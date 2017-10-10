@@ -16,38 +16,69 @@
             HorizontalOptions="Center"
             Text="{Binding [CommonAge]}" />
 
-        <!--  MinimumSlider  -->
-        <StackLayout>
-            <Slider
-                Maximum="80"
-                Minimum="18"
-                Value="{Binding MinimumAge, Mode=TwoWay}" />
-            <StackLayout Orientation="Horizontal">
-                <Label HorizontalOptions="Center" Text="Minima" />
-                <Label HorizontalOptions="Center" Text="{Binding MinimumAge}" />
-            </StackLayout>
-            <!--  MaximumSlider  -->
-            <Slider
-                Maximum="80"
-                Minimum="18"
-                Value="{Binding MaximumAge, Mode=TwoWay}" />
-            <StackLayout Orientation="Horizontal">
-                <Label HorizontalOptions="Center" Text="Maxima" />
-                <Label HorizontalOptions="Center" Text="{Binding MaximumAge}" />
-            </StackLayout>
-        </StackLayout>
+        <ContentView>
+            <OnPlatform x:TypeArguments="View">
+                <OnPlatform.iOS>
+                    <!--  MinimumSlider  -->
+                    <StackLayout>
+                        <Slider
+                            Maximum="80"
+                            Minimum="18"
+                            Value="{Binding MinimumAge, Mode=TwoWay}" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="Center" Text="Minima" />
+                            <Label HorizontalOptions="Center" Text="{Binding MinimumAge}" />
+                        </StackLayout>
+                        <!--  MaximumSlider  -->
+                        <Slider
+                            Maximum="80"
+                            Minimum="18"
+                            Value="{Binding MaximumAge, Mode=TwoWay}" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="Center" Text="Maxima" />
+                            <Label HorizontalOptions="Center" Text="{Binding MaximumAge}" />
+                        </StackLayout>
+                    </StackLayout>
+                </OnPlatform.iOS>
+                <OnPlatform.WinPhone>
+                    <!--  MinimumSlider  -->
+                    <StackLayout>
+                        <Slider
+                            Maximum="80"
+                            Minimum="18"
+                            Value="{Binding MinimumAge, Mode=TwoWay}" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="Center" Text="Minima" />
+                            <Label HorizontalOptions="Center" Text="{Binding MinimumAge}" />
+                        </StackLayout>
+                        <!--  MaximumSlider  -->
+                        <Slider
+                            Maximum="80"
+                            Minimum="18"
+                            Value="{Binding MaximumAge, Mode=TwoWay}" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="Center" Text="Maxima" />
+                            <Label HorizontalOptions="Center" Text="{Binding MaximumAge}" />
+                        </StackLayout>
+                    </StackLayout>
+                </OnPlatform.WinPhone>
+                <OnPlatform.Android>
+                    <forms:RangeSlider
+                        BarHeight="10"
+                        LowerValue="{Binding MinimumAge, Mode=TwoWay}"
+                        MaximumValue="80"
+                        MinimumValue="18"
+                        ShowTextAboveThumbs="True"
+                        StepValue="0"
+                        StepValueContinuously="False"
+                        TextSize="15"
+                        UpperValue="{Binding MaximumAge, Mode=TwoWay}"
+                        VerticalOptions="Center" />
+                </OnPlatform.Android>
+            </OnPlatform>
+        </ContentView>
 
-        <!--<forms:RangeSlider
-            LowerValue="{Binding MinimumAge, Mode=TwoWay}"
-            BarHeight="10"
-            MaximumValue="80"
-            MinimumValue="18"
-            ShowTextAboveThumbs="True"
-            StepValue="0"
-            StepValueContinuously="False"
-            TextSize="15"
-            UpperValue="{Binding MaximumAge, Mode=TwoWay}"
-            VerticalOptions="Center" />-->
+
 
         <!--<ctrlXlabs:ExtendedSlider
             Margin="20,10,20,0"
