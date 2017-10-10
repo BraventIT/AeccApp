@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BaseContentPage
+    x:Class="AeccApp.Core.Views.AllNewsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:v="clr-namespace:AeccApp.Core.Views"
+    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    Title="{Binding [AllNewsViewTitle]}"
+    vm:ViewModelLocator.AutoWireViewModel="True">
+
+    <!--  NewsList list item template  -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="newTemplate">
+                <ViewCell>
+                    <Grid>
+
+                        <Grid.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="WinPhone, Windows" Value="15,15,15,0" />
+                                <On Platform="iOS" Value="10,10,10,0" />
+                                <On Platform="Android" Value="15,15,15,0" />
+                            </OnPlatform>
+                        </Grid.Margin>
+
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+
+                        <ctrl:CustomImage
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            BackgroundColor="Yellow"
+                            HorizontalOptions="FillAndExpand"
+                            SourcePlatform="bell"
+                            VerticalOptions="Center">
+                            <ctrl:CustomImage.WidthRequest>
+                                <OnPlatform
+                                    x:TypeArguments="x:Double"
+                                    Android="200"
+                                    WinPhone="200"
+                                    iOS="150" />
+                            </ctrl:CustomImage.WidthRequest>
+                            <ctrl:CustomImage.HeightRequest>
+                                <OnPlatform
+                                    x:TypeArguments="x:Double"
+                                    Android="200"
+                                    WinPhone="200"
+                                    iOS="150" />
+                            </ctrl:CustomImage.HeightRequest>
+                        </ctrl:CustomImage>
+
+
+                        <StackLayout
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
+                            Orientation="Vertical">
+                            <Label
+                                FontAttributes="Bold"
+                                Text="{Binding Title}"
+                                TextColor="Black"
+                                VerticalOptions="Start" />
+                            <Label
+                                FontAttributes="Bold"
+                                Text="{Binding Content}"
+                                TextColor="Black"
+                                VerticalOptions="Start" />
+                        </StackLayout>
+
+
+
+                    </Grid>
+
+
+
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <!--  NewsList list  -->
+    <ListView
+        x:Name="NewsListView"
+        BackgroundColor="Transparent"
+        HasUnevenRows="true"
+        HorizontalOptions="FillAndExpand"
+        ItemTemplate="{StaticResource newTemplate}"
+        ItemsSource="{Binding NewsList}"
+        SeparatorColor="Black"
+        VerticalOptions="FillAndExpand">
+
+        <ListView.Behaviors>
+            <beh:EventToCommandBehavior
+                Command="{Binding ChooseNewCommand}"
+                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                EventName="ItemTapped" />
+        </ListView.Behaviors>
+    </ListView>
+
+</v:BaseContentPage>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.CounterpartProfilePopupControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:v="clr-namespace:AeccApp.Core.Views"
+    x:Name="root">
+
+    <ScrollView>
+        <StackLayout BackgroundColor="White">
+            <ctrl:CustomImage
+                BackgroundColor="LightGray"
+                HeightRequest="225"
+                HorizontalOptions="FillAndExpand"
+                SourcePlatform="round_no_profile_image_v2"
+                VerticalOptions="Start"
+                WidthRequest="50" />
+
+            <StackLayout Padding="20">
+                <Label
+                    Margin="0,10,0,10"
+                    BindingContext="{x:Reference root}"
+                    HorizontalOptions="Center"
+                    Text="{Binding Counterpart.Name}" />
+                <Label
+                    Margin="0,0,0,10"
+                    BindingContext="{x:Reference root}"
+                    HorizontalOptions="Center"
+                    Text="{Binding Counterpart.Description}" />
+            </StackLayout>
+            <BoxView HeightRequest="1" Color="Gray" />
+            <StackLayout Padding="10">
+                <Label
+                    Margin="0,0,0,20"
+                    HorizontalOptions="Center"
+                    Text="{Binding [PopupVolunteerProfileInfo]}" />
+                <Grid HorizontalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--  TODO Commented until project updates about gender  -->
+                    <!--<Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="5"
+                        Text="{Binding [CommonGender]}" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="50,5,5,5"
+                        BindingContext="{x:Reference root}"
+                        Text="{Binding Counterpart.Gender}" />-->
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="5"
+                        Text="{Binding [CommonAge]}" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="50,5,5,5"
+                        BindingContext="{x:Reference root}"
+                        Text="{Binding Counterpart.Age}" />
+
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</ContentView>

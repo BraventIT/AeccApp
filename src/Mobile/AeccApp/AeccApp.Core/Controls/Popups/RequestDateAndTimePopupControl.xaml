@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.RequestDateAndTimePopupControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    x:Name="root"
+    BackgroundColor="{StaticResource SeeThrough}">
+    <Grid
+        BackgroundColor="{StaticResource BackgroundColor}"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        <Grid.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="WinPhone, Windows" Value="10" />
+                <On Platform="iOS" Value="50" />
+                <On Platform="Android" Value="50" />
+            </OnPlatform>
+        </Grid.Margin>
+
+
+        <StackLayout>
+
+
+            <Grid BackgroundColor="LightGray">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ctrl:CustomImage
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="10"
+                    HorizontalOptions="Start"
+                    SourcePlatform="x_icon"
+                    VerticalOptions="Center">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer BindingContext="{x:Reference root}" Command="{Binding ClosePopupCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+                </ctrl:CustomImage>
+                <ctrl:CustomImage
+                    Grid.Column="1"
+                    Margin="10"
+                    HorizontalOptions="End"
+                    SourcePlatform="tick_icon"
+                    VerticalOptions="Center">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer BindingContext="{x:Reference root}" Command="{Binding ApplyDateAndTimeCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+                </ctrl:CustomImage>
+
+            </Grid>
+
+            <StackLayout
+                Padding="10"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start">
+
+
+
+
+
+                <Label
+                    Margin="10,10,10,5"
+                    HorizontalOptions="Center"
+                    Text="{Binding [CommonDate]}" />
+                <DatePicker
+                    Margin="10,5,10,5"
+                    BindingContext="{x:Reference root}"
+                    Date="{Binding DateSelected, Mode=TwoWay}" />
+
+                <Label
+                    Margin="10,5,10,5"
+                    HorizontalOptions="Center"
+                    Text="{Binding [CommonTime]}" />
+                <TimePicker
+                    Margin="10"
+                    BindingContext="{x:Reference root}"
+                    Time="{Binding TimeSelected, Mode=TwoWay}" />
+            </StackLayout>
+
+
+        </StackLayout>
+
+    </Grid>
+</ContentView>

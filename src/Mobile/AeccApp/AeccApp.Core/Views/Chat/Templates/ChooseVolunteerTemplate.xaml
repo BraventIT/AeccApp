@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Views.Templates.ChooseVolunteerTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls">
+
+    <!--  Volunteers list item template  -->
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="volunteerTemplate">
+                <ViewCell>
+
+                    <StackLayout
+                        Padding="10"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+
+                        <ctrl:CustomImage
+                            HeightRequest="50"
+                            HorizontalOptions="Center"
+                            SourcePlatform="round_no_profile_image"
+                            VerticalOptions="Center"
+                            WidthRequest="50" />
+
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource SubTitleLabelStyle}"
+                                Text="{Binding Name}"
+                                VerticalOptions="Start" />
+
+                            <StackLayout
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Orientation="Horizontal">
+
+                                <Label
+                                    Margin="0,0,5,0"
+                                    Style="{StaticResource MediumLabelStyle}"
+                                    Text="X años"
+                                    VerticalOptions="Start" />
+                                <Label Text="-" />
+                                <Label
+                                    Margin="5,0,0,0"
+                                    LineBreakMode="TailTruncation"
+                                    Style="{StaticResource MediumLabelStyle}"
+                                    Text="Mockeo de edad y descripcion Mockeo de edad y descripcion"
+                                    VerticalOptions="Start">
+
+                                    <Label.WidthRequest>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Double"
+                                            Android="220"
+                                            WinPhone="160"
+                                            iOS="160" />
+                                    </Label.WidthRequest>
+                                </Label>
+
+
+
+                                <ctrl:CustomImage
+                                    HeightRequest="20"
+                                    HorizontalOptions="Center"
+                                    SourcePlatform="right_arrow"
+                                    VerticalOptions="Center"
+                                    WidthRequest="20" />
+                            </StackLayout>
+
+                        </Grid>
+
+                    </StackLayout>
+
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid>
+        <Grid IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}">
+
+            <Grid IsVisible="{Binding IsFilterPopupVisible, Converter={StaticResource InverseBoolConverter}}">
+
+                <ListView
+                    x:Name="VolunteersListView"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding VolunteersIsEmpty, Converter={StaticResource InverseBoolConverter}}"
+                    ItemTemplate="{StaticResource volunteerTemplate}"
+                    ItemsSource="{Binding Volunteers}"
+                    VerticalOptions="FillAndExpand">
+                    <ListView.RowHeight>
+                        <OnPlatform x:TypeArguments="x:Int32">
+                            <On Platform="iOS">100</On>
+                            <On Platform="Android">100</On>
+                            <On Platform="UWP">100</On>
+                        </OnPlatform>
+                    </ListView.RowHeight>
+                    <ListView.Behaviors>
+                        <beh:EventToCommandBehavior
+                            Command="{Binding ChooseVolunteerCommand}"
+                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                            EventName="ItemTapped" />
+                    </ListView.Behaviors>
+                </ListView>
+
+                <StackLayout
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding VolunteersIsEmpty}"
+                    VerticalOptions="Center">
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource SubTitleLabelStyle}"
+                        Text="{Binding [ChatViewThereAreNoVolunteers]}" />
+                    <Button
+                        Margin="20"
+                        Command="{Binding RefreshVolunteersCommand}"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource ButtonStyle}"
+                        Text="{Binding [CommonRefreshList]}" />
+                </StackLayout>
+
+                <Label
+                    Margin="20,150,20,20"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsBusy}"
+                    Style="{StaticResource SubTitleLabelStyle}"
+                    Text="{Binding [ChatViewLookingForVolunteers]}"
+                    VerticalOptions="Center" />
+
+            </Grid>
+
+            <!--  Volunteer filters popup  -->
+            <ctrl:ChatFiltersPopupControl
+                ApplyFiltersCommand="{Binding ApplyFiltersCommand}"
+                IsVisible="{Binding IsFilterPopupVisible}"
+                MaximumAge="{Binding MaximumAge}"
+                MinimumAge="{Binding MinimumAge}" />
+        </Grid>
+
+        <!--  Volunteer-only messages  -->
+        <StackLayout
+            Margin="20"
+            HorizontalOptions="Center"
+            IsVisible="{Binding IsVolunteer}"
+            VerticalOptions="Center">
+            <Label
+                HorizontalTextAlignment="Center"
+                IsVisible="{Binding VolunteerIsActive, Converter={StaticResource InverseBoolConverter}"
+                Style="{StaticResource SubTitleLabelStyle}"
+                Text="{Binding [ChatViewGoOnlineBeforeChat]}" />
+            <Label
+                HorizontalTextAlignment="Center"
+                IsVisible="{Binding VolunteerIsActive}"
+                Style="{StaticResource SubTitleLabelStyle}"
+                Text="{Binding [ChatViewYouHaveToWaitRequest]}" />
+        </StackLayout>
+    </Grid>
+
+</ContentView>

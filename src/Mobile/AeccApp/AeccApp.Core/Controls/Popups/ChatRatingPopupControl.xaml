@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.ChatRatingPopupControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    x:Name="root"
+    BackgroundColor="{StaticResource SeeThrough}"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="FillAndExpand">
+
+    <StackLayout
+        Margin="50"
+        Padding="20"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+
+        <Label
+            Margin="0,0,0,20"
+            HorizontalOptions="Center"
+            Text="{Binding [PopupChatRatingTextTitle]}" />
+        <Label
+            Margin="0,0,0,20"
+            HorizontalOptions="Center"
+            Text="{Binding [PopupChatRatingText]}" />
+
+        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+
+            <ctrl:CustomImage
+                HeightRequest="25"
+                SourcePlatform="rating_star"
+                WidthRequest="25">
+                <ctrl:CustomImage.GestureRecognizers>
+                    <TapGestureRecognizer
+                        BindingContext="{x:Reference root}"
+                        Command="{Binding RatingCommand}"
+                        CommandParameter="1" />
+                </ctrl:CustomImage.GestureRecognizers>
+
+            </ctrl:CustomImage>
+
+            <ctrl:CustomImage
+                HeightRequest="25"
+                SourcePlatform="rating_star"
+                WidthRequest="25">
+                <ctrl:CustomImage.GestureRecognizers>
+                    <TapGestureRecognizer
+                        BindingContext="{x:Reference root}"
+                        Command="{Binding RatingCommand}"
+                        CommandParameter="2" />
+                </ctrl:CustomImage.GestureRecognizers>
+
+            </ctrl:CustomImage>
+            <ctrl:CustomImage
+                HeightRequest="25"
+                SourcePlatform="rating_star"
+                WidthRequest="25">
+                <ctrl:CustomImage.GestureRecognizers>
+                    <TapGestureRecognizer
+                        BindingContext="{x:Reference root}"
+                        Command="{Binding RatingCommand}"
+                        CommandParameter="3" />
+                </ctrl:CustomImage.GestureRecognizers>
+
+            </ctrl:CustomImage>
+            <ctrl:CustomImage
+                HeightRequest="25"
+                SourcePlatform="rating_star"
+                WidthRequest="25">
+                <ctrl:CustomImage.GestureRecognizers>
+                    <TapGestureRecognizer
+                        BindingContext="{x:Reference root}"
+                        Command="{Binding RatingCommand}"
+                        CommandParameter="4" />
+                </ctrl:CustomImage.GestureRecognizers>
+
+            </ctrl:CustomImage>
+            <ctrl:CustomImage
+                HeightRequest="25"
+                SourcePlatform="rating_star"
+                WidthRequest="25">
+                <ctrl:CustomImage.GestureRecognizers>
+                    <TapGestureRecognizer
+                        BindingContext="{x:Reference root}"
+                        Command="{Binding RatingCommand}"
+                        CommandParameter="5" />
+                </ctrl:CustomImage.GestureRecognizers>
+
+            </ctrl:CustomImage>
+        </StackLayout>
+
+
+    </StackLayout>
+</ContentView>

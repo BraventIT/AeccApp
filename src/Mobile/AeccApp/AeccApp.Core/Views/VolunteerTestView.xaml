@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BaseContentPage
+    x:Class="AeccApp.Core.Views.VolunteerTestView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:eff="clr-namespace:AeccApp.Core.Effects"
+    xmlns:v="clr-namespace:AeccApp.Core.Views"
+    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}">
+    <ScrollView HorizontalOptions="Center">
+        <StackLayout
+            Margin="12,0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Label Style="{StaticResource TitleLabelStyle}" Text="Volunteer Test" />
+
+            <ctrl:CustomImage
+                Margin="30"
+                HorizontalOptions="Center"
+                MaximumWidthRequest="400"
+                SourcePlatform="logo" />
+
+            <StackLayout Padding="10" BackgroundColor="White">
+                <Label Style="{StaticResource NormalLabelStyle}" Text="Página de prueba para poder seleccionar rol de voluntario sin realizar cambios en Azure AD. Sólo para entorno de prueba" />
+
+                <StackLayout
+                    Margin="0,10"
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal">
+                    <Switch IsToggled="{Binding IsVolunteer, Mode=TwoWay}">
+                        <Switch.Effects>
+                            <eff:SwitchClearEffect />
+                        </Switch.Effects>
+                    </Switch>
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="¿Es voluntario?"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <Button
+                    Margin="20,0"
+                    Command="{Binding EnterCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource ButtonStyle}"
+                    Text="Continuar" />
+
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+</v:BaseContentPage>

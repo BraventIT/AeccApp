@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.RequestChangeRequestPopupControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    x:Name="root"
+    BackgroundColor="{StaticResource SeeThrough}">
+
+    <Grid
+        Margin="50,50,50,100"
+        Padding="50"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        <StackLayout>
+
+            <ctrl:CustomImage
+                Margin="20,20,20,10"
+                HeightRequest="30"
+                HorizontalOptions="Center"
+                SourcePlatform="round_question_icon"
+                WidthRequest="30" />
+
+            <Label
+                Margin="0,0,0,10"
+                FontFamily="Bold"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Text="{Binding [PopupRequestChangeRequestTypeTextTitle]}" />
+
+            <Label
+                Margin="0,0,0,30"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="{Binding [PopupRequestChangeRequestTypeText]}" />
+
+            <StackLayout
+                Margin="0,0,0,20"
+                HorizontalOptions="Center"
+                Orientation="Horizontal">
+                <Label
+                    Margin="10,0,10,0"
+                    FontSize="Medium"
+                    HorizontalOptions="End"
+                    Text="Si"
+                    TextColor="LawnGreen">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackAndChangeTypeCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label
+                    Margin="10,0,10,0"
+                    FontSize="Medium"
+                    HorizontalOptions="Start"
+                    Text="No"
+                    TextColor="LawnGreen">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </StackLayout>
+
+        </StackLayout>
+
+    </Grid>
+</ContentView>

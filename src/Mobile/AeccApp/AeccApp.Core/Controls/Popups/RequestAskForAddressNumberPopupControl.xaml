@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.RequestAskForAddressNumberPopupControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="root"
+    BackgroundColor="{StaticResource SeeThrough}">
+
+    <Grid
+        Margin="40"
+        Padding="20"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        <StackLayout>
+
+            <Label HorizontalOptions="Center" Text="{Binding [PopupRequestAskForAddresNumberText]}" />
+
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                <Label
+                    Margin="5,5,5,0"
+                    BindingContext="{x:Reference root}"
+                    FontSize="Medium"
+                    HorizontalOptions="End"
+                    Text="Continuar">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ContinueWithoutInputANumberCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label
+                    Margin="5,5,5,0"
+                    BindingContext="{x:Reference root}"
+                    FontSize="Medium"
+                    HorizontalOptions="Start"
+                    Text="Añadir un número">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </StackLayout>
+
+        </StackLayout>
+    </Grid>
+
+</ContentView>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="AeccApp.Core.Views.DashboardView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:pages="clr-namespace:AeccApp.Core.Views"
+    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    Title="{Binding [DashboardAppTitle]}"
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}">
+
+    <!--  This page works as parent of every tabbed page  -->
+
+    <!--<TabbedPage.ToolbarItems>
+        <ctrl:HideableToolbarItem
+            Name="Notifications"
+            Command="{Binding OpenNotificationsCommand}"
+            IconPlatform="bell"
+            Order="Primary"
+            Priority="1"
+            Text="{Binding [DashboardNotifications]}" />
+    </TabbedPage.ToolbarItems>-->
+
+    <!--  Pages can be added as references or inline  -->
+
+    <TabbedPage.Children>
+        <pages:HomeView />
+        <pages:ChatView />
+        <pages:ProfileView />
+        <pages:RequestsView />
+    </TabbedPage.Children>
+</TabbedPage>

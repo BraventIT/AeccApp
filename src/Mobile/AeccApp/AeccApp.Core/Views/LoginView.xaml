@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:BaseContentPage
+    x:Class="AeccApp.Core.Views.LoginView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:v="clr-namespace:AeccApp.Core.Views"
+    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}">
+    <ScrollView>
+        <Grid>
+            <StackLayout VerticalOptions="Center">
+
+                <ctrl:CustomImage
+                    Margin="30"
+                    HorizontalOptions="Center"
+                    MaximumWidthRequest="400"
+                    SourcePlatform="logo" />
+
+                <!--  LOGIN BUTTON  -->
+                <Button
+                    Margin="20,0"
+                    Command="{Binding SignInCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource ButtonStyle}"
+                    Text="{Binding [LoginViewLogin]}" />
+
+            </StackLayout>
+
+            <!--  INDICATOR  -->
+            <ctrl:CustomActivityIndicatorControl />
+        </Grid>
+    </ScrollView>
+</v:BaseContentPage>

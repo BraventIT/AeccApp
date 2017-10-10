@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.RequestConfirmationPopupControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    x:Name="root"
+    BackgroundColor="{StaticResource SeeThrough}">
+    <ScrollView>
+        <StackLayout
+            Margin="30,70,30,70"
+            Padding="30,10,30,10"
+            BackgroundColor="{StaticResource BackgroundColor}">
+            <ctrl:CustomImage
+                Margin="20"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                SourcePlatform="round_question_icon"
+                VerticalOptions="Center"
+                WidthRequest="50" />
+
+            <Label
+                Margin="0,0,0,20"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Text="{Binding [PopupRequestConfirmationTextTitle]}" />
+
+            <Label
+                Margin="0,0,0,20"
+                BindingContext="{x:Reference root}"
+                HorizontalOptions="Center"
+                Text="{Binding DisplayRequestInfo}"
+                TextColor="LightGray" />
+
+            <Grid
+                Padding="5"
+                BackgroundColor="LightGray"
+                HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="WinPhone,Windows" Value="90,0,90,10" />
+                        <On Platform="iOS" Value="50,0,50,10" />
+                        <On Platform="Android" Value="80,0,80,10" />
+                    </OnPlatform>
+                </Grid.Margin>
+
+
+
+                <ctrl:CustomImage
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="5"
+                    HeightRequest="30"
+                    HorizontalOptions="Center"
+                    SourcePlatform="date_icon"
+                    VerticalOptions="Center"
+                    WidthRequest="30" />
+                <Label
+                    Grid.Column="1"
+                    BindingContext="{x:Reference root}"
+                    Text="{Binding DisplayDate}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <Grid
+                Padding="5"
+                BackgroundColor="LightGray"
+                HorizontalOptions="Center">
+                <Grid.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="WinPhone,Windows" Value="90,0,90,10" />
+                        <On Platform="iOS" Value="50,0,50,10" />
+                        <On Platform="Android" Value="80,0,80,10" />
+                    </OnPlatform>
+                </Grid.Margin>
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ctrl:CustomImage
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="5"
+                    HeightRequest="30"
+                    HorizontalOptions="Center"
+                    SourcePlatform="time_icon"
+                    VerticalOptions="Center"
+                    WidthRequest="30" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BindingContext="{x:Reference root}"
+                    Text="{Binding DisplayTime}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <StackLayout
+                Margin="0,20,0,0"
+                HorizontalOptions="Center"
+                Orientation="Horizontal">
+
+                <Button
+                    BindingContext="{x:Reference root}"
+                    Command="{Binding SendRequestConfirmationCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource ButtonSmallStyle}"
+                    Text="Si" />
+                <Button
+                    BindingContext="{x:Reference root}"
+                    Command="{Binding ClosePopupCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource ButtonSmallStyle}"
+                    Text="No" />
+
+            </StackLayout>
+
+
+        </StackLayout>
+    </ScrollView>
+
+
+</ContentView>

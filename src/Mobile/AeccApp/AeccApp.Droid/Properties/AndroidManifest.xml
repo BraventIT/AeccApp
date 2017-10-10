@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="net.bravent.aeccapp" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="24" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<application android:label="AECC">
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBrlsD3dhg3Bo6oaAugOCexgVoNcQDaQgQ" />
+		<activity android:name="microsoft.identity.client.BrowserTabActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="msal24b548ab-933a-47c0-9b3c-c9b334219cc7" android:host="auth" />
+			</intent-filter>
+		</activity>
+	</application>
+</manifest>

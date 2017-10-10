@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BaseContentPage
+    x:Class="AeccApp.Core.Views.RequestsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:pages="clr-namespace:AeccApp.Core.Views"
+    xmlns:v="clr-namespace:AeccApp.Core.Views"
+    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    Title="{Binding [CommonYourRequests]}"
+    vm:ViewModelLocator.AutoWireViewModel="True">
+    <v:BaseContentPage.Icon>
+        <OnPlatform
+            x:TypeArguments="FileImageSource"
+            Android="requests_tab_icon.png"
+            WinPhone="Assets/requests_tab_icon.png"
+            iOS="requests_tab_icon.png" />
+    </v:BaseContentPage.Icon>
+
+    <ScrollView>
+        <!--  Without requests landing page  -->
+        <StackLayout>
+            <StackLayout.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="30,30,30,0" />
+                    <On Platform="Android" Value="10,10,10,20" />
+                </OnPlatform>
+            </StackLayout.Margin>
+
+            <ctrl:CustomImage
+                Margin="10"
+                HeightRequest="150"
+                HorizontalOptions="Center"
+                SourcePlatform="round_new_here"
+                WidthRequest="150" />
+
+            <Label
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource TitleLabelStyle}"
+                Text="{Binding [CommonIsYourFirstTime]}" />
+            <Label
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource SubTitleLabelStyle}"
+                Text="{Binding [RequestsViewText]}" />
+
+            <Button
+                Margin="0,20"
+                Command="{Binding NewRequestCommand}"
+                HorizontalOptions="Center"
+                Style="{StaticResource ButtonStyle}"
+                Text="{Binding [CommonNewRequest]}" />
+
+        </StackLayout>
+    </ScrollView>
+
+</v:BaseContentPage>

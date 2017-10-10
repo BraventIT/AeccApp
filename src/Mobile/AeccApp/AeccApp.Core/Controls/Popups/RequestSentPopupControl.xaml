@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.RequestSentPopupControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    x:Name="root"
+    BackgroundColor="{StaticResource SeeThrough}"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="FillAndExpand">
+
+    <Grid
+        Margin="20"
+        Padding="5"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+
+        <StackLayout>
+            <ctrl:CustomImage
+                Grid.Column="0"
+                Margin="10"
+                BindingContext="{x:Reference root}"
+                HeightRequest="30"
+                HorizontalOptions="End"
+                SourcePlatform="x_icon"
+                VerticalOptions="Center"
+                WidthRequest="30">
+                <ctrl:CustomImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseRequestSentPopupCommand}" />
+                </ctrl:CustomImage.GestureRecognizers>
+
+            </ctrl:CustomImage>
+
+            <ctrl:CustomImage
+                Grid.Column="0"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                SourcePlatform="thumb_up"
+                VerticalOptions="Center"
+                WidthRequest="50" />
+
+            <Label
+                Margin="10,10,10,5"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Text="{Binding [PopupRequestSentTextTitle]}" />
+
+            <Label
+                Margin="10,5,10,10"
+                HorizontalOptions="Center"
+                Text="{Binding [PopupRequestSentText]}" />
+
+
+        </StackLayout>
+
+    </Grid>
+
+</ContentView>

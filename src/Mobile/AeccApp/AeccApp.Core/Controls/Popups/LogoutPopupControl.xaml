@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.LogoutPopupControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    x:Name="root"
+    BackgroundColor="{StaticResource SeeThrough}">
+
+    <ContentView
+        Margin="20"
+        Style="{StaticResource BorderStyle}"
+        VerticalOptions="Center">
+        <ContentView Style="{StaticResource InternalViewStyle}">
+            <Grid
+                Margin="1"
+                Padding="0,20"
+                BackgroundColor="{StaticResource BackgroundColor}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+
+                <ctrl:CustomImage
+                    Grid.ColumnSpan="2"
+                    HorizontalOptions="Center"
+                    SourcePlatform="round_question_icon" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource TitleLabelStyle}"
+                    Text="{Binding [PopupLogoutTextTitle]}" />
+
+                <Label
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource SubTitleLabelStyleCentered}"
+                    Text="{Binding [PopupLogoutText]}" />
+
+                <Button
+                    Grid.Row="3"
+                    Margin="0,20,0,0"
+                    BindingContext="{x:Reference root}"
+                    Command="{Binding YesCommand}"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource ButtonSmallStyle}"
+                    Text="Si" />
+
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="0,20,0,0"
+                    BindingContext="{x:Reference root}"
+                    Command="{Binding NoCommand}"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource ButtonSmallStyle}"
+                    Text="No" />
+            </Grid>
+        </ContentView>
+    </ContentView>
+
+</ContentView>

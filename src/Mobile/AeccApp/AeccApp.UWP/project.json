@@ -1,0 +1,34 @@
+﻿{
+  "dependencies": {
+    "Autofac": "4.6.1",
+    "Microsoft.Bcl": "1.1.10",
+    "Microsoft.Bcl.Build": "1.0.21",
+    "Microsoft.Bot.Connector.DirectLine": "3.0.2",
+    "Microsoft.CSharp": "4.4.0",
+    "Microsoft.Identity.Client": "1.1.0-preview",
+    "Microsoft.Net.Http": "2.2.29",
+    "Microsoft.NETCore.Platforms": "2.0.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
+    "Microsoft.Rest.ClientRuntime": "2.3.2",
+    "Microsoft.Win32.Primitives": "4.3.0",
+    "NETStandard.Library": "1.6.1",
+    "Newtonsoft.Json": "10.0.3",
+    "System.AppContext": "4.3.0",
+    "System.Collections": "4.3.0",
+    "Xamarin.Build.Download": "0.4.7",
+    "Xamarin.Forms": "2.3.4.270",
+    "Xamarin.Forms.GoogleMaps": "1.8.1",
+    "Xamarin.Forms.RangeSlider": "0.7.11"
+  },
+  "frameworks": {
+    "uap10.0.10586": {}
+  },
+  "runtimes": {
+    "win10-arm": {},
+    "win10-arm-aot": {},
+    "win10-x86": {},
+    "win10-x86-aot": {},
+    "win10-x64": {},
+    "win10-x64-aot": {}
+  }
+}

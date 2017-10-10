@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="AeccApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
+    xmlns:cv="clr-namespace:AeccApp.Core.Converters">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--  COLORS  -->
+            <Color x:Key="ErrorColor">#ff5252</Color>
+            <Color x:Key="BackgroundColor">#F4F2F0</Color>
+            <Color x:Key="AccentColor">#58AE65</Color>
+            <Color x:Key="SeeThrough">#B2FFFFFF</Color>
+            <Color x:Key="GreyText">#abb5c3</Color>
+            <Color x:Key="GreyTextDark">#798b9f</Color>
+
+
+            <!--  FONT SIZES  -->
+            <OnPlatform
+                x:Key="LittleSize"
+                x:TypeArguments="x:Double"
+                Android="12"
+                WinPhone="12"
+                iOS="11" />
+
+            <OnPlatform
+                x:Key="MidMediumSize"
+                x:TypeArguments="x:Double"
+                Android="14"
+                WinPhone="14"
+                iOS="12" />
+
+            <OnPlatform
+                x:Key="MediumSize"
+                x:TypeArguments="x:Double"
+                Android="16"
+                WinPhone="16"
+                iOS="14" />
+
+            <OnPlatform
+                x:Key="LargeSize"
+                x:TypeArguments="x:Double"
+                Android="18"
+                WinPhone="18"
+                iOS="16" />
+
+            <OnPlatform
+                x:Key="LargerSize"
+                x:TypeArguments="x:Double"
+                Android="20"
+                WinPhone="20"
+                iOS="18" />
+
+            <OnPlatform
+                x:Key="BigSize"
+                x:TypeArguments="x:Double"
+                Android="24"
+                WinPhone="24"
+                iOS="20" />
+
+            <OnPlatform
+                x:Key="ExtraBigSize"
+                x:TypeArguments="x:Double"
+                Android="32"
+                WinPhone="32"
+                iOS="24" />
+
+            <OnPlatform
+                x:Key="HugeSize"
+                x:TypeArguments="x:Double"
+                Android="48"
+                WinPhone="48"
+                iOS="32" />
+
+
+            <!--  STYLES  -->
+            <Style x:Key="ValidationErrorLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="{StaticResource ErrorColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+            </Style>
+
+            <Style x:Key="GreyLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+
+
+            <Style x:Key="TitleLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Margin" Value="20, 12" />
+            </Style>
+
+
+            <Style
+                x:Key="SubTitleLabelStyle"
+                BasedOn="{StaticResource GreyLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="Margin" Value="0,6,0,3" />
+            </Style>
+
+            <Style
+                x:Key="SubTitleLabelStyleCentered"
+                BasedOn="{StaticResource SubTitleLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="15" />
+            </Style>
+
+            <Style
+                x:Key="NormalLabelStyle"
+                BasedOn="{StaticResource GreyLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+            </Style>
+
+            <Style
+                x:Key="MediumLabelStyle"
+                BasedOn="{StaticResource GreyLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+            </Style>
+
+            <OnPlatform
+                x:Key="ButtonWidth"
+                x:TypeArguments="x:Double"
+                Android="170"
+                WinPhone="150"
+                iOS="150" />
+
+            <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="WidthRequest" Value="{StaticResource ButtonWidth}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+            </Style>
+
+            <OnPlatform
+                x:Key="ButtonSmallWidth"
+                x:TypeArguments="x:Double"
+                Android="120"
+                WinPhone="120"
+                iOS="100" />
+
+            <Style
+                x:Key="ButtonSmallStyle"
+                BasedOn="{StaticResource ButtonStyle}"
+                TargetType="{x:Type Button}">
+                <Setter Property="WidthRequest" Value="{StaticResource ButtonSmallWidth}" />
+            </Style>
+
+            <OnPlatform
+                x:Key="ImageButtonImageSize"
+                x:TypeArguments="x:Int32"
+                Android="35"
+                WinPhone="60"
+                iOS="40" />
+
+            <OnPlatform
+                x:Key="ImageButtonWidth"
+                x:TypeArguments="x:Double"
+                Android="200"
+                WinPhone="180"
+                iOS="200" />
+
+            <Style x:Key="ImageButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="Orientation" Value="ImageToLeft" />
+                <Setter Property="WidthRequest" Value="{StaticResource ImageButtonWidth}" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="ImageHeightRequest" Value="{StaticResource ImageButtonImageSize}" />
+                <Setter Property="ImageWidthRequest" Value="{StaticResource ImageButtonImageSize}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+            </Style>
+
+            <Style
+                x:Key="SwitchTextStyle"
+                BasedOn="{StaticResource GreyLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="InternalViewStyle" TargetType="ContentView">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+                <Setter Property="VerticalOptions" Value="Fill" />
+            </Style>
+
+            <Style x:Key="BorderStyle" TargetType="ContentView">
+                <Setter Property="BackgroundColor" Value="{StaticResource GreyText}" />
+                <Setter Property="Padding" Value="1" />
+            </Style>
+
+            <!--  CONVERTERS  -->
+            <cv:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <cv:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            <cv:ImagePlatformConverter x:Key="ImagePlatformConverter" />
+            <cv:TextChangeEventArgsConverter x:Key="TextChangeEventArgsConverter" />
+            <cv:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <cv:IsNullConverter x:Key="IsNullConverter" />
+            <cv:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+            <cv:ToggledEventArgsConverter x:Key="ToggledEventArgsConverter" />
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

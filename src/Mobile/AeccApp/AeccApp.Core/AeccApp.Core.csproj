@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- https://bugzilla.xamarin.com/show_bug.cgi?id=55591 -->
+    <None Remove="**\*.xaml" />
+
+    <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
+    <EmbeddedResource Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\Services\AeccBot\AeccBot\CommandHandling\Definitions\BackChannelCommands.cs" Link="Services\Chat\BackChannelCommands.cs" />
+    <Compile Include="..\..\..\Services\AeccBot\AeccBot\MessageRouting\Definitions\MessageRouterResultTypeEnum.cs" Link="Services\Chat\MessageRouterResultTypeEnum.cs" />
+    <Compile Include="..\..\..\Services\AeccBot\AeccBot\Models\ChannelAccountWithUserData.cs" Link="Models\Chat\ChannelAccountWithUserData.cs" />
+    <Compile Include="..\..\..\Services\AeccBot\AeccBot\Models\Party.cs" Link="Models\Chat\Party.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.1" />
+    <PackageReference Include="Microsoft.Bot.Connector.DirectLine" Version="3.0.2" />
+    <PackageReference Include="Microsoft.Graph" Version="1.5.1" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.0.1" />
+    <PackageReference Include="Xamarin.Build.Download" Version="0.4.7" />
+    <PackageReference Include="Xamarin.Forms" Version="2.3.4.270" />
+    <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="1.8.1" />
+    <PackageReference Include="Xamarin.Forms.RangeSlider" Version="0.7.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AeccApp.Internationalization\AeccApp.Internationalization.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\Popups\CounterpartProfilePopupControl.xaml.cs">
+      <DependentUpon>CounterpartProfilePopupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\Popups\LogoutPopupControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Chat\ChatEventView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Chat\Templates\ChatTemplate.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>ChatTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Chat\Templates\ChooseVolunteerTemplate.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>ChooseVolunteerTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\VolunteerTestView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

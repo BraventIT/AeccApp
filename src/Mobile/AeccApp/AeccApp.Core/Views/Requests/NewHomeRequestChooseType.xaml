@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AeccApp.Core.Views.NewHomeRequestChooseTypeView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    Title="{Binding [NewHomeRequestChoseTypeTitle]}"
+    vm:ViewModelLocator.AutoWireViewModel="True">
+    <ScrollView>
+
+        <StackLayout>
+
+            <!--  Header  -->
+            <StackLayout
+                Padding="35"
+                BackgroundColor="{StaticResource GreyText}"
+                HorizontalOptions="FillAndExpand">
+
+                <Grid HorizontalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackLayout
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <ctrl:CustomImage
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HeightRequest="25"
+                            HorizontalOptions="Center"
+                            SourcePlatform="location_pin"
+                            VerticalOptions="Center"
+                            WidthRequest="25" />
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            FontSize="Large"
+                            HorizontalOptions="Center"
+                            Text="Mi casa mock"
+                            VerticalOptions="Center" />
+                    </StackLayout>
+                    <Label
+                        Grid.Row="1"
+                        HorizontalOptions="Center"
+                        Text="Display Address 12,1A, Spain"
+                        VerticalOptions="Center" />
+                </Grid>
+            </StackLayout>
+
+            <!--  Requests types  -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
+                </Grid.RowDefinitions>
+
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="20,10,0,0"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="{Binding [NewHomeRequestChoseTypeHomeCompanion]}"
+                    TextColor="{StaticResource GreyTextDark}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RequestCompanionForHomeCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <ctrl:CustomImage
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,10,20,0"
+                    HeightRequest="25"
+                    HorizontalOptions="End"
+                    SourcePlatform="right_arrow"
+                    WidthRequest="25">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RequestCompanionForHomeCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+                </ctrl:CustomImage>
+
+                <BoxView
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,0,0"
+                    HeightRequest="1"
+                    Color="LightGray" />
+
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="20,10,0,0"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="{Binding [NewHomeRequestChoseTypeHomeManagement]}"
+                    TextColor="{StaticResource GreyTextDark}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RequestSupportOnHomeManagementsCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <ctrl:CustomImage
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0,10,20,0"
+                    HeightRequest="25"
+                    HorizontalOptions="End"
+                    SourcePlatform="right_arrow"
+                    WidthRequest="25">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RequestSupportOnHomeManagementsCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+                </ctrl:CustomImage>
+
+                <BoxView
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,0,0"
+                    HeightRequest="1"
+                    Color="LightGray" />
+
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Margin="20,10,0,0"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="{Binding [NewHomeRequestChoseTypeAECCInfo]}"
+                    TextColor="{StaticResource GreyTextDark}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <ctrl:CustomImage
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="0,10,20,0"
+                    HeightRequest="25"
+                    HorizontalOptions="End"
+                    SourcePlatform="right_arrow"
+                    WidthRequest="25">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+                </ctrl:CustomImage>
+                <BoxView
+                    Grid.Row="5"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,0,0"
+                    HeightRequest="1"
+                    Color="LightGray" />
+
+                <Label
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Margin="20,10,0,0"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
+                    TextColor="{StaticResource GreyTextDark}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <ctrl:CustomImage
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Margin="0,10,20,0"
+                    HeightRequest="25"
+                    HorizontalOptions="End"
+                    SourcePlatform="right_arrow"
+                    WidthRequest="25">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+                </ctrl:CustomImage>
+
+                <BoxView
+                    Grid.Row="7"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,0,0"
+                    HeightRequest="1"
+                    Color="LightGray" />
+
+            </Grid>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

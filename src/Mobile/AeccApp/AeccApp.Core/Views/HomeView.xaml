@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BaseContentPage
+    x:Class="AeccApp.Core.Views.HomeView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
+    xmlns:eff="clr-namespace:AeccApp.Core.Effects"
+    xmlns:v="clr-namespace:AeccApp.Core.Views"
+    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    Title="{Binding [HomeViewTitle]}"
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    IconPlatform="home_tab_icon">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="NewItemTemplate">
+                <ViewCell>
+                    <StackLayout Padding="1">
+
+                        <ctrl:CustomImage
+                            Margin="0,10,0,0"
+                            HeightRequest="200"
+                            HorizontalOptions="FillAndExpand"
+                            SourcePlatform="mock_new_firma_convenio" />
+                        <Label
+                            Margin="0,5,0,5"
+                            FontAttributes="Bold"
+                            Text="{Binding Title}"
+                            TextColor="Black"
+                            VerticalOptions="Start" />
+                        <Label
+                            Margin="0,5,0,5"
+                            FontAttributes="Bold"
+                            Text="{Binding Content}"
+                            TextColor="Black"
+                            VerticalOptions="Start" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <ScrollView IsVisible="{Binding TermsAndConditionsPopupVisible, Converter={StaticResource InverseBoolConverter}}">
+
+            <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+
+                <!--  Volunteer state panel  -->
+                <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
+                    <Frame
+                        Padding="10"
+                        BackgroundColor="White"
+                        IsVisible="{Binding IsVolunteer}">
+
+                        <StackLayout Orientation="Horizontal">
+                            <Switch IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" IsToggled="{Binding VolunteerIsActive, Mode=TwoWay}">
+                                <Switch.Behaviors>
+                                    <beh:EventToCommandBehavior
+                                        Command="{Binding VolunteerStateCommand}"
+                                        EventArgsConverter="{StaticResource ToggledEventArgsConverter}"
+                                        EventName="Toggled" />
+                                </Switch.Behaviors>
+                                <Switch.Effects>
+                                    <eff:SwitchClearEffect />
+                                </Switch.Effects>
+                            </Switch>
+                            <Label Style="{StaticResource SwitchTextStyle}" Text="Activa tu disponibilidad" />
+                        </StackLayout>
+
+                    </Frame>
+                </Grid>
+
+                <!--  Request state panel  -->
+                <StackLayout
+                    Padding="10"
+                    BackgroundColor="White"
+                    IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}">
+
+                    <Label Style="{StaticResource SubTitleLabelStyle}" Text="{Binding [HomeViewRequests]}" />
+                    <Label
+                        Style="{StaticResource NormalLabelStyle}"
+                        Text="{Binding [HomeViewAllRequests]}"
+                        TextColor="{StaticResource AccentColor}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenAllRequestsCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <ctrlXlabs:ImageButton
+                        Margin="5"
+                        Command="{Binding NewRequestCommand}"
+                        HeightRequest="40"
+                        HorizontalOptions="CenterAndExpand"
+                        SourcePlatform="round_plus"
+                        Style="{StaticResource ImageButtonStyle}"
+                        Text="{Binding [CommonNewRequest]}" />
+
+                </StackLayout>
+
+                <!--  Chat state panel  -->
+                <StackLayout Padding="10" BackgroundColor="White">
+
+                    <Label Style="{StaticResource SubTitleLabelStyle}" Text="{Binding [HomeViewChatsOnline]}" />
+                    <Grid Padding="5" IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
+
+                        <ctrlXlabs:ImageButton
+                            Margin="5"
+                            Command="{Binding NewChatCommand}"
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
+                            SourcePlatform="round_plus"
+                            Style="{StaticResource ImageButtonStyle}"
+                            Text="{Binding [CommonNewChat]}" />
+
+                        <StackLayout IsVisible="{Binding IsVolunteer}">
+                            <Label
+                                IsVisible="{Binding VolunteerIsActive, Converter={StaticResource InverseBoolConverter}"
+                                Style="{StaticResource NormalLabelStyle}"
+                                Text="Antes de ponerte en contacto con un beneficiario, tienes que ponerte en línea." />
+                            <Label
+                                IsVisible="{Binding VolunteerIsActive}"
+                                Style="{StaticResource NormalLabelStyle}"
+                                Text="Tienes que esperar a que te llegue una solicitud" />
+                        </StackLayout>
+
+                    </Grid>
+
+
+                    <StackLayout IsVisible="{Binding InConversation}">
+                        <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding LastMessage.From.Name}" />
+                        <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding LastMessage.DateTime}" />
+                        <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding LastMessage.Activity.Text}" />
+                        <Button
+                            Command="{Binding CurrentChatCommand}"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource ButtonStyle}"
+                            Text="Chat actual" />
+                    </StackLayout>
+
+                </StackLayout>
+
+                <!--  News panel  -->
+                <Grid Padding="10" BackgroundColor="White">
+                    <Grid.HeightRequest>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="1400"
+                            WinPhone="2000"
+                            iOS="1700" />
+                    </Grid.HeightRequest>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Style="{StaticResource SubTitleLabelStyle}"
+                        Text="{Binding [HomeViewLastNews]}" />
+                    <Label
+                        Grid.Row="1"
+                        Style="{StaticResource NormalLabelStyle}"
+                        Text="{Binding [HomeViewAllNews]}"
+                        TextColor="{StaticResource AccentColor}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenAllNewsCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <ctrl:NonScrollableListView
+                        x:Name="NewsListView"
+                        Grid.Row="2"
+                        BackgroundColor="Transparent"
+                        HasUnevenRows="true"
+                        HorizontalOptions="FillAndExpand"
+                        ItemTemplate="{StaticResource NewItemTemplate}"
+                        ItemsSource="{Binding NewsList}"
+                        SeparatorVisibility="None">
+                        <ctrl:NonScrollableListView.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="220"
+                                WinPhone="160"
+                                iOS="500" />
+                        </ctrl:NonScrollableListView.HeightRequest>
+
+                        <ctrl:NonScrollableListView.Behaviors>
+                            <beh:EventToCommandBehavior
+                                Command="{Binding ChooseNewCommand}"
+                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                                EventName="ItemTapped" />
+                        </ctrl:NonScrollableListView.Behaviors>
+                    </ctrl:NonScrollableListView>
+
+                </Grid>
+
+            </StackLayout>
+
+        </ScrollView>
+
+        <!--  Terms and conditions popup  -->
+        <ctrl:ChatTermsAndConditionsPopupControl
+            CloseCommand="{Binding TermsAndConditionsCloseCommand}"
+            IsVisible="{Binding TermsAndConditionsPopupVisible}"
+            OkCommand="{Binding TermsAndConditionsOkCommand}">
+            <View.Behaviors>
+                <beh:AnimateScaleBehavior IsVisible="{Binding TermsAndConditionsPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
+            </View.Behaviors>
+        </ctrl:ChatTermsAndConditionsPopupControl>
+
+        <!--  INDICATOR  -->
+        <ctrl:CustomActivityIndicatorControl />
+    </Grid>
+</v:BaseContentPage>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BaseContentPage
+    x:Class="AeccApp.Core.Views.ChatRequestView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:v="clr-namespace:AeccApp.Core.Views"
+    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource SeeThrough}">
+
+    <Grid
+        Margin="20"
+        Padding="0,20"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        VerticalOptions="Center">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource TitleLabelStyle}"
+            Text="{Binding [ChatRequestAssistance]}" />
+
+        <Label
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Style="{StaticResource SubTitleLabelStyleCentered}"
+            Text="{Binding RequestMessage}" />
+
+        <Button
+            Grid.Row="2"
+            Margin="0,20,0,0"
+            Command="{Binding AcceptRequestCommand}"
+            HorizontalOptions="Center"
+            Style="{StaticResource ButtonSmallStyle}"
+            Text="{Binding [ChatRequestAccept]}" />
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="0,20,0,0"
+            Command="{Binding RejectRequestCommand}"
+            HorizontalOptions="Center"
+            Style="{StaticResource ButtonSmallStyle}"
+            Text="{Binding [ChatRequestReject]}" />
+
+        <!--  INDICATOR  -->
+        <ctrl:CustomActivityIndicatorControl Grid.RowSpan="3" Grid.ColumnSpan="2" />
+    </Grid>
+</v:BaseContentPage>

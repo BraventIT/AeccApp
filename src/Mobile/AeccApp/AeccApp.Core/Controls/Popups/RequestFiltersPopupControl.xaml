@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.RequestFiltersPopupControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    x:Name="root">
+
+    <StackLayout>
+
+        <Label HorizontalOptions="Center" Text="{Binding [CommonDate]}" />
+        <DatePicker BindingContext="{x:Reference root}" Date="{Binding DateSelected, Mode=TwoWay}" />
+
+        <Label HorizontalOptions="Center" Text="{Binding [CommonTime]}" />
+        <TimePicker BindingContext="{x:Reference root}" Time="{Binding TimeSelected, Mode=TwoWay}" />
+
+        <StackLayout
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Margin="0,15,0,0"
+            Padding="35,15,35,15"
+            BackgroundColor="LawnGreen"
+            HorizontalOptions="CenterAndExpand"
+            Orientation="Horizontal">
+
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ApplyFiltersCommand}" />
+            </StackLayout.GestureRecognizers>
+
+            <Label Text="{Binding [CommonApplyFilters]}" VerticalOptions="Center" />
+        </StackLayout>
+
+    </StackLayout>
+
+
+</ContentView>

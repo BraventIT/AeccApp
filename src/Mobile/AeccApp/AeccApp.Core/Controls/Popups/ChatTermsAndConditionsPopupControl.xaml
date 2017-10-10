@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.ChatTermsAndConditionsPopupControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    x:Name="root"
+    BackgroundColor="{StaticResource SeeThrough}"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="FillAndExpand">
+
+    <Grid
+        Margin="20"
+        Padding="0,20"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        VerticalOptions="Center">
+
+        <StackLayout
+            BackgroundColor="{StaticResource BackgroundColor}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <ScrollView Padding="20">
+                <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+
+                    <Button
+                        Grid.Row="0"
+                        BindingContext="{x:Reference root}"
+                        Command="{Binding CloseCommand}"
+                        HorizontalOptions="End"
+                        Style="{StaticResource ButtonSmallStyle}"
+                        Text="Close" />
+
+                    <Label
+                        Grid.Row="1"
+                        Margin="0,10,0,20"
+                        HorizontalOptions="Center"
+                        Text="Términos y condiciones" />
+
+                    <Label
+                        Grid.Row="2"
+                        Margin="0,0,0,20"
+                        HorizontalOptions="Center"
+                        Text="Aliquam suscipit, metus nec dignissim congue, est sapien finibus diam, vel suscipit ante turpis a quam. Aliquam erat volutpat. Proin lacinia sem neque, quis congue erat placerat in. Mauris ac augue maximus, dictum diam vel, posuere nisl. Aliquam maximus nibh a ipsum ornare, blandit placerat est blandit. Quisque nibh arcu, viverra in tincidunt at, posuere eu nibh. Vestibulum scelerisque a dolor et vulputate. Integer hendrerit aliquam elit, ac vulputate ante tempor eu. Sed eu aliquam risus. Nullam a elit mauris.  Ut euismod hendrerit dapibus. Cras bibendum ante ac libero varius eleifend. Donec a neque tincidunt, ullamcorper purus at, sodales libero. Maecenas eget tempus nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean ornare finibus enim. Proin hendrerit magna at lacus tristique posuere. Nam laoreet urna ac magna cursus pulvinar. Pellentesque ipsum purus, ullamcorper ac lacus eleifend, condimentum fermentum augue. Proin lobortis ac nibh et commodo. Phasellus vel suscipit ligula, eu vulputate augue. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc eget euismod quam, et varius sapien. Sed a euismod ex, aliquam venenatis ligula. Mauris fermentum pharetra lacinia.  Nam bibendum sed nulla in fringilla. Quisque suscipit libero et ultrices sollicitudin. Aenean pharetra hendrerit lorem, eu dictum tortor faucibus id. Phasellus convallis, arcu non dictum vestibulum, sem dolor fringilla orci, eu posuere massa ipsum sit amet purus. Mauris at mi ut justo semper feugiat. Duis quis arcu ex. Aliquam sit amet neque rutrum, ultricies augue rutrum, varius ante. Donec ornare eu libero malesuada sodales. Quisque sed euismod ipsum. Ut ac ligula nibh. Sed accumsan aliquam fringilla.  Pellentesque eget augue vulputate, rhoncus turpis vel, blandit justo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Pellentesque dignissim sapien ac dolor convallis, quis porta lacus scelerisque. Quisque at diam eget augue sagittis tempor. Sed pharetra ullamcorper dui, id tempor ante luctus nec. Integer nec enim consectetur, faucibus diam sed, pulvinar nisi. Cras ut imperdiet urna. Mauris consequat, mauris a porttitor placerat, justo leo efficitur quam, in tempus lacus libero eu purus.  Cras eu ultricies purus. Nulla eu dui vel sapien semper facilisis ac ac nisi. Quisque vitae orci vitae turpis eleifend aliquam at eget arcu. Nam odio nunc" />
+
+
+                    <Button
+                        Grid.Row="3"
+                        BindingContext="{x:Reference root}"
+                        Command="{Binding OkCommand}"
+                        Style="{StaticResource ButtonStyle}"
+                        Text="Aceptas los términos" />
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+
+    </Grid>
+
+</ContentView>
