@@ -21,7 +21,7 @@ namespace AeccApp.Core.Views
             var pinBravent = new Pin() { Label = "Bravent", Position = new Position(40.486683, -3.665183) };
             map.Pins.Add(pinBravent);
 
-            
+
         }
 
         protected override void OnAppearing()

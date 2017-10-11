@@ -9,5 +9,8 @@ namespace AeccApp.Core.Services
     public interface IGoogleMapsPlaceService
     {
         Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText);
+
+        Task<GooglePlacesDetailModel> GetPlaceDetailAsync(string findText);
+
     }
 }

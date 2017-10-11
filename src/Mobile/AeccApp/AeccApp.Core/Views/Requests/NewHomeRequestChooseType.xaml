@@ -47,13 +47,13 @@
                             Grid.ColumnSpan="2"
                             FontSize="Large"
                             HorizontalOptions="Center"
-                            Text="Mi casa mock"
+                            Text="{Binding MyAddress.AddressName}"
                             VerticalOptions="Center" />
                     </StackLayout>
                     <Label
                         Grid.Row="1"
                         HorizontalOptions="Center"
-                        Text="Display Address 12,1A, Spain"
+                        Text="{Binding MyAddress.DisplayAddress}"
                         VerticalOptions="Center" />
                 </Grid>
             </StackLayout>

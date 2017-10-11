@@ -21,9 +21,9 @@ namespace AeccApp.Core.ViewModels
         {
             //TODO Delete mock home addresses
             HomeAddressesList = new ObservableCollection<AddressModel>();
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "Fake street, 1234 2ºa, Madrid", "placeID"));
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "Fake street, 1234 2ºa, Madrid", "placeID"));
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "Fake street, 1234 2ºa, Madrid", "placeID"));
+            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "Fake street, 1234 2ºa, Madrid", "placeID",0,0));
+            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "Fake street, 1234 2ºa, Madrid", "placeID", 0, 0));
+            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "Fake street, 1234 2ºa, Madrid", "placeID", 0, 0));
         }
 
         #region Commands

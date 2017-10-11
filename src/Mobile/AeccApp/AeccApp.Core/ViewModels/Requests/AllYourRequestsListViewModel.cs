@@ -32,7 +32,7 @@ namespace AeccApp.Core.ViewModels
         void OnHospitalTabCommand(object obj)
         {
             SwitchHomeAndHospitalList = true;
-            RequestModel mockRequest = new RequestModel("tipo", "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "",""));
+            RequestModel mockRequest = new RequestModel("tipo", "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "","",0,0));
             mockRequest.RequestAddress.DisplayAddress = mockRequest.RequestAddress.AddressName + "-" + mockRequest.RequestAddress.AddressStreet + "," + mockRequest.RequestAddress.AddressNumber;
             HospitalRequestsList.Add(mockRequest);
 
@@ -52,7 +52,7 @@ namespace AeccApp.Core.ViewModels
         {
             SwitchHomeAndHospitalList = false;
 
-            RequestModel mockRequest = new RequestModel("tipo", "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "",""));
+            RequestModel mockRequest = new RequestModel("tipo", "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "","",0,0));
             mockRequest.RequestAddress.DisplayAddress = mockRequest.RequestAddress.AddressName + "-" + mockRequest.RequestAddress.AddressStreet + "," + mockRequest.RequestAddress.AddressNumber;
             HomeRequestsList.Add(mockRequest);
 

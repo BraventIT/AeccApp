@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using AeccApp.Core.Models.Requests;
 using System.Linq;
+using AeccApp.Core.Models.Requests;
 
 namespace AeccApp.Core.Services
 {
@@ -17,7 +17,20 @@ namespace AeccApp.Core.Services
             _requestProvider = requestProvider;
         }
 
-        public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText)
+        public async Task<GooglePlacesDetailModel> GetPlaceDetailAsync(string findText)
+        {
+            UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
+            {
+                Path = "maps/api/place/details/json",
+                Query = $"placeid={findText}&language=es&key={GlobalSetting.Instance.GooglePlacesApiKey}"
+            };
+            
+            GooglePlacesDetailModel place = await _requestProvider.GetAsync<GooglePlacesDetailModel>(uriBuilder.ToString());
+            return place;
+        }
+
+
+            public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText)
         {
             UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
             {

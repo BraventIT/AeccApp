@@ -17,6 +17,9 @@ namespace AeccApp.Core.Models.Requests
         public string DisplayAddress { get; set; }
         public string PlaceId { get; set; }
 
+        public double Lat { get; set; }
+        public double Lng { get; set; }
+
 
 
         public AddressModel()
@@ -24,7 +27,7 @@ namespace AeccApp.Core.Models.Requests
             
         }
 
-        public AddressModel(string AddressName,string AddressStreet,string AddressProvince, string AddressNumber, string AddressFloor, string AddressHospitalRoom,string DisplayAddress,string PlaceId)
+        public AddressModel(string AddressName,string AddressStreet,string AddressProvince, string AddressNumber, string AddressFloor, string AddressHospitalRoom,string DisplayAddress,string PlaceId,float Lat,float Lng)
         {
             this.AddressName = AddressName;
             this.AddressStreet = AddressStreet;
@@ -34,9 +37,11 @@ namespace AeccApp.Core.Models.Requests
             this.AddressHospitalRoom = AddressHospitalRoom;
             this.DisplayAddress = DisplayAddress;
             this.PlaceId = PlaceId;
+            this.Lat = Lat;
+            this.Lng = Lng;
         }
 
-        public AddressModel(string AddressName, string AddressStreet,string AddressProvince, string AddressNumber, string AddressFloor,string DisplayAddress, string PlaceId)
+        public AddressModel(string AddressName, string AddressStreet,string AddressProvince, string AddressNumber, string AddressFloor,string DisplayAddress, string PlaceId,double Lat, double Lng)
         {
             this.AddressName = AddressName;
             this.AddressStreet = AddressStreet;
@@ -45,6 +50,8 @@ namespace AeccApp.Core.Models.Requests
             this.AddressFloor = AddressFloor;
             this.DisplayAddress = DisplayAddress;
             this.PlaceId = PlaceId;
+            this.Lat = Lat;
+            this.Lng = Lng;
         }
 
     }

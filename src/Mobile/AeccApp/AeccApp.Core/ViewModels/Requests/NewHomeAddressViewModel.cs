@@ -58,13 +58,13 @@ namespace AeccApp.Core.ViewModels
         {
             if (IsAddressGettingSaved)
             {
-                //TODO Save new home address (without address number)
-                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>();
+                // Save new home address (without address number)
+                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
             }
             else
             {
-                //TODO pass home address without saving it (without address number)
-                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>();
+                // pass home address without saving it (without address number)
+                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
 
             }
         }
@@ -137,14 +137,16 @@ namespace AeccApp.Core.ViewModels
 
             if (IsAddressGettingSaved && ThereIsAddressNumberOrDoesNotWantTo == true)
             {
-                //TODO Save new home address (with address number)
-                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>();
+                // Save new home address (with address number)
+                NewAddress.AddressNumber = AddressNumberInfo;
+                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
 
             }
             else if (!IsAddressGettingSaved && ThereIsAddressNumberOrDoesNotWantTo == true)
             {
-                //TODO pass home address without saving it (with address number)
-                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>();
+                // pass home address without saving it (with address number)
+                NewAddress.AddressNumber = AddressNumberInfo;
+                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
             }
 
 

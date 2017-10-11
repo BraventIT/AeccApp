@@ -1,4 +1,5 @@
-﻿using AeccApp.Internationalization.Properties;
+﻿using AeccApp.Core.Models.Requests;
+using AeccApp.Internationalization.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,18 @@ namespace AeccApp.Core.ViewModels
 {
     public class CompletingRequestViewModel : ViewModelBase
     {
-      
 
 
+        #region Constructor and initialization
+        public override Task InitializeAsync(object navigationData)
+        {
+            CurrentAddress = navigationData as AddressModel;
+            InitialMapLat = CurrentAddress.Lat;
+            InitialMapLng = CurrentAddress.Lng;
+            return Task.CompletedTask;
+        }
+
+        #endregion
 
         #region Commands
         private Command _closeRequestSentPopupCommand;
@@ -181,19 +191,27 @@ namespace AeccApp.Core.ViewModels
 
         #region Properties
 
-        private float _initialMapLat;
+        private double _initialMapLat;
 
-        public float InitialMapLat
+        public double InitialMapLat
         {
             get { return _initialMapLat; }
             set { _initialMapLat = value; }
         }
-        private float _initialMapLng;
+        private double _initialMapLng;
 
-        public float InitialMapLng
+        public double InitialMapLng
         {
             get { return _initialMapLng; }
             set { _initialMapLng = value; }
+        }
+
+        private AddressModel _currentAddress;
+
+        public AddressModel CurrentAddress
+        {
+            get { return _currentAddress; }
+            set { Set(ref _currentAddress, value); }
         }
 
 

@@ -36,7 +36,7 @@
                             WinPhone="250"
                             iOS="150" />
                     </StackLayout.HeightRequest>
-                    <!--  Avoid InitialCameraUpdate for map /iOS bug/: https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
+                    <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
                     <maps:Map
                         x:Name="map"
                         HasZoomEnabled="True"
@@ -128,9 +128,7 @@
 
             <!--  Popups  -->
 
-            <ctrl:RequestSentPopupControl 
-                CloseRequestSentPopupCommand="{Binding CloseRequestSentPopupCommand}" 
-                IsVisible="{Binding IsRequestSentPopupVisible}" >
+            <ctrl:RequestSentPopupControl CloseRequestSentPopupCommand="{Binding CloseRequestSentPopupCommand}" IsVisible="{Binding IsRequestSentPopupVisible}">
                 <View.Behaviors>
                     <beh:AnimateScaleBehavior IsVisible="{Binding IsRequestSentPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
                 </View.Behaviors>
@@ -142,7 +140,7 @@
                 DateSelected="{Binding DateToApply, Mode=TwoWay}"
                 HorizontalOptions="FillAndExpand"
                 IsVisible="{Binding IsDateAndTimePopupVisible}"
-                TimeSelected="{Binding TimeToApply, Mode=TwoWay}" >
+                TimeSelected="{Binding TimeToApply, Mode=TwoWay}">
                 <View.Behaviors>
                     <beh:AnimateScaleBehavior IsVisible="{Binding IsDateAndTimePopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
                 </View.Behaviors>
@@ -155,7 +153,7 @@
                 DisplayTime="{Binding TimeToApplyParsed}"
                 HorizontalOptions="FillAndExpand"
                 IsVisible="{Binding IsRequestConfirmationPopupVisible}"
-                SendRequestConfirmationCommand="{Binding SendRequestCommand}" >
+                SendRequestConfirmationCommand="{Binding SendRequestCommand}">
                 <View.Behaviors>
                     <beh:AnimateScaleBehavior IsVisible="{Binding IsRequestConfirmationPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
                 </View.Behaviors>
