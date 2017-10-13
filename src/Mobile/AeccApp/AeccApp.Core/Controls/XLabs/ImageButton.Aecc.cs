@@ -20,7 +20,7 @@ namespace XLabs.Forms.Controls
                 var source = (FileImageSource)value;
 
                 string path = source.File;
-                if (Device.RuntimePlatform == Device.Windows)
+                if (Device.RuntimePlatform == Device.UWP)
                 {
                     path = $"Assets/{path}.png";
                 }

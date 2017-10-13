@@ -17,7 +17,7 @@ namespace AeccApp.Core.Converters
 				return value;
 			}
 
-            if (Device.RuntimePlatform == Device.Windows)
+            if (Device.RuntimePlatform == Device.UWP)
 			{
 				var pathUwp = $"Assets/{value}.png";
 				return pathUwp;

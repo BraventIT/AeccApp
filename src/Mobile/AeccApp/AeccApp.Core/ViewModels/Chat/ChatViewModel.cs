@@ -99,19 +99,19 @@ namespace AeccApp.Core.ViewModels
 
         #region Filter Popup Properties
 
-        private int _minimumAge = 18;
+        private int _filterMinimumAge = 18;
 
-        public int MinimumAge
+        public int FilterMinimumAge
         {
-            get { return _minimumAge; }
-            set { Set(ref _minimumAge, value); }
+            get { return _filterMinimumAge; }
+            set { Set(ref _filterMinimumAge, value); }
         }
-        private int _maximumAge = 80;
+        private int _filterMaximumAge = 80;
 
-        public int MaximumAge
+        public int FilterMaximumAge
         {
-            get { return _maximumAge; }
-            set { Set(ref _maximumAge, value); }
+            get { return _filterMaximumAge; }
+            set { Set(ref _filterMaximumAge, value); }
         }
 
 
@@ -142,7 +142,7 @@ namespace AeccApp.Core.ViewModels
 
         async void OnApplyFiltersCommand(object obj)
         {
-            if (MinimumAge > MaximumAge)
+            if (FilterMinimumAge > FilterMaximumAge)
             {
                 //Temporary sliders (Not range sliders yet) not following filters logic
                 return;
@@ -156,7 +156,7 @@ namespace AeccApp.Core.ViewModels
                     int volunteerAge = 0;
                     if (Int32.TryParse(item.Age, out volunteerAge))
                     {
-                        if (volunteerAge > MaximumAge || volunteerAge < MinimumAge)
+                        if (volunteerAge > FilterMaximumAge || volunteerAge < FilterMinimumAge)
                         {
                             Volunteers.Remove(item);
                         }

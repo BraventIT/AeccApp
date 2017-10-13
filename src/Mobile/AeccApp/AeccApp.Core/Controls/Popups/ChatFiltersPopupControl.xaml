@@ -4,10 +4,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
-    xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     x:Name="root">
-
 
     <StackLayout>
 
@@ -16,77 +15,17 @@
             HorizontalOptions="Center"
             Text="{Binding [CommonAge]}" />
 
-        <ContentView>
-            <OnPlatform x:TypeArguments="View">
-                <OnPlatform.iOS>
-                    <!--  MinimumSlider  -->
-                    <StackLayout>
-                        <Slider
-                            Maximum="80"
-                            Minimum="18"
-                            Value="{Binding MinimumAge, Mode=TwoWay}" />
-                        <StackLayout Orientation="Horizontal">
-                            <Label HorizontalOptions="Center" Text="Minima" />
-                            <Label HorizontalOptions="Center" Text="{Binding MinimumAge}" />
-                        </StackLayout>
-                        <!--  MaximumSlider  -->
-                        <Slider
-                            Maximum="80"
-                            Minimum="18"
-                            Value="{Binding MaximumAge, Mode=TwoWay}" />
-                        <StackLayout Orientation="Horizontal">
-                            <Label HorizontalOptions="Center" Text="Maxima" />
-                            <Label HorizontalOptions="Center" Text="{Binding MaximumAge}" />
-                        </StackLayout>
-                    </StackLayout>
-                </OnPlatform.iOS>
-                <OnPlatform.WinPhone>
-                    <!--  MinimumSlider  -->
-                    <StackLayout>
-                        <Slider
-                            Maximum="80"
-                            Minimum="18"
-                            Value="{Binding MinimumAge, Mode=TwoWay}" />
-                        <StackLayout Orientation="Horizontal">
-                            <Label HorizontalOptions="Center" Text="Minima" />
-                            <Label HorizontalOptions="Center" Text="{Binding MinimumAge}" />
-                        </StackLayout>
-                        <!--  MaximumSlider  -->
-                        <Slider
-                            Maximum="80"
-                            Minimum="18"
-                            Value="{Binding MaximumAge, Mode=TwoWay}" />
-                        <StackLayout Orientation="Horizontal">
-                            <Label HorizontalOptions="Center" Text="Maxima" />
-                            <Label HorizontalOptions="Center" Text="{Binding MaximumAge}" />
-                        </StackLayout>
-                    </StackLayout>
-                </OnPlatform.WinPhone>
-                <OnPlatform.Android>
-                    <forms:RangeSlider
-                        BarHeight="10"
-                        LowerValue="{Binding MinimumAge, Mode=TwoWay}"
-                        MaximumValue="80"
-                        MinimumValue="18"
-                        ShowTextAboveThumbs="True"
-                        StepValue="0"
-                        StepValueContinuously="False"
-                        TextSize="15"
-                        UpperValue="{Binding MaximumAge, Mode=TwoWay}"
-                        VerticalOptions="Center" />
-                </OnPlatform.Android>
-            </OnPlatform>
-        </ContentView>
-
-
-
-        <!--<ctrlXlabs:ExtendedSlider
-            Margin="20,10,20,0"
-            HorizontalOptions="FillAndExpand"
-            Maximum="80"
-            Minimum="18"
+        <ctrlRange:RangeSlider
+            BarHeight="10"
+            LowerValue="{Binding FilterMinimumAge, Mode=TwoWay}"
+            MaximumValue="80"
+            MinimumValue="18"
+            ShowTextAboveThumbs="True"
             StepValue="1"
-            Value="{Binding CurrentAge}" />-->
+            StepValueContinuously="True"
+            TextSize="15"
+            UpperValue="{Binding FilterMaximumAge, Mode=TwoWay}" />
+
 
         <StackLayout IsVisible="False">
             <!--  TODO Gender filters hidden until project updates  -->

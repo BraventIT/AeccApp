@@ -37,7 +37,7 @@ namespace AeccApp
 
             InitApp();
 
-            if (Device.RuntimePlatform == Device.Windows)
+            if (Device.RuntimePlatform == Device.UWP)
             {
                 InitNavigation();
             }
@@ -58,7 +58,7 @@ namespace AeccApp
 
         protected override void OnStart()
         {
-            if (Device.RuntimePlatform != Device.Windows)
+            if (Device.RuntimePlatform != Device.UWP)
             {
                 InitNavigation();
             }
