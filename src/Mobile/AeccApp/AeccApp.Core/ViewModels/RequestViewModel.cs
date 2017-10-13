@@ -7,7 +7,6 @@ namespace AeccApp.Core.ViewModels
 {
     public class RequestsViewModel : ViewModelBase
     { 
-
         #region Commands
         private Command _newRequestCommand;
         public ICommand NewRequestCommand

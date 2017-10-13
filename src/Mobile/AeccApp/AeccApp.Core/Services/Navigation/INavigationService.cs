@@ -1,8 +1,4 @@
 ﻿using AeccApp.Core.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AeccApp.Core.Services
@@ -16,6 +12,10 @@ namespace AeccApp.Core.Services
         Task NavigateToAsync<TViewModel>(bool isModal = false) where TViewModel : ViewModelBase;
 
         Task NavigateToAsync<TViewModel>(object parameter, bool isModal = false) where TViewModel : ViewModelBase;
+
+        Task ShowPopupAsync(ViewModelBase viewModel);
+
+        Task HidePopupAsync();
 
         Task NavigateBackAsync();
 

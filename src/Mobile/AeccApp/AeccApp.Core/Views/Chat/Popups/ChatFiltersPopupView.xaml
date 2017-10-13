@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<vPop:PopupPage
+    x:Class="AeccApp.Core.Views.Popups.ChatFiltersPopupView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+    xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
+    xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    BackgroundColor="{StaticResource SeeThrough}">
+
+    <ContentView
+        Margin="20"
+        Style="{StaticResource BorderStyle}"
+        VerticalOptions="Center">
+        <ContentView Style="{StaticResource InternalViewStyle}">
+
+            <StackLayout
+                Margin="1"
+                Padding="20"
+                BackgroundColor="{StaticResource BackgroundColor}">
+
+                <Label
+                    Margin="10"
+                    HorizontalOptions="Center"
+                    Text="{Binding [CommonAge]}" />
+
+                <ctrlRange:RangeSlider
+                    BarHeight="10"
+                    LowerValue="{Binding MinimumAge, Mode=TwoWay}"
+                    MaximumValue="80"
+                    MinimumValue="18"
+                    ShowTextAboveThumbs="True"
+                    StepValue="1"
+                    StepValueContinuously="True"
+                    TextSize="15"
+                    UpperValue="{Binding MaximumAge, Mode=TwoWay}" />
+
+                <StackLayout IsVisible="False">
+                    <!--  TODO Gender filters hidden until project updates  -->
+                    <BoxView
+                        Margin="0,10,0,0"
+                        HeightRequest="1"
+                        Color="Black" />
+
+                    <Label
+                        Margin="10"
+                        HorizontalOptions="Center"
+                        Text="{Binding [CommonGender]}" />
+
+
+                    <Grid HorizontalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <ctrl:CustomImage
+                            Grid.Column="0"
+                            Margin="20"
+                            HeightRequest="100"
+                            HorizontalOptions="Center"
+                            SourcePlatform="gender_female"
+                            VerticalOptions="Center"
+                            WidthRequest="100" />
+
+                        <ctrl:CustomImage
+                            Grid.Column="1"
+                            Margin="20"
+                            HeightRequest="100"
+                            HorizontalOptions="Center"
+                            SourcePlatform="gender_male"
+                            VerticalOptions="Center"
+                            WidthRequest="100" />
+
+                    </Grid>
+                </StackLayout>
+
+                <BoxView HeightRequest="1" Color="Black" />
+
+                <Button
+                    Margin="10"
+                    Command="{Binding ApplyFiltersCommand}"
+                    Style="{StaticResource ButtonStyle}"
+                    Text="{Binding [CommonApplyFilters]}" />
+            </StackLayout>
+        </ContentView>
+    </ContentView>
+</vPop:PopupPage>

@@ -2,6 +2,8 @@
 using AeccApp.Core.Services;
 using Xamarin.Forms;
 using System.Windows.Input;
+using AeccApp.Core.ViewModels.Popups;
+using System;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -12,12 +14,17 @@ namespace AeccApp.Core.ViewModels
         public ProfileViewModel()
         {
             _identityService = ServiceLocator.Resolve<IIdentityService>();
+            LogoutPopupVM = new LogoutPopupViewModel();
+        }
+
+        public override async Task ActivateAsync()
+        {
+            LogoutPopupVM.Logout += OnLogoutPopupLogout;
         }
 
         public override void Deactivate()
         {
-            base.Deactivate();
-            IsLogOutPopUpVisible = false;
+            LogoutPopupVM.Logout -= OnLogoutPopupLogout;
         }
 
         #region Properties
@@ -40,68 +47,30 @@ namespace AeccApp.Core.ViewModels
         {
             get { return GSetting.User?.Address; }
         }
-      
+
         public int Age
         {
             get { return GSetting.User.Age; }
         }
 
-        private bool _isLogOutPopUpVisible;
-
-        public bool IsLogOutPopUpVisible
-        {
-            get { return _isLogOutPopUpVisible; }
-            set
-            {
-                Set(ref _isLogOutPopUpVisible, value);
-            }
-        }
-        
-
+        public LogoutPopupViewModel LogoutPopupVM { get; private set; }
 
         #endregion
 
         #region Commands
-        private Command _logoutCommand;
-        public ICommand LogoutCommand
+        /// <summary>
+        /// Show logout popup
+        /// </summary>
+        private Command _showLogoutPopupCommand;
+        public ICommand ShowLogoutPopupCommand
         {
             get
             {
-                return _logoutCommand ??
-                    (_logoutCommand = new Command(o => OnLogoutAsync()));
+                return _showLogoutPopupCommand ??
+                    (_showLogoutPopupCommand = new Command(o => NavigationService.ShowPopupAsync(LogoutPopupVM)));
             }
         }
-        /// <summary>
-        /// Logout 
-        /// </summary>
-        /// <returns></returns>
-        private async Task OnLogoutAsync()
-        {
-            _identityService.LogOff();
-            await NavigationService.NavigateToAsync<LoginViewModel>();
-            await NavigationService.RemoveBackStackAsync();
-        }
-
-        private Command _openCloseLogoutPopupCommand;
-        public ICommand OpenCloseLogoutPopupCommand
-        {
-            get
-            {
-                return _openCloseLogoutPopupCommand ??
-                    (_openCloseLogoutPopupCommand = new Command(o => OnOpenCloseLogoutPopupCommand()));
-            }
-        }
-        /// <summary>
-        /// Opens and closes logout popup
-        /// </summary>
-        private void OnOpenCloseLogoutPopupCommand()
-        {
-            IsLogOutPopUpVisible = !IsLogOutPopUpVisible;
-        }
-
-
-
-
+         
         private Command _editProfileCommand;
         public ICommand EditProfileCommand
         {
@@ -124,17 +93,16 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
-
-        public override bool OnBackButtonPressed()
+        /// <summary>
+        /// Logout 
+        /// </summary>
+        /// <returns></returns>
+        private async void OnLogoutPopupLogout(object sender, EventArgs e)
         {
-            bool returnValue = false;
-            if (IsLogOutPopUpVisible)
-            {
-                IsLogOutPopUpVisible = false;
-                returnValue = true;
-            }
-
-            return returnValue;
+            await NavigationService.HidePopupAsync();
+            _identityService.LogOff();
+            await NavigationService.NavigateToAsync<LoginViewModel>();
+            await NavigationService.RemoveBackStackAsync();
         }
     }
 }

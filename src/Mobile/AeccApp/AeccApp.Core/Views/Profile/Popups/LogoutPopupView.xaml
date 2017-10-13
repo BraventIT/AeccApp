@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentView
-    x:Class="AeccApp.Core.Controls.LogoutPopupControl"
+<vPop:PopupPage
+    x:Class="AeccApp.Core.Views.Popups.LogoutPopupView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
-    x:Name="root"
+    xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
     <ContentView
@@ -28,8 +28,6 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-
-
                 <ctrl:CustomImage
                     Grid.ColumnSpan="2"
                     HorizontalOptions="Center"
@@ -51,8 +49,7 @@
                 <Button
                     Grid.Row="3"
                     Margin="0,20,0,0"
-                    BindingContext="{x:Reference root}"
-                    Command="{Binding YesCommand}"
+                    Command="{Binding LogoutCommand}"
                     HorizontalOptions="Center"
                     Style="{StaticResource ButtonSmallStyle}"
                     Text="Si" />
@@ -61,8 +58,7 @@
                     Grid.Row="3"
                     Grid.Column="1"
                     Margin="0,20,0,0"
-                    BindingContext="{x:Reference root}"
-                    Command="{Binding NoCommand}"
+                    Command="{Binding ClosePopupCommand}"
                     HorizontalOptions="Center"
                     Style="{StaticResource ButtonSmallStyle}"
                     Text="No" />
@@ -70,4 +66,4 @@
         </ContentView>
     </ContentView>
 
-</ContentView>
+</vPop:PopupPage>

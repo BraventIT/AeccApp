@@ -19,6 +19,7 @@
     <PackageReference Include="Microsoft.Bot.Connector.DirectLine" Version="3.0.2" />
     <PackageReference Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.0.4" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.0.1" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.7" />
     <PackageReference Include="Xamarin.Forms" Version="2.4.0.282" />
@@ -32,6 +33,15 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Chat\Popups\ChatFiltersPopupView.xaml.cs">
+      <DependentUpon>ChatFiltersPopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Profile\Popups\LogoutPopupView.xaml.cs">
+      <DependentUpon>LogoutPopupView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

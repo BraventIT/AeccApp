@@ -110,7 +110,7 @@
                         Orientation="Horizontal">
 
                         <Button
-                            Command="{Binding OpenCloseLogoutPopupCommand}"
+                            Command="{Binding ShowLogoutPopupCommand}"
                             Style="{StaticResource ButtonSmallStyle}"
                             Text="{Binding [CommonLogout]}" />
                         <Button
@@ -125,14 +125,6 @@
 
             <!--  INDICATOR  -->
             <ctrl:CustomActivityIndicatorControl />
-            <ctrl:LogoutPopupControl
-                IsVisible="False"
-                NoCommand="{Binding OpenCloseLogoutPopupCommand}"
-                YesCommand="{Binding LogoutCommand}">
-                <View.Behaviors>
-                    <beh:AnimateScaleBehavior IsVisible="{Binding IsLogOutPopUpVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-                </View.Behaviors>
-            </ctrl:LogoutPopupControl>
         </Grid>
     </ScrollView>
 </v:BaseContentPage>

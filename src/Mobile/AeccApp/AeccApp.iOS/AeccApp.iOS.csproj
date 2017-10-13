@@ -152,6 +152,9 @@
     <PackageReference Include="Microsoft.Rest.ClientRuntime">
       <Version>2.3.10</Version>
     </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.0.4</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugins.Settings">
       <Version>3.0.1</Version>
     </PackageReference>

@@ -145,11 +145,11 @@
             </Grid>
 
             <!--  Volunteer filters popup  -->
-            <ctrl:ChatFiltersPopupControl
+            <!--<ctrl:ChatFiltersPopupControl
                 ApplyFiltersCommand="{Binding ApplyFiltersCommand}"
                 IsVisible="{Binding IsFilterPopupVisible}"
                 MaximumAge="{Binding MaximumAge}"
-                MinimumAge="{Binding MinimumAge}" />
+                MinimumAge="{Binding MinimumAge}" />-->
         </Grid>
 
         <!--  Volunteer-only messages  -->

@@ -9,6 +9,8 @@ using System.Reflection;
 using System.Globalization;
 using AeccApp.Core.Views;
 using AeccApp.Core.Helpers;
+using Rg.Plugins.Popup.Pages;
+using Rg.Plugins.Popup.Services;
 
 namespace AeccApp.Core.Services
 {
@@ -132,5 +134,33 @@ namespace AeccApp.Core.Services
             Page page = Activator.CreateInstance(pageType) as Page;
             return page;
         }
+
+        #region Popups
+        public async Task ShowPopupAsync(ViewModelBase viewModel)
+        {
+            PopupPage popupPage = CreatePopupPage(viewModel.GetType());
+
+            popupPage.BindingContext = viewModel;
+            await PopupNavigation.PushAsync(popupPage);
+        }
+
+        public Task HidePopupAsync()
+        {
+            return PopupNavigation.PopAllAsync();
+        }
+
+        private PopupPage CreatePopupPage(Type viewModelType)
+        {
+            Type popupPageType = ViewModelPath.GetPopupPageTypeForViewModel(viewModelType);
+            if (popupPageType == null)
+            {
+                throw new Exception($"Cannot locate popup page type for {viewModelType}");
+            }
+
+            PopupPage page = Activator.CreateInstance(popupPageType) as PopupPage;
+            return page;
+        }
+        #endregion
+
     }
 }

@@ -18,6 +18,15 @@ namespace AeccApp.Core.Helpers
             return viewType;
         }
 
+        internal static Type GetPopupPageTypeForViewModel(Type viewModelType)
+        {
+            var viewName = viewModelType.FullName.Replace("Model", string.Empty);
+            var viewModelAssemblyName = viewModelType.GetTypeInfo().Assembly.FullName;
+            var viewAssemblyName = $"{viewName}, {viewModelAssemblyName}";
+            var viewType = Type.GetType(viewAssemblyName);
+            return viewType;
+        }
+
         internal static Type GetViewModelTypeForPage(Type viewType)
         {
             var viewName = viewType.FullName.Replace(".Views.", ".ViewModels.");

@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Popup = Rg.Plugins.Popup.Windows.Popup;
 
 namespace AeccApp.UWP
 {
@@ -62,11 +63,11 @@ namespace AeccApp.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                var rendererAssemblies = new[]
+                var rendererAssemblies = new List<Assembly>()
                       {
                           typeof(Xamarin.Forms.GoogleMaps.UWP.MapRenderer).GetTypeInfo().Assembly
                       };
-
+                rendererAssemblies.AddRange(Popup.GetExtraAssemblies());
 
                 Xamarin.Forms.Forms.Init(e, rendererAssemblies);
                 Xamarin.FormsGoogleMaps.Init(BingMapKey);
