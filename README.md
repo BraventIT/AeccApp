@@ -5,9 +5,9 @@
 ### Actualmente la aplicación está en un estado inicial de desarrollo.
 Las piezas que actualmente tenemos en desarrollo son:
 
-1. La aplicación móvil. ([aqui)](https://github.com/BraventMobile/AeccApp/tree/develop/src/Mobile)
+1. La aplicación móvil. ([aqui)](https://github.com/BraventIT/AeccApp/tree/develop/src/Mobile)
 	+ Xamarin forms para iOS, Android y UWP.
-2. Un bot que gestiona las comunicaciones entre *voluntarios* y *beneficiarios* ([aqui)](https://github.com/BraventMobile/AeccApp/tree/develop/src/Services/AeccBot)
+2. Un bot que gestiona las comunicaciones entre *voluntarios* y *beneficiarios* ([aqui)](https://github.com/BraventIT/AeccApp/tree/develop/src/Services/AeccBot)
 	* Bot Framework
 3. Servicios ASP.NET Web API para gestión de maestros (pendiente de desarrollar)  
 
