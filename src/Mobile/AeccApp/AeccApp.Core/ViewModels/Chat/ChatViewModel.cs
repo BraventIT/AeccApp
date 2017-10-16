@@ -24,7 +24,7 @@ namespace AeccApp.Core.ViewModels
             Messages = new ObservableCollection<Message>();
             Volunteers = new ObservableCollection<Volunteer>();
             ChatFiltersPopupVM = new ChatFiltersPopupViewModel();
-
+            ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
             _chatService = ServiceLocator.Resolve<IChatService>();
         }
 
@@ -32,7 +32,7 @@ namespace AeccApp.Core.ViewModels
         {
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             ChatFiltersPopupVM.AppliedFilters += OnChatFiltersAppliedFilters;
-
+            ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
             _chatService.MessagesReceived += OnMesagesReceived;
             _chatService.AggregationsReceived += OnAggregationsReceived;
 
@@ -62,6 +62,8 @@ namespace AeccApp.Core.ViewModels
         {
             MessagingCenter.Unsubscribe<ChatStateMessage>(this, string.Empty);
             ChatFiltersPopupVM.AppliedFilters -= OnChatFiltersAppliedFilters;
+            ChatLeaseConversationPopupVM.LeaseChatConversation -= OnLeaseConversation;
+
             _chatService.MessagesReceived -= OnMesagesReceived;
             _chatService.AggregationsReceived -= OnAggregationsReceived;
         }
@@ -118,6 +120,7 @@ namespace AeccApp.Core.ViewModels
 
         #region Popups Properties
         public ChatFiltersPopupViewModel ChatFiltersPopupVM { get; private set; }
+        public ChatLeaseConversationPopupViewModel ChatLeaseConversationPopupVM { get; private set; }
 
         private bool _isVolunteerProfileVisible;
         public bool IsVolunteerProfileVisible
@@ -240,41 +243,33 @@ namespace AeccApp.Core.ViewModels
             });
         }
 
-        private Command leaseConversationCommand;
-        public ICommand LeaseConversationCommand
-        {
-            get
-            {
-                return leaseConversationCommand ??
-                    (leaseConversationCommand = new Command(OnLeaseConversation, (o) => !IsBusy));
-            }
-        }
+       
 
-        private async void OnLeaseConversation(object obj)
+        private async void OnLeaseConversation(object sender, EventArgs e)
         {
             await ExecuteOperationAsync(() => _chatService.EndChatAsync());
-            IsLeaseConversationPopupVisible = false;
+            await NavigationService.HidePopupAsync();
             if (!IsVolunteer)
             {
                 RatingPopupVisible = true;
             }
         }
-
-        private Command toggleLeaseConversationPopupCommand;
-        public ICommand ToggleLeaseConversationPopupCommand
+  
+        private Command _leaseConversationPopupCommand;
+        public ICommand LeaseConversationPopupCommand
         {
             get
             {
-                return toggleLeaseConversationPopupCommand ??
-                    (toggleLeaseConversationPopupCommand = new Command(
-                        OnToggleLeaseConversationPopup, (o) => !IsBusy));
+                return _leaseConversationPopupCommand ??
+                    (_leaseConversationPopupCommand = new Command(
+                        OnLeaseConversationPopup, (o) => !IsBusy));
             }
         }
 
-        private void OnToggleLeaseConversationPopup(object obj)
+        private void OnLeaseConversationPopup(object obj)
         {
-            RatingPopupVisible = false;
-            IsLeaseConversationPopupVisible = !IsLeaseConversationPopupVisible;
+            NavigationService.HidePopupAsync();
+            NavigationService.ShowPopupAsync(ChatLeaseConversationPopupVM);
         }
         #endregion
 
@@ -465,8 +460,6 @@ namespace AeccApp.Core.ViewModels
             chooseVolunteerCommand?.ChangeCanExecute();
             refreshVolunteersCommand?.ChangeCanExecute();
             sendMessageCommand?.ChangeCanExecute();
-            toggleLeaseConversationPopupCommand?.ChangeCanExecute();
-            leaseConversationCommand.ChangeCanExecute();
         }
 
         #endregion

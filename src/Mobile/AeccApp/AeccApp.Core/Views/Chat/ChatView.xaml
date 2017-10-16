@@ -15,7 +15,7 @@
 
     <ContentPage.ToolbarItems>
         <ctrl:HideableToolbarItem
-            Command="{Binding ToggleLeaseConversationPopupCommand}"
+            Command="{Binding LeaseConversationPopupCommand}"
             IconPlatform="exit_icon"
             IsVisible="{Binding PartyId, Converter={StaticResource IsNotNullConverter}}"
             Order="Primary"
@@ -62,14 +62,14 @@
         </ctrl:ChatRatingPopupControl>
 
         <!--  Leave conversation popup  -->
-        <ctrl:ChatLeaseConversationPopupControl
+        <!--<ctrl:ChatLeaseConversationPopupControl
             IsVisible="{Binding IsLeaseConversationPopupVisible}"
             NoCommand="{Binding ToggleLeaseConversationPopupCommand}"
             YesCommand="{Binding LeaseConversationCommand}">
             <View.Behaviors>
                 <beh:AnimateScaleBehavior IsVisible="{Binding IsLeaseConversationPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
             </View.Behaviors>
-        </ctrl:ChatLeaseConversationPopupControl>
+        </ctrl:ChatLeaseConversationPopupControl>-->
 
         <!--  INDICATOR  -->
         <ctrl:CustomActivityIndicatorControl />
