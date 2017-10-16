@@ -24,12 +24,26 @@ namespace AeccApp.Core.ViewModels
             Messages = new ObservableCollection<Message>();
             Volunteers = new ObservableCollection<Volunteer>();
             ChatFiltersPopupVM = new ChatFiltersPopupViewModel();
-
+            ChatRatingPopupVM = new ChatRatingPopupViewModel();
+            ChatCounterpartProfilePopupVM = new ChatCounterpartProfilePopupViewModel();
+            ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
+            ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
             _chatService = ServiceLocator.Resolve<IChatService>();
+
+          
+
         }
 
         public override Task ActivateAsync()
         {
+            if (Settings.TermsAndConditionsAccept == false)
+            {
+               return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
+            }
+            else
+            {
+
+          
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
 
@@ -56,6 +70,9 @@ namespace AeccApp.Core.ViewModels
                 }
             },
              finallyAction: () => VolunteersIsEmpty = !Volunteers.Any());
+            }
+
+
         }
 
         public override void Deactivate()
@@ -117,28 +134,11 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Popups Properties
+        public ChatTermsAndConditionsPopupViewModel ChatTermsAndConditionsPopupVM { get; private set; }
         public ChatFiltersPopupViewModel ChatFiltersPopupVM { get; private set; }
-
-        private bool _isVolunteerProfileVisible;
-        public bool IsVolunteerProfileVisible
-        {
-            get { return _isVolunteerProfileVisible; }
-            set { Set(ref _isVolunteerProfileVisible, value); }
-        }
-
-        private bool isLeaseConversationPopupVisible;
-        public bool IsLeaseConversationPopupVisible
-        {
-            get { return isLeaseConversationPopupVisible; }
-            set { Set(ref isLeaseConversationPopupVisible, value); }
-        }
-
-        private bool _ratingPopupVisible;
-        public bool RatingPopupVisible
-        {
-            get { return _ratingPopupVisible; }
-            set { Set(ref _ratingPopupVisible, value); }
-        }
+        public ChatLeaseConversationPopupViewModel ChatLeaseConversationPopupVM { get; private set; }
+        public ChatRatingPopupViewModel ChatRatingPopupVM { get; private set; }
+        public ChatCounterpartProfilePopupViewModel ChatCounterpartProfilePopupVM { get; private set; }
 
 
         #endregion
@@ -149,51 +149,7 @@ namespace AeccApp.Core.ViewModels
 
         #region Chat Commands
 
-        private Command _ratingCommand;
-        public ICommand RatingCommand
-        {
-            get
-            {
-                return _ratingCommand ??
-                    (_ratingCommand = new Command(OnRatingCommand, (o) => !IsBusy));
-            }
-        }
-
-        private async void OnRatingCommand(object obj)
-        {
-            //TODO Manage rating result:
-            switch (obj)
-            {
-                case "1":
-                    var test1 = "1 estrella";
-                    break;
-
-                case "2":
-                    var test2 = "2 estrellas";
-
-                    break;
-
-                case "3":
-                    var test3 = "3 estrellas";
-
-                    break;
-
-                case "4":
-                    var test4 = "4 estrellas";
-
-                    break;
-
-                case "5":
-                    var test = "5 estrellas";
-
-                    break;
-
-                default:
-                    break;
-            }
-            RatingPopupVisible = false;
-            await ExecuteOperationAsync(() => NavigationService.NavigateToAsync<DashboardViewModel>());
-        }
+      
 
         private Command _viewVolunteerProfileCommand;
         public ICommand ViewVolunteerProfileCommand
@@ -205,10 +161,10 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private void OnVolunteerProfileOpen(object obj)
+        private async void OnVolunteerProfileOpen(object obj)
         {
-            isLeaseConversationPopupVisible = false;
-            IsVolunteerProfileVisible = !IsVolunteerProfileVisible;
+            await NavigationService.HidePopupAsync();
+            await NavigationService.ShowPopupAsync(ChatCounterpartProfilePopupVM);
         }
 
         private Command sendMessageCommand;
@@ -240,41 +196,33 @@ namespace AeccApp.Core.ViewModels
             });
         }
 
-        private Command leaseConversationCommand;
-        public ICommand LeaseConversationCommand
-        {
-            get
-            {
-                return leaseConversationCommand ??
-                    (leaseConversationCommand = new Command(OnLeaseConversation, (o) => !IsBusy));
-            }
-        }
+       
 
-        private async void OnLeaseConversation(object obj)
+        private async void OnLeaseConversation(object sender, EventArgs e)
         {
             await ExecuteOperationAsync(() => _chatService.EndChatAsync());
-            IsLeaseConversationPopupVisible = false;
+            await NavigationService.HidePopupAsync();
             if (!IsVolunteer)
             {
-                RatingPopupVisible = true;
-            }
+                await NavigationService.ShowPopupAsync(ChatRatingPopupVM);
+                    }
         }
-
-        private Command toggleLeaseConversationPopupCommand;
-        public ICommand ToggleLeaseConversationPopupCommand
+  
+        private Command _leaseConversationPopupCommand;
+        public ICommand LeaseConversationPopupCommand
         {
             get
             {
-                return toggleLeaseConversationPopupCommand ??
-                    (toggleLeaseConversationPopupCommand = new Command(
-                        OnToggleLeaseConversationPopup, (o) => !IsBusy));
+                return _leaseConversationPopupCommand ??
+                    (_leaseConversationPopupCommand = new Command(
+                        OnLeaseConversationPopup, (o) => !IsBusy));
             }
         }
 
-        private void OnToggleLeaseConversationPopup(object obj)
+        private void OnLeaseConversationPopup(object obj)
         {
-            RatingPopupVisible = false;
-            IsLeaseConversationPopupVisible = !IsLeaseConversationPopupVisible;
+            NavigationService.HidePopupAsync();
+            NavigationService.ShowPopupAsync(ChatLeaseConversationPopupVM);
         }
         #endregion
 
@@ -335,8 +283,7 @@ namespace AeccApp.Core.ViewModels
 
         void OnFiltersOpenHandler(object obj)
         {
-            isLeaseConversationPopupVisible = false;
-            IsVolunteerProfileVisible = false;
+            NavigationService.HidePopupAsync();
             NavigationService.ShowPopupAsync(ChatFiltersPopupVM);
         }
 
@@ -379,29 +326,7 @@ namespace AeccApp.Core.ViewModels
                 }
             });
         }
-
-        public override bool OnBackButtonPressed()
-        {
-            bool returnValue = false;
-            if (RatingPopupVisible)
-            {
-                RatingPopupVisible = false;
-                returnValue = true;
-            }
-            else if (IsLeaseConversationPopupVisible)
-            {
-                IsLeaseConversationPopupVisible = false;
-                returnValue = true;
-            }
-            else if (IsVolunteerProfileVisible)
-            {
-                IsVolunteerProfileVisible = false;
-                returnValue = true;
-            }
-
-            return returnValue;
-        }
-
+        
         private void OnChatState(ChatStateMessage obj)
         {
             VolunteerIsActive = obj.VolunteerIsActive;
@@ -414,6 +339,8 @@ namespace AeccApp.Core.ViewModels
             {
                 await _chatService.InitializeChatAsync(_partyId);
                 NotifyPropertyChanged(nameof(ConversationCounterpart));
+                ChatCounterpartProfilePopupVM.Counterpart = _chatService.ConversationCounterpart;
+
             }
             else
             {
@@ -465,8 +392,6 @@ namespace AeccApp.Core.ViewModels
             chooseVolunteerCommand?.ChangeCanExecute();
             refreshVolunteersCommand?.ChangeCanExecute();
             sendMessageCommand?.ChangeCanExecute();
-            toggleLeaseConversationPopupCommand?.ChangeCanExecute();
-            leaseConversationCommand.ChangeCanExecute();
         }
 
         #endregion

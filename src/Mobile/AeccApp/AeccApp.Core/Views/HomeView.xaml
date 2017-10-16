@@ -202,16 +202,6 @@
 
         </ScrollView>
 
-        <!--  Terms and conditions popup  -->
-        <ctrl:ChatTermsAndConditionsPopupControl
-            CloseCommand="{Binding TermsAndConditionsCloseCommand}"
-            IsVisible="{Binding TermsAndConditionsPopupVisible}"
-            OkCommand="{Binding TermsAndConditionsOkCommand}">
-            <View.Behaviors>
-                <beh:AnimateScaleBehavior IsVisible="{Binding TermsAndConditionsPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-            </View.Behaviors>
-        </ctrl:ChatTermsAndConditionsPopupControl>
-
         <!--  INDICATOR  -->
         <ctrl:CustomActivityIndicatorControl />
     </Grid>

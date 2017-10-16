@@ -15,7 +15,7 @@
 
     <ContentPage.ToolbarItems>
         <ctrl:HideableToolbarItem
-            Command="{Binding ToggleLeaseConversationPopupCommand}"
+            Command="{Binding LeaseConversationPopupCommand}"
             IconPlatform="exit_icon"
             IsVisible="{Binding PartyId, Converter={StaticResource IsNotNullConverter}}"
             Order="Primary"
@@ -46,30 +46,6 @@
 
         <!--  Volunteer list page  -->
         <temp:ChooseVolunteerTemplate IsVisible="{Binding PartyId, Converter={StaticResource IsNullConverter}}" />
-
-        <!--  Volunteer profile page  -->
-        <ctrl:CounterpartProfilePopupControl Counterpart="{Binding ConversationCounterpart}" IsVisible="{Binding IsVolunteerProfileVisible}">
-            <View.Behaviors>
-                <beh:AnimateScaleBehavior IsVisible="{Binding IsVolunteerProfileVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-            </View.Behaviors>
-        </ctrl:CounterpartProfilePopupControl>
-
-        <!--  Rating popup  -->
-        <ctrl:ChatRatingPopupControl IsVisible="{Binding RatingPopupVisible}" RatingCommand="{Binding RatingCommand}">
-            <View.Behaviors>
-                <beh:AnimateScaleBehavior IsVisible="{Binding RatingPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-            </View.Behaviors>
-        </ctrl:ChatRatingPopupControl>
-
-        <!--  Leave conversation popup  -->
-        <ctrl:ChatLeaseConversationPopupControl
-            IsVisible="{Binding IsLeaseConversationPopupVisible}"
-            NoCommand="{Binding ToggleLeaseConversationPopupCommand}"
-            YesCommand="{Binding LeaseConversationCommand}">
-            <View.Behaviors>
-                <beh:AnimateScaleBehavior IsVisible="{Binding IsLeaseConversationPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-            </View.Behaviors>
-        </ctrl:ChatLeaseConversationPopupControl>
 
         <!--  INDICATOR  -->
         <ctrl:CustomActivityIndicatorControl />

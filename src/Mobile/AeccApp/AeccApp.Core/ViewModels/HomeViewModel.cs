@@ -15,6 +15,7 @@ namespace AeccApp.Core.ViewModels
         #region Contructor & Initialize
         public HomeViewModel()
         {
+            ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
             ChatService = ServiceLocator.Resolve<IChatService>();
         }
 
@@ -87,6 +88,9 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Popups Properties
+
+        public ChatTermsAndConditionsPopupViewModel ChatTermsAndConditionsPopupVM { get; private set; }
+        
         private bool eventPopupVisible;
         public bool EventPopupVisible
         {
@@ -94,12 +98,7 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref eventPopupVisible, value); }
         }
 
-        private bool termsAndConditionsPopupVisible;
-        public bool TermsAndConditionsPopupVisible
-        {
-            get { return termsAndConditionsPopupVisible; }
-            set { Set(ref termsAndConditionsPopupVisible, value); }
-        }
+      
         private bool checkBoxImageEnabled;
 
         public bool CheckBoxImageEnabled
@@ -108,41 +107,6 @@ namespace AeccApp.Core.ViewModels
             set { checkBoxImageEnabled = value; }
         }
 
-        private Command termsAndConditionsCloseCommand;
-        public ICommand TermsAndConditionsCloseCommand
-
-        {
-            get
-            {
-                termsAndConditionsCloseCommand = termsAndConditionsCloseCommand ??
-                    (termsAndConditionsCloseCommand = new Command(OnTermsAndConditionsClose));
-                return termsAndConditionsCloseCommand;
-
-
-            }
-        }
-        private void OnTermsAndConditionsClose(object obj)
-        {
-            TermsAndConditionsPopupVisible = false;
-
-
-        }
-
-        private Command termsAndConditionsOkCommand;
-        public ICommand TermsAndConditionsOkCommand
-        {
-            get
-            {
-                termsAndConditionsOkCommand = termsAndConditionsOkCommand ??
-                   (termsAndConditionsOkCommand = new Command(OnTermsAndConditionsAccept));
-                return termsAndConditionsOkCommand;
-            }
-        }
-        private void OnTermsAndConditionsAccept(object obj)
-        {
-            Settings.TermsAndConditionsAccept = true;
-            TermsAndConditionsPopupVisible = false;
-        }
 
         #endregion
 
@@ -208,11 +172,11 @@ namespace AeccApp.Core.ViewModels
         /// <summary>
         /// If terms and conditions accepted switch to chat tab
         /// </summary>
-        void OnNewChat()
+        async void OnNewChat()
         {
             if (Settings.TermsAndConditionsAccept == false)
             {
-                TermsAndConditionsPopupVisible = true;
+                await NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
             }
             else
             {
@@ -270,11 +234,11 @@ namespace AeccApp.Core.ViewModels
                 EventPopupVisible = false;
                 returnValue = true;
             }
-            else if(TermsAndConditionsPopupVisible)
-            {
-                TermsAndConditionsPopupVisible = false;
-                returnValue = true;
-            }
+            //else if(TermsAndConditionsPopupVisible)
+            //{
+            //    TermsAndConditionsPopupVisible = false;
+            //    returnValue = true;
+            //}
 
             return returnValue;
         }

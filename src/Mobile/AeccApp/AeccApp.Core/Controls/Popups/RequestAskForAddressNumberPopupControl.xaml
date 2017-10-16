@@ -7,8 +7,8 @@
     BackgroundColor="{StaticResource SeeThrough}">
 
     <Grid
-        Margin="40"
-        Padding="20"
+        Margin="30"
+        Padding="15"
         BackgroundColor="{StaticResource BackgroundColor}"
         HorizontalOptions="Center"
         VerticalOptions="Center">
@@ -16,12 +16,17 @@
 
             <Label HorizontalOptions="Center" Text="{Binding [PopupRequestAskForAddresNumberText]}" />
 
-            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+            <Grid HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
                 <Label
+                    Grid.Column="0"
                     Margin="5,5,5,0"
                     BindingContext="{x:Reference root}"
                     FontSize="Medium"
-                    HorizontalOptions="End"
                     Text="Continuar">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ContinueWithoutInputANumberCommand}" />
@@ -29,18 +34,17 @@
                 </Label>
 
                 <Label
+                    Grid.Column="1"
                     Margin="5,5,5,0"
                     BindingContext="{x:Reference root}"
                     FontSize="Medium"
-                    HorizontalOptions="Start"
                     Text="Añadir un número">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 
-            </StackLayout>
-
+            </Grid>
         </StackLayout>
     </Grid>
 
