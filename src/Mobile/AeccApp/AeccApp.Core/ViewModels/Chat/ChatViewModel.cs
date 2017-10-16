@@ -24,6 +24,7 @@ namespace AeccApp.Core.ViewModels
             Messages = new ObservableCollection<Message>();
             Volunteers = new ObservableCollection<Volunteer>();
             ChatFiltersPopupVM = new ChatFiltersPopupViewModel();
+            ChatRatingPopupVM = new ChatRatingPopupViewModel();
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
             _chatService = ServiceLocator.Resolve<IChatService>();
         }
@@ -121,6 +122,7 @@ namespace AeccApp.Core.ViewModels
         #region Popups Properties
         public ChatFiltersPopupViewModel ChatFiltersPopupVM { get; private set; }
         public ChatLeaseConversationPopupViewModel ChatLeaseConversationPopupVM { get; private set; }
+        public ChatRatingPopupViewModel ChatRatingPopupVM { get; private set; }
 
         private bool _isVolunteerProfileVisible;
         public bool IsVolunteerProfileVisible
@@ -152,51 +154,7 @@ namespace AeccApp.Core.ViewModels
 
         #region Chat Commands
 
-        private Command _ratingCommand;
-        public ICommand RatingCommand
-        {
-            get
-            {
-                return _ratingCommand ??
-                    (_ratingCommand = new Command(OnRatingCommand, (o) => !IsBusy));
-            }
-        }
-
-        private async void OnRatingCommand(object obj)
-        {
-            //TODO Manage rating result:
-            switch (obj)
-            {
-                case "1":
-                    var test1 = "1 estrella";
-                    break;
-
-                case "2":
-                    var test2 = "2 estrellas";
-
-                    break;
-
-                case "3":
-                    var test3 = "3 estrellas";
-
-                    break;
-
-                case "4":
-                    var test4 = "4 estrellas";
-
-                    break;
-
-                case "5":
-                    var test = "5 estrellas";
-
-                    break;
-
-                default:
-                    break;
-            }
-            RatingPopupVisible = false;
-            await ExecuteOperationAsync(() => NavigationService.NavigateToAsync<DashboardViewModel>());
-        }
+      
 
         private Command _viewVolunteerProfileCommand;
         public ICommand ViewVolunteerProfileCommand
@@ -251,8 +209,8 @@ namespace AeccApp.Core.ViewModels
             await NavigationService.HidePopupAsync();
             if (!IsVolunteer)
             {
-                RatingPopupVisible = true;
-            }
+                await NavigationService.ShowPopupAsync(ChatRatingPopupVM);
+                    }
         }
   
         private Command _leaseConversationPopupCommand;

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<vPop:PopupPage
+    x:Class="AeccApp.Core.Views.Popups.ChatRatingPopupView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+    xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
+    xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    BackgroundColor="{StaticResource SeeThrough}">
+
+    <ContentView
+        Margin="20"
+        Style="{StaticResource BorderStyle}"
+        VerticalOptions="Center">
+        <ContentView Style="{StaticResource InternalViewStyle}">
+
+            <StackLayout
+                Margin="50"
+                Padding="20"
+                BackgroundColor="{StaticResource BackgroundColor}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Label
+                    Margin="0,0,0,20"
+                    HorizontalOptions="Center"
+                    Text="{Binding [PopupChatRatingTextTitle]}" />
+                <Label
+                    Margin="0,0,0,20"
+                    HorizontalOptions="Center"
+                    Text="{Binding [PopupChatRatingText]}" />
+
+                <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+
+                    <ctrl:CustomImage
+                        HeightRequest="25"
+                        SourcePlatform="rating_star"
+                        WidthRequest="25">
+                        <ctrl:CustomImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RatingCommand}" CommandParameter="1" />
+                        </ctrl:CustomImage.GestureRecognizers>
+
+                    </ctrl:CustomImage>
+
+                    <ctrl:CustomImage
+                        HeightRequest="25"
+                        SourcePlatform="rating_star"
+                        WidthRequest="25">
+                        <ctrl:CustomImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RatingCommand}" CommandParameter="2" />
+                        </ctrl:CustomImage.GestureRecognizers>
+
+                    </ctrl:CustomImage>
+                    <ctrl:CustomImage
+                        HeightRequest="25"
+                        SourcePlatform="rating_star"
+                        WidthRequest="25">
+                        <ctrl:CustomImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RatingCommand}" CommandParameter="3" />
+                        </ctrl:CustomImage.GestureRecognizers>
+
+                    </ctrl:CustomImage>
+                    <ctrl:CustomImage
+                        HeightRequest="25"
+                        SourcePlatform="rating_star"
+                        WidthRequest="25">
+                        <ctrl:CustomImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RatingCommand}" CommandParameter="4" />
+                        </ctrl:CustomImage.GestureRecognizers>
+
+                    </ctrl:CustomImage>
+                    <ctrl:CustomImage
+                        HeightRequest="25"
+                        SourcePlatform="rating_star"
+                        WidthRequest="25">
+                        <ctrl:CustomImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RatingCommand}" CommandParameter="5" />
+                        </ctrl:CustomImage.GestureRecognizers>
+
+                    </ctrl:CustomImage>
+                </StackLayout>
+
+
+            </StackLayout>
+        </ContentView>
+    </ContentView>
+</vPop:PopupPage>
