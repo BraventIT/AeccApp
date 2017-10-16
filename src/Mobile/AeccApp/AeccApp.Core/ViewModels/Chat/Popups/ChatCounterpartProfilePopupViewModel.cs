@@ -17,6 +17,11 @@ namespace AeccApp.Core.ViewModels.Popups
             set { _counterpart = value; }
         }
 
+        public override bool OnBackButtonPressed()
+        {
+            return true;
+        }
+
 
     }
 }

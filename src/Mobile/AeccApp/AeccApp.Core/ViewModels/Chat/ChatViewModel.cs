@@ -27,11 +27,23 @@ namespace AeccApp.Core.ViewModels
             ChatRatingPopupVM = new ChatRatingPopupViewModel();
             ChatCounterpartProfilePopupVM = new ChatCounterpartProfilePopupViewModel();
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
+            ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
             _chatService = ServiceLocator.Resolve<IChatService>();
+
+          
+
         }
 
         public override Task ActivateAsync()
         {
+            if (Settings.TermsAndConditionsAccept == false)
+            {
+               return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
+            }
+            else
+            {
+
+          
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             ChatFiltersPopupVM.AppliedFilters += OnChatFiltersAppliedFilters;
             ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
@@ -58,6 +70,9 @@ namespace AeccApp.Core.ViewModels
                 }
             },
              finallyAction: () => VolunteersIsEmpty = !Volunteers.Any());
+            }
+
+
         }
 
         public override void Deactivate()
@@ -121,6 +136,7 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Popups Properties
+        public ChatTermsAndConditionsPopupViewModel ChatTermsAndConditionsPopupVM { get; private set; }
         public ChatFiltersPopupViewModel ChatFiltersPopupVM { get; private set; }
         public ChatLeaseConversationPopupViewModel ChatLeaseConversationPopupVM { get; private set; }
         public ChatRatingPopupViewModel ChatRatingPopupVM { get; private set; }
@@ -312,30 +328,7 @@ namespace AeccApp.Core.ViewModels
                 }
             });
         }
-
-        public override bool OnBackButtonPressed()
-        {
-            //TODO OVERRIDE THIS ON EACH VIEWMODEL
-            bool returnValue = false;
-            //if (RatingPopupVisible)
-            //{
-            //    RatingPopupVisible = false;
-            //    returnValue = true;
-            //}
-            //else if (IsLeaseConversationPopupVisible)
-            //{
-            //    IsLeaseConversationPopupVisible = false;
-            //    returnValue = true;
-            //}
-            //else if (IsVolunteerProfileVisible)
-            //{
-            //    IsVolunteerProfileVisible = false;
-            //    returnValue = true;
-            //}
-
-            return returnValue;
-        }
-
+        
         private void OnChatState(ChatStateMessage obj)
         {
             VolunteerIsActive = obj.VolunteerIsActive;

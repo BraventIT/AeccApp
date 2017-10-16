@@ -55,6 +55,10 @@ namespace AeccApp.Core.ViewModels.Popups
             await ExecuteOperationAsync(() => NavigationService.NavigateToAsync<DashboardViewModel>());
         }
 
+        public override bool OnBackButtonPressed()
+        {
+            return true;
+        }
 
-    }
+        }
 }

@@ -47,13 +47,6 @@
         <!--  Volunteer list page  -->
         <temp:ChooseVolunteerTemplate IsVisible="{Binding PartyId, Converter={StaticResource IsNullConverter}}" />
 
-        <!--  Volunteer profile page  -->
-        <ctrl:CounterpartProfilePopupControl Counterpart="{Binding ConversationCounterpart}" IsVisible="{Binding IsVolunteerProfileVisible}">
-            <View.Behaviors>
-                <beh:AnimateScaleBehavior IsVisible="{Binding IsVolunteerProfileVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-            </View.Behaviors>
-        </ctrl:CounterpartProfilePopupControl>
-
         <!--  INDICATOR  -->
         <ctrl:CustomActivityIndicatorControl />
     </Grid>

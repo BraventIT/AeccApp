@@ -33,5 +33,11 @@ namespace AeccApp.Core.ViewModels.Popups
         {
             await NavigationService.HidePopupAsync();
         }
+
+        public override bool OnBackButtonPressed()
+        {
+            return true;
+        }
+
     }
 }
