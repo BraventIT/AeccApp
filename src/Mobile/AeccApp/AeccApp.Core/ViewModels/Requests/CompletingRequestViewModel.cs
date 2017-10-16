@@ -1,10 +1,5 @@
-﻿using AeccApp.Core.Models.Requests;
-using AeccApp.Internationalization.Properties;
+﻿using AeccApp.Core.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Resources;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -13,8 +8,6 @@ namespace AeccApp.Core.ViewModels
 {
     public class CompletingRequestViewModel : ViewModelBase
     {
-
-
         #region Constructor and initialization
         public override Task InitializeAsync(object navigationData)
         {
@@ -188,7 +181,6 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
-
         #region Properties
 
         private double _initialMapLat;
@@ -301,7 +293,6 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
-
         #region Methods
         public override bool OnBackButtonPressed()
         {
@@ -325,14 +316,5 @@ namespace AeccApp.Core.ViewModels
         }
         #endregion
 
-
-
-
-
-
     }
-
-
-
-
 }

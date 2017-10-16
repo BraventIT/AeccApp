@@ -1,12 +1,6 @@
-﻿using AeccApp.Core.Models.Requests;
-using AeccApp.Internationalization.Properties;
+﻿using AeccApp.Core.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,7 +8,7 @@ namespace AeccApp.Core.ViewModels
 {
     class AllYourRequestsListViewModel : ViewModelBase
     {
-      
+
 
         #region Commands
 
@@ -32,8 +26,7 @@ namespace AeccApp.Core.ViewModels
         void OnHospitalTabCommand(object obj)
         {
             SwitchHomeAndHospitalList = true;
-            RequestModel mockRequest = new RequestModel("tipo", "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "","",0,0));
-            mockRequest.RequestAddress.DisplayAddress = mockRequest.RequestAddress.AddressName + "-" + mockRequest.RequestAddress.AddressStreet + "," + mockRequest.RequestAddress.AddressNumber;
+            RequestModel mockRequest = new RequestModel("tipo", "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "", 0, 0));
             HospitalRequestsList.Add(mockRequest);
 
 
@@ -52,10 +45,8 @@ namespace AeccApp.Core.ViewModels
         {
             SwitchHomeAndHospitalList = false;
 
-            RequestModel mockRequest = new RequestModel("tipo", "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "","",0,0));
-            mockRequest.RequestAddress.DisplayAddress = mockRequest.RequestAddress.AddressName + "-" + mockRequest.RequestAddress.AddressStreet + "," + mockRequest.RequestAddress.AddressNumber;
+            RequestModel mockRequest = new RequestModel("tipo", "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "", 0, 0));
             HomeRequestsList.Add(mockRequest);
-
         }
 
         private Command _openCloseFilterPopupCommand;
@@ -124,7 +115,7 @@ namespace AeccApp.Core.ViewModels
         }
         private ObservableCollection<RequestModel> _hospitalRequestsList = new ObservableCollection<RequestModel>();
 
-        public ObservableCollection<RequestModel> HospitalRequestsList 
+        public ObservableCollection<RequestModel> HospitalRequestsList
         {
             get { return _hospitalRequestsList; }
             set { Set(ref _hospitalRequestsList, value); }
@@ -175,14 +166,11 @@ namespace AeccApp.Core.ViewModels
             if (IsFilterPopupVisible)
             {
                 IsFilterPopupVisible = false;
-                returnValue =  true;
+                returnValue = true;
             }
             return returnValue;
         }
         #endregion
-
-
-
 
     }
 }

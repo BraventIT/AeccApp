@@ -1,11 +1,5 @@
-﻿using AeccApp.Core.Models.News;
-using AeccApp.Internationalization.Properties;
-using System;
+﻿using AeccApp.Core.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -13,8 +7,6 @@ namespace AeccApp.Core.ViewModels
 {
     public class AllNewsViewModel : ViewModelBase
     {
-     
-
         #region Propeties
         private List<NewsModel> newsList;
 

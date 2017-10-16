@@ -1,58 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
-namespace AeccApp.Core.Models.Requests
+namespace AeccApp.Core.Models
 {
     public class AddressModel
     {
-        public string AddressName { get; set; }
-        public string AddressStreet { get; set; }
-        public string AddressProvince { get; set; }
-        public string AddressNumber { get; set; }
-        public string AddressFloor { get; set; }
-        public string AddressHospitalRoom { get; set; }
-        public string DisplayAddress { get; set; }
+        public string Name { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string Province { get; set; }
+        public string Number { get; set; }
+        public string Floor { get; set; }
+        public string Portal { get; set; }
+        public string HospitalRoom { get; set; }
+
         public string PlaceId { get; set; }
 
         public double Lat { get; set; }
         public double Lng { get; set; }
-
-
-
-        public AddressModel()
+        public string DisplayAddress
         {
-            
+            get
+            {
+                return string.IsNullOrEmpty(Number) ?
+                  $"{Street}, {City}" :
+                  $"{Street} {Number}, {City}";
+            }
         }
 
-        public AddressModel(string AddressName,string AddressStreet,string AddressProvince, string AddressNumber, string AddressFloor, string AddressHospitalRoom,string DisplayAddress,string PlaceId,float Lat,float Lng)
+        public override string ToString()
         {
-            this.AddressName = AddressName;
-            this.AddressStreet = AddressStreet;
-            this.AddressProvince = AddressProvince;
-            this.AddressNumber = AddressNumber;
-            this.AddressFloor = AddressFloor;
-            this.AddressHospitalRoom = AddressHospitalRoom;
-            this.DisplayAddress = DisplayAddress;
-            this.PlaceId = PlaceId;
+            var address = DisplayAddress;
+            return string.IsNullOrEmpty(Name) ?
+                  address :
+                   $"{Name} - {address}";
+        }
+
+        public AddressModel(Prediction item)
+        {
+            PlaceId = item.PlaceId;
+            int numTerms = item.Terms.Count();
+
+            if (numTerms<2)
+            {
+                return;
+            }
+
+            switch (numTerms)
+            {
+                case 3:
+                    Street = item.Terms[0].Value;
+                    break;
+                case 4:
+                    Street = item.Terms[0].Value;
+                    if (int.TryParse(item.Terms[1].Value, out int number))
+                    {
+                        Number = item.Terms[1].Value;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            City = item.Terms[numTerms - 2].Value;
+        }
+
+        public AddressModel(string name, string street, string province, string number, string floor, string placeId, double Lat, double Lng)
+        {
+            Name = name;
+            Street = street;
+            Province = province;
+            Number = number;
+            Floor = floor;
+            PlaceId = placeId;
             this.Lat = Lat;
             this.Lng = Lng;
         }
-
-        public AddressModel(string AddressName, string AddressStreet,string AddressProvince, string AddressNumber, string AddressFloor,string DisplayAddress, string PlaceId,double Lat, double Lng)
-        {
-            this.AddressName = AddressName;
-            this.AddressStreet = AddressStreet;
-            this.AddressProvince = AddressProvince;
-            this.AddressNumber = AddressNumber;
-            this.AddressFloor = AddressFloor;
-            this.DisplayAddress = DisplayAddress;
-            this.PlaceId = PlaceId;
-            this.Lat = Lat;
-            this.Lng = Lng;
-        }
-
     }
 }

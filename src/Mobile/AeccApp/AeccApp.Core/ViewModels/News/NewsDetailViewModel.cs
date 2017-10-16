@@ -1,18 +1,11 @@
-﻿using AeccApp.Core.Models.News;
-using AeccApp.Internationalization.Properties;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Resources;
-using System.Text;
+﻿using AeccApp.Core.Models;
 using System.Threading.Tasks;
 
 namespace AeccApp.Core.ViewModels
 {
-    class NewsDetailViewModel :  ViewModelBase
+    public class NewsDetailViewModel :  ViewModelBase
     {
     
-
         #region Contructor & Initialize
         public override Task InitializeAsync(object navigationData)
         {

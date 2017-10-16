@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
 
-namespace AeccApp.Core.Models.Requests
+namespace AeccApp.Core.Models
 {
-    using System;
-    using System.Net;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-
     /// <summary>
     /// GooglePlacesModel represents the deserialized JSON returned by GooglePlaces API
     /// Does not contains coordinates, used to address autocomplete

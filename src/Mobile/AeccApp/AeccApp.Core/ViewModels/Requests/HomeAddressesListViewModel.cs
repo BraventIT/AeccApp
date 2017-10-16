@@ -1,12 +1,5 @@
-﻿using AeccApp.Core.Models.Requests;
-using AeccApp.Internationalization.Properties;
-using System;
-using System.Collections.Generic;
+﻿using AeccApp.Core.Models;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,16 +7,13 @@ namespace AeccApp.Core.ViewModels
 {
     public class HomeAddressesListViewModel : ViewModelBase
     {
-        
-       
-
         public HomeAddressesListViewModel()
         {
             //TODO Delete mock home addresses
             HomeAddressesList = new ObservableCollection<AddressModel>();
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "Fake street, 1234 2ºa, Madrid", "placeID",0,0));
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "Fake street, 1234 2ºa, Madrid", "placeID", 0, 0));
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "Fake street, 1234 2ºa, Madrid", "placeID", 0, 0));
+            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", 0, 0));
+            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", 0, 0));
+            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", 0, 0));
         }
 
         #region Commands
@@ -48,7 +38,6 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
-
         #region Properties
         private ObservableCollection<AddressModel> _homeAddressesList;
 
@@ -59,7 +48,6 @@ namespace AeccApp.Core.ViewModels
         }
 
         #endregion
-
 
     }
 }

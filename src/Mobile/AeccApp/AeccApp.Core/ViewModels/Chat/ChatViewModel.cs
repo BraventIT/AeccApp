@@ -31,7 +31,7 @@ namespace AeccApp.Core.ViewModels
         public override Task ActivateAsync()
         {
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
-            ChatFiltersPopupVM.AppliedFilters += OnChatFiltersAppliedFilters;
+            ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
 
             _chatService.MessagesReceived += OnMesagesReceived;
             _chatService.AggregationsReceived += OnAggregationsReceived;
@@ -61,7 +61,7 @@ namespace AeccApp.Core.ViewModels
         public override void Deactivate()
         {
             MessagingCenter.Unsubscribe<ChatStateMessage>(this, string.Empty);
-            ChatFiltersPopupVM.AppliedFilters -= OnChatFiltersAppliedFilters;
+            ChatFiltersPopupVM.AppliedFilters -= OnChatAppliedFilters;
             _chatService.MessagesReceived -= OnMesagesReceived;
             _chatService.AggregationsReceived -= OnAggregationsReceived;
         }
@@ -351,7 +351,7 @@ namespace AeccApp.Core.ViewModels
                 Volunteers.AddRange(listAggregations);
         }
 
-        private async void OnChatFiltersAppliedFilters(object sender, EventArgs e)
+        private async void OnChatAppliedFilters(object sender, EventArgs e)
         {
             await ExecuteOperationAsync(async () =>
             {

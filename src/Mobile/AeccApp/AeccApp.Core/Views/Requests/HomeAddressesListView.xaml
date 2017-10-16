@@ -116,31 +116,14 @@
             ItemTemplate="{StaticResource homeAddressesListTemplate}"
             ItemsSource="{Binding HomeAddressesList}" />
 
-        <Frame
+        <ctrlXlabs:ImageButton
             Margin="10"
-            Padding="5"
-            BackgroundColor="{StaticResource AccentColor}"
-            CornerRadius="5"
-            HasShadow="False"
+            Command="{Binding NewHomeAddressCommand}"
+            HeightRequest="40"
             HorizontalOptions="CenterAndExpand"
-            VerticalOptions="End">
-            <StackLayout Orientation="Horizontal">
-
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NewHomeAddressCommand}" />
-                </StackLayout.GestureRecognizers>
-
-                <ctrl:CustomImage
-                    HeightRequest="25"
-                    SourcePlatform="round_plus"
-                    WidthRequest="25" />
-                <Label
-                    Text="Nueva dirección"
-                    TextColor="White"
-                    VerticalOptions="Center" />
-
-            </StackLayout>
-        </Frame>
+            SourcePlatform="round_plus"
+            Style="{StaticResource ImageButtonStyle}"
+            Text="Nueva dirección" />
 
     </StackLayout>
 </ContentPage>

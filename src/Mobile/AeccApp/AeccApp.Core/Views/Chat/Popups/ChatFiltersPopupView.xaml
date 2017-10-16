@@ -84,6 +84,7 @@
                     Style="{StaticResource ButtonStyle}"
                     Text="{Binding [CommonApplyFilters]}" />
             </StackLayout>
+
         </ContentView>
     </ContentView>
 </vPop:PopupPage>
