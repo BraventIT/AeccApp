@@ -25,6 +25,7 @@ namespace AeccApp.Core.ViewModels
             Volunteers = new ObservableCollection<Volunteer>();
             ChatFiltersPopupVM = new ChatFiltersPopupViewModel();
             ChatRatingPopupVM = new ChatRatingPopupViewModel();
+            ChatCounterpartProfilePopupVM = new ChatCounterpartProfilePopupViewModel();
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
             _chatService = ServiceLocator.Resolve<IChatService>();
         }
@@ -123,27 +124,7 @@ namespace AeccApp.Core.ViewModels
         public ChatFiltersPopupViewModel ChatFiltersPopupVM { get; private set; }
         public ChatLeaseConversationPopupViewModel ChatLeaseConversationPopupVM { get; private set; }
         public ChatRatingPopupViewModel ChatRatingPopupVM { get; private set; }
-
-        private bool _isVolunteerProfileVisible;
-        public bool IsVolunteerProfileVisible
-        {
-            get { return _isVolunteerProfileVisible; }
-            set { Set(ref _isVolunteerProfileVisible, value); }
-        }
-
-        private bool isLeaseConversationPopupVisible;
-        public bool IsLeaseConversationPopupVisible
-        {
-            get { return isLeaseConversationPopupVisible; }
-            set { Set(ref isLeaseConversationPopupVisible, value); }
-        }
-
-        private bool _ratingPopupVisible;
-        public bool RatingPopupVisible
-        {
-            get { return _ratingPopupVisible; }
-            set { Set(ref _ratingPopupVisible, value); }
-        }
+        public ChatCounterpartProfilePopupViewModel ChatCounterpartProfilePopupVM { get; private set; }
 
 
         #endregion
@@ -166,10 +147,10 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private void OnVolunteerProfileOpen(object obj)
+        private async void OnVolunteerProfileOpen(object obj)
         {
-            isLeaseConversationPopupVisible = false;
-            IsVolunteerProfileVisible = !IsVolunteerProfileVisible;
+            await NavigationService.HidePopupAsync();
+            await NavigationService.ShowPopupAsync(ChatCounterpartProfilePopupVM);
         }
 
         private Command sendMessageCommand;
@@ -288,8 +269,7 @@ namespace AeccApp.Core.ViewModels
 
         void OnFiltersOpenHandler(object obj)
         {
-            isLeaseConversationPopupVisible = false;
-            IsVolunteerProfileVisible = false;
+            NavigationService.HidePopupAsync();
             NavigationService.ShowPopupAsync(ChatFiltersPopupVM);
         }
 
@@ -335,22 +315,23 @@ namespace AeccApp.Core.ViewModels
 
         public override bool OnBackButtonPressed()
         {
+            //TODO OVERRIDE THIS ON EACH VIEWMODEL
             bool returnValue = false;
-            if (RatingPopupVisible)
-            {
-                RatingPopupVisible = false;
-                returnValue = true;
-            }
-            else if (IsLeaseConversationPopupVisible)
-            {
-                IsLeaseConversationPopupVisible = false;
-                returnValue = true;
-            }
-            else if (IsVolunteerProfileVisible)
-            {
-                IsVolunteerProfileVisible = false;
-                returnValue = true;
-            }
+            //if (RatingPopupVisible)
+            //{
+            //    RatingPopupVisible = false;
+            //    returnValue = true;
+            //}
+            //else if (IsLeaseConversationPopupVisible)
+            //{
+            //    IsLeaseConversationPopupVisible = false;
+            //    returnValue = true;
+            //}
+            //else if (IsVolunteerProfileVisible)
+            //{
+            //    IsVolunteerProfileVisible = false;
+            //    returnValue = true;
+            //}
 
             return returnValue;
         }
@@ -367,6 +348,8 @@ namespace AeccApp.Core.ViewModels
             {
                 await _chatService.InitializeChatAsync(_partyId);
                 NotifyPropertyChanged(nameof(ConversationCounterpart));
+                ChatCounterpartProfilePopupVM.Counterpart = _chatService.ConversationCounterpart;
+
             }
             else
             {
