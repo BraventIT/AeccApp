@@ -1,4 +1,5 @@
 ﻿using AeccApp.Core.Models.Requests;
+using AeccApp.Core.ViewModels.Popups;
 using AeccApp.Internationalization.Properties;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,13 @@ namespace AeccApp.Core.ViewModels
 
 
         #region Constructor and initialization
+
+        public CompletingRequestViewModel()
+        {
+            RequestConfirmationPopupVM = new RequestConfirmationPopupViewModel();
+
+        }
+
         public override Task InitializeAsync(object navigationData)
         {
             CurrentAddress = navigationData as AddressModel;
@@ -72,39 +80,22 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private void OnOpenRequestConfirmationPopupCommand(object obj)
+        private async void OnOpenRequestConfirmationPopupCommand(object obj)
         {
             if (DateToApplyParsed==null)
             {
-                DateToApplyParsed = DateTime.Now.ToString().Remove(10);
+                RequestConfirmationPopupVM.DisplayDate = DateTime.Now.ToString().Remove(10);
             }
             if (TimeToApplyParsed == null)
             {
-                TimeToApplyParsed = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
+                RequestConfirmationPopupVM.DisplayTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
             }
 
+            await NavigationService.ShowPopupAsync(RequestConfirmationPopupVM);
 
-            IsRequestConfirmationPopupVisible = true;
 
         }
-
-
-        private Command _closeRequestConfirmationPopupCommand;
-        public ICommand CloseRequestConfirmationPopupCommand
-        {
-            get
-            {
-                return _closeRequestConfirmationPopupCommand ??
-                    (_closeRequestConfirmationPopupCommand = new Command(OnCloseRequestConfirmationPopupCommand, (o) => !IsBusy));
-            }
-        }
-
-        private void OnCloseRequestConfirmationPopupCommand(object obj)
-        {
-            IsRequestConfirmationPopupVisible = false;
-        }
-
-
+        
 
         private Command _openDateAndTimePopupCommand;
         public ICommand OpenDateAndTimePopupCommand
@@ -191,8 +182,10 @@ namespace AeccApp.Core.ViewModels
 
         #region Properties
 
-        private double _initialMapLat;
+        public RequestConfirmationPopupViewModel RequestConfirmationPopupVM { get; private set; }
 
+
+        private double _initialMapLat;
         public double InitialMapLat
         {
             get { return _initialMapLat; }

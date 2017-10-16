@@ -192,7 +192,7 @@
                     ClosePopupCommand="{Binding CloseNumberSuggestionPopupCommand}"
                     ContinueWithoutInputANumberCommand="{Binding DoesNotWantToInputNumberSuggestionPopupCommand}"
                     HorizontalOptions="Center"
-                    IsVisible="{Binding IsNumberSuggestionPopupVisible}" >
+                    IsVisible="{Binding IsNumberSuggestionPopupVisible}">
                     <View.Behaviors>
                         <beh:AnimateScaleBehavior IsVisible="{Binding IsNumberSuggestionPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
                     </View.Behaviors>

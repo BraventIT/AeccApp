@@ -146,19 +146,6 @@
                 </View.Behaviors>
             </ctrl:RequestDateAndTimePopupControl>
 
-            <ctrl:RequestConfirmationPopupControl
-                ClosePopupCommand="{Binding CloseRequestConfirmationPopupCommand}"
-                DisplayDate="{Binding DateToApplyParsed}"
-                DisplayRequestInfo="Bind request info here"
-                DisplayTime="{Binding TimeToApplyParsed}"
-                HorizontalOptions="FillAndExpand"
-                IsVisible="{Binding IsRequestConfirmationPopupVisible}"
-                SendRequestConfirmationCommand="{Binding SendRequestCommand}">
-                <View.Behaviors>
-                    <beh:AnimateScaleBehavior IsVisible="{Binding IsRequestConfirmationPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-                </View.Behaviors>
-            </ctrl:RequestConfirmationPopupControl>
-
         </Grid>
     </ScrollView>
 

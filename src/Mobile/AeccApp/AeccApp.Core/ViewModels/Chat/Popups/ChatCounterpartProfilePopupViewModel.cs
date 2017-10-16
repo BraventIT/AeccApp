@@ -14,7 +14,7 @@ namespace AeccApp.Core.ViewModels.Popups
         public UserData Counterpart
         {
             get { return _counterpart; }
-            set { _counterpart = value; }
+            set { Set(ref _counterpart, value); }
         }
 
         public override bool OnBackButtonPressed()
