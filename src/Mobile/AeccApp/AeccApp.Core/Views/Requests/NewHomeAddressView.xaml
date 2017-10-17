@@ -76,7 +76,6 @@
 
                 <!--  Suggestions list  -->
                 <ListView
-                    HasUnevenRows="True"
                     IsVisible="{Binding AddressSelected, Converter={StaticResource IsNullConverter}}"
                     ItemTemplate="{StaticResource suggestedAddressesListTemplate}"
                     ItemsSource="{Binding SugestedAddressesList}">
@@ -160,16 +159,6 @@
                 </StackLayout>
             </StackLayout>
         </ScrollView>
-
-        <!--<ctrl:RequestAskForAddressNumberPopupControl
-            ClosePopupCommand="{Binding CloseNumberSuggestionPopupCommand}"
-            ContinueWithoutInputANumberCommand="{Binding DoesNotWantToInputNumberSuggestionPopupCommand}"
-            HorizontalOptions="Center"
-            IsVisible="{Binding IsNumberSuggestionPopupVisible}">
-            <View.Behaviors>
-                <beh:AnimateScaleBehavior IsVisible="{Binding IsNumberSuggestionPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-            </View.Behaviors>
-        </ctrl:RequestAskForAddressNumberPopupControl>-->
 
         <!--  INDICATOR  -->
         <ctrl:CustomActivityIndicatorControl />

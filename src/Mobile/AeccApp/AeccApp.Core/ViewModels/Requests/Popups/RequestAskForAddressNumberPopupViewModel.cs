@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
-   public class RequestAskForAddressNumberPopupViewModel : ViewModelBase
+    public class RequestAskForAddressNumberPopupViewModel : ViewModelBase
     {
-        public event EventHandler OnContinueWithoutInput;
+        public event EventHandler ContinueWithoutInputANumber;
 
 
         private Command _continueWithoutInputANumberCommand;
@@ -17,10 +15,9 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _continueWithoutInputANumberCommand ??
-                    (_continueWithoutInputANumberCommand = new Command(o => OnContinueWithoutInput?.Invoke(this, null)));
+                    (_continueWithoutInputANumberCommand = new Command(o => ContinueWithoutInputANumber?.Invoke(this, null)));
             }
         }
-
 
         private Command _closePopupCommand;
         public ICommand ClosePopupCommand
