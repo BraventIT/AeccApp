@@ -72,9 +72,8 @@ namespace AeccApp.Core.Models
         }
         public AddressModel(GooglePlacesDetailModel googlePlacesDetailModel,AddressModel modifiedAddress)
         {
-            modifiedAddress.Coordinates.Latitude = googlePlacesDetailModel.Result.Geometry.Location.Lat;
-            modifiedAddress.Coordinates.Longitude = googlePlacesDetailModel.Result.Geometry.Location.Lng;
-
+            modifiedAddress.Coordinates = new Position(googlePlacesDetailModel.Result.Geometry.Location.Lat, googlePlacesDetailModel.Result.Geometry.Location.Lng);
+     
             int n;
             bool thereIsNaturalNumberInput = int.TryParse(googlePlacesDetailModel.Result.AddressComponents[0].LongName, out n);
 

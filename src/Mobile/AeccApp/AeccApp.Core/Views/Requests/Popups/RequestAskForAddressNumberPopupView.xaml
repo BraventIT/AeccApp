@@ -33,7 +33,7 @@
                         <Label
                             Grid.Column="0"
                             Margin="5,5,5,0"
-                            FontSize="Medium"
+                            FontSize="{StaticResource MediumSize}"
                             Text="{Binding [CommonContinue]}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ContinueWithoutInputANumberCommand}" />
@@ -43,7 +43,7 @@
                         <Label
                             Grid.Column="1"
                             Margin="5,5,5,0"
-                            FontSize="Medium"
+                            FontSize="{StaticResource MediumSize}"
                             Text="{Binding [CommonAddANumber]}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />

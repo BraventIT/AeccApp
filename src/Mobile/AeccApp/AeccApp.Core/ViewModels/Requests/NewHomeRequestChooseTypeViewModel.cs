@@ -1,4 +1,5 @@
 ﻿using AeccApp.Core.Models;
+using AeccApp.Core.Models.Requests;
 using AeccApp.Core.Services;
 using System;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace AeccApp.Core.ViewModels
             return ExecuteOperationAsync(async () =>
             {
                 GooglePlacesDetailModel places = await _googleMapsPlaceService.GetPlaceDetailAsync(MyAddress.PlaceId);
-                AddressModified = new AddressModel(places,MyAddress);             
+                AddCoordinatesToAddress(places);             
             });
         }
 
@@ -86,16 +87,7 @@ namespace AeccApp.Core.ViewModels
 
 
         #region Properties
-        private AddressModel _addressModified;
-
-        public AddressModel AddressModified
-        {
-            get { return _addressModified; }
-            set { _addressModified = value; }
-        }
-
-
-
+    
         private AddressModel _myAddress;
         public AddressModel MyAddress
         {
@@ -104,5 +96,28 @@ namespace AeccApp.Core.ViewModels
         }
         #endregion
 
-    }
+
+        #region Methods
+        public void AddCoordinatesToAddress(GooglePlacesDetailModel googlePlacesDetailModel)
+        {
+            Position addressCoordinates = new Position(googlePlacesDetailModel.Result.Geometry.Location.Lat, googlePlacesDetailModel.Result.Geometry.Location.Lng);
+            MyAddress.Coordinates = addressCoordinates;
+            int n;
+            bool thereIsNaturalNumberInput = int.TryParse(googlePlacesDetailModel.Result.AddressComponents[0].LongName, out n);
+
+            if (thereIsNaturalNumberInput)
+            {
+                MyAddress.Number = googlePlacesDetailModel.Result.AddressComponents[0].LongName;
+                MyAddress.Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
+            }
+            else
+            {
+                MyAddress.Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
+            }
+            
+
+        }
+            #endregion
+
+        }
 }
