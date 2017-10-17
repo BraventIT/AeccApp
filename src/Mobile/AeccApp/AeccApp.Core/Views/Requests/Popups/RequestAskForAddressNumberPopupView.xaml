@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<vPop:PopupPage
+    x:Class="AeccApp.Core.Views.Popups.RequestAskForAddressNumberPopupView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+    xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
+    xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    BackgroundColor="{StaticResource SeeThrough}">
+
+    <ContentView
+        Margin="20"
+        Style="{StaticResource BorderStyle}"
+        VerticalOptions="Center">
+        <ContentView Style="{StaticResource InternalViewStyle}">
+
+            <Grid
+                Margin="30"
+                Padding="15"
+                BackgroundColor="{StaticResource BackgroundColor}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <StackLayout>
+
+                    <Label HorizontalOptions="Center" Text="{Binding [PopupRequestAskForAddresNumberText]}" />
+
+                    <Grid HorizontalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                            Grid.Column="0"
+                            Margin="5,5,5,0"
+                            FontSize="Medium"
+                            Text="Continuar">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ContinueWithoutInputANumberCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label
+                            Grid.Column="1"
+                            Margin="5,5,5,0"
+                            FontSize="Medium"
+                            Text="Añadir un número">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </Grid>
+                </StackLayout>
+            </Grid>
+
+
+        </ContentView>
+    </ContentView>
+</vPop:PopupPage>

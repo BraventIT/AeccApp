@@ -2,8 +2,14 @@
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.Validations;
+using AeccApp.Core.ViewModels.Popups;
+using AeccApp.Internationalization.Properties;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Net.Http;
+using System.Resources;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -16,10 +22,209 @@ namespace AeccApp.Core.ViewModels
 
         public NewHomeAddressViewModel()
         {
-            _googleMapsPlaceService= ServiceLocator.Resolve<IGoogleMapsPlaceService>();
-
-            AddressName.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = this["NewHomeAddressViewMustNameTheAddress"] });
+            RequestAskForAddressNumberPopupVM = new RequestAskForAddressNumberPopupViewModel();
+            _googleMapsPlaceService = ServiceLocator.Resolve<IGoogleMapsPlaceService>();       
+            AddressName.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = this["Debes nombrar esta dirección para guardarla"] });
         }
+
+        public override Task ActivateAsync()
+        {
+            RequestAskForAddressNumberPopupVM.OnContinueWithoutInput += OnDoesNotWantToInputNumberSuggestionPopupCommand;
+            return null;
+        }
+
+        public override void Deactivate()
+        {
+            RequestAskForAddressNumberPopupVM.OnContinueWithoutInput -= OnDoesNotWantToInputNumberSuggestionPopupCommand;
+
+        }
+
+        #region Commands
+
+        private async void OnDoesNotWantToInputNumberSuggestionPopupCommand(object sender, EventArgs e)
+        {
+            if (IsAddressGettingSaved)
+            {
+                // Save new home address (without address number)
+                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
+            }
+            else
+            {
+                // pass home address without saving it (without address number)
+                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
+
+            }
+            await NavigationService.HidePopupAsync();
+        }
+
+
+        private Command _sugestionListTapped;
+        public ICommand SugestionListTapped
+        {
+            get
+            {
+                return _sugestionListTapped ??
+                    (_sugestionListTapped = new Command(OnSugestionListTapped, (o) => !IsBusy));
+            }
+        }
+
+        private void OnSugestionListTapped(object obj)
+        {
+            AddressSelected = obj as AddressModel;
+            Address = AddressSelected.DisplayAddress;
+            NewAddress.Street = AddressSelected.DisplayAddress;
+            NewAddress.PlaceId = AddressSelected.PlaceId;
+        }
+
+        private Command _continueWithRequestCommand;
+        public ICommand ContinueWithRequestCommand
+        {
+            get
+            {
+                return _continueWithRequestCommand ??
+                    (_continueWithRequestCommand = new Command(OnContinueWithRequestCommand, (o) => !IsBusy));
+            }
+        }
+
+        async private void OnContinueWithRequestCommand(object obj)
+        {
+            if (AddressName == null || AddressName.Validate() == false)
+            {
+                //Validate() doing its work
+            }
+            else
+            {
+                NewAddress.Name = AddressName.Value;
+                NewAddress.Number = AddressSelected.DisplayAddress;
+               // NewAddress.DisplayAddress = AddressSelected.DisplayAddress;
+
+                if (!AddressNumberInfo.Equals(string.Empty))
+                {
+                    ThereIsAddressNumberOrDoesNotWantTo = true;
+                    NewAddress.Number = "Nº" + AddressNumberInfo;
+
+                    if (!AddressPortalInfo.Equals(string.Empty))
+                    {
+                        NewAddress.Number = NewAddress.Number + " Portal " + AddressPortalInfo;
+
+                    }
+
+                    if (!AddressFloorInfo.Equals(string.Empty))
+                    {
+                        NewAddress.Number = NewAddress.Number + ", " + AddressFloorInfo;
+                    }
+
+                }
+                else
+                {
+                    ThereIsAddressNumberOrDoesNotWantTo = false;
+                    await NavigationService.ShowPopupAsync(RequestAskForAddressNumberPopupVM);
+                }
+
+            }
+
+            if (IsAddressGettingSaved && ThereIsAddressNumberOrDoesNotWantTo == true)
+            {
+                // Save new home address (with address number)
+                NewAddress.Number = AddressNumberInfo;
+                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
+
+            }
+            else if (!IsAddressGettingSaved && ThereIsAddressNumberOrDoesNotWantTo == true)
+            {
+                // pass home address without saving it (with address number)
+                NewAddress.Number = AddressNumberInfo;
+                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
+            }
+
+
+        }
+
+
+        private Command _resetEntryTextCommand;
+        public ICommand ResetEntryTextCommand
+        {
+            get
+            {
+                return _resetEntryTextCommand ??
+                    (_resetEntryTextCommand = new Command(OnResetEntryTextCommand, (o) => !IsBusy));
+            }
+        }
+
+        private void OnResetEntryTextCommand(object obj)
+        {
+            SugestedAddressesList.Clear();
+            Address = string.Empty;
+            AddressSelected = null;
+        }
+
+
+        private Command _addressEntryListenerCommand;
+        public ICommand AddressEntryListenerCommand
+        {
+            get
+            {
+                return _addressEntryListenerCommand ??
+                    (_addressEntryListenerCommand = new Command(OnAddressEntryListenerCommand, (o) => !IsBusy));
+            }
+        }
+
+        private void OnAddressEntryListenerCommand(object obj)
+        {
+            string result = string.Empty;
+            if (obj is string)
+            {
+                result = (string)obj;
+            }
+
+            if (result == string.Empty)
+            {
+                IsSearchIconVisible = false;
+            }
+            else
+            {
+                //Address suggestions with 5 characters or more
+                if (result.Length > 4)
+                {
+                    RefreshSugestedAddressesAsync(result);
+                }
+                else
+                {
+                    SugestedAddressesList.Clear();
+                }
+                IsSearchIconVisible = true;
+            }
+
+
+        }
+
+
+        private Command _switchHomeAddressCommand;
+        public ICommand SwitchHomeAddressCommand
+        {
+            get
+            {
+                return _switchHomeAddressCommand ??
+                    (_switchHomeAddressCommand = new Command(OnSwitchHomeAddress, (o) => !IsBusy));
+            }
+        }
+
+        private void OnSwitchHomeAddress(object obj)
+        {
+            bool result = false;
+            if (obj is bool)
+                result = (bool)obj;
+
+            if (result == true)
+            {
+                IsAddressGettingSaved = true;
+            }
+            else
+            {
+                IsAddressGettingSaved = false;
+            }
+        }
+        #endregion
 
         #region Properties
 
@@ -42,31 +247,6 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
-        private ObservableCollection<AddressModel> _sugestedAddressesList = new ObservableCollection<AddressModel>();
-        public ObservableCollection<AddressModel> SugestedAddressesList
-        {
-            get { return _sugestedAddressesList; }
-            set { Set(ref _sugestedAddressesList, value); }
-        }
-
-        private AddressModel _addressSelected;
-        public AddressModel AddressSelected
-        {
-            get { return _addressSelected; }
-            set
-            {
-                if (Set(ref _addressSelected, value))
-                    NotifyPropertyChanged(nameof(AddressNumber));
-            }
-        }
-
-        private string _address = string.Empty;
-        public string Address
-        {
-            get { return _address; }
-            set { Set(ref _address, value); }
-        }
-
         #region Address related properties
 
         private ValidatableObject<string> _addressName = new ValidatableObject<string>();
@@ -77,14 +257,54 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _addressName, value); }
         }
 
-        public string AddressNumber
+
+
+        private AddressModel _addressSelected;
+
+        public AddressModel AddressSelected
         {
-            get { return AddressSelected?.Number; }
-            set
-            {
-                AddressSelected.Number = value;
-                AddressSelected.PlaceId = null;
-            }
+            get { return _addressSelected; }
+            set { Set(ref _addressSelected, value); }
+        }
+        private AddressModel _newAddress = new AddressModel();
+
+        public AddressModel NewAddress
+        {
+            get { return _newAddress; }
+            set { Set(ref _newAddress, value); }
+        }
+
+        private string _addressNumberInfo = string.Empty;
+
+        public string AddressNumberInfo
+        {
+            get { return _addressNumberInfo; }
+            set { Set(ref _addressNumberInfo, value); }
+        }
+
+        private string _addressPortalInfo = string.Empty;
+
+        public string AddressPortalInfo
+        {
+            get { return _addressPortalInfo; }
+            set { Set(ref _addressPortalInfo, value); }
+        }
+        private string _addressFloorInfo = string.Empty;
+
+        public string AddressFloorInfo
+        {
+            get { return _addressFloorInfo; }
+            set { Set(ref _addressFloorInfo, value); }
+        }
+
+
+
+        private string _address = string.Empty;
+
+        public string Address
+        {
+            get { return _address; }
+            set { Set(ref _address, value); }
         }
 
         private bool _isAddressGettingSaved;
@@ -95,177 +315,36 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _isAddressGettingSaved, value); }
         }
 
+
         #endregion
-        #endregion
 
-        #region Commands
+        public RequestAskForAddressNumberPopupViewModel RequestAskForAddressNumberPopupVM { get; private set; }
 
-        private Command _closeNumberSuggestionPopupCommand;
-        public ICommand CloseNumberSuggestionPopupCommand
+
+        private bool _thereIsAddressNumberOrDoesNotWantTo;
+
+        public bool ThereIsAddressNumberOrDoesNotWantTo
         {
-            get
-            {
-                return _closeNumberSuggestionPopupCommand ??
-                    (_closeNumberSuggestionPopupCommand = new Command(OnCloseNumberSuggestionPopupCommand, (o) => !IsBusy));
-            }
-        }
-
-        private void OnCloseNumberSuggestionPopupCommand(object obj)
-        {
-            IsNumberSuggestionPopupVisible = false;
-        }
-
-        private Command _doesNotWantToInputNumberSuggestionPopupCommand;
-        public ICommand DoesNotWantToInputNumberSuggestionPopupCommand
-        {
-            get
-            {
-                return _doesNotWantToInputNumberSuggestionPopupCommand ??
-                    (_doesNotWantToInputNumberSuggestionPopupCommand = new Command(o => InternalContinueWithRequestAsync(), (o) => !IsBusy));
-            }
-        }
-
-        private Command _addressSelectedCommand;
-        public ICommand AddressSelectedCommand
-        {
-            get
-            {
-                return _addressSelectedCommand ??
-                    (_addressSelectedCommand = new Command(OnAddressSelected, (o) => !IsBusy));
-            }
-        }
-
-        private void OnAddressSelected(object obj)
-        {
-            AddressSelected = obj as AddressModel;
-            Address = AddressSelected.DisplayAddress;
-        }
-
-        private Command _continueWithRequestCommand;
-        public ICommand ContinueWithRequestCommand
-        {
-            get
-            {
-                return _continueWithRequestCommand ??
-                    (_continueWithRequestCommand = new Command(o => OnContinueWithRequestAsync(), (o) => !IsBusy));
-            }
-        }
-
-        private async Task OnContinueWithRequestAsync()
-        {
-            if (IsAddressGettingSaved && !AddressName.Validate())
-                return;
-
-            if (string.IsNullOrWhiteSpace(AddressSelected.Number))
-            {
-                IsNumberSuggestionPopupVisible = true;
-            }
-            else
-            {
-                await InternalContinueWithRequestAsync();
-            }
-        }
-
-        private Task InternalContinueWithRequestAsync()
-        {
-            return ExecuteOperationAsync(async () =>
-            {
-                AddressSelected.Name = AddressName.Value;
-
-                if (string.IsNullOrEmpty(AddressSelected.PlaceId))
-                {
-                    var places = await _googleMapsPlaceService.FindPlacesAsync(AddressSelected.DisplayAddress);
-                    if (places.Any())
-                    {
-                        AddressSelected = places.First();
-                    }
-                }
-
-                // Save new home address
-                if (IsAddressGettingSaved)
-                {
-                    // TODO Save address
-                }
-
-                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(AddressSelected);
-                await NavigationService.RemoveLastFromBackStackAsync();
-            });
-        }
-
-        private Command _resetAddressCommand;
-        public ICommand ResetAddressCommand
-        {
-            get
-            {
-                return _resetAddressCommand ??
-                    (_resetAddressCommand = new Command(OnResetAddress, (o) => !IsBusy));
-            }
-        }
-
-        private void OnResetAddress(object obj)
-        {
-            SugestedAddressesList.Clear();
-            Address = string.Empty;
-            AddressSelected = null;
+            get { return _thereIsAddressNumberOrDoesNotWantTo; }
+            set { Set(ref _thereIsAddressNumberOrDoesNotWantTo, value); }
         }
 
 
-        private Command _addressChangedCommand;
-        public ICommand AddressChangedCommand
+        private bool _saveHomeAddressSwitch;
+
+        public bool SaveHomeAddressSwitch
         {
-            get
-            {
-                return _addressChangedCommand ??
-                    (_addressChangedCommand = new Command(OnAddressChanged, (o) => !IsBusy));
-            }
+            get { return _saveHomeAddressSwitch; }
+            set { Set(ref _saveHomeAddressSwitch, value); }
         }
 
-        private void OnAddressChanged(object obj)
+        private ObservableCollection<AddressModel> _sugestedAddressesList = new ObservableCollection<AddressModel>();
+        public ObservableCollection<AddressModel> SugestedAddressesList
         {
-            string result = string.Empty;
-            if (obj is string)
-            {
-                result = (string)obj;
-            }
-
-            if (string.IsNullOrWhiteSpace(result))
-            {
-                IsSearchIconVisible = false;
-            }
-            else
-            {
-                //Address suggestions with 5 characters or more
-                if (result.Length > 4)
-                {
-                    RefreshSugestedAddressesAsync(result);
-                }
-                else if (SugestedAddressesList.Any())
-                {
-                    SugestedAddressesList.Clear();
-                }
-                IsSearchIconVisible = true;
-            }
+            get { return _sugestedAddressesList; }
+            set { Set(ref _sugestedAddressesList, value); }
         }
 
-
-        private Command _addressGettingSaved;
-        public ICommand AddressGettingSavedCommand
-        {
-            get
-            {
-                return _addressGettingSaved ??
-                    (_addressGettingSaved = new Command(OnAddressGettingSaved, (o) => !IsBusy));
-            }
-        }
-
-        private void OnAddressGettingSaved(object obj)
-        {
-            bool result = false;
-            if (obj is bool)
-                result = (bool)obj;
-
-            IsAddressGettingSaved = result;
-        }
         #endregion
 
         #region Methods
@@ -278,12 +357,6 @@ namespace AeccApp.Core.ViewModels
                 IsNumberSuggestionPopupVisible = false;
                 returnValue = true;
             }
-            if (AddressSelected != null)
-            {
-                AddressSelected = null;
-                Address = string.Empty;
-                returnValue = true;
-            }
 
             return returnValue;
         }
@@ -292,16 +365,13 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                SugestedAddressesList.Clear();
+                SugestedAddressesList = new ObservableCollection<AddressModel>();
+
                 var places = await _googleMapsPlaceService.FindPlacesAsync(result);
                 SugestedAddressesList.AddRange(places);
             });
         }
 
-        protected override void OnIsBusyChanged()
-        {
-            _continueWithRequestCommand.ChangeCanExecute();
-        }
         #endregion
 
     }
