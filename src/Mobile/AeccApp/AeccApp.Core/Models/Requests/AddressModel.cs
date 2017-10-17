@@ -13,7 +13,7 @@ namespace AeccApp.Core.Models
         public string Floor { get; set; }
         public string Portal { get; set; }
         public string HospitalRoom { get; set; }
-
+        public bool WillBeSaved { get; set; }
         public string PlaceId { get; set; }
 
         private Position _coordinates;
@@ -70,7 +70,24 @@ namespace AeccApp.Core.Models
 
             City = item.Terms[numTerms - 2].Value;
         }
+        public AddressModel(GooglePlacesDetailModel googlePlacesDetailModel,AddressModel modifiedAddress)
+        {
+            modifiedAddress.Coordinates.Latitude = googlePlacesDetailModel.Result.Geometry.Location.Lat;
+            modifiedAddress.Coordinates.Longitude = googlePlacesDetailModel.Result.Geometry.Location.Lng;
 
+            int n;
+            bool thereIsNaturalNumberInput = int.TryParse(googlePlacesDetailModel.Result.AddressComponents[0].LongName, out n);
+
+            if (thereIsNaturalNumberInput)
+            {
+                modifiedAddress.Number = googlePlacesDetailModel.Result.AddressComponents[0].LongName;
+                modifiedAddress.Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
+            }
+            else
+            {
+                modifiedAddress.Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
+            }
+        }
         public AddressModel()
         {
 
