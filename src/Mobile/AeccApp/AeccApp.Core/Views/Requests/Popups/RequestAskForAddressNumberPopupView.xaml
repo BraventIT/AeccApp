@@ -35,7 +35,7 @@
                             Grid.Column="0"
                             Margin="5,5,5,0"
                             FontSize="Medium"
-                            Text="Continuar">
+                            Text="{Binding [CommonContinue]}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ContinueWithoutInputANumberCommand}" />
                             </Label.GestureRecognizers>
@@ -45,7 +45,7 @@
                             Grid.Column="1"
                             Margin="5,5,5,0"
                             FontSize="Medium"
-                            Text="Añadir un número">
+                            Text="{Binding [CommonAddANumber]}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
                             </Label.GestureRecognizers>

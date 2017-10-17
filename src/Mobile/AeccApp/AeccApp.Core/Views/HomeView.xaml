@@ -118,11 +118,11 @@
                             <Label
                                 IsVisible="{Binding VolunteerIsActive, Converter={StaticResource InverseBoolConverter}"
                                 Style="{StaticResource NormalLabelStyle}"
-                                Text="Antes de ponerte en contacto con un beneficiario, tienes que ponerte en línea." />
+                                Text="{Binding [ChatViewGoOnlineBeforeChat]}" />
                             <Label
                                 IsVisible="{Binding VolunteerIsActive}"
                                 Style="{StaticResource NormalLabelStyle}"
-                                Text="Tienes que esperar a que te llegue una solicitud" />
+                                Text="{Binding [ChatViewYouHaveToWaitRequest]}" />
                         </StackLayout>
 
                     </Grid>
@@ -136,7 +136,7 @@
                             Command="{Binding CurrentChatCommand}"
                             HorizontalOptions="Center"
                             Style="{StaticResource ButtonStyle}"
-                            Text="Chat actual" />
+                            Text="{Binding [HomeViewCurrentChat]}" />
                     </StackLayout>
 
                 </StackLayout>

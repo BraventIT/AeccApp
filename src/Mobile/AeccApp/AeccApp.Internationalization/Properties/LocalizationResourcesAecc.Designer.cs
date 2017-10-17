@@ -215,6 +215,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Añade un número.
+        /// </summary>
+        public static string CommonAddANumber {
+            get {
+                return ResourceManager.GetString("CommonAddANumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Direccion:.
         /// </summary>
         public static string CommonAddressTitle {
@@ -247,6 +256,24 @@ namespace AeccApp.Internationalization.Properties {
         public static string CommonApplyFilters {
             get {
                 return ResourceManager.GetString("CommonApplyFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cerrar.
+        /// </summary>
+        public static string CommonClose {
+            get {
+                return ResourceManager.GetString("CommonClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continuar.
+        /// </summary>
+        public static string CommonContinue {
+            get {
+                return ResourceManager.GetString("CommonContinue", resourceCulture);
             }
         }
         
@@ -323,6 +350,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nueva dirección.
+        /// </summary>
+        public static string CommonNewAddress {
+            get {
+                return ResourceManager.GetString("CommonNewAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nuevo chat.
         /// </summary>
         public static string CommonNewChat {
@@ -364,6 +400,24 @@ namespace AeccApp.Internationalization.Properties {
         public static string CommonRefreshList {
             get {
                 return ResourceManager.GetString("CommonRefreshList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Términos y condiciones.
+        /// </summary>
+        public static string CommonTermsAndConditions {
+            get {
+                return ResourceManager.GetString("CommonTermsAndConditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aceptas los términos.
+        /// </summary>
+        public static string CommonTermsAndConditionsAccept {
+            get {
+                return ResourceManager.GetString("CommonTermsAndConditionsAccept", resourceCulture);
             }
         }
         
@@ -499,6 +553,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string HomeViewChatsOnline {
             get {
                 return ResourceManager.GetString("HomeViewChatsOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat actual.
+        /// </summary>
+        public static string HomeViewCurrentChat {
+            get {
+                return ResourceManager.GetString("HomeViewCurrentChat", resourceCulture);
             }
         }
         

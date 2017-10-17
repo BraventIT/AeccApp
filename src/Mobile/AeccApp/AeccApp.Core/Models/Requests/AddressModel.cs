@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.Models
 {
@@ -15,8 +16,14 @@ namespace AeccApp.Core.Models
 
         public string PlaceId { get; set; }
 
-        public double Lat { get; set; }
-        public double Lng { get; set; }
+        private Position _coordinates;
+
+        public Position Coordinates
+        {
+            get { return _coordinates; }
+            set { _coordinates = value; }
+        }
+
         public string DisplayAddress
         {
             get
@@ -69,7 +76,7 @@ namespace AeccApp.Core.Models
 
         }
 
-        public AddressModel(string name, string street, string province, string number, string floor, string placeId, double Lat, double Lng)
+        public AddressModel(string name, string street, string province, string number, string floor, string placeId, Position Coordinates)
         {
             Name = name;
             Street = street;
@@ -77,8 +84,7 @@ namespace AeccApp.Core.Models
             Number = number;
             Floor = floor;
             PlaceId = placeId;
-            this.Lat = Lat;
-            this.Lng = Lng;
+            this.Coordinates = Coordinates;
         }
     }
 }

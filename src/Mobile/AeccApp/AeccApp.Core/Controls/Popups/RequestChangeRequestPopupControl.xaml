@@ -43,7 +43,7 @@
                     Margin="10,0,10,0"
                     FontSize="Medium"
                     HorizontalOptions="End"
-                    Text="Si"
+                    Text="{Binding [CommonYes]}"
                     TextColor="LawnGreen">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding BackAndChangeTypeCommand}" />
@@ -54,7 +54,7 @@
                     Margin="10,0,10,0"
                     FontSize="Medium"
                     HorizontalOptions="Start"
-                    Text="No"
+                    Text="{Binding [CommonNo]}"
                     TextColor="LawnGreen">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />

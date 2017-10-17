@@ -56,7 +56,7 @@
                     Command="{Binding YesCommand}"
                     HorizontalOptions="Center"
                     Style="{StaticResource ButtonSmallStyle}"
-                    Text="Si" />
+                    Text="{Binding [CommonYes]}" />
 
                 <Button
                     Grid.Row="3"
@@ -65,7 +65,7 @@
                     Command="{Binding NoCommand}"
                     HorizontalOptions="Center"
                     Style="{StaticResource ButtonSmallStyle}"
-                    Text="No" />
+                    Text="{Binding [CommonNo]}" />
             </Grid>
 
 
