@@ -2,18 +2,35 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Threading.Tasks;
+using AeccApp.Core.Services;
+using AeccApp.Core.Extensions;
 
 namespace AeccApp.Core.ViewModels
 {
     public class HomeAddressesListViewModel : ViewModelBase
     {
+        public readonly IHomeAddressesDataService _homeAddressesDataService;
+
         public HomeAddressesListViewModel()
         {
-            //TODO Delete mock home addresses
-            HomeAddressesList = new ObservableCollection<AddressModel>();
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", new Models.Requests.Position(0,0)));
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", new Models.Requests.Position(0, 0)));
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", new Models.Requests.Position(0, 0)));
+            _homeAddressesDataService = ServiceLocator.HomeAddressesDataService;
+
+            _homeAddressesList = new ObservableCollection<AddressModel>();
+        }
+
+        public override Task ActivateAsync()
+        {
+            return ExecuteOperationAsync(async () =>
+            {
+                var homeAddresses = await _homeAddressesDataService.GetListAsync();
+
+                if (homeAddresses != null)
+                {
+                    HomeAddressesList.Clear();
+                    HomeAddressesList.AddRange(homeAddresses);
+                }
+            });
         }
 
         #region Commands

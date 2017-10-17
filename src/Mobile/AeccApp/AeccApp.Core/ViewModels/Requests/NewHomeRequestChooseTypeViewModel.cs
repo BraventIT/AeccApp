@@ -12,7 +12,7 @@ namespace AeccApp.Core.ViewModels
         private readonly IGoogleMapsPlaceService _googleMapsPlaceService;
         public NewHomeRequestChooseTypeViewModel()
         {
-            _googleMapsPlaceService = ServiceLocator.Resolve<IGoogleMapsPlaceService>();
+            _googleMapsPlaceService = ServiceLocator.GoogleMapsPlaceService;
         }
 
 

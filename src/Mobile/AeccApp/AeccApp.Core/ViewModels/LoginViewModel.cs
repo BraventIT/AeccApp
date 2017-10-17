@@ -14,7 +14,7 @@ namespace AeccApp.Core.ViewModels
         #region Activate & Deactive Methods
         public LoginViewModel()
         {
-            _identityService = ServiceLocator.Resolve<IIdentityService>();
+            _identityService = ServiceLocator.IdentityService;
         }
 
         public override Task ActivateAsync()

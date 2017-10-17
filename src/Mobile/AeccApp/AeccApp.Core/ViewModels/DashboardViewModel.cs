@@ -83,8 +83,8 @@ namespace AeccApp.Core.ViewModels
 
         public DashboardViewModel()
         {
-            _chatService = ServiceLocator.Resolve<IChatService>();
-            _identityService = ServiceLocator.Resolve<IIdentityService>();
+            _chatService = ServiceLocator.ChatService;
+            _identityService = ServiceLocator.IdentityService;
         }
 
         public override Task InitializeAsync(object navigationData)

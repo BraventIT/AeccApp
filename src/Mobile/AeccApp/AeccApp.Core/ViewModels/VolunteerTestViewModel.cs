@@ -10,7 +10,7 @@ namespace AeccApp.Core.ViewModels
 
         public VolunteerTestViewModel()
         {
-            _identityService = ServiceLocator.Resolve<IIdentityService>();
+            _identityService = ServiceLocator.IdentityService;
         }
 
         private Command _enterCommand;

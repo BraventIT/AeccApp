@@ -52,7 +52,7 @@ namespace AeccApp
 
         private void InitNavigation()
         {
-            var navigationService = ServiceLocator.Resolve<INavigationService>();
+            var navigationService = ServiceLocator.NavigationService;
             navigationService.Initialize();
         }
 

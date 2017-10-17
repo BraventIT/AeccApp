@@ -125,6 +125,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
     <Compile Include="Renderers\XLabs\ImageButtonRenderer.cs" />
+    <Compile Include="Services\FileProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -249,5 +250,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\round_new_here.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

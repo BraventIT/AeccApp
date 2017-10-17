@@ -11,11 +11,11 @@ using System.Globalization;
 
 namespace AeccApp.Core.Services
 {
-    public class RequestProvider : IRequestProvider
+    public class HttpRequestProvider : IHttpRequestProvider
     {
         private readonly JsonSerializerSettings _serializerSettings;
 
-        public RequestProvider()
+        public HttpRequestProvider()
         {
             _serializerSettings = new JsonSerializerSettings
             {

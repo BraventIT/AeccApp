@@ -28,10 +28,8 @@ namespace AeccApp.Core.ViewModels
             ChatCounterpartProfilePopupVM = new ChatCounterpartProfilePopupViewModel();
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
             ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
-            _chatService = ServiceLocator.Resolve<IChatService>();
 
-          
-
+            _chatService = ServiceLocator.ChatService;
         }
 
         public override Task ActivateAsync()
