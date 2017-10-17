@@ -53,9 +53,9 @@
 
                         <Grid.Margin>
                             <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone,Windows" Value="90,0,90,10" />
+                                <On Platform="WinPhone,Windows" Value="70,0,70,10" />
                                 <On Platform="iOS" Value="50,0,50,10" />
-                                <On Platform="Android" Value="80,0,80,10" />
+                                <On Platform="Android" Value="60,0,60,10" />
                             </OnPlatform>
                         </Grid.Margin>
 
@@ -82,9 +82,9 @@
                         HorizontalOptions="Center">
                         <Grid.Margin>
                             <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone,Windows" Value="90,0,90,10" />
+                                <On Platform="WinPhone,Windows" Value="70,0,70,10" />
                                 <On Platform="iOS" Value="50,0,50,10" />
-                                <On Platform="Android" Value="80,0,80,10" />
+                                <On Platform="Android" Value="60,0,60,10" />
                             </OnPlatform>
                         </Grid.Margin>
 
