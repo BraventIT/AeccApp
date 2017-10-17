@@ -1,5 +1,5 @@
 ﻿using AeccApp.Core.Extensions;
-using AeccApp.Core.Models.Requests;
+using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.Validations;
 using AeccApp.Core.ViewModels.Popups;
@@ -72,7 +72,7 @@ namespace AeccApp.Core.ViewModels
         {
             AddressSelected = obj as AddressModel;
             Address = AddressSelected.DisplayAddress;
-            NewAddress.AddressStreet = AddressSelected.DisplayAddress;
+            NewAddress.Street = AddressSelected.DisplayAddress;
             NewAddress.PlaceId = AddressSelected.PlaceId;
         }
 
@@ -94,24 +94,24 @@ namespace AeccApp.Core.ViewModels
             }
             else
             {
-                NewAddress.AddressName = AddressName.Value;
-                NewAddress.AddressStreet = AddressSelected.DisplayAddress;
-                NewAddress.DisplayAddress = AddressSelected.DisplayAddress;
+                NewAddress.Name = AddressName.Value;
+                NewAddress.Number = AddressSelected.DisplayAddress;
+               // NewAddress.DisplayAddress = AddressSelected.DisplayAddress;
 
                 if (!AddressNumberInfo.Equals(string.Empty))
                 {
                     ThereIsAddressNumberOrDoesNotWantTo = true;
-                    NewAddress.AddressNumber = "Nº" + AddressNumberInfo;
+                    NewAddress.Number = "Nº" + AddressNumberInfo;
 
                     if (!AddressPortalInfo.Equals(string.Empty))
                     {
-                        NewAddress.AddressNumber = NewAddress.AddressNumber + " Portal " + AddressPortalInfo;
+                        NewAddress.Number = NewAddress.Number + " Portal " + AddressPortalInfo;
 
                     }
 
                     if (!AddressFloorInfo.Equals(string.Empty))
                     {
-                        NewAddress.AddressNumber = NewAddress.AddressNumber + ", " + AddressFloorInfo;
+                        NewAddress.Number = NewAddress.Number + ", " + AddressFloorInfo;
                     }
 
                 }
@@ -126,14 +126,14 @@ namespace AeccApp.Core.ViewModels
             if (IsAddressGettingSaved && ThereIsAddressNumberOrDoesNotWantTo == true)
             {
                 // Save new home address (with address number)
-                NewAddress.AddressNumber = AddressNumberInfo;
+                NewAddress.Number = AddressNumberInfo;
                 await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
 
             }
             else if (!IsAddressGettingSaved && ThereIsAddressNumberOrDoesNotWantTo == true)
             {
                 // pass home address without saving it (with address number)
-                NewAddress.AddressNumber = AddressNumberInfo;
+                NewAddress.Number = AddressNumberInfo;
                 await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
             }
 

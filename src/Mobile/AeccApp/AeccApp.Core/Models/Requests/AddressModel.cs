@@ -64,6 +64,11 @@ namespace AeccApp.Core.Models
             City = item.Terms[numTerms - 2].Value;
         }
 
+        public AddressModel()
+        {
+
+        }
+
         public AddressModel(string name, string street, string province, string number, string floor, string placeId, double Lat, double Lng)
         {
             Name = name;
