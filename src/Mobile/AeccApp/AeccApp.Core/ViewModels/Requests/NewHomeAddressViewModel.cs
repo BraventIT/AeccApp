@@ -2,6 +2,7 @@
 using AeccApp.Core.Models.Requests;
 using AeccApp.Core.Services;
 using AeccApp.Core.Validations;
+using AeccApp.Core.ViewModels.Popups;
 using AeccApp.Internationalization.Properties;
 using Newtonsoft.Json;
 using System;
@@ -21,40 +22,26 @@ namespace AeccApp.Core.ViewModels
 
         public NewHomeAddressViewModel()
         {
-            _googleMapsPlaceService= ServiceLocator.Resolve<IGoogleMapsPlaceService>();
-
+            RequestAskForAddressNumberPopupVM = new RequestAskForAddressNumberPopupViewModel();
+            _googleMapsPlaceService = ServiceLocator.Resolve<IGoogleMapsPlaceService>();       
             AddressName.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = this["Debes nombrar esta dirección para guardarla"] });
+        }
+
+        public override Task ActivateAsync()
+        {
+            RequestAskForAddressNumberPopupVM.OnContinueWithoutInput += OnDoesNotWantToInputNumberSuggestionPopupCommand;
+            return null;
+        }
+
+        public override void Deactivate()
+        {
+            RequestAskForAddressNumberPopupVM.OnContinueWithoutInput -= OnDoesNotWantToInputNumberSuggestionPopupCommand;
+
         }
 
         #region Commands
 
-
-        private Command _closeNumberSuggestionPopupCommand;
-        public ICommand CloseNumberSuggestionPopupCommand
-        {
-            get
-            {
-                return _closeNumberSuggestionPopupCommand ??
-                    (_closeNumberSuggestionPopupCommand = new Command(OnCloseNumberSuggestionPopupCommand, (o) => !IsBusy));
-            }
-        }
-
-        private void OnCloseNumberSuggestionPopupCommand(object obj)
-        {
-            IsNumberSuggestionPopupVisible = false;
-        }
-
-        private Command _doesNotWantToInputNumberSuggestionPopupCommand;
-        public ICommand DoesNotWantToInputNumberSuggestionPopupCommand
-        {
-            get
-            {
-                return _doesNotWantToInputNumberSuggestionPopupCommand ??
-                    (_doesNotWantToInputNumberSuggestionPopupCommand = new Command(OnDoesNotWantToInputNumberSuggestionPopupCommand, (o) => !IsBusy));
-            }
-        }
-
-        private async void OnDoesNotWantToInputNumberSuggestionPopupCommand(object obj)
+        private async void OnDoesNotWantToInputNumberSuggestionPopupCommand(object sender, EventArgs e)
         {
             if (IsAddressGettingSaved)
             {
@@ -67,6 +54,7 @@ namespace AeccApp.Core.ViewModels
                 await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(NewAddress);
 
             }
+            await NavigationService.HidePopupAsync();
         }
 
 
@@ -130,7 +118,7 @@ namespace AeccApp.Core.ViewModels
                 else
                 {
                     ThereIsAddressNumberOrDoesNotWantTo = false;
-                    IsNumberSuggestionPopupVisible = true;
+                    await NavigationService.ShowPopupAsync(RequestAskForAddressNumberPopupVM);
                 }
 
             }
@@ -330,6 +318,7 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
+        public RequestAskForAddressNumberPopupViewModel RequestAskForAddressNumberPopupVM { get; private set; }
 
 
         private bool _thereIsAddressNumberOrDoesNotWantTo;
