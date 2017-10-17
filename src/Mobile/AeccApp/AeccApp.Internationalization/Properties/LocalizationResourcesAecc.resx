@@ -168,6 +168,9 @@
   <data name="ChoseVolunteerViewChoseVolunteer" xml:space="preserve">
     <value>Elige voluntario</value>
   </data>
+  <data name="CommonAddANumber" xml:space="preserve">
+    <value>Añade un número</value>
+  </data>
   <data name="CommonAddressTitle" xml:space="preserve">
     <value>Direccion:</value>
   </data>
@@ -179,6 +182,12 @@
   </data>
   <data name="CommonApplyFilters" xml:space="preserve">
     <value>Aplicar filtros</value>
+  </data>
+  <data name="CommonClose" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="CommonContinue" xml:space="preserve">
+    <value>Continuar</value>
   </data>
   <data name="CommonDate" xml:space="preserve">
     <value>Fecha</value>
@@ -204,6 +213,9 @@
   <data name="CommonNameTitle" xml:space="preserve">
     <value>Nombre:</value>
   </data>
+  <data name="CommonNewAddress" xml:space="preserve">
+    <value>Nueva dirección</value>
+  </data>
   <data name="CommonNewChat" xml:space="preserve">
     <value>Nuevo chat</value>
   </data>
@@ -218,6 +230,12 @@
   </data>
   <data name="CommonRefreshList" xml:space="preserve">
     <value>Actualizar lista</value>
+  </data>
+  <data name="CommonTermsAndConditions" xml:space="preserve">
+    <value>Términos y condiciones</value>
+  </data>
+  <data name="CommonTermsAndConditionsAccept" xml:space="preserve">
+    <value>Aceptas los términos</value>
   </data>
   <data name="CommonTime" xml:space="preserve">
     <value>Hora</value>
@@ -263,6 +281,9 @@
   </data>
   <data name="HomeViewChatsOnline" xml:space="preserve">
     <value>Chats online</value>
+  </data>
+  <data name="HomeViewCurrentChat" xml:space="preserve">
+    <value>Chat actual</value>
   </data>
   <data name="HomeViewLastNews" xml:space="preserve">
     <value>Últimas noticias</value>

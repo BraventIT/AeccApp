@@ -78,7 +78,6 @@
 
     <TabbedPage.ToolbarItems>
         <ctrl:HideableToolbarItem
-            Name="Filtros"
             Command="{Binding OpenCloseFilterPopupCommand}"
             IconPlatform="bell"
             Order="Primary"

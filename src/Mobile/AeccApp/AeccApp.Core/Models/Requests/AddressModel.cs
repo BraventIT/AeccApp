@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using AeccApp.Core.Models.Requests;
+using System.Linq;
 
 namespace AeccApp.Core.Models
 {
@@ -12,11 +13,17 @@ namespace AeccApp.Core.Models
         public string Floor { get; set; }
         public string Portal { get; set; }
         public string HospitalRoom { get; set; }
-
+        public bool WillBeSaved { get; set; }
         public string PlaceId { get; set; }
 
-        public double Lat { get; set; }
-        public double Lng { get; set; }
+        private Position _coordinates;
+
+        public Position Coordinates
+        {
+            get { return _coordinates; }
+            set { _coordinates = value; }
+        }
+
         public string DisplayAddress
         {
             get
@@ -63,13 +70,30 @@ namespace AeccApp.Core.Models
 
             City = item.Terms[numTerms - 2].Value;
         }
+        public AddressModel(GooglePlacesDetailModel googlePlacesDetailModel,AddressModel modifiedAddress)
+        {
+            modifiedAddress.Coordinates.Latitude = googlePlacesDetailModel.Result.Geometry.Location.Lat;
+            modifiedAddress.Coordinates.Longitude = googlePlacesDetailModel.Result.Geometry.Location.Lng;
 
+            int n;
+            bool thereIsNaturalNumberInput = int.TryParse(googlePlacesDetailModel.Result.AddressComponents[0].LongName, out n);
+
+            if (thereIsNaturalNumberInput)
+            {
+                modifiedAddress.Number = googlePlacesDetailModel.Result.AddressComponents[0].LongName;
+                modifiedAddress.Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
+            }
+            else
+            {
+                modifiedAddress.Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
+            }
+        }
         public AddressModel()
         {
 
         }
 
-        public AddressModel(string name, string street, string province, string number, string floor, string placeId, double Lat, double Lng)
+        public AddressModel(string name, string street, string province, string number, string floor, string placeId, Position Coordinates)
         {
             Name = name;
             Street = street;
@@ -77,8 +101,7 @@ namespace AeccApp.Core.Models
             Number = number;
             Floor = floor;
             PlaceId = placeId;
-            this.Lat = Lat;
-            this.Lng = Lng;
+            this.Coordinates = Coordinates;
         }
     }
 }

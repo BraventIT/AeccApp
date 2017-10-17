@@ -26,21 +26,7 @@ namespace AeccApp.Core.ViewModels
             return ExecuteOperationAsync(async () =>
             {
                 GooglePlacesDetailModel places = await _googleMapsPlaceService.GetPlaceDetailAsync(MyAddress.PlaceId);
-                MyAddress.Lat = places.Result.Geometry.Location.Lat;
-                MyAddress.Lng = places.Result.Geometry.Location.Lng;
-
-                int n;
-                bool thereIsNaturalNumberInput = int.TryParse(places.Result.AddressComponents[0].LongName, out n);
-
-                if (thereIsNaturalNumberInput)
-                {
-                    MyAddress.Number = places.Result.AddressComponents[0].LongName;
-                    MyAddress.Province = places.Result.AddressComponents[2].LongName;
-                }
-                else
-                {
-                    MyAddress.Province = places.Result.AddressComponents[2].LongName;
-                }
+                AddressModified = new AddressModel(places,MyAddress);             
             });
         }
 
@@ -100,7 +86,16 @@ namespace AeccApp.Core.ViewModels
 
 
         #region Properties
-        
+        private AddressModel _addressModified;
+
+        public AddressModel AddressModified
+        {
+            get { return _addressModified; }
+            set { _addressModified = value; }
+        }
+
+
+
         private AddressModel _myAddress;
         public AddressModel MyAddress
         {

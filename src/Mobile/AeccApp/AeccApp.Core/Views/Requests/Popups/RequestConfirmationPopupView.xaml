@@ -121,12 +121,12 @@
                             Command="{Binding SendRequestConfirmationCommand}"
                             HorizontalOptions="CenterAndExpand"
                             Style="{StaticResource ButtonSmallStyle}"
-                            Text="Si" />
+                            Text="{Binding [CommonYes]}" />
                         <Button
                             Command="{Binding ClosePopupCommand}"
                             HorizontalOptions="CenterAndExpand"
                             Style="{StaticResource ButtonSmallStyle}"
-                            Text="No" />
+                            Text="{Binding [CommonNo]}" />
 
                     </StackLayout>
 
