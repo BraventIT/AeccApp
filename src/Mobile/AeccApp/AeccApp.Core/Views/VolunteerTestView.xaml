@@ -29,11 +29,7 @@
                     Margin="0,10"
                     HorizontalOptions="Center"
                     Orientation="Horizontal">
-                    <Switch IsToggled="{Binding IsVolunteer, Mode=TwoWay}">
-                        <Switch.Effects>
-                            <eff:SwitchClearEffect />
-                        </Switch.Effects>
-                    </Switch>
+                    <Switch IsToggled="{Binding IsVolunteer, Mode=TwoWay}" />
                     <Label
                         HorizontalOptions="Center"
                         Text="¿Es voluntario?"

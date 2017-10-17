@@ -29,7 +29,7 @@ namespace AeccApp.Core.Behaviors
         }
 
         public static readonly BindableProperty EventNameProperty =
-        BindableProperty.Create("EventName", typeof(string), typeof(EventToCommandBehavior), string.Empty);
+        BindableProperty.Create(nameof(EventName), typeof(string), typeof(EventToCommandBehavior), string.Empty);
 
         public ICommand Command
         {
@@ -38,7 +38,7 @@ namespace AeccApp.Core.Behaviors
         }
 
         public static readonly BindableProperty CommandProperty =
-            BindableProperty.Create("Command", typeof(ICommand), typeof(EventToCommandBehavior), null, propertyChanged: OnCommandChanged);
+            BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(EventToCommandBehavior), null, propertyChanged: OnCommandChanged);
 
         private static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
@@ -54,7 +54,7 @@ namespace AeccApp.Core.Behaviors
         }
 
         public static readonly BindableProperty CommandParameterProperty =
-            BindableProperty.Create("CommandParameter", typeof(object), typeof(EventToCommandBehavior), null);
+            BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(EventToCommandBehavior), null);
 
 
 
@@ -66,7 +66,7 @@ namespace AeccApp.Core.Behaviors
 
 
         public static readonly BindableProperty EventArgsConverterProperty =
-            BindableProperty.Create("EventArgsConverter", typeof(IValueConverter), typeof(EventToCommandBehavior), null);
+            BindableProperty.Create(nameof(EventArgsConverter), typeof(IValueConverter), typeof(EventToCommandBehavior), null);
 
 
 
@@ -77,10 +77,9 @@ namespace AeccApp.Core.Behaviors
         }
 
         public static readonly BindableProperty EventArgsConverterParameterProperty =
-            BindableProperty.Create("EventArgsConverterParameter", typeof(object), typeof(EventToCommandBehavior), null);
+            BindableProperty.Create(nameof(EventArgsConverterParameter), typeof(object), typeof(EventToCommandBehavior), null);
 
         #endregion
-
 
         protected override void OnAttachedTo(View visualElement)
         {

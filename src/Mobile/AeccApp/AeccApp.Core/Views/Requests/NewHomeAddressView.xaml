@@ -144,9 +144,7 @@
                                     EventName="Toggled" />
                             </Switch.Behaviors>
                         </Switch>
-                        <Switch.Effects>
-                            <eff:SwitchClearEffect />
-                        </Switch.Effects>
+
                         <Label Style="{StaticResource SwitchTextStyle}" Text="{Binding [NewHomeAddressViewSaveAddress]}" />
                     </StackLayout>
 
