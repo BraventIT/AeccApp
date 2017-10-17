@@ -1,7 +1,5 @@
-﻿using AeccApp.Core.Models.Requests;
-using System;
+﻿using AeccApp.Core.Models;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AeccApp.Core.Services
@@ -10,7 +8,7 @@ namespace AeccApp.Core.Services
     {
         Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText);
 
-        Task<GooglePlacesDetailModel> GetPlaceDetailAsync(string findText);
+        Task<GooglePlacesDetailModel> GetPlaceDetailAsync(string placeId);
 
     }
 }

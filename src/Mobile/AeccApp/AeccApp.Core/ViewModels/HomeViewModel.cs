@@ -1,14 +1,11 @@
 ﻿using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
-using AeccApp.Core.Models.News;
 using AeccApp.Core.Services;
+using AeccApp.Core.ViewModels.Popups;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using static AeccApp.Core.Messages.DashboardTabMessage;
-using System;
-using AeccApp.Core.ViewModels.Popups;
 
 namespace AeccApp.Core.ViewModels
 {

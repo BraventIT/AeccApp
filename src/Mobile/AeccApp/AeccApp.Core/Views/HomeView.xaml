@@ -19,7 +19,6 @@
             <DataTemplate x:Key="NewItemTemplate">
                 <ViewCell>
                     <StackLayout Padding="1">
-
                         <ctrl:CustomImage
                             Margin="0,10,0,0"
                             HeightRequest="200"

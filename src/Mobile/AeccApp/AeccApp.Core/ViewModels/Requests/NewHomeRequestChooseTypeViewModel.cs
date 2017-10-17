@@ -1,18 +1,13 @@
-﻿using AeccApp.Core.Models.Requests;
+﻿using AeccApp.Core.Models;
 using AeccApp.Core.Services;
-using AeccApp.Internationalization.Properties;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Resources;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels
 {
-   public class NewHomeRequestChooseTypeViewModel : ViewModelBase
+    public class NewHomeRequestChooseTypeViewModel : ViewModelBase
     {
         private readonly IGoogleMapsPlaceService _googleMapsPlaceService;
         public NewHomeRequestChooseTypeViewModel()
@@ -27,7 +22,7 @@ namespace AeccApp.Core.ViewModels
         {
 
             MyAddress = navigationData as AddressModel;
-            MyAddress.PlaceId.ToString();
+
             return ExecuteOperationAsync(async () =>
             {
                 GooglePlacesDetailModel places = await _googleMapsPlaceService.GetPlaceDetailAsync(MyAddress.PlaceId);
@@ -36,23 +31,17 @@ namespace AeccApp.Core.ViewModels
 
                 int n;
                 bool thereIsNaturalNumberInput = int.TryParse(places.Result.AddressComponents[0].LongName, out n);
-                
+
                 if (thereIsNaturalNumberInput)
                 {
-                    MyAddress.AddressNumber = places.Result.AddressComponents[0].LongName;
-                    MyAddress.AddressProvince = places.Result.AddressComponents[2].LongName;
+                    MyAddress.Number = places.Result.AddressComponents[0].LongName;
+                    MyAddress.Province = places.Result.AddressComponents[2].LongName;
                 }
                 else
                 {
-                    MyAddress.AddressProvince = places.Result.AddressComponents[2].LongName;
+                    MyAddress.Province = places.Result.AddressComponents[2].LongName;
                 }
-
-                
-                
-
-                int I = 0;
             });
-            
         }
 
         private Command _requestCompanionForHomeCommand;
@@ -112,7 +101,7 @@ namespace AeccApp.Core.ViewModels
 
         #region Properties
         
-        private AddressModel _myAddress = new AddressModel();
+        private AddressModel _myAddress;
         public AddressModel MyAddress
         {
             get { return _myAddress; }

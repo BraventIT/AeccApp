@@ -1,7 +1,6 @@
-﻿using System;
-namespace AeccApp.Core.Models.Base
+﻿namespace AeccApp.Core.Models
 {
-	public class ApiError
+    public class ApiError
 	{
         
 		public string Error { get; set; }

@@ -1,9 +1,4 @@
-﻿using AeccApp.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AeccApp.Core.Messages
+﻿namespace AeccApp.Core.Messages
 {
     public enum TabsEnum
     {

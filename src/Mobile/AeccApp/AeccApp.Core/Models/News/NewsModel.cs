@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-
-namespace AeccApp.Core.Models.News
+﻿namespace AeccApp.Core.Models
 {
-   public class NewsModel
+    public class NewsModel
     {
 
         public NewsModel(string newsId ,string imagen, string title, string content)
