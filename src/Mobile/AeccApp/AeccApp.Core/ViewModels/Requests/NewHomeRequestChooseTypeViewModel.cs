@@ -26,8 +26,8 @@ namespace AeccApp.Core.ViewModels
             return ExecuteOperationAsync(async () =>
             {
                 GooglePlacesDetailModel places = await _googleMapsPlaceService.GetPlaceDetailAsync(MyAddress.PlaceId);
-                MyAddress.Lat = places.Result.Geometry.Location.Lat;
-                MyAddress.Lng = places.Result.Geometry.Location.Lng;
+                MyAddress.Coordinates.Latitude = places.Result.Geometry.Location.Lat;
+                MyAddress.Coordinates.Longitude = places.Result.Geometry.Location.Lng;
 
                 int n;
                 bool thereIsNaturalNumberInput = int.TryParse(places.Result.AddressComponents[0].LongName, out n);

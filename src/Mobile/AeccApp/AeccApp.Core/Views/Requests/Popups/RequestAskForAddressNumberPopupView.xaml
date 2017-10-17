@@ -16,7 +16,6 @@
         <ContentView Style="{StaticResource InternalViewStyle}">
 
             <Grid
-                Margin="30"
                 Padding="15"
                 BackgroundColor="{StaticResource BackgroundColor}"
                 HorizontalOptions="Center"

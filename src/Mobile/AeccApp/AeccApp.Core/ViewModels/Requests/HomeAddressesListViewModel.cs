@@ -11,9 +11,9 @@ namespace AeccApp.Core.ViewModels
         {
             //TODO Delete mock home addresses
             HomeAddressesList = new ObservableCollection<AddressModel>();
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", new Xamarin.Forms.GoogleMaps.Position(0,0)));
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", new Xamarin.Forms.GoogleMaps.Position(0, 0)));
-            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", new Xamarin.Forms.GoogleMaps.Position(0, 0)));
+            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", new Models.Requests.Position(0,0)));
+            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", new Models.Requests.Position(0, 0)));
+            HomeAddressesList.Add(new AddressModel("Mi casa", "Fake street", "Castellón", "1234", "2", "placeID", new Models.Requests.Position(0, 0)));
         }
 
         #region Commands

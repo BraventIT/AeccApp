@@ -20,8 +20,8 @@ namespace AeccApp.Core.ViewModels
         public override Task InitializeAsync(object navigationData)
         {
             CurrentAddress = navigationData as AddressModel;
-            InitialMapLat = CurrentAddress.Lat;
-            InitialMapLng = CurrentAddress.Lng;
+            InitialMapLat = CurrentAddress.Coordinates.Latitude;
+            InitialMapLng = CurrentAddress.Coordinates.Longitude;
             return Task.CompletedTask;
         }
 

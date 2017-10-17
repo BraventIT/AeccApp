@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Xamarin.Forms.GoogleMaps;
+﻿using AeccApp.Core.Models.Requests;
+using System.Linq;
 
 namespace AeccApp.Core.Models
 {
