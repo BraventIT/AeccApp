@@ -128,12 +128,6 @@
 
             <!--  Popups  -->
 
-            <ctrl:RequestSentPopupControl CloseRequestSentPopupCommand="{Binding CloseRequestSentPopupCommand}" IsVisible="{Binding IsRequestSentPopupVisible}">
-                <View.Behaviors>
-                    <beh:AnimateScaleBehavior IsVisible="{Binding IsRequestSentPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-                </View.Behaviors>
-            </ctrl:RequestSentPopupControl>
-
             <ctrl:RequestDateAndTimePopupControl
                 ApplyDateAndTimeCommand="{Binding ApplyDateAndTimeCommand}"
                 ClosePopupCommand="{Binding CloseDateAndTimePopupCommand}"

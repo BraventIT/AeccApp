@@ -42,6 +42,9 @@
     <Compile Update="Views\Profile\Popups\LogoutPopupView.xaml.cs">
       <DependentUpon>LogoutPopupView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Requests\Popups\RequestSentPopupView.xaml.cs">
+      <DependentUpon>RequestSentPopupView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

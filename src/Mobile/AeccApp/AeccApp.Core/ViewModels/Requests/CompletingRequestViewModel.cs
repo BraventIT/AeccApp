@@ -14,15 +14,21 @@ namespace AeccApp.Core.ViewModels
         public CompletingRequestViewModel()
         {
             RequestConfirmationPopupVM = new RequestConfirmationPopupViewModel();
-
+            RequestSentPopupVM = new RequestSentPopupViewModel();
         }
 
         public override Task InitializeAsync(object navigationData)
         {
+            RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
             CurrentAddress = navigationData as AddressModel;
             InitialMapLat = CurrentAddress.Coordinates.Latitude;
             InitialMapLng = CurrentAddress.Coordinates.Longitude;
             return Task.CompletedTask;
+        }
+
+        public override void Deactivate()
+        {
+            RequestConfirmationPopupVM.ConfirmRequestToSend -= OnSendRequestConfirmationCommand;
         }
 
         #endregion
@@ -55,12 +61,12 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private void OnSendRequestCommand(object obj)
+        private async void OnSendRequestCommand(object obj)
         {
 
             //TODO send request
-            IsRequestConfirmationPopupVisible = false;
-            IsRequestSentPopupVisible = true;
+            await NavigationService.HidePopupAsync();
+            await NavigationService.ShowPopupAsync(RequestSentPopupVM); 
         }
 
         private Command _openRequestConfirmationPopupCommand;
@@ -167,7 +173,12 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-
+        private async void OnSendRequestConfirmationCommand(object sender, EventArgs e)
+        {
+            await NavigationService.HidePopupAsync();
+            //TODO SEND REQUEST
+            await NavigationService.ShowPopupAsync(RequestSentPopupVM);
+        }
 
 
         #endregion
@@ -175,6 +186,7 @@ namespace AeccApp.Core.ViewModels
         #region Properties
 
         public RequestConfirmationPopupViewModel RequestConfirmationPopupVM { get; private set; }
+        public RequestSentPopupViewModel RequestSentPopupVM { get; private set; }
 
 
         private double _initialMapLat;

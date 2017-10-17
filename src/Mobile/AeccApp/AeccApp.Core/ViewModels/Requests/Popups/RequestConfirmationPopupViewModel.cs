@@ -8,6 +8,7 @@ namespace AeccApp.Core.ViewModels.Popups
 {
    public class RequestConfirmationPopupViewModel : ViewModelBase
     {
+        public event EventHandler ConfirmRequestToSend;
 
         private Command _closePopupCommand;
         public ICommand ClosePopupCommand
@@ -29,13 +30,10 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _sendRequestConfirmationCommand ??
-                    (_sendRequestConfirmationCommand = new Command(OnSendRequestConfirmationCommand));
+                    (_sendRequestConfirmationCommand = new Command(o => ConfirmRequestToSend?.Invoke(this, null)));
             }
         }
-        private async void OnSendRequestConfirmationCommand()
-        {
-            await NavigationService.HidePopupAsync();
-        }
+   
 
 
         private string _displayRequestInfo;
