@@ -188,7 +188,7 @@
                     </StackLayout>
                 </StackLayout>
 
-                <!--<ctrl:RequestAskForAddressNumberPopupControl
+                <ctrl:RequestAskForAddressNumberPopupControl
                     ClosePopupCommand="{Binding CloseNumberSuggestionPopupCommand}"
                     ContinueWithoutInputANumberCommand="{Binding DoesNotWantToInputNumberSuggestionPopupCommand}"
                     HorizontalOptions="Center"
@@ -196,7 +196,7 @@
                     <View.Behaviors>
                         <beh:AnimateScaleBehavior IsVisible="{Binding IsNumberSuggestionPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
                     </View.Behaviors>
-                </ctrl:RequestAskForAddressNumberPopupControl>-->
+                </ctrl:RequestAskForAddressNumberPopupControl>
 
             </Grid>
         </ScrollView>
