@@ -6,7 +6,6 @@
     xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
-    xmlns:eff="clr-namespace:AeccApp.Core.Effects"
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [HomeViewTitle]}"
@@ -62,9 +61,6 @@
                                         EventArgsConverter="{StaticResource ToggledEventArgsConverter}"
                                         EventName="Toggled" />
                                 </Switch.Behaviors>
-                                <Switch.Effects>
-                                    <eff:SwitchClearEffect />
-                                </Switch.Effects>
                             </Switch>
                             <Label Style="{StaticResource SwitchTextStyle}" Text="Activa tu disponibilidad" />
                         </StackLayout>
