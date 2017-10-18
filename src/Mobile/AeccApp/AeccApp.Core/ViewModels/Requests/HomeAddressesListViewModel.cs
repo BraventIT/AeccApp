@@ -13,6 +13,7 @@ namespace AeccApp.Core.ViewModels
     {
         public readonly IHomeAddressesDataService _homeAddressesDataService;
 
+        #region Activate & Deactive Methods
         public HomeAddressesListViewModel()
         {
             _homeAddressesDataService = ServiceLocator.HomeAddressesDataService;
@@ -34,6 +35,7 @@ namespace AeccApp.Core.ViewModels
                 HomeAddressesIsEmpty = homeAddresses == null || !homeAddresses.Any();
             });
         }
+        #endregion
 
         #region Properties
         private ObservableCollection<AddressModel> _homeAddressesList;

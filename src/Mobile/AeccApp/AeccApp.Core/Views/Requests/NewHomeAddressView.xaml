@@ -17,7 +17,7 @@
         <ResourceDictionary>
             <DataTemplate x:Key="suggestedAddressesListTemplate">
                 <ViewCell>
-                    <Label FontSize="{StaticResource NormalLabelStyle}" Text="{Binding DisplayAddress}" />
+                    <Label Style="{StaticResource SubTitleLabelStyle}" Text="{Binding DisplayAddress}" />
                 </ViewCell>
             </DataTemplate>
         </ResourceDictionary>
@@ -38,10 +38,9 @@
                 <ColumnDefinition Width="25" />
             </Grid.ColumnDefinitions>
 
-
             <ctrl:CustomImage
                 Grid.Column="0"
-                Margin="0,5"
+                Margin="5,10"
                 HorizontalOptions="Center"
                 IsVisible="{Binding IsSearchIconVisible, Converter={StaticResource InverseBoolConverter}}"
                 SourcePlatform="search_mini_icon"
@@ -62,17 +61,16 @@
                 </Entry.Behaviors>
             </Entry>
 
-            <ctrl:CustomImage
+            <Frame
                 Grid.Column="2"
-                Margin="0,5"
+                Padding="5,10"
                 HorizontalOptions="Center"
-                IsVisible="{Binding IsSearchIconVisible}"
-                SourcePlatform="x_icon"
-                VerticalOptions="Center">
-                <StackLayout.GestureRecognizers>
+                IsVisible="{Binding IsSearchIconVisible}">
+                <ctrl:CustomImage SourcePlatform="x_icon" VerticalOptions="Center" />
+                <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ResetAddressFinderCommand}" />
-                </StackLayout.GestureRecognizers>
-            </ctrl:CustomImage>
+                </Frame.GestureRecognizers>
+            </Frame>
 
         </Grid>
 

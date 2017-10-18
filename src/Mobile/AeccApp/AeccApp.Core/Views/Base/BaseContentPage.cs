@@ -1,6 +1,7 @@
 ﻿using System;
 using AeccApp.Core.ViewModels;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace AeccApp.Core.Views
 {
@@ -19,9 +20,10 @@ namespace AeccApp.Core.Views
                 ViewModel.ViewIsInitialized = true;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
+            await Task.Delay(200);
             ViewModel?.ActivateAsync();
         }
 

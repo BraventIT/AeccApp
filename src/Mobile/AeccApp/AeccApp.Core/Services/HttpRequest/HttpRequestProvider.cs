@@ -86,7 +86,6 @@ namespace AeccApp.Core.Services
             httpClient.DefaultRequestHeaders.Add(parameter, Guid.NewGuid().ToString());
         }
 
-
         private async Task HandleResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)

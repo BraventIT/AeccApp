@@ -15,7 +15,7 @@ namespace AeccApp.Core.ViewModels
     public class NewHomeAddressViewModel : ViewModelBase
     {
         private IGoogleMapsPlaceService GoogleMapsPlaceService { get; } = ServiceLocator.GoogleMapsPlaceService;
-        private IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
+       
 
         public NewHomeAddressViewModel()
         {
@@ -55,13 +55,8 @@ namespace AeccApp.Core.ViewModels
         }
         #endregion
 
-
-        private ObservableCollection<AddressModel> _sugestedAddressesList;
-        public ObservableCollection<AddressModel> SugestedAddressesList
-        {
-            get { return _sugestedAddressesList; }
-            set { Set(ref _sugestedAddressesList, value); }
-        }
+        
+        public ObservableCollection<AddressModel> SugestedAddressesList { get; private set; }
 
         private bool _sugestedAddressesListIsEmpty;
         public bool SugestedAddressesListIsEmpty
@@ -214,6 +209,7 @@ namespace AeccApp.Core.ViewModels
             if (string.IsNullOrWhiteSpace(result))
             {
                 IsSearchIconVisible = false;
+                ShowHelpMessage = true;
             }
             else
             {
@@ -227,6 +223,7 @@ namespace AeccApp.Core.ViewModels
                     SugestedAddressesList.Clear();
                 }
                 IsSearchIconVisible = true;
+                ShowHelpMessage = false;
             }
         }
 
@@ -266,9 +263,7 @@ namespace AeccApp.Core.ViewModels
 
                         // Save new home address
                         if (IsAddressGettingSaved)
-                        {
-                            await HomeAddressesDataService.AddOrUpdateAddressAsync(AddressSelected);
-                        }
+                            AddressSelected.WillBeSaved = true;
 
                         await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(AddressSelected);
                         await NavigationService.RemoveLastFromBackStackAsync();
@@ -303,8 +298,9 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                ShowHelpMessage = false;
-                SugestedAddressesList.Clear();
+                if (SugestedAddressesList.Any())
+                    SugestedAddressesList.Clear();
+
                 var places = await GoogleMapsPlaceService.FindPlacesAsync(result);
                 SugestedAddressesList.AddRange(places);
 

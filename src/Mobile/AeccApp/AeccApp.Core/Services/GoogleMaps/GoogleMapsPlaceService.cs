@@ -16,9 +16,6 @@ namespace AeccApp.Core.Services
             _requestProvider = requestProvider;
         }
 
-
-
-
         public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText)
         {
             UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)

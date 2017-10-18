@@ -10,6 +10,7 @@ namespace AeccApp.Core.ViewModels
     public class NewHomeRequestChooseTypeViewModel : ViewModelBase
     {
         private IGoogleMapsPlaceService GoogleMapsPlaceService { get; } = ServiceLocator.GoogleMapsPlaceService;
+        private IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
 
         #region Properties
 
@@ -25,12 +26,19 @@ namespace AeccApp.Core.ViewModels
 
         public override Task InitializeAsync(object navigationData)
         {
-
             MyAddress = navigationData as AddressModel;
 
             return ExecuteOperationAsync(async () =>
             {
-                MyAddress = await GoogleMapsPlaceService.FillPlaceDetailAsync(MyAddress);
+                if (MyAddress.Coordinates == null)
+                {
+                    MyAddress = await GoogleMapsPlaceService.FillPlaceDetailAsync(MyAddress);
+                }
+                if (MyAddress.WillBeSaved)
+                {
+                    MyAddress.WillBeSaved = false;
+                    await HomeAddressesDataService.AddOrUpdateAddressAsync(MyAddress);
+                }
             });
         }
 

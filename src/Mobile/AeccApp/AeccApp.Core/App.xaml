@@ -41,13 +41,6 @@
             <OnPlatform
                 x:Key="LargeSize"
                 x:TypeArguments="x:Double"
-                Android="18"
-                WinPhone="18"
-                iOS="16" />
-
-            <OnPlatform
-                x:Key="LargerSize"
-                x:TypeArguments="x:Double"
                 Android="20"
                 WinPhone="20"
                 iOS="18" />
@@ -87,7 +80,7 @@
 
             <Style x:Key="TitleLabelStyle" TargetType="{x:Type Label}">
                 <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="Margin" Value="20, 12" />
             </Style>
