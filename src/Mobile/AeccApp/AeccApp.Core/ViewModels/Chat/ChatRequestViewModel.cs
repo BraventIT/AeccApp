@@ -16,7 +16,7 @@ namespace AeccApp.Core.ViewModels
         #region Contructor & Initialize
         public ChatRequestViewModel()
         {
-            ChatService = ServiceLocator.Resolve<IChatService>();
+            ChatService = ServiceLocator.ChatService;
         }
 
         public override async Task InitializeAsync(object navigationData)

@@ -8,10 +8,10 @@ namespace AeccApp.Core.Services
 {
     public class GoogleMapsPlaceService : IGoogleMapsPlaceService
     {
-        private readonly IRequestProvider _requestProvider;
+        private readonly IHttpRequestProvider _requestProvider;
         private const string GOOGLE_MAPS_ENDPOINT = "https://maps.googleapis.com";
 
-        public GoogleMapsPlaceService(IRequestProvider requestProvider)
+        public GoogleMapsPlaceService(IHttpRequestProvider requestProvider)
         {
             _requestProvider = requestProvider;
         }

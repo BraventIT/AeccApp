@@ -17,7 +17,7 @@ namespace AeccApp.Core.ViewModels
         public HomeViewModel()
         {
             ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
-            ChatService = ServiceLocator.Resolve<IChatService>();
+            ChatService = ServiceLocator.ChatService;
         }
 
         public override async Task ActivateAsync()

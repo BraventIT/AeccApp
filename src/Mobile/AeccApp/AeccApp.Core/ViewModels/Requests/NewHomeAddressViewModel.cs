@@ -4,6 +4,7 @@ using AeccApp.Core.Services;
 using AeccApp.Core.Validations;
 using AeccApp.Core.ViewModels.Popups;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,10 +16,12 @@ namespace AeccApp.Core.ViewModels
     public class NewHomeAddressViewModel : ViewModelBase
     {
         private readonly IGoogleMapsPlaceService _googleMapsPlaceService;
+        public readonly IHomeAddressesDataService _homeAddressesDataService;
 
         public NewHomeAddressViewModel()
         {
-            _googleMapsPlaceService = ServiceLocator.Resolve<IGoogleMapsPlaceService>();
+            _googleMapsPlaceService = ServiceLocator.GoogleMapsPlaceService;
+            _homeAddressesDataService = ServiceLocator.HomeAddressesDataService;
 
             SugestedAddressesList = new ObservableCollection<AddressModel>();
             RequestAskForAddressNumberPopupVM = new RequestAskForAddressNumberPopupViewModel();
@@ -123,9 +126,14 @@ namespace AeccApp.Core.ViewModels
 
         private void OnAddressSelected(object obj)
         {
-            AddressSelected = obj as AddressModel;
-            _previousAddress = Address;
-            Address = AddressSelected.DisplayAddress;
+            // ListView ItemTapped event is called twice
+            var newAddressSelected = obj as AddressModel;
+            if (newAddressSelected != AddressSelected)
+            {
+                AddressSelected = newAddressSelected;
+                _previousAddress = Address;
+                Address = AddressSelected.DisplayAddress;
+            }
         }
 
         private Command _continueWithRequestCommand;
@@ -251,7 +259,7 @@ namespace AeccApp.Core.ViewModels
                 // Save new home address
                 if (IsAddressGettingSaved)
                 {
-                    // TODO Save address
+                    await _homeAddressesDataService.AddOrUpdateAddressAsync(AddressSelected);
                 }
 
                 await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(AddressSelected);

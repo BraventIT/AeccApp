@@ -103,7 +103,7 @@ namespace AeccApp.Core.ViewModels
 
         public ViewModelBase()
         {
-            NavigationService = ServiceLocator.Resolve<INavigationService>();
+            NavigationService = ServiceLocator.NavigationService;
         }
 
         public virtual Task InitializeAsync(object navigationData)

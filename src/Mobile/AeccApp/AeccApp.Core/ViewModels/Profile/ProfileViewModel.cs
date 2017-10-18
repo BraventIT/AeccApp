@@ -13,7 +13,7 @@ namespace AeccApp.Core.ViewModels
 
         public ProfileViewModel()
         {
-            _identityService = ServiceLocator.Resolve<IIdentityService>();
+            _identityService = ServiceLocator.IdentityService;
             LogoutPopupVM = new LogoutPopupViewModel();
         }
 

@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<v:BaseContentPage
     x:Class="AeccApp.Core.Views.HomeAddressesListView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
+    xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [HomeAddressesListViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True">
@@ -15,8 +16,6 @@
             <DataTemplate x:Key="homeAddressesListTemplate">
                 <ViewCell>
                     <Grid Padding="5">
-
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -45,9 +44,7 @@
                                 </OnPlatform>
                             </Label.Margin>
 
-
                         </ctrl:CustomImage>
-
 
                         <Label
                             Grid.Row="0"
@@ -65,7 +62,6 @@
                             </Label.Margin>
                         </Label>
 
-
                         <Label
                             Grid.Row="1"
                             Grid.Column="1"
@@ -81,9 +77,7 @@
                                 </OnPlatform>
                             </Label.Margin>
 
-
                         </Label>
-
 
                         <ctrl:CustomImage
                             Grid.Row="0"
@@ -95,8 +89,6 @@
                             SourcePlatform="right_arrow"
                             VerticalOptions="Center"
                             WidthRequest="30" />
-
-
 
                     </Grid>
                 </ViewCell>
@@ -126,4 +118,4 @@
             Text="{Binding [CommonNewAddress]}" />
 
     </StackLayout>
-</ContentPage>
+</v:BaseContentPage>

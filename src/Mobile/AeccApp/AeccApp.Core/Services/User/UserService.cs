@@ -6,10 +6,10 @@ namespace AeccApp.Core.Services
 {
     public class UserService : IUserService
     {
-        private readonly IRequestProvider _requestProvider;
+        private readonly IHttpRequestProvider _requestProvider;
         private readonly IIdentityService _identityService;
 
-        public UserService(IIdentityService identityService, IRequestProvider requestProvider)
+        public UserService(IIdentityService identityService, IHttpRequestProvider requestProvider)
         {
             _identityService = identityService;
             _requestProvider = requestProvider;

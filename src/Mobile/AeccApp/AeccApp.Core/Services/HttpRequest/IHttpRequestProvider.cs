@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AeccApp.Core.Services
 {
-    public interface IRequestProvider
+    public interface IHttpRequestProvider
     {
         Task<TResult> GetAsync<TResult>(string uri, string token = "");
 
