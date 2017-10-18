@@ -5573,8 +5573,8 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f0200d9
 			public const int mr_ic_play_light = 2130837721;
 			
-			// aapt resource value: 0x7f0200f1
-			public const int notification_template_icon_bg = 2130837745;
+			// aapt resource value: 0x7f0200f2
+			public const int notification_template_icon_bg = 2130837746;
 			
 			// aapt resource value: 0x7f0200da
 			public const int profile = 2130837722;
@@ -5583,67 +5583,70 @@ namespace AeccApp.Droid
 			public const int profile_generic = 2130837723;
 			
 			// aapt resource value: 0x7f0200dc
-			public const int profile_tab_icon = 2130837724;
+			public const int profile_icon = 2130837724;
 			
 			// aapt resource value: 0x7f0200dd
-			public const int rating_star = 2130837725;
+			public const int profile_tab_icon = 2130837725;
 			
 			// aapt resource value: 0x7f0200de
-			public const int requests_tab_icon = 2130837726;
+			public const int rating_star = 2130837726;
 			
 			// aapt resource value: 0x7f0200df
-			public const int right_arrow = 2130837727;
+			public const int requests_tab_icon = 2130837727;
 			
 			// aapt resource value: 0x7f0200e0
-			public const int right_arrow_big = 2130837728;
+			public const int right_arrow = 2130837728;
 			
 			// aapt resource value: 0x7f0200e1
-			public const int round_new_here = 2130837729;
+			public const int right_arrow_big = 2130837729;
 			
 			// aapt resource value: 0x7f0200e2
-			public const int round_no_profile_image = 2130837730;
+			public const int round_new_here = 2130837730;
 			
 			// aapt resource value: 0x7f0200e3
-			public const int round_no_profile_image_v2 = 2130837731;
+			public const int round_no_profile_image = 2130837731;
 			
 			// aapt resource value: 0x7f0200e4
-			public const int round_plus = 2130837732;
+			public const int round_no_profile_image_v2 = 2130837732;
 			
 			// aapt resource value: 0x7f0200e5
-			public const int round_question_icon = 2130837733;
+			public const int round_plus = 2130837733;
 			
 			// aapt resource value: 0x7f0200e6
-			public const int search_mini_icon = 2130837734;
+			public const int round_question_icon = 2130837734;
 			
 			// aapt resource value: 0x7f0200e7
-			public const int seek_thumb_disabled = 2130837735;
+			public const int search_mini_icon = 2130837735;
 			
 			// aapt resource value: 0x7f0200e8
-			public const int seek_thumb_normal = 2130837736;
+			public const int seek_thumb_disabled = 2130837736;
 			
 			// aapt resource value: 0x7f0200e9
-			public const int seek_thumb_pressed = 2130837737;
+			public const int seek_thumb_normal = 2130837737;
 			
 			// aapt resource value: 0x7f0200ea
-			public const int send_icon = 2130837738;
+			public const int seek_thumb_pressed = 2130837738;
 			
 			// aapt resource value: 0x7f0200eb
-			public const int slideout = 2130837739;
+			public const int send_icon = 2130837739;
 			
 			// aapt resource value: 0x7f0200ec
-			public const int thumb_up = 2130837740;
+			public const int slideout = 2130837740;
 			
 			// aapt resource value: 0x7f0200ed
-			public const int tick_icon = 2130837741;
+			public const int thumb_up = 2130837741;
 			
 			// aapt resource value: 0x7f0200ee
-			public const int time_icon = 2130837742;
+			public const int tick_icon = 2130837742;
 			
 			// aapt resource value: 0x7f0200ef
-			public const int x_icon = 2130837743;
+			public const int time_icon = 2130837743;
 			
 			// aapt resource value: 0x7f0200f0
-			public const int xamarin_logo = 2130837744;
+			public const int x_icon = 2130837744;
+			
+			// aapt resource value: 0x7f0200f1
+			public const int xamarin_logo = 2130837745;
 			
 			static Drawable()
 			{
