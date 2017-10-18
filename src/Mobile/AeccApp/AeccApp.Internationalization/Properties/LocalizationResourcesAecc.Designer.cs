@@ -989,6 +989,24 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No encontramos una dirección valida, por favor revisa los datos.
+        /// </summary>
+        public static string PopupThereIsNoResultsText {
+            get {
+                return ResourceManager.GetString("PopupThereIsNoResultsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lo sentimos!.
+        /// </summary>
+        public static string PopupThereIsNoResultsTextTitle {
+            get {
+                return ResourceManager.GetString("PopupThereIsNoResultsTextTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Información personal.
         /// </summary>
         public static string PopupVolunteerProfileInfo {
