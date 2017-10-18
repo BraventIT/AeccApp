@@ -44,7 +44,7 @@ namespace AeccApp.Core.ViewModels
           
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
-
+                ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
             _chatService.MessagesReceived += OnMesagesReceived;
             _chatService.AggregationsReceived += OnAggregationsReceived;
 
@@ -77,6 +77,7 @@ namespace AeccApp.Core.ViewModels
         {
             MessagingCenter.Unsubscribe<ChatStateMessage>(this, string.Empty);
             ChatFiltersPopupVM.AppliedFilters -= OnChatAppliedFilters;
+            ChatLeaseConversationPopupVM.LeaseChatConversation -= OnLeaseConversation;
             _chatService.MessagesReceived -= OnMesagesReceived;
             _chatService.AggregationsReceived -= OnAggregationsReceived;
         }

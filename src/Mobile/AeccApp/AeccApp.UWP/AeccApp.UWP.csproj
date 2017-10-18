@@ -132,6 +132,7 @@
     <Content Include="Assets\chat.png" />
     <Content Include="Assets\logout.png" />
     <Content Include="Assets\mock_new_firma_convenio.png" />
+    <Content Include="Assets\profile_icon.png" />
     <Content Include="Assets\profile_tab_icon.png" />
     <Content Include="Assets\rating_star.png" />
     <Content Include="Assets\requests_tab_icon.png" />
