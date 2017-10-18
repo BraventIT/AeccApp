@@ -1,5 +1,4 @@
 ﻿using AeccApp.Core.Models;
-using AeccApp.Core.Models.Requests;
 using AeccApp.Core.Services;
 using System;
 using System.Threading.Tasks;
@@ -10,12 +9,17 @@ namespace AeccApp.Core.ViewModels
 {
     public class NewHomeRequestChooseTypeViewModel : ViewModelBase
     {
-        private readonly IGoogleMapsPlaceService _googleMapsPlaceService;
-        public NewHomeRequestChooseTypeViewModel()
-        {
-            _googleMapsPlaceService = ServiceLocator.GoogleMapsPlaceService;
-        }
+        private IGoogleMapsPlaceService GoogleMapsPlaceService { get; } = ServiceLocator.GoogleMapsPlaceService;
 
+        #region Properties
+
+        private AddressModel _myAddress;
+        public AddressModel MyAddress
+        {
+            get { return _myAddress; }
+            set { Set(ref _myAddress, value); }
+        }
+        #endregion
 
         #region Commands
 
@@ -26,8 +30,7 @@ namespace AeccApp.Core.ViewModels
 
             return ExecuteOperationAsync(async () =>
             {
-                GooglePlacesDetailModel places = await _googleMapsPlaceService.GetPlaceDetailAsync(MyAddress.PlaceId);
-                AddCoordinatesToAddress(places);             
+                MyAddress = await GoogleMapsPlaceService.FillPlaceDetailAsync(MyAddress);
             });
         }
 
@@ -82,42 +85,6 @@ namespace AeccApp.Core.ViewModels
 
         }
 
-
         #endregion
-
-
-        #region Properties
-    
-        private AddressModel _myAddress;
-        public AddressModel MyAddress
-        {
-            get { return _myAddress; }
-            set { Set(ref _myAddress, value); }
-        }
-        #endregion
-
-
-        #region Methods
-        public void AddCoordinatesToAddress(GooglePlacesDetailModel googlePlacesDetailModel)
-        {
-            Position addressCoordinates = new Position(googlePlacesDetailModel.Result.Geometry.Location.Lat, googlePlacesDetailModel.Result.Geometry.Location.Lng);
-            MyAddress.Coordinates = addressCoordinates;
-            int n;
-            bool thereIsNaturalNumberInput = int.TryParse(googlePlacesDetailModel.Result.AddressComponents[0].LongName, out n);
-
-            if (thereIsNaturalNumberInput)
-            {
-                MyAddress.Number = googlePlacesDetailModel.Result.AddressComponents[0].LongName;
-                MyAddress.Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
-            }
-            else
-            {
-                MyAddress.Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
-            }
-            
-
-        }
-            #endregion
-
-        }
+    }
 }

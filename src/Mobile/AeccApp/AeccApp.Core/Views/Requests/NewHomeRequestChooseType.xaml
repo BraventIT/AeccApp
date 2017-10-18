@@ -34,8 +34,6 @@
                         Orientation="Horizontal"
                         VerticalOptions="Center">
                         <ctrl:CustomImage
-                            Grid.Row="0"
-                            Grid.Column="0"
                             HeightRequest="25"
                             HorizontalOptions="Center"
                             SourcePlatform="location_pin"
@@ -43,8 +41,6 @@
                             WidthRequest="25" />
 
                         <Label
-                            Grid.Row="1"
-                            Grid.ColumnSpan="2"
                             FontSize="Large"
                             HorizontalOptions="Center"
                             Text="{Binding MyAddress.AddressName}"

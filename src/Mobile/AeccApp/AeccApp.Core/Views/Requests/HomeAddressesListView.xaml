@@ -52,7 +52,7 @@
                             FontAttributes="Bold"
                             FontSize="{StaticResource MediumSize}"
                             HorizontalOptions="Start"
-                            Text="{Binding AddressName}">
+                            Text="{Binding Name}">
                             <Label.Margin>
                                 <OnPlatform x:TypeArguments="Thickness">
                                     <On Platform="WinPhone, Windows" Value="5,10,0,5" />
@@ -67,7 +67,7 @@
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
                             FontSize="{StaticResource MidMediumSize}"
-                            Text="{Binding DisplayAddress}">
+                            Text="{Binding FinderAddress}">
 
                             <Label.Margin>
                                 <OnPlatform x:TypeArguments="Thickness">
@@ -93,29 +93,53 @@
                     </Grid>
                 </ViewCell>
             </DataTemplate>
+
+            <DataTemplate x:Key="homeAddressHeaderTemplate">
+                <ContentView>
+                    <Label
+                        Margin="0,10,0,10"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text="{Binding [HomeAddressesListViewYourAddresses]}" />
+                </ContentView>
+            </DataTemplate>
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <StackLayout>
-        <Label
-            Margin="0,10,0,10"
-            HorizontalOptions="Center"
-            Style="{StaticResource TitleLabelStyle}"
-            Text="{Binding [HomeAddressesListViewYourAddresses]}" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
         <ListView
             HasUnevenRows="True"
+            HeaderTemplate="{StaticResource homeAddressHeaderTemplate}"
             HeightRequest="600"
+            IsVisible="{Binding HomeAddressesIsEmpty, Converter={StaticResource InverseBoolConverter}}"
             ItemTemplate="{StaticResource homeAddressesListTemplate}"
             ItemsSource="{Binding HomeAddressesList}" />
 
+        <Label
+            Margin="20,0"
+            HorizontalTextAlignment="Center"
+            IsVisible="{Binding HomeAddressesIsEmpty}"
+            Style="{StaticResource NormalLabelStyle}"
+            Text="{Binding [NewHomeAddressListViewAddressesEmpty]}"
+            VerticalOptions="Center" />
+
         <ctrlXlabs:ImageButton
+            Grid.Row="1"
             Margin="10"
             Command="{Binding NewHomeAddressCommand}"
-            HeightRequest="40"
+            HeightRequest="50"
             HorizontalOptions="CenterAndExpand"
             SourcePlatform="round_plus"
             Style="{StaticResource ImageButtonStyle}"
             Text="{Binding [CommonNewAddress]}" />
 
-    </StackLayout>
+        <!--  INDICATOR  -->
+        <ctrl:CustomActivityIndicatorControl />
+
+    </Grid>
 </v:BaseContentPage>

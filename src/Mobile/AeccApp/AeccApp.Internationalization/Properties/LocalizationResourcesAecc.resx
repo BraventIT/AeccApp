@@ -300,6 +300,12 @@
   <data name="LoginViewUserPlaceHolder" xml:space="preserve">
     <value>Nombre de usuario</value>
   </data>
+  <data name="NewHomeAddressListViewAddressesEmpty" xml:space="preserve">
+    <value>No tienes ninguna dirección guardada. ¡Crea una nueva!</value>
+  </data>
+  <data name="NewHomeAddressViewAddressesEmpty" xml:space="preserve">
+    <value>No hemos conseguido ninguna coincidencia. Por favor, revisa la dirección</value>
+  </data>
   <data name="NewHomeAddressViewChoseProvince" xml:space="preserve">
     <value>Elige una provincia</value>
   </data>
@@ -308,6 +314,9 @@
   </data>
   <data name="NewHomeAddressViewFloorPlaceHolder" xml:space="preserve">
     <value>Piso,Letra</value>
+  </data>
+  <data name="NewHomeAddressViewHelp" xml:space="preserve">
+    <value>Teclea la dirección y selecciónala de la lista</value>
   </data>
   <data name="NewHomeAddressViewMoreInfo" xml:space="preserve">
     <value>Amplía la información</value>

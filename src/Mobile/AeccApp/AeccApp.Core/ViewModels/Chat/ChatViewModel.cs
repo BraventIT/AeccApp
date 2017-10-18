@@ -123,11 +123,11 @@ namespace AeccApp.Core.ViewModels
         #region Choose volunteer Propeties
         public ObservableCollection<Volunteer> Volunteers { get; private set; }
 
-        private bool volunteersIsEmpty;
+        private bool _volunteersIsEmpty;
         public bool VolunteersIsEmpty
         {
-            get { return volunteersIsEmpty; }
-            set { Set(ref volunteersIsEmpty, value); }
+            get { return _volunteersIsEmpty; }
+            set { Set(ref _volunteersIsEmpty, value); }
         }
         #endregion
 

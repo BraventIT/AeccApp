@@ -8,7 +8,7 @@ namespace AeccApp.Core.Services
     {
         Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText);
 
-        Task<GooglePlacesDetailModel> GetPlaceDetailAsync(string placeId);
+        Task<AddressModel> FillPlaceDetailAsync(AddressModel address);
 
     }
 }

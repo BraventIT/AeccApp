@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using System.Threading.Tasks;
 using AeccApp.Core.Services;
 using AeccApp.Core.Extensions;
+using System.Linq;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -30,8 +31,26 @@ namespace AeccApp.Core.ViewModels
                     HomeAddressesList.Clear();
                     HomeAddressesList.AddRange(homeAddresses);
                 }
+                HomeAddressesIsEmpty = homeAddresses == null || !homeAddresses.Any();
             });
         }
+
+        #region Properties
+        private ObservableCollection<AddressModel> _homeAddressesList;
+
+        public ObservableCollection<AddressModel> HomeAddressesList
+        {
+            get { return _homeAddressesList; }
+            set { Set(ref _homeAddressesList, value); }
+        }
+
+        private bool _homeAddressesIsEmpty;
+        public bool HomeAddressesIsEmpty
+        {
+            get { return _homeAddressesIsEmpty; }
+            set { Set(ref _homeAddressesIsEmpty, value); }
+        }
+        #endregion
 
         #region Commands
 
@@ -55,16 +74,7 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
-        #region Properties
-        private ObservableCollection<AddressModel> _homeAddressesList;
-
-        public ObservableCollection<AddressModel> HomeAddressesList
-        {
-            get { return _homeAddressesList; }
-            set { Set(ref _homeAddressesList, value); }
-        }
-
-        #endregion
+      
 
     }
 }

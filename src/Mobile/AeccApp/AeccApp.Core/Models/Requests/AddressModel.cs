@@ -24,7 +24,7 @@ namespace AeccApp.Core.Models
             set { _coordinates = value; }
         }
 
-        public string DisplayAddress
+        public string FinderAddress
         {
             get
             {
@@ -34,12 +34,15 @@ namespace AeccApp.Core.Models
             }
         }
 
-        public override string ToString()
+        public string DisplayAddress
         {
-            var address = DisplayAddress;
-            return string.IsNullOrEmpty(Name) ?
-                  address :
-                   $"{Name} - {address}";
+            get
+            {
+                var address = FinderAddress;
+                return string.IsNullOrEmpty(Name) ?
+                      address :
+                       $"{Name} - {address}";
+            }
         }
 
         public AddressModel(Prediction item)
@@ -70,23 +73,9 @@ namespace AeccApp.Core.Models
 
             City = item.Terms[numTerms - 2].Value;
         }
-        public AddressModel(GooglePlacesDetailModel googlePlacesDetailModel,AddressModel modifiedAddress)
-        {
-            modifiedAddress.Coordinates = new Position(googlePlacesDetailModel.Result.Geometry.Location.Lat, googlePlacesDetailModel.Result.Geometry.Location.Lng);
-     
-            int n;
-            bool thereIsNaturalNumberInput = int.TryParse(googlePlacesDetailModel.Result.AddressComponents[0].LongName, out n);
 
-            if (thereIsNaturalNumberInput)
-            {
-                modifiedAddress.Number = googlePlacesDetailModel.Result.AddressComponents[0].LongName;
-                modifiedAddress.Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
-            }
-            else
-            {
-                modifiedAddress.Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
-            }
-        }
+       
+
         public AddressModel()
         {
 
@@ -101,6 +90,18 @@ namespace AeccApp.Core.Models
             Floor = floor;
             PlaceId = placeId;
             this.Coordinates = Coordinates;
+        }
+
+        public void AddCoordinates(GooglePlacesDetailModel googlePlacesDetailModel)
+        {
+            Position addressCoordinates = new Position(googlePlacesDetailModel.Result.Geometry.Location.Lat, googlePlacesDetailModel.Result.Geometry.Location.Lng);
+            Coordinates = addressCoordinates;
+
+            if (int.TryParse(googlePlacesDetailModel.Result.AddressComponents[0].LongName, out int n))
+            {
+                Number = googlePlacesDetailModel.Result.AddressComponents[0].LongName;
+            }
+            Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
         }
     }
 }

@@ -16,17 +16,7 @@ namespace AeccApp.Core.Services
             _requestProvider = requestProvider;
         }
 
-        public async Task<GooglePlacesDetailModel> GetPlaceDetailAsync(string placeId)
-        {
-            UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
-            {
-                Path = "maps/api/place/details/json",
-                Query = $"placeid={placeId}&language=es&key={GlobalSetting.Instance.GooglePlacesApiKey}"
-            };
 
-            GooglePlacesDetailModel place = await _requestProvider.GetAsync<GooglePlacesDetailModel>(uriBuilder.ToString());
-            return place;
-        }
 
 
         public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText)
@@ -43,6 +33,19 @@ namespace AeccApp.Core.Services
                 return places.Predictions.Select(item => new AddressModel(item));
             else
                 return new List<AddressModel>();
+        }
+
+        public async Task<AddressModel> FillPlaceDetailAsync(AddressModel address)
+        {
+            UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
+            {
+                Path = "maps/api/place/details/json",
+                Query = $"placeid={address.PlaceId}&language=es&key={GlobalSetting.Instance.GooglePlacesApiKey}"
+            };
+
+            GooglePlacesDetailModel place = await _requestProvider.GetAsync<GooglePlacesDetailModel>(uriBuilder.ToString());
+            address.AddCoordinates(place);
+            return address;
         }
     }
 }

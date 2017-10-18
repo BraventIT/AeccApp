@@ -18,9 +18,16 @@ namespace AeccApp.Core.Services
             IocContainer.Register<IHttpRequestProvider, HttpRequestProvider>();
         }
 
+        static INavigationService _navigationService;
         public static INavigationService NavigationService
         {
-            get { return Resolve<INavigationService>(); }
+            set { _navigationService = value; }
+            get
+            {
+                return (_navigationService != null) ?
+                  _navigationService :
+                  Resolve<INavigationService>();
+            }
         }
 
         public static IChatService ChatService

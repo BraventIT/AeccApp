@@ -12,7 +12,8 @@ namespace AeccApp.Core.ViewModels
 {
     public abstract class ViewModelBase : BaseNotifyProperty, INavigableViewModel
     {
-        protected readonly INavigationService NavigationService;
+        protected INavigationService NavigationService { get; } = ServiceLocator.NavigationService;
+
         /// <summary>
         /// ViewModelBase contains instances for GlobalSettings and LocalizationResources
         /// </summary>
@@ -100,11 +101,6 @@ namespace AeccApp.Core.ViewModels
             }
         }
         #endregion
-
-        public ViewModelBase()
-        {
-            NavigationService = ServiceLocator.NavigationService;
-        }
 
         public virtual Task InitializeAsync(object navigationData)
         {
