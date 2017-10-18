@@ -426,6 +426,12 @@
   <data name="PopupTermsAndConditionsAccept" xml:space="preserve">
     <value>Acepto los términos y condiciones</value>
   </data>
+  <data name="PopupThereIsNoResultsText" xml:space="preserve">
+    <value>No encontramos una dirección valida, por favor revisa los datos</value>
+  </data>
+  <data name="PopupThereIsNoResultsTextTitle" xml:space="preserve">
+    <value>Lo sentimos!</value>
+  </data>
   <data name="PopupVolunteerProfileInfo" xml:space="preserve">
     <value>Información personal</value>
   </data>
