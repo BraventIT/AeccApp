@@ -44,8 +44,6 @@
                         VerticalOptions="FillAndExpand" />
 
                 </StackLayout>
-
-
                 <!--  Date and time text and button  -->
                 <Label
                     Margin="10"
@@ -119,26 +117,6 @@
                     Text="{Binding [CompletingRequestSendRequest]}" />
 
             </StackLayout>
-
-            <!--  Pending override back button  -->
-            <!--<ctrl:RequestChangeRequestPopupControl
-            BackAndChangeTypeCommand="{Binding}"
-            ClosePopupCommand="{Binding}"
-            IsVisible="{Binding}" />-->
-
-            <!--  Popups  -->
-
-            <ctrl:RequestDateAndTimePopupControl
-                ApplyDateAndTimeCommand="{Binding ApplyDateAndTimeCommand}"
-                ClosePopupCommand="{Binding CloseDateAndTimePopupCommand}"
-                DateSelected="{Binding DateToApply, Mode=TwoWay}"
-                HorizontalOptions="FillAndExpand"
-                IsVisible="{Binding IsDateAndTimePopupVisible}"
-                TimeSelected="{Binding TimeToApply, Mode=TwoWay}">
-                <View.Behaviors>
-                    <beh:AnimateScaleBehavior IsVisible="{Binding IsDateAndTimePopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-                </View.Behaviors>
-            </ctrl:RequestDateAndTimePopupControl>
 
         </Grid>
     </ScrollView>

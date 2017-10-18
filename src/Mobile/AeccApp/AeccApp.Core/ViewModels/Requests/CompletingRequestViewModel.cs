@@ -13,12 +13,14 @@ namespace AeccApp.Core.ViewModels
 
         public CompletingRequestViewModel()
         {
+            RequestDateAndTimePopupVM = new RequestDateAndTimePopupViewModel();
             RequestConfirmationPopupVM = new RequestConfirmationPopupViewModel();
             RequestSentPopupVM = new RequestSentPopupViewModel();
         }
 
         public override Task InitializeAsync(object navigationData)
         {
+            RequestDateAndTimePopupVM.ApplyDateAndTime += OnApplyDateAndTimeCommand;
             RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
             CurrentAddress = navigationData as AddressModel;
             InitialMapLat = CurrentAddress.Coordinates.Latitude;
@@ -28,29 +30,13 @@ namespace AeccApp.Core.ViewModels
 
         public override void Deactivate()
         {
+            RequestDateAndTimePopupVM.ApplyDateAndTime -= OnApplyDateAndTimeCommand;
             RequestConfirmationPopupVM.ConfirmRequestToSend -= OnSendRequestConfirmationCommand;
         }
 
         #endregion
 
         #region Commands
-        private Command _closeRequestSentPopupCommand;
-        public ICommand CloseRequestSentPopupCommand
-        {
-            get
-            {
-                return _closeRequestSentPopupCommand ??
-                    (_closeRequestSentPopupCommand = new Command(OnCloseRequestSentPopupCommand, (o) => !IsBusy));
-            }
-        }
-        private void OnCloseRequestSentPopupCommand(object obj)
-        {
-
-            
-            IsRequestSentPopupVisible = false;
-
-        }
-
         private Command _sendRequestCommand;
         public ICommand SendRequestCommand
         {
@@ -85,9 +71,18 @@ namespace AeccApp.Core.ViewModels
             {
                 RequestConfirmationPopupVM.DisplayDate = DateTime.Now.ToString().Remove(10);
             }
+            else
+            {
+                RequestConfirmationPopupVM.DisplayDate = DateToApplyParsed;
+            }
+
             if (TimeToApplyParsed == null)
             {
                 RequestConfirmationPopupVM.DisplayTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
+            }
+            else
+            {
+                RequestConfirmationPopupVM.DisplayTime = TimeToApplyParsed;
             }
 
             await NavigationService.ShowPopupAsync(RequestConfirmationPopupVM);
@@ -106,43 +101,18 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private void OnOpenDateAndTimePopupCommand(object obj)
+        private async void OnOpenDateAndTimePopupCommand(object obj)
         {
-            IsDateAndTimePopupVisible = true;
-        }
-
-        private Command _closeDateAndTimePopupCommand;
-        public ICommand CloseDateAndTimePopupCommand
-        {
-            get
-            {
-                return _closeDateAndTimePopupCommand ??
-                    (_closeDateAndTimePopupCommand = new Command(OnCloseDateAndTimePopupCommand, (o) => !IsBusy));
-            }
-        }
-
-        private void OnCloseDateAndTimePopupCommand(object obj)
-        {
-            IsDateAndTimePopupVisible = false;
+            await NavigationService.ShowPopupAsync(RequestDateAndTimePopupVM);
         }
 
 
-        private Command _applyDateAndTimeCommand;
-        public ICommand ApplyDateAndTimeCommand
-        {
-            get
-            {
-                return _applyDateAndTimeCommand ??
-                    (_applyDateAndTimeCommand = new Command(OnApplyDateAndTimeCommand, (o) => !IsBusy));
-            }
-        }
-
-        private void OnApplyDateAndTimeCommand(object obj)
+        private async void OnApplyDateAndTimeCommand(object sender, EventArgs e)
         {
             //Apply date and time to the request:
-            DateToApplyParsed = DateToApply.Date.ToString().Remove(10);
-            TimeToApplyParsed = TimeToApply.ToString().Remove(5);
-            IsDateAndTimePopupVisible = false;
+            DateToApplyParsed = RequestDateAndTimePopupVM.DateSelected.Date.ToString().Remove(10);
+            TimeToApplyParsed = RequestDateAndTimePopupVM.TimeSelected.ToString().Remove(5);
+            await NavigationService.HidePopupAsync();
 
         }
 
@@ -177,6 +147,7 @@ namespace AeccApp.Core.ViewModels
         {
             await NavigationService.HidePopupAsync();
             //TODO SEND REQUEST
+            
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
 
@@ -187,20 +158,21 @@ namespace AeccApp.Core.ViewModels
 
         public RequestConfirmationPopupViewModel RequestConfirmationPopupVM { get; private set; }
         public RequestSentPopupViewModel RequestSentPopupVM { get; private set; }
+        public RequestDateAndTimePopupViewModel RequestDateAndTimePopupVM { get; private set; }
 
 
         private double _initialMapLat;
         public double InitialMapLat
         {
             get { return _initialMapLat; }
-            set { _initialMapLat = value; }
+            set { Set(ref _initialMapLat, value); }
         }
         private double _initialMapLng;
 
         public double InitialMapLng
         {
             get { return _initialMapLng; }
-            set { _initialMapLng = value; }
+            set { Set(ref _initialMapLng, value); }
         }
 
         private AddressModel _currentAddress;
@@ -210,26 +182,6 @@ namespace AeccApp.Core.ViewModels
             get { return _currentAddress; }
             set { Set(ref _currentAddress, value); }
         }
-
-
-        private bool _isRequestSentPopupVisible;
-
-        public bool IsRequestSentPopupVisible
-        {
-            get { return _isRequestSentPopupVisible; }
-            set { Set(ref _isRequestSentPopupVisible, value); }
-        }
-
-
-        private bool _isRequestConfirmationPopupVisible;
-
-        public bool IsRequestConfirmationPopupVisible
-        {
-            get { return _isRequestConfirmationPopupVisible; }
-            set { Set(ref _isRequestConfirmationPopupVisible, value); }
-        }
-
-
 
         private string _commentsLenghtReminder = "0/120";
 
@@ -248,14 +200,6 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _requestComments, value); }
         }
 
-
-        private bool _isDateAndTimePopupVisible;
-
-        public bool IsDateAndTimePopupVisible
-        {
-            get { return _isDateAndTimePopupVisible; }
-            set { Set(ref _isDateAndTimePopupVisible, value); }
-        }
 
         private DateTime _dateToApply = DateTime.Now;
 
@@ -298,28 +242,7 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
-        #region Methods
-        public override bool OnBackButtonPressed()
-        {
-            bool returnValue = false;
-            if (IsRequestSentPopupVisible)
-            {
-                IsRequestSentPopupVisible = false;
-                returnValue = true;
-            }
-            else if (IsRequestConfirmationPopupVisible)
-            {
-                IsRequestConfirmationPopupVisible = false;
-                returnValue = true;
-            }
-            else if (IsDateAndTimePopupVisible)
-            {
-                IsDateAndTimePopupVisible = false;
-                returnValue = true;
-            }
-            return returnValue;
-        }
-        #endregion
+      
 
     }
 }
