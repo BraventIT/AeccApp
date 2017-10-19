@@ -253,7 +253,9 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                AddressSelected.Name = AddressName.Value;
+                // Save new home address
+                if (IsAddressGettingSaved)
+                    AddressSelected.WillBeSaved = true;
 
                 if (string.IsNullOrEmpty(AddressSelected.PlaceId))
                 {
@@ -261,19 +263,21 @@ namespace AeccApp.Core.ViewModels
                     if (places.Any())
                     {
                         AddressSelected = places.First();
-
-                        // Save new home address
-                        if (IsAddressGettingSaved)
-                            AddressSelected.WillBeSaved = true;
-
+                        AddressSelected.Name = AddressName.Value;
+                        
                         await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(AddressSelected);
                         await NavigationService.RemoveLastFromBackStackAsync();
                     }
                     else
                     {
                         await NavigationService.ShowPopupAsync(RequestThereIsNoResultsPopupVM);
-                        // TODO Mostrar Popup diciendo que busque mejor
                     }
+                }
+                else
+                {
+                    AddressSelected.Name = AddressName.Value;
+                    await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(AddressSelected);
+                    await NavigationService.RemoveLastFromBackStackAsync();
                 }
             });
         }
