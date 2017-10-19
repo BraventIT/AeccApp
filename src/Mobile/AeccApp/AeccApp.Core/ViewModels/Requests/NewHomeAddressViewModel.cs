@@ -253,7 +253,6 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                AddressSelected.Name = AddressName.Value;
 
                 if (string.IsNullOrEmpty(AddressSelected.PlaceId))
                 {
@@ -261,6 +260,7 @@ namespace AeccApp.Core.ViewModels
                     if (places.Any())
                     {
                         AddressSelected = places.First();
+                        AddressSelected.Name = AddressName.Value;
 
                         // Save new home address
                         if (IsAddressGettingSaved)
@@ -272,7 +272,6 @@ namespace AeccApp.Core.ViewModels
                     else
                     {
                         await NavigationService.ShowPopupAsync(RequestThereIsNoResultsPopupVM);
-                        // TODO Mostrar Popup diciendo que busque mejor
                     }
                 }
             });
