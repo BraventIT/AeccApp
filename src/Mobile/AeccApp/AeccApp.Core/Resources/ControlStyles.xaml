@@ -62,6 +62,20 @@
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
     </Style>
 
+    <OnPlatform
+        x:Key="ImageButtonLargeWidth"
+        x:TypeArguments="x:Double"
+        Android="240"
+        WinPhone="200"
+        iOS="240" />
+
+    <Style
+        x:Key="ImageButtonLargeStyle"
+        BasedOn="{StaticResource ImageButtonStyle}"
+        TargetType="{x:Type ctrlXlabs:ImageButton}">
+        <Setter Property="WidthRequest" Value="{StaticResource ImageButtonLargeWidth}" />
+    </Style>
+
     <Style
         x:Key="SwitchTextStyle"
         BasedOn="{StaticResource GreyLabelStyle}"

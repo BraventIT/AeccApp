@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels
 {
-    public class NewHomeRequestChooseTypeViewModel : ViewModelBase
+    public class HomeRequestChooseTypeViewModel : ViewModelBase
     {
         private IGoogleMapsPlaceService GoogleMapsPlaceService { get; } = ServiceLocator.GoogleMapsPlaceService;
         private IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
@@ -22,12 +22,19 @@ namespace AeccApp.Core.ViewModels
         }
         #endregion
 
-        #region Commands
+        
 
         public override Task InitializeAsync(object navigationData)
         {
             MyAddress = navigationData as AddressModel;
+            if (MyAddress == null)
+                throw new ArgumentNullException("AddressModel object required");
 
+            return Task.CompletedTask;
+        }
+
+        public override Task ActivateAsync()
+        {
             return ExecuteOperationAsync(async () =>
             {
                 if (MyAddress.Coordinates == null)
@@ -41,6 +48,8 @@ namespace AeccApp.Core.ViewModels
                 }
             });
         }
+
+        #region Commands
 
         private Command _requestCompanionForHomeCommand;
         public ICommand RequestCompanionForHomeCommand

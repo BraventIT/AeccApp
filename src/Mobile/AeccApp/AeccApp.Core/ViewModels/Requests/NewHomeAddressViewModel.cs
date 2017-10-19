@@ -254,32 +254,27 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                // Save new home address
-                if (IsAddressGettingSaved)
-                    AddressSelected.WillBeSaved = true;
-
                 if (string.IsNullOrEmpty(AddressSelected.PlaceId))
                 {
                     var places = await GoogleMapsPlaceService.FindPlacesAsync(AddressSelected.FinderAddress);
                     if (places.Any())
                     {
                         AddressSelected = places.First();
-                        AddressSelected.Name = AddressName.Value;
-                        
-                        await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(AddressSelected);
-                        await NavigationService.RemoveLastFromBackStackAsync();
                     }
                     else
                     {
                         await NavigationService.ShowPopupAsync(RequestThereIsNoResultsPopupVM);
+                        return;
                     }
                 }
-                else
-                {
-                    AddressSelected.Name = AddressName.Value;
-                    await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(AddressSelected);
-                    await NavigationService.RemoveLastFromBackStackAsync();
-                }
+
+                // Save new home address
+                if (IsAddressGettingSaved)
+                    AddressSelected.WillBeSaved = true;
+
+                AddressSelected.Name = AddressName.Value;
+                await NavigationService.NavigateToAsync<HomeRequestChooseTypeViewModel>(AddressSelected);
+                await NavigationService.RemoveLastFromBackStackAsync();
             });
         }
 

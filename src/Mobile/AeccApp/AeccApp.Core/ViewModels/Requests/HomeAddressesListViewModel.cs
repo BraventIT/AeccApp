@@ -11,21 +11,19 @@ namespace AeccApp.Core.ViewModels
 {
     public class HomeAddressesListViewModel : ViewModelBase
     {
-        public readonly IHomeAddressesDataService _homeAddressesDataService;
+        public IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
 
         #region Activate & Deactive Methods
         public HomeAddressesListViewModel()
         {
-            _homeAddressesDataService = ServiceLocator.HomeAddressesDataService;
-
-            _homeAddressesList = new ObservableCollection<AddressModel>();
+            HomeAddressesList = new ObservableCollection<AddressModel>();
         }
 
         public override Task ActivateAsync()
         {
             return ExecuteOperationAsync(async () =>
             {
-                var homeAddresses = await _homeAddressesDataService.GetListAsync();
+                var homeAddresses = await HomeAddressesDataService.GetListAsync();
 
                 if (homeAddresses != null)
                 {
@@ -38,14 +36,8 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Properties
-        private ObservableCollection<AddressModel> _homeAddressesList;
-
-        public ObservableCollection<AddressModel> HomeAddressesList
-        {
-            get { return _homeAddressesList; }
-            set { Set(ref _homeAddressesList, value); }
-        }
-
+        public ObservableCollection<AddressModel> HomeAddressesList { get; private set; }
+        
         private bool _homeAddressesIsEmpty;
         public bool HomeAddressesIsEmpty
         {
@@ -73,7 +65,7 @@ namespace AeccApp.Core.ViewModels
         private async void OnChooseAddress(object obj)
         {
             var selectedAddress = obj as AddressModel;
-            await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(selectedAddress);
+            await NavigationService.NavigateToAsync<HomeRequestChooseTypeViewModel>(selectedAddress);
         }
 
         private Command _newHomeAddressCommand;
@@ -89,13 +81,9 @@ namespace AeccApp.Core.ViewModels
         async void OnNewHomeAddressCommand(object obj)
         {
             await NavigationService.NavigateToAsync<NewHomeAddressViewModel>();
-
         }
 
 
         #endregion
-
-      
-
     }
 }

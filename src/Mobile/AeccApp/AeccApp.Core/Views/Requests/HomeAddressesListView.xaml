@@ -116,7 +116,6 @@
         <ListView
             HasUnevenRows="True"
             HeaderTemplate="{StaticResource homeAddressHeaderTemplate}"
-            HeightRequest="600"
             IsVisible="{Binding HomeAddressesIsEmpty, Converter={StaticResource InverseBoolConverter}}"
             ItemTemplate="{StaticResource homeAddressesListTemplate}"
             ItemsSource="{Binding HomeAddressesList}">
@@ -128,6 +127,7 @@
                     EventName="ItemTapped" />
             </ListView.Behaviors>
         </ListView>
+
         <Label
             Margin="20,0"
             HorizontalTextAlignment="Center"
@@ -140,14 +140,14 @@
             Grid.Row="1"
             Margin="10"
             Command="{Binding NewHomeAddressCommand}"
-            HeightRequest="50"
-            HorizontalOptions="CenterAndExpand"
+            HorizontalOptions="Center"
             SourcePlatform="round_plus"
-            Style="{StaticResource ImageButtonStyle}"
+            Style="{StaticResource ImageButtonLargeStyle}"
             Text="{Binding [CommonNewAddress]}" />
 
         <!--  INDICATOR  -->
         <ctrl:CustomActivityIndicatorControl />
 
     </Grid>
+
 </v:BaseContentPage>

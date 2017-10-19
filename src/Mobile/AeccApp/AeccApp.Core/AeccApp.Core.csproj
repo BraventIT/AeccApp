@@ -35,5 +35,11 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\Requests\HomeRequestChooseType.xaml.cs">
+      <DependentUpon>HomeRequestChooseType.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 
 </Project>
