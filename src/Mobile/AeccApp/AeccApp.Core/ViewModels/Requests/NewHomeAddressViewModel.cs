@@ -21,7 +21,7 @@ namespace AeccApp.Core.ViewModels
         {
             SugestedAddressesList = new ObservableCollection<AddressModel>();
             RequestAskForAddressNumberPopupVM = new RequestAskForAddressNumberPopupViewModel();
-
+            RequestThereIsNoResultsPopupVM = new RequestThereIsNoResultsPopupViewModel();
             AddressName.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = this["NewHomeAddressViewMustNameTheAddress"] });
         }
 
@@ -85,6 +85,7 @@ namespace AeccApp.Core.ViewModels
         }
 
         public RequestAskForAddressNumberPopupViewModel RequestAskForAddressNumberPopupVM { get; private set; }
+        public RequestThereIsNoResultsPopupViewModel RequestThereIsNoResultsPopupVM { get; private set; }
 
         #region Address related properties 
 
@@ -270,13 +271,14 @@ namespace AeccApp.Core.ViewModels
                     }
                     else
                     {
+                        await NavigationService.ShowPopupAsync(RequestThereIsNoResultsPopupVM);
                         // TODO Mostrar Popup diciendo que busque mejor
                     }
                 }
             });
         }
 
-        private async void OnDoesNotWantToInputNumberSuggestionPopupCommand(object sender, EventArgs e)
+        public async void OnDoesNotWantToInputNumberSuggestionPopupCommand(object sender, EventArgs e)
         {
             await NavigationService.HidePopupAsync();
             await InternalContinueWithRequestAsync();

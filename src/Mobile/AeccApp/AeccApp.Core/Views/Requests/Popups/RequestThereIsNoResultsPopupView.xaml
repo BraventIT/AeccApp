@@ -32,7 +32,7 @@
                         VerticalOptions="Center"
                         WidthRequest="30">
                         <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding CloseRequestSentPopupCommand}" />
+                            <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
                         </ctrl:CustomImage.GestureRecognizers>
 
                     </ctrl:CustomImage>
