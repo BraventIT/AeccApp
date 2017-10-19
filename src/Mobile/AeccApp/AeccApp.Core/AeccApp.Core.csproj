@@ -36,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\GlobalDefinitions.xaml.cs">
+      <DependentUpon>GlobalDefinitions.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Chat\Popups\ChatFiltersPopupView.xaml.cs">
       <DependentUpon>ChatFiltersPopupView.xaml</DependentUpon>
     </Compile>

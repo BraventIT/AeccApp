@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="AeccApp.Core.Resources.GlobalDefinitions"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--  COLORS  -->
+    <Color x:Key="ErrorColor">#ff5252</Color>
+    <Color x:Key="BackgroundColor">#F4F2F0</Color>
+    <Color x:Key="AccentColor">#58AE65</Color>
+    <Color x:Key="SeeThrough">#B2FFFFFF</Color>
+    <Color x:Key="GreyText">#abb5c3</Color>
+    <Color x:Key="GreyTextDark">#798b9f</Color>
+
+    <!--  FONT SIZES  -->
+    <OnPlatform
+        x:Key="LittleSize"
+        x:TypeArguments="x:Double"
+        Android="12"
+        WinPhone="12"
+        iOS="11" />
+
+    <OnPlatform
+        x:Key="MidMediumSize"
+        x:TypeArguments="x:Double"
+        Android="14"
+        WinPhone="14"
+        iOS="12" />
+
+    <OnPlatform
+        x:Key="MediumSize"
+        x:TypeArguments="x:Double"
+        Android="16"
+        WinPhone="16"
+        iOS="14" />
+
+    <OnPlatform
+        x:Key="LargeSize"
+        x:TypeArguments="x:Double"
+        Android="20"
+        WinPhone="20"
+        iOS="18" />
+
+    <OnPlatform
+        x:Key="BigSize"
+        x:TypeArguments="x:Double"
+        Android="24"
+        WinPhone="24"
+        iOS="20" />
+
+    <OnPlatform
+        x:Key="ExtraBigSize"
+        x:TypeArguments="x:Double"
+        Android="32"
+        WinPhone="32"
+        iOS="24" />
+
+    <OnPlatform
+        x:Key="HugeSize"
+        x:TypeArguments="x:Double"
+        Android="48"
+        WinPhone="48"
+        iOS="32" />
+</ResourceDictionary>
