@@ -17,150 +17,169 @@
         <ResourceDictionary>
             <DataTemplate x:Key="suggestedAddressesListTemplate">
                 <ViewCell>
-                    <Label
-                        Margin="3"
-                        FontSize="Medium"
-                        Text="{Binding DisplayAddress}" />
+                    <Label Style="{StaticResource SubTitleLabelStyle}" Text="{Binding DisplayAddress}" />
                 </ViewCell>
             </DataTemplate>
         </ResourceDictionary>
     </ContentView.Resources>
 
     <Grid>
-        <ScrollView>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Address search entry  -->
+        <Grid Padding="5,0" BackgroundColor="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="25" />
+            </Grid.ColumnDefinitions>
+
+            <ctrl:CustomImage
+                Grid.Column="0"
+                Margin="5,10"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsSearchIconVisible, Converter={StaticResource InverseBoolConverter}}"
+                SourcePlatform="search_mini_icon"
+                VerticalOptions="Center" />
+
+            <Entry
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                IsEnabled="{Binding AddressSelected, Converter={StaticResource IsNullConverter}}"
+                Placeholder="{Binding [NewHomeAddressViewSearchAddress]}"
+                Text="{Binding AddressFinder}">
+
+                <Entry.Behaviors>
+                    <beh:EventToCommandBehavior
+                        Command="{Binding AddressChangedCommand}"
+                        EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
+                        EventName="TextChanged" />
+                </Entry.Behaviors>
+            </Entry>
+
+            <Frame
+                Grid.Column="2"
+                Padding="5,10"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsSearchIconVisible}">
+                <ctrl:CustomImage SourcePlatform="x_icon" VerticalOptions="Center" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ResetAddressFinderCommand}" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+        </Grid>
+
+        <!--  Suggestions list  -->
+        <ListView
+            Grid.Row="1"
+            IsVisible="{Binding AddressSelected, Converter={StaticResource IsNullConverter}}"
+            ItemTemplate="{StaticResource suggestedAddressesListTemplate}"
+            ItemsSource="{Binding SugestedAddressesList}">
+
+            <ListView.Behaviors>
+                <beh:EventToCommandBehavior
+                    Command="{Binding AddressSelectedCommand}"
+                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                    EventName="ItemTapped" />
+            </ListView.Behaviors>
+
+        </ListView>
+
+        <Label
+            Grid.Row="1"
+            Margin="20,0"
+            HorizontalTextAlignment="Center"
+            IsVisible="{Binding ShowHelpMessage}"
+            Style="{StaticResource NormalLabelStyle}"
+            Text="{Binding [NewHomeAddressViewHelp]}"
+            VerticalOptions="Center" />
+
+        <Label
+            Grid.Row="1"
+            Margin="20,0"
+            HorizontalTextAlignment="Center"
+            IsVisible="{Binding SugestedAddressesListIsEmpty}"
+            Style="{StaticResource NormalLabelStyle}"
+            Text="{Binding [NewHomeAddressViewAddressesEmpty]}"
+            VerticalOptions="Center" />
+
+        <!--  Add address info form  -->
+        <ScrollView Grid.Row="1" IsVisible="{Binding AddressSelected, Converter={StaticResource IsNotNullConverter}}">
             <StackLayout>
-                <Grid Padding="5,0" BackgroundColor="LightGray">
+                <BoxView
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand"
+                    Color="Gray" />
+
+                <Label
+                    Margin="0,10,0,0"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="{Binding [NewHomeAddressViewMoreInfo]}"
+                    TextColor="{StaticResource GreyText}" />
+
+                <Grid HorizontalOptions="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-
-                    <!--  Address search entry  -->
-                    <ctrl:CustomImage
+                    <Entry
                         Grid.Column="0"
-                        Margin="0,5"
-                        HorizontalOptions="Center"
-                        IsVisible="{Binding IsSearchIconVisible, Converter={StaticResource InverseBoolConverter}}"
-                        SourcePlatform="search_mini_icon"
-                        VerticalOptions="Center" />
-
+                        Margin="0,10,15,10"
+                        Placeholder="{Binding [NewHomeAddressViewNumberPlaceHolder]}"
+                        Text="{Binding AddressNumber}" />
                     <Entry
                         Grid.Column="1"
-                        BackgroundColor="Transparent"
-                        IsEnabled="{Binding AddressSelected, Converter={StaticResource IsNullConverter}}"
-                        Placeholder="{Binding [NewHomeAddressViewSearchAddress]}"
-                        Text="{Binding Address}">
-
-                        <Entry.Behaviors>
-                            <beh:EventToCommandBehavior
-                                Command="{Binding AddressChangedCommand}"
-                                EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
-                                EventName="TextChanged" />
-                        </Entry.Behaviors>
-                    </Entry>
-
-                    <ctrl:CustomImage
+                        Margin="0,10,15,10"
+                        Placeholder="{Binding [NewHomeAddressViewPortalPlaceHolder]}"
+                        Text="{Binding AddressSelected.Portal}" />
+                    <Entry
                         Grid.Column="2"
-                        Margin="0,5"
-                        HorizontalOptions="Center"
-                        IsVisible="{Binding IsSearchIconVisible}"
-                        SourcePlatform="x_icon"
-                        VerticalOptions="Center">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ResetAddressCommand}" />
-                        </StackLayout.GestureRecognizers>
-                    </ctrl:CustomImage>
-
+                        Margin="15,10,0,10"
+                        Placeholder="{Binding [NewHomeAddressViewFloorPlaceHolder]}"
+                        Text="{Binding AddressSelected.Floor}" />
                 </Grid>
 
-                <!--  Suggestions list  -->
-                <ListView
-                    IsVisible="{Binding AddressSelected, Converter={StaticResource IsNullConverter}}"
-                    ItemTemplate="{StaticResource suggestedAddressesListTemplate}"
-                    ItemsSource="{Binding SugestedAddressesList}">
-
-                    <ListView.Behaviors>
-                        <beh:EventToCommandBehavior
-                            Command="{Binding AddressSelectedCommand}"
-                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                            EventName="ItemTapped" />
-                    </ListView.Behaviors>
-
-                </ListView>
-
-                <!--  Add address info form  -->
-                <StackLayout IsVisible="{Binding AddressSelected, Converter={StaticResource IsNotNullConverter}}">
-                    <BoxView
-                        HeightRequest="1"
-                        HorizontalOptions="FillAndExpand"
-                        Color="Gray" />
-
-                    <Label
-                        Margin="0,10,0,0"
-                        FontSize="Medium"
-                        HorizontalOptions="Center"
-                        Text="{Binding [NewHomeAddressViewMoreInfo]}"
-                        TextColor="{StaticResource GreyText}" />
-
-                    <Grid HorizontalOptions="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Entry
-                            Grid.Column="0"
-                            Margin="0,10,15,10"
-                            Placeholder="{Binding [NewHomeAddressViewNumberPlaceHolder]}"
-                            Text="{Binding AddressNumber}" />
-                        <Entry
-                            Grid.Column="1"
-                            Margin="0,10,15,10"
-                            Placeholder="{Binding [NewHomeAddressViewPortalPlaceHolder]}"
-                            Text="{Binding AddressSelected.Portal}" />
-                        <Entry
-                            Grid.Column="2"
-                            Margin="15,10,0,10"
-                            Placeholder="{Binding [NewHomeAddressViewFloorPlaceHolder]}"
-                            Text="{Binding AddressSelected.Floor}" />
-                    </Grid>
-
-                    <StackLayout Margin="0,10,0,10" HorizontalOptions="Center">
-                        <Entry Placeholder="{Binding [NewHomeAddressViewNameTheAddressPlaceHolder]}" Text="{Binding AddressName.Value}" />
-                        <Label Style="{StaticResource ValidationErrorLabelStyle}" Text="{Binding AddressName.Errors, Converter={StaticResource FirstValidationErrorConverter}" />
-                    </StackLayout>
-
-                    <StackLayout
-                        Margin="10"
-                        HorizontalOptions="Center"
-                        Orientation="Horizontal">
-                        <Switch VerticalOptions="Center">
-                            <Switch.Behaviors>
-                                <beh:EventToCommandBehavior
-                                    Command="{Binding AddressGettingSavedCommand}"
-                                    EventArgsConverter="{StaticResource ToggledEventArgsConverter}"
-                                    EventName="Toggled" />
-                            </Switch.Behaviors>
-                        </Switch>
-
-                        <Label Style="{StaticResource SwitchTextStyle}" Text="{Binding [NewHomeAddressViewSaveAddress]}" />
-                    </StackLayout>
-
-                    <ctrlXlabs:ImageButton
-                        Margin="10"
-                        Command="{Binding ContinueWithRequestCommand}"
-                        HeightRequest="40"
-                        HorizontalOptions="CenterAndExpand"
-                        SourcePlatform="right_arrow_big"
-                        Style="{StaticResource ImageButtonStyle}"
-                        Text="{Binding [NewHomeAddressViewContinueRequest]}" />
-
+                <StackLayout Margin="0,10,0,10" HorizontalOptions="Center">
+                    <Entry Placeholder="{Binding [NewHomeAddressViewNameTheAddressPlaceHolder]}" Text="{Binding AddressName.Value}" />
+                    <Label Style="{StaticResource ValidationErrorLabelStyle}" Text="{Binding AddressName.Errors, Converter={StaticResource FirstValidationErrorConverter}" />
                 </StackLayout>
+
+                <StackLayout
+                    Margin="10"
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal">
+                    <Switch VerticalOptions="Center">
+                        <Switch.Behaviors>
+                            <beh:EventToCommandBehavior
+                                Command="{Binding AddressGettingSavedCommand}"
+                                EventArgsConverter="{StaticResource ToggledEventArgsConverter}"
+                                EventName="Toggled" />
+                        </Switch.Behaviors>
+                    </Switch>
+
+                    <Label Style="{StaticResource SwitchTextStyle}" Text="{Binding [NewHomeAddressViewSaveAddress]}" />
+                </StackLayout>
+
+                <ctrlXlabs:ImageButton
+                    Margin="10"
+                    Command="{Binding ContinueWithRequestCommand}"
+                    HeightRequest="40"
+                    HorizontalOptions="CenterAndExpand"
+                    SourcePlatform="right_arrow_big"
+                    Style="{StaticResource ImageButtonStyle}"
+                    Text="{Binding [NewHomeAddressViewContinueRequest]}" />
+
             </StackLayout>
         </ScrollView>
 
         <!--  INDICATOR  -->
-        <ctrl:CustomActivityIndicatorControl />
+        <ctrl:CustomActivityIndicatorControl Grid.Row="1" />
     </Grid>
 </v:BaseContentPage>

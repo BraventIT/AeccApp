@@ -4,7 +4,6 @@ using AeccApp.Core.Services;
 using AeccApp.Core.Validations;
 using AeccApp.Core.ViewModels.Popups;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,14 +14,11 @@ namespace AeccApp.Core.ViewModels
 {
     public class NewHomeAddressViewModel : ViewModelBase
     {
-        private readonly IGoogleMapsPlaceService _googleMapsPlaceService;
-        public readonly IHomeAddressesDataService _homeAddressesDataService;
+        private IGoogleMapsPlaceService GoogleMapsPlaceService { get; } = ServiceLocator.GoogleMapsPlaceService;
+       
 
         public NewHomeAddressViewModel()
         {
-            _googleMapsPlaceService = ServiceLocator.GoogleMapsPlaceService;
-            _homeAddressesDataService = ServiceLocator.HomeAddressesDataService;
-
             SugestedAddressesList = new ObservableCollection<AddressModel>();
             RequestAskForAddressNumberPopupVM = new RequestAskForAddressNumberPopupViewModel();
 
@@ -45,20 +41,30 @@ namespace AeccApp.Core.ViewModels
         #region Visibility related properties
 
         private bool _isSearchIconVisible;
-
         public bool IsSearchIconVisible
         {
             get { return _isSearchIconVisible; }
             set { Set(ref _isSearchIconVisible, value); }
         }
+
+        private bool _showHelpMessage = true;
+        public bool ShowHelpMessage
+        {
+            get { return _showHelpMessage; }
+            set { Set(ref _showHelpMessage, value); }
+        }
         #endregion
 
-        private ObservableCollection<AddressModel> _sugestedAddressesList;
-        public ObservableCollection<AddressModel> SugestedAddressesList
+        
+        public ObservableCollection<AddressModel> SugestedAddressesList { get; private set; }
+
+        private bool _sugestedAddressesListIsEmpty;
+        public bool SugestedAddressesListIsEmpty
         {
-            get { return _sugestedAddressesList; }
-            set { Set(ref _sugestedAddressesList, value); }
+            get { return _sugestedAddressesListIsEmpty; }
+            set { Set(ref _sugestedAddressesListIsEmpty, value); }
         }
+
 
         private AddressModel _addressSelected;
         public AddressModel AddressSelected
@@ -70,13 +76,12 @@ namespace AeccApp.Core.ViewModels
                     NotifyPropertyChanged(nameof(AddressNumber));
             }
         }
-        private string _previousAddress = string.Empty;
 
-        private string _address = string.Empty;
-        public string Address
+        private string _addressFinder = string.Empty;
+        public string AddressFinder
         {
-            get { return _address; }
-            set { Set(ref _address, value); }
+            get { return _addressFinder; }
+            set { Set(ref _addressFinder, value); }
         }
 
         public RequestAskForAddressNumberPopupViewModel RequestAskForAddressNumberPopupVM { get; private set; }
@@ -131,8 +136,7 @@ namespace AeccApp.Core.ViewModels
             if (newAddressSelected != AddressSelected)
             {
                 AddressSelected = newAddressSelected;
-                _previousAddress = Address;
-                Address = AddressSelected.DisplayAddress;
+                AddressFinder = AddressSelected.FinderAddress;
             }
         }
 
@@ -161,21 +165,23 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private Command _resetAddressCommand;
-        public ICommand ResetAddressCommand
+        private Command _resetAddressFinderCommand;
+        public ICommand ResetAddressFinderCommand
         {
             get
             {
-                return _resetAddressCommand ??
-                    (_resetAddressCommand = new Command(OnResetAddress, o => !IsBusy));
+                return _resetAddressFinderCommand ??
+                    (_resetAddressFinderCommand = new Command(o=> OnResetAddressFinder(), o => !IsBusy));
             }
         }
 
-        private void OnResetAddress(object obj)
+        private void OnResetAddressFinder()
         {
-            SugestedAddressesList.Clear();
-            Address = string.Empty;
             AddressSelected = null;
+            AddressFinder = string.Empty;
+
+            SugestedAddressesListIsEmpty = false;
+            ShowHelpMessage = true;
         }
 
 
@@ -200,10 +206,10 @@ namespace AeccApp.Core.ViewModels
                 result = (string)obj;
             }
 
-
             if (string.IsNullOrWhiteSpace(result))
             {
                 IsSearchIconVisible = false;
+                ShowHelpMessage = true;
             }
             else
             {
@@ -217,6 +223,7 @@ namespace AeccApp.Core.ViewModels
                     SugestedAddressesList.Clear();
                 }
                 IsSearchIconVisible = true;
+                ShowHelpMessage = false;
             }
         }
 
@@ -249,21 +256,23 @@ namespace AeccApp.Core.ViewModels
 
                 if (string.IsNullOrEmpty(AddressSelected.PlaceId))
                 {
-                    var places = await _googleMapsPlaceService.FindPlacesAsync(AddressSelected.DisplayAddress);
+                    var places = await GoogleMapsPlaceService.FindPlacesAsync(AddressSelected.FinderAddress);
                     if (places.Any())
                     {
                         AddressSelected = places.First();
+
+                        // Save new home address
+                        if (IsAddressGettingSaved)
+                            AddressSelected.WillBeSaved = true;
+
+                        await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(AddressSelected);
+                        await NavigationService.RemoveLastFromBackStackAsync();
+                    }
+                    else
+                    {
+                        // TODO Mostrar Popup diciendo que busque mejor
                     }
                 }
-
-                // Save new home address
-                if (IsAddressGettingSaved)
-                {
-                    await _homeAddressesDataService.AddOrUpdateAddressAsync(AddressSelected);
-                }
-
-                await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(AddressSelected);
-                await NavigationService.RemoveLastFromBackStackAsync();
             });
         }
 
@@ -278,8 +287,7 @@ namespace AeccApp.Core.ViewModels
             bool returnValue = false;
             if (AddressSelected != null)
             {
-                Address = _previousAddress;
-                AddressSelected = null;
+                OnResetAddressFinder();
                 returnValue = true;
             }
 
@@ -290,9 +298,13 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                SugestedAddressesList.Clear();
-                var places = await _googleMapsPlaceService.FindPlacesAsync(result);
+                if (SugestedAddressesList.Any())
+                    SugestedAddressesList.Clear();
+
+                var places = await GoogleMapsPlaceService.FindPlacesAsync(result);
                 SugestedAddressesList.AddRange(places);
+
+                SugestedAddressesListIsEmpty = !SugestedAddressesList.Any();
             });
         }
 

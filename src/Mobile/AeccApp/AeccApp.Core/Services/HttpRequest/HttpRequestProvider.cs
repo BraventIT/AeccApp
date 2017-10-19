@@ -29,10 +29,10 @@ namespace AeccApp.Core.Services
         public async Task<TResult> GetAsync<TResult>(string uri, string token = "")
         {
             HttpClient httpClient = CreateHttpClient(token);
-            HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(false);
+            HttpResponseMessage response = await httpClient.GetAsync(uri);
 
             await HandleResponse(response);
-            string serialized = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            string serialized = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings);
         }
@@ -48,10 +48,10 @@ namespace AeccApp.Core.Services
 
             var content = new StringContent(JsonConvert.SerializeObject(data));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await httpClient.PostAsync(uri, content).ConfigureAwait(false);
+            HttpResponseMessage response = await httpClient.PostAsync(uri, content);
 
             await HandleResponse(response);
-            string serialized = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            string serialized = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings);
         }
@@ -85,7 +85,6 @@ namespace AeccApp.Core.Services
 
             httpClient.DefaultRequestHeaders.Add(parameter, Guid.NewGuid().ToString());
         }
-
 
         private async Task HandleResponse(HttpResponseMessage response)
         {

@@ -611,6 +611,24 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No tienes ninguna dirección guardada. ¡Crea una nueva!.
+        /// </summary>
+        public static string NewHomeAddressListViewAddressesEmpty {
+            get {
+                return ResourceManager.GetString("NewHomeAddressListViewAddressesEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No hemos conseguido ninguna coincidencia. Por favor, revisa la dirección.
+        /// </summary>
+        public static string NewHomeAddressViewAddressesEmpty {
+            get {
+                return ResourceManager.GetString("NewHomeAddressViewAddressesEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Elige una provincia.
         /// </summary>
         public static string NewHomeAddressViewChoseProvince {
@@ -634,6 +652,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string NewHomeAddressViewFloorPlaceHolder {
             get {
                 return ResourceManager.GetString("NewHomeAddressViewFloorPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teclea la dirección y selecciónala de la lista.
+        /// </summary>
+        public static string NewHomeAddressViewHelp {
+            get {
+                return ResourceManager.GetString("NewHomeAddressViewHelp", resourceCulture);
             }
         }
         

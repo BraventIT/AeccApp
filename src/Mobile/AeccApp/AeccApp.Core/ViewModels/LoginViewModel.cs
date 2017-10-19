@@ -9,17 +9,21 @@ namespace AeccApp.Core.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private readonly IIdentityService _identityService;
+        private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
 
         #region Activate & Deactive Methods
-        public LoginViewModel()
-        {
-            _identityService = ServiceLocator.IdentityService;
-        }
-
         public override Task ActivateAsync()
         {
             return TryToLoginAsync(true);
+        }
+        #endregion
+
+        #region Properties
+        private bool _isLoginRequired;
+        public bool IsLoginRequired
+        {
+            get { return _isLoginRequired; }
+            set { Set(ref _isLoginRequired, value); }
         }
         #endregion
 
@@ -43,25 +47,13 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                try
+                if (await IdentityService.TryToLoginAsync(silentLogin))
                 {
-                    //_identityService.LogOff();
-                    if (await _identityService.TryToLoginAsync(silentLogin))
-                    {
-                        await NavigationService.NavigateToAsync<VolunteerTestViewModel>();
-                        await NavigationService.RemoveLastFromBackStackAsync();
-                    }
+                    await NavigationService.NavigateToAsync<VolunteerTestViewModel>();
+                    await NavigationService.RemoveLastFromBackStackAsync();
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
-            });
+            }, finallyAction: () => IsLoginRequired = true);
         }
-
-       
-
-       
 
         protected override void OnIsBusyChanged()
         {

@@ -136,7 +136,7 @@
 
                 <Label
                     Margin="20,150,20,20"
-                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
                     IsVisible="{Binding IsBusy}"
                     Style="{StaticResource SubTitleLabelStyle}"
                     Text="{Binding [ChatViewLookingForVolunteers]}"

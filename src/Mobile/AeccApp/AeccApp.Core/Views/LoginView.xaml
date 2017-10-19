@@ -23,6 +23,7 @@
                     Margin="20,0"
                     Command="{Binding SignInCommand}"
                     HorizontalOptions="CenterAndExpand"
+                    IsVisible="{Binding IsLoginRequired}"
                     Style="{StaticResource ButtonStyle}"
                     Text="{Binding [LoginViewLogin]}" />
 

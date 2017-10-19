@@ -20,7 +20,7 @@ namespace AeccApp.Core.Services
             if (!_fileProvider.FileExists(filename))
                 return null;
 
-            string jsonString = await _fileProvider.LoadTextAsync(filename).ConfigureAwait(false);
+            string jsonString = await _fileProvider.LoadTextAsync(filename);
             return await Task.Run(() => JsonConvert.DeserializeObject<List<T>>(jsonString));
         }
 

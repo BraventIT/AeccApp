@@ -8,14 +8,8 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [CommonYourRequests]}"
-    vm:ViewModelLocator.AutoWireViewModel="True">
-    <v:BaseContentPage.Icon>
-        <OnPlatform
-            x:TypeArguments="FileImageSource"
-            Android="requests_tab_icon.png"
-            WinPhone="Assets/requests_tab_icon.png"
-            iOS="requests_tab_icon.png" />
-    </v:BaseContentPage.Icon>
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    IconPlatform="requests_tab_icon">
 
     <ScrollView>
         <!--  Without requests landing page  -->
