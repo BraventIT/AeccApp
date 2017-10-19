@@ -34,13 +34,13 @@
                             Grid.Column="0"
                             Command="{Binding SendRequestConfirmationCommand}"
                             HorizontalOptions="CenterAndExpand"
-                            Style="{StaticResource ButtonSmallStyle}"
+                            Style="{StaticResource ButtonStyle}"
                             Text="{Binding [CommonContinue]}" />
                         <Button
                             Grid.Column="1"
                             Command="{Binding ClosePopupCommand}"
                             HorizontalOptions="CenterAndExpand"
-                            Style="{StaticResource ButtonSmallStyle}"
+                            Style="{StaticResource ButtonStyle}"
                             Text="{Binding [CommonAddANumber]}" />
 
                     </Grid>
