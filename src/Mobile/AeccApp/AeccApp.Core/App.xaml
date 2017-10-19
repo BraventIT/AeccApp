@@ -6,7 +6,7 @@
     xmlns:cv="clr-namespace:AeccApp.Core.Converters"
     xmlns:res="clr-namespace:AeccApp.Core.Resources">
     <Application.Resources>
-        <ResourceDictionary MergedWith="res:OtherStyles">
+        <ResourceDictionary MergedWith="res:ControlStyles">
 
             <!--  CONVERTERS  -->
             <cv:InverseBoolConverter x:Key="InverseBoolConverter" />

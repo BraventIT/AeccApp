@@ -2,9 +2,9 @@
 
 namespace AeccApp.Core.Resources
 {
-    public partial class OtherStyles : ResourceDictionary
+    public partial class ControlStyles : ResourceDictionary
     {
-		public OtherStyles ()
+		public ControlStyles()
 		{
 			InitializeComponent ();
 		}
