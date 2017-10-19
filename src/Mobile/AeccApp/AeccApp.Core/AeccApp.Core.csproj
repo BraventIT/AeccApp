@@ -13,7 +13,7 @@
     <Compile Include="..\..\..\Services\AeccBot\AeccBot\Models\ChannelAccountWithUserData.cs" Link="Models\Chat\ChannelAccountWithUserData.cs" />
     <Compile Include="..\..\..\Services\AeccBot\AeccBot\Models\Party.cs" Link="Models\Chat\Party.cs" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.6.1" />
     <PackageReference Include="Microsoft.Bot.Connector.DirectLine" Version="3.0.2" />
@@ -35,19 +35,5 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Resources\GlobalDefinitions.xaml.cs">
-      <DependentUpon>GlobalDefinitions.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Chat\Popups\ChatFiltersPopupView.xaml.cs">
-      <DependentUpon>ChatFiltersPopupView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Profile\Popups\LogoutPopupView.xaml.cs">
-      <DependentUpon>LogoutPopupView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Requests\Popups\RequestSentPopupView.xaml.cs">
-      <DependentUpon>RequestSentPopupView.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
 
 </Project>
