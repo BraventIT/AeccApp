@@ -294,6 +294,12 @@
   <data name="HomeViewTitle" xml:space="preserve">
     <value>Inicio</value>
   </data>
+  <data name="HospitalAddressesListViewTitle" xml:space="preserve">
+    <value>Indica tu hospital</value>
+  </data>
+  <data name="HospitalAddressesListViewYourAddresses" xml:space="preserve">
+    <value>Tus hospitales guardados</value>
+  </data>
   <data name="LoginViewLogin" xml:space="preserve">
     <value>Entrar</value>
   </data>
@@ -371,6 +377,9 @@
   </data>
   <data name="NewHomeRequestSelectAddressWhereAreYouTitle" xml:space="preserve">
     <value>¿Dónde estás?</value>
+  </data>
+  <data name="NewHospitalAddressListViewAddressesEmpty" xml:space="preserve">
+    <value>No tienes ninguna dirección guardada. ¡Crea una nueva!</value>
   </data>
   <data name="NewsDetailViewTitle" xml:space="preserve">
     <value>Detalles de la noticia</value>

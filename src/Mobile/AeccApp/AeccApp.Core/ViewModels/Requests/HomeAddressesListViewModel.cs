@@ -56,6 +56,25 @@ namespace AeccApp.Core.ViewModels
 
         #region Commands
 
+        private Command _chooseAddressCommand;
+        public ICommand ChooseAddressCommand
+        {
+            get
+            {
+                return _chooseAddressCommand ??
+                    (_chooseAddressCommand = new Command(OnChooseAddress, (o) => !IsBusy));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj">obj contains the HomeAddressList item tapped</param>
+        private async void OnChooseAddress(object obj)
+        {
+            var selectedAddress = obj as AddressModel;
+            await NavigationService.NavigateToAsync<NewHomeRequestChooseTypeViewModel>(selectedAddress);
+        }
 
         private Command _newHomeAddressCommand;
         public ICommand NewHomeAddressCommand

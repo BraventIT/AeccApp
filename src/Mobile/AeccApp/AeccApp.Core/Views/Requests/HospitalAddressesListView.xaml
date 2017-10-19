@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <v:BaseContentPage
-    x:Class="AeccApp.Core.Views.HomeAddressesListView"
+    x:Class="AeccApp.Core.Views.HospitalAddressesListView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
-    Title="{Binding [HomeAddressesListViewTitle]}"
+    Title="{Binding [HospitalAddressesListViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True">
 
     <!--  Home address list item template  -->
     <ContentView.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="homeAddressesListTemplate">
+            <DataTemplate x:Key="hospitalAddressesListTemplate">
                 <ViewCell>
                     <Grid Padding="5">
                         <Grid.ColumnDefinitions>
@@ -95,13 +94,13 @@
                 </ViewCell>
             </DataTemplate>
 
-            <DataTemplate x:Key="homeAddressHeaderTemplate">
+            <DataTemplate x:Key="hospitalAddressHeaderTemplate">
                 <ContentView>
                     <Label
                         Margin="0,10,0,10"
                         HorizontalOptions="Center"
                         Style="{StaticResource TitleLabelStyle}"
-                        Text="{Binding [HomeAddressesListViewYourAddresses]}" />
+                        Text="{Binding [HospitalAddressesListViewYourAddresses]}" />
                 </ContentView>
             </DataTemplate>
         </ResourceDictionary>
@@ -115,31 +114,24 @@
 
         <ListView
             HasUnevenRows="True"
-            HeaderTemplate="{StaticResource homeAddressHeaderTemplate}"
+            HeaderTemplate="{StaticResource hospitalAddressHeaderTemplate}"
             HeightRequest="600"
-            IsVisible="{Binding HomeAddressesIsEmpty, Converter={StaticResource InverseBoolConverter}}"
-            ItemTemplate="{StaticResource homeAddressesListTemplate}"
-            ItemsSource="{Binding HomeAddressesList}">
+            IsVisible="{Binding HospitalAddressesIsEmpty, Converter={StaticResource InverseBoolConverter}}"
+            ItemTemplate="{StaticResource hospitalAddressesListTemplate}"
+            ItemsSource="{Binding HospitalAddressesList}" />
 
-            <ListView.Behaviors>
-                <beh:EventToCommandBehavior
-                    Command="{Binding ChooseAddressCommand}"
-                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                    EventName="ItemTapped" />
-            </ListView.Behaviors>
-        </ListView>
         <Label
             Margin="20,0"
             HorizontalTextAlignment="Center"
-            IsVisible="{Binding HomeAddressesIsEmpty}"
+            IsVisible="{Binding HospitalAddressesIsEmpty}"
             Style="{StaticResource NormalLabelStyle}"
-            Text="{Binding [NewHomeAddressListViewAddressesEmpty]}"
+            Text="{Binding [NewHospitalAddressListViewAddressesEmpty]}"
             VerticalOptions="Center" />
 
         <ctrlXlabs:ImageButton
             Grid.Row="1"
             Margin="10"
-            Command="{Binding NewHomeAddressCommand}"
+            Command="{Binding NewHospitalAddressCommand}"
             HeightRequest="50"
             HorizontalOptions="CenterAndExpand"
             SourcePlatform="round_plus"

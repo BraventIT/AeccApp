@@ -593,6 +593,24 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Indica tu hospital.
+        /// </summary>
+        public static string HospitalAddressesListViewTitle {
+            get {
+                return ResourceManager.GetString("HospitalAddressesListViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tus hospitales guardados.
+        /// </summary>
+        public static string HospitalAddressesListViewYourAddresses {
+            get {
+                return ResourceManager.GetString("HospitalAddressesListViewYourAddresses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entrar.
         /// </summary>
         public static string LoginViewLogin {
@@ -823,6 +841,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string NewHomeRequestSelectAddressWhereAreYouTitle {
             get {
                 return ResourceManager.GetString("NewHomeRequestSelectAddressWhereAreYouTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No tienes ninguna dirección guardada. ¡Crea una nueva!.
+        /// </summary>
+        public static string NewHospitalAddressListViewAddressesEmpty {
+            get {
+                return ResourceManager.GetString("NewHospitalAddressListViewAddressesEmpty", resourceCulture);
             }
         }
         

@@ -45,7 +45,7 @@ namespace AeccApp.Core.ViewModels
 
         async void OnAtHospitalCommand(object obj)
         {
-            await NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
+            await NavigationService.NavigateToAsync<HospitalAddressesListViewModel>();
 
 
         }

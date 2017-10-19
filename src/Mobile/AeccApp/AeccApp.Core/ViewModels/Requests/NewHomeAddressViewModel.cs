@@ -120,6 +120,7 @@ namespace AeccApp.Core.ViewModels
 
         #region Commands
 
+
         private Command _addressSelectedCommand;
         public ICommand AddressSelectedCommand
         {
