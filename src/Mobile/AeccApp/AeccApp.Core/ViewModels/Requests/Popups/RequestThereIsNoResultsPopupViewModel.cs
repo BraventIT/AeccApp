@@ -4,24 +4,23 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace AeccApp.Core.ViewModels.Requests.Popups
+namespace AeccApp.Core.ViewModels.Popups
 {
    public class RequestThereIsNoResultsPopupViewModel : ViewModelBase
     {
 
-        private Command _closeRequestSentPopupCommand;
-        public ICommand CloseRequestSentPopupCommand
+        private Command _closePopupCommand;
+        public ICommand ClosePopupCommand
         {
             get
             {
-                return _closeRequestSentPopupCommand ??
-                    (_closeRequestSentPopupCommand = new Command(OnClosePopupCommand));
+                return _closePopupCommand ??
+                    (_closePopupCommand = new Command(OnClosePopupCommand));
             }
         }
         private async void OnClosePopupCommand()
         {
             await NavigationService.HidePopupAsync();
-            await NavigationService.NavigateToAsync<DashboardViewModel>();
         }
 
     }
