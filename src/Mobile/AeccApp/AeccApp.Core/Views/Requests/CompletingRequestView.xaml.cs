@@ -13,15 +13,33 @@ namespace AeccApp.Core.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CompletingRequestView : BaseContentPage
 	{
-		public CompletingRequestView ()
+
+        readonly string pinBundle = "location_pin.png";
+
+        public CompletingRequestView ()
 		{
            
+
+
+
             InitializeComponent ();
             map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.486683, -3.665183), 16d);
             var pinBravent = new Pin() { Label = "Bravent", Position = new Position(40.486683, -3.665183) };
+            pinBravent.IsDraggable = false;
+            switch (Device.OS)
+            {
+                case TargetPlatform.Android:
+                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin.png");
+                    break;
+                case TargetPlatform.iOS:
+                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin.png");
+                    break;
+                default:
+                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"Assets/location_pin.png");
+                    break;
+            }
+
             map.Pins.Add(pinBravent);
-
-
         }
 
         protected override void OnAppearing()
