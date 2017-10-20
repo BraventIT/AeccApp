@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<v:BaseContentPage
     x:Class="AeccApp.Core.Views.NewRequestSelectAddressView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [NewHomeRequestSelectAddressTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True">
@@ -97,4 +98,4 @@
 
 
     </ContentPage.Content>
-</ContentPage>
+</v:BaseContentPage>
