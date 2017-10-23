@@ -16,6 +16,7 @@
     "Rg.Plugins.Popup": "1.0.4",
     "System.AppContext": "4.3.0",
     "System.Collections": "4.3.0",
+    "Xam.Plugin.Geolocator": "4.1.1",
     "Xamarin.Build.Download": "0.4.7",
     "Xamarin.Forms": "2.4.0.282",
     "Xamarin.Forms.GoogleMaps": "1.8.1",

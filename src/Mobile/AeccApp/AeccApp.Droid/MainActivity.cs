@@ -3,6 +3,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Microsoft.Identity.Client;
+using Plugin.Permissions;
 using Xamarin;
 using Xamarin.Forms;
 
@@ -25,6 +26,11 @@ namespace AeccApp.Droid
 
             LoadApplication(new App());
             App.UiParent = new UIParent(Forms.Context as Activity);
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

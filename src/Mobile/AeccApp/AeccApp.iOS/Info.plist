@@ -53,5 +53,7 @@
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Aecc</string>
+	<string>NSLocationWhenInUseUsageDescription</string>
+	<string>NSLocationAlwaysUsageDescription</string>
 </dict>
 </plist>
