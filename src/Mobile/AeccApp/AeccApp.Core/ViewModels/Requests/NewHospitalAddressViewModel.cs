@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AeccApp.Core.ViewModels.Popups;
+using AeccApp.Core.Views.Popups;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
@@ -75,6 +77,7 @@ namespace AeccApp.Core.ViewModels
         void OnRelocateCommand(object obj)
         {
             //TODO UPDATE GEOLOCALIZATION
+            
         }
 
 

@@ -989,6 +989,33 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿En que habitación estás?.
+        /// </summary>
+        public static string PopupHospitalAskForRoomText {
+            get {
+                return ResourceManager.GetString("PopupHospitalAskForRoomText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¿En que sala estás?.
+        /// </summary>
+        public static string PopupHospitalAskForRoomTextTwo {
+            get {
+                return ResourceManager.GetString("PopupHospitalAskForRoomTextTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completa la informacion.
+        /// </summary>
+        public static string PopupHospitalAskForRoomTitle {
+            get {
+                return ResourceManager.GetString("PopupHospitalAskForRoomTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vas a cerrar sesión y tendrás que volver a entrar la proxima vez..
         /// </summary>
         public static string PopupLogoutText {

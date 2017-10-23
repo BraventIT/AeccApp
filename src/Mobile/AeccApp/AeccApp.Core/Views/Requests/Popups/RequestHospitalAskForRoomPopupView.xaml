@@ -32,7 +32,7 @@
                         VerticalOptions="Center"
                         WidthRequest="30">
                         <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding CloseRequestSentPopupCommand}" />
+                            <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
                         </ctrl:CustomImage.GestureRecognizers>
 
                     </ctrl:CustomImage>
@@ -41,7 +41,7 @@
                         Grid.Column="0"
                         HeightRequest="50"
                         HorizontalOptions="Center"
-                        SourcePlatform="thumb_up"
+                        SourcePlatform="round_question_icon"
                         VerticalOptions="Center"
                         WidthRequest="50" />
 
@@ -49,13 +49,27 @@
                         Margin="10,10,10,5"
                         FontSize="Large"
                         HorizontalOptions="Center"
-                        Text="{Binding [PopupRequestSentTextTitle]}" />
+                        Text="{Binding [PopupHospitalAskForRoomTitle]}" />
 
                     <Label
                         Margin="10,5,10,10"
                         HorizontalOptions="Center"
-                        Text="{Binding [PopupRequestSentText]}" />
+                        Text="{Binding [PopupHospitalAskForRoomText]}" />
 
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Room}" />
+
+                    <Label
+                        Margin="10,5,10,10"
+                        HorizontalOptions="Center"
+                        Text="{Binding [PopupHospitalAskForRoomTextTwo]}" />
+
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Hall}" />
+
+                    <Button
+                        Command="{Binding ContinueWithRequestCommand}"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource ButtonStyle}"
+                        Text="{Binding [CommonContinue]}" />
 
                 </StackLayout>
 

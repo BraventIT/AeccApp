@@ -426,6 +426,15 @@
   <data name="PopupChatRatingTextTitle" xml:space="preserve">
     <value>¿Cómo ha sido tu experiencia?</value>
   </data>
+  <data name="PopupHospitalAskForRoomText" xml:space="preserve">
+    <value>¿En que habitación estás?</value>
+  </data>
+  <data name="PopupHospitalAskForRoomTextTwo" xml:space="preserve">
+    <value>¿En que sala estás?</value>
+  </data>
+  <data name="PopupHospitalAskForRoomTitle" xml:space="preserve">
+    <value>Completa la informacion</value>
+  </data>
   <data name="PopupLogoutText" xml:space="preserve">
     <value>Vas a cerrar sesión y tendrás que volver a entrar la proxima vez.</value>
   </data>
