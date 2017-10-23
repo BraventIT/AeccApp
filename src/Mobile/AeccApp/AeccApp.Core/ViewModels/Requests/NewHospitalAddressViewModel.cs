@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.ViewModels.Popups;
+﻿using AeccApp.Core.Models;
+using AeccApp.Core.ViewModels.Popups;
 using AeccApp.Core.Views.Popups;
 using System;
 using System.Collections.Generic;
@@ -74,10 +75,14 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        void OnRelocateCommand(object obj)
+        async void OnRelocateCommand(object obj)
         {
             //TODO UPDATE GEOLOCALIZATION
-            
+            RequestHospitalAskForRoomPopupViewModel vmTest = new RequestHospitalAskForRoomPopupViewModel();
+
+
+            await NavigationService.NavigateToAsync<CompletingHospitalRequestViewModel>(new AddressModel("name","street","province","2","floor2","placeidd",new Models.Requests.Position(2.0,2.3)));
+
         }
 
 

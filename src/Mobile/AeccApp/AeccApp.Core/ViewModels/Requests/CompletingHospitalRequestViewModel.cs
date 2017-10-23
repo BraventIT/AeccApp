@@ -1,17 +1,19 @@
 ﻿using AeccApp.Core.Models;
 using AeccApp.Core.ViewModels.Popups;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels
 {
-    public class CompletingRequestViewModel : ViewModelBase
+    public class CompletingHospitalRequestViewModel : ViewModelBase
     {
         #region Constructor and initialization
 
-        public CompletingRequestViewModel()
+        public CompletingHospitalRequestViewModel()
         {
             RequestDateAndTimePopupVM = new RequestDateAndTimePopupViewModel();
             RequestConfirmationPopupVM = new RequestConfirmationPopupViewModel();
@@ -49,10 +51,10 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnSendRequestCommand(object obj)
         {
-
+            //TODO Save address if needed
             //TODO send request
             await NavigationService.HidePopupAsync();
-            await NavigationService.ShowPopupAsync(RequestSentPopupVM); 
+            await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
 
         private Command _openRequestConfirmationPopupCommand;
@@ -67,7 +69,7 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnOpenRequestConfirmationPopupCommand(object obj)
         {
-            if (DateToApplyParsed==null)
+            if (DateToApplyParsed == null)
             {
                 RequestConfirmationPopupVM.DisplayDate = DateTime.Now.ToString().Remove(10);
             }
@@ -89,7 +91,7 @@ namespace AeccApp.Core.ViewModels
 
 
         }
-        
+
 
         private Command _openDateAndTimePopupCommand;
         public ICommand OpenDateAndTimePopupCommand
@@ -147,10 +149,28 @@ namespace AeccApp.Core.ViewModels
         {
             await NavigationService.HidePopupAsync();
             //TODO SEND REQUEST
-            
+
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
 
+        private Command _addressGettingSaved;
+        public ICommand AddressGettingSavedCommand
+        {
+            get
+            {
+                return _addressGettingSaved ??
+                    (_addressGettingSaved = new Command(OnAddressGettingSaved, o => !IsBusy));
+            }
+        }
+
+        private void OnAddressGettingSaved(object obj)
+        {
+            bool result = false;
+            if (obj is bool)
+                result = (bool)obj;
+
+            IsAddressGettingSaved = result;
+        }
 
         #endregion
 
@@ -160,6 +180,13 @@ namespace AeccApp.Core.ViewModels
         public RequestSentPopupViewModel RequestSentPopupVM { get; private set; }
         public RequestDateAndTimePopupViewModel RequestDateAndTimePopupVM { get; private set; }
 
+
+        private bool _isAddressGettingSaved;
+        public bool IsAddressGettingSaved
+        {
+            get { return _isAddressGettingSaved; }
+            set { Set(ref _isAddressGettingSaved, value); }
+        }
 
         private double _initialMapLat;
         public double InitialMapLat
@@ -242,7 +269,7 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
-      
+
 
     }
 }

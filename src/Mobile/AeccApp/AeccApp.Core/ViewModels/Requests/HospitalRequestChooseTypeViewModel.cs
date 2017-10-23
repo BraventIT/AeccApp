@@ -66,8 +66,7 @@ namespace AeccApp.Core.ViewModels
         async public void OnRequestCompanionForHomeCommand(object obj)
         {
             //Acompañamiento en el domicilio
-            await NavigationService.NavigateToAsync<CompletingRequestViewModel>(MyAddress);
-
+            await NavigationService.NavigateToAsync<CompletingHomeRequestViewModel>(MyAddress);
         }
 
         private Command _requestSupportOnHomeManagementsCommand;
@@ -82,7 +81,7 @@ namespace AeccApp.Core.ViewModels
 
         async public void OnRequestSupportOnHomeManagementsCommand(object obj)
         {
-            await NavigationService.NavigateToAsync<CompletingRequestViewModel>(MyAddress);
+            await NavigationService.NavigateToAsync<CompletingHomeRequestViewModel>(MyAddress);
             //Apoyo en gestiones en el domicilio
         }
 
