@@ -183,6 +183,9 @@
   <data name="CommonApplyFilters" xml:space="preserve">
     <value>Aplicar filtros</value>
   </data>
+  <data name="CommonChoseHospital" xml:space="preserve">
+    <value>Elige hospital</value>
+  </data>
   <data name="CommonClose" xml:space="preserve">
     <value>Cerrar</value>
   </data>
@@ -204,11 +207,17 @@
   <data name="CommonIsYourFirstTime" xml:space="preserve">
     <value>¿Es tu primera vez aqui?</value>
   </data>
+  <data name="CommonList" xml:space="preserve">
+    <value>Listado</value>
+  </data>
   <data name="CommonLogout" xml:space="preserve">
     <value>Logout</value>
   </data>
   <data name="CommonMailTitle" xml:space="preserve">
     <value>Email:</value>
+  </data>
+  <data name="CommonMap" xml:space="preserve">
+    <value>Mapa</value>
   </data>
   <data name="CommonNameTitle" xml:space="preserve">
     <value>Nombre:</value>

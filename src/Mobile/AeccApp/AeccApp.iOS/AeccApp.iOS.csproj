@@ -256,5 +256,8 @@
   <ItemGroup>
     <BundleResource Include="Resources\profile_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\location_pin_hospital_map.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

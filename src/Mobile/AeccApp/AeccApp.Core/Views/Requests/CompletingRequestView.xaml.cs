@@ -14,14 +14,9 @@ namespace AeccApp.Core.Views
 	public partial class CompletingRequestView : BaseContentPage
 	{
 
-        readonly string pinBundle = "location_pin.png";
-
         public CompletingRequestView ()
 		{
            
-
-
-
             InitializeComponent ();
             map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.486683, -3.665183), 16d);
             var pinBravent = new Pin() { Label = "Bravent", Position = new Position(40.486683, -3.665183) };

@@ -260,6 +260,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Elige hospital.
+        /// </summary>
+        public static string CommonChoseHospital {
+            get {
+                return ResourceManager.GetString("CommonChoseHospital", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cerrar.
         /// </summary>
         public static string CommonClose {
@@ -323,6 +332,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Listado.
+        /// </summary>
+        public static string CommonList {
+            get {
+                return ResourceManager.GetString("CommonList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logout.
         /// </summary>
         public static string CommonLogout {
@@ -337,6 +355,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string CommonMailTitle {
             get {
                 return ResourceManager.GetString("CommonMailTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mapa.
+        /// </summary>
+        public static string CommonMap {
+            get {
+                return ResourceManager.GetString("CommonMap", resourceCulture);
             }
         }
         
