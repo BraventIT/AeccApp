@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using AeccApp.Core.Services.Geolocator;
+using Xamarin.Forms;
 
 namespace AeccApp.Core.Services
 {
@@ -10,12 +11,15 @@ namespace AeccApp.Core.Services
             IocContainer.RegisterAsSingleton<INavigationService, NavigationService>();
             IocContainer.RegisterAsSingleton<IChatService, ChatService>();
             IocContainer.RegisterAsSingleton<IIdentityService, IdentityService>();
+            IocContainer.RegisterAsSingleton<IGeolocatorService, GeolocatorService>();
+
 
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
             IocContainer.RegisterAsSingleton<IHomeAddressesDataService, HomeAddressesDataService>();
             
             IocContainer.RegisterAsSingleton<IGoogleMapsPlaceService, GoogleMapsPlaceService>();
             IocContainer.Register<IHttpRequestProvider, HttpRequestProvider>();
+
         }
 
         static INavigationService _navigationService;
@@ -43,6 +47,11 @@ namespace AeccApp.Core.Services
         public static IHomeAddressesDataService HomeAddressesDataService
         {
             get { return Resolve<IHomeAddressesDataService>(); }
+        }
+
+        public static IGeolocatorService GeolocatorService
+        {
+            get { return Resolve<IGeolocatorService>(); }
         }
 
         public static IGoogleMapsPlaceService GoogleMapsPlaceService

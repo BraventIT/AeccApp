@@ -1,6 +1,8 @@
 ﻿using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
+using AeccApp.Core.Services.Geolocator;
+using Plugin.Geolocator;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -11,6 +13,7 @@ namespace AeccApp.Core.ViewModels
     {
         private readonly IChatService _chatService;
         private readonly IIdentityService _identityService;
+        private readonly IGeolocatorService _geolocatorService;
 
 
         #region Commands
@@ -85,6 +88,10 @@ namespace AeccApp.Core.ViewModels
         {
             _chatService = ServiceLocator.ChatService;
             _identityService = ServiceLocator.IdentityService;
+            _geolocatorService = ServiceLocator.GeolocatorService;
+
+            _geolocatorService.GetCurrent();
+            int test = 0;
         }
 
         public override Task InitializeAsync(object navigationData)
