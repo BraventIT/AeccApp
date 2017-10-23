@@ -1,4 +1,7 @@
-﻿using AeccApp.Core.Services.Geolocator;
+﻿using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.Services
@@ -11,8 +14,6 @@ namespace AeccApp.Core.Services
             IocContainer.RegisterAsSingleton<INavigationService, NavigationService>();
             IocContainer.RegisterAsSingleton<IChatService, ChatService>();
             IocContainer.RegisterAsSingleton<IIdentityService, IdentityService>();
-            IocContainer.RegisterAsSingleton<IGeolocatorService, GeolocatorService>();
-
 
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
             IocContainer.RegisterAsSingleton<IHomeAddressesDataService, HomeAddressesDataService>();
@@ -49,9 +50,14 @@ namespace AeccApp.Core.Services
             get { return Resolve<IHomeAddressesDataService>(); }
         }
 
-        public static IGeolocatorService GeolocatorService
+        public static IGeolocator GeolocatorService
         {
-            get { return Resolve<IGeolocatorService>(); }
+            get { return CrossGeolocator.Current; }
+        }
+
+        public static IPermissions PermissionsService
+        {
+            get { return CrossPermissions.Current; }
         }
 
         public static IGoogleMapsPlaceService GoogleMapsPlaceService

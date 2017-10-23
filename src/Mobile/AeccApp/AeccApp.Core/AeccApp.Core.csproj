@@ -19,6 +19,7 @@
     <PackageReference Include="Microsoft.Bot.Connector.DirectLine" Version="3.0.2" />
     <PackageReference Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Plugin.Permissions" Version="2.1.0" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.0.4" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.1.1" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.0.1" />

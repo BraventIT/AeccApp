@@ -12,8 +12,6 @@ namespace AeccApp.Droid
     [Activity(Label = "AECC", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        private const string GoogleAndroidMapKey = "AIzaSyBrlsD3dhg3Bo6oaAugOCexgVoNcQDaQgQ";
-
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;

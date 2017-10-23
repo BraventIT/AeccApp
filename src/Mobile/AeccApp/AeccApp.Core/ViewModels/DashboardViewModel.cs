@@ -1,8 +1,9 @@
-﻿using AeccApp.Core.Messages;
+﻿using AeccApp.Core.Extensions;
+using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
-using AeccApp.Core.Services.Geolocator;
-using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
+using Plugin.Permissions.Abstractions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -11,10 +12,10 @@ namespace AeccApp.Core.ViewModels
 {
     public class DashboardViewModel : ViewModelBase
     {
-        private readonly IChatService _chatService;
-        private readonly IIdentityService _identityService;
-        private readonly IGeolocatorService _geolocatorService;
-
+        private  IChatService ChatService { get; } = ServiceLocator.ChatService;
+        private  IIdentityService IdentityService { get; }= ServiceLocator.IdentityService;
+        private  IGeolocator GeolocatorService { get; } = ServiceLocator.GeolocatorService;
+        private IPermissions PermissionsService { get; } = ServiceLocator.PermissionsService;
 
         #region Commands
 
@@ -34,7 +35,7 @@ namespace AeccApp.Core.ViewModels
         /// <param name="obj"></param>
         private async void OnLogOffAsync(object obj)
         {
-            _identityService.LogOff();
+            IdentityService.LogOff();
             await NavigationService.NavigateToAsync<LoginViewModel>();
             await NavigationService.RemoveBackStackAsync();
         }
@@ -82,19 +83,7 @@ namespace AeccApp.Core.ViewModels
         }
         #endregion
 
-
-
-        public DashboardViewModel()
-        {
-            _chatService = ServiceLocator.ChatService;
-            _identityService = ServiceLocator.IdentityService;
-            _geolocatorService = ServiceLocator.GeolocatorService;
-
-            _geolocatorService.GetCurrent();
-            int test = 0;
-        }
-
-        public override Task InitializeAsync(object navigationData)
+        public override async Task InitializeAsync(object navigationData)
         {
             if (navigationData is TabParameter)
             {
@@ -102,14 +91,29 @@ namespace AeccApp.Core.ViewModels
                 var tabIndex = ((TabParameter)navigationData).TabIndex;
                 MessagingCenter.Send(new TabMessage(tabIndex), string.Empty);
             }
-            
-            return Task.CompletedTask;
+
+            var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
+            if (!hasPermission)
+                return;
+
+            if (GeolocatorService.IsLocationAvailable())
+            {
+                var pos = await GeolocatorService.GetCurrentLocation();
+                if (pos == null && !GeolocatorService.IsGeolocationEnabled)
+                {
+                    // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
+                }
+            }
+
+            //  return Task.CompletedTask;
         }
 
         public override Task ActivateAsync()
         {
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, o => OnChatEngagementEventAsync(o));
+
+
             return Task.CompletedTask;
         }
 
