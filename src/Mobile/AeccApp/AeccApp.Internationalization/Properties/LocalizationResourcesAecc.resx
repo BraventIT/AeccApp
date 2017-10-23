@@ -183,6 +183,9 @@
   <data name="CommonApplyFilters" xml:space="preserve">
     <value>Aplicar filtros</value>
   </data>
+  <data name="CommonChooseRequestType" xml:space="preserve">
+    <value>Elige tu petición</value>
+  </data>
   <data name="CommonChoseHospital" xml:space="preserve">
     <value>Elige hospital</value>
   </data>
@@ -368,9 +371,6 @@
   </data>
   <data name="NewHomeRequestChoseTypeTalkToAnAECCProfesional" xml:space="preserve">
     <value>Contactar con un profesional</value>
-  </data>
-  <data name="NewHomeRequestChoseTypeTitle" xml:space="preserve">
-    <value>Elige tu petición</value>
   </data>
   <data name="NewHomeRequestSelectAddressImAtHome" xml:space="preserve">
     <value>Estoy en casa</value>

@@ -260,6 +260,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Elige tu petición.
+        /// </summary>
+        public static string CommonChooseRequestType {
+            get {
+                return ResourceManager.GetString("CommonChooseRequestType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Elige hospital.
         /// </summary>
         public static string CommonChoseHospital {
@@ -814,15 +823,6 @@ namespace AeccApp.Internationalization.Properties {
         public static string NewHomeRequestChoseTypeTalkToAnAECCProfesional {
             get {
                 return ResourceManager.GetString("NewHomeRequestChoseTypeTalkToAnAECCProfesional", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Elige tu petición.
-        /// </summary>
-        public static string NewHomeRequestChoseTypeTitle {
-            get {
-                return ResourceManager.GetString("NewHomeRequestChoseTypeTitle", resourceCulture);
             }
         }
         
