@@ -11,18 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace AeccApp.Core.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CompletingRequestView : BaseContentPage
+	public partial class CompletingHospitalRequestView : BaseContentPage
 	{
+		public CompletingHospitalRequestView ()
+        {
 
-        readonly string pinBundle = "location_pin.png";
-
-        public CompletingRequestView ()
-		{
-           
-
-
-
-            InitializeComponent ();
+            InitializeComponent();
             map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.486683, -3.665183), 16d);
             var pinBravent = new Pin() { Label = "Bravent", Position = new Position(40.486683, -3.665183) };
             pinBravent.IsDraggable = false;
@@ -50,11 +44,9 @@ namespace AeccApp.Core.Views
         }
         public async void MoveCameraMap(Position toPosition)
         {
-            
+
             var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
                      toPosition, 16d), TimeSpan.FromSeconds(1));
         }
-
-        
     }
 }

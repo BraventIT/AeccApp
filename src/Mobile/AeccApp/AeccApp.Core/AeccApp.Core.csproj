@@ -38,6 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Requests\CompletingHomeRequestView.xaml.cs">
+      <DependentUpon>CompletingHomeRequestView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Requests\HomeRequestChooseType.xaml.cs">
       <DependentUpon>HomeRequestChooseType.xaml</DependentUpon>
     </Compile>

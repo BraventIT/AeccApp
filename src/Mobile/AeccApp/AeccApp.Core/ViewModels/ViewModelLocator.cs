@@ -59,9 +59,12 @@ namespace AeccApp.Core.ViewModels
             IocContainer.Register<ChatEventViewModel>();
             IocContainer.Register<HomeAddressesListViewModel>();
             IocContainer.Register<HomeRequestChooseTypeViewModel>();
-            IocContainer.Register<CompletingRequestViewModel>();
+            IocContainer.Register<CompletingHomeRequestViewModel>();
             IocContainer.Register<ChatRequestViewModel>();
             IocContainer.Register<HospitalAddressesListViewModel>();
+            IocContainer.Register<NewHospitalAddressViewModel>();
+            IocContainer.Register<HospitalRequestChooseTypeViewModel>();
+            IocContainer.Register<CompletingHospitalRequestViewModel>();
 
         }
     }

@@ -103,6 +103,7 @@
     <Content Include="Assets\gender_male.png" />
     <Content Include="Assets\home_tab_icon.png" />
     <Content Include="Assets\location_pin.png" />
+    <Content Include="Assets\location_pin_hospital_map.png" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\profile.png" />
   </ItemGroup>

@@ -5,140 +5,108 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
-    Title="{Binding [CommonYourRequests]}"
+    Title="{Binding [CommonChoseHospital]}"
     vm:ViewModelLocator.AutoWireViewModel="True">
 
-    <ScrollView>
-        <StackLayout>
-            <StackLayout IsVisible="{Binding IsFilterPopupVisible, Converter={StaticResource InverseBoolConverter}}">
+    <StackLayout>
+        <!--  Sub navigation bar with map and hospital list  -->
+        <StackLayout
+            BackgroundColor="Gray"
+            HeightRequest="65"
+            HorizontalOptions="FillAndExpand">
+            <Grid HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-
-                <!--  Sub navigation bar with home and hospital tabs  -->
                 <StackLayout
-                    BackgroundColor="Gray"
-                    HeightRequest="65"
-                    HorizontalOptions="FillAndExpand">
-                    <Grid HorizontalOptions="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <StackLayout
-                            Grid.Column="0"
-                            HorizontalOptions="Center"
-                            Orientation="Horizontal">
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeTabCommand}" />
-                            </StackLayout.GestureRecognizers>
-
-                            <StackLayout.Margin>
-                                <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="WinPhone, Windows" Value="0" />
-                                    <On Platform="iOS" Value="0,15,25,15" />
-                                    <On Platform="Android" Value="0,15,25,15" />
-                                </OnPlatform>
-                            </StackLayout.Margin>
-
-                            <ctrl:CustomImage
-                                HeightRequest="50"
-                                SourcePlatform="bell"
-                                VerticalOptions="Center"
-                                WidthRequest="50" />
-                            <Label Text="{Binding [AllYourRequestsHome]}" VerticalOptions="Center" />
-                        </StackLayout>
-
-                        <StackLayout
-                            Grid.Column="1"
-                            HorizontalOptions="Center"
-                            Orientation="Horizontal">
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HospitalTabCommand}" />
-                            </StackLayout.GestureRecognizers>
-                            <StackLayout.Margin>
-                                <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="WinPhone, Windows" Value="0" />
-                                    <On Platform="iOS" Value="0,15,25,15" />
-                                    <On Platform="Android" Value="0,15,25,15" />
-                                </OnPlatform>
-                            </StackLayout.Margin>
-                            <ctrl:CustomImage
-                                HeightRequest="50"
-                                SourcePlatform="bell"
-                                VerticalOptions="Center"
-                                WidthRequest="50" />
-                            <Label Text="{Binding [AllYourRequestsHospital]}" VerticalOptions="Center" />
-                        </StackLayout>
-                    </Grid>
-                </StackLayout>
-
-                <StackLayout Padding="15">
-                    <!--  Home requests list  -->
-                    <ListView
-                        HasUnevenRows="True"
-                        HeightRequest="600"
-                        IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}"
-                        ItemTemplate="{StaticResource requestsList}"
-                        ItemsSource="{Binding HomeRequestsList}" />
-
-
-                    <!--  Hospital requests list  -->
-                    <ListView
-                        HasUnevenRows="True"
-                        HeightRequest="600"
-                        IsVisible="{Binding SwitchHomeAndHospitalList}"
-                        ItemTemplate="{StaticResource requestsList}"
-                        ItemsSource="{Binding HospitalRequestsList}">
-
-                        <ListView.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone, Windows" Value="100" />
-                            </OnPlatform>
-                        </ListView.Margin>
-
-
-                    </ListView>
-
-                </StackLayout>
-
-
-
-
-                <!--  New request button  -->
-                <StackLayout
-                    Padding="5"
-                    BackgroundColor="LawnGreen"
-                    HorizontalOptions="CenterAndExpand"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
                     Orientation="Horizontal">
-
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NewRequestCommand}" />
+                        <TapGestureRecognizer Command="{Binding HospitalListTabCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="WinPhone, Windows" Value="0" />
+                            <On Platform="iOS" Value="0,15,25,15" />
+                            <On Platform="Android" Value="0,15,25,15" />
+                        </OnPlatform>
+                    </StackLayout.Margin>
+                    <ctrl:CustomImage
+                        HeightRequest="50"
+                        SourcePlatform="bell"
+                        VerticalOptions="Center"
+                        WidthRequest="50" />
+                    <Label Text="{Binding [CommonList]}" VerticalOptions="Center" />
+                </StackLayout>
+
+
+                <StackLayout
+                    Grid.Column="0"
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding HospitalMapTabCommand}" />
                     </StackLayout.GestureRecognizers>
 
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="WinPhone, Windows" Value="0" />
+                            <On Platform="iOS" Value="0,15,25,15" />
+                            <On Platform="Android" Value="0,15,25,15" />
+                        </OnPlatform>
+                    </StackLayout.Margin>
+
                     <ctrl:CustomImage
-                        HeightRequest="25"
+                        HeightRequest="50"
                         SourcePlatform="bell"
-                        WidthRequest="25" />
-                    <Label Text="{Binding [CommonNewRequest]}" VerticalOptions="Center" />
+                        VerticalOptions="Center"
+                        WidthRequest="50" />
+                    <Label Text="{Binding [CommonMap]}" VerticalOptions="Center" />
                 </StackLayout>
 
-
-
-            </StackLayout>
-
-            <!--  Requests filters popup  -->
-            <ctrl:RequestFiltersPopupControl
-                ApplyFiltersCommand="{Binding ApplyFiltersCommand}"
-                DateSelected="{Binding DateToFilterWith, Mode=TwoWay}"
-                IsVisible="{Binding IsFilterPopupVisible}"
-                TimeSelected="{Binding TimeToFilterWith, Mode=TwoWay}">
-                <View.Behaviors>
-                    <beh:AnimateScaleBehavior IsVisible="{Binding IsFilterPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-                </View.Behaviors>
-            </ctrl:RequestFiltersPopupControl>
+            </Grid>
         </StackLayout>
-    </ScrollView>
 
+        <StackLayout>
+            <!--  Hospitals map  -->
+            <Grid
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding SwitchBetweenAndHospitalList}"
+                VerticalOptions="FillAndExpand">
+                <maps:Map
+                    x:Name="map"
+                    HasZoomEnabled="True"
+                    HeightRequest="600" />
+                <ctrl:CustomImage
+                    Margin="8"
+                    HeightRequest="45"
+                    HorizontalOptions="End"
+                    SourcePlatform="location_pin"
+                    VerticalOptions="Start"
+                    WidthRequest="45">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RelocateCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+                </ctrl:CustomImage>
+            </Grid>
+            <!--  Hospitals list  -->
+            <Grid Padding="15" IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
+                <ListView HasUnevenRows="True" HeightRequest="600">
+                    <ListView.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="WinPhone, Windows" Value="100" />
+                        </OnPlatform>
+                    </ListView.Margin>
+                </ListView>
+            </Grid>
+        </StackLayout>
+
+
+    </StackLayout>
 </v:BaseContentPage>

@@ -72,9 +72,7 @@ namespace AeccApp.Core.ViewModels
 
         async void OnNewHospitalAddressCommand(object obj)
         {
-            //TODO CAMBIAR NAVEGACION AL VIEWMODEL CORRESPONDIENTE CUANDO SE CREE
-            await NavigationService.NavigateToAsync<NewHomeAddressViewModel>();
-
+            await NavigationService.NavigateToAsync<NewHospitalAddressViewModel>();
         }
 
 

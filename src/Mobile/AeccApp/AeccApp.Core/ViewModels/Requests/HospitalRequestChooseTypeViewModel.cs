@@ -1,13 +1,15 @@
 ﻿using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels
 {
-    public class HomeRequestChooseTypeViewModel : ViewModelBase
+    public class HospitalRequestChooseTypeViewModel : ViewModelBase
     {
         private IGoogleMapsPlaceService GoogleMapsPlaceService { get; } = ServiceLocator.GoogleMapsPlaceService;
         private IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
@@ -22,7 +24,7 @@ namespace AeccApp.Core.ViewModels
         }
         #endregion
 
-        
+
 
         public override Task InitializeAsync(object navigationData)
         {
@@ -65,7 +67,6 @@ namespace AeccApp.Core.ViewModels
         {
             //Acompañamiento en el domicilio
             await NavigationService.NavigateToAsync<CompletingHomeRequestViewModel>(MyAddress);
-
         }
 
         private Command _requestSupportOnHomeManagementsCommand;
@@ -103,5 +104,6 @@ namespace AeccApp.Core.ViewModels
         }
 
         #endregion
+
     }
 }

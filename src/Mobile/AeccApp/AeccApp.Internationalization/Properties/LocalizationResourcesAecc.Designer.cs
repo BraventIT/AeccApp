@@ -260,6 +260,24 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Elige tu petición.
+        /// </summary>
+        public static string CommonChooseRequestType {
+            get {
+                return ResourceManager.GetString("CommonChooseRequestType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Elige hospital.
+        /// </summary>
+        public static string CommonChoseHospital {
+            get {
+                return ResourceManager.GetString("CommonChoseHospital", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cerrar.
         /// </summary>
         public static string CommonClose {
@@ -323,6 +341,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Listado.
+        /// </summary>
+        public static string CommonList {
+            get {
+                return ResourceManager.GetString("CommonList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logout.
         /// </summary>
         public static string CommonLogout {
@@ -337,6 +364,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string CommonMailTitle {
             get {
                 return ResourceManager.GetString("CommonMailTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mapa.
+        /// </summary>
+        public static string CommonMap {
+            get {
+                return ResourceManager.GetString("CommonMap", resourceCulture);
             }
         }
         
@@ -791,15 +827,6 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Elige tu petición.
-        /// </summary>
-        public static string NewHomeRequestChoseTypeTitle {
-            get {
-                return ResourceManager.GetString("NewHomeRequestChoseTypeTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Estoy en casa.
         /// </summary>
         public static string NewHomeRequestSelectAddressImAtHome {
@@ -958,6 +985,33 @@ namespace AeccApp.Internationalization.Properties {
         public static string PopupChatRatingTextTitle {
             get {
                 return ResourceManager.GetString("PopupChatRatingTextTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¿En que habitación estás?.
+        /// </summary>
+        public static string PopupHospitalAskForRoomText {
+            get {
+                return ResourceManager.GetString("PopupHospitalAskForRoomText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¿En que sala estás?.
+        /// </summary>
+        public static string PopupHospitalAskForRoomTextTwo {
+            get {
+                return ResourceManager.GetString("PopupHospitalAskForRoomTextTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completa la informacion.
+        /// </summary>
+        public static string PopupHospitalAskForRoomTitle {
+            get {
+                return ResourceManager.GetString("PopupHospitalAskForRoomTitle", resourceCulture);
             }
         }
         

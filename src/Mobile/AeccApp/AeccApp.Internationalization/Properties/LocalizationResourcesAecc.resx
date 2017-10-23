@@ -183,6 +183,12 @@
   <data name="CommonApplyFilters" xml:space="preserve">
     <value>Aplicar filtros</value>
   </data>
+  <data name="CommonChooseRequestType" xml:space="preserve">
+    <value>Elige tu petición</value>
+  </data>
+  <data name="CommonChoseHospital" xml:space="preserve">
+    <value>Elige hospital</value>
+  </data>
   <data name="CommonClose" xml:space="preserve">
     <value>Cerrar</value>
   </data>
@@ -204,11 +210,17 @@
   <data name="CommonIsYourFirstTime" xml:space="preserve">
     <value>¿Es tu primera vez aqui?</value>
   </data>
+  <data name="CommonList" xml:space="preserve">
+    <value>Listado</value>
+  </data>
   <data name="CommonLogout" xml:space="preserve">
     <value>Logout</value>
   </data>
   <data name="CommonMailTitle" xml:space="preserve">
     <value>Email:</value>
+  </data>
+  <data name="CommonMap" xml:space="preserve">
+    <value>Mapa</value>
   </data>
   <data name="CommonNameTitle" xml:space="preserve">
     <value>Nombre:</value>
@@ -360,9 +372,6 @@
   <data name="NewHomeRequestChoseTypeTalkToAnAECCProfesional" xml:space="preserve">
     <value>Contactar con un profesional</value>
   </data>
-  <data name="NewHomeRequestChoseTypeTitle" xml:space="preserve">
-    <value>Elige tu petición</value>
-  </data>
   <data name="NewHomeRequestSelectAddressImAtHome" xml:space="preserve">
     <value>Estoy en casa</value>
   </data>
@@ -416,6 +425,15 @@
   </data>
   <data name="PopupChatRatingTextTitle" xml:space="preserve">
     <value>¿Cómo ha sido tu experiencia?</value>
+  </data>
+  <data name="PopupHospitalAskForRoomText" xml:space="preserve">
+    <value>¿En que habitación estás?</value>
+  </data>
+  <data name="PopupHospitalAskForRoomTextTwo" xml:space="preserve">
+    <value>¿En que sala estás?</value>
+  </data>
+  <data name="PopupHospitalAskForRoomTitle" xml:space="preserve">
+    <value>Completa la informacion</value>
   </data>
   <data name="PopupLogoutText" xml:space="preserve">
     <value>Vas a cerrar sesión y tendrás que volver a entrar la proxima vez.</value>

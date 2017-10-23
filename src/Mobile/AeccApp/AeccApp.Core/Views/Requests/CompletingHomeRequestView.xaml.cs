@@ -11,31 +11,31 @@ using Xamarin.Forms.Xaml;
 namespace AeccApp.Core.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class NewHospitalAddressView : BaseContentPage
+	public partial class CompletingHomeRequestView : BaseContentPage
 	{
-		public NewHospitalAddressView ()
+
+        public CompletingHomeRequestView()
 		{
-			InitializeComponent ();
-            
+           
+            InitializeComponent ();
             map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.486683, -3.665183), 16d);
-            var pinBravent = new Pin() { Label = "Hospital de pruebas técnicas Bravent", Position = new Position(40.486683, -3.665183) };
+            var pinBravent = new Pin() { Label = "Bravent", Position = new Position(40.486683, -3.665183) };
             pinBravent.IsDraggable = false;
             switch (Device.OS)
             {
                 case TargetPlatform.Android:
-                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin_hospital_map.png");
+                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin.png");
                     break;
                 case TargetPlatform.iOS:
-                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin_hospital_map.png");
+                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin.png");
                     break;
                 default:
-                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"Assets/location_pin_hospital_map.png");
+                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"Assets/location_pin.png");
                     break;
             }
 
             map.Pins.Add(pinBravent);
         }
-
 
         protected override void OnAppearing()
         {
@@ -45,11 +45,11 @@ namespace AeccApp.Core.Views
         }
         public async void MoveCameraMap(Position toPosition)
         {
+            
             var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
-                     toPosition, 14d), TimeSpan.FromSeconds(1));
+                     toPosition, 16d), TimeSpan.FromSeconds(1));
         }
 
-
-
+        
     }
 }
