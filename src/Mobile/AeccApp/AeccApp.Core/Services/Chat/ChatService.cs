@@ -127,7 +127,7 @@ namespace AeccApp.Core.Services
                 {
                     _client = new DirectLineClient(GSetting.AeccBotSecret);
                     _mainConversation = await _client.Conversations.StartConversationAsync();
-                    _account = new ChannelAccountWithUserData(GSetting.User.UserId, GSetting.User.UserName)
+                    _account = new ChannelAccountWithUserData(GSetting.User.UserId, GSetting.User.Name)
                     {
                         FirstName = GSetting.User.FirstName,
                         Surname = GSetting.User.Surname,

@@ -2,8 +2,7 @@
 {
     public class RequestModel
     {
-
-        public string RequestType { get; set; }
+        public RequestTypeModel RequestType { get; set; }
         public string RequestLocation { get; set; }
         public string RequestDate { get; set; }
         public string RequestTime { get; set; }
@@ -11,7 +10,7 @@
 
         public AddressModel RequestAddress { get; set; }
 
-        public RequestModel(string RequestType,string RequestLocation, string RequestDate, string RequestTime, string RequestComments, AddressModel RequestAddress)
+        public RequestModel(RequestTypeModel RequestType,string RequestLocation, string RequestDate, string RequestTime, string RequestComments, AddressModel RequestAddress)
         {
             this.RequestType = RequestType;
             this.RequestLocation = RequestLocation;

@@ -30,7 +30,7 @@ namespace AeccApp.Core.ViewModels
         #region Properties
         public string Name
         {
-            get { return GSetting.User?.UserName; }
+            get { return GSetting.User?.Name; }
         }
 
         public string Email

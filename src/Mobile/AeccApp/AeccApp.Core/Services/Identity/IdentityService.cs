@@ -77,7 +77,7 @@ namespace AeccApp.Core.Services
             GSetting.User = new UserData()
             {
                 UserId = ar.UniqueId,
-                UserName = ar.User.Name,
+                Name = ar.User.Name,
                 FirstName = user["given_name"]?.ToString(),
                 Surname = user["family_name"]?.ToString(),
                 Email = user["emails"]?.First().ToString(),

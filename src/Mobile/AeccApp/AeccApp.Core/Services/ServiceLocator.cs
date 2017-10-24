@@ -16,8 +16,8 @@ namespace AeccApp.Core.Services
             IocContainer.RegisterAsSingleton<IIdentityService, IdentityService>();
 
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
-            IocContainer.RegisterAsSingleton<IHomeAddressesDataService, HomeAddressesDataService>();
-            
+            IocContainer.RegisterAsSingleton<IHomeRequestService, HomeRequestService>();
+            IocContainer.RegisterAsSingleton<IGoogleMapsPlaceService, GoogleMapsPlaceService>();
             IocContainer.RegisterAsSingleton<IGoogleMapsPlaceService, GoogleMapsPlaceService>();
             IocContainer.Register<IHttpRequestProvider, HttpRequestProvider>();
 
@@ -50,6 +50,17 @@ namespace AeccApp.Core.Services
             get { return Resolve<IHomeAddressesDataService>(); }
         }
 
+        static IHomeAddressesDataService _homeRequestService;
+        public static IHomeAddressesDataService HomeRequestService
+        {
+            set { _homeRequestService = value; }
+            get
+            {
+                return (_homeRequestService != null) ?
+                  _homeRequestService :
+                  Resolve<IHomeAddressesDataService>();
+            }
+        }
         public static IGeolocator GeolocatorService
         {
             get { return CrossGeolocator.Current; }
