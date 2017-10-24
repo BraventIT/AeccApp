@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AeccApp.Core.Services
 {
-    public class HomeRequestService
+    public class HomeRequestService: IHomeRequestService
     {
         public async Task<IEnumerable<RequestTypeModel>> GetRequestTypes()
         {
