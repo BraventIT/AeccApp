@@ -17,8 +17,8 @@ namespace AeccApp.Core.Views
         {
 
             InitializeComponent();
-            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.486683, -3.665183), 16d);
-            var pinBravent = new Pin() { Label = "Bravent", Position = new Position(40.486683, -3.665183) };
+            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Xamarin.Forms.GoogleMaps.Position(40.416937, -3.703523), 6d);
+            var pinBravent = new Pin() { Label = "Bravent", Position = new Position(40.416937, -3.703523) };
             pinBravent.IsDraggable = false;
             switch (Device.OS)
             {
@@ -39,7 +39,6 @@ namespace AeccApp.Core.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            MoveCameraMap(new Position(40.486683, -3.665183));
 
         }
         public async void MoveCameraMap(Position toPosition)

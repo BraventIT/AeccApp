@@ -43,7 +43,7 @@
                         <Label
                             FontSize="Large"
                             HorizontalOptions="Center"
-                            Text="{Binding MyAddress.AddressName}"
+                            Text="{Binding MyAddress.Name}"
                             VerticalOptions="Center" />
                     </StackLayout>
                     <Label

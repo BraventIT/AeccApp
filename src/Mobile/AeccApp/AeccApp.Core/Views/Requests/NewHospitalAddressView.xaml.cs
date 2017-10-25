@@ -19,8 +19,8 @@ namespace AeccApp.Core.Views
 		{
 			InitializeComponent ();
             
-            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Xamarin.Forms.GoogleMaps.Position(40.486683, -3.665183), 13d);
-            var pinBravent = new Pin() { Label = "Hospital de pruebas técnicas Bravent", Position = new Xamarin.Forms.GoogleMaps.Position(40.486683, -3.665183) };
+            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Xamarin.Forms.GoogleMaps.Position(40.416937, -3.703523), 6d);
+            var pinBravent = new Pin() { Label = "Hospital de pruebas técnicas Bravent", Position = new Xamarin.Forms.GoogleMaps.Position(40.416937, -3.703523) };
             pinBravent.IsDraggable = false;
             switch (Device.OS)
             {
@@ -47,8 +47,6 @@ namespace AeccApp.Core.Views
                 MoveCameraMap(arg);
             });
 
-           // MessagingCenter.Subscribe<GeolocatorMessages>(this, string.Empty, OnCoordinatesRefresh);
-            MoveCameraMap(new Xamarin.Forms.GoogleMaps.Position(40.486683, -3.665183));
 
         }
         public async void MoveCameraMap(Xamarin.Forms.GoogleMaps.Position toPosition)

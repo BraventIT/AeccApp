@@ -15,7 +15,7 @@ namespace AeccApp.Core.ViewModels
         public async override Task ActivateAsync()
         {
             Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position();
-            if (GeolocatorService.IsGeolocationAvailable)
+            if (GeolocatorService.IsGeolocationEnabled)
             {
                 position = await GeolocatorService.GetCurrentLocationAsync();
                 MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
@@ -91,7 +91,7 @@ namespace AeccApp.Core.ViewModels
 
         async void OnRelocateCommand(object obj)
         {
-            if (GeolocatorService.IsGeolocationAvailable)
+            if (GeolocatorService.IsGeolocationEnabled)
             {
             var position = await GeolocatorService.GetCurrentLocationAsync();
             MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh),string.Empty, position) ;

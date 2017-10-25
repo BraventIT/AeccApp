@@ -28,6 +28,8 @@ namespace AeccApp.Core.Extensions
 
                 if (position == null)
                     position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
+
+
             }
             catch (Exception ex)
             {

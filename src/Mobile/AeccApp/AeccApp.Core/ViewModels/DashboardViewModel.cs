@@ -96,7 +96,7 @@ namespace AeccApp.Core.ViewModels
             if (!hasPermission)
                 return;
 
-            if (GeolocatorService.IsGeolocationAvailable)
+            if (GeolocatorService.IsGeolocationEnabled)
             {
                 var pos = await GeolocatorService.GetCurrentLocationAsync();
                 if (pos == null && !GeolocatorService.IsGeolocationEnabled)

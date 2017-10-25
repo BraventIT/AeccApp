@@ -97,7 +97,7 @@ namespace XLabs.Forms.Controls
             // const int Padding = 10;
             var source = model.IsEnabled ? model.Source : model.DisabledSource ?? model.Source;
 
-            using (var bitmap = await GetBitmapAsync(source).ConfigureAwait(false))
+            using (var bitmap = await GetBitmapAsync(source))
             {
                 if (bitmap == null)
                     targetButton.SetCompoundDrawables(null, null, null, null);
@@ -161,7 +161,7 @@ namespace XLabs.Forms.Controls
             var returnValue = (Bitmap)null;
 
             if (handler != null)
-                returnValue = await handler.LoadImageAsync(source, Context).ConfigureAwait(false);
+                returnValue = await handler.LoadImageAsync(source, Context);
 
             return returnValue;
         }

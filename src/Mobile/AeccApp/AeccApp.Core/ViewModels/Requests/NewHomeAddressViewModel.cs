@@ -259,7 +259,7 @@ namespace AeccApp.Core.ViewModels
                 if (string.IsNullOrEmpty(AddressSelected.PlaceId))
                 {
                     Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position();
-                    if (GeolocatorService.IsGeolocationAvailable)
+                    if (GeolocatorService.IsGeolocationEnabled)
                     {
                         position = await GeolocatorService.GetCurrentLocationAsync();
                     }
@@ -311,7 +311,7 @@ namespace AeccApp.Core.ViewModels
                     SugestedAddressesList.Clear();
 
                 Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position();
-                if (GeolocatorService.IsGeolocationAvailable)
+                if (GeolocatorService.IsGeolocationEnabled)
                 {
                     position = await GeolocatorService.GetCurrentLocationAsync();
                 }
