@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.Models;
+﻿using AeccApi.Models;
+using AeccApp.Core.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -26,7 +27,7 @@ namespace AeccApp.Core.ViewModels
         void OnHospitalTabCommand(object obj)
         {
             SwitchHomeAndHospitalList = true;
-            RequestModel mockRequest = new RequestModel(new RequestTypeModel() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "", new Models.Requests.Position(0, 0)));
+            RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "", new Models.Requests.Position(0, 0)));
             HospitalRequestsList.Add(mockRequest);
 
 
@@ -45,7 +46,7 @@ namespace AeccApp.Core.ViewModels
         {
             SwitchHomeAndHospitalList = false;
 
-            RequestModel mockRequest = new RequestModel(new RequestTypeModel() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "", new Models.Requests.Position(0, 0)));
+            RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "", new Models.Requests.Position(0, 0)));
             HomeRequestsList.Add(mockRequest);
         }
 

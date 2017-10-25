@@ -1,8 +1,10 @@
-﻿namespace AeccApp.Core.Models
+﻿using AeccApi.Models;
+
+namespace AeccApp.Core.Models
 {
     public class RequestModel
     {
-        public RequestTypeModel RequestType { get; set; }
+        public RequestType RequestType { get; set; }
         public string RequestLocation { get; set; }
         public string RequestDate { get; set; }
         public string RequestTime { get; set; }
@@ -10,7 +12,7 @@
 
         public AddressModel RequestAddress { get; set; }
 
-        public RequestModel(RequestTypeModel RequestType,string RequestLocation, string RequestDate, string RequestTime, string RequestComments, AddressModel RequestAddress)
+        public RequestModel(RequestType RequestType,string RequestLocation, string RequestDate, string RequestTime, string RequestComments, AddressModel RequestAddress)
         {
             this.RequestType = RequestType;
             this.RequestLocation = RequestLocation;

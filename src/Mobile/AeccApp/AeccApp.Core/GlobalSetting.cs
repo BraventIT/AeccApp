@@ -5,6 +5,7 @@ namespace AeccApp.Core
     public class GlobalSetting
     {
         private string _baseEndpoint;
+        private string _apiEndpoint;
         private static readonly GlobalSetting _instance = new GlobalSetting();
 
         public GlobalSetting()
@@ -18,6 +19,8 @@ namespace AeccApp.Core
             ApplicationID = "24b548ab-933a-47c0-9b3c-c9b334219cc7";
 
             BaseEndpoint = $"https://{DomainName}/demoapi";
+            ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
+
         }
 
         public static GlobalSetting Instance
@@ -28,10 +31,13 @@ namespace AeccApp.Core
         public string BaseEndpoint
         {
             get { return _baseEndpoint; }
-            set
-            {
-                _baseEndpoint = value;
-            }
+            set { _baseEndpoint = value; }
+        }
+
+        public string ApiEndpoint
+        {
+            get { return _apiEndpoint; }
+            set { _apiEndpoint = value; }
         }
 
         #region Maps

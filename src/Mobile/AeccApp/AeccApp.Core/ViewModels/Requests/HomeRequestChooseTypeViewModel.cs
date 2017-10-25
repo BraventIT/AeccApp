@@ -22,8 +22,6 @@ namespace AeccApp.Core.ViewModels
         }
         #endregion
 
-        
-
         public override Task InitializeAsync(object navigationData)
         {
             MyAddress = navigationData as AddressModel;

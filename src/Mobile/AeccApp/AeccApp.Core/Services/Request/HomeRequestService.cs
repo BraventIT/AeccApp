@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.Models;
+﻿using AeccApi.Models;
+using AeccApp.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,37 +8,39 @@ namespace AeccApp.Core.Services
 {
     public class HomeRequestService: IHomeRequestService
     {
-        public async Task<IEnumerable<RequestTypeModel>> GetRequestTypes()
+        private readonly IHttpRequestProvider _requestProvider;
+        private readonly IIdentityService _identityService;
+
+        public HomeRequestService(IIdentityService identityService, IHttpRequestProvider requestProvider)
         {
-            await Task.Delay(2000);
-            return new RequestTypeModel[]
-            {
-                 new RequestTypeModel()
-                 { Source= RequestSourceEnum.Domicilio
-                 , Name= "Acompañamiento a pacientes en el domicilio"
-                 },
-                 new RequestTypeModel()
-                 {
-                     Source= RequestSourceEnum.Domicilio
-                     ,Name ="Acompañamiento y apoyo en la realización de gestiones en el domicilio"
-                 }
-            };
+            _identityService = identityService;
+            _requestProvider = requestProvider;
         }
 
-        public async Task<IEnumerable<CoordinatorModel>> GetCoordinators(string province)
+        public async Task<IEnumerable<RequestType>> GetRequestTypesAsync()
+        {
+            UriBuilder uribuilder = new UriBuilder(GlobalSetting.Instance.ApiEndpoint)
+            {
+                Path = "api/RequestTypes",
+                Query = "requestSource={RequestSourceEnum.Hospital.ToString()}"
+            };
+            return await _requestProvider.GetAsync<IEnumerable<RequestType>>(uribuilder.ToString());
+        }
+
+        public async Task<IEnumerable<Coordinator>> GetCoordinators(string province)
         {
             await Task.Delay(2000);
             if (province.StartsWith("Barcelona", StringComparison.CurrentCultureIgnoreCase))
             {
-                return new CoordinatorModel[]
+                return new Coordinator[]
                 {
-                    new CoordinatorModel()
+                    new Coordinator()
                     {
                         Name= "Jordi Abad"
                         , Email="jordi.abad@test.org"
                         , Province="Barcelona"
                     },
-                    new CoordinatorModel()
+                    new Coordinator()
                     {
                         Name="Ana Carretero"
                         , Email="anamaria.carretero@test.org"
@@ -47,9 +50,9 @@ namespace AeccApp.Core.Services
             }
             else if (province.StartsWith("Madrid", StringComparison.CurrentCultureIgnoreCase))
             {
-                return new CoordinatorModel[]
+                return new Coordinator[]
                {
-                    new CoordinatorModel()
+                    new Coordinator()
                     {
                         Name="Eva Sanchez",
                         Email= "eva.sanchez@test.org"
@@ -58,9 +61,9 @@ namespace AeccApp.Core.Services
             }
             else if (province.StartsWith("Gerona", StringComparison.CurrentCultureIgnoreCase))
             {
-                return new CoordinatorModel[]
+                return new Coordinator[]
                {
-                    new CoordinatorModel()
+                    new Coordinator()
                     {
                         Name="Alberto Pulez",
                         Email= "alberto.pulez@test.org"
@@ -69,9 +72,9 @@ namespace AeccApp.Core.Services
             }
             else if (province.StartsWith("La Coruña", StringComparison.CurrentCultureIgnoreCase))
             {
-                return new CoordinatorModel[]
+                return new Coordinator[]
                {
-                    new CoordinatorModel()
+                    new Coordinator()
                     {
                         Name="Victor Pulez",
                         Email= "Victor.pulez@test.org"
@@ -79,7 +82,7 @@ namespace AeccApp.Core.Services
                };
             }
             else
-                return new List<CoordinatorModel>();
+                return new List<Coordinator>();
         }
     }
 }
