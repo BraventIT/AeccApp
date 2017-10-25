@@ -312,6 +312,18 @@
   <data name="HospitalAddressesListViewYourAddresses" xml:space="preserve">
     <value>Tus hospitales guardados</value>
   </data>
+  <data name="LocationPermissionsNegative" xml:space="preserve">
+    <value>Quizás luego</value>
+  </data>
+  <data name="LocationPermissionsPositive" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="LocationPermissionsQuestion" xml:space="preserve">
+    <value>Por favor activa en la configuracion de tu dispositivo el permiso de </value>
+  </data>
+  <data name="LocationPermissionsTitle" xml:space="preserve">
+    <value>Permiso de </value>
+  </data>
   <data name="LoginViewLogin" xml:space="preserve">
     <value>Entrar</value>
   </data>

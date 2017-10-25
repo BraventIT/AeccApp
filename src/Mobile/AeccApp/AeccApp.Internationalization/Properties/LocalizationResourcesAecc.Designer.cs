@@ -647,6 +647,42 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quizás luego.
+        /// </summary>
+        public static string LocationPermissionsNegative {
+            get {
+                return ResourceManager.GetString("LocationPermissionsNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuración.
+        /// </summary>
+        public static string LocationPermissionsPositive {
+            get {
+                return ResourceManager.GetString("LocationPermissionsPositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Por favor activa en la configuracion de tu dispositivo el permiso de .
+        /// </summary>
+        public static string LocationPermissionsQuestion {
+            get {
+                return ResourceManager.GetString("LocationPermissionsQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permiso de .
+        /// </summary>
+        public static string LocationPermissionsTitle {
+            get {
+                return ResourceManager.GetString("LocationPermissionsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entrar.
         /// </summary>
         public static string LoginViewLogin {

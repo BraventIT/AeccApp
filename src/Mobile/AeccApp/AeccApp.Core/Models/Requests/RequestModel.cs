@@ -9,13 +9,15 @@ namespace AeccApp.Core.Models
         public string RequestDate { get; set; }
         public string RequestTime { get; set; }
         public string RequestComments { get; set; }
-
         public AddressModel RequestAddress { get; set; }
 
-        public RequestModel(RequestType RequestType,string RequestLocation, string RequestDate, string RequestTime, string RequestComments, AddressModel RequestAddress)
+
+        public RequestModel()
+        {
+
+        public RequestModel(RequestTypeModel RequestType,string RequestLocation, string RequestDate, string RequestTime, string RequestComments, AddressModel RequestAddress)
         {
             this.RequestType = RequestType;
-            this.RequestLocation = RequestLocation;
             this.RequestDate = RequestDate;
             this.RequestTime = RequestTime;
             this.RequestComments = RequestComments;

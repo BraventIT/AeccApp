@@ -1,17 +1,31 @@
-﻿using AeccApp.Core.Models;
-using AeccApp.Core.ViewModels.Popups;
-using AeccApp.Core.Views.Popups;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AeccApp.Core.Extensions;
+using AeccApp.Core.Messages;
+using AeccApp.Core.Services;
+using Plugin.Geolocator.Abstractions;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace AeccApp.Core.ViewModels
 {
     public class NewHospitalAddressViewModel : ViewModelBase
     {
+        private IGeolocator GeolocatorService { get; } = ServiceLocator.GeolocatorService;
 
+        public async override Task ActivateAsync()
+        {
+            Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position();
+            if (GeolocatorService.IsGeolocationEnabled)
+            {
+                position = await GeolocatorService.GetCurrentLocationAsync();
+                MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
+            }
+            else
+            {
+                // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
+            }
+           
+        }
 
         #region Commands
 
@@ -77,11 +91,17 @@ namespace AeccApp.Core.ViewModels
 
         async void OnRelocateCommand(object obj)
         {
-            //TODO UPDATE GEOLOCALIZATION
-            RequestHospitalAskForRoomPopupViewModel vmTest = new RequestHospitalAskForRoomPopupViewModel();
+            if (GeolocatorService.IsGeolocationEnabled)
+            {
+            var position = await GeolocatorService.GetCurrentLocationAsync();
+            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh),string.Empty, position) ;
+            }
+            else
+            {
+                // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
+            }
 
 
-            await NavigationService.NavigateToAsync<CompletingHospitalRequestViewModel>(new AddressModel("name","street","province","2","floor2","placeidd",new Models.Requests.Position(2.0,2.3)));
 
         }
 
@@ -92,7 +112,7 @@ namespace AeccApp.Core.ViewModels
         #region Properties
 
 
-        private bool _switchBetweenAndHospitalList;
+        private bool _switchBetweenAndHospitalList = true;
 
         public bool SwitchBetweenAndHospitalList
         {

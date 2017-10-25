@@ -15,6 +15,7 @@ namespace AeccApp.Core.Services
             IocContainer.RegisterAsSingleton<IChatService, ChatService>();
             IocContainer.RegisterAsSingleton<IIdentityService, IdentityService>();
 
+            IocContainer.RegisterAsSingleton<IHomeAddressesDataService, HomeAddressesDataService>();
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
             IocContainer.RegisterAsSingleton<IHomeRequestService, HomeRequestService>();
             IocContainer.RegisterAsSingleton<IHomeAddressesDataService, HomeAddressesDataService>();

@@ -29,7 +29,7 @@ namespace AeccApp.Core.Services
 
         public async Task<IEnumerable<Coordinator>> GetCoordinators(string province)
         {
-            await Task.Delay(2000);
+            await Task.Delay(500);
             if (province.StartsWith("Barcelona", StringComparison.CurrentCultureIgnoreCase))
             {
                 return new Coordinator[]
@@ -82,7 +82,9 @@ namespace AeccApp.Core.Services
                };
             }
             else
-                return new List<Coordinator>();
+            {
+                return null;
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AeccApp.Core.Models.Requests
+namespace AeccApp.Core.Models
 {
     public class Position
     {

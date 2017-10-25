@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using AeccApp.Core.Models;
+using System.Globalization;
 
 namespace AeccApp.Core.Services
 {
@@ -16,12 +17,18 @@ namespace AeccApp.Core.Services
             _requestProvider = requestProvider;
         }
 
-        public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText)
+        public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText, Xamarin.Forms.GoogleMaps.Position position)
         {
+            string query = $"input={findText}&language=es&components=country:es&key={GlobalSetting.Instance.GooglePlacesApiKey}";
+            if (position.Latitude != 0)
+            {
+                query += $"&location={position.Latitude.ToString(CultureInfo.InvariantCulture)},{position.Longitude.ToString(CultureInfo.InvariantCulture)}";
+            }
+
             UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
             {
                 Path = "maps/api/place/autocomplete/json",
-                Query = $"input={findText}&language=es&components=country:es&types=geocode&key={GlobalSetting.Instance.GooglePlacesApiKey}"
+                Query = query
             };
 
             var places = await _requestProvider.GetAsync<GooglePlacesModel>(uriBuilder.ToString());

@@ -96,9 +96,9 @@ namespace AeccApp.Core.ViewModels
             if (!hasPermission)
                 return;
 
-            if (GeolocatorService.IsLocationAvailable())
+            if (GeolocatorService.IsGeolocationEnabled)
             {
-                var pos = await GeolocatorService.GetCurrentLocation();
+                var pos = await GeolocatorService.GetCurrentLocationAsync();
                 if (pos == null && !GeolocatorService.IsGeolocationEnabled)
                 {
                     // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
