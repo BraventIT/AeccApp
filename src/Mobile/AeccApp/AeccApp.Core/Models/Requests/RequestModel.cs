@@ -14,8 +14,9 @@ namespace AeccApp.Core.Models
 
         public RequestModel()
         {
+        }
 
-        public RequestModel(RequestTypeModel RequestType,string RequestLocation, string RequestDate, string RequestTime, string RequestComments, AddressModel RequestAddress)
+        public RequestModel(RequestType RequestType,string RequestLocation, string RequestDate, string RequestTime, string RequestComments, AddressModel RequestAddress)
         {
             this.RequestType = RequestType;
             this.RequestDate = RequestDate;
@@ -23,7 +24,5 @@ namespace AeccApp.Core.Models
             this.RequestComments = RequestComments;
             this.RequestAddress = RequestAddress;
         }
-
-
     }
 }

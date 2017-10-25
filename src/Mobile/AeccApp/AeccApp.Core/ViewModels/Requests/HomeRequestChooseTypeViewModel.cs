@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.Models;
+﻿using AeccApi.Models;
+using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -34,15 +35,15 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _myAddress, value); }
         }
 
-        private IEnumerable<CoordinatorModel> _provinceCoordinators;
-        public IEnumerable<CoordinatorModel> ProvinceCoordinators
+        private IEnumerable<Coordinator> _provinceCoordinators;
+        public IEnumerable<Coordinator> ProvinceCoordinators
         {
             get { return _provinceCoordinators; }
             set { Set(ref _provinceCoordinators, value); }
         }
 
-        private IEnumerable<RequestTypeModel> _requestTypes = new ObservableCollection<RequestTypeModel>();
-        public IEnumerable<RequestTypeModel> RequestTypes
+        private IEnumerable<RequestType> _requestTypes = new ObservableCollection<RequestType>();
+        public IEnumerable<RequestType> RequestTypes
         {
             get { return _requestTypes; }
             set { Set(ref _requestTypes, value); }
@@ -82,7 +83,7 @@ namespace AeccApp.Core.ViewModels
                 ProvinceCoordinators = await HomeRequestService.GetCoordinators(MyAddress.Province);
                 if (ProvinceCoordinators != null && ProvinceCoordinators.Any())
                 {
-                    RequestTypes = await HomeRequestService.GetRequestTypes();
+                    RequestTypes = await HomeRequestService.GetRequestTypesAsync();
                 }
                 else
                 {
@@ -113,7 +114,7 @@ namespace AeccApp.Core.ViewModels
 
         async public void OnRequestTypeCommand(object obj)
         {
-            var requestType = obj as RequestTypeModel;
+            var requestType = obj as RequestType;
             Request.RequestType = requestType;
             Request.RequestAddress = MyAddress;
             await NavigationService.NavigateToAsync<CompletingHomeRequestViewModel>(Request);

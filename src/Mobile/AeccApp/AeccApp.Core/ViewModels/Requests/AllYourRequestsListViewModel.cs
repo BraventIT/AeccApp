@@ -10,7 +10,6 @@ namespace AeccApp.Core.ViewModels
     class AllYourRequestsListViewModel : ViewModelBase
     {
 
-
         #region Commands
 
 
@@ -27,7 +26,7 @@ namespace AeccApp.Core.ViewModels
         void OnHospitalTabCommand(object obj)
         {
             SwitchHomeAndHospitalList = true;
-            RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "", new Models.Requests.Position(0, 0)));
+            RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "", new Position(0, 0)));
             HospitalRequestsList.Add(mockRequest);
 
 
@@ -46,7 +45,7 @@ namespace AeccApp.Core.ViewModels
         {
             SwitchHomeAndHospitalList = false;
 
-            RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "", new Models.Requests.Position(0, 0)));
+            RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "", new Position(0, 0)));
             HomeRequestsList.Add(mockRequest);
         }
 
@@ -158,7 +157,6 @@ namespace AeccApp.Core.ViewModels
         }
 
         #endregion
-
 
         #region Methods
         public override bool OnBackButtonPressed()
