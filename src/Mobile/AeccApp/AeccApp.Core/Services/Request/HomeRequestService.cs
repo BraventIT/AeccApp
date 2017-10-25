@@ -9,7 +9,7 @@ namespace AeccApp.Core.Services
     {
         public async Task<IEnumerable<RequestTypeModel>> GetRequestTypes()
         {
-            await Task.Delay(2000);
+            await Task.Delay(500);
             return new RequestTypeModel[]
             {
                  new RequestTypeModel()
@@ -26,7 +26,7 @@ namespace AeccApp.Core.Services
 
         public async Task<IEnumerable<CoordinatorModel>> GetCoordinators(string province)
         {
-            await Task.Delay(2000);
+            await Task.Delay(500);
             if (province.StartsWith("Barcelona", StringComparison.CurrentCultureIgnoreCase))
             {
                 return new CoordinatorModel[]
@@ -79,7 +79,9 @@ namespace AeccApp.Core.Services
                };
             }
             else
-                return new List<CoordinatorModel>();
+            {
+                return null;
+            }
         }
     }
 }

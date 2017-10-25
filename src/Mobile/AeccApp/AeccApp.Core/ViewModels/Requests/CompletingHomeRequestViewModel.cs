@@ -22,7 +22,8 @@ namespace AeccApp.Core.ViewModels
         {
             RequestDateAndTimePopupVM.ApplyDateAndTime += OnApplyDateAndTimeCommand;
             RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
-            CurrentAddress = navigationData as AddressModel;
+            CurrentRequest = navigationData as RequestModel;
+            CurrentAddress = CurrentRequest.RequestAddress;
             InitialMapLat = CurrentAddress.Coordinates.Latitude;
             InitialMapLng = CurrentAddress.Coordinates.Longitude;
             return Task.CompletedTask;
@@ -37,24 +38,7 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
-        private Command _sendRequestCommand;
-        public ICommand SendRequestCommand
-        {
-            get
-            {
-                return _sendRequestCommand ??
-                    (_sendRequestCommand = new Command(OnSendRequestCommand, (o) => !IsBusy));
-            }
-        }
-
-        private async void OnSendRequestCommand(object obj)
-        {
-
-            //TODO send request
-            await NavigationService.HidePopupAsync();
-            await NavigationService.ShowPopupAsync(RequestSentPopupVM); 
-        }
-
+     
         private Command _openRequestConfirmationPopupCommand;
         public ICommand OpenRequestConfirmationPopupCommand
         {
@@ -70,6 +54,7 @@ namespace AeccApp.Core.ViewModels
             if (DateToApplyParsed==null)
             {
                 RequestConfirmationPopupVM.DisplayDate = DateTime.Now.ToString().Remove(10);
+                DateToApplyParsed = DateTime.Now.ToString().Remove(10);
             }
             else
             {
@@ -79,6 +64,7 @@ namespace AeccApp.Core.ViewModels
             if (TimeToApplyParsed == null)
             {
                 RequestConfirmationPopupVM.DisplayTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
+                TimeToApplyParsed = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
             }
             else
             {
@@ -109,7 +95,7 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnApplyDateAndTimeCommand(object sender, EventArgs e)
         {
-            //Apply date and time to the request:
+            //Applies date and time to the request:
             DateToApplyParsed = RequestDateAndTimePopupVM.DateSelected.Date.ToString().Remove(10);
             TimeToApplyParsed = RequestDateAndTimePopupVM.TimeSelected.ToString().Remove(5);
             await NavigationService.HidePopupAsync();
@@ -145,9 +131,11 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnSendRequestConfirmationCommand(object sender, EventArgs e)
         {
+            CurrentRequest.RequestComments = RequestComments;
+            CurrentRequest.RequestDate = DateToApplyParsed;
+            CurrentRequest.RequestTime = TimeToApplyParsed;
+            //TODO send request
             await NavigationService.HidePopupAsync();
-            //TODO SEND REQUEST
-            
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
 
@@ -174,6 +162,15 @@ namespace AeccApp.Core.ViewModels
             get { return _initialMapLng; }
             set { Set(ref _initialMapLng, value); }
         }
+
+        private RequestModel _currentRequest;
+
+        public RequestModel CurrentRequest
+        {
+            get { return _currentRequest; }
+            set { _currentRequest = value; }
+        }
+
 
         private AddressModel _currentAddress;
 

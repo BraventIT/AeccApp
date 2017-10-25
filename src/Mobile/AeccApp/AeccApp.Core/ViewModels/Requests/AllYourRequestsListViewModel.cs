@@ -26,7 +26,7 @@ namespace AeccApp.Core.ViewModels
         void OnHospitalTabCommand(object obj)
         {
             SwitchHomeAndHospitalList = true;
-            RequestModel mockRequest = new RequestModel(new RequestTypeModel() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "", new Models.Position(0, 0)));
+            RequestModel mockRequest = new RequestModel(new RequestTypeModel() { Name = "tipo" }, "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "", new Models.Position(0, 0)));
             HospitalRequestsList.Add(mockRequest);
 
 
@@ -45,7 +45,7 @@ namespace AeccApp.Core.ViewModels
         {
             SwitchHomeAndHospitalList = false;
 
-            RequestModel mockRequest = new RequestModel(new RequestTypeModel() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "", new Models.Position(0, 0)));
+            RequestModel mockRequest = new RequestModel(new RequestTypeModel() { Name = "tipo" }, "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "", new Models.Position(0, 0)));
             HomeRequestsList.Add(mockRequest);
         }
 

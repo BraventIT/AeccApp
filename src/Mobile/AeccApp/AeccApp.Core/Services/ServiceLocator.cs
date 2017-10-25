@@ -51,15 +51,15 @@ namespace AeccApp.Core.Services
             get { return Resolve<IHomeAddressesDataService>(); }
         }
 
-        static IHomeAddressesDataService _homeRequestService;
-        public static IHomeAddressesDataService HomeRequestService
+        static IHomeRequestService _homeRequestService;
+        public static IHomeRequestService HomeRequestService
         {
             set { _homeRequestService = value; }
             get
             {
                 return (_homeRequestService != null) ?
                   _homeRequestService :
-                  Resolve<IHomeAddressesDataService>();
+                  Resolve<IHomeRequestService>();
             }
         }
         public static IGeolocator GeolocatorService

@@ -67,7 +67,7 @@ namespace XLabs.Forms.Controls
 
             if (Element != null && Element.Font != Font.Default && targetButton != null) targetButton.Typeface = Element.Font.ToExtendedTypeface(Context);
 
-            if (Element != null && ImageButton.Source != null) await SetImageSourceAsync(targetButton, ImageButton).ConfigureAwait(false);
+            if (Element != null && ImageButton.Source != null) await SetImageSourceAsync(targetButton, ImageButton);
         }
 
         /// <summary>
@@ -94,6 +94,10 @@ namespace XLabs.Forms.Controls
         {
             if (targetButton == null || targetButton.Handle == IntPtr.Zero || model == null) return;
 
+            try
+            {
+
+            
             // const int Padding = 10;
             var source = model.IsEnabled ? model.Source : model.DisabledSource ?? model.Source;
 
@@ -119,7 +123,7 @@ namespace XLabs.Forms.Controls
                         Drawable bottom = null;
                         //System.Diagnostics.Debug.WriteLine($"SetImageSourceAsync intptr{targetButton.Handle}");
                         int padding = 10; // model.Padding
-                        targetButton.CompoundDrawablePadding = RequestToPixels(padding);
+                         targetButton.CompoundDrawablePadding = RequestToPixels(padding);
                         switch (model.Orientation)
                         {
                             case ImageOrientation.ImageToLeft:
@@ -147,6 +151,11 @@ namespace XLabs.Forms.Controls
                         targetButton.SetCompoundDrawables(left, top, right, bottom);
                     }
                 }
+            }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
             }
         }
 
@@ -181,7 +190,7 @@ namespace XLabs.Forms.Controls
                 e.PropertyName == ImageButton.ImageTintColorProperty.PropertyName ||
                 e.PropertyName == ImageButton.DisabledImageTintColorProperty.PropertyName)
             {
-                await SetImageSourceAsync(Control, ImageButton).ConfigureAwait(false);
+                await SetImageSourceAsync(Control, ImageButton);
             }
         }
 
