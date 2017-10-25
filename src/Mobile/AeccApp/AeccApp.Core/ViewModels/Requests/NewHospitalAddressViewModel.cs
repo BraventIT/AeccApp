@@ -112,7 +112,7 @@ namespace AeccApp.Core.ViewModels
         #region Properties
 
 
-        private bool _switchBetweenAndHospitalList;
+        private bool _switchBetweenAndHospitalList = true;
 
         public bool SwitchBetweenAndHospitalList
         {
