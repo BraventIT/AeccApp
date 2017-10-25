@@ -101,7 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Identity.Client">
-      <Version>1.1.0-preview</Version>
+      <Version>1.1.1-alpha0393</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Rest.ClientRuntime">
       <Version>2.3.10</Version>
@@ -115,10 +115,10 @@
     <PackageReference Include="Xam.Plugins.Settings">
       <Version>3.0.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.Animated.Vector.Drawable">
+    <PackageReference Include="Xamarin.Android.Support.Compat">
       <Version>25.4.0.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.Compat">
+    <PackageReference Include="Xamarin.Android.Support.CustomTabs">
       <Version>25.4.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design">
@@ -134,12 +134,6 @@
       <Version>25.4.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter">
-      <Version>25.4.0.2</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">
-      <Version>25.4.0.2</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.Vector.Drawable">
       <Version>25.4.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
