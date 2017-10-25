@@ -6,7 +6,7 @@ namespace AeccApp.Core.Services
 {
     public interface IGoogleMapsPlaceService
     {
-        Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText);
+        Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText , Xamarin.Forms.GoogleMaps.Position position);
 
         Task<AddressModel> FillPlaceDetailAsync(AddressModel address);
 

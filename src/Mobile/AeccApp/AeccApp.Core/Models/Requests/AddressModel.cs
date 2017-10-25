@@ -1,4 +1,4 @@
-﻿using AeccApp.Core.Models.Requests;
+﻿using AeccApp.Core.Models;
 using System.Linq;
 
 namespace AeccApp.Core.Models

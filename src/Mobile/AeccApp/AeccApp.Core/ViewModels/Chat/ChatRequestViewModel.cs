@@ -58,7 +58,7 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _requestMessage, value); }
         }
         #endregion
-
+        
         #region Commands
         private Command _acceptRequestCommand;
         public ICommand AcceptRequestCommand

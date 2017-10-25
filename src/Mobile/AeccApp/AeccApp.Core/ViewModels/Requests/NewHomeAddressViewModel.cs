@@ -3,6 +3,7 @@ using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.Validations;
 using AeccApp.Core.ViewModels.Popups;
+using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace AeccApp.Core.ViewModels
     public class NewHomeAddressViewModel : ViewModelBase
     {
         private IGoogleMapsPlaceService GoogleMapsPlaceService { get; } = ServiceLocator.GoogleMapsPlaceService;
-       
+        private IGeolocator GeolocatorService { get; } = ServiceLocator.GeolocatorService;
+
 
         public NewHomeAddressViewModel()
         {
@@ -256,7 +258,12 @@ namespace AeccApp.Core.ViewModels
             {
                 if (string.IsNullOrEmpty(AddressSelected.PlaceId))
                 {
-                    var places = await GoogleMapsPlaceService.FindPlacesAsync(AddressSelected.FinderAddress);
+                    Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position();
+                    if (GeolocatorService.IsGeolocationAvailable)
+                    {
+                        position = await GeolocatorService.GetCurrentLocationAsync();
+                    }
+                        var places = await GoogleMapsPlaceService.FindPlacesAsync(AddressSelected.FinderAddress,position);
                     if (places.Any())
                     {
                         AddressSelected = places.First();
@@ -303,7 +310,13 @@ namespace AeccApp.Core.ViewModels
                 if (SugestedAddressesList.Any())
                     SugestedAddressesList.Clear();
 
-                var places = await GoogleMapsPlaceService.FindPlacesAsync(result);
+                Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position();
+                if (GeolocatorService.IsGeolocationAvailable)
+                {
+                    position = await GeolocatorService.GetCurrentLocationAsync();
+                }
+
+                var places = await GoogleMapsPlaceService.FindPlacesAsync(result,position);
                 SugestedAddressesList.AddRange(places);
 
                 SugestedAddressesListIsEmpty = !SugestedAddressesList.Any();

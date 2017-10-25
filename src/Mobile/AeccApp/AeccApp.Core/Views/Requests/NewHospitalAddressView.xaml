@@ -77,7 +77,7 @@
             <!--  Hospitals map  -->
             <Grid
                 HorizontalOptions="FillAndExpand"
-                IsVisible="{Binding SwitchBetweenAndHospitalList}"
+                IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}"
                 VerticalOptions="FillAndExpand">
                 <maps:Map
                     x:Name="map"
@@ -96,7 +96,7 @@
                 </ctrl:CustomImage>
             </Grid>
             <!--  Hospitals list  -->
-            <Grid Padding="15" IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
+            <Grid Padding="15" IsVisible="{Binding SwitchBetweenAndHospitalList}">
                 <ListView HasUnevenRows="True" HeightRequest="600">
                     <ListView.Margin>
                         <OnPlatform x:TypeArguments="Thickness">
