@@ -4,16 +4,25 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Listado de Coordinadores</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo</a>
 </p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Buscar por nombre: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Buscar" class="btn btn-default" /> |
+            <a asp-action="Index">Volver a la lista completa</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Email)
@@ -22,7 +31,7 @@
                     @Html.DisplayNameFor(model => model.Telephone)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Province)
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["ProvinceSortParm"]">@Html.DisplayNameFor(model => model.Province)</a>
                 </th>
             <th></th>
         </tr>
@@ -43,9 +52,9 @@
                 @Html.DisplayFor(modelItem => item.Province)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Borrar</a>
             </td>
         </tr>
 }

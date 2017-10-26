@@ -16,8 +16,8 @@ namespace AeccApp.Core.ViewModels
 
         public async override Task ActivateAsync()
         {
-           var kk = await ServiceLocator.HomeRequestService.GetRequestTypesAsync();
-            var kk2 = await ServiceLocator.HomeRequestService.GetCoordinatorsAsync("zaragoza");
+            // var kk = await ServiceLocator.HomeRequestService.GetRequestTypesAsync();
+            //  var kk2 = await ServiceLocator.HomeRequestService.GetCoordinatorsAsync("zaragoza");
         }
 
         private Command _enterCommand;
