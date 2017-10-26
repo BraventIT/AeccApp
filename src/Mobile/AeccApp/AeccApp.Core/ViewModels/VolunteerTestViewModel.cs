@@ -14,6 +14,12 @@ namespace AeccApp.Core.ViewModels
             _identityService = ServiceLocator.IdentityService;
         }
 
+        public async override Task ActivateAsync()
+        {
+           var kk = await ServiceLocator.HomeRequestService.GetRequestTypesAsync();
+            var kk2 = await ServiceLocator.HomeRequestService.GetCoordinatorsAsync("zaragoza");
+        }
+
         private Command _enterCommand;
         public ICommand EnterCommand
         {

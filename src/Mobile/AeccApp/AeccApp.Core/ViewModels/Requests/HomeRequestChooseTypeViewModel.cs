@@ -80,7 +80,7 @@ namespace AeccApp.Core.ViewModels
                     MyAddress = await GoogleMapsPlaceService.FillPlaceDetailAsync(MyAddress);
                 }
 
-                ProvinceCoordinators = await HomeRequestService.GetCoordinators(MyAddress.Province);
+                ProvinceCoordinators = await HomeRequestService.GetCoordinatorsAsync(MyAddress.Province);
                 if (ProvinceCoordinators != null && ProvinceCoordinators.Any())
                 {
                     RequestTypes = await HomeRequestService.GetRequestTypesAsync();

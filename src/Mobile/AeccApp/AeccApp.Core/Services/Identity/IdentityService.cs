@@ -3,6 +3,7 @@ using Microsoft.Identity.Client;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,10 +115,12 @@ namespace AeccApp.Core.Services
             }
             catch (MsalUiRequiredException ex)
             {
+                Debug.WriteLine(ex);
                 //  await DisplayAlert($"Session has expired, please sign out and back in.", ex.ToString(), "Dismiss");
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 // await DisplayAlert($"Exception:", ex.ToString(), "Dismiss");
             }
             return _token;
