@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AeccApp.Core.Services.Request
+namespace AeccApp.Core.Services
 {
     public class HospitalRequestService : IHospitalRequestService
     {
