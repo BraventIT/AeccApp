@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AeccApi.Models;
+using System.Globalization;
+using AeccApi.Extensions;
 
 namespace AeccApi.Controllers
 {
@@ -19,9 +21,30 @@ namespace AeccApi.Controllers
         }
 
         // GET: Coordinators
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            return View(await _context.Coordinators.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["ProvinceSortParm"] = sortOrder == "Province" ? "province_desc" : "Province";
+            ViewData["CurrentFilter"] = searchString;
+
+            var coordinators = _context.Coordinators.Select(s => s);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                coordinators = coordinators.Where(c => c.Name.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    coordinators = coordinators.OrderByDescending(c => c.Name); break;
+                case "Province":
+                    coordinators = coordinators.OrderBy(c => c.Province); break;
+                case "province_desc":
+                    coordinators = coordinators.OrderByDescending(c => c.Province); break;
+                default:
+                    coordinators = coordinators.OrderBy(c => c.Name); break;
+            }
+
+            return View(await coordinators.AsNoTracking().ToListAsync());
         }
 
         // GET: Coordinators/Details/5
@@ -114,14 +137,10 @@ namespace AeccApi.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CoordinatorExists(coordinator.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -129,7 +148,7 @@ namespace AeccApi.Controllers
         }
 
         // GET: Coordinators/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError=false)
         {
             if (id == null)
             {
@@ -137,10 +156,18 @@ namespace AeccApi.Controllers
             }
 
             var coordinator = await _context.Coordinators
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (coordinator == null)
             {
                 return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if the problem persists " +
+                    "see your system administrator.";
             }
 
             return View(coordinator);
@@ -151,10 +178,18 @@ namespace AeccApi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var coordinator = await _context.Coordinators.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Coordinators.Remove(coordinator);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                Coordinator coordinatorToDelete = new Coordinator() { ID = id };
+                _context.Entry(coordinatorToDelete).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool CoordinatorExists(int id)
