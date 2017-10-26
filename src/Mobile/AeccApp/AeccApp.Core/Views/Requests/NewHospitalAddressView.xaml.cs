@@ -11,11 +11,11 @@ namespace AeccApp.Core.Views
 	{
 		public NewHospitalAddressView ()
 		{
-            MessagingCenter.Subscribe<GeolocatorMessages, Xamarin.Forms.GoogleMaps.Position>(this, string.Empty, (sender, arg) => 
+            MessagingCenter.Subscribe<GeolocatorMessages, Position>(this, string.Empty, (sender, arg) => 
                 MoveCameraMap(arg));
 			InitializeComponent ();
             map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.416937, -3.703523), 6d);
-            var pinBravent = new Pin() { Label = "Hospital de pruebas técnicas Bravent", Position = new Xamarin.Forms.GoogleMaps.Position(40.416937, -3.703523) };
+            var pinBravent = new Pin() { Label = "Hospital de pruebas técnicas Bravent", Position = new Position(40.416937, -3.703523) };
             pinBravent.IsDraggable = false;
             switch (Device.OS)
             {

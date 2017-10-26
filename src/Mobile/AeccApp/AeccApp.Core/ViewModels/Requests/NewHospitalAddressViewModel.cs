@@ -5,6 +5,8 @@ using Plugin.Geolocator.Abstractions;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -43,7 +45,6 @@ namespace AeccApp.Core.ViewModels
         void OnHospitalMapTabCommand(object obj)
         {
             SwitchBetweenAndHospitalList = true;
-         
         }
         private Command _hospitalListTabCommand;
         public ICommand HospitalListTabCommand
@@ -110,6 +111,14 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Properties
+
+        private ObservableCollection<Pin> _mapPins = new ObservableCollection<Pin>();
+
+        public ObservableCollection<Pin> MapPins
+        {
+            get { return _mapPins; }
+            set { Set(ref _mapPins, value); }
+        }
 
 
         private bool _switchBetweenAndHospitalList = true;

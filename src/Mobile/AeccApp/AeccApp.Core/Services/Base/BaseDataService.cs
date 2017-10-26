@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.Services
 {
@@ -22,6 +23,15 @@ namespace AeccApp.Core.Services
 
             string jsonString = await _fileProvider.LoadTextAsync(filename);
             return await Task.Run(() => JsonConvert.DeserializeObject<List<T>>(jsonString));
+        }
+
+        protected async Task<Dictionary<string,Pin>> LoadDictionaryAsync(string filename)
+        {
+            if (!_fileProvider.FileExists(filename))
+                return null;
+
+            string jsonString = await _fileProvider.LoadTextAsync(filename);
+            return await Task.Run(() => JsonConvert.DeserializeObject<Dictionary<string, Pin>>(jsonString));
         }
 
         protected async Task SaveAsync(string filename, IEnumerable<T> data)
