@@ -8,6 +8,6 @@ namespace AeccApp.Core.Services
     public interface IHomeRequestService
     {
         Task<IEnumerable<RequestType>> GetRequestTypesAsync();
-        Task<IEnumerable<Coordinator>> GetCoordinators(string province);
+        Task<IEnumerable<Coordinator>> GetCoordinatorsAsync(string province);
     }
 }

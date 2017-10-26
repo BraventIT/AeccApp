@@ -22,69 +22,19 @@ namespace AeccApp.Core.Services
             UriBuilder uribuilder = new UriBuilder(GlobalSetting.Instance.ApiEndpoint)
             {
                 Path = "api/RequestTypes",
-                Query = "requestSource={RequestSourceEnum.Hospital.ToString()}"
+                Query = $"requestSource={RequestSourceEnum.Domicilio.ToString()}"
             };
             return await _requestProvider.GetAsync<IEnumerable<RequestType>>(uribuilder.ToString());
         }
 
-        public async Task<IEnumerable<Coordinator>> GetCoordinators(string province)
+        public async Task<IEnumerable<Coordinator>> GetCoordinatorsAsync(string province)
         {
-            await Task.Delay(500);
-            if (province.StartsWith("Barcelona", StringComparison.CurrentCultureIgnoreCase))
+            UriBuilder uribuilder = new UriBuilder(GlobalSetting.Instance.ApiEndpoint)
             {
-                return new Coordinator[]
-                {
-                    new Coordinator()
-                    {
-                        Name= "Jordi Abad"
-                        , Email="jordi.abad@test.org"
-                        , Province="Barcelona"
-                    },
-                    new Coordinator()
-                    {
-                        Name="Ana Carretero"
-                        , Email="anamaria.carretero@test.org"
-                        , Province="Barcelona"
-                    },
-                };
-            }
-            else if (province.StartsWith("Madrid", StringComparison.CurrentCultureIgnoreCase))
-            {
-                return new Coordinator[]
-               {
-                    new Coordinator()
-                    {
-                        Name="Eva Sanchez",
-                        Email= "eva.sanchez@test.org"
-                    }
-               };
-            }
-            else if (province.StartsWith("Gerona", StringComparison.CurrentCultureIgnoreCase))
-            {
-                return new Coordinator[]
-               {
-                    new Coordinator()
-                    {
-                        Name="Alberto Pulez",
-                        Email= "alberto.pulez@test.org"
-                    }
-               };
-            }
-            else if (province.StartsWith("La Coruña", StringComparison.CurrentCultureIgnoreCase))
-            {
-                return new Coordinator[]
-               {
-                    new Coordinator()
-                    {
-                        Name="Victor Pulez",
-                        Email= "Victor.pulez@test.org"
-                    }
-               };
-            }
-            else
-            {
-                return null;
-            }
+                Path = "api/Coordinators",
+                Query = $"requestSource={RequestSourceEnum.Hospital.ToString()}&province={province}"
+            };
+            return await _requestProvider.GetAsync<IEnumerable<Coordinator>>(uribuilder.ToString());
         }
     }
 }
