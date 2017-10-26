@@ -47,109 +47,104 @@
             </DataTemplate>
         </ResourceDictionary>
     </ContentView.Resources>
+    <StackLayout>
+        <!--  Header  -->
+        <StackLayout
+            Padding="35"
+            BackgroundColor="{StaticResource GreyText}"
+            HorizontalOptions="FillAndExpand">
 
-    <ScrollView>
-        <StackLayout>
+            <Grid HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <!--  Header  -->
-            <StackLayout
-                Padding="35"
-                BackgroundColor="{StaticResource GreyText}"
-                HorizontalOptions="FillAndExpand">
-
-                <Grid HorizontalOptions="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <StackLayout
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
+                <StackLayout
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal"
+                    VerticalOptions="Center">
+                    <ctrl:CustomImage
+                        HeightRequest="25"
                         HorizontalOptions="Center"
-                        Orientation="Horizontal"
-                        VerticalOptions="Center">
-                        <ctrl:CustomImage
-                            HeightRequest="25"
-                            HorizontalOptions="Center"
-                            SourcePlatform="location_pin"
-                            VerticalOptions="Center"
-                            WidthRequest="25" />
+                        SourcePlatform="location_pin"
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
 
-                        <Label
-                            FontSize="Large"
-                            HorizontalOptions="Center"
-                            Text="{Binding MyAddress.Name}"
-                            VerticalOptions="Center" />
-                    </StackLayout>
                     <Label
-                        Grid.Row="1"
+                        FontSize="Large"
                         HorizontalOptions="Center"
-                        Text="{Binding MyAddress.DisplayAddress}"
+                        Text="{Binding MyAddress.Name}"
                         VerticalOptions="Center" />
-                </Grid>
-            </StackLayout>
-
-            <!--  Requests types list  -->
-            <ListView
-                Grid.Row="0"
-                Grid.ColumnSpan="2"
-                HasUnevenRows="True"
-                ItemTemplate="{StaticResource requestTypesTemplate}"
-                ItemsSource="{Binding RequestTypes}"
-                SeparatorVisibility="None">
-
-                <ListView.Behaviors>
-                    <beh:EventToCommandBehavior
-                        Command="{Binding RequestTypeCommand}"
-                        EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                        EventName="ItemTapped" />
-                </ListView.Behaviors>
-
-                <!--  Footer  -->
-                <ListView.Footer>
-
-                    <StackLayout HorizontalOptions="Center">
-                        <Label IsVisible="{Binding ProvinceHasNotRequestAvailable}" Text="lalala no hay nada cambiame por recurso" />
-                        <Grid>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
-                            </Grid.GestureRecognizers>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-
-                            <Label
-                                Grid.Column="0"
-                                Margin="20,10,0,0"
-                                FontAttributes="Bold"
-                                FontSize="Medium"
-                                Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
-                                TextColor="{StaticResource GreyTextDark}" />
-                            <ctrl:CustomImage
-                                Grid.Column="1"
-                                Margin="0,10,20,0"
-                                HeightRequest="25"
-                                HorizontalOptions="End"
-                                SourcePlatform="right_arrow"
-                                WidthRequest="25" />
-
-                        </Grid>
-                    </StackLayout>
-                </ListView.Footer>
-            </ListView>
-
+                </StackLayout>
+                <Label
+                    Grid.Row="1"
+                    HorizontalOptions="Center"
+                    Text="{Binding MyAddress.DisplayAddress}"
+                    VerticalOptions="Center" />
+            </Grid>
         </StackLayout>
-    </ScrollView>
+
+        <!--  Requests types list  -->
+        <ListView
+            HasUnevenRows="True"
+            ItemTemplate="{StaticResource requestTypesTemplate}"
+            ItemsSource="{Binding RequestTypes}"
+            SeparatorVisibility="None">
+
+            <ListView.Behaviors>
+                <beh:EventToCommandBehavior
+                    Command="{Binding RequestTypeCommand}"
+                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                    EventName="ItemTapped" />
+            </ListView.Behaviors>
+
+            <!--  Footer  -->
+            <ListView.Footer>
+                <StackLayout HorizontalOptions="Center">
+                    <Label
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding ProvinceHasNotRequestAvailable}"
+                        Text="{Binding [HomeRequestChooseTypeNoRequestsInProvince]}" />
+                    <Grid>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Margin="20,10,0,0"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
+                            TextColor="{StaticResource GreyTextDark}" />
+                        <ctrl:CustomImage
+                            Grid.Column="1"
+                            Margin="0,10,20,0"
+                            HeightRequest="25"
+                            HorizontalOptions="End"
+                            SourcePlatform="right_arrow"
+                            WidthRequest="25" />
+                    </Grid>
+                </StackLayout>
+            </ListView.Footer>
+
+        </ListView>
+
+
+    </StackLayout>
 </v:BaseContentPage>

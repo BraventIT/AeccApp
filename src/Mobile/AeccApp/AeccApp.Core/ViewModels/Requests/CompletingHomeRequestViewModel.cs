@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.Models;
+﻿using AeccApp.Core.Messages;
+using AeccApp.Core.Models;
 using AeccApp.Core.ViewModels.Popups;
 using System;
 using System.Threading.Tasks;
@@ -26,9 +27,16 @@ namespace AeccApp.Core.ViewModels
             CurrentAddress = CurrentRequest.RequestAddress;
             InitialMapLat = CurrentAddress.Coordinates.Latitude;
             InitialMapLng = CurrentAddress.Coordinates.Longitude;
+            RequestTypeHeader = CurrentRequest.RequestType.Name;
+            Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position(InitialMapLat,InitialMapLng);
+            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty,position);
             return Task.CompletedTask;
         }
+        public override Task ActivateAsync()
+        {
 
+            return base.ActivateAsync();
+        }
         public override void Deactivate()
         {
             RequestDateAndTimePopupVM.ApplyDateAndTime -= OnApplyDateAndTimeCommand;
@@ -147,6 +155,15 @@ namespace AeccApp.Core.ViewModels
         public RequestConfirmationPopupViewModel RequestConfirmationPopupVM { get; private set; }
         public RequestSentPopupViewModel RequestSentPopupVM { get; private set; }
         public RequestDateAndTimePopupViewModel RequestDateAndTimePopupVM { get; private set; }
+
+
+        private string _requestTypeHeader;
+
+        public string RequestTypeHeader
+        {
+            get { return _requestTypeHeader; }
+            set { Set(ref _requestTypeHeader, value); }
+        }
 
 
         private double _initialMapLat;

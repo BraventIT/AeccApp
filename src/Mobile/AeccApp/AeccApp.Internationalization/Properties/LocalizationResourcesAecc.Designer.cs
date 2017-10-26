@@ -566,6 +566,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No hay coordinadores disponibles en esta provincia..
+        /// </summary>
+        public static string HomeRequestChooseTypeNoRequestsInProvince {
+            get {
+                return ResourceManager.GetString("HomeRequestChooseTypeNoRequestsInProvince", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ver todas las noticias.
         /// </summary>
         public static string HomeViewAllNews {

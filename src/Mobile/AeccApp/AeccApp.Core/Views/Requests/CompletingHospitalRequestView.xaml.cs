@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AeccApp.Core.Messages;
+using System;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.Xaml;
 
 namespace AeccApp.Core.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CompletingHospitalRequestView : BaseContentPage
 	{
 		public CompletingHospitalRequestView ()
         {
 
+            MessagingCenter.Subscribe<GeolocatorMessages, Position>(this, string.Empty, (sender, arg) => 
+                MoveCameraMap(arg)
+            );
             InitializeComponent();
-            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Xamarin.Forms.GoogleMaps.Position(40.416937, -3.703523), 6d);
+            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.416937, -3.703523), 6d);
             var pinBravent = new Pin() { Label = "Bravent", Position = new Position(40.416937, -3.703523) };
             pinBravent.IsDraggable = false;
             switch (Device.OS)
@@ -36,14 +36,14 @@ namespace AeccApp.Core.Views
             map.Pins.Add(pinBravent);
         }
 
-        protected override void OnAppearing()
+     
+        protected override void OnDisappearing()
         {
-            base.OnAppearing();
-
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<GeolocatorMessages>(this, string.Empty);
         }
         public async void MoveCameraMap(Position toPosition)
         {
-
             var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
                      toPosition, 16d), TimeSpan.FromSeconds(1));
         }

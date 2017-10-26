@@ -285,6 +285,9 @@
   <data name="HomeAddressesListViewYourAddresses" xml:space="preserve">
     <value>Tus domicilios guardados</value>
   </data>
+  <data name="HomeRequestChooseTypeNoRequestsInProvince" xml:space="preserve">
+    <value>No hay coordinadores disponibles en esta provincia.</value>
+  </data>
   <data name="HomeViewAllNews" xml:space="preserve">
     <value>Ver todas las noticias</value>
   </data>

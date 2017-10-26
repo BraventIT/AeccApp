@@ -21,9 +21,9 @@
                     BackgroundColor="LightGray"
                     HorizontalOptions="FillAndExpand">
                     <Label
-                        FontSize="Large"
+                        FontSize="{StaticResource MediumSize}"
                         HorizontalOptions="Center"
-                        Text="Request type text" />
+                        Text="{Binding RequestTypeHeader}" />
                 </StackLayout>
 
 
