@@ -21,8 +21,8 @@ namespace AeccApp.Core.Services
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
             IocContainer.RegisterAsSingleton<IHomeRequestService, HomeRequestService>();
             IocContainer.RegisterAsSingleton<IHomeAddressesDataService, HomeAddressesDataService>();
-            IocContainer.RegisterAsSingleton<IGoogleMapsPlaceService, GoogleMapsPlaceService>();
-            IocContainer.RegisterAsSingleton<IGoogleMapsPlaceService, GoogleMapsPlaceService>();
+            IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
+            IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.Register<IHttpRequestProvider, HttpRequestProvider>();
         }
 
@@ -83,9 +83,9 @@ namespace AeccApp.Core.Services
             get { return CrossPermissions.Current; }
         }
 
-        public static IGoogleMapsPlaceService GoogleMapsPlaceService
+        public static IGoogleMapsService GoogleMapsService
         {
-            get { return Resolve<IGoogleMapsPlaceService>(); }
+            get { return Resolve<IGoogleMapsService>(); }
         }
 
         public static IFileProvider FileProvider

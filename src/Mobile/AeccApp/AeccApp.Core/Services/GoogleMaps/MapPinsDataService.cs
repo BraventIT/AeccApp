@@ -10,7 +10,7 @@ namespace AeccApp.Core.Services
     {
         private const string MAP_PINS_FILENAME = "MapPins.json";
 
-        public override string FileName => throw new System.NotImplementedException();
+        public override string FileName => "MapPins.json";
 
         public Task<Dictionary<string, Pin>> GetListAsync()
     {

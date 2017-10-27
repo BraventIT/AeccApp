@@ -11,7 +11,7 @@ namespace AeccApp.Core.ViewModels
 {
     public class HospitalRequestChooseTypeViewModel : ViewModelBase
     {
-        private IGoogleMapsPlaceService GoogleMapsPlaceService { get; } = ServiceLocator.GoogleMapsPlaceService;
+        private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
         private IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
 
         #region Properties
@@ -41,7 +41,7 @@ namespace AeccApp.Core.ViewModels
             {
                 if (MyAddress.Coordinates == null)
                 {
-                    MyAddress = await GoogleMapsPlaceService.FillPlaceDetailAsync(MyAddress);
+                    MyAddress = await GoogleMapsService.FillPlaceDetailAsync(MyAddress);
                 }
                 if (MyAddress.WillBeSaved)
                 {

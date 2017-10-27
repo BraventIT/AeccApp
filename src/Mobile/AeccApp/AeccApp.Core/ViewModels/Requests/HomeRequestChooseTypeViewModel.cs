@@ -13,7 +13,7 @@ namespace AeccApp.Core.ViewModels
 {
     public class HomeRequestChooseTypeViewModel : ViewModelBase
     {
-        private IGoogleMapsPlaceService GoogleMapsPlaceService { get; } = ServiceLocator.GoogleMapsPlaceService;
+        private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
         private IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
         private IHomeRequestService HomeRequestService { get; } = ServiceLocator.HomeRequestService;
 
@@ -77,7 +77,7 @@ namespace AeccApp.Core.ViewModels
 
                 if (MyAddress.Coordinates == null)
                 {
-                    MyAddress = await GoogleMapsPlaceService.FillPlaceDetailAsync(MyAddress);
+                    MyAddress = await GoogleMapsService.FillPlaceDetailAsync(MyAddress);
                 }
 
                 ProvinceCoordinators = await HomeRequestService.GetCoordinatorsAsync(MyAddress.Province);

@@ -15,7 +15,7 @@ namespace AeccApp.Core.ViewModels
 {
     public class NewHomeAddressViewModel : ViewModelBase
     {
-        private IGoogleMapsPlaceService GoogleMapsPlaceService { get; } = ServiceLocator.GoogleMapsPlaceService;
+        private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
         private IGeolocator GeolocatorService { get; } = ServiceLocator.GeolocatorService;
 
 
@@ -263,7 +263,7 @@ namespace AeccApp.Core.ViewModels
                     {
                         position = await GeolocatorService.GetCurrentLocationAsync();
                     }
-                        var places = await GoogleMapsPlaceService.FindPlacesAsync(AddressSelected.FinderAddress,position);
+                        var places = await GoogleMapsService.FindPlacesAsync(AddressSelected.FinderAddress,position);
                     if (places.Any())
                     {
                         AddressSelected = places.First();
@@ -316,7 +316,7 @@ namespace AeccApp.Core.ViewModels
                     position = await GeolocatorService.GetCurrentLocationAsync();
                 }
 
-                var places = await GoogleMapsPlaceService.FindPlacesAsync(result,position);
+                var places = await GoogleMapsService.FindPlacesAsync(result,position);
                 SugestedAddressesList.AddRange(places);
 
                 SugestedAddressesListIsEmpty = !SugestedAddressesList.Any();

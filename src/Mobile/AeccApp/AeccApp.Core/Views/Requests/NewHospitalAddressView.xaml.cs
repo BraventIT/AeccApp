@@ -14,23 +14,7 @@ namespace AeccApp.Core.Views
             MessagingCenter.Subscribe<GeolocatorMessages, Position>(this, string.Empty, (sender, arg) => 
                 MoveCameraMap(arg));
 			InitializeComponent ();
-            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.416937, -3.703523), 6d);
-            var pinBravent = new Pin() { Label = "Hospital de pruebas técnicas Bravent", Position = new Position(40.416937, -3.703523) };
-            pinBravent.IsDraggable = false;
-            switch (Device.OS)
-            {
-                case TargetPlatform.Android:
-                   // pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin_hospital_map.png");
-                    break;
-                case TargetPlatform.iOS:
-                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin_hospital_map.png");
-                    break;
-                default:
-                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"Assets/location_pin_hospital_map.png");
-                    break;
-            }
-
-            map.Pins.Add(pinBravent);
+            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.416937, -3.703523), 6d);         
         }
 
         protected override void OnDisappearing()

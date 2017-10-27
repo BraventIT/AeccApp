@@ -7,12 +7,12 @@ using System.Globalization;
 
 namespace AeccApp.Core.Services
 {
-    public class GoogleMapsPlaceService : IGoogleMapsPlaceService
+    public class GoogleMapsService : IGoogleMapsService
     {
         private readonly IHttpRequestProvider _requestProvider;
         private const string GOOGLE_MAPS_ENDPOINT = "https://maps.googleapis.com";
 
-        public GoogleMapsPlaceService(IHttpRequestProvider requestProvider)
+        public GoogleMapsService(IHttpRequestProvider requestProvider)
         {
             _requestProvider = requestProvider;
         }
@@ -51,5 +51,19 @@ namespace AeccApp.Core.Services
             address.AddCoordinates(place);
             return address;
         }
+
+        public async Task<GoogleGeocodingModel> FindAddressGeocodingAsync(string address)
+        {
+            UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
+            {
+                Path = "maps/api/geocode/json",
+                Query = $"address={address}&language=es&key=AIzaSyCnY2JhpLJoOY1gexf0CoEMFBONbvExjoY"
+            };
+
+            GoogleGeocodingModel place = await _requestProvider.GetAsync<GoogleGeocodingModel>(uriBuilder.ToString());
+            
+            return place;
+        }
+
     }
 }

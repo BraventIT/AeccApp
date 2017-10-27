@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms.GoogleMaps;
 using System.Linq;
 using AeccApi.Models;
+using AeccApp.Core.Models;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -17,6 +18,7 @@ namespace AeccApp.Core.ViewModels
         private IGeolocator GeolocatorService { get; } = ServiceLocator.GeolocatorService;
         private IHospitalRequestService HospitalRequestService { get; } = ServiceLocator.HospitalRequestService;
         private IMapPinsDataService MapPinsDataService { get; } = ServiceLocator.MapPinsDataService;
+        private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
 
 
         public async override Task ActivateAsync()
@@ -34,8 +36,14 @@ namespace AeccApp.Core.ViewModels
                 var Hospitals = await HospitalRequestService.GetHospitalsAsync(address.SubAdminArea) ;
                 foreach (var item in Hospitals)
                 {
-
+                   GoogleGeocodingModel geocoded = await GoogleMapsService.FindAddressGeocodingAsync(item.Street);
+                    PinManagement(item.Street,item.Name, geocoded.Results[0].Geometry.Location.Lat, geocoded.Results[0].Geometry.Location.Lng);
                 }
+
+                //TODO uncomment this when line 178 TO DO is done
+                //var savedPins = await MapPinsDataService.GetListAsync();
+                //MapPins.AddRange(savedPins.Values);
+
             }
             else
             {
@@ -144,7 +152,34 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _switchBetweenAndHospitalList, value); }
         }
 
-  
+
+        #endregion
+
+        #region Methods
+        private async void PinManagement (string hospitalAddress , string hospitalName , double lat, double lng)
+        {
+            Pin pin = new Pin() { Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat,lng) };
+            switch (Device.OS)
+            {
+                case TargetPlatform.Android:
+                    // pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin_hospital_map.png");
+                    break;
+                case TargetPlatform.iOS:
+                    pin.Icon = BitmapDescriptorFactory.FromBundle($"location_pin_hospital_map.png");
+                    break;
+                default:
+                    pin.Icon = BitmapDescriptorFactory.FromBundle($"Assets/location_pin_hospital_map.png");
+                    break;
+            }
+
+            //TODO delete this line when next TO DO is fixed:
+            MapPins.Add(pin);
+
+            //TODO fix System.IO.IOException: Sharing violation on path /data/user/0/net.bravent.aeccapp/files/MapPins.json
+            // await MapPinsDataService.AddOrUpdateAddressAsync(hospitalAddress, pin);
+
+
+        }
         #endregion
 
 
