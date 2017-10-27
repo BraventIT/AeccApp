@@ -9,8 +9,8 @@
 
   <ItemGroup>
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Coordinator.cs" Link="Models\Requests\Coordinator.cs" />
-    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Employ.cs" Link="Models\Requests\Employ.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Hospital.cs" Link="Models\Requests\Hospital.cs" />
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\HospitalAssignment.cs" Link="Models\Requests\HospitalAssignment.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\RequestSourceEnum.cs" Link="Models\Requests\RequestSourceEnum.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\RequestType.cs" Link="Models\Requests\RequestType.cs" />
     <Compile Include="..\..\..\Services\AeccBot\AeccBot\CommandHandling\Definitions\BackChannelCommands.cs" Link="Services\Chat\BackChannelCommands.cs" />

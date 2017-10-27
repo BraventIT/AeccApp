@@ -31,13 +31,11 @@ namespace AeccApi.Controllers.API
                 return BadRequest();
             }
 
-            var coordinators= (string.IsNullOrEmpty(province)) ?
+            var coordinators = (string.IsNullOrEmpty(province)) ?
                  _context.Coordinators
-                    .Include(s => s.Employments)
-                    .Where(r => r.Employments.Any(x => x.RequestSource == requestSourceFilter)) :
+                  .Where(h => h.RequestSource == requestSourceFilter) :
                   _context.Coordinators
-                    .Include(s => s.Employments)
-                    .Where(r => r.Employments.Any(x => x.RequestSource == requestSourceFilter) && r.Province.StartsWith(province, true, CultureInfo.GetCultureInfo("es-ES")));
+                  .Where(h => h.RequestSource == requestSourceFilter && h.Province.StartsWith(province, true, CultureInfo.GetCultureInfo("es-ES")));
 
             return Ok(coordinators);
         }

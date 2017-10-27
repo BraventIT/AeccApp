@@ -26,10 +26,16 @@ namespace AeccApi.Models
         [Display(Name = "Provincia")]
 #endif
         public string Province { get; set; }
+
 #if SERVICE
-        [Display(Name ="Empleo")]
+        [Display(Name = "Tipo de coordinador")]
 #endif
-        public ICollection<Employ> Employments { get; set; }
+        public RequestSourceEnum RequestSource { get; set; }
+
+#if SERVICE
+        [Display(Name = "Hospitales asignados")]
+#endif
+        public ICollection<HospitalAssignment> HospitalAssignments { get; set; }
 
     }
 }

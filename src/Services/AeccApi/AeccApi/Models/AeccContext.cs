@@ -14,15 +14,17 @@ namespace AeccApi.Models
 
         public DbSet<RequestType> RequestTypes { get; set; }
         public DbSet<Coordinator> Coordinators { get; set; }
-        public DbSet<Employ> Employments { get; set; }
         public DbSet<Hospital> Hospitals { get; set; }
+        public DbSet<HospitalAssignment> HospitalAssignments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<RequestType>().ToTable("RequestType");
             modelBuilder.Entity<Coordinator>().ToTable("Coordinator");
-            modelBuilder.Entity<Employ>().ToTable("Employ");
             modelBuilder.Entity<Hospital>().ToTable("Hospital");
+            modelBuilder.Entity<HospitalAssignment>().ToTable("HospitalAssignment");
+
+            modelBuilder.Entity<HospitalAssignment>().HasKey(c => new { c.CoordinatorID, c.HospitalID });
         }
     }
 }

@@ -14,15 +14,15 @@ namespace AeccApi.Models
 #endif
         public string Name { get; set; }
         public string Street { get; set; }
-#if SERVICE
-        [Display(Name = "Ciudad")]
-#endif
-        public string City { get; set; }
+//#if SERVICE
+//        [Display(Name = "Ciudad")]
+//#endif
+//        public string City { get; set; }
 #if SERVICE
         [Display(Name = "Provincia")]
 #endif
         public string Province { get; set; }
 
-        public ICollection<Employ> Employees { get; set; }
+        public ICollection<HospitalAssignment> HospitalAssignments { get; set; }
     }
 }

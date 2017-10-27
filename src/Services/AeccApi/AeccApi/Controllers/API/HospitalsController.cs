@@ -40,7 +40,7 @@ namespace AeccApi.Controllers.API
             }
 
             var hospital = await _context.Hospitals
-                .Include(s => s.Employees)
+                .Include(s => s.HospitalAssignments)
                 .ThenInclude(e => e.Coordinator)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);

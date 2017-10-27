@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AeccApi.Models;
 using System.Globalization;
 using AeccApi.Extensions;
+using AeccApi.ViewModels;
 
 namespace AeccApi.Controllers
 {
@@ -56,16 +57,37 @@ namespace AeccApi.Controllers
             }
 
             var coordinator = await _context.Coordinators
-                .Include(s=> s.Employments)
+                .Include(s=> s.HospitalAssignments)
                 .ThenInclude(e=> e.Hospital)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
+
             if (coordinator == null)
             {
                 return NotFound();
             }
 
             return View(coordinator);
+        }
+
+        private void PopulateAssignedHospitalVM(Coordinator coordinator)
+        {
+            var provinceHospitals = _context.Hospitals.Where(h => 
+                !string.IsNullOrEmpty( h.Name)
+                && h.Province.Contains(coordinator.Province, StringComparison.CurrentCultureIgnoreCase));
+            var coordinatorHospitals = new HashSet<int>(coordinator.HospitalAssignments.Select(c => c.HospitalID));
+            var viewModel = new List<AssignmentHospitalData>();
+
+            foreach (var hospitals in provinceHospitals)
+            {
+                viewModel.Add(new AssignmentHospitalData
+                {
+                    HospitalID = hospitals.ID,
+                    Name = hospitals.Name,
+                    Assigned = coordinatorHospitals.Contains(hospitals.ID)
+                });
+            }
+            ViewData["Hospitals"] = viewModel;
         }
 
         // GET: Coordinators/Create
@@ -108,11 +130,17 @@ namespace AeccApi.Controllers
                 return NotFound();
             }
 
-            var coordinator = await _context.Coordinators.SingleOrDefaultAsync(m => m.ID == id);
+            var coordinator = await _context.Coordinators
+                .Include(c=> c.HospitalAssignments)
+                .ThenInclude(c => c.Hospital)
+                .AsTracking()
+                .SingleOrDefaultAsync(m => m.ID == id);
             if (coordinator == null)
             {
                 return NotFound();
             }
+
+            PopulateAssignedHospitalVM(coordinator);
             return View(coordinator);
         }
 
@@ -121,18 +149,25 @@ namespace AeccApi.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Email,Telephone,Province")] Coordinator coordinator)
+        public async Task<IActionResult> Edit(int? id, string[] selectedHospitals)
         {
-            if (id != coordinator.ID)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var coordinatorToUpdate = await _context.Coordinators
+                .Include(c => c.HospitalAssignments)
+                .ThenInclude(c=> c.Hospital)
+                .SingleOrDefaultAsync(m => m.ID == id);
+
+            if (await TryUpdateModelAsync(coordinatorToUpdate,
+                "",
+                i=> i.Name, i=> i.Email, i=> i.Telephone, i=> i.Province, i=> i.RequestSource))
             {
+                UpdateAssignedHospitals(selectedHospitals, coordinatorToUpdate);
                 try
                 {
-                    _context.Update(coordinator);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -144,7 +179,42 @@ namespace AeccApi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(coordinator);
+            UpdateAssignedHospitals(selectedHospitals, coordinatorToUpdate);
+            PopulateAssignedHospitalVM(coordinatorToUpdate);
+            return View(coordinatorToUpdate);
+        }
+
+        private void UpdateAssignedHospitals(string[] selectedHospitals, Coordinator coordinatorToUpdate)
+        {
+            if (selectedHospitals==null)
+            {
+                coordinatorToUpdate.HospitalAssignments = new List<HospitalAssignment>();
+                return;
+            }
+
+            var selectedHospitalsHS = new HashSet<string>(selectedHospitals);
+            var coordinatorHospitals = new HashSet<int>
+                (coordinatorToUpdate.HospitalAssignments.Select(h => h.HospitalID));
+
+
+            foreach (var hospital in _context.Hospitals)
+            {
+                if (selectedHospitalsHS.Contains(hospital.ID.ToString()) )
+                {
+                    if (!coordinatorHospitals.Contains(hospital.ID))
+                    {
+                        coordinatorToUpdate.HospitalAssignments.Add(new HospitalAssignment { CoordinatorID = coordinatorToUpdate.ID, HospitalID = hospital.ID });
+                    }
+                }
+                else
+                {
+                    if (coordinatorHospitals.Contains(hospital.ID))
+                    {
+                        var hospitalToRemove = coordinatorToUpdate.HospitalAssignments.SingleOrDefault(c => c.HospitalID == hospital.ID);
+                        coordinatorToUpdate.HospitalAssignments.Remove(hospitalToRemove);
+                    }
+                }
+            }
         }
 
         // GET: Coordinators/Delete/5
