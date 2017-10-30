@@ -45,7 +45,6 @@
                     <Label Text="{Binding [CommonList]}" VerticalOptions="Center" />
                 </StackLayout>
 
-
                 <StackLayout
                     Grid.Column="0"
                     HorizontalOptions="Center"
@@ -73,41 +72,39 @@
             </Grid>
         </StackLayout>
 
-        <StackLayout>
-            <!--  Hospitals map  -->
-            <Grid
-                HorizontalOptions="FillAndExpand"
-                IsVisible="{Binding SwitchBetweenAndHospitalList}"
-                VerticalOptions="FillAndExpand">
-                <ctrl:CustomMap
-                    x:Name="map"
-                    HasZoomEnabled="True"
-                    HeightRequest="600"
-                    IsShowingUser="True"
-                    MapPins="{Binding MapPins}">
+        <!--  Hospitals map  -->
+        <Grid
+            HorizontalOptions="FillAndExpand"
+            IsVisible="{Binding SwitchBetweenAndHospitalList}"
+            VerticalOptions="FillAndExpand">
+            <ctrl:CustomMap
+                x:Name="map"
+                HasZoomEnabled="True"
+                HeightRequest="600"
+                IsShowingUser="True"
+                MapPins="{Binding MapPins}">
 
-                    <ctrl:CustomMap.Behaviors>
-                        <beh:EventToCommandBehavior
-                            Command="{Binding PinClickedCommand}"
-                            EventArgsConverter="{StaticResource MapPinClickedConverter}"
-                            EventName="PinClicked" />
-                    </ctrl:CustomMap.Behaviors>
+                <ctrl:CustomMap.Behaviors>
+                    <beh:EventToCommandBehavior
+                        Command="{Binding PinClickedCommand}"
+                        EventArgsConverter="{StaticResource MapPinClickedConverter}"
+                        EventName="PinClicked" />
+                </ctrl:CustomMap.Behaviors>
 
-                </ctrl:CustomMap>
+            </ctrl:CustomMap>
 
-            </Grid>
-            <!--  Hospitals list  -->
-            <Grid Padding="15" IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
-                <ListView HasUnevenRows="True" HeightRequest="600">
-                    <ListView.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <On Platform="WinPhone, Windows" Value="100" />
-                        </OnPlatform>
-                    </ListView.Margin>
-                </ListView>
-            </Grid>
-        </StackLayout>
+        </Grid>
 
+        <!--  Hospitals list  -->
+        <Grid Padding="15" IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
+            <ListView HasUnevenRows="True" HeightRequest="600">
+                <ListView.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="WinPhone, Windows" Value="100" />
+                    </OnPlatform>
+                </ListView.Margin>
+            </ListView>
+        </Grid>
 
     </StackLayout>
 </v:BaseContentPage>

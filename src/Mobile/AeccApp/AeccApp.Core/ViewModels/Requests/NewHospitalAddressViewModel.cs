@@ -7,7 +7,8 @@ using Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Xamarin.Forms.GoogleMaps;
-using System.Text.RegularExpressions;
+using AeccApp.Core.Models;
+using AeccApi.Models;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -18,13 +19,18 @@ namespace AeccApp.Core.ViewModels
         private IMapPositionsDataService MapPositionsDataService { get; } = ServiceLocator.MapPositionsDataService;
         private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
 
+        public NewHospitalAddressViewModel()
+        {
+            _mapPins = new ObservableCollection<Pin>();
+            _hospitals = new ObservableCollection<Hospital>();
+        }
 
         public async override Task ActivateAsync()
         {
             if (GeolocatorService.IsGeolocationEnabled)
             {
                 var currentPosition = await GeolocatorService.GetCurrentLocationAsync();
-                Models.AddressModel currentAddress = null;
+                AddressModel currentAddress = null;
                 if (currentPosition != null)
                 {
                     currentAddress = await GoogleMapsService.FindCoordinatesGeocodingAsync(currentPosition.Latitude, currentPosition.Longitude);
@@ -43,16 +49,16 @@ namespace AeccApp.Core.ViewModels
                         if (location == null)
                         {
                             location = await GoogleMapsService.FindAddressGeocodingAsync(hospitalAddress);
-                        }
-                        if (location == null)
-                        {
-                            location = await GoogleMapsService.FindAddressGeocodingAsync(hospital.Name);
-                        }
-                        if (location != null)
-                        {
+                            if (location == null)
+                            {
+                                location = await GoogleMapsService.FindAddressGeocodingAsync(hospital.Name);
+                                if (location == null)
+                                    continue;
+                            }
+
                             await MapPositionsDataService.AddOrUpdateAddressAsync(hospitalAddress, location);
-                            PinManagement(hospital.Name, location.Latitude, location.Longitude);
                         }
+                        PinManagement(hospital.Name, location.Latitude, location.Longitude);
                     }
                 }
 
@@ -60,7 +66,6 @@ namespace AeccApp.Core.ViewModels
 
                 //var savedPins = await MapPinsDataService.GetListAsync();
                 //MapPins.AddRange(savedPins.Values);
-
             }
             else
             {
@@ -69,9 +74,6 @@ namespace AeccApp.Core.ViewModels
         }
 
         #region Commands
-
-
-
         private Command _pinClickedCommand;
         public ICommand PinClickedCommand
         {
@@ -105,6 +107,7 @@ namespace AeccApp.Core.ViewModels
         {
             SwitchBetweenAndHospitalList = true;
         }
+
         private Command _hospitalListTabCommand;
         public ICommand HospitalListTabCommand
         {
@@ -120,8 +123,6 @@ namespace AeccApp.Core.ViewModels
             SwitchBetweenAndHospitalList = false;
 
         }
-
-
 
         private Command _newHospitalSelectedCommand;
         public ICommand NewHospitalSelectedCommand
@@ -151,15 +152,19 @@ namespace AeccApp.Core.ViewModels
         }
 
 
-
-        private ObservableCollection<Pin> _mapPins = new ObservableCollection<Pin>();
+        private ObservableCollection<Pin> _mapPins;
 
         public ObservableCollection<Pin> MapPins
         {
             get { return _mapPins; }
-            set { Set(ref _mapPins, value); }
         }
 
+        private ObservableCollection<Hospital> _hospitals;
+
+        public ObservableCollection<Hospital> Hospitals
+        {
+            get { return _hospitals; }
+        }
 
         private bool _switchBetweenAndHospitalList = true;
 
@@ -175,7 +180,7 @@ namespace AeccApp.Core.ViewModels
         #region Methods
         private void PinManagement(string hospitalName, double lat, double lng)
         {
-            Pin pin = new Pin() { Address= hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
+            Pin pin = new Pin() { Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
                 case TargetPlatform.Android:
@@ -196,10 +201,5 @@ namespace AeccApp.Core.ViewModels
             // await MapPinsDataService.AddOrUpdateAddressAsync(hospitalAddress, pin);
         }
         #endregion
-
-
-
-
-
     }
 }
