@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace AeccApp.Core.Services
 {
-    public abstract class BaseDataListsService<T>: BaseDataService<List<T>>
+    public abstract class BaseDataListsService<T>: BaseDeferredDataService<List<T>>
     {
         protected List<T> _data;
        
@@ -25,7 +25,7 @@ namespace AeccApp.Core.Services
                 dataList.Remove(oldData);
             }
             dataList.Add(data);
-            await SaveAsync(dataList);
+            Save(dataList);
         }
     }
 }

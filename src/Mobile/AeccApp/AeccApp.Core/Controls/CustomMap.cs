@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.Controls
 {
-   public class CustomMap : Map
+    public class CustomMap : Map
     {
         public static readonly BindableProperty MapPinsProperty = BindableProperty.Create(
             nameof(Pins),
