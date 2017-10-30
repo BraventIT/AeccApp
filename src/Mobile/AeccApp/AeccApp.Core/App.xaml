@@ -9,6 +9,8 @@
         <ResourceDictionary MergedWith="res:ControlStyles">
 
             <!--  CONVERTERS  -->
+
+            <cv:MapPinClickedConverter x:Key="MapPinClickedConverter" />
             <cv:InverseBoolConverter x:Key="InverseBoolConverter" />
             <cv:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
             <cv:ImagePlatformConverter x:Key="ImagePlatformConverter" />

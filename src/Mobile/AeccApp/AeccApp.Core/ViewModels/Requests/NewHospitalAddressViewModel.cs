@@ -32,6 +32,7 @@ namespace AeccApp.Core.ViewModels
                 MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
 
                 var address = await GoogleMapsService.FindCoordinatesGeocodingAsync(position.Latitude, position.Longitude);
+                AddressSelected.Province = address.Results[0].AddressComponents[2].LongName;
                 var Hospitals = await HospitalRequestService.GetHospitalsAsync(address.Results[0].AddressComponents[2].LongName);
                 foreach (var item in Hospitals)
                 {
@@ -57,6 +58,26 @@ namespace AeccApp.Core.ViewModels
 
         #region Commands
 
+
+
+        private Command _pinClickedCommand;
+        public ICommand PinClickedCommand
+        {
+            get
+            {
+                return _pinClickedCommand ??
+                    (_pinClickedCommand = new Command(OnPinClickedCommand, (o) => !IsBusy));
+            }
+        }
+
+        async void OnPinClickedCommand(object obj)
+        {
+            var pinClicked = obj as Pin;
+            AddressSelected.Street = pinClicked.Address;
+            AddressSelected.Coordinates = new Models.Position(pinClicked.Position.Latitude,pinClicked.Position.Longitude);
+            AddressSelected.Name = pinClicked.Label;
+            await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
+        }
 
         private Command _hospitalMapTabCommand;
         public ICommand HospitalMapTabCommand
@@ -138,6 +159,16 @@ namespace AeccApp.Core.ViewModels
 
         #region Properties
 
+        private AddressModel _addressSelected = new AddressModel();
+
+        public AddressModel AddressSelected
+        {
+            get { return _addressSelected; }
+            set { _addressSelected = value; }
+        }
+
+
+
         private ObservableCollection<Pin> _mapPins = new ObservableCollection<Pin>();
 
         public ObservableCollection<Pin> MapPins
@@ -161,7 +192,7 @@ namespace AeccApp.Core.ViewModels
         #region Methods
         private void PinManagement(string hospitalAddress, string hospitalName, double lat, double lng)
         {
-            Pin pin = new Pin() { Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
+            Pin pin = new Pin() { Address= hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
                 case TargetPlatform.Android:

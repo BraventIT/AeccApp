@@ -83,7 +83,16 @@
                     x:Name="map"
                     HasZoomEnabled="True"
                     HeightRequest="600"
-                    MapPins="{Binding MapPins}" />
+                    MapPins="{Binding MapPins}">
+
+                    <ctrl:CustomMap.Behaviors>
+                        <beh:EventToCommandBehavior
+                            Command="{Binding PinClickedCommand}"
+                            EventArgsConverter="{StaticResource MapPinClickedConverter}"
+                            EventName="PinClicked" />
+                    </ctrl:CustomMap.Behaviors>
+
+                </ctrl:CustomMap>
                 <ctrl:CustomImage
                     Margin="8"
                     HeightRequest="45"

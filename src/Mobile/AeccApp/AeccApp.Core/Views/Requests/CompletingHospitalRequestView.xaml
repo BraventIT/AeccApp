@@ -23,7 +23,7 @@
                     <Label
                         FontSize="Large"
                         HorizontalOptions="Center"
-                        Text="Request type text" />
+                        Text="{Binding RequestTypeHeader}" />
                 </StackLayout>
 
 
@@ -36,11 +36,15 @@
                             WinPhone="300"
                             iOS="200" />
                     </StackLayout.HeightRequest>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MapDetailCommand}" />
+                    </StackLayout.GestureRecognizers>
                     <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
                     <maps:Map
                         x:Name="map"
-                        HasZoomEnabled="True"
+                        HasZoomEnabled="False"
                         HorizontalOptions="FillAndExpand"
+                        IsEnabled="False"
                         VerticalOptions="FillAndExpand" />
 
                     <StackLayout

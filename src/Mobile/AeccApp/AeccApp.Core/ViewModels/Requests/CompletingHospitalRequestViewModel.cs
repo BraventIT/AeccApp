@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.Models;
+﻿using AeccApp.Core.Messages;
+using AeccApp.Core.Models;
 using AeccApp.Core.ViewModels.Popups;
 using System;
 using System.Collections.Generic;
@@ -22,14 +23,22 @@ namespace AeccApp.Core.ViewModels
 
         public override Task InitializeAsync(object navigationData)
         {
-            RequestDateAndTimePopupVM.ApplyDateAndTime += OnApplyDateAndTimeCommand;
-            RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
-            CurrentAddress = navigationData as AddressModel;
+         
+            CurrentRequest = navigationData as RequestModel;
+            CurrentAddress = CurrentRequest.RequestAddress;
             InitialMapLat = CurrentAddress.Coordinates.Latitude;
             InitialMapLng = CurrentAddress.Coordinates.Longitude;
+            RequestTypeHeader = CurrentRequest.RequestType.Name;
+            Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position(InitialMapLat, InitialMapLng);
+            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
             return Task.CompletedTask;
         }
-
+        public override Task ActivateAsync()
+        {
+            RequestDateAndTimePopupVM.ApplyDateAndTime += OnApplyDateAndTimeCommand;
+            RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
+            return base.ActivateAsync();
+        }
         public override void Deactivate()
         {
             RequestDateAndTimePopupVM.ApplyDateAndTime -= OnApplyDateAndTimeCommand;
@@ -39,23 +48,41 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
-        private Command _sendRequestCommand;
-        public ICommand SendRequestCommand
+
+        private Command _addressGettingSaved;
+        public ICommand AddressGettingSavedCommand
         {
             get
             {
-                return _sendRequestCommand ??
-                    (_sendRequestCommand = new Command(OnSendRequestCommand, (o) => !IsBusy));
+                return _addressGettingSaved ??
+                    (_addressGettingSaved = new Command(OnAddressGettingSaved, o => !IsBusy));
             }
         }
 
-        private async void OnSendRequestCommand(object obj)
+        private void OnAddressGettingSaved(object obj)
         {
-            //TODO Save address if needed
-            //TODO send request
-            await NavigationService.HidePopupAsync();
-            await NavigationService.ShowPopupAsync(RequestSentPopupVM);
+            bool result = false;
+            if (obj is bool)
+                result = (bool)obj;
+
+            IsAddressGettingSaved = result;
         }
+
+        private Command _mapDetailCommand;
+        public ICommand MapDetailCommand
+        {
+            get
+            {
+                return _mapDetailCommand ??
+                    (_mapDetailCommand = new Command(OnMapDetailCommand, (o) => !IsBusy));
+            }
+        }
+
+        private async void OnMapDetailCommand(object obj)
+        {
+            await NavigationService.NavigateToAsync<MapDetailViewModel>(new Xamarin.Forms.GoogleMaps.Position(InitialMapLat, InitialMapLng));
+        }
+
 
         private Command _openRequestConfirmationPopupCommand;
         public ICommand OpenRequestConfirmationPopupCommand
@@ -72,6 +99,7 @@ namespace AeccApp.Core.ViewModels
             if (DateToApplyParsed == null)
             {
                 RequestConfirmationPopupVM.DisplayDate = DateTime.Now.ToString().Remove(10);
+                DateToApplyParsed = DateTime.Now.ToString().Remove(10);
             }
             else
             {
@@ -81,6 +109,7 @@ namespace AeccApp.Core.ViewModels
             if (TimeToApplyParsed == null)
             {
                 RequestConfirmationPopupVM.DisplayTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
+                TimeToApplyParsed = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
             }
             else
             {
@@ -111,7 +140,7 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnApplyDateAndTimeCommand(object sender, EventArgs e)
         {
-            //Apply date and time to the request:
+            //Applies date and time to the request:
             DateToApplyParsed = RequestDateAndTimePopupVM.DateSelected.Date.ToString().Remove(10);
             TimeToApplyParsed = RequestDateAndTimePopupVM.TimeSelected.ToString().Remove(5);
             await NavigationService.HidePopupAsync();
@@ -147,30 +176,18 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnSendRequestConfirmationCommand(object sender, EventArgs e)
         {
+            CurrentRequest.RequestComments = RequestComments;
+            CurrentRequest.RequestDate = DateToApplyParsed;
+            CurrentRequest.RequestTime = TimeToApplyParsed;
+            if (IsAddressGettingSaved)
+            {
+                //TODO Save hospital
+            }
             await NavigationService.HidePopupAsync();
-            //TODO SEND REQUEST
-
+            //TODO send request
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
 
-        private Command _addressGettingSaved;
-        public ICommand AddressGettingSavedCommand
-        {
-            get
-            {
-                return _addressGettingSaved ??
-                    (_addressGettingSaved = new Command(OnAddressGettingSaved, o => !IsBusy));
-            }
-        }
-
-        private void OnAddressGettingSaved(object obj)
-        {
-            bool result = false;
-            if (obj is bool)
-                result = (bool)obj;
-
-            IsAddressGettingSaved = result;
-        }
 
         #endregion
 
@@ -188,6 +205,15 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _isAddressGettingSaved, value); }
         }
 
+        private string _requestTypeHeader;
+
+        public string RequestTypeHeader
+        {
+            get { return _requestTypeHeader; }
+            set { Set(ref _requestTypeHeader, value); }
+        }
+
+
         private double _initialMapLat;
         public double InitialMapLat
         {
@@ -201,6 +227,15 @@ namespace AeccApp.Core.ViewModels
             get { return _initialMapLng; }
             set { Set(ref _initialMapLng, value); }
         }
+
+        private RequestModel _currentRequest;
+
+        public RequestModel CurrentRequest
+        {
+            get { return _currentRequest; }
+            set { _currentRequest = value; }
+        }
+
 
         private AddressModel _currentAddress;
 
