@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using AeccApp.Core.Models;
 using System.Globalization;
+using System.Threading;
 
 namespace AeccApp.Core.Services
 {
@@ -17,7 +18,7 @@ namespace AeccApp.Core.Services
             _requestProvider = requestProvider;
         }
 
-        public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText, Position position)
+        public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText, Position position, CancellationToken cancelToken)
         {
             string query = $"input={findText}&language=es&components=country:es&key={GlobalSetting.Instance.GooglePlacesApiKey}";
             if (position?.Latitude != 0)
@@ -31,7 +32,7 @@ namespace AeccApp.Core.Services
                 Query = query
             };
 
-            var places = await _requestProvider.GetAsync<GooglePlacesModel>(uriBuilder.ToString());
+            var places = await _requestProvider.GetAsync<GooglePlacesModel>(uriBuilder.ToString(), cancelToken: cancelToken);
 
             if (places?.Predictions != null)
                 return places.Predictions.Select(item => new AddressModel(item));
@@ -39,7 +40,7 @@ namespace AeccApp.Core.Services
                 return new List<AddressModel>();
         }
 
-        public async Task<AddressModel> FillPlaceDetailAsync(AddressModel address)
+        public async Task<AddressModel> FillPlaceDetailAsync(AddressModel address, CancellationToken cancelToken)
         {
             UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
             {
@@ -47,12 +48,12 @@ namespace AeccApp.Core.Services
                 Query = $"placeid={address.PlaceId}&language=es&key={GlobalSetting.Instance.GooglePlacesApiKey}"
             };
 
-            GooglePlacesDetailModel place = await _requestProvider.GetAsync<GooglePlacesDetailModel>(uriBuilder.ToString());
+            GooglePlacesDetailModel place = await _requestProvider.GetAsync<GooglePlacesDetailModel>(uriBuilder.ToString(), cancelToken);
             address.AddCoordinates(place);
             return address;
         }
 
-        public async Task<Position> FindAddressGeocodingAsync(string address)
+        public async Task<Position> FindAddressGeocodingAsync(string address, CancellationToken cancelToken)
         {
             UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
             {
@@ -60,14 +61,14 @@ namespace AeccApp.Core.Services
                 Query = $"address={address}&language=es&key={GlobalSetting.Instance.GooglePlacesApiKey}"
             };
 
-            GoogleGeocodingModel place = await _requestProvider.GetAsync<GoogleGeocodingModel>(uriBuilder.ToString());
+            GoogleGeocodingModel place = await _requestProvider.GetAsync<GoogleGeocodingModel>(uriBuilder.ToString(), cancelToken);
             var result = place.Results.FirstOrDefault();
 
             return (result != null) ?
                 new Position(result.Geometry.Location.Lat, result.Geometry.Location.Lng) : null;
         }
 
-        public async Task<AddressModel> FindCoordinatesGeocodingAsync(double lat, double lng)
+        public async Task<AddressModel> FindCoordinatesGeocodingAsync(double lat, double lng, CancellationToken cancelToken)
         {
             UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
             {
@@ -75,7 +76,7 @@ namespace AeccApp.Core.Services
                 Query = $"latlng={lat.ToString(CultureInfo.InvariantCulture)},{lng.ToString(CultureInfo.InvariantCulture)}&language=es&key={GlobalSetting.Instance.GooglePlacesApiKey}"
             };
 
-            GoogleGeocodingModel place = await _requestProvider.GetAsync<GoogleGeocodingModel>(uriBuilder.ToString());
+            GoogleGeocodingModel place = await _requestProvider.GetAsync<GoogleGeocodingModel>(uriBuilder.ToString(), cancelToken: cancelToken);
 
             var result = place.Results.FirstOrDefault();
 

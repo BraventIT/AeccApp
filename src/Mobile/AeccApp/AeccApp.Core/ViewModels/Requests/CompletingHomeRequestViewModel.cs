@@ -34,8 +34,7 @@ namespace AeccApp.Core.ViewModels
         {
             Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position(InitialMapLat,InitialMapLng);
             MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty,position);
-
-            return base.ActivateAsync();
+            return Task.CompletedTask;
         }
         public override void Deactivate()
         {

@@ -22,7 +22,7 @@ namespace AeccApp.Core.Services
             uribuilder.Path += "users/info";
             
             var token = await _identityService.GetTokenAsync();
-            return await _requestProvider.GetAsync<UserData>(uribuilder.ToString(), token);
+            return await _requestProvider.GetAsync<UserData>(uribuilder.ToString(), token: token);
         }
     }
 }

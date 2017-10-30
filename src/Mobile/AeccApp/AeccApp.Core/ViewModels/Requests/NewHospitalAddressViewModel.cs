@@ -25,52 +25,55 @@ namespace AeccApp.Core.ViewModels
             _hospitals = new ObservableCollection<Hospital>();
         }
 
-        public async override Task ActivateAsync()
+        public override Task ActivateAsync()
         {
-            if (GeolocatorService.IsGeolocationEnabled)
-            {
-                var currentPosition = await GeolocatorService.GetCurrentLocationAsync();
-                AddressModel currentAddress = null;
-                if (currentPosition != null)
-                {
-                    currentAddress = await GoogleMapsService.FindCoordinatesGeocodingAsync(currentPosition.Latitude, currentPosition.Longitude);
-                    MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, currentPosition);
-                }
+            return ExecuteOperationAsync(async cancelToken =>
+           {
+               if (GeolocatorService.IsGeolocationEnabled)
+               {
+                   var currentPosition = await GeolocatorService.GetCurrentLocationAsync(cancelToken);
+                   AddressModel currentAddress = null;
+                   if (currentPosition != null)
+                   {
+                       currentAddress = await GoogleMapsService.FindCoordinatesGeocodingAsync(currentPosition.Latitude, currentPosition.Longitude, cancelToken);
+                       MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, currentPosition);
+                   }
 
-                var currentProvince = (currentAddress != null) ? currentAddress.Province : string.Empty;
-                var Hospitals = await HospitalRequestService.GetHospitalsAsync(currentProvince);
-                foreach (var hospital in Hospitals)
-                {
-                    if (!string.IsNullOrEmpty(hospital.Street) && !string.IsNullOrEmpty(hospital.Name))
-                    {
-                        var hospitalAddress = $"{hospital.Name}, {hospital.Street}";
+                   var currentProvince = (currentAddress != null) ? currentAddress.Province : string.Empty;
+                   var Hospitals = await HospitalRequestService.GetHospitalsAsync(currentProvince, cancelToken);
+                   foreach (var hospital in Hospitals)
+                   {
+                       if (!string.IsNullOrEmpty(hospital.Street) && !string.IsNullOrEmpty(hospital.Name))
+                       {
+                           var hospitalAddress = $"{hospital.Name}, {hospital.Street}";
 
-                        var location = await MapPositionsDataService.GetAsync(hospitalAddress);
-                        if (location == null)
-                        {
-                            location = await GoogleMapsService.FindAddressGeocodingAsync(hospitalAddress);
-                            if (location == null)
-                            {
-                                location = await GoogleMapsService.FindAddressGeocodingAsync(hospital.Name);
-                                if (location == null)
-                                    continue;
-                            }
+                           var location = await MapPositionsDataService.GetAsync(hospitalAddress);
+                           if (location == null)
+                           {
+                               location = await GoogleMapsService.FindAddressGeocodingAsync(hospitalAddress, cancelToken);
+                               if (location == null)
+                               {
+                                   location = await GoogleMapsService.FindAddressGeocodingAsync(hospital.Name, cancelToken);
+                                   if (location == null)
+                                       continue;
+                               }
 
-                            await MapPositionsDataService.AddOrUpdateAddressAsync(hospitalAddress, location);
-                        }
-                        PinManagement(hospital.Name, location.Latitude, location.Longitude);
-                    }
-                }
+                               await MapPositionsDataService.AddOrUpdateAddressAsync(hospitalAddress, location);
+                           }
+                           PinManagement(hospital.Name, location.Latitude, location.Longitude);
+                       }
+                   }
 
-                //TODO uncomment this when line178 TO DO is done:
+                   //TODO uncomment this when line178 TO DO is done:
 
-                //var savedPins = await MapPinsDataService.GetListAsync();
-                //MapPins.AddRange(savedPins.Values);
-            }
-            else
-            {
-                // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
-            }
+                   //var savedPins = await MapPinsDataService.GetListAsync();
+                   //MapPins.AddRange(savedPins.Values);
+               }
+               else
+               {
+                   // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
+               }
+           });
         }
 
         #region Commands

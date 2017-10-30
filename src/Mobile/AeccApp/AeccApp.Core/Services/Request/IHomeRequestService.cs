@@ -1,13 +1,14 @@
 ﻿using AeccApi.Models;
 using AeccApp.Core.Models;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AeccApp.Core.Services
 {
     public interface IHomeRequestService
     {
-        Task<IEnumerable<RequestType>> GetRequestTypesAsync();
-        Task<IEnumerable<Coordinator>> GetCoordinatorsAsync(string province);
+        Task<IEnumerable<RequestType>> GetRequestTypesAsync(CancellationToken cancelToken);
+        Task<IEnumerable<Coordinator>> GetCoordinatorsAsync(string province, CancellationToken cancelToken);
     }
 }

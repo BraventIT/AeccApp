@@ -1,17 +1,18 @@
 ﻿using AeccApp.Core.Models;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AeccApp.Core.Services
 {
     public interface IGoogleMapsService
     {
-        Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText, Position position);
+        Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText, Position position, CancellationToken cancelToken);
 
-        Task<AddressModel> FillPlaceDetailAsync(AddressModel address);
+        Task<AddressModel> FillPlaceDetailAsync(AddressModel address, CancellationToken cancelToken);
 
-        Task<Position> FindAddressGeocodingAsync(string address);
+        Task<Position> FindAddressGeocodingAsync(string address, CancellationToken cancelToken);
 
-        Task<AddressModel> FindCoordinatesGeocodingAsync(double lat, double lng);
+        Task<AddressModel> FindCoordinatesGeocodingAsync(double lat, double lng, CancellationToken cancelToken);
     }
 }

@@ -23,7 +23,6 @@ namespace AeccApp.Core.ViewModels
 
         public override Task InitializeAsync(object navigationData)
         {
-         
             CurrentRequest = navigationData as RequestModel;
             CurrentAddress = CurrentRequest.RequestAddress;
             InitialMapLat = CurrentAddress.Coordinates.Latitude;
@@ -37,7 +36,7 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
             RequestDateAndTimePopupVM.ApplyDateAndTime += OnApplyDateAndTimeCommand;
             RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
-            return base.ActivateAsync();
+            return Task.CompletedTask;
         }
         public override void Deactivate()
         {

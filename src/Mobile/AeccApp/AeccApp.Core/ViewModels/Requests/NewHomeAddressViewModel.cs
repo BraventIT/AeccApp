@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -121,8 +122,6 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
-
-
         private Command _addressSelectedCommand;
         public ICommand AddressSelectedCommand
         {
@@ -254,11 +253,11 @@ namespace AeccApp.Core.ViewModels
         #region Methods
         private Task InternalContinueWithRequestAsync()
         {
-            return ExecuteOperationAsync(async () =>
+            return ExecuteOperationAsync(async cancelToken =>
             {
                 if (string.IsNullOrEmpty(AddressSelected.PlaceId))
                 {
-                    IEnumerable<AddressModel> places = await GetPlacesAsync(AddressSelected.FinderAddress);
+                    IEnumerable<AddressModel> places = await GetPlacesAsync(AddressSelected.FinderAddress, cancelToken);
                     if (places.Any())
                     {
                         AddressSelected = places.First();
@@ -280,14 +279,14 @@ namespace AeccApp.Core.ViewModels
             });
         }
 
-        private async Task<IEnumerable<AddressModel>> GetPlacesAsync(string findText)
+        private async Task<IEnumerable<AddressModel>> GetPlacesAsync(string findText, CancellationToken cancelToken)
         {
             Models.Position position = null;
             if (GeolocatorService.IsGeolocationEnabled)
             {
-                position = await GeolocatorService.GetCurrentLocationAsync();
+                position = await GeolocatorService.GetCurrentLocationAsync(cancelToken);
             }
-            var places = await GoogleMapsService.FindPlacesAsync(findText, position);
+            var places = await GoogleMapsService.FindPlacesAsync(findText, position, cancelToken);
             return places;
         }
 
@@ -311,12 +310,15 @@ namespace AeccApp.Core.ViewModels
 
         private Task RefreshSugestedAddressesAsync(string result)
         {
-            return ExecuteOperationAsync(async () =>
+            TryCancelToken();
+            UpdateToken();
+
+            return ExecuteOperationAsync(async cancelToken =>
             {
                 if (SugestedAddressesList.Any())
                     SugestedAddressesList.Clear();
 
-                var places = await GetPlacesAsync(result);
+                var places = await GetPlacesAsync(result, cancelToken);
                 SugestedAddressesList.AddRange(places);
 
                 SugestedAddressesListIsEmpty = !SugestedAddressesList.Any();

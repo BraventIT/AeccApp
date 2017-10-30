@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using AeccApp.Core.Models;
+using System.Threading;
 
 namespace AeccApp.Core.Extensions
 {
@@ -17,7 +18,7 @@ namespace AeccApp.Core.Extensions
             return geolocator.IsGeolocationAvailable;
         }
 
-        public static async Task<Models.Position> GetCurrentLocationAsync(this IGeolocator locator)
+        public static async Task<Models.Position> GetCurrentLocationAsync(this IGeolocator locator, CancellationToken cancelToken)
         {
             Plugin.Geolocator.Abstractions.Position position = null;
             try
@@ -28,7 +29,7 @@ namespace AeccApp.Core.Extensions
                 position = await locator.GetLastKnownLocationAsync();
 
                 if (position == null)
-                    position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
+                    position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), cancelToken, true);
             }
             catch (Exception ex)
             {

@@ -12,7 +12,6 @@ namespace AeccApp.Core.ViewModels
         Task ActivateAsync();
         void Deactivate();
 
-        bool ViewIsInitialized { get; set; }
         bool OnBackButtonPressed();
     }
 }

@@ -95,17 +95,6 @@ namespace AeccApp.Core.ViewModels
             var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
             if (!hasPermission)
                 return;
-
-            if (GeolocatorService.IsGeolocationEnabled)
-            {
-                var pos = await GeolocatorService.GetCurrentLocationAsync();
-                if (pos == null && !GeolocatorService.IsGeolocationEnabled)
-                {
-                    // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
-                }
-            }
-
-            //  return Task.CompletedTask;
         }
 
         public override Task ActivateAsync()

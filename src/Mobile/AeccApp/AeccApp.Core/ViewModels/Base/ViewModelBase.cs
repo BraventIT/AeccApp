@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 using AeccApp.Internationalization.Properties;
 using AeccApp.Core.Services;
 using System.Diagnostics;
+using System.Threading;
 
 namespace AeccApp.Core.ViewModels
 {
     public abstract class ViewModelBase : BaseNotifyProperty, INavigableViewModel
     {
         protected INavigationService NavigationService { get; } = ServiceLocator.NavigationService;
+
+        private static CancellationToken _currentToken;
+        private static CancellationTokenSource _cancelTokenSource;
 
         /// <summary>
         /// ViewModelBase contains instances for GlobalSettings and LocalizationResources
@@ -112,9 +116,7 @@ namespace AeccApp.Core.ViewModels
             return Task.CompletedTask;
         }
 
-        public virtual void Deactivate()
-        {
-        }
+        public virtual void Deactivate()  { }
 
         protected async Task ExecuteOperationAsync(Func<Task> executeAction, Action finallyAction = null)
         {
@@ -134,6 +136,44 @@ namespace AeccApp.Core.ViewModels
 
                 FinishOperation();
             }
+        }
+
+        protected async Task ExecuteOperationAsync(Func<CancellationToken, Task> executeAction, Action finallyAction = null)
+        {
+            try
+            {
+                StartOperation();
+
+                if (!_currentToken.IsCancellationRequested)
+                    await executeAction(_currentToken);
+            }
+            catch (OperationCanceledException ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                finallyAction?.Invoke();
+
+                FinishOperation();
+            }
+        }
+
+        public static void UpdateToken()
+        {
+            if (_cancelTokenSource == null || _cancelTokenSource.IsCancellationRequested)
+                _cancelTokenSource = new CancellationTokenSource();
+            _currentToken = _cancelTokenSource.Token;
+        }
+
+        public static void TryCancelToken()
+        {
+            if (_cancelTokenSource != null && !_cancelTokenSource.IsCancellationRequested)
+                _cancelTokenSource.Cancel();
         }
 
         protected virtual void OnIsBusyChanged() { }

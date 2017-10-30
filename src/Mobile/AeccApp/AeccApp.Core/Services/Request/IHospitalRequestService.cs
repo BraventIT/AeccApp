@@ -1,15 +1,14 @@
 ﻿using AeccApi.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AeccApp.Core.Services
 {
     public interface IHospitalRequestService
     {
-        Task<IEnumerable<RequestType>> GetRequestTypesAsync();
-        Task<IEnumerable<Hospital>> GetHospitalsAsync(string province);
-        Task<Hospital> GetHospitalDetail(int hospitalId);
+        Task<IEnumerable<RequestType>> GetRequestTypesAsync(CancellationToken cancelToken);
+        Task<IEnumerable<Hospital>> GetHospitalsAsync(string province, CancellationToken cancelToken);
+        Task<Hospital> GetHospitalDetail(int hospitalId, CancellationToken cancelToken);
     }
 }

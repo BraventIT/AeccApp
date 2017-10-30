@@ -16,8 +16,6 @@ namespace AeccApp.Core.Views
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
-            if (ViewModel != null)
-                ViewModel.ViewIsInitialized = true;
         }
 
         protected override async void OnAppearing()
@@ -30,8 +28,6 @@ namespace AeccApp.Core.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            if (ViewModel != null)
-                ViewModel.ViewIsInitialized = false;
             ViewModel?.Deactivate();
         }
 

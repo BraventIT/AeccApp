@@ -72,18 +72,18 @@ namespace AeccApp.Core.ViewModels
 
         public override Task ActivateAsync()
         {
-            return ExecuteOperationAsync(async () =>
+            return ExecuteOperationAsync(async cancelToken =>
             {
 
                 if (MyAddress.Coordinates == null)
                 {
-                    MyAddress = await GoogleMapsService.FillPlaceDetailAsync(MyAddress);
+                    MyAddress = await GoogleMapsService.FillPlaceDetailAsync(MyAddress, cancelToken);
                 }
 
-                ProvinceCoordinators = await HomeRequestService.GetCoordinatorsAsync(MyAddress.Province);
+                ProvinceCoordinators = await HomeRequestService.GetCoordinatorsAsync(MyAddress.Province, cancelToken);
                 if (ProvinceCoordinators != null && ProvinceCoordinators.Any())
                 {
-                    RequestTypes = await HomeRequestService.GetRequestTypesAsync();
+                    RequestTypes = await HomeRequestService.GetRequestTypesAsync(cancelToken);
                 }
                 else
                 {
@@ -94,9 +94,6 @@ namespace AeccApp.Core.ViewModels
                     MyAddress.WillBeSaved = false;
                     await HomeAddressesDataService.AddOrUpdateAddressAsync(MyAddress);
                 }
-
-
-
             });
         }
 

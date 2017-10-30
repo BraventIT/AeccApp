@@ -48,6 +48,7 @@ namespace AeccApp.Core.Services
             var mainPage = Application.Current.MainPage as NavigationPage;
             if (mainPage != null)
             {
+                ViewModelBase.TryCancelToken();
                 var page = (mainPage.Navigation.ModalStack.Any()) ?
                      await mainPage.Navigation.PopModalAsync() :
                      await mainPage.Navigation.PopAsync();
@@ -102,11 +103,11 @@ namespace AeccApp.Core.Services
                 else
                     await navigationPage.PushAsync(page);
             }
-
+            ViewModelBase.UpdateToken();
             await (page.BindingContext as INavigableViewModel).InitializeAsync(parameter);
         }
 
-        private async void OnPagePopped(object sender, NavigationEventArgs e)
+        private void OnPagePopped(object sender, NavigationEventArgs e)
         {
             var mainPage = Application.Current.MainPage as NavigationPage;
             if (mainPage != null)

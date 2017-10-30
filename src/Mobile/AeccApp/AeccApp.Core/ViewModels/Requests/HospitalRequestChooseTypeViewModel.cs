@@ -37,13 +37,12 @@ namespace AeccApp.Core.ViewModels
 
         public override Task ActivateAsync()
         {
-            return ExecuteOperationAsync(async () =>
+            return ExecuteOperationAsync(async cancelToken =>
             {
-
-                ProvinceHospitals = await HospitalRequestService.GetHospitalsAsync(HospitalAddress.Province);
+                ProvinceHospitals = await HospitalRequestService.GetHospitalsAsync(HospitalAddress.Province, cancelToken);
                 if (ProvinceHospitals != null && ProvinceHospitals.Any())
                 {
-                    RequestTypes = await HospitalRequestService.GetRequestTypesAsync();
+                    RequestTypes = await HospitalRequestService.GetRequestTypesAsync(cancelToken);
                 }
                 else
                 {

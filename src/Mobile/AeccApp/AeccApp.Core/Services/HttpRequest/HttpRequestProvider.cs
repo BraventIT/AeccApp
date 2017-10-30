@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System;
 using System.Globalization;
+using System.Threading;
 
 namespace AeccApp.Core.Services
 {
@@ -26,10 +27,10 @@ namespace AeccApp.Core.Services
             _serializerSettings.Converters.Add(new StringEnumConverter());
         }
 
-        public async Task<TResult> GetAsync<TResult>(string uri, string token = "")
+        public async Task<TResult> GetAsync<TResult>(string uri, CancellationToken cancelToken = default(CancellationToken), string token = "")
         {
             HttpClient httpClient = CreateHttpClient(token);
-            HttpResponseMessage response = await httpClient.GetAsync(uri);
+            HttpResponseMessage response = await httpClient.GetAsync(uri, cancelToken).ConfigureAwait(false);
 
             await HandleResponse(response);
             string serialized = await response.Content.ReadAsStringAsync();
@@ -37,7 +38,7 @@ namespace AeccApp.Core.Services
             return JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings);
         }
 
-        public async Task<TResult> PostAsync<TResult>(string uri, TResult data, string token = "", string header = "")
+        public async Task<TResult> PostAsync<TResult>(string uri, TResult data, CancellationToken cancelToken = default(CancellationToken), string token = "", string header = "")
         {
             HttpClient httpClient = CreateHttpClient(token);
 
@@ -48,7 +49,7 @@ namespace AeccApp.Core.Services
 
             var content = new StringContent(JsonConvert.SerializeObject(data));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await httpClient.PostAsync(uri, content);
+            HttpResponseMessage response = await httpClient.PostAsync(uri, content, cancelToken).ConfigureAwait(false);
 
             await HandleResponse(response);
             string serialized = await response.Content.ReadAsStringAsync();
@@ -56,10 +57,10 @@ namespace AeccApp.Core.Services
             return JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings);
         }
 
-        public async Task DeleteAsync(string uri, string token = "")
+        public async Task DeleteAsync(string uri, CancellationToken cancelToken = default(CancellationToken), string token = "")
         {
             HttpClient httpClient = CreateHttpClient(token);
-            await httpClient.DeleteAsync(uri);
+            await httpClient.DeleteAsync(uri, cancelToken);
         }
 
         private HttpClient CreateHttpClient(string token = "")
