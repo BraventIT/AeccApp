@@ -25,10 +25,8 @@ namespace AeccApp.Core.Views
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<GeolocatorMessages>(this, string.Empty);
         }
-        public async void MoveCameraMap(Xamarin.Forms.GoogleMaps.Position toPosition)
+        public async void MoveCameraMap(Position toPosition)
         {
-            var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
-                     toPosition, 16d), TimeSpan.FromSeconds(1));
 
             var addressPin = new Pin() { Label = "Tu dirección", Position = toPosition };
             addressPin.IsDraggable = false;
@@ -46,6 +44,8 @@ namespace AeccApp.Core.Views
             }
 
             map.Pins.Add(addressPin);
+            var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
+                     toPosition, 16d), TimeSpan.FromSeconds(1));
 
 
         }

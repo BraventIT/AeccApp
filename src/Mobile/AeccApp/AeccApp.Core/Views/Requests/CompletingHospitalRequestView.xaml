@@ -21,32 +21,43 @@
                     BackgroundColor="LightGray"
                     HorizontalOptions="FillAndExpand">
                     <Label
-                        FontSize="Large"
+                        FontSize="{StaticResource LargeSize}"
                         HorizontalOptions="Center"
                         Text="{Binding RequestTypeHeader}" />
                 </StackLayout>
 
 
                 <!--  Map  -->
-                <StackLayout HorizontalOptions="FillAndExpand">
-                    <StackLayout.HeightRequest>
-                        <OnPlatform
-                            x:TypeArguments="x:Double"
-                            Android="200"
-                            WinPhone="300"
-                            iOS="200" />
-                    </StackLayout.HeightRequest>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding MapDetailCommand}" />
-                    </StackLayout.GestureRecognizers>
-                    <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
-                    <maps:Map
-                        x:Name="map"
-                        HasZoomEnabled="False"
-                        HorizontalOptions="FillAndExpand"
-                        IsEnabled="False"
-                        VerticalOptions="FillAndExpand" />
+                <StackLayout>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="150"
+                                WinPhone="250"
+                                iOS="150" />
+                        </Grid.HeightRequest>
 
+                        <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
+                        <maps:Map
+                            x:Name="map"
+                            HasZoomEnabled="False"
+                            HorizontalOptions="FillAndExpand"
+                            IsEnabled="False"
+                            VerticalOptions="FillAndExpand" />
+
+                        <BoxView
+                            HorizontalOptions="FillAndExpand"
+                            Opacity="0.1"
+                            VerticalOptions="FillAndExpand"
+                            Color="Gray">
+                            <BoxView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding MapDetailCommand}" />
+                            </BoxView.GestureRecognizers>
+                        </BoxView>
+                    </Grid>
+
+                    <!--  Save hospital switch  -->
                     <StackLayout
                         Margin="10"
                         HorizontalOptions="Center"

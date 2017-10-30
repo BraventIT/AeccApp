@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Xamarin.Forms.GoogleMaps;
 using System.Text.RegularExpressions;
+using AeccApp.Core.Models;
+using AeccApi.Models;
+using System.Collections.Generic;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -24,11 +27,12 @@ namespace AeccApp.Core.ViewModels
             if (GeolocatorService.IsGeolocationEnabled)
             {
                 var currentPosition = await GeolocatorService.GetCurrentLocationAsync();
-                Models.AddressModel currentAddress = null;
+                AddressModel currentAddress = null;
+             
                 if (currentPosition != null)
                 {
                     currentAddress = await GoogleMapsService.FindCoordinatesGeocodingAsync(currentPosition.Latitude, currentPosition.Longitude);
-                    MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, currentPosition);
+                    MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, new Xamarin.Forms.GoogleMaps.Position(currentPosition.Latitude,currentPosition.Longitude) );
                 }
 
                 var currentProvince = (currentAddress != null) ? currentAddress.Province : string.Empty;
@@ -55,6 +59,8 @@ namespace AeccApp.Core.ViewModels
                         }
                     }
                 }
+
+
 
                 //TODO uncomment this when line178 TO DO is done:
 
@@ -115,10 +121,11 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        void OnHospitalListTabCommand(object obj)
+        async void OnHospitalListTabCommand(object obj)
         {
             SwitchBetweenAndHospitalList = false;
-
+            Hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty);
+          
         }
 
 
@@ -135,7 +142,13 @@ namespace AeccApp.Core.ViewModels
 
         async void OnNewHospitalSelectedCommand(object obj)
         {
-            await NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
+            var hospitalSelected = obj as Hospital;
+            AddressSelected.Street = hospitalSelected.Street;
+            AddressSelected.Name = hospitalSelected.Name;
+            var location = await GoogleMapsService.FindAddressGeocodingAsync(hospitalSelected.Street);
+
+            AddressSelected.Coordinates = new Models.Position(location.Latitude,location.Longitude);
+            await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
         }
 
         #endregion
@@ -150,7 +163,13 @@ namespace AeccApp.Core.ViewModels
             set { _addressSelected = value; }
         }
 
+        private IEnumerable<Hospital> _hospitals = new ObservableCollection<Hospital>();
 
+        public IEnumerable<Hospital> Hospitals
+        {
+            get { return _hospitals; }
+            set { Set(ref _hospitals, value); }
+        }
 
         private ObservableCollection<Pin> _mapPins = new ObservableCollection<Pin>();
 
@@ -175,7 +194,7 @@ namespace AeccApp.Core.ViewModels
         #region Methods
         private void PinManagement(string hospitalName, double lat, double lng)
         {
-            Pin pin = new Pin() { Address= hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
+            Pin pin = new Pin() {Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
                 case TargetPlatform.Android:
