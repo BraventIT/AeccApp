@@ -83,6 +83,7 @@
                     x:Name="map"
                     HasZoomEnabled="True"
                     HeightRequest="600"
+                    IsShowingUser="True"
                     MapPins="{Binding MapPins}">
 
                     <ctrl:CustomMap.Behaviors>
@@ -93,17 +94,7 @@
                     </ctrl:CustomMap.Behaviors>
 
                 </ctrl:CustomMap>
-                <ctrl:CustomImage
-                    Margin="8"
-                    HeightRequest="45"
-                    HorizontalOptions="End"
-                    SourcePlatform="location_pin"
-                    VerticalOptions="Start"
-                    WidthRequest="45">
-                    <ctrl:CustomImage.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding RelocateCommand}" />
-                    </ctrl:CustomImage.GestureRecognizers>
-                </ctrl:CustomImage>
+
             </Grid>
             <!--  Hospitals list  -->
             <Grid Padding="15" IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">

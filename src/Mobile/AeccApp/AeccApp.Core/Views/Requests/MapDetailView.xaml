@@ -16,6 +16,7 @@
             x:Name="map"
             HasZoomEnabled="True"
             HorizontalOptions="FillAndExpand"
+            IsShowingUser="True"
             VerticalOptions="FillAndExpand" />
 
     </Grid>

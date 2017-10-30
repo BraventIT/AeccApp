@@ -126,35 +126,6 @@ namespace AeccApp.Core.ViewModels
             await NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
         }
 
-
-        private Command _relocateCommand;
-        public ICommand RelocateCommand
-        {
-            get
-            {
-                return _relocateCommand ??
-                    (_relocateCommand = new Command(OnRelocateCommand, (o) => !IsBusy));
-            }
-        }
-
-        async void OnRelocateCommand(object obj)
-        {
-            if (GeolocatorService.IsGeolocationEnabled)
-            {
-                var position = await GeolocatorService.GetCurrentLocationAsync();
-                MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
-            }
-            else
-            {
-                // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
-            }
-
-
-
-        }
-
-
-
         #endregion
 
         #region Properties
