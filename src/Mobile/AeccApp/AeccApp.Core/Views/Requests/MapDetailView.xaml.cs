@@ -1,33 +1,31 @@
 ﻿using AeccApp.Core.Messages;
 using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.Xaml;
 
 namespace AeccApp.Core.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CompletingHomeRequestView : BaseContentPage
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class MapDetailView : BaseContentPage
 	{
-
-        public CompletingHomeRequestView()
+		public MapDetailView ()
 		{
-           
-            MessagingCenter.Subscribe<GeolocatorMessages, Position>(this, string.Empty, (sender, arg) =>
+
+            MessagingCenter.Subscribe<GeolocatorMessages, Xamarin.Forms.GoogleMaps.Position>(this, string.Empty, (sender, arg) =>
               MoveCameraMap(arg));
-            InitializeComponent ();
-            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.416937, -3.703523), 6d);
-                 
+            InitializeComponent();
+            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Xamarin.Forms.GoogleMaps.Position(40.416937, -3.703523), 6d);
+
         }
 
-   
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            MessagingCenter.Unsubscribe<GeolocatorMessages>(this,string.Empty);
+            MessagingCenter.Unsubscribe<GeolocatorMessages>(this, string.Empty);
         }
-        public async void MoveCameraMap(Position toPosition)
+        public async void MoveCameraMap(Xamarin.Forms.GoogleMaps.Position toPosition)
         {
             var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
                      toPosition, 16d), TimeSpan.FromSeconds(1));
@@ -52,6 +50,6 @@ namespace AeccApp.Core.Views
 
         }
 
-        
+
     }
 }

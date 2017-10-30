@@ -65,6 +65,8 @@ namespace AeccApp.Core.ViewModels
             IocContainer.Register<NewHospitalAddressViewModel>();
             IocContainer.Register<HospitalRequestChooseTypeViewModel>();
             IocContainer.Register<CompletingHospitalRequestViewModel>();
+            IocContainer.Register<MapDetailViewModel>();
+
 
         }
     }

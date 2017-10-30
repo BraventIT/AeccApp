@@ -46,7 +46,23 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
-     
+
+        private Command _mapDetailCommand;
+        public ICommand MapDetailCommand
+        {
+            get
+            {
+                return _mapDetailCommand ??
+                    (_mapDetailCommand = new Command(OnMapDetailCommand, (o) => !IsBusy));
+            }
+        }
+
+        private async void OnMapDetailCommand(object obj)
+        {
+            await NavigationService.NavigateToAsync<MapDetailViewModel>(new Xamarin.Forms.GoogleMaps.Position(InitialMapLat,InitialMapLng));
+        }
+
+
         private Command _openRequestConfirmationPopupCommand;
         public ICommand OpenRequestConfirmationPopupCommand
         {
