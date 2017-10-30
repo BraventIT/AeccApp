@@ -28,18 +28,14 @@
 
 
                 <!--  Map  -->
-                <StackLayout HorizontalOptions="FillAndExpand">
-                    <StackLayout.HeightRequest>
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Grid.HeightRequest>
                         <OnPlatform
                             x:TypeArguments="x:Double"
                             Android="150"
                             WinPhone="250"
                             iOS="150" />
-                    </StackLayout.HeightRequest>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding MapDetailCommand}" />
-                    </StackLayout.GestureRecognizers>
-
+                    </Grid.HeightRequest>
 
                     <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
                     <maps:Map
@@ -49,7 +45,17 @@
                         IsEnabled="False"
                         VerticalOptions="FillAndExpand" />
 
-                </StackLayout>
+                    <BoxView
+                        HorizontalOptions="FillAndExpand"
+                        Opacity="0.1"
+                        VerticalOptions="FillAndExpand"
+                        Color="Gray">
+                        <BoxView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MapDetailCommand}" />
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                </Grid>
+
                 <!--  Date and time text and button  -->
                 <Label
                     Margin="10"

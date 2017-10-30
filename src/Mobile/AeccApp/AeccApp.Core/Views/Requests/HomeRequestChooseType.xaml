@@ -29,7 +29,7 @@
                             Grid.Column="0"
                             Margin="20,10,0,0"
                             FontAttributes="Bold"
-                            FontSize="Medium"
+                            FontSize="{StaticResource MediumSize}"
                             Text="{Binding Name}"
                             TextColor="{StaticResource GreyTextDark}" />
 
@@ -78,7 +78,7 @@
                         WidthRequest="25" />
 
                     <Label
-                        FontSize="Large"
+                        FontSize="{StaticResource LargeSize}"
                         HorizontalOptions="Center"
                         Text="{Binding MyAddress.Name}"
                         VerticalOptions="Center" />
@@ -129,7 +129,7 @@
                             Grid.Column="0"
                             Margin="20,10,0,0"
                             FontAttributes="Bold"
-                            FontSize="Medium"
+                            FontSize="{StaticResource MediumSize}"
                             Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
                             TextColor="{StaticResource GreyTextDark}" />
                         <ctrl:CustomImage

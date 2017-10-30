@@ -7,8 +7,10 @@ using Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Xamarin.Forms.GoogleMaps;
+using System.Text.RegularExpressions;
 using AeccApp.Core.Models;
 using AeccApi.Models;
+using System.Collections.Generic;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -121,10 +123,14 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        void OnHospitalListTabCommand(object obj)
+        async void OnHospitalListTabCommand(object obj)
         {
             SwitchBetweenAndHospitalList = false;
-
+            if (Hospitals.Count==0)
+            {
+            var hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty);
+            Hospitals.AddRange(hospitals);
+            }
         }
 
         private Command _newHospitalSelectedCommand;
@@ -139,7 +145,13 @@ namespace AeccApp.Core.ViewModels
 
         async void OnNewHospitalSelectedCommand(object obj)
         {
-            await NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
+            var hospitalSelected = obj as Hospital;
+            AddressSelected.Street = hospitalSelected.Street;
+            AddressSelected.Name = hospitalSelected.Name;
+            var location = await GoogleMapsService.FindAddressGeocodingAsync(hospitalSelected.Street);
+
+            AddressSelected.Coordinates = new Models.Position(location.Latitude,location.Longitude);
+            await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
         }
 
         #endregion
@@ -154,19 +166,18 @@ namespace AeccApp.Core.ViewModels
             set { _addressSelected = value; }
         }
 
+        private ObservableCollection<Hospital> _hospitals;
+
+        public ObservableCollection<Hospital> Hospitals
+        {
+            get { return _hospitals; }
+        }
 
         private ObservableCollection<Pin> _mapPins;
 
         public ObservableCollection<Pin> MapPins
         {
             get { return _mapPins; }
-        }
-
-        private ObservableCollection<Hospital> _hospitals;
-
-        public ObservableCollection<Hospital> Hospitals
-        {
-            get { return _hospitals; }
         }
 
         private bool _switchBetweenAndHospitalList = true;
@@ -183,7 +194,7 @@ namespace AeccApp.Core.ViewModels
         #region Methods
         private void PinManagement(string hospitalName, double lat, double lng)
         {
-            Pin pin = new Pin() { Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
+            Pin pin = new Pin() {Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
                 case TargetPlatform.Android:

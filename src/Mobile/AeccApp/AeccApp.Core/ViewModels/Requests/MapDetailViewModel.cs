@@ -13,12 +13,31 @@ namespace AeccApp.Core.ViewModels
 
         public override Task InitializeAsync(object navigationData)
         {
-            var position = (Position)navigationData;
-            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
+            Position = (Position)navigationData;
 
             return Task.CompletedTask;
         }
 
+        public override Task ActivateAsync()
+        {
+            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, Position);
 
+            return base.ActivateAsync();
         }
+
+
+
+        #region Properties
+        private Position _position;
+
+        public Position Position
+        {
+            get { return _position; }
+            set { Set(ref _position, value); }
+        }
+
+        #endregion
+
+
+    }
 }
