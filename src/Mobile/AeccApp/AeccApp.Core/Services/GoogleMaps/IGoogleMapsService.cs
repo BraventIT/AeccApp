@@ -11,5 +11,7 @@ namespace AeccApp.Core.Services
         Task<AddressModel> FillPlaceDetailAsync(AddressModel address);
 
         Task<GoogleGeocodingModel> FindAddressGeocodingAsync(string address);
+
+        Task<GoogleGeocodingModel> FindCoordinatesGeocodingAsync(double lat, double lng);
     }
 }

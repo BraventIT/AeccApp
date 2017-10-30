@@ -31,16 +31,19 @@ namespace AeccApp.Core.ViewModels
                 position = await GeolocatorService.GetCurrentLocationAsync();
                 MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
 
-                var addresses = await GeolocatorService.GetAddressesForPositionAsync(new Plugin.Geolocator.Abstractions.Position(position.Latitude,position.Longitude), GlobalSetting.Instance.GooglePlacesApiKey);           
-                var address = addresses.FirstOrDefault();
-                var Hospitals = await HospitalRequestService.GetHospitalsAsync(address.SubAdminArea) ;
+                var address = await GoogleMapsService.FindCoordinatesGeocodingAsync(position.Latitude, position.Longitude);
+                var Hospitals = await HospitalRequestService.GetHospitalsAsync(address.Results[0].AddressComponents[2].LongName);
                 foreach (var item in Hospitals)
                 {
-                   GoogleGeocodingModel geocoded = await GoogleMapsService.FindAddressGeocodingAsync(item.Street);
-                    PinManagement(item.Street,item.Name, geocoded.Results[0].Geometry.Location.Lat, geocoded.Results[0].Geometry.Location.Lng);
+                    if (item.Street.Any())
+                    {
+                        GoogleGeocodingModel geocoded = await GoogleMapsService.FindAddressGeocodingAsync(item.Street);
+                        PinManagement(item.Street, item.Name, geocoded.Results[0].Geometry.Location.Lat, geocoded.Results[0].Geometry.Location.Lng);
+                    }
                 }
 
-                //TODO uncomment this when line 178 TO DO is done
+                //TODO uncomment this when line178 TO DO is done:
+
                 //var savedPins = await MapPinsDataService.GetListAsync();
                 //MapPins.AddRange(savedPins.Values);
 
@@ -49,7 +52,7 @@ namespace AeccApp.Core.ViewModels
             {
                 // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
             }
-           
+
         }
 
         #region Commands
@@ -85,7 +88,7 @@ namespace AeccApp.Core.ViewModels
 
         }
 
-        
+
 
         private Command _newHospitalSelectedCommand;
         public ICommand NewHospitalSelectedCommand
@@ -117,8 +120,8 @@ namespace AeccApp.Core.ViewModels
         {
             if (GeolocatorService.IsGeolocationEnabled)
             {
-            var position = await GeolocatorService.GetCurrentLocationAsync();
-            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh),string.Empty, position) ;
+                var position = await GeolocatorService.GetCurrentLocationAsync();
+                MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
             }
             else
             {
@@ -156,9 +159,9 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Methods
-        private async void PinManagement (string hospitalAddress , string hospitalName , double lat, double lng)
+        private void PinManagement(string hospitalAddress, string hospitalName, double lat, double lng)
         {
-            Pin pin = new Pin() { Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat,lng) };
+            Pin pin = new Pin() { Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
                 case TargetPlatform.Android:

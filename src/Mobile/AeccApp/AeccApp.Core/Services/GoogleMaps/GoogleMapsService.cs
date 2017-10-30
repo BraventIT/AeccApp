@@ -65,5 +65,18 @@ namespace AeccApp.Core.Services
             return place;
         }
 
+        public async Task<GoogleGeocodingModel> FindCoordinatesGeocodingAsync(double lat, double lng)
+        {
+            UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
+            {
+                Path = "maps/api/geocode/json",
+                Query = $"latlng={lat.ToString(CultureInfo.InvariantCulture) + ","+lng.ToString(CultureInfo.InvariantCulture)}&language=es&key=AIzaSyCnY2JhpLJoOY1gexf0CoEMFBONbvExjoY"
+            };
+
+            GoogleGeocodingModel place = await _requestProvider.GetAsync<GoogleGeocodingModel>(uriBuilder.ToString());
+
+            return place;
+        }
+
     }
 }
