@@ -71,6 +71,26 @@ namespace AeccApp.Core.ViewModels
         #region Commands
 
 
+
+        private Command _pinClickedCommand;
+        public ICommand PinClickedCommand
+        {
+            get
+            {
+                return _pinClickedCommand ??
+                    (_pinClickedCommand = new Command(OnPinClickedCommand, (o) => !IsBusy));
+            }
+        }
+
+        async void OnPinClickedCommand(object obj)
+        {
+            var pinClicked = obj as Pin;
+            AddressSelected.Street = pinClicked.Address;
+            AddressSelected.Coordinates = new Models.Position(pinClicked.Position.Latitude,pinClicked.Position.Longitude);
+            AddressSelected.Name = pinClicked.Label;
+            await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
+        }
+
         private Command _hospitalMapTabCommand;
         public ICommand HospitalMapTabCommand
         {
@@ -118,38 +138,19 @@ namespace AeccApp.Core.ViewModels
             await NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
         }
 
-
-        private Command _relocateCommand;
-        public ICommand RelocateCommand
-        {
-            get
-            {
-                return _relocateCommand ??
-                    (_relocateCommand = new Command(OnRelocateCommand, (o) => !IsBusy));
-            }
-        }
-
-        async void OnRelocateCommand(object obj)
-        {
-            if (GeolocatorService.IsGeolocationEnabled)
-            {
-                var position = await GeolocatorService.GetCurrentLocationAsync();
-                MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
-            }
-            else
-            {
-                // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
-            }
-
-
-
-        }
-
-
-
         #endregion
 
         #region Properties
+
+        private AddressModel _addressSelected = new AddressModel();
+
+        public AddressModel AddressSelected
+        {
+            get { return _addressSelected; }
+            set { _addressSelected = value; }
+        }
+
+
 
         private ObservableCollection<Pin> _mapPins = new ObservableCollection<Pin>();
 
@@ -174,7 +175,7 @@ namespace AeccApp.Core.ViewModels
         #region Methods
         private void PinManagement(string hospitalName, double lat, double lng)
         {
-            Pin pin = new Pin() { Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
+            Pin pin = new Pin() { Address= hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
                 case TargetPlatform.Android:

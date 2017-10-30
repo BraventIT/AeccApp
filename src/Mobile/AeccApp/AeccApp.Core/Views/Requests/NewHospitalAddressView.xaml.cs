@@ -11,6 +11,7 @@ namespace AeccApp.Core.Views
 	{
 		public NewHospitalAddressView ()
 		{
+            
             MessagingCenter.Subscribe<GeolocatorMessages, Position>(this, string.Empty, (sender, arg) => 
                 MoveCameraMap(arg));
 			InitializeComponent ();

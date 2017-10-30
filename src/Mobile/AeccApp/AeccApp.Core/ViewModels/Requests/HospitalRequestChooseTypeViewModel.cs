@@ -1,11 +1,15 @@
-﻿using AeccApp.Core.Models;
+﻿using AeccApi.Models;
+using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -13,24 +17,20 @@ namespace AeccApp.Core.ViewModels
     {
         private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
         private IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
-
-        #region Properties
-
-        private AddressModel _myAddress;
-        public AddressModel MyAddress
-        {
-            get { return _myAddress; }
-            set { Set(ref _myAddress, value); }
-        }
-        #endregion
-
+        private IHospitalRequestService HospitalRequestService { get; } = ServiceLocator.HospitalRequestService;
 
 
         public override Task InitializeAsync(object navigationData)
         {
-            MyAddress = navigationData as AddressModel;
-            if (MyAddress == null)
+            HospitalAddress = navigationData as AddressModel;
+            if (HospitalAddress == null)
+            {
                 throw new ArgumentNullException("AddressModel object required");
+            }
+            else
+            {
+                Request.RequestAddress = HospitalAddress;
+            }
 
             return Task.CompletedTask;
         }
@@ -39,51 +39,91 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                if (MyAddress.Coordinates == null)
+
+                ProvinceHospitals = await HospitalRequestService.GetHospitalsAsync(HospitalAddress.Province);
+                if (ProvinceHospitals != null && ProvinceHospitals.Any())
                 {
-                    MyAddress = await GoogleMapsService.FillPlaceDetailAsync(MyAddress);
+                    RequestTypes = await HospitalRequestService.GetRequestTypesAsync();
                 }
-                if (MyAddress.WillBeSaved)
+                else
                 {
-                    MyAddress.WillBeSaved = false;
-                    await HomeAddressesDataService.AddOrUpdateAddressAsync(MyAddress);
+                    ProvinceHasNotRequestAvailable = true;
                 }
+               
+
+
+
             });
         }
 
+
+    
+
+        #region Properties
+
+        private IEnumerable<Hospital> _provinceHospitals;
+        public IEnumerable<Hospital> ProvinceHospitals
+        {
+            get { return _provinceHospitals; }
+            set { Set(ref _provinceHospitals, value); }
+        }
+
+        private IEnumerable<RequestType> _requestTypes = new ObservableCollection<RequestType>();
+        public IEnumerable<RequestType> RequestTypes
+        {
+            get { return _requestTypes; }
+            set { Set(ref _requestTypes, value); }
+        }
+
+        private bool _provinceHasNotRequestAvailable;
+
+        public bool ProvinceHasNotRequestAvailable
+        {
+            get { return _provinceHasNotRequestAvailable; }
+            set { Set(ref _provinceHasNotRequestAvailable, value); }
+        }
+
+
+        private AddressModel _hospitalAddress;
+        public AddressModel HospitalAddress
+        {
+            get { return _hospitalAddress; }
+            set { Set(ref _hospitalAddress, value); }
+        }
+
+        private RequestModel _request = new RequestModel();
+
+        public RequestModel Request
+        {
+            get { return _request; }
+            set { _request = value; }
+        }
+
+
+        #endregion
+
+
+
         #region Commands
-
-        private Command _requestCompanionForHomeCommand;
-        public ICommand RequestCompanionForHomeCommand
+        private Command _requestTypeCommand;
+        public ICommand RequestTypeCommand
         {
             get
             {
-                return _requestCompanionForHomeCommand ??
-                    (_requestCompanionForHomeCommand = new Command(OnRequestCompanionForHomeCommand, (o) => !IsBusy));
+                return _requestTypeCommand ??
+                    (_requestTypeCommand = new Command(OnRequestTypeCommand, (o) => !IsBusy));
             }
         }
 
-        async public void OnRequestCompanionForHomeCommand(object obj)
+        async public void OnRequestTypeCommand(object obj)
         {
-            //Acompañamiento en el domicilio
-            await NavigationService.NavigateToAsync<CompletingHomeRequestViewModel>(MyAddress);
+            var requestType = obj as RequestType;
+            Request.RequestAddress = HospitalAddress;
+            Request.RequestType = requestType;
+            await NavigationService.NavigateToAsync<CompletingHospitalRequestViewModel>(Request);
+
         }
 
-        private Command _requestSupportOnHomeManagementsCommand;
-        public ICommand RequestSupportOnHomeManagementsCommand
-        {
-            get
-            {
-                return _requestSupportOnHomeManagementsCommand ??
-                    (_requestSupportOnHomeManagementsCommand = new Command(OnRequestSupportOnHomeManagementsCommand, (o) => !IsBusy));
-            }
-        }
-
-        async public void OnRequestSupportOnHomeManagementsCommand(object obj)
-        {
-            await NavigationService.NavigateToAsync<CompletingHomeRequestViewModel>(MyAddress);
-            //Apoyo en gestiones en el domicilio
-        }
 
 
         private Command _requestTalkToAeccCommand;

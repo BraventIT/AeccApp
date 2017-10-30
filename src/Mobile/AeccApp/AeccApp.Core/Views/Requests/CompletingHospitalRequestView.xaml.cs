@@ -18,22 +18,7 @@ namespace AeccApp.Core.Views
             );
             InitializeComponent();
             map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.416937, -3.703523), 6d);
-            var pinBravent = new Pin() { Label = "Bravent", Position = new Position(40.416937, -3.703523) };
-            pinBravent.IsDraggable = false;
-            switch (Device.OS)
-            {
-                case TargetPlatform.Android:
-                 //   pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin.png");
-                    break;
-                case TargetPlatform.iOS:
-                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin.png");
-                    break;
-                default:
-                    pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"Assets/location_pin.png");
-                    break;
-            }
-
-            map.Pins.Add(pinBravent);
+           
         }
 
      
@@ -44,6 +29,22 @@ namespace AeccApp.Core.Views
         }
         public async void MoveCameraMap(Position toPosition)
         {
+            var pinHospital = new Pin() { Label = "Tu selección", Position = toPosition };
+            pinHospital.IsDraggable = false;
+            switch (Device.OS)
+            {
+                case TargetPlatform.Android:
+                    //   pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin.png");
+                    break;
+                case TargetPlatform.iOS:
+                    pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"location_pin.png");
+                    break;
+                default:
+                    pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"Assets/location_pin.png");
+                    break;
+            }
+
+            map.Pins.Add(pinHospital);
             var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
                      toPosition, 16d), TimeSpan.FromSeconds(1));
         }
