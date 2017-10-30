@@ -11,8 +11,8 @@ namespace AeccApp.Core.Models
 
         public Position(double lat , double lng)
         {
-            this.Latitude = lat;
-            this.Longitude = lng;
+            Latitude = lat;
+            Longitude = lng;
         }
     }
 }

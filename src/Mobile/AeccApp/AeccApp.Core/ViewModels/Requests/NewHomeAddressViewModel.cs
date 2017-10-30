@@ -5,6 +5,7 @@ using AeccApp.Core.Validations;
 using AeccApp.Core.ViewModels.Popups;
 using Plugin.Geolocator.Abstractions;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,6 @@ namespace AeccApp.Core.ViewModels
     {
         private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
         private IGeolocator GeolocatorService { get; } = ServiceLocator.GeolocatorService;
-
 
         public NewHomeAddressViewModel()
         {
@@ -258,12 +258,7 @@ namespace AeccApp.Core.ViewModels
             {
                 if (string.IsNullOrEmpty(AddressSelected.PlaceId))
                 {
-                    Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position();
-                    if (GeolocatorService.IsGeolocationEnabled)
-                    {
-                        position = await GeolocatorService.GetCurrentLocationAsync();
-                    }
-                        var places = await GoogleMapsService.FindPlacesAsync(AddressSelected.FinderAddress,position);
+                    IEnumerable<AddressModel> places = await GetPlacesAsync(AddressSelected.FinderAddress);
                     if (places.Any())
                     {
                         AddressSelected = places.First();
@@ -283,6 +278,17 @@ namespace AeccApp.Core.ViewModels
                 await NavigationService.NavigateToAsync<HomeRequestChooseTypeViewModel>(AddressSelected);
                 await NavigationService.RemoveLastFromBackStackAsync();
             });
+        }
+
+        private async Task<IEnumerable<AddressModel>> GetPlacesAsync(string findText)
+        {
+            Models.Position position = null;
+            if (GeolocatorService.IsGeolocationEnabled)
+            {
+                position = await GeolocatorService.GetCurrentLocationAsync();
+            }
+            var places = await GoogleMapsService.FindPlacesAsync(findText, position);
+            return places;
         }
 
         public async void OnDoesNotWantToInputNumberSuggestionPopupCommand(object sender, EventArgs e)
@@ -310,13 +316,7 @@ namespace AeccApp.Core.ViewModels
                 if (SugestedAddressesList.Any())
                     SugestedAddressesList.Clear();
 
-                Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position();
-                if (GeolocatorService.IsGeolocationEnabled)
-                {
-                    position = await GeolocatorService.GetCurrentLocationAsync();
-                }
-
-                var places = await GoogleMapsService.FindPlacesAsync(result,position);
+                var places = await GetPlacesAsync(result);
                 SugestedAddressesList.AddRange(places);
 
                 SugestedAddressesListIsEmpty = !SugestedAddressesList.Any();

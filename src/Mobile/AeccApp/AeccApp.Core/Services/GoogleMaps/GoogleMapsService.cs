@@ -17,10 +17,10 @@ namespace AeccApp.Core.Services
             _requestProvider = requestProvider;
         }
 
-        public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText, Xamarin.Forms.GoogleMaps.Position position)
+        public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText, Position position)
         {
             string query = $"input={findText}&language=es&components=country:es&key={GlobalSetting.Instance.GooglePlacesApiKey}";
-            if (position.Latitude != 0)
+            if (position?.Latitude != 0)
             {
                 query += $"&location={position.Latitude.ToString(CultureInfo.InvariantCulture)},{position.Longitude.ToString(CultureInfo.InvariantCulture)}";
             }
@@ -52,31 +52,38 @@ namespace AeccApp.Core.Services
             return address;
         }
 
-        public async Task<GoogleGeocodingModel> FindAddressGeocodingAsync(string address)
+        public async Task<Position> FindAddressGeocodingAsync(string address)
         {
             UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
             {
                 Path = "maps/api/geocode/json",
-                Query = $"address={address}&language=es&key=AIzaSyCnY2JhpLJoOY1gexf0CoEMFBONbvExjoY"
+                Query = $"address={address}&language=es&key={GlobalSetting.Instance.GooglePlacesApiKey}"
             };
 
             GoogleGeocodingModel place = await _requestProvider.GetAsync<GoogleGeocodingModel>(uriBuilder.ToString());
-            
-            return place;
+            var result = place.Results.FirstOrDefault();
+
+            return (result != null) ?
+                new Position(result.Geometry.Location.Lat, result.Geometry.Location.Lng) : null;
         }
 
-        public async Task<GoogleGeocodingModel> FindCoordinatesGeocodingAsync(double lat, double lng)
+        public async Task<AddressModel> FindCoordinatesGeocodingAsync(double lat, double lng)
         {
             UriBuilder uriBuilder = new UriBuilder(GOOGLE_MAPS_ENDPOINT)
             {
                 Path = "maps/api/geocode/json",
-                Query = $"latlng={lat.ToString(CultureInfo.InvariantCulture) + ","+lng.ToString(CultureInfo.InvariantCulture)}&language=es&key=AIzaSyCnY2JhpLJoOY1gexf0CoEMFBONbvExjoY"
+                Query = $"latlng={lat.ToString(CultureInfo.InvariantCulture)},{lng.ToString(CultureInfo.InvariantCulture)}&language=es&key={GlobalSetting.Instance.GooglePlacesApiKey}"
             };
 
             GoogleGeocodingModel place = await _requestProvider.GetAsync<GoogleGeocodingModel>(uriBuilder.ToString());
 
-            return place;
-        }
+            var result = place.Results.FirstOrDefault();
 
+            return (result != null) ?
+                new AddressModel()
+                {
+                    Province = result.AddressComponents.FirstOrDefault(c => c.Types.First().StartsWith("administrative_area_level"))?.LongName
+                } : null;
+        }
     }
 }

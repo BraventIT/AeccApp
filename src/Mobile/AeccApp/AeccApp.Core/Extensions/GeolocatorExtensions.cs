@@ -3,6 +3,7 @@ using Plugin.Geolocator.Abstractions;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using AeccApp.Core.Models;
 
 namespace AeccApp.Core.Extensions
 {
@@ -16,7 +17,7 @@ namespace AeccApp.Core.Extensions
             return geolocator.IsGeolocationAvailable;
         }
 
-        public static async Task<Xamarin.Forms.GoogleMaps.Position> GetCurrentLocationAsync(this IGeolocator locator)
+        public static async Task<Models.Position> GetCurrentLocationAsync(this IGeolocator locator)
         {
             Plugin.Geolocator.Abstractions.Position position = null;
             try
@@ -28,8 +29,6 @@ namespace AeccApp.Core.Extensions
 
                 if (position == null)
                     position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
-
-
             }
             catch (Exception ex)
             {
@@ -48,9 +47,8 @@ namespace AeccApp.Core.Extensions
                 Debug.WriteLine(output);
             }
 #endif
-            Xamarin.Forms.GoogleMaps.Position newPosition = new Xamarin.Forms.GoogleMaps.Position(position.Latitude, position.Longitude);
-
-            return newPosition;
+            return (position != null) ?
+                new Models.Position(position.Latitude, position.Longitude) : null;
         }
     }
 }

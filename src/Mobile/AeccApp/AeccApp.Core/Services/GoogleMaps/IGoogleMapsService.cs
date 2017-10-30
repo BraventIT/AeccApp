@@ -6,12 +6,12 @@ namespace AeccApp.Core.Services
 {
     public interface IGoogleMapsService
     {
-        Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText , Xamarin.Forms.GoogleMaps.Position position);
+        Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText, Position position);
 
         Task<AddressModel> FillPlaceDetailAsync(AddressModel address);
 
-        Task<GoogleGeocodingModel> FindAddressGeocodingAsync(string address);
+        Task<Position> FindAddressGeocodingAsync(string address);
 
-        Task<GoogleGeocodingModel> FindCoordinatesGeocodingAsync(double lat, double lng);
+        Task<AddressModel> FindCoordinatesGeocodingAsync(double lat, double lng);
     }
 }

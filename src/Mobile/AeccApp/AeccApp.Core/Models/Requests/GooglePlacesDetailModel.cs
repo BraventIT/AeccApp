@@ -2,8 +2,6 @@
 
 namespace AeccApp.Core.Models
 {
-
-    
     /// <summary>
     /// GooglePlacesDetailModel represents the deserialized JSON returned by GooglePlaces API
     /// This one does contains coordinates, used manage map pins.

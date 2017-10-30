@@ -1,5 +1,4 @@
-﻿using AeccApp.Core.Models;
-using System.Linq;
+﻿using System.Linq;
 
 namespace AeccApp.Core.Models
 {

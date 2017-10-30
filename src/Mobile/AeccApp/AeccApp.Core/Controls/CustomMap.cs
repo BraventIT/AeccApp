@@ -15,37 +15,41 @@ namespace AeccApp.Core.Controls
             typeof(ObservableCollection<Pin>),
             typeof(CustomMap),
             new ObservableCollection<Pin>(),
-            propertyChanged: (b, o, n) =>
-            {
-                var bindable = (CustomMap)b;
-                bindable.Pins.Clear();
+            propertyChanged: OnMapPinsChanged);
 
-                var collection = (ObservableCollection<Pin>)n;
-                foreach (var item in collection)
-                    bindable.Pins.Add(item);
-                collection.CollectionChanged += (sender, e) =>
+        private static void OnMapPinsChanged(BindableObject b, object oldValue, object n)
+        {
+            var map = (CustomMap)b;
+            map.Pins.Clear();
+
+            var collection = (ObservableCollection<Pin>)n;
+            foreach (var item in collection)
+                map.Pins.Add(item);
+            collection.CollectionChanged += (sender, e) =>
+            {
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    Device.BeginInvokeOnMainThread(() =>
+                    switch (e.Action)
                     {
-                        switch (e.Action)
-                        {
-                            case NotifyCollectionChangedAction.Add:
-                            case NotifyCollectionChangedAction.Replace:
-                            case NotifyCollectionChangedAction.Remove:
-                                if (e.OldItems != null)
-                                    foreach (var item in e.OldItems)
-                                        bindable.Pins.Remove((Pin)item);
-                                if (e.NewItems != null)
-                                    foreach (var item in e.NewItems)
-                                        bindable.Pins.Add((Pin)item);
-                                break;
-                            case NotifyCollectionChangedAction.Reset:
-                                bindable.Pins.Clear();
-                                break;
-                        }
-                    });
-                };
-            });
+                        case NotifyCollectionChangedAction.Add:
+                        case NotifyCollectionChangedAction.Replace:
+                        case NotifyCollectionChangedAction.Remove:
+                            if (e.OldItems != null)
+                                foreach (var item in e.OldItems)
+                                    map.Pins.Remove((Pin)item);
+                            if (e.NewItems != null)
+                                foreach (var item in e.NewItems)
+                                    map.Pins.Add((Pin)item);
+                            break;
+                        case NotifyCollectionChangedAction.Reset:
+                            map.Pins.Clear();
+                            break;
+                    }
+                });
+            };
+
+        }
+
         public IList<Pin> MapPins { get; set; }
 
     }

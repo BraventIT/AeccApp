@@ -7,9 +7,7 @@ using Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Xamarin.Forms.GoogleMaps;
-using System.Linq;
-using AeccApi.Models;
-using AeccApp.Core.Models;
+using System.Text.RegularExpressions;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -17,28 +15,44 @@ namespace AeccApp.Core.ViewModels
     {
         private IGeolocator GeolocatorService { get; } = ServiceLocator.GeolocatorService;
         private IHospitalRequestService HospitalRequestService { get; } = ServiceLocator.HospitalRequestService;
-        private IMapPinsDataService MapPinsDataService { get; } = ServiceLocator.MapPinsDataService;
+        private IMapPositionsDataService MapPositionsDataService { get; } = ServiceLocator.MapPositionsDataService;
         private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
 
 
         public async override Task ActivateAsync()
         {
-
-
-            Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position();
             if (GeolocatorService.IsGeolocationEnabled)
             {
-                position = await GeolocatorService.GetCurrentLocationAsync();
-                MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
-
-                var address = await GoogleMapsService.FindCoordinatesGeocodingAsync(position.Latitude, position.Longitude);
-                var Hospitals = await HospitalRequestService.GetHospitalsAsync(address.Results[0].AddressComponents[2].LongName);
-                foreach (var item in Hospitals)
+                var currentPosition = await GeolocatorService.GetCurrentLocationAsync();
+                Models.AddressModel currentAddress = null;
+                if (currentPosition != null)
                 {
-                    if (item.Street.Any())
+                    currentAddress = await GoogleMapsService.FindCoordinatesGeocodingAsync(currentPosition.Latitude, currentPosition.Longitude);
+                    MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, currentPosition);
+                }
+
+                var currentProvince = (currentAddress != null) ? currentAddress.Province : string.Empty;
+                var Hospitals = await HospitalRequestService.GetHospitalsAsync(currentProvince);
+                foreach (var hospital in Hospitals)
+                {
+                    if (!string.IsNullOrEmpty(hospital.Street) && !string.IsNullOrEmpty(hospital.Name))
                     {
-                        GoogleGeocodingModel geocoded = await GoogleMapsService.FindAddressGeocodingAsync(item.Street);
-                        PinManagement(item.Street, item.Name, geocoded.Results[0].Geometry.Location.Lat, geocoded.Results[0].Geometry.Location.Lng);
+                        var hospitalAddress = $"{hospital.Name}, {hospital.Street}";
+
+                        var location = await MapPositionsDataService.GetAsync(hospitalAddress);
+                        if (location == null)
+                        {
+                            location = await GoogleMapsService.FindAddressGeocodingAsync(hospitalAddress);
+                        }
+                        if (location == null)
+                        {
+                            location = await GoogleMapsService.FindAddressGeocodingAsync(hospital.Name);
+                        }
+                        if (location != null)
+                        {
+                            await MapPositionsDataService.AddOrUpdateAddressAsync(hospitalAddress, location);
+                            PinManagement(hospital.Name, location.Latitude, location.Longitude);
+                        }
                     }
                 }
 
@@ -52,7 +66,6 @@ namespace AeccApp.Core.ViewModels
             {
                 // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
             }
-
         }
 
         #region Commands
@@ -159,7 +172,7 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Methods
-        private void PinManagement(string hospitalAddress, string hospitalName, double lat, double lng)
+        private void PinManagement(string hospitalName, double lat, double lng)
         {
             Pin pin = new Pin() { Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
@@ -180,8 +193,6 @@ namespace AeccApp.Core.ViewModels
 
             //TODO fix System.IO.IOException: Sharing violation on path /data/user/0/net.bravent.aeccapp/files/MapPins.json
             // await MapPinsDataService.AddOrUpdateAddressAsync(hospitalAddress, pin);
-
-
         }
         #endregion
 

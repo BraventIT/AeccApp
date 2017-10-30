@@ -16,7 +16,7 @@ namespace AeccApp.Core.Services
             IocContainer.RegisterAsSingleton<IIdentityService, IdentityService>();
 
             IocContainer.RegisterAsSingleton<IHospitalRequestService, HospitalRequestService>();
-            IocContainer.RegisterAsSingleton<IMapPinsDataService, MapPinsDataService>();
+            IocContainer.RegisterAsSingleton<IMapPositionsDataService, MapPositionsDataService>();
             IocContainer.RegisterAsSingleton<IHomeAddressesDataService, HomeAddressesDataService>();
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
             IocContainer.RegisterAsSingleton<IHomeRequestService, HomeRequestService>();
@@ -57,9 +57,10 @@ namespace AeccApp.Core.Services
         {
             get { return Resolve<IHospitalRequestService>(); }
         }
-        public static IMapPinsDataService MapPinsDataService
+
+        public static IMapPositionsDataService MapPositionsDataService
         {
-            get { return Resolve<IMapPinsDataService>(); }
+            get { return Resolve<IMapPositionsDataService>(); }
         }
 
         static IHomeRequestService _homeRequestService;
