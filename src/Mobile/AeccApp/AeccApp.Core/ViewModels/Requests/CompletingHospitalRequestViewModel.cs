@@ -29,12 +29,12 @@ namespace AeccApp.Core.ViewModels
             InitialMapLat = CurrentAddress.Coordinates.Latitude;
             InitialMapLng = CurrentAddress.Coordinates.Longitude;
             RequestTypeHeader = CurrentRequest.RequestType.Name;
-            Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position(InitialMapLat, InitialMapLng);
-            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
             return Task.CompletedTask;
         }
         public override Task ActivateAsync()
         {
+            Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position(InitialMapLat, InitialMapLng);
+            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
             RequestDateAndTimePopupVM.ApplyDateAndTime += OnApplyDateAndTimeCommand;
             RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
             return base.ActivateAsync();
