@@ -12,10 +12,40 @@ namespace AeccApp.Core.ViewModels
 {
     public class DashboardViewModel : ViewModelBase
     {
-        private  IChatService ChatService { get; } = ServiceLocator.ChatService;
-        private  IIdentityService IdentityService { get; }= ServiceLocator.IdentityService;
-        private  IGeolocator GeolocatorService { get; } = ServiceLocator.GeolocatorService;
+        private IChatService ChatService { get; } = ServiceLocator.ChatService;
+        private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
         private IPermissions PermissionsService { get; } = ServiceLocator.PermissionsService;
+
+        #region Contructor & Initialize
+        public override async Task InitializeAsync(object navigationData)
+        {
+            if (navigationData is TabParameter)
+            {
+                // Change selected application tab
+                var tabIndex = ((TabParameter)navigationData).TabIndex;
+                MessagingCenter.Send(new TabMessage(tabIndex), string.Empty);
+            }
+
+            var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
+            if (!hasPermission)
+                return;
+        }
+
+        public override Task ActivateAsync()
+        {
+            MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
+            MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, o => OnChatEngagementEventAsync(o));
+
+
+            return Task.CompletedTask;
+        }
+
+        public override void Deactivate()
+        {
+            MessagingCenter.Unsubscribe<ChatEventMessage>(this, string.Empty);
+            MessagingCenter.Unsubscribe<ChatEngagementEventMessage>(this, string.Empty);
+        }
+        #endregion
 
         #region Commands
 
@@ -63,7 +93,7 @@ namespace AeccApp.Core.ViewModels
                     (newChatCommand = new Command(NewChatCommandAsync));
             }
         }
-        
+
         private void NewChatCommandAsync(object obj)
         {
             MessagingCenter.Send(this, "New");
@@ -82,34 +112,5 @@ namespace AeccApp.Core.ViewModels
             await NavigationService.NavigateToAsync<ChatEventViewModel>(obj, isModal: true);
         }
         #endregion
-
-        public override async Task InitializeAsync(object navigationData)
-        {
-            if (navigationData is TabParameter)
-            {
-                // Change selected application tab
-                var tabIndex = ((TabParameter)navigationData).TabIndex;
-                MessagingCenter.Send(new TabMessage(tabIndex), string.Empty);
-            }
-
-            var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
-            if (!hasPermission)
-                return;
-        }
-
-        public override Task ActivateAsync()
-        {
-            MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
-            MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, o => OnChatEngagementEventAsync(o));
-
-
-            return Task.CompletedTask;
-        }
-
-        public override void Deactivate()
-        {
-            MessagingCenter.Unsubscribe<ChatEventMessage>(this, string.Empty);
-            MessagingCenter.Unsubscribe<ChatEngagementEventMessage>(this, string.Empty);
-        }
     }
 }

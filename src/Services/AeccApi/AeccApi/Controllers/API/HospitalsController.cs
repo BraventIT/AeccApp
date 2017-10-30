@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AeccApi.Models;
+using AeccApi.Extensions;
 using System.Globalization;
 
 namespace AeccApi.Controllers.API
@@ -26,7 +27,7 @@ namespace AeccApi.Controllers.API
         public IEnumerable<Hospital> GetHospitals(string province)
         {
             return (!string.IsNullOrEmpty(province)) ?
-                _context.Hospitals.Where(h => h.Province.StartsWith(province, true, CultureInfo.GetCultureInfo("es-ES"))) :
+                _context.Hospitals.Where(h => h.Province.Contains(province, StringComparison.CurrentCultureIgnoreCase)) :
                 _context.Hospitals;
         }
 
