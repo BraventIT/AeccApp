@@ -17,10 +17,10 @@ namespace AeccApp.Core.Services
 
             IocContainer.RegisterAsSingleton<IHospitalRequestService, HospitalRequestService>();
             IocContainer.RegisterAsSingleton<IMapPositionsDataService, MapPositionsDataService>();
-            IocContainer.RegisterAsSingleton<IAddressesDataService, HomeAddressesDataService>();
+            IocContainer.RegisterAsSingleton<IAddressesDataService, AddressesDataService>();
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
             IocContainer.RegisterAsSingleton<IHomeRequestService, HomeRequestService>();
-            IocContainer.RegisterAsSingleton<IAddressesDataService, HomeAddressesDataService>();
+            IocContainer.RegisterAsSingleton<IAddressesDataService, AddressesDataService>();
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.Register<IHttpRequestProvider, HttpRequestProvider>();
@@ -92,6 +92,11 @@ namespace AeccApp.Core.Services
         public static IFileProvider FileProvider
         {
             get { return DependencyService.Get<IFileProvider>(); }
+        }
+
+        public static ILocationProviderSettings LocationProviderSettings
+        {
+            get { return DependencyService.Get<ILocationProviderSettings>(); }
         }
 
         private static T Resolve<T>()

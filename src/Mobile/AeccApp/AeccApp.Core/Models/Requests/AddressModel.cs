@@ -61,6 +61,7 @@ namespace AeccApp.Core.Models
                     Street = item.Terms[0].Value;
                     break;
                 case 4:
+                case 5:
                     Street = item.Terms[0].Value;
                     if (int.TryParse(item.Terms[1].Value, out int number))
                     {
@@ -73,8 +74,6 @@ namespace AeccApp.Core.Models
 
             City = item.Terms[numTerms - 2].Value;
         }
-
-       
 
         public AddressModel()
         {
@@ -92,16 +91,6 @@ namespace AeccApp.Core.Models
             this.Coordinates = Coordinates;
         }
 
-        public void AddCoordinates(GooglePlacesDetailModel googlePlacesDetailModel)
-        {
-            Position addressCoordinates = new Position(googlePlacesDetailModel.Result.Geometry.Location.Lat, googlePlacesDetailModel.Result.Geometry.Location.Lng);
-            Coordinates = addressCoordinates;
-
-            if (int.TryParse(googlePlacesDetailModel.Result.AddressComponents[0].LongName, out int n))
-            {
-                Number = googlePlacesDetailModel.Result.AddressComponents[0].LongName;
-            }
-            Province = googlePlacesDetailModel.Result.AddressComponents[2].LongName;
-        }
+       
     }
 }

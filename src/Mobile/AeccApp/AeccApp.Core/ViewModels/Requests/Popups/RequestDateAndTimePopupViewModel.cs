@@ -6,25 +6,9 @@ using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
-   public class RequestDateAndTimePopupViewModel : ViewModelBase
+   public class RequestDateAndTimePopupViewModel : ClosablePopupViewModelBase
     {
         public event EventHandler ApplyDateAndTime;
-
-
-
-        private Command _closePopupCommand;
-        public ICommand ClosePopupCommand
-        {
-            get
-            {
-                return _closePopupCommand ??
-                    (_closePopupCommand = new Command(OnClosePopupCommand));
-            }
-        }
-        private async void OnClosePopupCommand()
-        {
-            await NavigationService.HidePopupAsync();
-        }
 
         private Command _applyDateAndTimeCommand;
         public ICommand ApplyDateAndTimeCommand

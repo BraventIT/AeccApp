@@ -2,7 +2,7 @@
 using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
-using Plugin.Geolocator.Abstractions;
+using AeccApp.Core.ViewModels.Popups;
 using Plugin.Permissions.Abstractions;
 using System;
 using System.Threading.Tasks;
@@ -18,6 +18,11 @@ namespace AeccApp.Core.ViewModels
         private IPermissions PermissionsService { get; } = ServiceLocator.PermissionsService;
 
         #region Contructor & Initialize
+        public DashboardViewModel()
+        {
+            NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
+        }
+
         public override async Task InitializeAsync(object navigationData)
         {
             if (navigationData is TabParameter)
@@ -28,33 +33,26 @@ namespace AeccApp.Core.ViewModels
             }
             try
             {
-            var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
-            if (!hasPermission)
-                return;
-
+                var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
+                if (!hasPermission)
+                    return;
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 await NavigationService.ShowPopupAsync(NoLocationProviderPopupVM);
             }
         }
 
-        
         public override Task ActivateAsync()
         {
-            NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
-            NoLocationProviderPopupVM.ClosePopup += OnCloseLocationProviderPopup;
-
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, o => OnChatEngagementEventAsync(o));
-
 
             return Task.CompletedTask;
         }
 
         public override void Deactivate()
         {
-            NoLocationProviderPopupVM.ClosePopup -= OnCloseLocationProviderPopup;
             MessagingCenter.Unsubscribe<ChatEventMessage>(this, string.Empty);
             MessagingCenter.Unsubscribe<ChatEngagementEventMessage>(this, string.Empty);
         }
@@ -119,10 +117,6 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Private Methods
-        private async void OnCloseLocationProviderPopup(object sender, EventArgs e)
-        {
-            await NavigationService.HidePopupAsync();
-        }
         private async Task OnChatEngagementEventAsync(ChatEngagementEventMessage chatEngagementEvent)
         {
             await NavigationService.NavigateToAsync<ChatRequestViewModel>(chatEngagementEvent.RequestPartyId, isModal: true);

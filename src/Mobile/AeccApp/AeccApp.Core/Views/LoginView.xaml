@@ -10,7 +10,7 @@
     BackgroundColor="{StaticResource BackgroundColor}">
 
     <Grid>
-        <ScrollView>
+        <ScrollView VerticalOptions="FillAndExpand">
             <StackLayout VerticalOptions="Center">
 
                 <ctrl:CustomImage

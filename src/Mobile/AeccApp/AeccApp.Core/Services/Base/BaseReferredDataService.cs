@@ -11,7 +11,7 @@ namespace AeccApp.Core.Services
 
         protected readonly IFileProvider _fileProvider;
 
-        public abstract string FileName { get; }
+        protected abstract string FileName { get; }
 
         public BaseReferredDataService()
         {

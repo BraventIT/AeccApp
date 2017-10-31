@@ -115,7 +115,7 @@
     <Compile Include="CustomRenderer\NonScrollableListViewRenderer.cs" />
     <Compile Include="CustomRenderer\XLabs\ImageButtonRenderer.Shared.cs" />
     <Compile Include="CustomRenderer\XLabs\ImageButtonRenderer.cs" />
-    <Compile Include="DependencyServices\LocationProviderSettings.cs" />
+    <Compile Include="Services\LocationProviderSettings.cs" />
     <Compile Include="Effects\SwitchClearEffect.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

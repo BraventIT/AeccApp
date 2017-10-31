@@ -1,9 +1,10 @@
-﻿using AeccApp.Core.IDependencyServices;
+﻿using AeccApp.Core.Services;
+using AeccApp.Droid.Services;
 using Android.Content;
 using Xamarin.Forms;
 
-[assembly: Xamarin.Forms.Dependency(typeof(AeccApp.Droid.DependencyServices.LocationProviderSettings))]
-namespace AeccApp.Droid.DependencyServices
+[assembly: Dependency(typeof(LocationProviderSettings))]
+namespace AeccApp.Droid.Services
 {
     public class LocationProviderSettings : ILocationProviderSettings
     {

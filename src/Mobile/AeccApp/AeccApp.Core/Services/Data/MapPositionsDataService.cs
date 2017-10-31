@@ -5,7 +5,7 @@ namespace AeccApp.Core.Services
 {
     public class MapPositionsDataService : BaseDataDictionaryService<Position>, IMapPositionsDataService
     {
-        public override string FileName => "MapPositions.json";
+        protected override string FileName => "MapPositions.json";
 
         public Task AddOrUpdateAsync(string key, Position pos)
         {

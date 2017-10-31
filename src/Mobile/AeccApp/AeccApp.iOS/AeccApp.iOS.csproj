@@ -122,7 +122,7 @@
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="DependencyServices\LocationProviderSettings.cs" />
+    <Compile Include="Services\LocationProviderSettings.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
     <Compile Include="Renderers\XLabs\ImageButtonRenderer.cs" />

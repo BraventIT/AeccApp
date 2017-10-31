@@ -1,30 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
-    public class RequestHospitalAskForRoomPopupViewModel : ViewModelBase
+    public class RequestHospitalAskForRoomPopupViewModel : ClosablePopupViewModelBase
     {
 
         #region Commands
-        private Command _closePopupCommand;
-        public ICommand ClosePopupCommand
-        {
-            get
-            {
-                return _closePopupCommand ??
-                    (_closePopupCommand = new Command(OnClosePopupCommand, (o) => !IsBusy));
-            }
-        }
-
-        public void OnClosePopupCommand(object obj)
-        {
-            NavigationService.HidePopupAsync();
-        }
-
         private Command _continueWithRequestCommand;
         public ICommand ContinueWithRequestCommand
         {

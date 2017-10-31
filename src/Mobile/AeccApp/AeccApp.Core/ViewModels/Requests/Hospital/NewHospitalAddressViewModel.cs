@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using System.Linq;
 using System;
+using AeccApp.Core.ViewModels.Popups;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -28,15 +29,10 @@ namespace AeccApp.Core.ViewModels
             _mapPins = new ObservableCollection<Pin>();
             _hospitals = new ObservableCollection<Hospital>();
         }
-     
-        public override void Deactivate()
-        {
-            NoLocationProviderPopupVM.ClosePopup -= OnCloseLocationProviderPopup;
-        }
+
         public override Task ActivateAsync()
         {
             NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
-            NoLocationProviderPopupVM.ClosePopup += OnCloseLocationProviderPopup;
 
             return ExecuteOperationAsync(async cancelToken =>
            {
@@ -59,7 +55,7 @@ namespace AeccApp.Core.ViewModels
                        if (!string.IsNullOrEmpty(hospital.Street) && !string.IsNullOrEmpty(hospital.Name))
                        {
                            var location = await GetLocationForHospitalAsync(hospital, cancelToken);
-                           if (location!=null)
+                           if (location != null)
                                PinManagement(hospital.Name, location.Latitude, location.Longitude);
                        }
                    }
@@ -72,7 +68,7 @@ namespace AeccApp.Core.ViewModels
                else
                {
                    //Popup to open location settings
-                  await NavigationService.ShowPopupAsync(NoLocationProviderPopupVM);
+                   await NavigationService.ShowPopupAsync(NoLocationProviderPopupVM);
                }
            });
         }
@@ -130,7 +126,7 @@ namespace AeccApp.Core.ViewModels
         {
             var pinClicked = obj as Pin;
             AddressSelected.Street = pinClicked.Address;
-            AddressSelected.Coordinates = new Models.Position(pinClicked.Position.Latitude,pinClicked.Position.Longitude);
+            AddressSelected.Coordinates = new Models.Position(pinClicked.Position.Latitude, pinClicked.Position.Longitude);
             AddressSelected.Name = pinClicked.Label;
             await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
         }
@@ -201,14 +197,7 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Methods
-        private async void OnCloseLocationProviderPopup(object sender, EventArgs e)
-        {
-            await NavigationService.HidePopupAsync();
-            await NavigationService.NavigateToAsync<NewHospitalAddressViewModel>();
-        }
-
-
-            private async Task<Models.Position> GetLocationForHospitalAsync(Hospital hospital, CancellationToken cancelToken)
+        private async Task<Models.Position> GetLocationForHospitalAsync(Hospital hospital, CancellationToken cancelToken)
         {
             var hospitalAddress = $"{hospital.Name}, {hospital.Street}";
 
@@ -228,7 +217,7 @@ namespace AeccApp.Core.ViewModels
 
         private void PinManagement(string hospitalName, double lat, double lng)
         {
-            Pin pin = new Pin() {Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
+            Pin pin = new Pin() { Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
                 case TargetPlatform.Android:

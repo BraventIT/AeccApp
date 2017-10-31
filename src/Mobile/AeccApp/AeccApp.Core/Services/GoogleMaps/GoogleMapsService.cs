@@ -13,6 +13,9 @@ namespace AeccApp.Core.Services
         private readonly IHttpRequestProvider _requestProvider;
         private const string GOOGLE_MAPS_ENDPOINT = "https://maps.googleapis.com";
 
+        private const string PROVINCE_AREA = "administrative_area_level";
+        private const string NUMBER_AREA = "street_number";
+
         public GoogleMapsService(IHttpRequestProvider requestProvider)
         {
             _requestProvider = requestProvider;
@@ -49,8 +52,22 @@ namespace AeccApp.Core.Services
             };
 
             GooglePlacesDetailModel place = await _requestProvider.GetAsync<GooglePlacesDetailModel>(uriBuilder.ToString(), cancelToken);
-            address.AddCoordinates(place);
+            FillAddressDetails(address, place);
             return address;
+        }
+
+        public void FillAddressDetails(AddressModel address, GooglePlacesDetailModel googlePlacesDetailModel)
+        {
+            Position addressCoordinates = new Position(googlePlacesDetailModel.Result.Geometry.Location.Lat, googlePlacesDetailModel.Result.Geometry.Location.Lng);
+            address.Coordinates = addressCoordinates;
+            var numberComponentValue = googlePlacesDetailModel.Result.AddressComponents.FirstOrDefault
+                (c => c.Types.First() == NUMBER_AREA)?.LongName;
+            if (int.TryParse(numberComponentValue, out int n))
+            {
+                address.Number = numberComponentValue;
+            }
+            address.Province = googlePlacesDetailModel.Result.AddressComponents.FirstOrDefault
+                (c => c.Types.First().StartsWith(PROVINCE_AREA))?.LongName;
         }
 
         public async Task<Position> FindAddressGeocodingAsync(string address, CancellationToken cancelToken)
@@ -83,7 +100,8 @@ namespace AeccApp.Core.Services
             return (result != null) ?
                 new AddressModel()
                 {
-                    Province = result.AddressComponents.FirstOrDefault(c => c.Types.First().StartsWith("administrative_area_level"))?.LongName
+                    Province = result.AddressComponents.FirstOrDefault
+                        (c => c.Types.First().StartsWith(PROVINCE_AREA))?.LongName
                 } : null;
         }
     }

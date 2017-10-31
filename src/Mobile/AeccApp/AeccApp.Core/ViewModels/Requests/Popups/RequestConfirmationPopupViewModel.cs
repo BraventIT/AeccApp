@@ -1,28 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
-   public class RequestConfirmationPopupViewModel : ViewModelBase
+    public class RequestConfirmationPopupViewModel : ClosablePopupViewModelBase
     {
         public event EventHandler ConfirmRequestToSend;
-
-        private Command _closePopupCommand;
-        public ICommand ClosePopupCommand
-        {
-            get
-            {
-                return _closePopupCommand ??
-                    (_closePopupCommand = new Command(OnClosePopupCommand));
-            }
-        }
-        private async void OnClosePopupCommand()
-        {
-            await NavigationService.HidePopupAsync();
-        }
 
         private Command _sendRequestConfirmationCommand;
         public ICommand SendRequestConfirmationCommand
@@ -33,8 +17,7 @@ namespace AeccApp.Core.ViewModels.Popups
                     (_sendRequestConfirmationCommand = new Command(o => ConfirmRequestToSend?.Invoke(this, null)));
             }
         }
-   
-
+  
 
         private string _displayRequestInfo;
 

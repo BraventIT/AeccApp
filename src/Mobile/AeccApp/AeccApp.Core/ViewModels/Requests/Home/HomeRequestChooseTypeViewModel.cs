@@ -74,7 +74,6 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async cancelToken =>
             {
-
                 if (MyAddress.Coordinates == null)
                 {
                     MyAddress = await GoogleMapsService.FillPlaceDetailAsync(MyAddress, cancelToken);

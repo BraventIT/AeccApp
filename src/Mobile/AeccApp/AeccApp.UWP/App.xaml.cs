@@ -1,5 +1,4 @@
 ﻿using AeccApp.Core;
-using AeccApp.UWP.DependencyServices;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -71,7 +70,6 @@ namespace AeccApp.UWP
                 rendererAssemblies.AddRange(Popup.GetExtraAssemblies());
 
                 Xamarin.Forms.Forms.Init(e, rendererAssemblies);
-                Xamarin.Forms.DependencyService.Register<LocationProviderSettings>();
                 Xamarin.FormsGoogleMaps.Init(BingMapKey);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
