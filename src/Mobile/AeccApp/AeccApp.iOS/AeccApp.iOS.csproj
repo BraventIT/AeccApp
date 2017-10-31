@@ -122,6 +122,7 @@
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="DependencyServices\LocationProviderSettings.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
     <Compile Include="Renderers\XLabs\ImageButtonRenderer.cs" />
@@ -262,5 +263,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\location_pin_hospital_map.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

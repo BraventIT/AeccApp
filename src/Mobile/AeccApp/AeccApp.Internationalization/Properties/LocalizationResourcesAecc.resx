@@ -456,6 +456,12 @@
   <data name="PopupLogoutTextTitle" xml:space="preserve">
     <value>¿Estás seguro?</value>
   </data>
+  <data name="PopupNoLocationProviderButtonYes" xml:space="preserve">
+    <value>Activar localización</value>
+  </data>
+  <data name="PopupNoLocationProviderText" xml:space="preserve">
+    <value>Es necesario activar la localización</value>
+  </data>
   <data name="PopupRequestAskForAddresNumberText" xml:space="preserve">
     <value>Para tener una localizacion más precisa es recomendable introducir un número, quieres continuar?</value>
   </data>

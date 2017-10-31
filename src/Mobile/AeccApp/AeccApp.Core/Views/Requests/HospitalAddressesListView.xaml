@@ -135,8 +135,9 @@
             HeightRequest="50"
             HorizontalOptions="CenterAndExpand"
             SourcePlatform="round_plus"
-            Style="{StaticResource ImageButtonStyle}"
-            Text="{Binding [CommonNewAddress]}" />
+            Style="{StaticResource ImageButtonLargeStyle}"
+            Text="{Binding [CommonNewAddress]}"
+            VerticalOptions="FillAndExpand" />
 
         <!--  INDICATOR  -->
         <ctrl:CustomActivityIndicatorControl />

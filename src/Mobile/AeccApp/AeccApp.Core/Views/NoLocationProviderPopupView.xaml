@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <vPop:PopupPage
-    x:Class="AeccApp.Core.Views.Popups.RequestAskForAddressNumberPopupView"
+    x:Class="AeccApp.Core.Views.NoLocationProviderPopupView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
@@ -22,21 +22,28 @@
                 VerticalOptions="Center">
                 <StackLayout>
 
-                    <Label HorizontalOptions="Center" Text="{Binding [PopupRequestAskForAddresNumberText]}" />
+                    <Label HorizontalOptions="Center" Text="{Binding [PopupNoLocationProviderText]}" />
 
-                    <StackLayout HorizontalOptions="Center">
+                    <Grid HorizontalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
                         <Button
-                            Command="{Binding ContinueWithoutInputANumberCommand}"
+                            Grid.Column="0"
+                            Command="{Binding ContinueToSettingsCommand}"
                             HorizontalOptions="CenterAndExpand"
                             Style="{StaticResource ButtonStyle}"
-                            Text="{Binding [CommonContinue]}" />
+                            Text="{Binding [PopupNoLocationProviderButtonYes]}" />
                         <Button
+                            Grid.Column="1"
                             Command="{Binding ClosePopupCommand}"
                             HorizontalOptions="CenterAndExpand"
                             Style="{StaticResource ButtonStyle}"
-                            Text="{Binding [CommonAddANumber]}" />
+                            Text="{Binding [CommonClose]}" />
 
-                    </StackLayout>
+                    </Grid>
                 </StackLayout>
             </Grid>
 

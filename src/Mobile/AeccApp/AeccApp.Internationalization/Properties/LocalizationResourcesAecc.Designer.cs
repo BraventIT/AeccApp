@@ -1079,6 +1079,24 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activar localización.
+        /// </summary>
+        public static string PopupNoLocationProviderButtonYes {
+            get {
+                return ResourceManager.GetString("PopupNoLocationProviderButtonYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es necesario activar la localización.
+        /// </summary>
+        public static string PopupNoLocationProviderText {
+            get {
+                return ResourceManager.GetString("PopupNoLocationProviderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Para tener una localizacion más precisa es recomendable introducir un número, quieres continuar?.
         /// </summary>
         public static string PopupRequestAskForAddresNumberText {

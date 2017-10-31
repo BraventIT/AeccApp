@@ -10,14 +10,14 @@
     BackgroundColor="{StaticResource SeeThrough}">
 
     <ContentView
-        Margin="20"
+        Margin="10"
         Style="{StaticResource BorderStyle}"
         VerticalOptions="Center">
         <ContentView Style="{StaticResource InternalViewStyle}">
             <ScrollView>
                 <StackLayout
-                    Margin="30,70,30,70"
-                    Padding="30,10,30,10"
+                    Margin="20,70,20,70"
+                    Padding="20,10,20,10"
                     BackgroundColor="{StaticResource BackgroundColor}">
                     <ctrl:CustomImage
                         Margin="20"
@@ -42,7 +42,7 @@
                     <Grid
                         Padding="5"
                         BackgroundColor="LightGray"
-                        HorizontalOptions="Center">
+                        HorizontalOptions="FillAndExpand">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -79,7 +79,7 @@
                     <Grid
                         Padding="5"
                         BackgroundColor="LightGray"
-                        HorizontalOptions="Center">
+                        HorizontalOptions="FillAndExpand">
                         <Grid.Margin>
                             <OnPlatform x:TypeArguments="Thickness">
                                 <On Platform="WinPhone,Windows" Value="70,0,70,10" />
