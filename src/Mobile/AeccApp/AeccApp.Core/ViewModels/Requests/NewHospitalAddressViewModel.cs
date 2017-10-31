@@ -11,6 +11,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using System.Linq;
+using System;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -24,13 +25,19 @@ namespace AeccApp.Core.ViewModels
         #region Contructor & Initialize
         public NewHospitalAddressViewModel()
         {
-            NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
             _mapPins = new ObservableCollection<Pin>();
             _hospitals = new ObservableCollection<Hospital>();
         }
-
+     
+        public override void Deactivate()
+        {
+            NoLocationProviderPopupVM.ClosePopup -= OnCloseLocationProviderPopup;
+        }
         public override Task ActivateAsync()
         {
+            NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
+            NoLocationProviderPopupVM.ClosePopup += OnCloseLocationProviderPopup;
+
             return ExecuteOperationAsync(async cancelToken =>
            {
                if (GeolocatorService.IsGeolocationEnabled)
@@ -194,7 +201,14 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Methods
-        private async Task<Models.Position> GetLocationForHospitalAsync(Hospital hospital, CancellationToken cancelToken)
+        private async void OnCloseLocationProviderPopup(object sender, EventArgs e)
+        {
+            await NavigationService.HidePopupAsync();
+            await NavigationService.NavigateToAsync<NewHospitalAddressViewModel>();
+        }
+
+
+            private async Task<Models.Position> GetLocationForHospitalAsync(Hospital hospital, CancellationToken cancelToken)
         {
             var hospitalAddress = $"{hospital.Name}, {hospital.Street}";
 

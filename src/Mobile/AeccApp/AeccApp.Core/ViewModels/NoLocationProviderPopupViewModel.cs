@@ -8,7 +8,22 @@ using Xamarin.Forms;
 namespace AeccApp.Core.ViewModels
 {
     public class NoLocationProviderPopupViewModel : ViewModelBase
-    { 
+    {
+
+        public event EventHandler ClosePopup;
+
+
+        private Command _closePopupCommand;
+        public ICommand ClosePopupCommand
+        {
+            get
+            {
+                return _closePopupCommand ??
+                    (_closePopupCommand = new Command(o => ClosePopup?.Invoke(this, null)));
+            }
+        }
+
+
         private Command _continueToSettingsCommand;
         public ICommand ContinueToSettingsCommand
         {
@@ -22,23 +37,5 @@ namespace AeccApp.Core.ViewModels
         {
             DependencyService.Get<ILocationProviderSettings>().OpenLocationProviderSettings();
         }
-
-        private Command _closePopupCommand;
-        public ICommand ClosePopupCommand
-        {
-            get
-            {
-                return _closePopupCommand ??
-                    (_closePopupCommand = new Command(OnClosePopupCommand));
-            }
-        }
-        private async void OnClosePopupCommand()
-        {
-            await NavigationService.HidePopupAsync();
-            await NavigationService.NavigateToAsync<NewHospitalAddressViewModel>();
-        }
-
-
-
     }
 }

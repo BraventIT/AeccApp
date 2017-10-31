@@ -4,6 +4,7 @@ using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using Plugin.Geolocator.Abstractions;
 using Plugin.Permissions.Abstractions;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -25,14 +26,25 @@ namespace AeccApp.Core.ViewModels
                 var tabIndex = ((TabParameter)navigationData).TabIndex;
                 MessagingCenter.Send(new TabMessage(tabIndex), string.Empty);
             }
-
+            try
+            {
             var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
             if (!hasPermission)
                 return;
+
+            }
+            catch (System.Exception)
+            {
+                await NavigationService.ShowPopupAsync(NoLocationProviderPopupVM);
+            }
         }
 
+        
         public override Task ActivateAsync()
         {
+            NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
+            NoLocationProviderPopupVM.ClosePopup += OnCloseLocationProviderPopup;
+
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, o => OnChatEngagementEventAsync(o));
 
@@ -42,9 +54,15 @@ namespace AeccApp.Core.ViewModels
 
         public override void Deactivate()
         {
+            NoLocationProviderPopupVM.ClosePopup -= OnCloseLocationProviderPopup;
             MessagingCenter.Unsubscribe<ChatEventMessage>(this, string.Empty);
             MessagingCenter.Unsubscribe<ChatEngagementEventMessage>(this, string.Empty);
         }
+        #endregion
+
+        #region Properties
+        public NoLocationProviderPopupViewModel NoLocationProviderPopupVM { get; private set; }
+
         #endregion
 
         #region Commands
@@ -101,7 +119,10 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Private Methods
-
+        private async void OnCloseLocationProviderPopup(object sender, EventArgs e)
+        {
+            await NavigationService.HidePopupAsync();
+        }
         private async Task OnChatEngagementEventAsync(ChatEngagementEventMessage chatEngagementEvent)
         {
             await NavigationService.NavigateToAsync<ChatRequestViewModel>(chatEngagementEvent.RequestPartyId, isModal: true);

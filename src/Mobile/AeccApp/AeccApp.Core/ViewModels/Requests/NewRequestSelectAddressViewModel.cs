@@ -28,8 +28,6 @@ namespace AeccApp.Core.ViewModels
         async void OnAtHomeCommand(object obj)
         {
             await NavigationService.NavigateToAsync<HomeAddressesListViewModel>();
-
-
         }
 
 
