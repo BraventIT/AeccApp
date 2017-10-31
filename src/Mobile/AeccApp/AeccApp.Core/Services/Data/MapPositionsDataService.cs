@@ -7,7 +7,7 @@ namespace AeccApp.Core.Services
     {
         public override string FileName => "MapPositions.json";
 
-        public Task AddOrUpdateAddressAsync(string key, Position pos)
+        public Task AddOrUpdateAsync(string key, Position pos)
         {
             return AddOrUpdateDataAsync(key, pos);
         }

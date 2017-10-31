@@ -8,15 +8,29 @@
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     vm:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{StaticResource BackgroundColor}">
-    <ScrollView>
-        <Grid>
+
+    <Grid>
+        <ScrollView>
             <StackLayout VerticalOptions="Center">
 
                 <ctrl:CustomImage
-                    Margin="30"
+                    Margin="30,0"
                     HorizontalOptions="Center"
                     MaximumWidthRequest="400"
                     SourcePlatform="logo" />
+
+                <StackLayout
+                    Margin="0,10"
+                    HeightRequest="80"
+                    HorizontalOptions="Center">
+                    <!--  INDICATOR  -->
+                    <ctrl:CustomActivityIndicatorControl />
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding IsBusy}"
+                        Style="{StaticResource MediumLabelStyle}"
+                        Text="estamos validando tus credenciales..." />
+                </StackLayout>
 
                 <!--  LOGIN BUTTON  -->
                 <Button
@@ -28,9 +42,7 @@
                     Text="{Binding [LoginViewLogin]}" />
 
             </StackLayout>
+        </ScrollView>
+    </Grid>
 
-            <!--  INDICATOR  -->
-            <ctrl:CustomActivityIndicatorControl />
-        </Grid>
-    </ScrollView>
 </v:BaseContentPage>

@@ -14,7 +14,7 @@ namespace AeccApp.Core.ViewModels
 {
     public class HospitalAddressesListViewModel : ViewModelBase
     {
-        public readonly IHomeAddressesDataService _homeAddressesDataService;
+        public readonly IAddressesDataService _homeAddressesDataService;
 
         #region Activate & Deactive Methods
         public HospitalAddressesListViewModel()

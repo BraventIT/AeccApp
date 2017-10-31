@@ -39,7 +39,7 @@ namespace AeccApp.Core.ViewModels
                    if (currentPosition != null)
                    {
                        currentAddress = await GoogleMapsService.FindCoordinatesGeocodingAsync(currentPosition.Latitude, currentPosition.Longitude, cancelToken);
-                   MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, new Xamarin.Forms.GoogleMaps.Position(currentPosition.Latitude,currentPosition.Longitude));
+                       MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, currentPosition);
                    }
 
                    var currentProvince = (currentAddress != null) ? currentAddress.Province : string.Empty;
@@ -56,7 +56,7 @@ namespace AeccApp.Core.ViewModels
                        }
                    }
 
-                   //TODO uncomment this when line230 TO DO is done:
+                   //TODO uncomment this when line178 TO DO is done:
 
                    //var savedPins = await MapPinsDataService.GetListAsync();
                    //MapPins.AddRange(savedPins.Values);
@@ -201,7 +201,7 @@ namespace AeccApp.Core.ViewModels
                 {
                     location = await GoogleMapsService.FindAddressGeocodingAsync($"{hospital.Name}, {hospital.Province}", cancelToken);
                     if (location != null)
-                        await MapPositionsDataService.AddOrUpdateAddressAsync(hospitalAddress, location);
+                        await MapPositionsDataService.AddOrUpdateAsync(hospitalAddress, location);
                 }
             }
             return location;
@@ -210,7 +210,6 @@ namespace AeccApp.Core.ViewModels
         private void PinManagement(string hospitalName, double lat, double lng)
         {
             Pin pin = new Pin() {Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
-            
             switch (Device.OS)
             {
                 case TargetPlatform.Android:

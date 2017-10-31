@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using System;
 using System.Diagnostics;
 
 namespace AeccApp.Core.Services
@@ -21,8 +20,6 @@ namespace AeccApp.Core.Services
 
         protected async Task<T> LoadAsync()
         {
-            return default(T);
-
             if (!_fileProvider.FileExists(FileName))
                 return default(T);
             string jsonString = await _fileProvider.LoadTextAsync(FileName);
