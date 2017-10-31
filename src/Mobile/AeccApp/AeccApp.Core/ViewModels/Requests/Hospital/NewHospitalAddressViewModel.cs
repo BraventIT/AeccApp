@@ -28,12 +28,11 @@ namespace AeccApp.Core.ViewModels
         {
             _mapPins = new ObservableCollection<Pin>();
             _hospitals = new ObservableCollection<Hospital>();
+            NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
         }
 
         public override Task ActivateAsync()
         {
-            NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
-
             return ExecuteOperationAsync(async cancelToken =>
            {
                if (GeolocatorService.IsGeolocationEnabled)
