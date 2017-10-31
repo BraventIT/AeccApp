@@ -24,26 +24,19 @@
 
                     <Label HorizontalOptions="Center" Text="{Binding [PopupRequestAskForAddresNumberText]}" />
 
-                    <Grid HorizontalOptions="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
+                    <StackLayout HorizontalOptions="Center">
                         <Button
-                            Grid.Column="0"
                             Command="{Binding ContinueWithoutInputANumberCommand}"
                             HorizontalOptions="CenterAndExpand"
                             Style="{StaticResource ButtonStyle}"
                             Text="{Binding [CommonContinue]}" />
                         <Button
-                            Grid.Column="1"
                             Command="{Binding ClosePopupCommand}"
                             HorizontalOptions="CenterAndExpand"
                             Style="{StaticResource ButtonStyle}"
                             Text="{Binding [CommonAddANumber]}" />
 
-                    </Grid>
+                    </StackLayout>
                 </StackLayout>
             </Grid>
 
