@@ -67,7 +67,7 @@
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
                             FontSize="{StaticResource MidMediumSize}"
-                            Text="{Binding FinderAddress}">
+                            Text="{Binding DisplayAddress}">
 
                             <Label.Margin>
                                 <OnPlatform x:TypeArguments="Thickness">

@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace AeccApp.Core.Services
 {
-    public abstract class BaseDeferredDataService<T>
+    public abstract class BaseReferredDataService<T>
     {
         private Timer _saveTimer;
 
@@ -14,7 +14,7 @@ namespace AeccApp.Core.Services
 
         public abstract string FileName { get; }
 
-        public BaseDeferredDataService()
+        public BaseReferredDataService()
         {
             _fileProvider = ServiceLocator.FileProvider;
         }

@@ -4,6 +4,7 @@ namespace AeccApp.Core.Models
 {
     public class AddressModel
     {
+        public bool IsHospitalAddress { get; set; }
         public string Name { get; set; }
         public string Street { get; set; }
         public string City { get; set; }

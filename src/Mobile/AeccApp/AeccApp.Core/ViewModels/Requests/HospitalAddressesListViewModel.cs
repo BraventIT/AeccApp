@@ -33,7 +33,7 @@ namespace AeccApp.Core.ViewModels
                 if (hospitalAddresses != null)
                 {
                     HospitalAddressesList.Clear();
-                    HospitalAddressesList.AddRange(hospitalAddresses);
+                    HospitalAddressesList.AddRange(hospitalAddresses.Where(o => o.IsHospitalAddress));               
                 }
                 HospitalAddressesIsEmpty = hospitalAddresses == null || !hospitalAddresses.Any();
             });

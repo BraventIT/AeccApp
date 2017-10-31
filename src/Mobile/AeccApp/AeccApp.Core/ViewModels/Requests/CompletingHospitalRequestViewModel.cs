@@ -1,5 +1,6 @@
 ﻿using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
+using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ namespace AeccApp.Core.ViewModels
 {
     public class CompletingHospitalRequestViewModel : ViewModelBase
     {
+        private IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
+
+
         #region Constructor and initialization
 
         public CompletingHospitalRequestViewModel()
@@ -180,7 +184,8 @@ namespace AeccApp.Core.ViewModels
             CurrentRequest.RequestTime = TimeToApplyParsed;
             if (IsAddressGettingSaved)
             {
-                //TODO Save hospital
+                CurrentRequest.RequestAddress.IsHospitalAddress = true;
+                await HomeAddressesDataService.AddOrUpdateAddressAsync(CurrentRequest.RequestAddress);
             }
             await NavigationService.HidePopupAsync();
             //TODO send request

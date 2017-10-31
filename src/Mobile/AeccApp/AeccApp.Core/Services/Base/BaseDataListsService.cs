@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace AeccApp.Core.Services
 {
-    public abstract class BaseDataListsService<T>: BaseDeferredDataService<List<T>>
+    public abstract class BaseDataListsService<T>: BaseReferredDataService<List<T>>
     {
         protected List<T> _data;
        

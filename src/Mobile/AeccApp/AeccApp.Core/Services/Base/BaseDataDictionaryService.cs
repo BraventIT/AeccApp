@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace AeccApp.Core.Services
 {
-    public abstract class BaseDataDictionaryService<T>: BaseDeferredDataService<Dictionary<string, T>>
+    public abstract class BaseDataDictionaryService<T>: BaseReferredDataService<Dictionary<string, T>>
     {
         protected Dictionary<string, T> _data;
 

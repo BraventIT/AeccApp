@@ -28,7 +28,7 @@ namespace AeccApp.Core.ViewModels
                 if (homeAddresses != null)
                 {
                     HomeAddressesList.Clear();
-                    HomeAddressesList.AddRange(homeAddresses);
+                    HomeAddressesList.AddRange(homeAddresses.Where(o => !o.IsHospitalAddress));
                 }
                 HomeAddressesIsEmpty = homeAddresses == null || !homeAddresses.Any();
             });
