@@ -22,7 +22,7 @@
                 VerticalOptions="Center">
                 <StackLayout>
 
-                    <Label HorizontalOptions="Center" Text="{Binding [PopupRequestAskForAddresNumberText]}" />
+                    <Label HorizontalOptions="Center" Text="{Binding [PopupNoLocationProviderText]}" />
 
                     <Grid HorizontalOptions="Center">
                         <Grid.ColumnDefinitions>
@@ -35,13 +35,13 @@
                             Command="{Binding ContinueToSettingsCommand}"
                             HorizontalOptions="CenterAndExpand"
                             Style="{StaticResource ButtonStyle}"
-                            Text="{Binding [CommonContinue]}" />
+                            Text="{Binding [PopupNoLocationProviderButtonYes]}" />
                         <Button
                             Grid.Column="1"
                             Command="{Binding ClosePopupCommand}"
                             HorizontalOptions="CenterAndExpand"
                             Style="{StaticResource ButtonStyle}"
-                            Text="{Binding [CommonAddANumber]}" />
+                            Text="{Binding [CommonClose]}" />
 
                     </Grid>
                 </StackLayout>

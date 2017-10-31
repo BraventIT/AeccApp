@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AeccApp.Core.IDependencyServices;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
@@ -17,9 +18,9 @@ namespace AeccApp.Core.ViewModels
                     (_continueToSettingsCommand = new Command(OnContinueToSettingsCommand));
             }
         }
-        private async void OnContinueToSettingsCommand()
+        private void OnContinueToSettingsCommand()
         {
-
+            DependencyService.Get<ILocationProviderSettings>().OpenLocationProviderSettings();
         }
 
         private Command _closePopupCommand;
@@ -34,6 +35,7 @@ namespace AeccApp.Core.ViewModels
         private async void OnClosePopupCommand()
         {
             await NavigationService.HidePopupAsync();
+            await NavigationService.NavigateToAsync<NewHospitalAddressViewModel>();
         }
 
 

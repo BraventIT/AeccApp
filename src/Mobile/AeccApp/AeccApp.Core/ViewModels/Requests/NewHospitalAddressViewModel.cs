@@ -24,6 +24,7 @@ namespace AeccApp.Core.ViewModels
         #region Contructor & Initialize
         public NewHospitalAddressViewModel()
         {
+            NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
             _mapPins = new ObservableCollection<Pin>();
             _hospitals = new ObservableCollection<Hospital>();
         }
@@ -63,13 +64,17 @@ namespace AeccApp.Core.ViewModels
                }
                else
                {
-                   // TODO Mostrar Popup para decirle al usuario que no tiene activado la geolocalización.
+                   //Popup to open location settings
+                  await NavigationService.ShowPopupAsync(NoLocationProviderPopupVM);
                }
            });
         }
         #endregion
 
         #region Properties
+
+        public NoLocationProviderPopupViewModel NoLocationProviderPopupVM { get; private set; }
+
 
         private AddressModel _addressSelected = new AddressModel();
 
