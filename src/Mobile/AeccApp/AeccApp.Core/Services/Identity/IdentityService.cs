@@ -162,7 +162,7 @@ namespace AeccApp.Core.Services
                 // KNOWN ISSUE:
                 // User will get prompted 
                 // to pick an IdP again.
-                AuthenticationResult ar = await App.PCA.AcquireTokenAsync(App.Scopes, GetUserByPolicy(App.PCA.Users, App.PolicyEditProfile), UIBehavior.SelectAccount, string.Empty, null, App.AuthorityEditProfile, App.UiParent);
+                AuthenticationResult ar = await PCA.AcquireTokenAsync(Scopes, GetUserByPolicy(PCA.Users, PolicyEditProfile), UIBehavior.SelectAccount, string.Empty, null, AuthorityEditProfile, App.UiParent);
                 UpdateUserData(ar);
             }
             catch (Exception ex)

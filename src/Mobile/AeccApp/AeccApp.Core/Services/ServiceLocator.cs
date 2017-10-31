@@ -17,10 +17,10 @@ namespace AeccApp.Core.Services
 
             IocContainer.RegisterAsSingleton<IHospitalRequestService, HospitalRequestService>();
             IocContainer.RegisterAsSingleton<IMapPositionsDataService, MapPositionsDataService>();
-            IocContainer.RegisterAsSingleton<IHomeAddressesDataService, HomeAddressesDataService>();
+            IocContainer.RegisterAsSingleton<IAddressesDataService, HomeAddressesDataService>();
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
             IocContainer.RegisterAsSingleton<IHomeRequestService, HomeRequestService>();
-            IocContainer.RegisterAsSingleton<IHomeAddressesDataService, HomeAddressesDataService>();
+            IocContainer.RegisterAsSingleton<IAddressesDataService, HomeAddressesDataService>();
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.Register<IHttpRequestProvider, HttpRequestProvider>();
@@ -48,9 +48,9 @@ namespace AeccApp.Core.Services
             get { return Resolve<IIdentityService>(); }
         }
 
-        public static IHomeAddressesDataService HomeAddressesDataService
+        public static IAddressesDataService HomeAddressesDataService
         {
-            get { return Resolve<IHomeAddressesDataService>(); }
+            get { return Resolve<IAddressesDataService>(); }
         }
 
         public static IHospitalRequestService HospitalRequestService

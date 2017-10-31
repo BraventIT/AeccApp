@@ -13,7 +13,7 @@ namespace AeccApp.Core.ViewModels
 {
     public class CompletingHospitalRequestViewModel : ViewModelBase
     {
-        private IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
+        private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
 
 
         #region Constructor and initialization
@@ -185,7 +185,7 @@ namespace AeccApp.Core.ViewModels
             if (IsAddressGettingSaved)
             {
                 CurrentRequest.RequestAddress.IsHospitalAddress = true;
-                await HomeAddressesDataService.AddOrUpdateAddressAsync(CurrentRequest.RequestAddress);
+                await HomeAddressesDataService.AddOrUpdateAsync(CurrentRequest.RequestAddress);
             }
             await NavigationService.HidePopupAsync();
             //TODO send request

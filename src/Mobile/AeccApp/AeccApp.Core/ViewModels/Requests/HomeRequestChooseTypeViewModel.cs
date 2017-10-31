@@ -14,7 +14,7 @@ namespace AeccApp.Core.ViewModels
     public class HomeRequestChooseTypeViewModel : ViewModelBase
     {
         private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
-        private IHomeAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
+        private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
         private IHomeRequestService HomeRequestService { get; } = ServiceLocator.HomeRequestService;
 
         #region Properties
@@ -92,7 +92,7 @@ namespace AeccApp.Core.ViewModels
                 if (MyAddress.WillBeSaved)
                 {
                     MyAddress.WillBeSaved = false;
-                    await HomeAddressesDataService.AddOrUpdateAddressAsync(MyAddress);
+                    await HomeAddressesDataService.AddOrUpdateAsync(MyAddress);
                 }
             });
         }

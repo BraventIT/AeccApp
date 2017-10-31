@@ -12,7 +12,7 @@ namespace AeccApp.Core.ViewModels
     class HomeViewModel : ViewModelBase
     {
         private readonly IChatService ChatService;
-        
+
         #region Contructor & Initialize
         public HomeViewModel()
         {
@@ -91,7 +91,7 @@ namespace AeccApp.Core.ViewModels
         #region Popups Properties
 
         public ChatTermsAndConditionsPopupViewModel ChatTermsAndConditionsPopupVM { get; private set; }
-        
+
         private bool eventPopupVisible;
         public bool EventPopupVisible
         {
@@ -99,7 +99,7 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref eventPopupVisible, value); }
         }
 
-      
+
         private bool checkBoxImageEnabled;
 
         public bool CheckBoxImageEnabled
@@ -126,7 +126,7 @@ namespace AeccApp.Core.ViewModels
         {
             //TODO Navigate to AllYourRequestListView if there are active requests
             //TODO Navigate to RequestsView if there are not active requests
-           
+
             await NavigationService.NavigateToAsync<AllYourRequestsListViewModel>();
         }
 
@@ -181,7 +181,7 @@ namespace AeccApp.Core.ViewModels
             }
             else
             {
-                MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Chat),string.Empty);
+                MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Chat), string.Empty);
             }
         }
 
@@ -192,13 +192,13 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return openAllNewsCommand ??
-                    (openAllNewsCommand = new Command(OnOpenAllNewsView));
+                    (openAllNewsCommand = new Command(o=> OnOpenAllNewsViewAsync()));
             }
         }
         /// <summary>
         /// Navigates to AllNewsView
         /// </summary>
-        async private void OnOpenAllNewsView(object obj)
+        private async Task OnOpenAllNewsViewAsync()
         {
             await NavigationService.NavigateToAsync<AllNewsViewModel>();
         }
@@ -209,7 +209,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return chooseNewCommand ??
-                    (chooseNewCommand = new Command(OnChooseNew, (o) => !IsBusy));
+                    (chooseNewCommand = new Command(o => OnChooseNewAsync(o), o => !IsBusy));
             }
         }
 
@@ -217,7 +217,7 @@ namespace AeccApp.Core.ViewModels
         /// 
         /// </summary>
         /// <param name="obj">obj contains the NewsList item tapped</param>
-        private async void OnChooseNew(object obj)
+        private async Task OnChooseNewAsync(object obj)
         {
             var selectedNew = obj as NewsModel;
             await NavigationService.NavigateToAsync<NewsDetailViewModel>(selectedNew);
@@ -258,7 +258,7 @@ namespace AeccApp.Core.ViewModels
 
         Task OnVolunteerStateChangedAsync(bool isActive)
         {
-            return ExecuteOperationAsync(() => ChatService.SetVolunteerState(isActive), 
+            return ExecuteOperationAsync(() => ChatService.SetVolunteerState(isActive),
                 finallyAction: () => VolunteerIsActive = ChatService.VolunteerIsActive);
         }
         #endregion

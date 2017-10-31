@@ -20,7 +20,7 @@ namespace AeccApp.Core.Services
 
         public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText, Position position, CancellationToken cancelToken)
         {
-            string query = $"input={findText}&language=es&components=country:es&key={GlobalSetting.Instance.GooglePlacesApiKey}";
+            string query = $"input={findText}&language=es&types=address&components=country:es&key={GlobalSetting.Instance.GooglePlacesApiKey}";
             if (position?.Latitude != 0)
             {
                 query += $"&location={position.Latitude.ToString(CultureInfo.InvariantCulture)},{position.Longitude.ToString(CultureInfo.InvariantCulture)}";
