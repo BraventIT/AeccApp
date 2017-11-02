@@ -2,6 +2,7 @@
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,6 +17,7 @@ namespace AeccApp.Core.ViewModels
         #region Contructor & Initialize
         public HomeViewModel()
         {
+            IsHeaderInfoBannerVisible = Settings.HomeHeaderBannerClosed;
             ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
             ChatService = ServiceLocator.ChatService;
         }
@@ -42,6 +44,15 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Propeties
+        private bool _isHeaderInfoBannerVisible;
+        public bool IsHeaderInfoBannerVisible
+        {
+            get { return _isHeaderInfoBannerVisible; }
+            set
+            {
+                Set(ref _isHeaderInfoBannerVisible, value);
+            }
+        }
 
         private bool inConversation;
         public bool InConversation
@@ -112,6 +123,38 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
+        private Command _headerInfoBannerCall;
+        public ICommand HeaderInfoBannerCall
+        {
+            get
+            {
+                return _headerInfoBannerCall ??
+                    (_headerInfoBannerCall = new Command(OnHeaderInfoBannerCall));
+            }
+        }
+
+        void OnHeaderInfoBannerCall()
+        {
+            Device.OpenUri(new Uri("tel://900100036"));
+        }
+
+        private Command _headerInfoBannerClose;
+        public ICommand HeaderInfoBannerClose
+        {
+            get
+            {
+                return _headerInfoBannerClose ??
+                    (_headerInfoBannerClose = new Command(OnHeaderInfoBannerClose));
+            }
+        }
+
+        void OnHeaderInfoBannerClose()
+        {
+            IsHeaderInfoBannerVisible = false;
+            Settings.HomeHeaderBannerClosed = false;
+
+        }
+
         private Command _openAllRequestsCommand;
         public ICommand OpenAllRequestsCommand
         {

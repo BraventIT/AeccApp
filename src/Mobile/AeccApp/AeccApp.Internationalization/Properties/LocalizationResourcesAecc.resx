@@ -300,11 +300,17 @@
   <data name="HomeViewCurrentChat" xml:space="preserve">
     <value>Chat actual</value>
   </data>
+  <data name="HomeViewHeaderInfoBannerText" xml:space="preserve">
+    <value>¿Tienes dudas? Llámanos al 900 100 036</value>
+  </data>
   <data name="HomeViewLastNews" xml:space="preserve">
     <value>Últimas noticias</value>
   </data>
   <data name="HomeViewRequests" xml:space="preserve">
     <value>Peticiones</value>
+  </data>
+  <data name="HomeViewTalkToVolunteer" xml:space="preserve">
+    <value>Habla con un voluntario</value>
   </data>
   <data name="HomeViewTitle" xml:space="preserve">
     <value>Inicio</value>

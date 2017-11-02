@@ -29,7 +29,7 @@
                         HorizontalTextAlignment="Center"
                         IsVisible="{Binding IsBusy}"
                         Style="{StaticResource MediumLabelStyle}"
-                        Text="estamos validando tus credenciales..." />
+                        Text="Estamos validando tus credenciales..." />
                 </StackLayout>
 
                 <!--  LOGIN BUTTON  -->
