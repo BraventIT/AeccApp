@@ -55,7 +55,7 @@ namespace AeccApp.Core.ViewModels
                        {
                            var location = await GetLocationForHospitalAsync(hospital, cancelToken);
                            if (location != null)
-                               PinManagement(hospital.Name, location.Latitude, location.Longitude);
+                               PinManagement(hospital.Street, hospital.Name, location.Latitude, location.Longitude);
                        }
                    }
 
@@ -214,9 +214,9 @@ namespace AeccApp.Core.ViewModels
             return location;
         }
 
-        private void PinManagement(string hospitalName, double lat, double lng)
+        private void PinManagement(string hospitalAddress,string hospitalName, double lat, double lng)
         {
-            Pin pin = new Pin() { Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
+            Pin pin = new Pin() {Address = hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
                 case TargetPlatform.Android:

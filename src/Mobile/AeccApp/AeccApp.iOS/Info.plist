@@ -2,14 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<key>LocationPermissionsTitle</key>
-<string>Esta app necesita acceder a tu localizacion.</string>
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>Esta app necesita acceder a tu localizacion.</string>
-<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-<string>Esta app necesita acceder a tu localizacion.</string>
-<key>NSLocationAlwaysUsageDescription</key>
-<string>Esta app necesita acceder a tu localizacion.</string>
+	<key>LocationPermissionsTitle</key>
+	<string>Esta app necesita acceder a tu localizacion.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Esta app necesita acceder a tu localizacion.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Esta app necesita acceder a tu localizacion.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Esta app necesita acceder a tu localizacion.</string>
 	<key>CFBundleName</key>
 	<string>AeccApp</string>
 	<key>CFBundleIdentifier</key>
@@ -36,8 +36,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
