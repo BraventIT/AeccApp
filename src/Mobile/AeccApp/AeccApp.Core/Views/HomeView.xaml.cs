@@ -18,7 +18,6 @@ namespace AeccApp.Core.Views
         public HomeView()
         {
             InitializeComponent();
-            NewsListView.HeightRequest = 3 * NewsListView.RowHeight; ;
         }
     }
 }

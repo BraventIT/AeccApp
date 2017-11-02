@@ -6,41 +6,13 @@
     xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
+    xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [HomeViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{StaticResource BackgroundColor}"
     IconPlatform="home_tab_icon">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <DataTemplate x:Key="NewItemTemplate">
-                <ViewCell>
-                    <StackLayout Padding="1">
-                        <ctrl:CustomImage
-                            Margin="0,10,0,0"
-                            HeightRequest="200"
-                            HorizontalOptions="FillAndExpand"
-                            SourcePlatform="mock_new_firma_convenio" />
-                        <Label
-                            Margin="0,5,0,5"
-                            FontAttributes="Bold"
-                            Text="{Binding Title}"
-                            TextColor="Black"
-                            VerticalOptions="Start" />
-                        <Label
-                            Margin="0,5,0,5"
-                            FontAttributes="Bold"
-                            Text="{Binding Content}"
-                            TextColor="Black"
-                            VerticalOptions="Start" />
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <Grid>
         <ScrollView IsVisible="{Binding TermsAndConditionsPopupVisible, Converter={StaticResource InverseBoolConverter}}">
             <StackLayout>
@@ -178,18 +150,10 @@
 
                     <!--  News panel  -->
                     <Grid Padding="10" BackgroundColor="White">
-                        <Grid.HeightRequest>
-                            <OnPlatform
-                                x:TypeArguments="x:Double"
-                                Android="1400"
-                                WinPhone="2000"
-                                iOS="1700" />
-                        </Grid.HeightRequest>
-
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <Label
@@ -206,31 +170,35 @@
                             </Label.GestureRecognizers>
                         </Label>
 
-                        <ctrl:NonScrollableListView
+                        <flv:FlowListView
                             x:Name="NewsListView"
                             Grid.Row="2"
-                            BackgroundColor="Transparent"
+                            FlowColumnCount="2"
+                            FlowItemTappedCommand="{Binding ChooseNewCommand}"
+                            FlowItemsSource="{Binding NewsList}"
                             HasUnevenRows="true"
                             HorizontalOptions="FillAndExpand"
-                            ItemTemplate="{StaticResource NewItemTemplate}"
-                            ItemsSource="{Binding NewsList}"
                             SeparatorVisibility="None">
-                            <ctrl:NonScrollableListView.HeightRequest>
-                                <OnPlatform
-                                    x:TypeArguments="x:Double"
-                                    Android="220"
-                                    WinPhone="160"
-                                    iOS="500" />
-                            </ctrl:NonScrollableListView.HeightRequest>
 
-                            <ctrl:NonScrollableListView.Behaviors>
-                                <beh:EventToCommandBehavior
-                                    Command="{Binding ChooseNewCommand}"
-                                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                                    EventName="ItemTapped" />
-                            </ctrl:NonScrollableListView.Behaviors>
-                        </ctrl:NonScrollableListView>
-
+                            <flv:FlowListView.FlowColumnTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="5">
+                                        <ctrl:CustomImage
+                                            Margin="0,10,0,0"
+                                            HeightRequest="200"
+                                            HorizontalOptions="FillAndExpand"
+                                            SourcePlatform="mock_new_firma_convenio" />
+                                        <Label
+                                            Margin="0,0,0,5"
+                                            FontAttributes="Bold"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Title}"
+                                            TextColor="Black"
+                                            VerticalOptions="Start" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </flv:FlowListView.FlowColumnTemplate>
+                        </flv:FlowListView>
                     </Grid>
 
                 </StackLayout>

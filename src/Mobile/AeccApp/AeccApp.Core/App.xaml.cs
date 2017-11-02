@@ -3,6 +3,7 @@ using AeccApp.Core.ViewModels;
 using Xamarin.Forms;
 using Microsoft.Identity.Client;
 using AeccApp.Core;
+using DLToolkit.Forms.Controls;
 
 namespace AeccApp
 {
@@ -13,6 +14,7 @@ namespace AeccApp
         public App()
         {
             InitializeComponent();
+            FlowListView.Init();
             InitApp();
 
             if (Device.RuntimePlatform == Device.UWP)
