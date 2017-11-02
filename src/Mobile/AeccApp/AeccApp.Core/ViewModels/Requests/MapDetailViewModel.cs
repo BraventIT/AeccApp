@@ -1,7 +1,4 @@
 ﻿using AeccApp.Core.Messages;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
@@ -10,33 +7,20 @@ namespace AeccApp.Core.ViewModels
 {
     public class MapDetailViewModel : ViewModelBase
     {
+        private Position _position;
+
         public override Task InitializeAsync(object navigationData)
         {
-            Position = (Position)navigationData;
+            _position = (Position)navigationData;
 
             return Task.CompletedTask;
         }
 
         public override Task ActivateAsync()
         {
-            MessagingCenter.Send(new GeolocatorMessage(GeolocatorEnum.Refresh), string.Empty, Position);
+            MessagingCenter.Send(new GeolocatorMessage(_position), string.Empty);
 
-            return base.ActivateAsync();
+            return Task.CompletedTask; 
         }
-
-
-
-        #region Properties
-        private Position _position;
-
-        public Position Position
-        {
-            get { return _position; }
-            set { Set(ref _position, value); }
-        }
-
-        #endregion
-
-
     }
 }

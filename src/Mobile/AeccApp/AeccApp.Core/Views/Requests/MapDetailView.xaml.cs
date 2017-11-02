@@ -6,16 +6,13 @@ using Xamarin.Forms.Xaml;
 
 namespace AeccApp.Core.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MapDetailView : BaseContentPage
-	{
-		public MapDetailView ()
-		{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MapDetailView : BaseContentPage
+    {
+        public MapDetailView()
+        {
             InitializeComponent();
-            MessagingCenter.Subscribe<GeolocatorMessage, Position>(this, string.Empty, (sender, arg) =>
-              MoveCameraMap(arg));
-           
-            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.416937, -3.703523), 6d);
+            MessagingCenter.Subscribe<GeolocatorMessage>(this, string.Empty, MoveCameraMap);
         }
 
 
@@ -24,9 +21,10 @@ namespace AeccApp.Core.Views
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<GeolocatorMessage>(this, string.Empty);
         }
-        public async void MoveCameraMap(Position toPosition)
+
+        public async void MoveCameraMap(GeolocatorMessage message)
         {
-            var addressPin = new Pin() { Label = "Tu dirección", Position = toPosition };
+            var addressPin = new Pin() { Label = "Tu dirección", Position = message.Position };
             addressPin.IsDraggable = false;
             switch (Device.OS)
             {
@@ -43,11 +41,7 @@ namespace AeccApp.Core.Views
 
             map.Pins.Add(addressPin);
             var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
-                     toPosition, 16d), TimeSpan.FromSeconds(1));
-
-
+                     message.Position, 16d), TimeSpan.FromSeconds(1));
         }
-
-
     }
 }

@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.Messages
 {
 
-    public enum GeolocatorEnum
+   public  class GeolocatorMessage
     {
-        Refresh = 0
-    }
-    class GeolocatorMessage
-    {
+        public Position Position { get; set; }
 
-
-        public GeolocatorEnum Message { get; set; }
-
-        public GeolocatorMessage(GeolocatorEnum tab)
+        public GeolocatorMessage(Position position)
         {
-            Message = tab;
+            Position = position;
         }
-
     }
 }

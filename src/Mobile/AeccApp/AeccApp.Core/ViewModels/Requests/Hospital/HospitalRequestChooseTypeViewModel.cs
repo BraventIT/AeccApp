@@ -5,11 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -27,10 +25,8 @@ namespace AeccApp.Core.ViewModels
             {
                 throw new ArgumentNullException("AddressModel object required");
             }
-            else
-            {
-                Request.RequestAddress = HospitalAddress;
-            }
+
+            Request.RequestAddress = HospitalAddress;
 
             return Task.CompletedTask;
         }
@@ -48,15 +44,8 @@ namespace AeccApp.Core.ViewModels
                 {
                     ProvinceHasNotRequestAvailable = true;
                 }
-               
-
-
-
             });
         }
-
-
-    
 
         #region Properties
 
@@ -100,8 +89,6 @@ namespace AeccApp.Core.ViewModels
 
 
         #endregion
-
-
 
         #region Commands
         private Command _requestTypeCommand;

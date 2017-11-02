@@ -11,12 +11,9 @@ namespace AeccApp.Core.Views
     {
         public NewHospitalAddressView()
         {
-
-            MessagingCenter.Subscribe<GeolocatorMessages, Models.Position>(this, string.Empty, (sender, arg) =>
-                MoveCameraMap(arg));
             InitializeComponent();
 
-            MessagingCenter.Subscribe<GeolocatorMessage, Models.Position>(this, string.Empty, (sender, arg) => MoveCameraMap(arg));
+            MessagingCenter.Subscribe<GeolocatorMessage>(this, string.Empty, MoveCameraMap);
             map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.416937, -3.703523), 6d);
         }
 
@@ -25,12 +22,12 @@ namespace AeccApp.Core.Views
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<GeolocatorMessage>(this, string.Empty);
         }
-        public async void MoveCameraMap(Position toPosition)
+        public async void MoveCameraMap(GeolocatorMessage message)
         {
             map.MyLocationEnabled = true;
-            var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
-                    new Position(toPosition.Latitude, toPosition.Longitude)
-                    , 16d), TimeSpan.FromSeconds(1));
+            map.UiSettings.MyLocationButtonEnabled = true;
+
+            var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(message.Position, 16d), TimeSpan.FromSeconds(1));
         }
     }
 }

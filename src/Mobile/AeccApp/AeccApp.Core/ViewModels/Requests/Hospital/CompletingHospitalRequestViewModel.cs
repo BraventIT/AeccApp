@@ -3,8 +3,6 @@ using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,7 +12,6 @@ namespace AeccApp.Core.ViewModels
     public class CompletingHospitalRequestViewModel : ViewModelBase
     {
         private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
-
 
         #region Constructor and initialization
 
@@ -29,15 +26,12 @@ namespace AeccApp.Core.ViewModels
         {
             CurrentRequest = navigationData as RequestModel;
             CurrentAddress = CurrentRequest.RequestAddress;
-            InitialMapLat = CurrentAddress.Coordinates.Latitude;
-            InitialMapLng = CurrentAddress.Coordinates.Longitude;
             RequestTypeHeader = CurrentRequest.RequestType.Name;
             return Task.CompletedTask;
         }
         public override Task ActivateAsync()
         {
-            Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position(InitialMapLat, InitialMapLng);
-            MessagingCenter.Send(new GeolocatorMessage(GeolocatorEnum.Refresh), string.Empty, position);
+            MessagingCenter.Send(new GeolocatorMessage(CurrentAddress.Coordinates), string.Empty);
             RequestDateAndTimePopupVM.ApplyDateAndTime += OnApplyDateAndTimeCommand;
             RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
             return Task.CompletedTask;
@@ -83,7 +77,7 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnMapDetailCommand(object obj)
         {
-            await NavigationService.NavigateToAsync<MapDetailViewModel>(new Xamarin.Forms.GoogleMaps.Position(InitialMapLat, InitialMapLng));
+            await NavigationService.NavigateToAsync<MapDetailViewModel>(CurrentAddress.Coordinates);
         }
 
 
@@ -217,21 +211,6 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _requestTypeHeader, value); }
         }
 
-
-        private double _initialMapLat;
-        public double InitialMapLat
-        {
-            get { return _initialMapLat; }
-            set { Set(ref _initialMapLat, value); }
-        }
-        private double _initialMapLng;
-
-        public double InitialMapLng
-        {
-            get { return _initialMapLng; }
-            set { Set(ref _initialMapLng, value); }
-        }
-
         private RequestModel _currentRequest;
 
         public RequestModel CurrentRequest
@@ -307,8 +286,5 @@ namespace AeccApp.Core.ViewModels
 
 
         #endregion
-
-
-
     }
 }

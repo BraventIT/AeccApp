@@ -3,14 +3,13 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Threading;
-using Xamarin.Forms.GoogleMaps;
 using Plugin.Geolocator.Abstractions;
 
 namespace AeccApp.Core.Extensions
 {
     public static class GeolocatorExtensions
     {
-        public static bool IsLocationAvailable(IGeolocator geolocator)
+        public static bool IsLocationAvailable(this IGeolocator geolocator)
         {
             if (!CrossGeolocator.IsSupported)
                 return false;

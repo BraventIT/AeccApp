@@ -3,16 +3,15 @@ using AeccApp.Core.Extensions;
 using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
+using AeccApp.Core.ViewModels.Popups;
 using Plugin.Geolocator.Abstractions;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
-using System.Linq;
-using System;
-using AeccApp.Core.ViewModels.Popups;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -35,36 +34,39 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async cancelToken =>
             {
-               if (GeolocatorService.IsGeolocationEnabled)
-               {
-                   var currentPosition = await GeolocatorService.GetCurrentLocationAsync(cancelToken);
-                   AddressModel currentAddress = null;
-                   if (currentPosition != null)
-                   {
-                       currentAddress = await GoogleMapsService.FindCoordinatesGeocodingAsync(currentPosition.Latitude, currentPosition.Longitude, cancelToken);
-                       MessagingCenter.Send(new GeolocatorMessage(GeolocatorEnum.Refresh), string.Empty, currentPosition);
-                   }
+                Xamarin.Forms.GoogleMaps.Position currentPosition = new Xamarin.Forms.GoogleMaps.Position();
 
-                   var currentProvince = (currentAddress != null) ? currentAddress.Province : string.Empty;
-                   var hospitals = await HospitalRequestService.GetHospitalsAsync(currentProvince, cancelToken);
-                   if (!hospitals.Any())
-                       hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
-                   foreach (var hospital in hospitals)
-                   {
-                       if (!string.IsNullOrEmpty(hospital.Street) && !string.IsNullOrEmpty(hospital.Name))
-                       {
-                           var location = await GetLocationForHospitalAsync(hospital, cancelToken);
-                           if (location != null)
-                               PinManagement(hospital.Street, hospital.Name, location.Latitude, location.Longitude);
-                       }
-                   }
-               }
-               else
-               {
-                   //Popup to open location settings
-                   await NavigationService.ShowPopupAsync(NoLocationProviderPopupVM);
-               }
-           });
+                if (GeolocatorService.IsLocationAvailable())
+                {
+                    currentPosition = await GeolocatorService.GetCurrentLocationAsync(cancelToken);
+                }
+                AddressModel currentAddress = null;
+                if (currentPosition.Latitude != 0)
+                {
+                    currentAddress = await GoogleMapsService.FindCoordinatesGeocodingAsync(currentPosition.Latitude, currentPosition.Longitude, cancelToken);
+                    MessagingCenter.Send(new GeolocatorMessage(currentPosition), string.Empty);
+                }
+                else
+                {
+                    //Popup to open location settings
+                    await NavigationService.ShowPopupAsync(NoLocationProviderPopupVM);
+                }
+
+                var currentProvince = (currentAddress != null) ? currentAddress.Province : string.Empty;
+                var hospitals = await HospitalRequestService.GetHospitalsAsync(currentProvince, cancelToken);
+
+                if (!hospitals.Any())
+                    hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
+                foreach (var hospital in hospitals)
+                {
+                    if (!string.IsNullOrEmpty(hospital.Street) && !string.IsNullOrEmpty(hospital.Name))
+                    {
+                        var location = await GetLocationForHospitalAsync(hospital, cancelToken);
+                        if (location != null)
+                            PinManagement(hospital.Street, hospital.Name, location.Latitude, location.Longitude);
+                    }
+                }
+            });
         }
         #endregion
 
@@ -106,23 +108,30 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
+        private Pin _lastPinClicked;
+
         private Command _pinClickedCommand;
         public ICommand PinClickedCommand
         {
             get
             {
                 return _pinClickedCommand ??
-                    (_pinClickedCommand = new Command(OnPinClickedCommand, (o) => !IsBusy));
+                    (_pinClickedCommand = new Command(o=> OnPinClickedCommandAsync(o)));
             }
         }
 
-        async void OnPinClickedCommand(object obj)
+        async Task OnPinClickedCommandAsync(object obj)
         {
             var pinClicked = obj as Pin;
-            AddressSelected.Street = pinClicked.Address;
-            AddressSelected.Coordinates = new Xamarin.Forms.GoogleMaps.Position(pinClicked.Position.Latitude, pinClicked.Position.Longitude);
-            AddressSelected.Name = pinClicked.Label;
-            await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
+            if (_lastPinClicked == pinClicked)
+            {
+                AddressSelected.Street = pinClicked.Address;
+                AddressSelected.Coordinates = pinClicked.Position;
+                AddressSelected.Name = pinClicked.Label;
+                await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
+            }
+            else
+                _lastPinClicked = pinClicked;
         }
 
         private Command _hospitalMapTabCommand;

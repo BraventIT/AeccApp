@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -25,17 +26,15 @@ namespace AeccApp.Core.ViewModels
             RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
             CurrentRequest = navigationData as RequestModel;
             CurrentAddress = CurrentRequest.RequestAddress;
-            InitialMapLat = CurrentAddress.Coordinates.Latitude;
-            InitialMapLng = CurrentAddress.Coordinates.Longitude;
             RequestTypeHeader = CurrentRequest.RequestType.Name;
             return Task.CompletedTask;
         }
         public override Task ActivateAsync()
         {
-            Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position(InitialMapLat,InitialMapLng);
-            MessagingCenter.Send(new GeolocatorMessage(GeolocatorEnum.Refresh), string.Empty,position);
+            MessagingCenter.Send(new GeolocatorMessage(CurrentAddress.Coordinates), string.Empty);
             return Task.CompletedTask;
         }
+
         public override void Deactivate()
         {
             RequestDateAndTimePopupVM.ApplyDateAndTime -= OnApplyDateAndTimeCommand;
@@ -58,7 +57,7 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnMapDetailCommand(object obj)
         {
-            await NavigationService.NavigateToAsync<MapDetailViewModel>(new Xamarin.Forms.GoogleMaps.Position(InitialMapLat,InitialMapLng));
+            await NavigationService.NavigateToAsync<MapDetailViewModel>(CurrentAddress.Coordinates);
         }
 
 
@@ -179,22 +178,7 @@ namespace AeccApp.Core.ViewModels
             get { return _requestTypeHeader; }
             set { Set(ref _requestTypeHeader, value); }
         }
-
-
-        private double _initialMapLat;
-        public double InitialMapLat
-        {
-            get { return _initialMapLat; }
-            set { Set(ref _initialMapLat, value); }
-        }
-        private double _initialMapLng;
-
-        public double InitialMapLng
-        {
-            get { return _initialMapLng; }
-            set { Set(ref _initialMapLng, value); }
-        }
-
+      
         private RequestModel _currentRequest;
 
         public RequestModel CurrentRequest

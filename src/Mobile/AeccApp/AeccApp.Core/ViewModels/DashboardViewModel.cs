@@ -31,6 +31,7 @@ namespace AeccApp.Core.ViewModels
                 var tabIndex = ((TabParameter)navigationData).TabIndex;
                 MessagingCenter.Send(new TabMessage(tabIndex), string.Empty);
             }
+
             try
             {
                 var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);

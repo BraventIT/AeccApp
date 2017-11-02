@@ -48,9 +48,9 @@
 
                         <BoxView
                             HorizontalOptions="FillAndExpand"
-                            Opacity="0.1"
+                            Opacity="0.3"
                             VerticalOptions="FillAndExpand"
-                            Color="Gray">
+                            Color="White">
                             <BoxView.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding MapDetailCommand}" />
                             </BoxView.GestureRecognizers>
