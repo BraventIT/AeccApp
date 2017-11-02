@@ -10,6 +10,7 @@
     <Color x:Key="AccentColor">#58AE65</Color>
     <Color x:Key="SeeThrough">#B2FFFFFF</Color>
     <Color x:Key="GreyText">#abb5c3</Color>
+    <Color x:Key="LightGrey">#dce4ee</Color>
     <Color x:Key="GreyTextDark">#798b9f</Color>
 
     <!--  FONT SIZES  -->

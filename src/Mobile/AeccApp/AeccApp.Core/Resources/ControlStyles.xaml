@@ -23,6 +23,10 @@
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
     </Style>
 
+    <Style x:Key="RoundGreenButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
     <OnPlatform
         x:Key="ButtonSmallWidth"
         x:TypeArguments="x:Double"

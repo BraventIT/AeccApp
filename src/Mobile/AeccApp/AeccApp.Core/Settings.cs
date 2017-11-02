@@ -24,6 +24,8 @@ namespace AeccApp.Core
         private const string TermsAndConditionsAcceptKey = "TermsAndConditions_accept";
         private static readonly bool TermsAndConditionsAcceptDefault = false;
 
+        private const string HomeHeaderBannerAcceptClosedKey = "HomeHeaderBanner_closed";
+        private static readonly bool HomeHeaderBannerAcceptClosedDefault = true;
         #endregion
 
 
@@ -52,6 +54,21 @@ namespace AeccApp.Core
             set
             {
                 AppSettings.AddOrUpdateValue(TermsAndConditionsAcceptKey, value);
+            }
+        }
+
+        /// <summary>
+        /// returns bool with HomeHeaderBanner visibility current status
+        /// </summary>
+        public static bool HomeHeaderBannerClosed
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(HomeHeaderBannerAcceptClosedKey, HomeHeaderBannerAcceptClosedDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(HomeHeaderBannerAcceptClosedKey, value);
             }
         }
 

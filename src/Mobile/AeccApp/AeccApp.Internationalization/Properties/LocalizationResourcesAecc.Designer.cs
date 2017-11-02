@@ -611,6 +611,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Tienes dudas? Llámanos al 900 100 036.
+        /// </summary>
+        public static string HomeViewHeaderInfoBannerText {
+            get {
+                return ResourceManager.GetString("HomeViewHeaderInfoBannerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Últimas noticias.
         /// </summary>
         public static string HomeViewLastNews {
@@ -625,6 +634,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string HomeViewRequests {
             get {
                 return ResourceManager.GetString("HomeViewRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Habla con un voluntario.
+        /// </summary>
+        public static string HomeViewTalkToVolunteer {
+            get {
+                return ResourceManager.GetString("HomeViewTalkToVolunteer", resourceCulture);
             }
         }
         
