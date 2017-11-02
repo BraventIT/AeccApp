@@ -5,6 +5,7 @@ using System.Linq;
 using AeccApp.Core.Models;
 using System.Globalization;
 using System.Threading;
+using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.Services
 {
@@ -24,7 +25,7 @@ namespace AeccApp.Core.Services
         public async Task<IEnumerable<AddressModel>> FindPlacesAsync(string findText, Position position, CancellationToken cancelToken)
         {
             string query = $"input={findText}&language=es&types=address&components=country:es&key={GlobalSetting.Instance.GooglePlacesApiKey}";
-            if (position?.Latitude != 0)
+            if (position.Latitude != 0)
             {
                 query += $"&location={position.Latitude.ToString(CultureInfo.InvariantCulture)},{position.Longitude.ToString(CultureInfo.InvariantCulture)}";
             }
@@ -82,7 +83,7 @@ namespace AeccApp.Core.Services
             var result = place.Results.FirstOrDefault();
 
             return (result != null) ?
-                new Position(result.Geometry.Location.Lat, result.Geometry.Location.Lng) : null;
+                new Position(result.Geometry.Location.Lat, result.Geometry.Location.Lng) : new Xamarin.Forms.GoogleMaps.Position() ;
         }
 
         public async Task<AddressModel> FindCoordinatesGeocodingAsync(double lat, double lng, CancellationToken cancelToken)

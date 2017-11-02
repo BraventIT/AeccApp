@@ -1,6 +1,7 @@
 ﻿using AeccApp.Core.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.Services
 {

@@ -281,7 +281,7 @@ namespace AeccApp.Core.ViewModels
 
         private async Task<IEnumerable<AddressModel>> GetPlacesAsync(string findText, CancellationToken cancelToken)
         {
-            Models.Position position = null;
+            Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position();
             if (GeolocatorService.IsGeolocationEnabled)
             {
                 position = await GeolocatorService.GetCurrentLocationAsync(cancelToken);

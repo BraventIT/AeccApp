@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Requests\Position.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Coordinator.cs" Link="Models\Requests\Coordinator.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Hospital.cs" Link="Models\Requests\Hospital.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\HospitalAssignment.cs" Link="Models\Requests\HospitalAssignment.cs" />
