@@ -13,7 +13,7 @@ namespace AeccApp.Core.Views
 		public CompletingHospitalRequestView ()
         {
 
-            MessagingCenter.Subscribe<GeolocatorMessages, Position>(this, string.Empty, (sender, arg) => 
+            MessagingCenter.Subscribe<GeolocatorMessage, Position>(this, string.Empty, (sender, arg) => 
                 MoveCameraMap(arg)
             );
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace AeccApp.Core.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            MessagingCenter.Unsubscribe<GeolocatorMessages>(this, string.Empty);
+            MessagingCenter.Unsubscribe<GeolocatorMessage>(this, string.Empty);
         }
         public async void MoveCameraMap(Position toPosition)
         {

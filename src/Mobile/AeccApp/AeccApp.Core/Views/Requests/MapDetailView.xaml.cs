@@ -11,23 +11,21 @@ namespace AeccApp.Core.Views
 	{
 		public MapDetailView ()
 		{
-
-            MessagingCenter.Subscribe<GeolocatorMessages, Xamarin.Forms.GoogleMaps.Position>(this, string.Empty, (sender, arg) =>
-              MoveCameraMap(arg));
             InitializeComponent();
-            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Xamarin.Forms.GoogleMaps.Position(40.416937, -3.703523), 6d);
-
+            MessagingCenter.Subscribe<GeolocatorMessage, Position>(this, string.Empty, (sender, arg) =>
+              MoveCameraMap(arg));
+           
+            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.416937, -3.703523), 6d);
         }
 
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            MessagingCenter.Unsubscribe<GeolocatorMessages>(this, string.Empty);
+            MessagingCenter.Unsubscribe<GeolocatorMessage>(this, string.Empty);
         }
         public async void MoveCameraMap(Position toPosition)
         {
-
             var addressPin = new Pin() { Label = "Tu dirección", Position = toPosition };
             addressPin.IsDraggable = false;
             switch (Device.OS)

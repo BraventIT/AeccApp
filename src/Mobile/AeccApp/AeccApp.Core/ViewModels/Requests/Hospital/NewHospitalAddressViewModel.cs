@@ -34,7 +34,7 @@ namespace AeccApp.Core.ViewModels
         public override Task ActivateAsync()
         {
             return ExecuteOperationAsync(async cancelToken =>
-           {
+            {
                if (GeolocatorService.IsGeolocationEnabled)
                {
                    var currentPosition = await GeolocatorService.GetCurrentLocationAsync(cancelToken);
@@ -42,7 +42,7 @@ namespace AeccApp.Core.ViewModels
                    if (currentPosition != null)
                    {
                        currentAddress = await GoogleMapsService.FindCoordinatesGeocodingAsync(currentPosition.Latitude, currentPosition.Longitude, cancelToken);
-                       MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, currentPosition);
+                       MessagingCenter.Send(new GeolocatorMessage(GeolocatorEnum.Refresh), string.Empty, currentPosition);
                    }
 
                    var currentProvince = (currentAddress != null) ? currentAddress.Province : string.Empty;
@@ -58,11 +58,6 @@ namespace AeccApp.Core.ViewModels
                                PinManagement(hospital.Name, location.Latitude, location.Longitude);
                        }
                    }
-
-                   //TODO uncomment this when line178 TO DO is done:
-
-                   //var savedPins = await MapPinsDataService.GetListAsync();
-                   //MapPins.AddRange(savedPins.Values);
                }
                else
                {

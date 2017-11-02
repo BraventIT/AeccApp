@@ -10,7 +10,6 @@ namespace AeccApp.Core.ViewModels
 {
     public class MapDetailViewModel : ViewModelBase
     {
-
         public override Task InitializeAsync(object navigationData)
         {
             Position = (Position)navigationData;
@@ -20,7 +19,7 @@ namespace AeccApp.Core.ViewModels
 
         public override Task ActivateAsync()
         {
-            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, Position);
+            MessagingCenter.Send(new GeolocatorMessage(GeolocatorEnum.Refresh), string.Empty, Position);
 
             return base.ActivateAsync();
         }

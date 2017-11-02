@@ -9,13 +9,13 @@ namespace AeccApp.Core.Messages
     {
         Refresh = 0
     }
-    class GeolocatorMessages
+    class GeolocatorMessage
     {
 
 
         public GeolocatorEnum Message { get; set; }
 
-        public GeolocatorMessages(GeolocatorEnum tab)
+        public GeolocatorMessage(GeolocatorEnum tab)
         {
             Message = tab;
         }

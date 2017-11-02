@@ -1,6 +1,7 @@
 ﻿using AeccApp.Core.Services;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
@@ -14,9 +15,14 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _continueToSettingsCommand ??
-                    (_continueToSettingsCommand = new Command
-                    (o => LocationProviderSettings.OpenLocationProviderSettings()));
+                    (_continueToSettingsCommand = new Command(o => OnContinueToSettingsAsync()));
             }
+        }
+
+        private async Task OnContinueToSettingsAsync()
+        {
+            LocationProviderSettings.OpenLocationProviderSettings();
+            await NavigationService.HidePopupAsync();
         }
     }
 }

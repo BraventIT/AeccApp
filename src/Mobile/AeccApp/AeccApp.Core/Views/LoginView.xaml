@@ -9,8 +9,8 @@
     vm:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{StaticResource BackgroundColor}">
 
-    <Grid>
-        <ScrollView VerticalOptions="FillAndExpand">
+    <ScrollView>
+        <Grid>
             <StackLayout VerticalOptions="Center">
 
                 <ctrl:CustomImage
@@ -42,7 +42,7 @@
                     Text="{Binding [LoginViewLogin]}" />
 
             </StackLayout>
-        </ScrollView>
-    </Grid>
+        </Grid>
+    </ScrollView>
 
 </v:BaseContentPage>

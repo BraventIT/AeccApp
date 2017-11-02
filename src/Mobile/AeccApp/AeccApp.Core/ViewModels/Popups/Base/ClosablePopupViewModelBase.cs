@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
@@ -14,12 +15,12 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _closePopupCommand ??
-                    (_closePopupCommand = new Command(OnClosePopupCommand));
+                    (_closePopupCommand = new Command(o=> OnClosePopupCommandAsync()));
             }
         }
-        protected virtual async void OnClosePopupCommand()
+        protected virtual Task OnClosePopupCommandAsync()
         {
-            await NavigationService.HidePopupAsync();
+            return NavigationService.HidePopupAsync();
         }
     }
 }

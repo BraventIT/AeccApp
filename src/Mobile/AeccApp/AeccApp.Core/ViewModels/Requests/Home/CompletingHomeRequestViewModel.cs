@@ -33,7 +33,7 @@ namespace AeccApp.Core.ViewModels
         public override Task ActivateAsync()
         {
             Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position(InitialMapLat,InitialMapLng);
-            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty,position);
+            MessagingCenter.Send(new GeolocatorMessage(GeolocatorEnum.Refresh), string.Empty,position);
             return Task.CompletedTask;
         }
         public override void Deactivate()

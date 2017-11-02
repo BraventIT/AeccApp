@@ -37,7 +37,7 @@ namespace AeccApp.Core.ViewModels
         public override Task ActivateAsync()
         {
             Xamarin.Forms.GoogleMaps.Position position = new Xamarin.Forms.GoogleMaps.Position(InitialMapLat, InitialMapLng);
-            MessagingCenter.Send(new GeolocatorMessages(GeolocatorEnum.Refresh), string.Empty, position);
+            MessagingCenter.Send(new GeolocatorMessage(GeolocatorEnum.Refresh), string.Empty, position);
             RequestDateAndTimePopupVM.ApplyDateAndTime += OnApplyDateAndTimeCommand;
             RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
             return Task.CompletedTask;

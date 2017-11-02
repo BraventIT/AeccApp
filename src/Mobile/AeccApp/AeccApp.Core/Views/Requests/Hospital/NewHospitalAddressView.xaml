@@ -130,7 +130,6 @@
                     x:Name="map"
                     HasZoomEnabled="True"
                     HeightRequest="600"
-                    IsShowingUser="True"
                     MapPins="{Binding MapPins}">
 
                     <ctrl:CustomMap.Behaviors>
