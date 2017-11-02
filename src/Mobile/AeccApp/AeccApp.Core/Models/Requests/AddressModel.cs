@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.Models
 {

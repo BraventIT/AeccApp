@@ -12,7 +12,7 @@ namespace AeccApp.Core.Views
         public NewHospitalAddressView()
         {
 
-            MessagingCenter.Subscribe<GeolocatorMessages, Models.Position>(this, string.Empty, (sender, arg) =>
+            MessagingCenter.Subscribe<GeolocatorMessages, Position>(this, string.Empty, (sender, arg) =>
                 MoveCameraMap(arg));
             InitializeComponent();
             map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Xamarin.Forms.GoogleMaps.Position(40.416937, -3.703523), 6d);
@@ -23,10 +23,9 @@ namespace AeccApp.Core.Views
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<GeolocatorMessages>(this, string.Empty);
         }
-        public async void MoveCameraMap(Models.Position toPosition)
+        public async void MoveCameraMap(Position toPosition)
         {
-            var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
-                    new Xamarin.Forms.GoogleMaps.Position(toPosition.Latitude, toPosition.Longitude)
+            var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(toPosition
                     , 16d), TimeSpan.FromSeconds(1));
         }
     }

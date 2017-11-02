@@ -125,7 +125,7 @@ namespace AeccApp.Core.ViewModels
         {
             var pinClicked = obj as Pin;
             AddressSelected.Street = pinClicked.Address;
-            AddressSelected.Coordinates = new Models.Position(pinClicked.Position.Latitude, pinClicked.Position.Longitude);
+            AddressSelected.Coordinates = new Xamarin.Forms.GoogleMaps.Position(pinClicked.Position.Latitude, pinClicked.Position.Longitude);
             AddressSelected.Name = pinClicked.Label;
             await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
         }
@@ -196,18 +196,18 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Methods
-        private async Task<Models.Position> GetLocationForHospitalAsync(Hospital hospital, CancellationToken cancelToken)
+        private async Task<Xamarin.Forms.GoogleMaps.Position> GetLocationForHospitalAsync(Hospital hospital, CancellationToken cancelToken)
         {
             var hospitalAddress = $"{hospital.Name}, {hospital.Street}";
 
             var location = await MapPositionsDataService.GetAsync(hospitalAddress);
-            if (location == null)
+            if (location.Latitude == 0)
             {
                 location = await GoogleMapsService.FindAddressGeocodingAsync(hospitalAddress, cancelToken);
-                if (location == null)
+                if (location.Latitude == 0)
                 {
                     location = await GoogleMapsService.FindAddressGeocodingAsync($"{hospital.Name}, {hospital.Province}", cancelToken);
-                    if (location != null)
+                    if (location.Latitude != 0)
                         await MapPositionsDataService.AddOrUpdateAsync(hospitalAddress, location);
                 }
             }
