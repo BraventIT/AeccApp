@@ -13,7 +13,7 @@
 	<key>CFBundleName</key>
 	<string>AeccApp</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.bravent.development</string>
+	<string>com.bravent.aecc</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
