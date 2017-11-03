@@ -60,18 +60,38 @@
     </ContentView.Resources>
     <StackLayout>
         <!--  Sub navigation bar with map and hospital list  -->
-        <StackLayout
-            BackgroundColor="Gray"
-            HeightRequest="65"
-            HorizontalOptions="FillAndExpand">
+        <StackLayout BackgroundColor="Gray" HorizontalOptions="FillAndExpand">
             <Grid HorizontalOptions="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,0,10,0"
+                    BackgroundColor="GreenYellow"
+                    HeightRequest="7"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding SwitchBetweenAndHospitalList}" />
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    BackgroundColor="GreenYellow"
+                    HeightRequest="7"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}" />
+
                 <StackLayout
                     Grid.Column="1"
+                    Margin="10,0,0,0"
                     HorizontalOptions="Center"
                     Orientation="Horizontal">
                     <StackLayout.GestureRecognizers>
@@ -81,7 +101,7 @@
                         <OnPlatform x:TypeArguments="Thickness">
                             <On Platform="WinPhone, Windows" Value="0" />
                             <On Platform="iOS" Value="0,15,25,15" />
-                            <On Platform="Android" Value="0,15,25,15" />
+                            <On Platform="Android" Value="0,5,25,5" />
                         </OnPlatform>
                     </StackLayout.Margin>
                     <ctrl:CustomImage
@@ -95,6 +115,7 @@
 
                 <StackLayout
                     Grid.Column="0"
+                    Margin="0,0,10,0"
                     HorizontalOptions="Center"
                     Orientation="Horizontal">
                     <StackLayout.GestureRecognizers>
@@ -105,7 +126,7 @@
                         <OnPlatform x:TypeArguments="Thickness">
                             <On Platform="WinPhone, Windows" Value="0" />
                             <On Platform="iOS" Value="0,15,25,15" />
-                            <On Platform="Android" Value="0,15,25,15" />
+                            <On Platform="Android" Value="0,5,25,5" />
                         </OnPlatform>
                     </StackLayout.Margin>
 
@@ -134,16 +155,16 @@
 
                     <ctrl:CustomMap.Behaviors>
                         <beh:EventToCommandBehavior
-                            Command="{Binding PinClickedCommand}"
-                            EventArgsConverter="{StaticResource MapPinClickedConverter}"
-                            EventName="PinClicked" />
+                            Command="{Binding InfoWindowClickedCommand}"
+                            EventArgsConverter="{StaticResource InfoWindowClickedEventArgsConverter}"
+                            EventName="InfoWindowClicked" />
                     </ctrl:CustomMap.Behaviors>
 
                 </ctrl:CustomMap>
 
             </Grid>
             <!--  Hospitals list  -->
-            <Grid Padding="15" IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
+            <Grid IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
                 <ListView
                     HasUnevenRows="True"
                     HeightRequest="600"

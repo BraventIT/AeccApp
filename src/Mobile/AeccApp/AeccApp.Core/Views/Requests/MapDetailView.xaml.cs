@@ -12,6 +12,7 @@ namespace AeccApp.Core.Views
         public MapDetailView()
         {
             InitializeComponent();
+            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(40.416937, -3.703523), 6d);
             MessagingCenter.Subscribe<GeolocatorMessage>(this, string.Empty, MoveCameraMap);
         }
 

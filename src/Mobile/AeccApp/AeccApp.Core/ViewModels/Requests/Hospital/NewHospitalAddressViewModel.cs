@@ -108,30 +108,26 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
-        private Pin _lastPinClicked;
 
-        private Command _pinClickedCommand;
-        public ICommand PinClickedCommand
+        private Command _infoWindowClickedCommand;
+        public ICommand InfoWindowClickedCommand
         {
             get
             {
-                return _pinClickedCommand ??
-                    (_pinClickedCommand = new Command(o=> OnPinClickedCommandAsync(o)));
+                return _infoWindowClickedCommand ??
+                    (_infoWindowClickedCommand = new Command(o=> OnInfoWindowClickedCommand(o)));
             }
         }
 
-        async Task OnPinClickedCommandAsync(object obj)
+        async Task OnInfoWindowClickedCommand(object obj)
         {
             var pinClicked = obj as Pin;
-            if (_lastPinClicked == pinClicked)
-            {
+        
                 AddressSelected.Street = pinClicked.Address;
                 AddressSelected.Coordinates = pinClicked.Position;
                 AddressSelected.Name = pinClicked.Label;
                 await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
-            }
-            else
-                _lastPinClicked = pinClicked;
+           
         }
 
         private Command _hospitalMapTabCommand;
@@ -140,7 +136,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _hospitalMapTabCommand ??
-                    (_hospitalMapTabCommand = new Command(OnHospitalMapTabCommand, (o) => !IsBusy));
+                    (_hospitalMapTabCommand = new Command(OnHospitalMapTabCommand));
             }
         }
 
@@ -155,7 +151,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _hospitalListTabCommand ??
-                    (_hospitalListTabCommand = new Command(OnHospitalListTabCommand, (o) => !IsBusy));
+                    (_hospitalListTabCommand = new Command(OnHospitalListTabCommand));
             }
         }
 
@@ -178,7 +174,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _newHospitalSelectedCommand ??
-                    (_newHospitalSelectedCommand = new Command(OnNewHospitalSelectedCommand, (o) => !IsBusy));
+                    (_newHospitalSelectedCommand = new Command(OnNewHospitalSelectedCommand));
             }
         }
 

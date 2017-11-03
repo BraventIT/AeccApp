@@ -16,6 +16,14 @@
         WinPhone="150"
         iOS="150" />
 
+    <Style x:Key="TransparentBoxViewStyle" TargetType="{x:Type BoxView}">
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="0.3" />
+        <Setter Property="BackgroundColor" Value="White" />
+    </Style>
+
+
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="WidthRequest" Value="{StaticResource ButtonWidth}" />

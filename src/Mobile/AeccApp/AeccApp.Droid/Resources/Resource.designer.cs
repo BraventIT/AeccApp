@@ -2225,7 +2225,13 @@ namespace AeccApp.Droid
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.abc_textfield_search_material = global::AeccApp.Droid.Resource.Drawable.abc_textfield_search_material;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.abc_vector_test = global::AeccApp.Droid.Resource.Drawable.abc_vector_test;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_hide_password = global::AeccApp.Droid.Resource.Drawable.avd_hide_password;
+			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_hide_password_1 = global::AeccApp.Droid.Resource.Drawable.avd_hide_password_1;
+			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_hide_password_2 = global::AeccApp.Droid.Resource.Drawable.avd_hide_password_2;
+			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_hide_password_3 = global::AeccApp.Droid.Resource.Drawable.avd_hide_password_3;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_show_password = global::AeccApp.Droid.Resource.Drawable.avd_show_password;
+			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_show_password_1 = global::AeccApp.Droid.Resource.Drawable.avd_show_password_1;
+			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_show_password_2 = global::AeccApp.Droid.Resource.Drawable.avd_show_password_2;
+			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_show_password_3 = global::AeccApp.Droid.Resource.Drawable.avd_show_password_3;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.design_bottom_navigation_item_background = global::AeccApp.Droid.Resource.Drawable.design_bottom_navigation_item_background;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.design_fab_background = global::AeccApp.Droid.Resource.Drawable.design_fab_background;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.design_ic_visibility = global::AeccApp.Droid.Resource.Drawable.design_ic_visibility;
@@ -6032,8 +6038,26 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
+			// aapt resource value: 0x7f02014c
+			public const int avd_hide_password_1 = 2130837836;
+			
+			// aapt resource value: 0x7f02014d
+			public const int avd_hide_password_2 = 2130837837;
+			
+			// aapt resource value: 0x7f02014e
+			public const int avd_hide_password_3 = 2130837838;
+			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
+			
+			// aapt resource value: 0x7f02014f
+			public const int avd_show_password_1 = 2130837839;
+			
+			// aapt resource value: 0x7f020150
+			public const int avd_show_password_2 = 2130837840;
+			
+			// aapt resource value: 0x7f020151
+			public const int avd_show_password_3 = 2130837841;
 			
 			// aapt resource value: 0x7f020055
 			public const int bell = 2130837589;
@@ -6689,11 +6713,11 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f02012e
 			public const int notification_icon_background = 2130837806;
 			
-			// aapt resource value: 0x7f020149
-			public const int notification_template_icon_bg = 2130837833;
-			
 			// aapt resource value: 0x7f02014a
-			public const int notification_template_icon_low_bg = 2130837834;
+			public const int notification_template_icon_bg = 2130837834;
+			
+			// aapt resource value: 0x7f02014b
+			public const int notification_template_icon_low_bg = 2130837835;
 			
 			// aapt resource value: 0x7f02012f
 			public const int notification_tile_bg = 2130837807;
@@ -6738,40 +6762,43 @@ namespace AeccApp.Droid
 			public const int round_plus = 2130837820;
 			
 			// aapt resource value: 0x7f02013d
-			public const int round_question_icon = 2130837821;
+			public const int round_plus_green_background = 2130837821;
 			
 			// aapt resource value: 0x7f02013e
-			public const int search_mini_icon = 2130837822;
+			public const int round_question_icon = 2130837822;
 			
 			// aapt resource value: 0x7f02013f
-			public const int seek_thumb_disabled = 2130837823;
+			public const int search_mini_icon = 2130837823;
 			
 			// aapt resource value: 0x7f020140
-			public const int seek_thumb_normal = 2130837824;
+			public const int seek_thumb_disabled = 2130837824;
 			
 			// aapt resource value: 0x7f020141
-			public const int seek_thumb_pressed = 2130837825;
+			public const int seek_thumb_normal = 2130837825;
 			
 			// aapt resource value: 0x7f020142
-			public const int send_icon = 2130837826;
+			public const int seek_thumb_pressed = 2130837826;
 			
 			// aapt resource value: 0x7f020143
-			public const int slideout = 2130837827;
+			public const int send_icon = 2130837827;
 			
 			// aapt resource value: 0x7f020144
-			public const int thumb_up = 2130837828;
+			public const int slideout = 2130837828;
 			
 			// aapt resource value: 0x7f020145
-			public const int tick_icon = 2130837829;
+			public const int thumb_up = 2130837829;
 			
 			// aapt resource value: 0x7f020146
-			public const int time_icon = 2130837830;
+			public const int tick_icon = 2130837830;
 			
 			// aapt resource value: 0x7f020147
-			public const int x_icon = 2130837831;
+			public const int time_icon = 2130837831;
 			
 			// aapt resource value: 0x7f020148
-			public const int xamarin_logo = 2130837832;
+			public const int x_icon = 2130837832;
+			
+			// aapt resource value: 0x7f020149
+			public const int xamarin_logo = 2130837833;
 			
 			static Drawable()
 			{
