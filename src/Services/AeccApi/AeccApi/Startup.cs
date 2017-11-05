@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using AeccApi.Models;
+using AeccApi.Services;
 
 namespace AeccApi
 {
@@ -23,9 +24,11 @@ namespace AeccApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AeccContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AeccConnection")));
-
-            services.AddMvc();
+            services.
+                AddDbContext<AeccContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AeccConnection")))
+                .Configure<EmailData>(Configuration.GetSection(nameof(EmailData)))
+                .AddTransient<IEmailService,EmailService>()
+                .AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
