@@ -127,7 +127,7 @@ namespace XLabs.Forms.Controls
                     TextAlignment = GetTextAlignment(sourceButton.Orientation),
                     FontSize = 16,
                     VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center,
-                    Text = sourceButton.Text
+                    Text = sourceButton.Text ?? string.Empty
                 };
 
                 if (sourceButton.Orientation == ImageOrientation.ImageToLeft)

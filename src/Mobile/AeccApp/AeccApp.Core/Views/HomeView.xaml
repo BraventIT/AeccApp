@@ -195,7 +195,7 @@
                                             Margin="0,10,0,0"
                                             HeightRequest="200"
                                             HorizontalOptions="FillAndExpand"
-                                            SourcePlatform="mock_new_firma_convenio" />
+                                            SourcePlatform="mock_new_firma_convenio.jpg" />
                                         <Label
                                             Margin="0,0,0,5"
                                             FontAttributes="Bold"

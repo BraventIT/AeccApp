@@ -93,25 +93,123 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
-    <Content Include="Assets\chat_tab_icon.png" />
-    <Content Include="Assets\date_icon.png" />
-    <Content Include="Assets\exit_icon.png" />
-    <Content Include="Assets\filters_icon.png" />
-    <Content Include="Assets\from_home.png" />
-    <Content Include="Assets\from_hospital.png" />
-    <Content Include="Assets\gender_female.png" />
-    <Content Include="Assets\gender_male.png" />
-    <Content Include="Assets\home_tab_icon.png" />
+    <Content Include="..\AeccApp.Droid\Resources\drawable\bell.png">
+      <Link>Assets\bell.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\chat.png">
+      <Link>Assets\chat.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\chat_tab_icon.png">
+      <Link>Assets\chat_tab_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\date_icon.png">
+      <Link>Assets\date_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\exit_icon.png">
+      <Link>Assets\exit_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\filters_icon.png">
+      <Link>Assets\filters_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\from_home.png">
+      <Link>Assets\from_home.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\from_hospital.png">
+      <Link>Assets\from_hospital.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\gender_female.png">
+      <Link>Assets\gender_female.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\gender_male.png">
+      <Link>Assets\gender_male.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\home_tab_icon.png">
+      <Link>Assets\home_tab_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\icon.png">
+      <Link>Assets\icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\location_pin.png">
+      <Link>Assets\location_pin.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\location_pin_hospital_map.png">
+      <Link>Assets\location_pin_hospital_map.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\logo.png">
+      <Link>Assets\logo.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\logout.png">
+      <Link>Assets\logout.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\mock_new_firma_convenio.jpg">
+      <Link>Assets\mock_new_firma_convenio.jpg</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\profile.png">
+      <Link>Assets\profile.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\profile_icon.png">
+      <Link>Assets\profile_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\profile_tab_icon.png">
+      <Link>Assets\profile_tab_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\rating_star.png">
+      <Link>Assets\rating_star.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\requests_tab_icon.png">
+      <Link>Assets\requests_tab_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\right_arrow.png">
+      <Link>Assets\right_arrow.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\right_arrow_big.png">
+      <Link>Assets\right_arrow_big.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\round_new_here.png">
+      <Link>Assets\round_new_here.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\round_no_profile_image.png">
+      <Link>Assets\round_no_profile_image.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\round_no_profile_image_v2.png">
+      <Link>Assets\round_no_profile_image_v2.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\round_plus.png">
+      <Link>Assets\round_plus.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\round_plus_green_background.png">
+      <Link>Assets\round_plus_green_background.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\round_question_icon.png">
+      <Link>Assets\round_question_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\search_mini_icon.png">
+      <Link>Assets\search_mini_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\send_icon.png">
+      <Link>Assets\send_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\slideout.png">
+      <Link>Assets\slideout.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\thumb_up.png">
+      <Link>Assets\thumb_up.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\tick_icon.png">
+      <Link>Assets\tick_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\time_icon.png">
+      <Link>Assets\time_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\x_icon.png">
+      <Link>Assets\x_icon.png</Link>
+    </Content>
     <Content Include="Assets\Large1240.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
-    <Content Include="Assets\location_pin.png" />
-    <Content Include="Assets\location_pin_hospital_map.png" />
-    <Content Include="Assets\logo.png" />
-    <Content Include="Assets\profile.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -137,23 +235,6 @@
     <None Include="AeccApp.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\bell.png" />
-    <Content Include="Assets\chat.png" />
-    <Content Include="Assets\logout.png" />
-    <Content Include="Assets\mock_new_firma_convenio.png" />
-    <Content Include="Assets\profile_icon.png" />
-    <Content Include="Assets\profile_tab_icon.png" />
-    <Content Include="Assets\rating_star.png" />
-    <Content Include="Assets\requests_tab_icon.png" />
-    <Content Include="Assets\right_arrow.png" />
-    <Content Include="Assets\right_arrow_big.png" />
-    <Content Include="Assets\round_new_here.png" />
-    <Content Include="Assets\round_no_profile_image.png" />
-    <Content Include="Assets\round_no_profile_image_v2.png" />
-    <Content Include="Assets\round_plus.png" />
-    <Content Include="Assets\round_question_icon.png" />
-    <Content Include="Assets\search_mini_icon.png" />
-    <Content Include="Assets\send_icon.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />
@@ -169,10 +250,6 @@
     <Content Include="Assets\StoreLogo.scale-150.png" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
-    <Content Include="Assets\thumb_up.png" />
-    <Content Include="Assets\tick_icon.png" />
-    <Content Include="Assets\time_icon.png" />
-    <Content Include="Assets\x_icon.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />
     <Content Include="Assets\LockScreenLogo.scale-125.png" />
