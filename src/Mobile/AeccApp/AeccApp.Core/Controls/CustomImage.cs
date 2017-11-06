@@ -49,9 +49,10 @@ namespace AeccApp.Core.Controls
 
 				string path = source.File;
                 if (Device.RuntimePlatform == Device.UWP)
-				{
-					path = $"Assets/{path}.png";
-				}
+                {
+                    path = (path.EndsWith(".jpg", StringComparison.CurrentCultureIgnoreCase)) ?
+                        $"Assets/{path}": $"Assets/{path}.png";
+                }
 
 				source.File = path;
 				SetValue(SourceProperty, source);

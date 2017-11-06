@@ -32,16 +32,7 @@ namespace AeccApp.Core.ViewModels
                 MessagingCenter.Send(new TabMessage(tabIndex), string.Empty);
             }
 
-            try
-            {
-                var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
-                if (!hasPermission)
-                    return;
-            }
-            catch (Exception)
-            {
-                await NavigationService.ShowPopupAsync(NoLocationProviderPopupVM);
-            }
+           
         }
 
         public override Task ActivateAsync()
@@ -49,7 +40,26 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, o => OnChatEngagementEventAsync(o));
 
-            return Task.CompletedTask;
+            return ExecuteOperationAsync(async (token) =>
+             {
+                 try
+                 {
+                     var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
+                     if (!hasPermission)
+                         return;
+                 }
+                 catch (Exception)
+                 {
+                     await NavigationService.ShowPopupAsync(NoLocationProviderPopupVM);
+                 }
+
+                 //await ServiceLocator.EmailService.SendAsync(new AeccApi.Models.EmailMessage()
+                 //{
+                 //    To = $"{GlobalSetting.Instance.User.Email};afraj@bravent.net",
+                 //    Subject = "Prueba de envío de mensajes",
+                 //    Body = $"Esto es una prueba.\r\nSe ha enviado en nombre de: {GlobalSetting.Instance.User.Name} {GlobalSetting.Instance.User.Surname}\r\n\r\nUn saludo!! ;-)"
+                 //}, token);
+             });
         }
 
         public override void Deactivate()

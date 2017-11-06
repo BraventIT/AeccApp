@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#if SERVICE
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+#endif
 
 namespace AeccApi.Models
 {
-    [JsonObject(IsReference = true)]
     public class EmailMessage
     {
 #if SERVICE

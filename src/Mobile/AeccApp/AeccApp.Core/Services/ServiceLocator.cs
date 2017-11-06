@@ -18,6 +18,7 @@ namespace AeccApp.Core.Services
             IocContainer.RegisterAsSingleton<IHospitalRequestService, HospitalRequestService>();
             IocContainer.RegisterAsSingleton<IMapPositionsDataService, MapPositionsDataService>();
             IocContainer.RegisterAsSingleton<IAddressesDataService, AddressesDataService>();
+            IocContainer.RegisterAsSingleton<IEmailService, EmailService>();
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
             IocContainer.RegisterAsSingleton<IHomeRequestService, HomeRequestService>();
             IocContainer.RegisterAsSingleton<IAddressesDataService, AddressesDataService>();
@@ -74,6 +75,19 @@ namespace AeccApp.Core.Services
                   Resolve<IHomeRequestService>();
             }
         }
+
+        static IEmailService _emailService;
+        public static IEmailService EmailService
+        {
+            set { _emailService = value; }
+            get
+            {
+                return (_emailService != null) ?
+                  _emailService :
+                  Resolve<IEmailService>();
+            }
+        }
+
         public static IGeolocator GeolocatorService
         {
             get { return CrossGeolocator.Current; }

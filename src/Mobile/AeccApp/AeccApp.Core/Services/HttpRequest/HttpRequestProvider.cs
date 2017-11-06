@@ -38,7 +38,12 @@ namespace AeccApp.Core.Services
             return JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings);
         }
 
-        public async Task<TResult> PostAsync<TResult>(string uri, TResult data, CancellationToken cancelToken = default(CancellationToken), string token = "", string header = "")
+        public Task PostAsync(string uri, object data, CancellationToken cancelToken = default(CancellationToken), string token = "", string header = "")
+        {
+           return  PostAsync<string>(uri, data, cancelToken, token, header);
+        }
+
+        public async Task<TResult> PostAsync<TResult>(string uri, object data, CancellationToken cancelToken = default(CancellationToken), string token = "", string header = "")
         {
             HttpClient httpClient = CreateHttpClient(token);
 
@@ -53,8 +58,9 @@ namespace AeccApp.Core.Services
 
             await HandleResponse(response);
             string serialized = await response.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings);
+            return (!string.IsNullOrEmpty(serialized)) ?
+                JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings) :
+                default(TResult);
         }
 
         public async Task DeleteAsync(string uri, CancellationToken cancelToken = default(CancellationToken), string token = "")
