@@ -14,8 +14,9 @@ using AeccApp.Core.Controls;
 using AeccApp.Droid.Renderers;
 using Xamarin.Forms.Platform.Android;
 using System.Reflection;
+using DLToolkit.Forms.Controls;
 
-[assembly: ExportRenderer(typeof(NonScrollableListView), typeof(NonScrollableListViewRenderer))]
+[assembly: ExportRenderer(typeof(FlowListView), typeof(NonScrollableListViewRenderer))]
 namespace AeccApp.Droid.Renderers
 {
     public class NonScrollableListViewRenderer : ListViewRenderer
