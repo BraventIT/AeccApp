@@ -16,6 +16,10 @@
         WinPhone="150"
         iOS="150" />
 
+    <Style TargetType="{x:Type ListView}">
+        <Setter Property="SeparatorVisibility" Value="None" />
+    </Style>
+
     <Style x:Key="TransparentBoxViewStyle" TargetType="{x:Type BoxView}">
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="FillAndExpand" />

@@ -89,6 +89,33 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Todavía no has hecho ninguna petición desde domicilio..
+        /// </summary>
+        public static string AllYourRequestsListNoHomeRequests {
+            get {
+                return ResourceManager.GetString("AllYourRequestsListNoHomeRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Todavía no has hecho ninguna petición desde hospital..
+        /// </summary>
+        public static string AllYourRequestsListNoHospitalRequests {
+            get {
+                return ResourceManager.GetString("AllYourRequestsListNoHospitalRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¡Ups!.
+        /// </summary>
+        public static string AllYourRequestsListOops {
+            get {
+                return ResourceManager.GetString("AllYourRequestsListOops", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Abre un nuevo chat, elige y habla con el voluntario que más se adapte a tus preferencias y necesidades..
         /// </summary>
         public static string ChatListViewText {

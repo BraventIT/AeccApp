@@ -177,8 +177,7 @@
                             FlowItemTappedCommand="{Binding ChooseNewCommand}"
                             FlowItemsSource="{Binding NewsList}"
                             HasUnevenRows="true"
-                            HorizontalOptions="FillAndExpand"
-                            SeparatorVisibility="None">
+                            HorizontalOptions="FillAndExpand">
 
                             <flv:FlowListView.HeightRequest>
                                 <OnPlatform x:TypeArguments="x:Double">

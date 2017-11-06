@@ -156,7 +156,7 @@ namespace AeccApp.Core.ViewModels
             CurrentRequest.RequestComments = RequestComments;
             CurrentRequest.RequestDate = DateToApplyParsed;
             CurrentRequest.RequestTime = TimeToApplyParsed;
-            //TODO send request
+            //TODO #33 Send request with email service 
             await NavigationService.HidePopupAsync();
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }

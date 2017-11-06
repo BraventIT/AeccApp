@@ -95,8 +95,7 @@
         <ListView
             HasUnevenRows="True"
             ItemTemplate="{StaticResource requestTypesTemplate}"
-            ItemsSource="{Binding RequestTypes}"
-            SeparatorVisibility="None">
+            ItemsSource="{Binding RequestTypes}">
 
             <ListView.Behaviors>
                 <beh:EventToCommandBehavior

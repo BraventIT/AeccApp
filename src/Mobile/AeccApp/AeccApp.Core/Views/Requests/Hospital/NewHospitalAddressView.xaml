@@ -216,9 +216,7 @@
                         HasUnevenRows="True"
                         HeightRequest="600"
                         ItemTemplate="{StaticResource hospitalListTemplate}"
-                        ItemsSource="{Binding Hospitals}"
-                        SeparatorColor="{StaticResource AccentColor}"
-                        SeparatorVisibility="Default">
+                        ItemsSource="{Binding Hospitals}">
                         <ListView.Margin>
                             <OnPlatform x:TypeArguments="Thickness">
                                 <On Platform="WinPhone, Windows" Value="100" />

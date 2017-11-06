@@ -147,8 +147,7 @@
             HasUnevenRows="True"
             ItemTemplate="{StaticResource ChatDataTemplateSelector}"
             ItemsSource="{Binding Messages}"
-            Rotation="180"
-            SeparatorVisibility="None" />
+            Rotation="180" />
 
         <!--  Chat text entry  -->
         <Entry

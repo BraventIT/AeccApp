@@ -21,7 +21,7 @@ namespace AeccApp.Core.ViewModels.Popups
 
         private async void OnRatingCommand(object obj)
         {
-            //TODO Manage rating result:
+            //TODO #18 Send rating with email service 
             switch (obj)
             {
                 case "1":

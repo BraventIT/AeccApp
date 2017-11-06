@@ -5,11 +5,40 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
+using System.Threading.Tasks;
 
 namespace AeccApp.Core.ViewModels
 {
     class AllYourRequestsListViewModel : ViewModelBase
     {
+
+
+        #region Constructor and initialize
+        public AllYourRequestsListViewModel()
+        {
+
+        }
+
+        public override Task ActivateAsync()
+        {
+            //TODO LOAD HOME AND HOSPITAL REQUESTS
+            return Task.CompletedTask;
+        }
+
+        public override Task InitializeAsync(object navigationData)
+        {
+            if (HomeRequestsList.Count == 0)
+            {
+                IsHomeRequestsListEmpty = true;
+            }
+            if (HospitalRequestsList.Count == 0)
+            {
+                IsHospitalRequestsListEmpty = true;
+            }
+
+            return Task.CompletedTask;
+        }
+        #endregion
 
         #region Commands
 
@@ -50,23 +79,7 @@ namespace AeccApp.Core.ViewModels
             HomeRequestsList.Add(mockRequest);
         }
 
-        private Command _openCloseFilterPopupCommand;
-        public ICommand OpenCloseFilterPopupCommand
-        {
-            get
-            {
-                return _openCloseFilterPopupCommand ??
-                    (_openCloseFilterPopupCommand = new Command(OnOpenCloseFilterPopup, (o) => !IsBusy));
-            }
-        }
-
-
-        void OnOpenCloseFilterPopup(object obj)
-        {
-            IsFilterPopupVisible = !IsFilterPopupVisible;
-
-        }
-
+     
 
         private Command _applyFiltersCommand;
         public ICommand ApplyFiltersCommand
@@ -83,7 +96,6 @@ namespace AeccApp.Core.ViewModels
             //TODO Apply home requests filters
             //TimeToFilterWith
             //DateToFilterWith
-            IsFilterPopupVisible = !IsFilterPopupVisible;
         }
 
         private Command _newRequestCommand;
@@ -107,6 +119,24 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Properties
+        private bool _isHomeRequestsListEmpty;
+
+        public bool IsHomeRequestsListEmpty
+        {
+            get { return _isHomeRequestsListEmpty; }
+            set { Set(ref _isHomeRequestsListEmpty, value); }
+        }
+
+        private bool _isHospitalRequestsListEmpty;
+
+        public bool IsHospitalRequestsListEmpty
+        {
+            get { return _isHospitalRequestsListEmpty; }
+            set { Set(ref _isHospitalRequestsListEmpty, value); }
+        }
+
+
+
         private ObservableCollection<RequestModel> _homeRequestsList = new ObservableCollection<RequestModel>();
 
         public ObservableCollection<RequestModel> HomeRequestsList
@@ -149,27 +179,12 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _switchHomeAndHospitalList, value); }
         }
 
-        private bool _isFilterPopupVisible;
-
-        public bool IsFilterPopupVisible
-        {
-            get { return _isFilterPopupVisible; }
-            set { Set(ref _isFilterPopupVisible, value); }
-        }
+  
 
         #endregion
 
         #region Methods
-        public override bool OnBackButtonPressed()
-        {
-            bool returnValue = false;
-            if (IsFilterPopupVisible)
-            {
-                IsFilterPopupVisible = false;
-                returnValue = true;
-            }
-            return returnValue;
-        }
+      
         #endregion
 
     }

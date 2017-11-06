@@ -126,6 +126,15 @@
   <data name="AllYourRequestsHospital" xml:space="preserve">
     <value>Hospital</value>
   </data>
+  <data name="AllYourRequestsListNoHomeRequests" xml:space="preserve">
+    <value>Todavía no has hecho ninguna petición desde domicilio.</value>
+  </data>
+  <data name="AllYourRequestsListNoHospitalRequests" xml:space="preserve">
+    <value>Todavía no has hecho ninguna petición desde hospital.</value>
+  </data>
+  <data name="AllYourRequestsListOops" xml:space="preserve">
+    <value>¡Ups!</value>
+  </data>
   <data name="ChatListViewText" xml:space="preserve">
     <value>Abre un nuevo chat, elige y habla con el voluntario que más se adapte a tus preferencias y necesidades.</value>
   </data>

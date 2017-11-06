@@ -20,11 +20,6 @@ namespace AeccApp.Core.ViewModels.Popups
             }
         }
 
-        public void OnContinueWithRequestCommand(object obj)
-        {
-                //TODO NAVIGATE TO NEXT PAGE WITH THE ROOM AND HALL STRING ADDED
-        }
-
 
         #endregion
 

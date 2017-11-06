@@ -182,7 +182,7 @@ namespace AeccApp.Core.ViewModels
                 await HomeAddressesDataService.AddOrUpdateAsync(CurrentRequest.RequestAddress);
             }
             await NavigationService.HidePopupAsync();
-            //TODO send request
+            //TODO #33 Send request with email service 
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
 
