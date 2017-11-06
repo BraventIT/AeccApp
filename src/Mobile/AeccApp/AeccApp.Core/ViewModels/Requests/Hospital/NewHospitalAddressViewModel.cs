@@ -5,6 +5,7 @@ using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using Plugin.Geolocator.Abstractions;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -72,8 +73,22 @@ namespace AeccApp.Core.ViewModels
 
         #region Properties
 
+
         public NoLocationProviderPopupViewModel NoLocationProviderPopupVM { get; private set; }
 
+        private string _addressFinder = string.Empty;
+        public string AddressFinder
+        {
+            get { return _addressFinder; }
+            set { Set(ref _addressFinder, value); }
+        }
+
+        private bool _isSearchIconVisible;
+        public bool IsSearchIconVisible
+        {
+            get { return _isSearchIconVisible; }
+            set { Set(ref _isSearchIconVisible, value); }
+        }
 
         private AddressModel _addressSelected = new AddressModel();
 
@@ -88,6 +103,8 @@ namespace AeccApp.Core.ViewModels
         public ObservableCollection<Hospital> Hospitals
         {
             get { return _hospitals; }
+            set { _hospitals = value; }
+
         }
 
         private ObservableCollection<Pin> _mapPins;
@@ -109,25 +126,96 @@ namespace AeccApp.Core.ViewModels
 
         #region Commands
 
+        private Command _resetAddressFinderCommand;
+        public ICommand ResetAddressFinderCommand
+        {
+            get
+            {
+                return _resetAddressFinderCommand ??
+                    (_resetAddressFinderCommand = new Command(o => OnResetAddressFinder()));
+            }
+        }
+
+        private async void OnResetAddressFinder()
+        {
+            AddressSelected = null;
+            AddressFinder = string.Empty;
+            IsSearchIconVisible = false;
+            Hospitals.Clear();
+            await ExecuteOperationAsync(async cancelToken =>
+            {
+                if (!Hospitals.Any())
+                {
+                    var hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
+                    Hospitals.AddRange(hospitals);
+                }
+            });
+
+        }
+
+
+        private Command _addressChangedCommand;
+        public ICommand AddressChangedCommand
+        {
+            get
+            {
+                return _addressChangedCommand ??
+                    (_addressChangedCommand = new Command(OnAddressChanged));
+            }
+        }
+
+        private async void OnAddressChanged(object obj)
+        {
+
+            string result = string.Empty;
+            if (obj is string)
+            {
+                result = (string)obj;
+            }
+
+            if (result.Length > 7)
+            {
+
+                if (string.IsNullOrWhiteSpace(result))
+                {
+                    IsSearchIconVisible = false;
+                    Hospitals.Clear();
+                    await ExecuteOperationAsync(async cancelToken =>
+                    {
+                        if (!Hospitals.Any())
+                        {
+                            var hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
+                            Hospitals.AddRange(hospitals);
+                        }
+                    });
+                }
+                else
+                {
+                    RefreshHospitalList(result);
+                    IsSearchIconVisible = true;
+                }
+            }
+        }
+
         private Command _infoWindowClickedCommand;
         public ICommand InfoWindowClickedCommand
         {
             get
             {
                 return _infoWindowClickedCommand ??
-                    (_infoWindowClickedCommand = new Command(o=> OnInfoWindowClickedCommand(o)));
+                    (_infoWindowClickedCommand = new Command(o => OnInfoWindowClickedCommand(o)));
             }
         }
 
         async Task OnInfoWindowClickedCommand(object obj)
         {
             var pinClicked = obj as Pin;
-        
-                AddressSelected.Street = pinClicked.Address;
-                AddressSelected.Coordinates = pinClicked.Position;
-                AddressSelected.Name = pinClicked.Label;
-                await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
-           
+
+            AddressSelected.Street = pinClicked.Address;
+            AddressSelected.Coordinates = pinClicked.Position;
+            AddressSelected.Name = pinClicked.Label;
+            await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(AddressSelected);
+
         }
 
         private Command _hospitalMapTabCommand;
@@ -196,6 +284,19 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Methods
+
+        async void RefreshHospitalList(string search)
+        {
+            Hospitals.Clear();
+            await ExecuteOperationAsync(async cancelToken =>
+            {
+
+                var hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
+                Hospitals.AddRange(hospitals.Where(o => o.Name.StartsWith(search, StringComparison.CurrentCultureIgnoreCase)));
+
+            });
+        }
+
         private async Task<Xamarin.Forms.GoogleMaps.Position> GetLocationForHospitalAsync(Hospital hospital, CancellationToken cancelToken)
         {
             var hospitalAddress = $"{hospital.Name}, {hospital.Street}";
@@ -214,9 +315,9 @@ namespace AeccApp.Core.ViewModels
             return location;
         }
 
-        private void PinManagement(string hospitalAddress,string hospitalName, double lat, double lng)
+        private void PinManagement(string hospitalAddress, string hospitalName, double lat, double lng)
         {
-            Pin pin = new Pin() {Address = hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
+            Pin pin = new Pin() { Address = hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
                 case TargetPlatform.Android:

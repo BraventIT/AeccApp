@@ -10,8 +10,9 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Xamarin.Forms.Platform.UWP;
 using System.ComponentModel;
+using DLToolkit.Forms.Controls;
 
-[assembly: ExportRenderer(typeof(NonScrollableListView), typeof(NonScrollableListViewRenderer))]
+[assembly: ExportRenderer(typeof(FlowListView), typeof(NonScrollableListViewRenderer))]
 namespace AeccApp.UWP.CustomRenderer
 {
     public class NonScrollableListViewRenderer : ListViewRenderer

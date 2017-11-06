@@ -9,8 +9,9 @@ using Xamarin.Forms.Platform.iOS;
 using Xamarin.Forms;
 using AeccApp.Core.Controls;
 using AeccApp.iOS.Renderers;
+using DLToolkit.Forms.Controls;
 
-[assembly: ExportRenderer(typeof(NonScrollableListView), typeof(NonScrollableListViewRenderer))]
+[assembly: ExportRenderer(typeof(FlowListView), typeof(NonScrollableListViewRenderer))]
 namespace AeccApp.iOS.Renderers
 {
    public class NonScrollableListViewRenderer : ListViewRenderer

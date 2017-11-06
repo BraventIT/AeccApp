@@ -164,28 +164,76 @@
 
             </Grid>
             <!--  Hospitals list  -->
-            <Grid IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
-                <ListView
-                    HasUnevenRows="True"
-                    HeightRequest="600"
-                    ItemTemplate="{StaticResource hospitalListTemplate}"
-                    ItemsSource="{Binding Hospitals}"
-                    SeparatorColor="{StaticResource AccentColor}"
-                    SeparatorVisibility="Default">
-                    <ListView.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <On Platform="WinPhone, Windows" Value="100" />
-                        </OnPlatform>
-                    </ListView.Margin>
+            <StackLayout IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
+                <!--  Address search entry  -->
+                <Grid
+                    Margin="10"
+                    Padding="0,5,0,5"
+                    BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
 
-                    <ListView.Behaviors>
-                        <beh:EventToCommandBehavior
-                            Command="{Binding NewHospitalSelectedCommand}"
-                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                            EventName="ItemTapped" />
-                    </ListView.Behaviors>
-                </ListView>
-            </Grid>
+                    <ctrl:CustomImage
+                        Grid.Column="0"
+                        Margin="5,10"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding IsSearchIconVisible, Converter={StaticResource InverseBoolConverter}}"
+                        SourcePlatform="search_mini_icon"
+                        VerticalOptions="Center" />
+
+                    <Entry
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        Placeholder="{Binding [NewHomeAddressViewSearchAddress]}"
+                        Text="{Binding AddressFinder}">
+
+                        <Entry.Behaviors>
+                            <beh:EventToCommandBehavior
+                                Command="{Binding AddressChangedCommand}"
+                                EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
+                                EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Frame
+                        Grid.Column="2"
+                        Padding="5,10"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding IsSearchIconVisible}">
+                        <ctrl:CustomImage SourcePlatform="x_icon" VerticalOptions="Center" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ResetAddressFinderCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                </Grid>
+
+                <Grid>
+                    <ListView
+                        HasUnevenRows="True"
+                        HeightRequest="600"
+                        ItemTemplate="{StaticResource hospitalListTemplate}"
+                        ItemsSource="{Binding Hospitals}"
+                        SeparatorColor="{StaticResource AccentColor}"
+                        SeparatorVisibility="Default">
+                        <ListView.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="WinPhone, Windows" Value="100" />
+                            </OnPlatform>
+                        </ListView.Margin>
+
+                        <ListView.Behaviors>
+                            <beh:EventToCommandBehavior
+                                Command="{Binding NewHospitalSelectedCommand}"
+                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                                EventName="ItemTapped" />
+                        </ListView.Behaviors>
+                    </ListView>
+                </Grid>
+            </StackLayout>
         </StackLayout>
 
 
