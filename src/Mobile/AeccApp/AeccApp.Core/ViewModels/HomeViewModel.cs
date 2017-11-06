@@ -18,7 +18,6 @@ namespace AeccApp.Core.ViewModels
         public HomeViewModel()
         {
             IsHeaderInfoBannerVisible = Settings.HomeHeaderBannerClosed;
-            ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
             ChatService = ServiceLocator.ChatService;
         }
 
@@ -105,7 +104,6 @@ namespace AeccApp.Core.ViewModels
 
         #region Popups Properties
 
-        public ChatTermsAndConditionsPopupViewModel ChatTermsAndConditionsPopupVM { get; private set; }
 
         private bool eventPopupVisible;
         public bool EventPopupVisible
@@ -217,19 +215,13 @@ namespace AeccApp.Core.ViewModels
                     (_newChatCommand = new Command(OnNewChat));
             }
         }
-        /// <summary>
-        /// If terms and conditions accepted switch to chat tab
-        /// </summary>
+     
+
         async void OnNewChat()
         {
-            if (Settings.TermsAndConditionsAccept == false)
-            {
-                await NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
-            }
-            else
-            {
+          
                 MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Chat), string.Empty);
-            }
+            
         }
 
 
@@ -282,11 +274,7 @@ namespace AeccApp.Core.ViewModels
                 EventPopupVisible = false;
                 returnValue = true;
             }
-            //else if(TermsAndConditionsPopupVisible)
-            //{
-            //    TermsAndConditionsPopupVisible = false;
-            //    returnValue = true;
-            //}
+         
 
             return returnValue;
         }
