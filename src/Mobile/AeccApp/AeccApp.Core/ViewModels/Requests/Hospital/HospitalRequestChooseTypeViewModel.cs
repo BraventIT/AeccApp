@@ -1,6 +1,7 @@
 ﻿using AeccApi.Models;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
+using AeccApp.Core.ViewModels.Popups;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,11 @@ namespace AeccApp.Core.ViewModels
         private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
         private IHospitalRequestService HospitalRequestService { get; } = ServiceLocator.HospitalRequestService;
 
+        public HospitalRequestChooseTypeViewModel()
+        {
+            RequestHospitalAskForRoomPopupVM = new RequestHospitalAskForRoomPopupViewModel();
+            RequestHospitalAskForRoomPopupVM.ContinueWithRequest += OnContinueWithRequest;
+        }
 
         public override Task InitializeAsync(object navigationData)
         {
@@ -48,6 +54,9 @@ namespace AeccApp.Core.ViewModels
         }
 
         #region Properties
+
+        public RequestHospitalAskForRoomPopupViewModel RequestHospitalAskForRoomPopupVM { get; private set; }
+
 
         private IEnumerable<Hospital> _provinceHospitals;
         public IEnumerable<Hospital> ProvinceHospitals
@@ -91,6 +100,16 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
+
+        private async void OnContinueWithRequest(object sender, EventArgs e)
+        {
+            Request.RequestAddress.HospitalHall = RequestHospitalAskForRoomPopupVM.Hall;
+            Request.RequestAddress.HospitalRoom = RequestHospitalAskForRoomPopupVM.Room;
+            await NavigationService.HidePopupAsync();
+            await NavigationService.NavigateToAsync<CompletingHospitalRequestViewModel>(Request);
+        }
+
+
         private Command _requestTypeCommand;
         public ICommand RequestTypeCommand
         {
@@ -106,7 +125,7 @@ namespace AeccApp.Core.ViewModels
             var requestType = obj as RequestType;
             Request.RequestAddress = HospitalAddress;
             Request.RequestType = requestType;
-            await NavigationService.NavigateToAsync<CompletingHospitalRequestViewModel>(Request);
+            await NavigationService.ShowPopupAsync(RequestHospitalAskForRoomPopupVM);
 
         }
 
@@ -130,6 +149,8 @@ namespace AeccApp.Core.ViewModels
         }
 
         #endregion
+
+
 
     }
 }

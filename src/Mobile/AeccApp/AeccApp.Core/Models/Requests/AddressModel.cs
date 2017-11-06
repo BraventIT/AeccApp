@@ -14,6 +14,7 @@ namespace AeccApp.Core.Models
         public string Floor { get; set; }
         public string Portal { get; set; }
         public string HospitalRoom { get; set; }
+        public string HospitalHall { get; set; }
         public bool WillBeSaved { get; set; }
         public string PlaceId { get; set; }
 

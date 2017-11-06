@@ -1,10 +1,13 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
     public class RequestHospitalAskForRoomPopupViewModel : ClosablePopupViewModelBase
     {
+        public event EventHandler ContinueWithRequest;
+
 
         #region Commands
         private Command _continueWithRequestCommand;
@@ -13,7 +16,7 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _continueWithRequestCommand ??
-                    (_continueWithRequestCommand = new Command(OnContinueWithRequestCommand, (o) => !IsBusy));
+                    (_continueWithRequestCommand = new Command(o => ContinueWithRequest?.Invoke(this, null)));
             }
         }
 
