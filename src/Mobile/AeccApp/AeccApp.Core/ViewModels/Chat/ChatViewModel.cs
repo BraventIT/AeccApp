@@ -28,6 +28,7 @@ namespace AeccApp.Core.ViewModels
             ChatCounterpartProfilePopupVM = new ChatCounterpartProfilePopupViewModel();
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
             ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
+            ChatConnectingPopupVM = new ChatConnectingPopupViewModel();
 
             _chatService = ServiceLocator.ChatService;
         }
@@ -84,6 +85,8 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Properties
+        public ChatConnectingPopupViewModel ChatConnectingPopupVM { get; set; }
+
         private string _partyId;
         public string PartyId
         {
@@ -265,6 +268,8 @@ namespace AeccApp.Core.ViewModels
             {
                 var selectedVolunteer = obj as Volunteer;
                 PartyId = selectedVolunteer.PartyId;
+                //Muestra popup de espera en la conexión
+                NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
                 await InitializeChatAsync();
             });
         }
@@ -349,8 +354,14 @@ namespace AeccApp.Core.ViewModels
 
         private void OnMesagesReceived(object sender, IList<Message> messages)
         {
+          
             foreach (var message in messages.Reverse())
             {
+                if(message.Activity.Text.StartsWith("ahora estás hablando con"))
+                {
+                    //Oculta popup de espera en la conexión //TODO Revisar cuando llegue codigo unico de mensaje
+                    NavigationService.HidePopupAsync();
+                }
                 Messages.Insert(0, message);
             }
         }

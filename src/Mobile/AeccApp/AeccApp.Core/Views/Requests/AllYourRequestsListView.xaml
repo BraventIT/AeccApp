@@ -77,15 +77,6 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <TabbedPage.ToolbarItems>
-        <ctrl:HideableToolbarItem
-            Command="{Binding OpenCloseFilterPopupCommand}"
-            IconPlatform="bell"
-            Order="Primary"
-            Priority="1"
-            Text="{Binding [CommonFilters]}" />
-
-    </TabbedPage.ToolbarItems>
     <StackLayout>
         <StackLayout>
 
@@ -215,25 +206,10 @@
                                 <On Platform="WinPhone, Windows" Value="100" />
                             </OnPlatform>
                         </ListView.Margin>
-
-
                     </ListView>
                 </StackLayout>
-
             </StackLayout>
-
         </StackLayout>
-
-        <!--  Requests filters popup  -->
-        <ctrl:RequestFiltersPopupControl
-            ApplyFiltersCommand="{Binding ApplyFiltersCommand}"
-            DateSelected="{Binding DateToFilterWith, Mode=TwoWay}"
-            IsVisible="{Binding IsFilterPopupVisible}"
-            TimeSelected="{Binding TimeToFilterWith, Mode=TwoWay}">
-            <View.Behaviors>
-                <beh:AnimateScaleBehavior IsVisible="{Binding IsFilterPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
-            </View.Behaviors>
-        </ctrl:RequestFiltersPopupControl>
     </StackLayout>
 
 </v:BaseContentPage>

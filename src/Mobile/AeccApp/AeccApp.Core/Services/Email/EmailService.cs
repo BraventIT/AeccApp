@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AeccApi.Models;
 using System.Threading;
+using AeccApp.Core.Models.Email;
 
 namespace AeccApp.Core.Services
 {
@@ -24,5 +25,6 @@ namespace AeccApp.Core.Services
             };
             return _requestProvider.PostAsync(uribuilder.ToString(), emailMessage, cancelToken);
         }
+
     }
 }

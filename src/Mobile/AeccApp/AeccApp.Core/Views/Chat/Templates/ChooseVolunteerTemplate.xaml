@@ -93,63 +93,51 @@
 
     <Grid>
         <Grid IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}">
+            <ListView
+                x:Name="VolunteersListView"
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding VolunteersIsEmpty, Converter={StaticResource InverseBoolConverter}}"
+                ItemTemplate="{StaticResource volunteerTemplate}"
+                ItemsSource="{Binding Volunteers}"
+                VerticalOptions="FillAndExpand">
+                <ListView.RowHeight>
+                    <OnPlatform x:TypeArguments="x:Int32">
+                        <On Platform="iOS">100</On>
+                        <On Platform="Android">100</On>
+                        <On Platform="UWP">100</On>
+                    </OnPlatform>
+                </ListView.RowHeight>
+                <ListView.Behaviors>
+                    <beh:EventToCommandBehavior
+                        Command="{Binding ChooseVolunteerCommand}"
+                        EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                        EventName="ItemTapped" />
+                </ListView.Behaviors>
+            </ListView>
 
-            <Grid IsVisible="{Binding IsFilterPopupVisible, Converter={StaticResource InverseBoolConverter}}">
-
-                <ListView
-                    x:Name="VolunteersListView"
-                    HorizontalOptions="FillAndExpand"
-                    IsVisible="{Binding VolunteersIsEmpty, Converter={StaticResource InverseBoolConverter}}"
-                    ItemTemplate="{StaticResource volunteerTemplate}"
-                    ItemsSource="{Binding Volunteers}"
-                    VerticalOptions="FillAndExpand">
-                    <ListView.RowHeight>
-                        <OnPlatform x:TypeArguments="x:Int32">
-                            <On Platform="iOS">100</On>
-                            <On Platform="Android">100</On>
-                            <On Platform="UWP">100</On>
-                        </OnPlatform>
-                    </ListView.RowHeight>
-                    <ListView.Behaviors>
-                        <beh:EventToCommandBehavior
-                            Command="{Binding ChooseVolunteerCommand}"
-                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                            EventName="ItemTapped" />
-                    </ListView.Behaviors>
-                </ListView>
-
-                <StackLayout
-                    HorizontalOptions="Center"
-                    IsVisible="{Binding VolunteersIsEmpty}"
-                    VerticalOptions="Center">
-                    <Label
-                        HorizontalTextAlignment="Center"
-                        Style="{StaticResource SubTitleLabelStyle}"
-                        Text="{Binding [ChatViewThereAreNoVolunteers]}" />
-                    <Button
-                        Margin="20"
-                        Command="{Binding RefreshVolunteersCommand}"
-                        HorizontalOptions="CenterAndExpand"
-                        Style="{StaticResource ButtonStyle}"
-                        Text="{Binding [CommonRefreshList]}" />
-                </StackLayout>
-
+            <StackLayout
+                HorizontalOptions="Center"
+                IsVisible="{Binding VolunteersIsEmpty}"
+                VerticalOptions="Center">
                 <Label
-                    Margin="20,150,20,20"
                     HorizontalTextAlignment="Center"
-                    IsVisible="{Binding IsBusy}"
                     Style="{StaticResource SubTitleLabelStyle}"
-                    Text="{Binding [ChatViewLookingForVolunteers]}"
-                    VerticalOptions="Center" />
+                    Text="{Binding [ChatViewThereAreNoVolunteers]}" />
+                <Button
+                    Margin="20"
+                    Command="{Binding RefreshVolunteersCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource ButtonStyle}"
+                    Text="{Binding [CommonRefreshList]}" />
+            </StackLayout>
 
-            </Grid>
-
-            <!--  Volunteer filters popup  -->
-            <!--<ctrl:ChatFiltersPopupControl
-                ApplyFiltersCommand="{Binding ApplyFiltersCommand}"
-                IsVisible="{Binding IsFilterPopupVisible}"
-                MaximumAge="{Binding MaximumAge}"
-                MinimumAge="{Binding MinimumAge}" />-->
+            <Label
+                Margin="20,150,20,20"
+                HorizontalTextAlignment="Center"
+                IsVisible="{Binding IsBusy}"
+                Style="{StaticResource SubTitleLabelStyle}"
+                Text="{Binding [ChatViewLookingForVolunteers]}"
+                VerticalOptions="Center" />
         </Grid>
 
         <!--  Volunteer-only messages  -->
