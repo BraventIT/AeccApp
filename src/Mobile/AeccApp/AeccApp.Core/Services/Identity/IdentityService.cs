@@ -18,11 +18,11 @@ namespace AeccApp.Core.Services
 
         private const string PolicySignUpSignIn = "B2C_1_inicioDeSesion";
         private const string PolicyEditProfile = "B2C_1_perfilxamarin";
-        private const string PolicyResetPassword = "B2C_1_passxamarin";
+        private const string PolicyResetPassword = "B2C_1_resetPassword";
 
         private string[] Scopes
         {
-            get { return new string[] { $"{GSetting.BaseEndpoint}/demo.read" }; }
+            get { return new string[] { $"{GSetting.BaseEndpoint}/read" }; }
         }
 
         private string AuthorityBase

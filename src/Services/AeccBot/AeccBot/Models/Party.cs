@@ -1,4 +1,4 @@
-﻿#if SERVICE
+﻿#if WEB
 using Microsoft.Bot.Connector;
 #else
 using Microsoft.Bot.Connector.DirectLine;

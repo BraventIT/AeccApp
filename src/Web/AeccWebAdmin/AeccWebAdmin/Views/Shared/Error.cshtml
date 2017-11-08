@@ -1,0 +1,21 @@
+﻿@model AeccApi.WebAdmin.ViewModels.ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">Se produjo un error al procesar la solicitud.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Identificador de petición:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+
+@if (Model.ShowMessage)
+{
+    <p>
+        <strong>Mensaje:</strong> <code>@Model.Message</code>
+    </p>
+}

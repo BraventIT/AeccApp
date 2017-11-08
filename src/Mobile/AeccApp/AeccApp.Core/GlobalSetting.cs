@@ -18,8 +18,8 @@ namespace AeccApp.Core
             DomainName = "alfraso.onmicrosoft.com";
             ApplicationID = "24b548ab-933a-47c0-9b3c-c9b334219cc7";
 
-            BaseEndpoint = $"https://{DomainName}/demoapi";
-            ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
+            BaseEndpoint = $"https://{DomainName}/aeccapi";
+            ApiEndpoint = "https://aecc.alfraso.com";
 
         }
 

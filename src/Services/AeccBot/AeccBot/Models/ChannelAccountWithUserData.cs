@@ -1,4 +1,4 @@
-﻿#if SERVICE
+﻿#if WEB
 using Microsoft.Bot.Connector;
 #else
 using Microsoft.Bot.Connector.DirectLine;
@@ -22,7 +22,7 @@ namespace AeccBot.Models
 
         public ChannelAccountWithUserData(ChannelAccount account)
         {
-#if SERVICE
+#if WEB
             Properties = account.Properties;
             FirstName = Properties?[nameof(FirstName)]?.ToString();
             Surname = Properties?[nameof(Surname)]?.ToString();

@@ -1,11 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AeccApi.Models;
 
 namespace AeccApi.Controllers
 {
+    [Produces("application/json")]
+    [Route("api/RequestTypes")]
     public class RequestTypesController : Controller
     {
         private readonly AeccContext _context;
@@ -15,130 +20,104 @@ namespace AeccApi.Controllers
             _context = context;
         }
 
-        // GET: RequestTypes
-        public async Task<IActionResult> Index()
+        // GET: api/RequestTypes
+        [HttpGet]
+        public IEnumerable<RequestType> GetRequestTypes(string requestSource)
         {
-            return View(await _context.RequestTypes.ToListAsync());
+            RequestSourceEnum requestSourceFilter;
+
+            return (!string.IsNullOrEmpty(requestSource) && Enum.TryParse(requestSource, true, out requestSourceFilter)) ?
+                 _context.RequestTypes.Where(r => r.Source == requestSourceFilter) : _context.RequestTypes;
         }
 
-        // GET: RequestTypes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: api/RequestTypes/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetRequestType([FromRoute] int id)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
-            }
-
-            var requestType = await _context.RequestTypes
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (requestType == null)
-            {
-                return NotFound();
-            }
-
-            return View(requestType);
-        }
-
-        // GET: RequestTypes/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: RequestTypes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Source,Name")] RequestType requestType)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(requestType);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(requestType);
-        }
-
-        // GET: RequestTypes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
+                return BadRequest(ModelState);
             }
 
             var requestType = await _context.RequestTypes.SingleOrDefaultAsync(m => m.Id == id);
+
             if (requestType == null)
             {
                 return NotFound();
             }
-            return View(requestType);
+
+            return Ok(requestType);
         }
 
-        // POST: RequestTypes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Source,Name")] RequestType requestType)
+        // PUT: api/RequestTypes/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutRequestType([FromRoute] int id, [FromBody] RequestType requestType)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (id != requestType.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            _context.Entry(requestType).State = EntityState.Modified;
+
+            try
             {
-                try
-                {
-                    _context.Update(requestType);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RequestTypeExists(requestType.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
             }
-            return View(requestType);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RequestTypeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // GET: RequestTypes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // POST: api/RequestTypes
+        [HttpPost]
+        public async Task<IActionResult> PostRequestType([FromBody] RequestType requestType)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return BadRequest(ModelState);
             }
 
-            var requestType = await _context.RequestTypes
-                .SingleOrDefaultAsync(m => m.Id == id);
+            _context.RequestTypes.Add(requestType);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetRequestType", new { id = requestType.Id }, requestType);
+        }
+
+        // DELETE: api/RequestTypes/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRequestType([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var requestType = await _context.RequestTypes.SingleOrDefaultAsync(m => m.Id == id);
             if (requestType == null)
             {
                 return NotFound();
             }
 
-            return View(requestType);
-        }
-
-        // POST: RequestTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var requestType = await _context.RequestTypes.SingleOrDefaultAsync(m => m.Id == id);
             _context.RequestTypes.Remove(requestType);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return Ok(requestType);
         }
 
         private bool RequestTypeExists(int id)

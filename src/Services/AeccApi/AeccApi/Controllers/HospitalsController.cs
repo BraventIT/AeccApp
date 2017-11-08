@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AeccApi.Models;
+using AeccApi.Extensions;
+using System.Globalization;
 
 namespace AeccApi.Controllers
 {
+    [Produces("application/json")]
+    [Route("api/Hospitals")]
     public class HospitalsController : Controller
     {
         private readonly AeccContext _context;
@@ -18,130 +22,107 @@ namespace AeccApi.Controllers
             _context = context;
         }
 
-        // GET: Hospitals
-        public async Task<IActionResult> Index()
+        // GET: api/Hospitals
+        [HttpGet]
+        public IEnumerable<Hospital> GetHospitals(string province)
         {
-            return View(await _context.Hospitals.ToListAsync());
+            return (!string.IsNullOrEmpty(province)) ?
+                _context.Hospitals.Where(h => h.Province.Contains(province, StringComparison.CurrentCultureIgnoreCase)) :
+                _context.Hospitals;
         }
 
-        // GET: Hospitals/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: api/Hospitals/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetHospital([FromRoute] int id)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return BadRequest(ModelState);
             }
 
             var hospital = await _context.Hospitals
+                .Include(s => s.HospitalAssignments)
+                .ThenInclude(e => e.Coordinator)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
+
             if (hospital == null)
             {
                 return NotFound();
             }
 
-            return View(hospital);
+            return Ok(hospital);
         }
 
-        // GET: Hospitals/Create
-        public IActionResult Create()
+        // PUT: api/Hospitals/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutHospital([FromRoute] int id, [FromBody] Hospital hospital)
         {
-            return View();
-        }
-
-        // POST: Hospitals/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Street,City,Province")] Hospital hospital)
-        {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(hospital);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(hospital);
-        }
-
-        // GET: Hospitals/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
+                return BadRequest(ModelState);
             }
 
-            var hospital = await _context.Hospitals.SingleOrDefaultAsync(m => m.ID == id);
-            if (hospital == null)
-            {
-                return NotFound();
-            }
-            return View(hospital);
-        }
-
-        // POST: Hospitals/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Street,City,Province")] Hospital hospital)
-        {
             if (id != hospital.ID)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            _context.Entry(hospital).State = EntityState.Modified;
+
+            try
             {
-                try
-                {
-                    _context.Update(hospital);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!HospitalExists(hospital.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
             }
-            return View(hospital);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!HospitalExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // GET: Hospitals/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // POST: api/Hospitals
+        [HttpPost]
+        public async Task<IActionResult> PostHospital([FromBody] Hospital hospital)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return BadRequest(ModelState);
             }
 
-            var hospital = await _context.Hospitals
-                .SingleOrDefaultAsync(m => m.ID == id);
+            _context.Hospitals.Add(hospital);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetHospital", new { id = hospital.ID }, hospital);
+        }
+
+        // DELETE: api/Hospitals/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteHospital([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var hospital = await _context.Hospitals.SingleOrDefaultAsync(m => m.ID == id);
             if (hospital == null)
             {
                 return NotFound();
             }
 
-            return View(hospital);
-        }
-
-        // POST: Hospitals/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var hospital = await _context.Hospitals.SingleOrDefaultAsync(m => m.ID == id);
             _context.Hospitals.Remove(hospital);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return Ok(hospital);
         }
 
         private bool HospitalExists(int id)

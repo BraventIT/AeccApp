@@ -24,7 +24,8 @@ namespace AeccApp.Core.Services
                 Path = "api/RequestTypes",
                 Query = $"requestSource={RequestSourceEnum.Hospital.ToString()}"
             };
-            return await _requestProvider.GetAsync<IEnumerable<RequestType>>(uribuilder.ToString(), cancelToken);
+            var token = await _identityService.GetTokenAsync();
+            return await _requestProvider.GetAsync<IEnumerable<RequestType>>(uribuilder.ToString(), cancelToken, token);
         }
 
         public async Task<IEnumerable<Hospital>> GetHospitalsAsync(string province, CancellationToken cancelToken)
@@ -34,7 +35,8 @@ namespace AeccApp.Core.Services
                 Path = "api/Hospitals",
                 Query = $"province={province}"
             };
-            return await _requestProvider.GetAsync<IEnumerable<Hospital>>(uribuilder.ToString(), cancelToken);
+            var token = await _identityService.GetTokenAsync();
+            return await _requestProvider.GetAsync<IEnumerable<Hospital>>(uribuilder.ToString(), cancelToken, token);
         }
 
         public async Task<Hospital> GetHospitalDetail(int hospitalId, CancellationToken cancelToken)
@@ -43,7 +45,8 @@ namespace AeccApp.Core.Services
             {
                 Path = $"api/Hospitals/{hospitalId}"
             };
-            return await _requestProvider.GetAsync<Hospital>(uribuilder.ToString(), cancelToken);
+            var token = await _identityService.GetTokenAsync();
+            return await _requestProvider.GetAsync<Hospital>(uribuilder.ToString(), cancelToken, token);
         }
     }
 }

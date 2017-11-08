@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>AeccApi.WebAdmin</AssemblyName>
+    <RootNamespace>AeccApi.WebAdmin</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0;WEB</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\DbInitializer.cs" />
+    <Compile Remove="Models\AeccContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Data\DbInitializer.cs" Link="Data\DbInitializer.cs" />
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\AeccContext.cs" Link="Models\AeccContext.cs" />
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Coordinator.cs" Link="Models\Coordinator.cs" />
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\EmailMessage.cs" Link="Models\EmailMessage.cs" />
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Hospital.cs" Link="Models\Hospital.cs" />
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\HospitalAssignment.cs" Link="Models\HospitalAssignment.cs" />
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\RequestSourceEnum.cs" Link="Models\RequestSourceEnum.cs" />
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\RequestType.cs" Link="Models\RequestType.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+</Project>
