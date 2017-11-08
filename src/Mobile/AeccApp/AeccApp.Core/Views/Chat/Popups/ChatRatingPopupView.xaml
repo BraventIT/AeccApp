@@ -33,52 +33,41 @@
 
                 <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
 
-                    <ctrl:CustomImage
+                    <ctrlXlabs:ImageButton
+                        Command="{Binding RatingCommand}"
+                        CommandParameter="1"
                         HeightRequest="25"
                         SourcePlatform="rating_star"
-                        WidthRequest="25">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RatingCommand}" CommandParameter="1" />
-                        </ctrl:CustomImage.GestureRecognizers>
+                        WidthRequest="25" />
 
-                    </ctrl:CustomImage>
-
-                    <ctrl:CustomImage
+                    <ctrlXlabs:ImageButton
+                        Command="{Binding RatingCommand}"
+                        CommandParameter="2"
                         HeightRequest="25"
                         SourcePlatform="rating_star"
-                        WidthRequest="25">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RatingCommand}" CommandParameter="2" />
-                        </ctrl:CustomImage.GestureRecognizers>
+                        WidthRequest="25" />
 
-                    </ctrl:CustomImage>
-                    <ctrl:CustomImage
+                    <ctrlXlabs:ImageButton
+                        Command="{Binding RatingCommand}"
+                        CommandParameter="3"
                         HeightRequest="25"
                         SourcePlatform="rating_star"
-                        WidthRequest="25">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RatingCommand}" CommandParameter="3" />
-                        </ctrl:CustomImage.GestureRecognizers>
+                        WidthRequest="25" />
 
-                    </ctrl:CustomImage>
-                    <ctrl:CustomImage
+                    <ctrlXlabs:ImageButton
+                        Command="{Binding RatingCommand}"
+                        CommandParameter="4"
                         HeightRequest="25"
                         SourcePlatform="rating_star"
-                        WidthRequest="25">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RatingCommand}" CommandParameter="4" />
-                        </ctrl:CustomImage.GestureRecognizers>
+                        WidthRequest="25" />
 
-                    </ctrl:CustomImage>
-                    <ctrl:CustomImage
+                    <ctrlXlabs:ImageButton
+                        Command="{Binding RatingCommand}"
+                        CommandParameter="5"
                         HeightRequest="25"
                         SourcePlatform="rating_star"
-                        WidthRequest="25">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RatingCommand}" CommandParameter="5" />
-                        </ctrl:CustomImage.GestureRecognizers>
+                        WidthRequest="25" />
 
-                    </ctrl:CustomImage>
                 </StackLayout>
 
 

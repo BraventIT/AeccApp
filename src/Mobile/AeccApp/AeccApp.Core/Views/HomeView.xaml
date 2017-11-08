@@ -34,16 +34,12 @@
                             <TapGestureRecognizer Command="{Binding HeaderInfoBannerCall}" />
                         </Label.GestureRecognizers>
                     </Label>
-                    <ctrl:CustomImage
+                    <ctrlXlabs:ImageButton
                         Grid.Column="1"
-                        Margin="0,0,10,0"
-                        HorizontalOptions="End"
-                        SourcePlatform="x_icon"
-                        VerticalOptions="Center">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding HeaderInfoBannerClose}" />
-                        </ctrl:CustomImage.GestureRecognizers>
-                    </ctrl:CustomImage>
+                        BackgroundColor="Transparent"
+                        Command="{Binding HeaderInfoBannerClose}"
+                        Orientation="ImageCentered"
+                        Source="x_icon" />
                 </Grid>
 
                 <StackLayout Padding="10,5,10,10" VerticalOptions="FillAndExpand">
@@ -181,9 +177,9 @@
 
                             <flv:FlowListView.HeightRequest>
                                 <OnPlatform x:TypeArguments="x:Double">
-                                    <OnPlatform.iOS>500</OnPlatform.iOS>
-                                    <OnPlatform.Android>500</OnPlatform.Android>
-                                    <OnPlatform.WinPhone>400</OnPlatform.WinPhone>
+                                    <OnPlatform.iOS>250</OnPlatform.iOS>
+                                    <OnPlatform.Android>250</OnPlatform.Android>
+                                    <OnPlatform.WinPhone>200</OnPlatform.WinPhone>
                                 </OnPlatform>
                             </flv:FlowListView.HeightRequest>
 

@@ -40,27 +40,21 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <ctrl:CustomImage
+                        <ctrlXlabs:ImageButton
                             Grid.Row="0"
                             Grid.Column="0"
                             Margin="10"
+                            Command="{Binding ClosePopupCommand}"
                             HorizontalOptions="Start"
                             SourcePlatform="x_icon"
-                            VerticalOptions="Center">
-                            <ctrl:CustomImage.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
-                            </ctrl:CustomImage.GestureRecognizers>
-                        </ctrl:CustomImage>
-                        <ctrl:CustomImage
+                            VerticalOptions="Center" />
+                        <ctrlXlabs:ImageButton
                             Grid.Column="1"
                             Margin="10"
+                            Command="{Binding ApplyDateAndTimeCommand}"
                             HorizontalOptions="End"
                             SourcePlatform="tick_icon"
-                            VerticalOptions="Center">
-                            <ctrl:CustomImage.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ApplyDateAndTimeCommand}" />
-                            </ctrl:CustomImage.GestureRecognizers>
-                        </ctrl:CustomImage>
+                            VerticalOptions="Center" />
 
                     </Grid>
 

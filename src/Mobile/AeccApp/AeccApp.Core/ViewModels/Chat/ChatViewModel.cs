@@ -28,23 +28,18 @@ namespace AeccApp.Core.ViewModels
             ChatCounterpartProfilePopupVM = new ChatCounterpartProfilePopupViewModel();
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
             ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
-
+            ConnectingPopupVM = new ConnectingPopupViewModel();
             _chatService = ServiceLocator.ChatService;
         }
 
         public override Task ActivateAsync()
         {
-            if (Settings.TermsAndConditionsAccept == false)
-            {
-               return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
-            }
-            else
-            {
 
-          
+
+
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
-                ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
+            ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
             _chatService.MessagesReceived += OnMesagesReceived;
             _chatService.AggregationsReceived += OnAggregationsReceived;
 
@@ -68,7 +63,7 @@ namespace AeccApp.Core.ViewModels
                 }
             },
              finallyAction: () => VolunteersIsEmpty = !Volunteers.Any());
-            }
+
 
 
         }
@@ -84,6 +79,9 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Properties
+        public ConnectingPopupViewModel ConnectingPopupVM { get; set; }
+
+
         private string _partyId;
         public string PartyId
         {
@@ -148,7 +146,7 @@ namespace AeccApp.Core.ViewModels
 
         #region Chat Commands
 
-      
+
 
         private Command _viewVolunteerProfileCommand;
         public ICommand ViewVolunteerProfileCommand
@@ -195,7 +193,7 @@ namespace AeccApp.Core.ViewModels
             });
         }
 
-       
+
 
         private async void OnLeaseConversation(object sender, EventArgs e)
         {
@@ -204,9 +202,9 @@ namespace AeccApp.Core.ViewModels
             if (!IsVolunteer)
             {
                 await NavigationService.ShowPopupAsync(ChatRatingPopupVM);
-                    }
+            }
         }
-  
+
         private Command _leaseConversationPopupCommand;
         public ICommand LeaseConversationPopupCommand
         {
@@ -261,12 +259,23 @@ namespace AeccApp.Core.ViewModels
 
         private Task OnChooseVolunteerAsync(object obj)
         {
-            return ExecuteOperationAsync(async () =>
+            if (Settings.TermsAndConditionsAccept == false)
             {
-                var selectedVolunteer = obj as Volunteer;
-                PartyId = selectedVolunteer.PartyId;
-                await InitializeChatAsync();
-            });
+                return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
+            }
+            else
+            {
+                return ExecuteOperationAsync(async () =>
+                {
+                    var selectedVolunteer = obj as Volunteer;
+                    PartyId = selectedVolunteer.PartyId;
+                    await NavigationService.HidePopupAsync();
+                    NavigationService.ShowPopupAsync(ConnectingPopupVM);
+                    await InitializeChatAsync();
+
+                });
+
+            }
         }
         #endregion
 
@@ -325,7 +334,7 @@ namespace AeccApp.Core.ViewModels
                 }
             });
         }
-        
+
         private void OnChatState(ChatStateMessage obj)
         {
             VolunteerIsActive = obj.VolunteerIsActive;
@@ -347,8 +356,10 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private void OnMesagesReceived(object sender, IList<Message> messages)
+        private async void OnMesagesReceived(object sender, IList<Message> messages)
         {
+            await NavigationService.HidePopupAsync();
+
             foreach (var message in messages.Reverse())
             {
                 Messages.Insert(0, message);

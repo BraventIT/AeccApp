@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     vm:ViewModelLocator.AutoWireViewModel="True"
@@ -26,17 +27,14 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <ctrl:CustomImage
+        <ctrlXlabs:ImageButton
             Grid.Column="1"
             Margin="20,0"
+            Command="{Binding OkCommand}"
             HeightRequest="30"
             SourcePlatform="x_icon"
             VerticalOptions="Start"
-            WidthRequest="30">
-            <ctrl:CustomImage.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding OkCommand}" />
-            </ctrl:CustomImage.GestureRecognizers>
-        </ctrl:CustomImage>
+            WidthRequest="30" />
 
         <Label
             Grid.ColumnSpan="2"

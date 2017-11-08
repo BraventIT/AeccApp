@@ -41,8 +41,6 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
-
-
         private Command _hospitalTabCommand;
         public ICommand HospitalTabCommand
         {
@@ -56,11 +54,16 @@ namespace AeccApp.Core.ViewModels
         void OnHospitalTabCommand(object obj)
         {
             SwitchHomeAndHospitalList = true;
-            RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "", new Position(0, 0)));
-            HospitalRequestsList.Add(mockRequest);
+
+            //RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "", new Position(0, 0)));
+            //HospitalRequestsList.Add(mockRequest);
 
 
         }
+
+
+
+
         private Command _homeTabCommand;
         public ICommand HomeTabCommand
         {
@@ -75,27 +78,8 @@ namespace AeccApp.Core.ViewModels
         {
             SwitchHomeAndHospitalList = false;
 
-            RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "", new Position(0, 0)));
-            HomeRequestsList.Add(mockRequest);
-        }
-
-     
-
-        private Command _applyFiltersCommand;
-        public ICommand ApplyFiltersCommand
-        {
-            get
-            {
-                return _applyFiltersCommand ??
-                    (_applyFiltersCommand = new Command(OnApplyFiltersCommand, (o) => !IsBusy));
-            }
-        }
-
-        void OnApplyFiltersCommand(object obj)
-        {
-            //TODO Apply home requests filters
-            //TimeToFilterWith
-            //DateToFilterWith
+            //RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "", new Position(0, 0)));
+            //HomeRequestsList.Add(mockRequest);
         }
 
         private Command _newRequestCommand;
@@ -111,14 +95,13 @@ namespace AeccApp.Core.ViewModels
         async void OnNewRequestCommand(object obj)
         {
             await NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
-
-
         }
 
 
         #endregion
 
         #region Properties
+
         private bool _isHomeRequestsListEmpty;
 
         public bool IsHomeRequestsListEmpty

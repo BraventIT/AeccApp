@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:slct="clr-namespace:AeccApp.Core.Selectors">
 
     <ContentView.Resources>
@@ -163,16 +164,13 @@
             </Entry.Behaviors>
         </Entry>
 
-        <ctrl:CustomImage
+        <ctrlXlabs:ImageButton
             Grid.Row="1"
             Grid.Column="1"
+            Command="{Binding SendMessageCommand}"
             HeightRequest="60"
             SourcePlatform="send_icon"
-            WidthRequest="60">
-            <ctrl:CustomImage.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
-            </ctrl:CustomImage.GestureRecognizers>
-        </ctrl:CustomImage>
+            WidthRequest="60" />
 
 
     </Grid>
