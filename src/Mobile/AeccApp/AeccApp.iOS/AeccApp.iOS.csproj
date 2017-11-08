@@ -149,6 +149,7 @@
     <BundleResource Include="Resources\xamarin_logo%402x.png" />
     <BundleResource Include="Resources\xamarin_logo%403x.png" />
     <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\chat.png" />
     <BundleResource Include="Resources\logout.png" />
     <BundleResource Include="Resources\profile.png" />
   </ItemGroup>
@@ -373,11 +374,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\round_plus_green_background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\chat.png">
-      <Link>Resources\chat.png</Link>
-    </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

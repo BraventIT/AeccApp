@@ -4,7 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
-    xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [NewHomeRequestSelectAddressTitle]}"
@@ -36,17 +35,27 @@
                     </Grid.RowDefinitions>
 
 
-                    <ctrlXlabs:ImageButton
+                    <ctrl:CustomImage
                         Grid.Row="0"
                         Grid.Column="0"
-                        Command="{Binding AtHomeCommand}"
                         HeightRequest="150"
                         HorizontalOptions="Center"
-                        Orientation="ImageCentered"
                         SourcePlatform="from_home"
-                        VerticalOptions="Center"
-                        WidthRequest="150" />
+                        WidthRequest="150">
 
+                        <ctrl:CustomImage.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="WinPhone, Windows" Value="15,15,15,0" />
+                                <On Platform="iOS" Value="0" />
+                                <On Platform="Android" Value="10,10,10,20" />
+                            </OnPlatform>
+                        </ctrl:CustomImage.Margin>
+
+                        <ctrl:CustomImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AtHomeCommand}" />
+                        </ctrl:CustomImage.GestureRecognizers>
+
+                    </ctrl:CustomImage>
                     <Label
                         Grid.Row="1"
                         Grid.Column="0"
@@ -55,16 +64,25 @@
                         Text="{Binding [NewHomeRequestSelectAddressImAtHome]}" />
 
 
-                    <ctrlXlabs:ImageButton
+                    <ctrl:CustomImage
                         Grid.Row="0"
                         Grid.Column="1"
-                        Command="{Binding AtHospitalCommand}"
                         HeightRequest="150"
                         HorizontalOptions="Center"
-                        Orientation="ImageCentered"
                         SourcePlatform="from_hospital"
-                        WidthRequest="150" />
+                        WidthRequest="150">
+                        <ctrl:CustomImage.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="WinPhone, Windows" Value="15,15,15,0" />
+                                <On Platform="iOS" Value="10,10,10,0" />
+                                <On Platform="Android" Value="10,10,10,20" />
+                            </OnPlatform>
+                        </ctrl:CustomImage.Margin>
+                        <ctrl:CustomImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AtHospitalCommand}" />
+                        </ctrl:CustomImage.GestureRecognizers>
 
+                    </ctrl:CustomImage>
                     <Label
                         Grid.Row="1"
                         Grid.Column="1"

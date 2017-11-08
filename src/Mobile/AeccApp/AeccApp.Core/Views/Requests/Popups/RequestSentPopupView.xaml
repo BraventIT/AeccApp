@@ -23,15 +23,19 @@
                 VerticalOptions="Center">
 
                 <StackLayout>
-                    <ctrlXlabs:ImageButton
+                    <ctrl:CustomImage
                         Grid.Column="0"
                         Margin="10"
-                        Command="{Binding CloseRequestSentPopupCommand}"
                         HeightRequest="30"
                         HorizontalOptions="End"
                         SourcePlatform="x_icon"
                         VerticalOptions="Center"
-                        WidthRequest="30" />
+                        WidthRequest="30">
+                        <ctrl:CustomImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseRequestSentPopupCommand}" />
+                        </ctrl:CustomImage.GestureRecognizers>
+
+                    </ctrl:CustomImage>
 
                     <ctrl:CustomImage
                         Grid.Column="0"

@@ -77,7 +77,15 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
+    <TabbedPage.ToolbarItems>
+        <ctrl:HideableToolbarItem
+            Command="{Binding OpenCloseFilterPopupCommand}"
+            IconPlatform="bell"
+            Order="Primary"
+            Priority="1"
+            Text="{Binding [CommonFilters]}" />
 
+    </TabbedPage.ToolbarItems>
     <StackLayout>
         <StackLayout>
 
@@ -85,7 +93,7 @@
             <!--  Sub navigation bar with home and hospital tabs  -->
             <StackLayout
                 BackgroundColor="Gray"
-                HeightRequest="85"
+                HeightRequest="65"
                 HorizontalOptions="FillAndExpand">
                 <Grid HorizontalOptions="Center">
                     <Grid.ColumnDefinitions>
@@ -141,9 +149,8 @@
                 </Grid>
             </StackLayout>
 
+            <!--  Home requests list  -->
             <StackLayout Padding="15">
-
-                <!--  Home requests list  -->
                 <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
                     <StackLayout
                         Margin="20"
@@ -151,14 +158,8 @@
                         IsVisible="{Binding IsHomeRequestsListEmpty}"
                         VerticalOptions="Center">
                         <ctrl:CustomImage Source="round_question_icon" />
-                        <Label
-                            HorizontalOptions="Center"
-                            Style="{StaticResource SubTitleLabelStyle}"
-                            Text="{Binding [AllYourRequestsListOops]}" />
-                        <Label
-                            HorizontalOptions="Center"
-                            Style="{StaticResource SubTitleLabelStyle}"
-                            Text="{Binding [AllYourRequestsListNoHomeRequests]}" />
+                        <Label Text="{Binding [AllYourRequestsListOops]}" />
+                        <Label Text="{Binding [AllYourRequestsListNoHomeRequests]}" />
                     </StackLayout>
 
                     <ListView
@@ -188,14 +189,8 @@
                         IsVisible="{Binding IsHospitalRequestsListEmpty}"
                         VerticalOptions="Center">
                         <ctrl:CustomImage Source="round_question_icon" />
-                        <Label
-                            HorizontalOptions="Center"
-                            Style="{StaticResource SubTitleLabelStyle}"
-                            Text="{Binding [AllYourRequestsListOops]}" />
-                        <Label
-                            HorizontalOptions="Center"
-                            Style="{StaticResource SubTitleLabelStyle}"
-                            Text="{Binding [AllYourRequestsListNoHospitalRequests]}" />
+                        <Label Text="{Binding [AllYourRequestsListOops]}" />
+                        <Label Text="{Binding [AllYourRequestsListNoHospitalRequests]}" />
                     </StackLayout>
                     <ListView
                         HasUnevenRows="True"
@@ -229,6 +224,16 @@
 
         </StackLayout>
 
+        <!--  Requests filters popup  -->
+        <ctrl:RequestFiltersPopupControl
+            ApplyFiltersCommand="{Binding ApplyFiltersCommand}"
+            DateSelected="{Binding DateToFilterWith, Mode=TwoWay}"
+            IsVisible="{Binding IsFilterPopupVisible}"
+            TimeSelected="{Binding TimeToFilterWith, Mode=TwoWay}">
+            <View.Behaviors>
+                <beh:AnimateScaleBehavior IsVisible="{Binding IsFilterPopupVisible}" ViewIsInitialized="{Binding ViewIsInitialized}" />
+            </View.Behaviors>
+        </ctrl:RequestFiltersPopupControl>
     </StackLayout>
 
 </v:BaseContentPage>

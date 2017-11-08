@@ -49,10 +49,4 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Views\Chat\Popups\ConnectingPopupView.xaml.cs">
-      <DependentUpon>ConnectingPopupView.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
 </Project>
