@@ -77,15 +77,6 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <TabbedPage.ToolbarItems>
-        <ctrl:HideableToolbarItem
-            Command="{Binding OpenCloseFilterPopupCommand}"
-            IconPlatform="bell"
-            Order="Primary"
-            Priority="1"
-            Text="{Binding [CommonFilters]}" />
-
-    </TabbedPage.ToolbarItems>
     <StackLayout>
         <StackLayout>
 

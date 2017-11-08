@@ -256,9 +256,6 @@
     <BundleResource Include="Resources\send_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\mock_new_firma_convenio.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\right_arrow.png" />
   </ItemGroup>
   <ItemGroup>
@@ -374,6 +371,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\round_plus_green_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mock_new_firma_convenio.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

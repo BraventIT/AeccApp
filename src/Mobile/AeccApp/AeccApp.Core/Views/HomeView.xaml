@@ -135,17 +135,77 @@
                         </Grid>
 
 
-                        <StackLayout IsVisible="{Binding InConversation}">
-                            <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding LastMessage.From.Name}" />
-                            <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding LastMessage.DateTime}" />
-                            <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding LastMessage.Activity.Text}" />
-                            <Button
-                                Command="{Binding CurrentChatCommand}"
-                                HorizontalOptions="Center"
-                                Style="{StaticResource ButtonStyle}"
-                                Text="{Binding [HomeViewCurrentChat]}" />
-                        </StackLayout>
+                        <StackLayout
+                            Margin="10"
+                            HorizontalOptions="FillAndExpand"
+                            IsVisible="{Binding InConversation}">
 
+                            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <ctrl:CustomShapeDrawing
+                                    Grid.RowSpan="2"
+                                    Grid.Column="0"
+                                    Margin="0,-7,6,1"
+                                    BorderColor="#4286f4"
+                                    HeightRequest="12"
+                                    HorizontalOptions="Center"
+                                    PointsShapeCoordinate="0.7/0, 0/0, 0.9/1"
+                                    ShapeColor="#4286f4"
+                                    WidthRequest="14" />
+
+                                <ctrl:CustomImage
+                                    Grid.RowSpan="2"
+                                    Grid.Column="0"
+                                    HeightRequest="70"
+                                    SourcePlatform="round_no_profile_image"
+                                    VerticalOptions="Center"
+                                    WidthRequest="70" />
+
+                                <StackLayout
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        LineBreakMode="TailTruncation"
+                                        Style="{StaticResource MediumLabelStyle}"
+                                        Text="{Binding LastMessage.Activity.Text}" />
+                                    <Label
+                                        LineBreakMode="TailTruncation"
+                                        Style="{StaticResource MediumLabelStyle}"
+                                        Text="{Binding LastMessage.DateTime}" />
+                                </StackLayout>
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    LineBreakMode="TailTruncation"
+                                    Style="{StaticResource MediumLabelStyle}"
+                                    Text="{Binding LastMessage.Activity.Text}"
+                                    VerticalOptions="Center" />
+
+                                <Button
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="2"
+                                    Command="{Binding CurrentChatCommand}"
+                                    HorizontalOptions="Center"
+                                    Style="{StaticResource ButtonStyle}"
+                                    Text="{Binding [HomeViewCurrentChat]}" />
+
+                            </Grid>
+
+                        </StackLayout>
                     </StackLayout>
 
                     <!--  News panel  -->
@@ -181,9 +241,9 @@
 
                             <flv:FlowListView.HeightRequest>
                                 <OnPlatform x:TypeArguments="x:Double">
-                                    <OnPlatform.iOS>250</OnPlatform.iOS>
-                                    <OnPlatform.Android>250</OnPlatform.Android>
-                                    <OnPlatform.WinPhone>400</OnPlatform.WinPhone>
+                                    <OnPlatform.iOS>200</OnPlatform.iOS>
+                                    <OnPlatform.Android>210</OnPlatform.Android>
+                                    <OnPlatform.WinPhone>180</OnPlatform.WinPhone>
                                 </OnPlatform>
                             </flv:FlowListView.HeightRequest>
 
@@ -192,7 +252,6 @@
                                     <StackLayout Padding="5">
                                         <ctrl:CustomImage
                                             Margin="0,10,0,0"
-                                            HeightRequest="200"
                                             HorizontalOptions="FillAndExpand"
                                             SourcePlatform="mock_new_firma_convenio.jpg" />
                                         <Label
