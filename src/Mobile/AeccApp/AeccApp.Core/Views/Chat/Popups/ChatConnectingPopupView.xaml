@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<vPop:PopupPage
+    x:Class="AeccApp.Core.Views.Popups.ChatConnectingPopupView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+    xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
+    xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    BackgroundColor="{StaticResource SeeThrough}">
+
+    <ContentView
+        Margin="20"
+        Style="{StaticResource BorderStyle}"
+        VerticalOptions="Center">
+        <ContentView Style="{StaticResource InternalViewStyle}">
+            <StackLayout Margin="30">
+
+                <Label Text="tESTtESTConnectinGtESTtEST" />
+
+            </StackLayout>
+        </ContentView>
+    </ContentView>
+</vPop:PopupPage>
