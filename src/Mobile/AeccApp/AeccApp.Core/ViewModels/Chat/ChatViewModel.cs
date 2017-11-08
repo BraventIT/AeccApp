@@ -268,6 +268,7 @@ namespace AeccApp.Core.ViewModels
             {
                 var selectedVolunteer = obj as Volunteer;
                 PartyId = selectedVolunteer.PartyId;
+                //Muestra popup de espera en la conexión
                 NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
                 await InitializeChatAsync();
             });
@@ -358,6 +359,7 @@ namespace AeccApp.Core.ViewModels
             {
                 if(message.Activity.Text.StartsWith("ahora estás hablando con"))
                 {
+                    //Oculta popup de espera en la conexión //TODO Revisar cuando llegue codigo unico de mensaje
                     NavigationService.HidePopupAsync();
                 }
                 Messages.Insert(0, message);

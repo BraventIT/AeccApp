@@ -1,4 +1,5 @@
 ﻿using AeccApi.Models;
+using AeccApp.Core.Models.Email;
 using System.Threading;
 using System.Threading.Tasks;
 

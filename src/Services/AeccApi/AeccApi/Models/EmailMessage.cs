@@ -20,5 +20,9 @@ namespace AeccApi.Models
         [Display(Name = "Destinatarios", Description = "Email destinatarios separados por ;")]
 #endif
         public string To { get; set; }
+
+#if SERVICE
+        [Display(Name = "Peticion", Description = "Concatenado de datos de la peticion")]
+#endif
     }
 }

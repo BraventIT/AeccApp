@@ -1,5 +1,7 @@
 ﻿using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
+using AeccApp.Core.Models.Email;
+using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using System;
 using System.Threading.Tasks;
@@ -156,7 +158,7 @@ namespace AeccApp.Core.ViewModels
             CurrentRequest.RequestComments = RequestComments;
             CurrentRequest.RequestDate = DateToApplyParsed;
             CurrentRequest.RequestTime = TimeToApplyParsed;
-            //TODO #33 Send request with email service 
+            //TODO #33 Send request with email service
             await NavigationService.HidePopupAsync();
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
