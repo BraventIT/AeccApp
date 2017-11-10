@@ -18,6 +18,7 @@ namespace AeccApp.Core.ViewModels
         private IPermissions PermissionsService { get; } = ServiceLocator.PermissionsService;
 
         #region Contructor & Initialize
+
         public DashboardViewModel()
         {
             NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
@@ -32,7 +33,7 @@ namespace AeccApp.Core.ViewModels
                 MessagingCenter.Send(new TabMessage(tabIndex), string.Empty);
             }
 
-           
+
         }
 
         public override Task ActivateAsync()
@@ -40,8 +41,23 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, o => OnChatEngagementEventAsync(o));
 
+            if (IsVolunteer)
+            {
+                //review
+              //  MessagingCenter.Send(new DashboardEnableAndDisableChatTab(false), string.Empty);
+                MessagingCenter.Send(new DashboardHideRequestsTabMessage(TabsEnum.Requests), string.Empty);
+
+            }
+
+
             return ExecuteOperationAsync(async (token) =>
              {
+                 await ExecuteOperationAsync(async () =>
+                 {
+                     await ChatService.InitializeAsync();
+                     InConversation = ChatService.InConversation;
+                 });
+
                  try
                  {
                      var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
@@ -71,6 +87,16 @@ namespace AeccApp.Core.ViewModels
 
         #region Properties
         public NoLocationProviderPopupViewModel NoLocationProviderPopupVM { get; private set; }
+
+        private bool inConversation;
+        public bool InConversation
+        {
+            get { return inConversation; }
+            set
+            {
+                Set(ref inConversation, value);
+            }
+        }
 
         #endregion
 

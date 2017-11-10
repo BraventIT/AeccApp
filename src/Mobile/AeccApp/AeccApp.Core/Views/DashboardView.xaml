@@ -27,7 +27,7 @@
     <TabbedPage.Children>
         <pages:HomeView />
         <pages:ChatView />
-        <pages:ProfileView />
         <pages:RequestsView />
+        <pages:ProfileView />
     </TabbedPage.Children>
 </TabbedPage>

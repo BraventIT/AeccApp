@@ -11,7 +11,8 @@
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [ChatListViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True"
-    IconPlatform="chat_tab_icon">
+    IconPlatform="chat_tab_icon"
+    IsEnabled="{Binding InConversation}">
 
     <ContentPage.ToolbarItems>
         <ctrl:HideableToolbarItem

@@ -43,6 +43,12 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Propeties
+
+        public string UserName
+        {
+            get { return GSetting.User?.Name; }
+        }
+
         private bool _isHeaderInfoBannerVisible;
         public bool IsHeaderInfoBannerVisible
         {
