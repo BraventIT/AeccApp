@@ -46,9 +46,7 @@ namespace AeccApp.Core.ViewModels
                 //review
               //  MessagingCenter.Send(new DashboardEnableAndDisableChatTab(false), string.Empty);
                 MessagingCenter.Send(new DashboardHideRequestsTabMessage(TabsEnum.Requests), string.Empty);
-
             }
-
 
             return ExecuteOperationAsync(async (token) =>
              {
