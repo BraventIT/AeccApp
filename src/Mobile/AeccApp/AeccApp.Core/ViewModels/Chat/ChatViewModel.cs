@@ -35,7 +35,7 @@ namespace AeccApp.Core.ViewModels
 
         public override Task ActivateAsync()
         {
-            if (Settings.TermsAndConditionsAccept == false)
+            if (IsVolunteer == false && Settings.TermsAndConditionsAccept == false )
             {
                return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
             }
