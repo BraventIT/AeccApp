@@ -9,6 +9,7 @@ namespace AeccApp.Core.Views
     public partial class DashboardView : TabbedPage
     {
         protected INavigableViewModel ViewModel => BindingContext as INavigableViewModel;
+        private bool HasBeenAlreadyInitialized = false;
 
         public DashboardView()
         {
@@ -30,7 +31,12 @@ namespace AeccApp.Core.Views
         }
         void OnHideRequestsTab(DashboardHideRequestsTabMessage message)
         {
-           Children.Remove(Children[(int)message.Message]);
+            if(HasBeenAlreadyInitialized == false)
+            {
+               Children.Remove(Children[(int)message.Message]);
+                HasBeenAlreadyInitialized = true;
+            }
+
         }
 
         void OnTabChanged(DashboardTabMessage message)
