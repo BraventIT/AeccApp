@@ -1,6 +1,6 @@
-﻿using AeccBot.CommandHandling;
+﻿using Aecc.Models;
+using AeccBot.CommandHandling;
 using AeccBot.MessageRouting.DataStore;
-using AeccBot.Models;
 using AeccBot.Utils;
 using Microsoft.Bot.Connector;
 using System;

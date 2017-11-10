@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
+﻿using Aecc.Models;
+using AeccApi.Extensions;
 using AeccApi.Models;
 using AeccApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AeccApi
 {
@@ -26,9 +25,19 @@ namespace AeccApi
         {
             services.
                 AddDbContext<AeccContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AeccConnection")))
-                .Configure<EmailData>(Configuration.GetSection(nameof(EmailData)))
-                .AddTransient<IEmailService,EmailService>()
-                .AddMvc();
+                .Configure<EmailOptions>(Configuration.GetSection("EmailData"));
+
+            // Email service
+            services.AddTransient<IEmailService, EmailService>();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddAzureAdB2C(options => Configuration.Bind("AzureAdB2C", options));
+
+            // Add framework services.
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +48,8 @@ namespace AeccApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -46,5 +57,6 @@ namespace AeccApi
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
     }
 }

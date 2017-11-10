@@ -1,4 +1,4 @@
-﻿using AeccApi.Models;
+﻿using Aecc.Models;
 
 namespace AeccApp.Core.Models
 {

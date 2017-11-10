@@ -1,4 +1,4 @@
-﻿using AeccBot.Models;
+﻿using Aecc.Models;
 using Microsoft.Bot.Connector;
 using System.Collections.Generic;
 using System.Linq;

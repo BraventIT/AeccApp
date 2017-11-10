@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AeccApi.Models;
+using Aecc.Models;
 using System.Threading;
-using AeccApp.Core.Models.Email;
 
 namespace AeccApp.Core.Services
 {
@@ -17,14 +16,14 @@ namespace AeccApp.Core.Services
             _requestProvider = requestProvider;
         }
 
-        public Task SendAsync(EmailMessage emailMessage, CancellationToken cancelToken)
+        public async Task SendAsync(EmailMessage emailMessage, CancellationToken cancelToken)
         {
             UriBuilder uribuilder = new UriBuilder(GlobalSetting.Instance.ApiEndpoint)
             {
                 Path = "api/Email"
             };
-            return _requestProvider.PostAsync(uribuilder.ToString(), emailMessage, cancelToken);
+            var identityToken = await _identityService.GetTokenAsync();
+            await _requestProvider.PostAsync(uribuilder.ToString(), emailMessage, cancelToken, identityToken);
         }
-
     }
 }

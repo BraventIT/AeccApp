@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
 using AeccBot.MessageRouting;
-using AeccBot.Models;
 using AeccBot.MessageRouting.DataStore;
+using Aecc.Models;
 
 namespace AeccBot.Dialogs
 {

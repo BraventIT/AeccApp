@@ -7,21 +7,22 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0;WEB</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0;WEB;</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Data\DbInitializer.cs" />
     <Compile Remove="Models\AeccContext.cs" />
+    <Compile Remove="Models\Identity\AzureAdB2COptions.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Data\DbInitializer.cs" Link="Data\DbInitializer.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\AeccContext.cs" Link="Models\AeccContext.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Coordinator.cs" Link="Models\Coordinator.cs" />
-    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\EmailMessage.cs" Link="Models\EmailMessage.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Hospital.cs" Link="Models\Hospital.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\HospitalAssignment.cs" Link="Models\HospitalAssignment.cs" />
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Identity\AzureAdB2COptions.cs" Link="Models\Identity\AzureAdB2COptions.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\RequestSourceEnum.cs" Link="Models\RequestSourceEnum.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\RequestType.cs" Link="Models\RequestType.cs" />
   </ItemGroup>

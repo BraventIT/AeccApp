@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Aecc.Models;
+using AeccApi.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
-using AeccApi.Data;
-using AeccApi.Models;
+using Microsoft.Extensions.Logging;
+using System;
 
 namespace AeccApi
 {

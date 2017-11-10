@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using AeccApi.Models;
+using Aecc.Models;
 
 namespace AeccApi.Services
 {
     public class EmailService : IEmailService
     {
-        public Task SendAsync(EmailData emailData, EmailMessage emailMessage)
+        public Task SendAsync(EmailOptions emailData, EmailMessage emailMessage)
         {
-            SmtpClient client = this.CreateSmtpClient(emailData);
-            MailMessage mailMessage = this.CreateMailMessage(emailData, emailMessage);
+            SmtpClient client = CreateSmtpClient(emailData);
+            MailMessage mailMessage = CreateMailMessage(emailData, emailMessage);
 
             return client.SendMailAsync(mailMessage);
         }
 
-        private SmtpClient CreateSmtpClient(EmailData emailData)
+        private SmtpClient CreateSmtpClient(EmailOptions emailData)
         {
             return new SmtpClient()
             {
@@ -29,7 +28,7 @@ namespace AeccApi.Services
             };
         }
 
-        private MailMessage CreateMailMessage(EmailData emailData, EmailMessage emailMessage)
+        private MailMessage CreateMailMessage(EmailOptions emailData, EmailMessage emailMessage)
         {
             MailMessage mailMessage =  new MailMessage()
             {

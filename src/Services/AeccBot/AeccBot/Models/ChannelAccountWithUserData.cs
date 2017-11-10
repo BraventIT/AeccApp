@@ -1,11 +1,11 @@
-﻿#if WEB
+﻿#if BOT
 using Microsoft.Bot.Connector;
 #else
 using Microsoft.Bot.Connector.DirectLine;
 #endif
 using Newtonsoft.Json;
 
-namespace AeccBot.Models
+namespace Aecc.Models
 {
     public class ChannelAccountWithUserData : ChannelAccount
     {
@@ -22,7 +22,7 @@ namespace AeccBot.Models
 
         public ChannelAccountWithUserData(ChannelAccount account)
         {
-#if WEB
+#if BOT
             Properties = account.Properties;
             FirstName = Properties?[nameof(FirstName)]?.ToString();
             Surname = Properties?[nameof(Surname)]?.ToString();

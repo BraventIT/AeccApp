@@ -1,4 +1,4 @@
-﻿namespace AeccApi.Models
+﻿namespace Aecc.Models
 {
     public enum RequestSourceEnum
     {

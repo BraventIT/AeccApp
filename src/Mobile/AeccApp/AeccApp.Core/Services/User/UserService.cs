@@ -18,7 +18,7 @@ namespace AeccApp.Core.Services
 
         public async Task<UserData> GetUserAsync()
         {
-            UriBuilder uribuilder = new UriBuilder(GlobalSetting.Instance.BaseEndpoint);
+            UriBuilder uribuilder = new UriBuilder(GlobalSetting.Instance.ApiEndpoint);
             uribuilder.Path += "users/info";
             
             var token = await _identityService.GetTokenAsync();
