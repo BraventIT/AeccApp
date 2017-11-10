@@ -38,7 +38,7 @@ namespace AeccApp.Core.Services
                             await PCA.AcquireTokenSilentAsync(AdB2COptions.FullNameScopes, GetUserByPolicy(PCA.Users, AdB2COptions.SignUpSignInPolicyId), AdB2COptions.AuthoritySignUpSignIn, true) :
                             await PCA.AcquireTokenAsync(AdB2COptions.FullNameScopes, App.UiParent);
 
-            if (ar != null)
+            if (ar != null && ar.AccessToken != null)
             {
                 UpdateUserData(ar);
 
