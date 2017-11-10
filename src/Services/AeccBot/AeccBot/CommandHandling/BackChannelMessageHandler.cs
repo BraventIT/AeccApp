@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
 using AeccBot.MessageRouting.DataStore;
-using AeccBot.Models;
 using AeccBot.Utils;
 using AeccBot.MessageRouting;
 using System.Collections.Generic;
+using Aecc.Models;
 
 namespace AeccBot.CommandHandling
 {

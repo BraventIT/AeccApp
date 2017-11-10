@@ -1,13 +1,4 @@
-﻿using AeccApi.Models;
-using AeccApp.Core.Models.Email;
-using AeccApp.Core.Services;
-using AeccApp.Internationalization.Properties;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 

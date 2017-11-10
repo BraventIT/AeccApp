@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AeccApi.Models;
+using Aecc.Models;
 
 namespace AeccApi.Services
 {
     public interface IEmailService
     {
-        Task SendAsync(EmailData emailData, EmailMessage emailMessage);
+        Task SendAsync(EmailOptions emailData, EmailMessage emailMessage);
     }
 }

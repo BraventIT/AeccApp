@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace AeccApi.Models
+namespace Aecc.Models
 {
     [JsonObject(IsReference = true)]
     public class HospitalAssignment

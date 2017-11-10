@@ -1,5 +1,6 @@
 ﻿using Microsoft.Bot.Connector;
 using System;
+using Aecc.Models;
 
 namespace AeccBot.Models
 {

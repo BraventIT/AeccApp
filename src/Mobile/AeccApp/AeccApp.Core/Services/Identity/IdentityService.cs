@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.Models;
+﻿using Aecc.Models;
+using AeccApp.Core.Models;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json.Linq;
 using System;
@@ -16,42 +17,17 @@ namespace AeccApp.Core.Services
 
         private const string VOLUNTEER_JOBTITLE = "voluntario";
 
-        private const string PolicySignUpSignIn = "B2C_1_inicioDeSesion";
-        private const string PolicyEditProfile = "B2C_1_perfilxamarin";
-        private const string PolicyResetPassword = "B2C_1_resetPassword";
-
-        private string[] Scopes
-        {
-            get { return new string[] { $"{GSetting.BaseEndpoint}/read" }; }
-        }
-
-        private string AuthorityBase
-        {
-            get { return $"https://login.microsoftonline.com/tfp/{GSetting.DomainName}/"; }
-        }
-
-        private string Authority
-        {
-            get { return $"{AuthorityBase}{PolicySignUpSignIn}"; }
-        }
-        private string AuthorityEditProfile
-        {
-            get { return $"{AuthorityBase}{PolicyEditProfile}"; }
-        }
-        private string AuthorityPasswordReset
-        {
-            get { return $"{AuthorityBase}{PolicyResetPassword}"; }
-        }
-
         private string _token;
 
         private GlobalSetting GSetting { get { return GlobalSetting.Instance; } }
 
+        private AzureAdB2COptions AdB2COptions { get { return GSetting.AzureAdB2COptions; } }
+
         public IdentityService()
         {
-            PCA = new PublicClientApplication(GSetting.ApplicationID, Authority)
+            PCA = new PublicClientApplication(AdB2COptions.ClientId, AdB2COptions.AuthoritySignUpSignIn)
             {
-                RedirectUri = $"msal{GSetting.ApplicationID}://auth"
+                RedirectUri = $"msal{AdB2COptions.ClientId}://auth"
             };
         }
 
@@ -59,8 +35,8 @@ namespace AeccApp.Core.Services
         {
             bool result = false;
             AuthenticationResult ar = (silentLogin) ?
-                            await PCA.AcquireTokenSilentAsync(Scopes, GetUserByPolicy(PCA.Users, PolicySignUpSignIn), Authority, true) :
-                            await PCA.AcquireTokenAsync(Scopes, App.UiParent);
+                            await PCA.AcquireTokenSilentAsync(AdB2COptions.FullNameScopes, GetUserByPolicy(PCA.Users, AdB2COptions.SignUpSignInPolicyId), AdB2COptions.AuthoritySignUpSignIn, true) :
+                            await PCA.AcquireTokenAsync(AdB2COptions.FullNameScopes, App.UiParent);
 
             if (ar != null)
             {
@@ -109,7 +85,7 @@ namespace AeccApp.Core.Services
             {
                 if (string.IsNullOrEmpty(_token))
                 {
-                    AuthenticationResult ar = await PCA.AcquireTokenSilentAsync(Scopes, GetUserByPolicy(PCA.Users, PolicySignUpSignIn), Authority, false);
+                    AuthenticationResult ar = await PCA.AcquireTokenSilentAsync(AdB2COptions.FullNameScopes, GetUserByPolicy(PCA.Users, AdB2COptions.SignUpSignInPolicyId), AdB2COptions.AuthoritySignUpSignIn, false);
                     _token = ar.AccessToken;
                 }
             }
@@ -162,7 +138,7 @@ namespace AeccApp.Core.Services
                 // KNOWN ISSUE:
                 // User will get prompted 
                 // to pick an IdP again.
-                AuthenticationResult ar = await PCA.AcquireTokenAsync(Scopes, GetUserByPolicy(PCA.Users, PolicyEditProfile), UIBehavior.SelectAccount, string.Empty, null, AuthorityEditProfile, App.UiParent);
+                AuthenticationResult ar = await PCA.AcquireTokenAsync(AdB2COptions.FullNameScopes, GetUserByPolicy(PCA.Users, AdB2COptions.EditProfilePolicyId), UIBehavior.SelectAccount, string.Empty, null, AdB2COptions.AuthorityEditProfile, App.UiParent);
                 UpdateUserData(ar);
             }
             catch (Exception ex)

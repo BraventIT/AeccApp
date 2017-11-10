@@ -1,9 +1,7 @@
-﻿using AeccBot.Models;
+﻿using Aecc.Models;
 using Microsoft.Bot.Connector;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace AeccBot.MessageRouting.DataStore
 {

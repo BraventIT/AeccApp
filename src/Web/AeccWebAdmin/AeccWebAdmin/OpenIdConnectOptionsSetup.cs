@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Identity.Client;
@@ -12,6 +9,7 @@ using AeccApi.WebAdmin.Models;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.Net;
+using Aecc.Models;
 
 namespace AeccApi.WebAdmin
 {
@@ -28,7 +26,7 @@ namespace AeccApi.WebAdmin
         public void Configure(OpenIdConnectOptions options)
         {
             options.ClientId = AzureAdB2COptions.ClientId;
-            options.Authority = AzureAdB2COptions.Authority;
+            options.Authority = AzureAdB2COptions.AuthoritySignUpSignIn;
             options.UseTokenLifetime = true;
             options.TokenValidationParameters = new TokenValidationParameters() { NameClaimType = "name" };
 
@@ -51,9 +49,9 @@ namespace AeccApi.WebAdmin
                 context.ProtocolMessage.IssuerAddress = context.ProtocolMessage.IssuerAddress.ToLower().Replace(defaultPolicy.ToLower(), policy.ToLower());
                 context.Properties.Items.Remove(AzureAdB2COptions.PolicyAuthenticationProperty);
             }
-            else if (!string.IsNullOrEmpty(AzureAdB2COptions.ApiUrl))
+            else if (!string.IsNullOrEmpty(AzureAdB2COptions.AppID))
             {
-                context.ProtocolMessage.Scope += $" offline_access {AzureAdB2COptions.ApiScopes}";
+                context.ProtocolMessage.Scope += $" offline_access {AzureAdB2COptions.Scope}";
                 context.ProtocolMessage.ResponseType = OpenIdConnectResponseType.CodeIdToken;
             }
             return Task.FromResult(0);
@@ -88,10 +86,10 @@ namespace AeccApi.WebAdmin
 
             string signedInUserID = context.Principal.FindFirst(ClaimTypes.NameIdentifier).Value;
             TokenCache userTokenCache = new MSALSessionCache(signedInUserID, context.HttpContext).GetMsalCacheInstance();
-            ConfidentialClientApplication cca = new ConfidentialClientApplication(AzureAdB2COptions.ClientId, AzureAdB2COptions.Authority, AzureAdB2COptions.RedirectUri, new ClientCredential(AzureAdB2COptions.ClientSecret), userTokenCache, null);
+            ConfidentialClientApplication cca = new ConfidentialClientApplication(AzureAdB2COptions.ClientId, AzureAdB2COptions.AuthoritySignUpSignIn, AzureAdB2COptions.RedirectUri, new ClientCredential(AzureAdB2COptions.ClientSecret), userTokenCache, null);
             try
             {
-                AuthenticationResult result = await cca.AcquireTokenByAuthorizationCodeAsync(code, AzureAdB2COptions.ApiScopes.Split(' '));
+                AuthenticationResult result = await cca.AcquireTokenByAuthorizationCodeAsync(code, AzureAdB2COptions.FullNameScopes);
 
 
                 context.HandleCodeRedemption(result.AccessToken, result.IdToken);

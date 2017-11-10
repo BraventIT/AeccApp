@@ -1,7 +1,7 @@
 ﻿using AeccBot.CommandHandling;
 using AeccBot.MessageRouting;
 using AeccBot.MessageRouting.DataStore;
-using AeccBot.Models;
+using Aecc.Models;
 
 namespace AeccBot
 {

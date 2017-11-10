@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using AeccApi.Models;
+using Aecc.Models;
 using AeccApi.Extensions;
-using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
+using AeccApi.Models;
 
 namespace AeccApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Hospitals")]
+    [Authorize]
     public class HospitalsController : Controller
     {
         private readonly AeccContext _context;

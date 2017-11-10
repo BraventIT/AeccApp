@@ -1,4 +1,4 @@
-﻿using AeccBot.Models;
+﻿using Aecc.Models;
 
 namespace AeccApp.Core.Models
 {

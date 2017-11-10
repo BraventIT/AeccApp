@@ -1,15 +1,8 @@
-﻿using AeccApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AeccApp.Core.Models.Email
+﻿namespace AeccApp.Core.Models.Email
 {
     public class EmailFromHome : EmailBase
     {
         protected GlobalSetting GSetting { get { return GlobalSetting.Instance; } }
-
-
 
         public EmailFromHome(RequestModel request , string  []receiverAddresses )
         {

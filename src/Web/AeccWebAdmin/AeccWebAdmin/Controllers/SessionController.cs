@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authentication;
-using AeccApi.WebAdmin.Models;
+using Aecc.Models;
 
 namespace AeccApi.WebAdmin.Controllers
 {

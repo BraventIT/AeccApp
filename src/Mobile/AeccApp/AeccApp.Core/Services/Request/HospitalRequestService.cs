@@ -1,4 +1,4 @@
-﻿using AeccApi.Models;
+﻿using Aecc.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -24,8 +24,8 @@ namespace AeccApp.Core.Services
                 Path = "api/RequestTypes",
                 Query = $"requestSource={RequestSourceEnum.Hospital.ToString()}"
             };
-            var token = await _identityService.GetTokenAsync();
-            return await _requestProvider.GetAsync<IEnumerable<RequestType>>(uribuilder.ToString(), cancelToken, token);
+            var identityToken = await _identityService.GetTokenAsync();
+            return await _requestProvider.GetAsync<IEnumerable<RequestType>>(uribuilder.ToString(), cancelToken, identityToken);
         }
 
         public async Task<IEnumerable<Hospital>> GetHospitalsAsync(string province, CancellationToken cancelToken)
@@ -35,8 +35,8 @@ namespace AeccApp.Core.Services
                 Path = "api/Hospitals",
                 Query = $"province={province}"
             };
-            var token = await _identityService.GetTokenAsync();
-            return await _requestProvider.GetAsync<IEnumerable<Hospital>>(uribuilder.ToString(), cancelToken, token);
+            var identityToken = await _identityService.GetTokenAsync();
+            return await _requestProvider.GetAsync<IEnumerable<Hospital>>(uribuilder.ToString(), cancelToken, identityToken);
         }
 
         public async Task<Hospital> GetHospitalDetail(int hospitalId, CancellationToken cancelToken)
@@ -45,8 +45,8 @@ namespace AeccApp.Core.Services
             {
                 Path = $"api/Hospitals/{hospitalId}"
             };
-            var token = await _identityService.GetTokenAsync();
-            return await _requestProvider.GetAsync<Hospital>(uribuilder.ToString(), cancelToken, token);
+            var identityToken = await _identityService.GetTokenAsync();
+            return await _requestProvider.GetAsync<Hospital>(uribuilder.ToString(), cancelToken, identityToken);
         }
     }
 }

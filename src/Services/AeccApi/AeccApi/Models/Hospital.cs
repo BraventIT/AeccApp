@@ -3,7 +3,7 @@ using System.Collections.Generic;
 #if WEB
 using System.ComponentModel.DataAnnotations;
 #endif
-namespace AeccApi.Models
+namespace Aecc.Models
 {
     [JsonObject(IsReference = true)]
     public class Hospital

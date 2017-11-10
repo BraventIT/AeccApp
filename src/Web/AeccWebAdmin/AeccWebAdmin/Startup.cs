@@ -1,15 +1,14 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using AeccApi.WebAdmin.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Aecc.Models;
+using AeccApi.WebAdmin.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using AeccApi.WebAdmin.Extensions;
-using AeccApi.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace AeccApi.WebAdmin
 {
@@ -26,8 +25,7 @@ namespace AeccApi.WebAdmin
         public void ConfigureServices(IServiceCollection services)
         {
             services.
-                AddDbContext<AeccContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AeccConnection")))
-                .Configure<AzureAdB2COptions>(Configuration.GetSection("AzureAdB2C"));
+                AddDbContext<AeccContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AeccConnection")));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -36,7 +34,7 @@ namespace AeccApi.WebAdmin
                 sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
             })
-            .AddAzureAdB2C(options => Configuration.Bind("Authentication:AzureAdB2C", options))
+            .AddAzureAdB2C(options => Configuration.Bind("AzureAdB2C", options))
             .AddCookie();
 
             // Add framework services.

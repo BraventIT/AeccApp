@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 #endif
 
-namespace AeccApi.Models
+namespace Aecc.Models
 {
     [JsonObject(IsReference = true)]
     public class Coordinator

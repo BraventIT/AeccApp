@@ -8,7 +8,7 @@ using AeccBot.MessageRouting;
 using AeccBot.Dialogs;
 using System.Linq;
 using System;
-using AeccBot.Models;
+using Aecc.Models;
 using System.Diagnostics;
 using AeccBot.Utils;
 using AeccBot.CommandHandling;

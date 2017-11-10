@@ -1,4 +1,4 @@
-﻿#if WEB
+﻿#if BOT
 using Microsoft.Bot.Connector;
 #else
 using Microsoft.Bot.Connector.DirectLine;
@@ -6,7 +6,7 @@ using Microsoft.Bot.Connector.DirectLine;
 using Newtonsoft.Json;
 using System;
 
-namespace AeccBot.Models
+namespace Aecc.Models
 {
     /// <summary>
     /// Represents a party in a conversation, for example:

@@ -1,7 +1,7 @@
 ﻿using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccBot.MessageRouting;
-using AeccBot.Models;
+using Aecc.Models;
 using Microsoft.Bot.Connector.DirectLine;
 using Newtonsoft.Json.Linq;
 using System;
