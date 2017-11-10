@@ -18,8 +18,19 @@ namespace AeccApp.Core.Views
 
         protected override void OnAppearing()
         {
+            MessagingCenter.Subscribe<DashboardEnableAndDisableChatTab>(this, string.Empty, OnEnableAndDisableChatTab);
+            MessagingCenter.Subscribe<DashboardHideRequestsTabMessage>(this, string.Empty, OnHideRequestsTab);
             MessagingCenter.Subscribe<DashboardTabMessage>(this, string.Empty, OnTabChanged);
             ViewModel?.ActivateAsync();
+        }
+
+        void OnEnableAndDisableChatTab(DashboardEnableAndDisableChatTab message)
+        {
+            Children[(int)TabsEnum.Chat].IsEnabled =  message.Message;
+        }
+        void OnHideRequestsTab(DashboardHideRequestsTabMessage message)
+        {
+           Children.Remove(Children[(int)message.Message]);
         }
 
         void OnTabChanged(DashboardTabMessage message)
@@ -30,6 +41,8 @@ namespace AeccApp.Core.Views
 
         protected override void OnDisappearing()
         {
+            MessagingCenter.Unsubscribe<DashboardEnableAndDisableChatTab>(this, string.Empty);
+            MessagingCenter.Unsubscribe<DashboardHideRequestsTabMessage>(this, string.Empty);
             MessagingCenter.Unsubscribe<DashboardTabMessage>(this, string.Empty);
             ViewModel?.Deactivate();
         }

@@ -55,16 +55,41 @@
                             BackgroundColor="White"
                             IsVisible="{Binding IsVolunteer}">
 
-                            <StackLayout Orientation="Horizontal">
-                                <Switch IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" IsToggled="{Binding VolunteerIsActive, Mode=TwoWay}">
-                                    <Switch.Behaviors>
-                                        <beh:EventToCommandBehavior
-                                            Command="{Binding VolunteerStateCommand}"
-                                            EventArgsConverter="{StaticResource ToggledEventArgsConverter}"
-                                            EventName="Toggled" />
-                                    </Switch.Behaviors>
-                                </Switch>
-                                <Label Style="{StaticResource SwitchTextStyle}" Text="Activa tu disponibilidad" />
+                            <StackLayout Margin="10">
+                                <Grid HorizontalOptions="Center">
+                                    <ctrl:CustomShapeDrawing
+                                        Margin="0,-7,6,1"
+                                        BorderColor="#4286f4"
+                                        HeightRequest="12"
+                                        HorizontalOptions="Center"
+                                        PointsShapeCoordinate="0.7/0, 0/0, 0.9/1"
+                                        ShapeColor="#4286f4"
+                                        WidthRequest="14" />
+
+                                    <ctrl:CustomImage
+                                        HeightRequest="100"
+                                        SourcePlatform="round_no_profile_image"
+                                        VerticalOptions="Center"
+                                        WidthRequest="100" />
+                                </Grid>
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Style="{StaticResource TitleLabelStyle}"
+                                    Text="{Binding UserName}" />
+                                <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                                    <Switch
+                                        HorizontalOptions="Center"
+                                        IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+                                        IsToggled="{Binding VolunteerIsActive, Mode=TwoWay}">
+                                        <Switch.Behaviors>
+                                            <beh:EventToCommandBehavior
+                                                Command="{Binding VolunteerStateCommand}"
+                                                EventArgsConverter="{StaticResource ToggledEventArgsConverter}"
+                                                EventName="Toggled" />
+                                        </Switch.Behaviors>
+                                    </Switch>
+                                    <Label Style="{StaticResource GreyLabelStyle}" Text="Activa tu disponibilidad" />
+                                </StackLayout>
                             </StackLayout>
 
                         </Frame>
@@ -103,6 +128,7 @@
                             <StackLayout>
                                 <Label Style="{StaticResource SubTitleLabelStyle}" Text="{Binding [HomeViewChatsOnline]}" />
                                 <Label
+                                    IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
                                     Style="{StaticResource NormalLabelStyle}"
                                     Text="{Binding [HomeViewTalkToVolunteer]}"
                                     TextColor="{StaticResource AccentColor}" />
@@ -114,6 +140,7 @@
 
                                 <ctrlXlabs:ImageButton
                                     Command="{Binding NewChatCommand}"
+                                    IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
                                     SourcePlatform="round_plus_green_background"
                                     Style="{StaticResource RoundGreenButtonStyle}" />
                             </Grid>

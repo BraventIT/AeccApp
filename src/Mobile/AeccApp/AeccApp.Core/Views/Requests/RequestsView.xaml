@@ -10,7 +10,6 @@
     Title="{Binding [HomeViewRequests]}"
     vm:ViewModelLocator.AutoWireViewModel="True"
     IconPlatform="requests_tab_icon">
-
     <ScrollView>
         <!--  Without requests landing page  -->
         <StackLayout>
