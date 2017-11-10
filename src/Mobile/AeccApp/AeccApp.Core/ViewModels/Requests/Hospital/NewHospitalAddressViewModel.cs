@@ -146,7 +146,7 @@ namespace AeccApp.Core.ViewModels
             {
                 if (!Hospitals.Any())
                 {
-                    var hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
+                    var hospitals = GlobalSetting.Instance.Hospitals;
                     Hospitals.AddRange(hospitals);
                 }
             });
@@ -173,7 +173,7 @@ namespace AeccApp.Core.ViewModels
                 result = (string)obj;
             }
 
-            if (result.Length > 7)
+            if (result.Length > 3)
             {
 
                 if (string.IsNullOrWhiteSpace(result))
@@ -184,7 +184,7 @@ namespace AeccApp.Core.ViewModels
                     {
                         if (!Hospitals.Any())
                         {
-                            var hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
+                            var hospitals = GlobalSetting.Instance.Hospitals;
                             Hospitals.AddRange(hospitals);
                         }
                     });
@@ -251,6 +251,8 @@ namespace AeccApp.Core.ViewModels
                 if (!Hospitals.Any())
                 {
                     var hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
+                    GlobalSetting.Instance.Hospitals = new ObservableCollection<Hospital>();
+                    GlobalSetting.Instance.Hospitals.AddRange(hospitals);
                     Hospitals.AddRange(hospitals);
                 }
             });
@@ -285,16 +287,13 @@ namespace AeccApp.Core.ViewModels
 
         #region Methods
 
-        async void RefreshHospitalList(string search)
+         void RefreshHospitalList(string search)
         {
             Hospitals.Clear();
-            await ExecuteOperationAsync(async cancelToken =>
-            {
+            var hospitals = GlobalSetting.Instance.Hospitals;
+            Hospitals.AddRange(hospitals.Where(o => o.Name.StartsWith(search, StringComparison.CurrentCultureIgnoreCase)));
 
-                var hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
-                Hospitals.AddRange(hospitals.Where(o => o.Name.StartsWith(search, StringComparison.CurrentCultureIgnoreCase)));
-
-            });
+            
         }
 
         private async Task<Xamarin.Forms.GoogleMaps.Position> GetLocationForHospitalAsync(Hospital hospital, CancellationToken cancelToken)
