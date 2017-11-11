@@ -54,7 +54,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _chooseAddressCommand ??
-                    (_chooseAddressCommand = new Command(OnChooseAddress, (o) => !IsBusy));
+                    (_chooseAddressCommand = new Command(OnChooseAddress, o => !IsBusy));
             }
         }
 
@@ -74,7 +74,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _newHomeAddressCommand ??
-                    (_newHomeAddressCommand = new Command(OnNewHomeAddressCommand, (o) => !IsBusy));
+                    (_newHomeAddressCommand = new Command(OnNewHomeAddressCommand, o => !IsBusy));
             }
         }
 

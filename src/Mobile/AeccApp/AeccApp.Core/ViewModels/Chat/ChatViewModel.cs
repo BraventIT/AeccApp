@@ -16,7 +16,8 @@ namespace AeccApp.Core.ViewModels
 {
     public class ChatViewModel : ViewModelBase
     {
-        private readonly IChatService _chatService;
+        private IChatService ChatService { get; } = ServiceLocator.ChatService;
+        private IList<Volunteer> _listVolunteers;
 
         #region Contructor & Initialize
         public ChatViewModel()
@@ -29,49 +30,38 @@ namespace AeccApp.Core.ViewModels
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
             ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
             ChatConnectingPopupVM = new ChatConnectingPopupViewModel();
-
-            _chatService = ServiceLocator.ChatService;
         }
 
         public override Task ActivateAsync()
         {
             if (Settings.TermsAndConditionsAccept == false)
-            {
-               return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
-            }
-            else
-            {
+                return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
 
-          
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
-                ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
-            _chatService.MessagesReceived += OnMesagesReceived;
-            _chatService.AggregationsReceived += OnAggregationsReceived;
+            ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
+            ChatService.MessagesReceived += OnMesagesReceived;
+            ChatService.AggregationsReceived += OnAggregationsReceived;
 
-            VolunteerIsActive = _chatService.VolunteerIsActive;
+            VolunteerIsActive = ChatService.VolunteerIsActive;
 
             return ExecuteOperationAsync(async () =>
             {
-                await _chatService.InitializeAsync();
+                await ChatService.InitializeAsync();
 
                 PartyId = ConversationCounterpart?.PartyId;
                 if (string.IsNullOrEmpty(PartyId))
                 {
                     if (!IsVolunteer)
                     {
-                        await UpdateVolunteersAsync();
+                        await FillVolunteersAsync();
                     }
                 }
                 else
                 {
                     await InitializeChatAsync();
                 }
-            },
-             finallyAction: () => VolunteersIsEmpty = !Volunteers.Any());
-            }
-
-
+            });
         }
 
         public override void Deactivate()
@@ -79,8 +69,8 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Unsubscribe<ChatStateMessage>(this, string.Empty);
             ChatFiltersPopupVM.AppliedFilters -= OnChatAppliedFilters;
             ChatLeaseConversationPopupVM.LeaseChatConversation -= OnLeaseConversation;
-            _chatService.MessagesReceived -= OnMesagesReceived;
-            _chatService.AggregationsReceived -= OnAggregationsReceived;
+            ChatService.MessagesReceived -= OnMesagesReceived;
+            ChatService.AggregationsReceived -= OnAggregationsReceived;
         }
         #endregion
 
@@ -102,7 +92,7 @@ namespace AeccApp.Core.ViewModels
 
         public UserData ConversationCounterpart
         {
-            get { return _chatService.ConversationCounterpart; }
+            get { return ChatService.ConversationCounterpart; }
         }
 
         private bool _volunteerIsActive;
@@ -111,7 +101,6 @@ namespace AeccApp.Core.ViewModels
             get { return _volunteerIsActive; }
             set { Set(ref _volunteerIsActive, value); }
         }
-
 
         #region Chat Properties
         public ObservableCollection<Message> Messages { get; private set; }
@@ -133,6 +122,20 @@ namespace AeccApp.Core.ViewModels
             get { return _volunteersIsEmpty; }
             set { Set(ref _volunteersIsEmpty, value); }
         }
+
+        private bool _canFilterVolunteers;
+        public bool CanFilterVolunteers
+        {
+            get { return _canFilterVolunteers; }
+            set { Set(ref _canFilterVolunteers, value); }
+        }
+
+        private bool _filterVolunteersIsEmpty;
+        public bool FilterVolunteersIsEmpty
+        {
+            get { return _filterVolunteersIsEmpty; }
+            set { Set(ref _filterVolunteersIsEmpty, value); }
+        }
         #endregion
 
         #region Popups Properties
@@ -150,16 +153,13 @@ namespace AeccApp.Core.ViewModels
         #region Commands
 
         #region Chat Commands
-
-      
-
         private Command _viewVolunteerProfileCommand;
         public ICommand ViewVolunteerProfileCommand
         {
             get
             {
                 return _viewVolunteerProfileCommand ??
-                    (_viewVolunteerProfileCommand = new Command(OnVolunteerProfileOpen, (o) => !IsBusy));
+                    (_viewVolunteerProfileCommand = new Command(OnVolunteerProfileOpen, o => !IsBusy));
             }
         }
 
@@ -169,13 +169,13 @@ namespace AeccApp.Core.ViewModels
             await NavigationService.ShowPopupAsync(ChatCounterpartProfilePopupVM);
         }
 
-        private Command sendMessageCommand;
+        private Command _sendMessageCommand;
         public ICommand SendMessageCommand
         {
             get
             {
-                return sendMessageCommand ??
-                    (sendMessageCommand = new Command(o => OnSendMessageAsync(), (o) => !IsBusy));
+                return _sendMessageCommand ??
+                    (_sendMessageCommand = new Command(o => OnSendMessageAsync(), o => !IsBusy));
             }
         }
 
@@ -194,22 +194,22 @@ namespace AeccApp.Core.ViewModels
                         Text = textToSend
                     }
                 });
-                await _chatService.SendMessageAsync(textToSend);
+                await ChatService.SendMessageAsync(textToSend);
             });
         }
 
-       
+
 
         private async void OnLeaseConversation(object sender, EventArgs e)
         {
-            await ExecuteOperationAsync(() => _chatService.EndChatAsync());
+            await ExecuteOperationAsync(() => ChatService.EndChatAsync());
             await NavigationService.HidePopupAsync();
             if (!IsVolunteer)
             {
                 await NavigationService.ShowPopupAsync(ChatRatingPopupVM);
-                    }
+            }
         }
-  
+
         private Command _leaseConversationPopupCommand;
         public ICommand LeaseConversationPopupCommand
         {
@@ -217,7 +217,7 @@ namespace AeccApp.Core.ViewModels
             {
                 return _leaseConversationPopupCommand ??
                     (_leaseConversationPopupCommand = new Command(
-                        OnLeaseConversationPopup, (o) => !IsBusy));
+                        OnLeaseConversationPopup, o => !IsBusy));
             }
         }
 
@@ -229,36 +229,30 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Choose volunteer Commands
-        private Command refreshVolunteersCommand;
+        private Command _refreshVolunteersCommand;
         public ICommand RefreshVolunteersCommand
         {
             get
             {
-                return refreshVolunteersCommand ??
-                    (refreshVolunteersCommand = new Command((o) => OnRefreshVolunteersAsync(o), (o) => !IsBusy));
+                return _refreshVolunteersCommand ??
+                    (_refreshVolunteersCommand = new Command(o => OnRefreshVolunteersAsync(o), o => !IsBusy));
             }
         }
 
         private Task OnRefreshVolunteersAsync(object obj)
         {
-            return ExecuteOperationAsync(async () =>
-            {
-                Volunteers.Clear();
-                Volunteers.AddRange(await _chatService.GetListVolunteersAsync());
-            },
-            finallyAction: () =>
-                 VolunteersIsEmpty = !Volunteers.Any());
+            return ExecuteOperationAsync(FillVolunteersAsync);
         }
 
-        private Command chooseVolunteerCommand;
+        private Command _chooseVolunteerCommand;
         public ICommand ChooseVolunteerCommand
         {
             get
             {
-                return chooseVolunteerCommand ??
-                    (chooseVolunteerCommand = new Command(
-                        (o) => OnChooseVolunteerAsync(o),
-                        (o) => !IsBusy));
+                return _chooseVolunteerCommand ??
+                    (_chooseVolunteerCommand = new Command(
+                        o => OnChooseVolunteerAsync(o),
+                        o => !IsBusy));
             }
         }
 
@@ -275,31 +269,44 @@ namespace AeccApp.Core.ViewModels
         }
         #endregion
 
-        private Command _openFiltersCommand;
-        public ICommand OpenFiltersCommand
+        private Command _openVolunteersFiltersCommand;
+        public ICommand OpenVolunteersFiltersCommand
         {
             get
             {
-                return _openFiltersCommand ??
-                    (_openFiltersCommand = new Command(OnFiltersOpenHandler, (o) => !IsBusy));
+                return _openVolunteersFiltersCommand ??
+                    (_openVolunteersFiltersCommand = new Command(OnVolunteersFiltersOpen, o => !IsBusy));
             }
         }
 
-        void OnFiltersOpenHandler(object obj)
+        void OnVolunteersFiltersOpen(object obj)
         {
             NavigationService.HidePopupAsync();
             NavigationService.ShowPopupAsync(ChatFiltersPopupVM);
         }
 
+        private Command _resetVolunteersFilterCommand;
+        public ICommand ResetVolunteersFilterCommand
+        {
+            get
+            {
+                return _resetVolunteersFilterCommand ??
+                    (_resetVolunteersFilterCommand = new Command(o => ChatFiltersPopupVM.Reset()));
+            }
+        }
         #endregion
 
         #region Private Methods
-        private async Task UpdateVolunteersAsync()
+        private async Task FillVolunteersAsync()
         {
+            FilterVolunteersIsEmpty = false;
             Volunteers.Clear();
-            var listAggregations = await _chatService.GetListVolunteersAsync();
-            if (listAggregations != null)
-                Volunteers.AddRange(listAggregations);
+            _listVolunteers = await ChatService.GetListVolunteersAsync();
+            if (_listVolunteers != null)
+                Volunteers.AddRange(_listVolunteers);
+
+            VolunteersIsEmpty = !Volunteers.Any();
+            CanFilterVolunteers = !VolunteersIsEmpty;
         }
 
         private async void OnChatAppliedFilters(object sender, EventArgs e)
@@ -312,25 +319,26 @@ namespace AeccApp.Core.ViewModels
                     //Temporary sliders (Not range sliders yet) not following filters logic
                     return;
                 }
-                else
+
+                Volunteers.Clear();
+                foreach (var item in _listVolunteers)
                 {
-                    Volunteers.Clear();
-                    Volunteers.AddRange(await _chatService.GetListVolunteersAsync());
-                    foreach (var item in Volunteers)
+                    if (Int32.TryParse(item.Age, out int volunteerAge))
                     {
-                        int volunteerAge = 0;
-                        if (Int32.TryParse(item.Age, out volunteerAge))
+                        if (volunteerAge < ChatFiltersPopupVM.MaximumAge && volunteerAge > ChatFiltersPopupVM.MinimumAge)
                         {
-                            if (volunteerAge > ChatFiltersPopupVM.MaximumAge || volunteerAge < ChatFiltersPopupVM.MinimumAge)
-                            {
-                                Volunteers.Remove(item);
-                            }
+                            Volunteers.Add(item);
                         }
                     }
                 }
+
+                if (!Volunteers.Any())
+                {
+                    FilterVolunteersIsEmpty = true;
+                }
             });
         }
-        
+
         private void OnChatState(ChatStateMessage obj)
         {
             VolunteerIsActive = obj.VolunteerIsActive;
@@ -339,25 +347,24 @@ namespace AeccApp.Core.ViewModels
         private async Task InitializeChatAsync()
         {
             Messages.Clear();
-            if (!_chatService.InConversation)
+            if (!ChatService.InConversation)
             {
-                await _chatService.InitializeChatAsync(_partyId);
+                await ChatService.InitializeChatAsync(_partyId);
                 NotifyPropertyChanged(nameof(ConversationCounterpart));
-                ChatCounterpartProfilePopupVM.Counterpart = _chatService.ConversationCounterpart;
+                ChatCounterpartProfilePopupVM.Counterpart = ChatService.ConversationCounterpart;
 
             }
             else
             {
-                Messages.AddRange(_chatService.GetConversationMessages());
+                Messages.AddRange(ChatService.GetConversationMessages());
             }
         }
 
         private void OnMesagesReceived(object sender, IList<Message> messages)
         {
-          
             foreach (var message in messages.Reverse())
             {
-                if(message.Activity.Text.StartsWith("ahora estás hablando con"))
+                if (message.Activity.Text.StartsWith("ahora estás hablando con"))
                 {
                     //Oculta popup de espera en la conexión //TODO Revisar cuando llegue codigo unico de mensaje
                     NavigationService.HidePopupAsync();
@@ -365,8 +372,6 @@ namespace AeccApp.Core.ViewModels
                 Messages.Insert(0, message);
             }
         }
-
-
 
         private void OnAggregationsReceived(object sender, IList<Volunteer> newVolunteers)
         {
@@ -399,9 +404,10 @@ namespace AeccApp.Core.ViewModels
             if (IsBusy)
                 VolunteersIsEmpty = false;
 
-            chooseVolunteerCommand?.ChangeCanExecute();
-            refreshVolunteersCommand?.ChangeCanExecute();
-            sendMessageCommand?.ChangeCanExecute();
+            _chooseVolunteerCommand?.ChangeCanExecute();
+            _refreshVolunteersCommand?.ChangeCanExecute();
+            _sendMessageCommand?.ChangeCanExecute();
+            _openVolunteersFiltersCommand?.ChangeCanExecute();
         }
 
         #endregion

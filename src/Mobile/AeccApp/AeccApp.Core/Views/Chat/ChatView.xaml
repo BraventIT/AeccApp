@@ -24,9 +24,9 @@
             Text="{Binding [ChatViewLeaveConversation]}" />
 
         <ctrl:HideableToolbarItem
-            Command="{Binding OpenFiltersCommand}"
+            Command="{Binding OpenVolunteersFiltersCommand}"
             IconPlatform="filters_icon"
-            IsVisible="{Binding PartyId, Converter={StaticResource IsNullConverter}}"
+            IsVisible="{Binding CanFilterVolunteers}"
             Order="Primary"
             Priority="0"
             Text="{Binding [CommonFilters]}" />

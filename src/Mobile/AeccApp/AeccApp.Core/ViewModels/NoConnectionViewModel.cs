@@ -21,7 +21,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _refreshConnection ??
-                    (_refreshConnection = new Command(OnRefreshConnection, (o) => !IsBusy));
+                    (_refreshConnection = new Command(OnRefreshConnection, o => !IsBusy));
             }
         }
         /// <summary>

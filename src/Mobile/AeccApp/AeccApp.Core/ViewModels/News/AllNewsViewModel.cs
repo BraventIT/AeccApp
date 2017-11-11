@@ -35,7 +35,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return chooseNewCommand ??
-                    (chooseNewCommand = new Command(OnChooseNew, (o) => !IsBusy));
+                    (chooseNewCommand = new Command(OnChooseNew, o => !IsBusy));
             }
         }
 

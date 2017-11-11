@@ -13,7 +13,7 @@ namespace AeccApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Hospitals")]
-    [Authorize]
+    //[Authorize]
     public class HospitalsController : Controller
     {
         private readonly AeccContext _context;

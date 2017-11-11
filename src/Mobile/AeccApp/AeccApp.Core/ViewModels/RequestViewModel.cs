@@ -14,7 +14,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _newRequestCommand ??
-                    (_newRequestCommand = new Command(OnNewRequestCommand, (o) => !IsBusy));
+                    (_newRequestCommand = new Command(OnNewRequestCommand, o => !IsBusy));
             }
         }
         /// <summary>

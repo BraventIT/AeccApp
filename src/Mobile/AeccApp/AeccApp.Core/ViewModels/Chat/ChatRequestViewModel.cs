@@ -9,16 +9,11 @@ namespace AeccApp.Core.ViewModels
 {
     public class ChatRequestViewModel : ViewModelBase
     {
-        private readonly IChatService ChatService;
+        private IChatService ChatService { get; } = ServiceLocator.ChatService;
 
         private string _requestPartyId;
 
         #region Contructor & Initialize
-        public ChatRequestViewModel()
-        {
-            ChatService = ServiceLocator.ChatService;
-        }
-
         public override async Task InitializeAsync(object navigationData)
         {
             if (navigationData is string)
@@ -66,7 +61,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _acceptRequestCommand ??
-                    (_acceptRequestCommand = new Command((o) => OnAcceptRequestAsync(), (o) => !IsBusy));
+                    (_acceptRequestCommand = new Command(o => OnAcceptRequestAsync(), o => !IsBusy));
             }
         }
 
@@ -98,7 +93,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _rejectRequestCommand ??
-                    (_rejectRequestCommand = new Command((o) => OnRejectRequestAsync(), (o) => !IsBusy));
+                    (_rejectRequestCommand = new Command(o => OnRejectRequestAsync(), o => !IsBusy));
             }
         }
 

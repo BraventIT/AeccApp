@@ -49,7 +49,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _hospitalTabCommand ??
-                    (_hospitalTabCommand = new Command(OnHospitalTabCommand, (o) => !IsBusy));
+                    (_hospitalTabCommand = new Command(OnHospitalTabCommand, o => !IsBusy));
             }
         }
 
@@ -67,7 +67,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _homeTabCommand ??
-                    (_homeTabCommand = new Command(OnHomeTabCommand, (o) => !IsBusy));
+                    (_homeTabCommand = new Command(OnHomeTabCommand, o => !IsBusy));
             }
         }
 
@@ -87,7 +87,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _applyFiltersCommand ??
-                    (_applyFiltersCommand = new Command(OnApplyFiltersCommand, (o) => !IsBusy));
+                    (_applyFiltersCommand = new Command(OnApplyFiltersCommand, o => !IsBusy));
             }
         }
 
@@ -104,7 +104,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _newRequestCommand ??
-                    (_newRequestCommand = new Command(OnNewRequestCommand, (o) => !IsBusy));
+                    (_newRequestCommand = new Command(OnNewRequestCommand, o => !IsBusy));
             }
         }
 

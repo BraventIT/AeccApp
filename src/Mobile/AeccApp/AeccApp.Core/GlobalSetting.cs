@@ -21,9 +21,9 @@ namespace AeccApp.Core
                 Tenant = "alfraso.onmicrosoft.com",
                 ClientId = "24b548ab-933a-47c0-9b3c-c9b334219cc7",
                 SignUpSignInPolicyId = "B2C_1_inicioDeSesion",
-                EditProfilePolicyId = "B2C_1_perfilxamarin",
+                EditProfilePolicyId = "B2C_1_EditProfile",
                 ResetPasswordPolicyId = "B2C_1_resetPassword",
-                AppID = "api",
+                AppID = "aeccapi",
                 Scope = "read"
             };
 

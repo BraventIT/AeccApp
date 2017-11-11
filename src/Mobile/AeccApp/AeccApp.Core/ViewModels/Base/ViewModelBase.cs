@@ -8,6 +8,7 @@ using AeccApp.Internationalization.Properties;
 using AeccApp.Core.Services;
 using System.Diagnostics;
 using System.Threading;
+using System.Net.Http;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -125,6 +126,10 @@ namespace AeccApp.Core.ViewModels
                 StartOperation();
 
                 await executeAction();
+            }
+            catch (HttpRequestException ex)
+            {
+                // TODO popup para reintentar
             }
             catch (Exception ex)
             {

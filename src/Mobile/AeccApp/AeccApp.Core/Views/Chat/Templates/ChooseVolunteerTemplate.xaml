@@ -96,7 +96,6 @@
             <ListView
                 x:Name="VolunteersListView"
                 HorizontalOptions="FillAndExpand"
-                IsVisible="{Binding VolunteersIsEmpty, Converter={StaticResource InverseBoolConverter}}"
                 ItemTemplate="{StaticResource volunteerTemplate}"
                 ItemsSource="{Binding Volunteers}"
                 VerticalOptions="FillAndExpand">
@@ -129,6 +128,22 @@
                     HorizontalOptions="CenterAndExpand"
                     Style="{StaticResource ButtonStyle}"
                     Text="{Binding [CommonRefreshList]}" />
+            </StackLayout>
+
+            <StackLayout
+                HorizontalOptions="Center"
+                IsVisible="{Binding FilterVolunteersIsEmpty}"
+                VerticalOptions="Center">
+                <Label
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource SubTitleLabelStyle}"
+                    Text="{Binding [ChatViewThereAreNoVolunteersFiltered]}" />
+                <Button
+                    Margin="20"
+                    Command="{Binding ResetVolunteersFilterCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource ButtonStyle}"
+                    Text="{Binding [ChatViewResetFilter]}" />
             </StackLayout>
 
             <Label

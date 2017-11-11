@@ -1,7 +1,6 @@
 ﻿using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
-using AeccApp.Core.ViewModels.Popups;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,13 +11,12 @@ namespace AeccApp.Core.ViewModels
 {
     class HomeViewModel : ViewModelBase
     {
-        private readonly IChatService ChatService;
+        private IChatService ChatService { get; } = ServiceLocator.ChatService;
 
         #region Contructor & Initialize
         public HomeViewModel()
         {
             IsHeaderInfoBannerVisible = Settings.HomeHeaderBannerClosed;
-            ChatService = ServiceLocator.ChatService;
         }
 
         public override async Task ActivateAsync()

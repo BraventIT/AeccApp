@@ -116,7 +116,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _requestTypeCommand ??
-                    (_requestTypeCommand = new Command(OnRequestTypeCommand, (o) => !IsBusy));
+                    (_requestTypeCommand = new Command(OnRequestTypeCommand, o => !IsBusy));
             }
         }
 
@@ -137,7 +137,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _requestTalkToAeccCommand ??
-                    (_requestTalkToAeccCommand = new Command(OnRequestTalkToAeccCommand, (o) => !IsBusy));
+                    (_requestTalkToAeccCommand = new Command(OnRequestTalkToAeccCommand, o => !IsBusy));
             }
         }
 

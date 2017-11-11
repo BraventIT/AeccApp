@@ -197,6 +197,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reinicia filtros.
+        /// </summary>
+        public static string ChatViewResetFilter {
+            get {
+                return ResourceManager.GetString("ChatViewResetFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enviar.
         /// </summary>
         public static string ChatViewSendMessage {
@@ -211,6 +220,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string ChatViewThereAreNoVolunteers {
             get {
                 return ResourceManager.GetString("ChatViewThereAreNoVolunteers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No hay voluntarios para el filtro que has pueto..
+        /// </summary>
+        public static string ChatViewThereAreNoVolunteersFiltered {
+            get {
+                return ResourceManager.GetString("ChatViewThereAreNoVolunteersFiltered", resourceCulture);
             }
         }
         

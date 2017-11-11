@@ -12,7 +12,7 @@ namespace AeccApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/RequestTypes")]
-    [Authorize]
+    //[Authorize]
     public class RequestTypesController : Controller
     {
         private readonly AeccContext _context;

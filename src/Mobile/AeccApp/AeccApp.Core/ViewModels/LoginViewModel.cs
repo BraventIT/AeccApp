@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Diagnostics;
+using Microsoft.Identity.Client;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -47,11 +48,20 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                if (await IdentityService.TryToLoginAsync(silentLogin))
+                try
                 {
-                    await NavigationService.NavigateToAsync<VolunteerTestViewModel>();
-                    await NavigationService.RemoveLastFromBackStackAsync();
+                    if (await IdentityService.TryToLoginAsync(silentLogin))
+                    {
+                        await NavigationService.NavigateToAsync<VolunteerTestViewModel>();
+                        await NavigationService.RemoveLastFromBackStackAsync();
+                    }
                 }
+                catch (MsalException ex)
+                {
+                    //ex.ErrorCode== "request_timeout"
+                    throw;
+                }
+               
             }, finallyAction: () => IsLoginRequired = true);
         }
 

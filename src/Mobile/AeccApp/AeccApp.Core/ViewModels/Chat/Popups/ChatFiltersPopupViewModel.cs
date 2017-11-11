@@ -8,19 +8,27 @@ namespace AeccApp.Core.ViewModels.Popups
 {
     public class ChatFiltersPopupViewModel: ViewModelBase
     {
+        private const int MIN_AGE = 18;
+        private const int MAX_AGE = 80;
+
         /// <summary>
         /// Raised when filters are applied
         /// </summary>
         public event EventHandler AppliedFilters;
 
-        private int _minimumAge = 18;
+        public ChatFiltersPopupViewModel()
+        {
+            Reset();
+        }
+
+        private int _minimumAge;
         public int MinimumAge
         {
             get { return _minimumAge; }
             set { Set(ref _minimumAge, value); }
         }
 
-        private int _maximumAge = 80;
+        private int _maximumAge;
         public int MaximumAge
         {
             get { return _maximumAge; }
@@ -41,6 +49,12 @@ namespace AeccApp.Core.ViewModels.Popups
                 return _applyFiltersCommand ??
                     (_applyFiltersCommand = new Command(o=> AppliedFilters?.Invoke(this, null)));
             }
+        }
+
+        public void Reset()
+        {
+            MinimumAge = MIN_AGE;
+            MaximumAge = MAX_AGE;
         }
     }
 }

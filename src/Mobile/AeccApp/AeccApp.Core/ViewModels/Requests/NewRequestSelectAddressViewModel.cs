@@ -31,7 +31,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _atHomeCommand ??
-                    (_atHomeCommand = new Command(OnAtHomeCommand, (o) => !IsBusy));
+                    (_atHomeCommand = new Command(OnAtHomeCommand, o => !IsBusy));
             }
         }
 
@@ -47,7 +47,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _atHospitalCommand ??
-                    (_atHospitalCommand = new Command(OnAtHospitalCommand, (o) => !IsBusy));
+                    (_atHospitalCommand = new Command(OnAtHospitalCommand, o => !IsBusy));
             }
         }
 

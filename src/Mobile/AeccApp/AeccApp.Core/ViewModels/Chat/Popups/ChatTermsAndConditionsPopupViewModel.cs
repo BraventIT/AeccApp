@@ -16,7 +16,7 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _acceptTermsCommand ??
-                    (_acceptTermsCommand = new Command(OnAcceptTermsCommand, (o) => !IsBusy));
+                    (_acceptTermsCommand = new Command(OnAcceptTermsCommand, o => !IsBusy));
             }
         }
 
@@ -34,7 +34,7 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _rejectTermsCommand ??
-                    (_rejectTermsCommand = new Command(OnRejectTermsCommand, (o) => !IsBusy));
+                    (_rejectTermsCommand = new Command(OnRejectTermsCommand, o => !IsBusy));
             }
         }
 

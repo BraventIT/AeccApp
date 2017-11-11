@@ -71,7 +71,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _mapDetailCommand ??
-                    (_mapDetailCommand = new Command(OnMapDetailCommand, (o) => !IsBusy));
+                    (_mapDetailCommand = new Command(OnMapDetailCommand, o => !IsBusy));
             }
         }
 
@@ -87,7 +87,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _openRequestConfirmationPopupCommand ??
-                    (_openRequestConfirmationPopupCommand = new Command(OnOpenRequestConfirmationPopupCommand, (o) => !IsBusy));
+                    (_openRequestConfirmationPopupCommand = new Command(OnOpenRequestConfirmationPopupCommand, o => !IsBusy));
             }
         }
 
@@ -125,7 +125,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _openDateAndTimePopupCommand ??
-                    (_openDateAndTimePopupCommand = new Command(OnOpenDateAndTimePopupCommand, (o) => !IsBusy));
+                    (_openDateAndTimePopupCommand = new Command(OnOpenDateAndTimePopupCommand, o => !IsBusy));
             }
         }
 
@@ -150,7 +150,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _commentsEntryListenerCommand ??
-                    (_commentsEntryListenerCommand = new Command(OnCommentsEntryListenerCommand, (o) => !IsBusy));
+                    (_commentsEntryListenerCommand = new Command(OnCommentsEntryListenerCommand, o => !IsBusy));
             }
         }
 

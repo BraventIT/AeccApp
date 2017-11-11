@@ -59,7 +59,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return okCommand ??
-                    (okCommand = new Command((o) => OnOkEventAsync()));
+                    (okCommand = new Command(o => OnOkEventAsync()));
             }
         }
 

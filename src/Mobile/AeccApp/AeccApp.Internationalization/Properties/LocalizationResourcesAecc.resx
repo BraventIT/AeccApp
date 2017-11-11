@@ -162,11 +162,17 @@
   <data name="ChatViewLookingForVolunteers" xml:space="preserve">
     <value>Comprobando si hay voluntarios</value>
   </data>
+  <data name="ChatViewResetFilter" xml:space="preserve">
+    <value>Reinicia filtros</value>
+  </data>
   <data name="ChatViewSendMessage" xml:space="preserve">
     <value>Enviar</value>
   </data>
   <data name="ChatViewThereAreNoVolunteers" xml:space="preserve">
     <value>No hay voluntarios. Intentalo más tarde</value>
+  </data>
+  <data name="ChatViewThereAreNoVolunteersFiltered" xml:space="preserve">
+    <value>No hay voluntarios para el filtro que has pueto.</value>
   </data>
   <data name="ChatViewViewVolunteerProfile" xml:space="preserve">
     <value>Perfil del voluntario</value>

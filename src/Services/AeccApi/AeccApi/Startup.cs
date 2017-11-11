@@ -30,11 +30,11 @@ namespace AeccApi
             // Email service
             services.AddTransient<IEmailService, EmailService>();
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddAzureAdB2C(options => Configuration.Bind("AzureAdB2C", options));
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //.AddAzureAdB2C(options => Configuration.Bind("AzureAdB2C", options));
 
             // Add framework services.
             services.AddMvc();

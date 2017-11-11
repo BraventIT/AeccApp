@@ -15,7 +15,7 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _ratingCommand ??
-                    (_ratingCommand = new Command(OnRatingCommand, (o) => !IsBusy));
+                    (_ratingCommand = new Command(OnRatingCommand, o => !IsBusy));
             }
         }
 

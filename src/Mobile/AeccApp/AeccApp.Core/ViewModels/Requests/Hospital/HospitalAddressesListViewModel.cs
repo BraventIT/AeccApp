@@ -66,7 +66,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _newHospitalAddressCommand ??
-                    (_newHospitalAddressCommand = new Command(OnNewHospitalAddressCommand, (o) => !IsBusy));
+                    (_newHospitalAddressCommand = new Command(OnNewHospitalAddressCommand, o => !IsBusy));
             }
         }
 
