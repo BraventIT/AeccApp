@@ -34,8 +34,11 @@ namespace AeccApp.Core.ViewModels
 
         public override Task ActivateAsync()
         {
-            if (Settings.TermsAndConditionsAccept == false)
-                return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
+            if (IsVolunteer == false && Settings.TermsAndConditionsAccept == false )
+            {
+               return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
+            }
+         
 
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;

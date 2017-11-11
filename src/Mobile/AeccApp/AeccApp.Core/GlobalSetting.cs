@@ -1,5 +1,6 @@
 ﻿using Aecc.Models;
 using AeccApp.Core.Models;
+using System.Collections.ObjectModel;
 
 namespace AeccApp.Core
 {
@@ -46,6 +47,10 @@ namespace AeccApp.Core
             get { return _apiEndpoint; }
             set { _apiEndpoint = value; }
         }
+
+        #region GlobalLists
+        public ObservableCollection<Hospital> Hospitals { get; set; }
+        #endregion
 
         #region Maps
 
