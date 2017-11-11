@@ -12,7 +12,7 @@ namespace AeccApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Coordinators")]
-    //[Authorize]
+    [Authorize]
     public class CoordinatorsController : Controller
     {
         private readonly AeccContext _context;

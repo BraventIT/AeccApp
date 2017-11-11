@@ -33,7 +33,6 @@ namespace AeccApi.Extensions
             {
                 jwtOptions.Authority = AzureAdB2COptions.AuthoritySignUpSignIn;
                 jwtOptions.Audience = AzureAdB2COptions.ClientId;
-
                 jwtOptions.Events = new JwtBearerEvents
                 {
                     OnAuthenticationFailed = AuthenticationFailed

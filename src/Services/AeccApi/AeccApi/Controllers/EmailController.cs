@@ -10,7 +10,7 @@ namespace AeccApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Email")]
-    //[Authorize]
+    [Authorize]
     public class EmailController : Controller
     {
         private readonly IEmailService _emailService;

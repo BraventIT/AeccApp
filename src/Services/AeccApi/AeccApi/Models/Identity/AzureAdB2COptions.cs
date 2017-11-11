@@ -15,9 +15,9 @@
 
         public string DefaultPolicy => SignUpSignInPolicyId;
 
-        public string AuthoritySignUpSignIn => $"{AzureAdB2CInstance}/{Tenant}/{SignUpSignInPolicyId}";
-        public string AuthorityEditProfile => $"{AzureAdB2CInstance}/{Tenant}/{EditProfilePolicyId}";
-        public string AuthorityPasswordReset => $"{AzureAdB2CInstance}/{Tenant}/{ResetPasswordPolicyId}";
+        public string AuthoritySignUpSignIn => $"{AzureAdB2CInstance}/{Tenant}/{SignUpSignInPolicyId}/v2.0/";
+        public string AuthorityEditProfile => $"{AzureAdB2CInstance}/{Tenant}/{EditProfilePolicyId}/v2.0/";
+        public string AuthorityPasswordReset => $"{AzureAdB2CInstance}/{Tenant}/{ResetPasswordPolicyId}/v2.0/";
 
         public string ClientSecret { get; set; }
 
