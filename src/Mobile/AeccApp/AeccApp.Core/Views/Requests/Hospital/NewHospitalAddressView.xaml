@@ -60,7 +60,7 @@
     </ContentView.Resources>
     <StackLayout>
         <!--  Sub navigation bar with map and hospital list  -->
-        <StackLayout BackgroundColor="Gray" HorizontalOptions="FillAndExpand">
+        <StackLayout BackgroundColor="LightGray" HorizontalOptions="FillAndExpand">
             <Grid HorizontalOptions="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -100,7 +100,7 @@
                     <StackLayout.Margin>
                         <OnPlatform x:TypeArguments="Thickness">
                             <On Platform="WinPhone, Windows" Value="0" />
-                            <On Platform="iOS" Value="0,15,25,15" />
+                            <On Platform="iOS" Value="0,15,25,10" />
                             <On Platform="Android" Value="0,5,25,5" />
                         </OnPlatform>
                     </StackLayout.Margin>
@@ -109,7 +109,10 @@
                         SourcePlatform="bell"
                         VerticalOptions="Center"
                         WidthRequest="50" />
-                    <Label Text="{Binding [CommonList]}" VerticalOptions="Center" />
+                    <Label
+                        FontSize="{StaticResource MediumSize}"
+                        Text="{Binding [CommonList]}"
+                        VerticalOptions="Center" />
                 </StackLayout>
 
 
@@ -135,7 +138,10 @@
                         SourcePlatform="bell"
                         VerticalOptions="Center"
                         WidthRequest="50" />
-                    <Label Text="{Binding [CommonMap]}" VerticalOptions="Center" />
+                    <Label
+                        FontSize="{StaticResource MediumSize}"
+                        Text="{Binding [CommonMap]}"
+                        VerticalOptions="Center" />
                 </StackLayout>
 
             </Grid>
@@ -164,12 +170,20 @@
 
             </Grid>
             <!--  Hospitals list  -->
+
             <StackLayout IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
                 <!--  Address search entry  -->
                 <Grid
-                    Margin="10"
+                    Margin="5,10,5,0"
                     Padding="0,5,0,5"
                     BackgroundColor="LightGray">
+                    <Grid.HeightRequest>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="60"
+                            WinPhone="60"
+                            iOS="60" />
+                    </Grid.HeightRequest>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25" />
                         <ColumnDefinition Width="*" />
@@ -197,7 +211,6 @@
                                 EventName="TextChanged" />
                         </Entry.Behaviors>
                     </Entry>
-
                     <Frame
                         Grid.Column="2"
                         Padding="5,10"
@@ -211,6 +224,25 @@
 
                 </Grid>
 
+                <Grid
+                    Margin="5"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding HospitalsListIsEmpty}"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.HeightRequest>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="70"
+                            WinPhone="80"
+                            iOS="70" />
+                    </Grid.HeightRequest>
+
+                    <Label
+                        FontSize="{StaticResource MediumSize}"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding [NewHomeAddressViewNoHospitalsInList]}" />
+
+                </Grid>
                 <Grid>
                     <ListView
                         HasUnevenRows="True"
