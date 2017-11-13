@@ -27,7 +27,7 @@ namespace AeccApp.Core.Views
             map.MyLocationEnabled = true;
             map.UiSettings.MyLocationButtonEnabled = true;
 
-            var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(message.Position, 16d), TimeSpan.FromSeconds(1));
+            var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(message.Position, 13d), TimeSpan.FromSeconds(1));
         }
     }
 }

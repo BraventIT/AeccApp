@@ -381,6 +381,9 @@
   <data name="NewHomeAddressViewNameTheAddressPlaceHolder" xml:space="preserve">
     <value>Ponle un nombre a esta dirección</value>
   </data>
+  <data name="NewHomeAddressViewNoHospitalsInList" xml:space="preserve">
+    <value>No se han encontrado resultados con esta busqueda. Intentalo de nuevo.</value>
+  </data>
   <data name="NewHomeAddressViewNumberPlaceHolder" xml:space="preserve">
     <value>Número</value>
   </data>

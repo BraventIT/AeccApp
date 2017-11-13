@@ -854,6 +854,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se han encontrado resultados con esta busqueda. Intentalo de nuevo..
+        /// </summary>
+        public static string NewHomeAddressViewNoHospitalsInList {
+            get {
+                return ResourceManager.GetString("NewHomeAddressViewNoHospitalsInList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Número.
         /// </summary>
         public static string NewHomeAddressViewNumberPlaceHolder {
