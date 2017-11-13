@@ -300,44 +300,27 @@ namespace AeccApp.Core.ViewModels
         #region Private Methods
         private async Task LoadVolunteersAsync()
         {
-            try
-            {
-                Volunteers.Clear();
-                FilterVolunteersIsEmpty = false;
-                
-                _listVolunteers = await ChatService.GetListVolunteersAsync();
+            FilterVolunteersIsEmpty = false;
 
-                FillVolunters();  
-            }
-            finally
-            {
-                VolunteersIsEmpty = !Volunteers.Any();
-                CanFilterVolunteers = !VolunteersIsEmpty;
-            }
+            _listVolunteers = await ChatService.GetListVolunteersAsync();
+
+            RefreshVolunters();
         }
 
         private async void OnChatAppliedFilters(object sender, EventArgs e)
         {
             await ExecuteOperationAsync(async () =>
             {
-                Volunteers.Clear();
                 await NavigationService.HidePopupAsync();
 
-                FillVolunters();
+                RefreshVolunters();
             });
         }
 
-        private void FillVolunters()
+        private bool VolunterFilter(UserData vol)
         {
-            foreach (var item in _listVolunteers)
-            {
-                if (item.Age < ChatFiltersPopupVM.MaximumAge && item.Age > ChatFiltersPopupVM.MinimumAge)
-                {
-                    Volunteers.Add(item);
-                }
-            }
-
-            FilterVolunteersIsEmpty = !Volunteers.Any();
+            return vol.Age < ChatFiltersPopupVM.MaximumAge 
+                && vol.Age > ChatFiltersPopupVM.MinimumAge;
         }
 
         private void OnChatState(ChatStateMessage obj)
@@ -353,7 +336,6 @@ namespace AeccApp.Core.ViewModels
                 await ChatService.InitializeChatAsync(_partyId);
                 NotifyPropertyChanged(nameof(ConversationCounterpart));
                 ChatCounterpartProfilePopupVM.Counterpart = ChatService.ConversationCounterpart;
-
             }
             else
             {
@@ -376,9 +358,19 @@ namespace AeccApp.Core.ViewModels
 
         private void OnAggregationsReceived(object sender, IList<UserData> newVolunteers)
         {
-            for (int i = 0; i < newVolunteers.Count; i++)
+            _listVolunteers = newVolunteers;
+            RefreshVolunters();
+        }
+
+        private void RefreshVolunters()
+        {
+            VolunteersIsEmpty = !_listVolunteers.Any();
+            CanFilterVolunteers = !VolunteersIsEmpty;
+           
+            var voluntersFiltered = _listVolunteers.Where(VolunterFilter).ToList();
+            for (int i = 0; i < voluntersFiltered.Count; i++)
             {
-                var aggregation = newVolunteers[i];
+                var aggregation = voluntersFiltered[i];
                 if (Volunteers.Count > i)
                 {
                     if (!aggregation.Equals(Volunteers[i]))
@@ -393,11 +385,12 @@ namespace AeccApp.Core.ViewModels
                 }
             }
 
-            while (Volunteers.Count != newVolunteers.Count)
+            while (Volunteers.Count != voluntersFiltered.Count)
             {
                 Volunteers.RemoveAt(Volunteers.Count - 1);
             }
-            VolunteersIsEmpty = !Volunteers.Any();
+
+            FilterVolunteersIsEmpty = !VolunteersIsEmpty && !Volunteers.Any();
         }
 
         protected override void OnIsBusyChanged()
