@@ -45,10 +45,10 @@ namespace AeccApp.Core.ViewModels
 
         public string Address
         {
-            get { return GSetting.User?.Address; }
+            get { return string.Empty; }
         }
 
-        public int Age
+        public int? Age
         {
             get { return GSetting.User.Age; }
         }

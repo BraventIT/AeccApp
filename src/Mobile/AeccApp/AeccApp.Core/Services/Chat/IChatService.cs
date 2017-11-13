@@ -1,5 +1,4 @@
 ﻿using AeccApp.Core.Models;
-using Aecc.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -44,13 +43,13 @@ namespace AeccApp.Core.Services
         /// <summary>
         /// Raised when a new volunteer is active
         /// </summary>
-        event EventHandler<IList<Volunteer>> AggregationsReceived;
+        event EventHandler<IList<UserData>> AggregationsReceived;
 
         /// <summary>
         /// Get volunteers active list
         /// </summary>
         /// <returns></returns>
-        Task<IList<Volunteer>> GetListVolunteersAsync();
+        Task<IList<UserData>> GetListVolunteersAsync();
 
         /// <summary>
         /// Try to initialize new chat conversation with selected volunteer

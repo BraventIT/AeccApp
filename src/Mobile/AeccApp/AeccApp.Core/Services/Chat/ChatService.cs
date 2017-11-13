@@ -50,7 +50,7 @@ namespace AeccApp.Core.Services
         /// </summary>
         private bool _sendingMessage;
 
-        private IList<Volunteer> _aggregations;
+        private IList<UserData> _aggregations;
         private IList<Message> _conversationMessages;
 
         private Party _conversationCounterpartParty;
@@ -68,7 +68,7 @@ namespace AeccApp.Core.Services
         private SemaphoreSlim _initializeLock;
 
         public event EventHandler<IList<Message>> MessagesReceived;
-        public event EventHandler<IList<Volunteer>> AggregationsReceived;
+        public event EventHandler<IList<UserData>> AggregationsReceived;
 
         private bool _inConversation;
         public bool InConversation
@@ -125,13 +125,19 @@ namespace AeccApp.Core.Services
 
                 if (_mainConversation == null)
                 {
+                    var user = GSetting.User;
+
                     _client = new DirectLineClient(GSetting.AeccBotSecret);
                     _mainConversation = await _client.Conversations.StartConversationAsync();
-                    _account = new ChannelAccountWithUserData(GSetting.User.UserId, GSetting.User.Name)
+                    _account = new ChannelAccountWithUserData()
                     {
-                        FirstName = GSetting.User.FirstName,
-                        Surname = GSetting.User.Surname,
-                        Email = GSetting.User.Email
+                        Id = user.Id,
+                        Name = user.Name,
+                        FirstName = user.FirstName,
+                        Surname = user.Surname,
+                        Email = user.Email,
+                        Age = user.Age,
+                        Gender = user.Gender
                     };
                     ListenToBotMessages();
                     await TryToFillConversationCounterpartAsync();
@@ -161,7 +167,7 @@ namespace AeccApp.Core.Services
             });
         }
 
-        public async Task<IList<Volunteer>> GetListVolunteersAsync()
+        public async Task<IList<UserData>> GetListVolunteersAsync()
         {
             var ct = new CancellationTokenSource(TIMEOUT_MS);
             await SendActivity(BackChannelCommands.CommandListAggregations, token: ct.Token);
@@ -523,7 +529,7 @@ namespace AeccApp.Core.Services
             var aggregationListBulk = activity.ChannelData as JArray;
             var aggregationsRaw = aggregationListBulk?.ToObject<List<Party>>();
 
-            _aggregations = aggregationsRaw.Select(o => new Volunteer(o)).ToList();
+            _aggregations = aggregationsRaw.Select(o => new UserData(o)).ToList();
 
             if (_listAggregationsResponseTask != null)
             {

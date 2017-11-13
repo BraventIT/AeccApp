@@ -17,13 +17,13 @@ namespace AeccApp.Core.ViewModels
     public class ChatViewModel : ViewModelBase
     {
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
-        private IList<Volunteer> _listVolunteers;
+        private IList<UserData> _listVolunteers;
 
         #region Contructor & Initialize
         public ChatViewModel()
         {
             Messages = new ObservableCollection<Message>();
-            Volunteers = new ObservableCollection<Volunteer>();
+            Volunteers = new ObservableCollection<UserData>();
             ChatFiltersPopupVM = new ChatFiltersPopupViewModel();
             ChatRatingPopupVM = new ChatRatingPopupViewModel();
             ChatCounterpartProfilePopupVM = new ChatCounterpartProfilePopupViewModel();
@@ -57,7 +57,7 @@ namespace AeccApp.Core.ViewModels
                 {
                     if (!IsVolunteer)
                     {
-                        await FillVolunteersAsync();
+                        await LoadVolunteersAsync();
                     }
                 }
                 else
@@ -117,7 +117,7 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Choose volunteer Propeties
-        public ObservableCollection<Volunteer> Volunteers { get; private set; }
+        public ObservableCollection<UserData> Volunteers { get; private set; }
 
         private bool _volunteersIsEmpty;
         public bool VolunteersIsEmpty
@@ -201,8 +201,6 @@ namespace AeccApp.Core.ViewModels
             });
         }
 
-
-
         private async void OnLeaseConversation(object sender, EventArgs e)
         {
             await ExecuteOperationAsync(() => ChatService.EndChatAsync());
@@ -244,7 +242,7 @@ namespace AeccApp.Core.ViewModels
 
         private Task OnRefreshVolunteersAsync(object obj)
         {
-            return ExecuteOperationAsync(FillVolunteersAsync);
+            return ExecuteOperationAsync(LoadVolunteersAsync);
         }
 
         private Command _chooseVolunteerCommand;
@@ -263,7 +261,7 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                var selectedVolunteer = obj as Volunteer;
+                var selectedVolunteer = obj as UserData;
                 PartyId = selectedVolunteer.PartyId;
                 //Muestra popup de espera en la conexión
                 NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
@@ -300,46 +298,46 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Private Methods
-        private async Task FillVolunteersAsync()
+        private async Task LoadVolunteersAsync()
         {
-            FilterVolunteersIsEmpty = false;
-            Volunteers.Clear();
-            _listVolunteers = await ChatService.GetListVolunteersAsync();
-            if (_listVolunteers != null)
-                Volunteers.AddRange(_listVolunteers);
+            try
+            {
+                Volunteers.Clear();
+                FilterVolunteersIsEmpty = false;
+                
+                _listVolunteers = await ChatService.GetListVolunteersAsync();
 
-            VolunteersIsEmpty = !Volunteers.Any();
-            CanFilterVolunteers = !VolunteersIsEmpty;
+                FillVolunters();  
+            }
+            finally
+            {
+                VolunteersIsEmpty = !Volunteers.Any();
+                CanFilterVolunteers = !VolunteersIsEmpty;
+            }
         }
 
         private async void OnChatAppliedFilters(object sender, EventArgs e)
         {
             await ExecuteOperationAsync(async () =>
             {
-                await NavigationService.HidePopupAsync();
-                if (ChatFiltersPopupVM.MinimumAge > ChatFiltersPopupVM.MaximumAge)
-                {
-                    //Temporary sliders (Not range sliders yet) not following filters logic
-                    return;
-                }
-
                 Volunteers.Clear();
-                foreach (var item in _listVolunteers)
-                {
-                    if (Int32.TryParse(item.Age, out int volunteerAge))
-                    {
-                        if (volunteerAge < ChatFiltersPopupVM.MaximumAge && volunteerAge > ChatFiltersPopupVM.MinimumAge)
-                        {
-                            Volunteers.Add(item);
-                        }
-                    }
-                }
+                await NavigationService.HidePopupAsync();
 
-                if (!Volunteers.Any())
-                {
-                    FilterVolunteersIsEmpty = true;
-                }
+                FillVolunters();
             });
+        }
+
+        private void FillVolunters()
+        {
+            foreach (var item in _listVolunteers)
+            {
+                if (item.Age < ChatFiltersPopupVM.MaximumAge && item.Age > ChatFiltersPopupVM.MinimumAge)
+                {
+                    Volunteers.Add(item);
+                }
+            }
+
+            FilterVolunteersIsEmpty = !Volunteers.Any();
         }
 
         private void OnChatState(ChatStateMessage obj)
@@ -376,7 +374,7 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private void OnAggregationsReceived(object sender, IList<Volunteer> newVolunteers)
+        private void OnAggregationsReceived(object sender, IList<UserData> newVolunteers)
         {
             for (int i = 0; i < newVolunteers.Count; i++)
             {

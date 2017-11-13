@@ -128,13 +128,16 @@ namespace AeccApp.Core.Services
             }
         }
 
+        private const string AGE_KEY = "extension_Age";
+        private const string GENDER_KEY = "extension_Gender";
+
         private void UpdateUserData(AuthenticationResult ar)
         {
             _token = ar.AccessToken;
             var user = ParseIdToken(ar.IdToken);
-            GSetting.User = new UserData()
+            GSetting.User = new CurrentUser()
             {
-                UserId = ar.UniqueId,
+                Id = ar.UniqueId,
                 Name = ar.User.Name,
                 FirstName = user["given_name"]?.ToString(),
                 Surname = user["family_name"]?.ToString(),
@@ -142,9 +145,14 @@ namespace AeccApp.Core.Services
             };
 
 
-            if (user["extension_Age"] != null)
+            if (user[AGE_KEY] != null)
             {
-                GSetting.User.Age = (int)user["extension_Age"];
+                GSetting.User.Age = (int)user[AGE_KEY];
+            }
+
+            if (user[GENDER_KEY] != null)
+            {
+                GSetting.User.Gender = user["extension_Gender"].ToString();
             }
 
             string jobTitle = user["jobTitle"]?.ToString() ?? string.Empty;

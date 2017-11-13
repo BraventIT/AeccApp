@@ -10,7 +10,7 @@ namespace AeccApp.Core.Models
         {
             get
             {
-                return (Activity.From == null || Activity.From.Id == GlobalSetting.Instance.User.UserId) ?
+                return (Activity.From == null || Activity.From.Id == GlobalSetting.Instance.User.Id) ?
                      MessageType.Sent : MessageType.Received;
             }
         }

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Compile Remove="Models\Request\Position.cs" />
+    <Compile Remove="Models\User\Volunteer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -39,6 +39,11 @@ namespace Aecc.Models
 
         private const char PropertySeparator = ';';
 
+        public Party()
+        {
+
+        }
+
         /// <summary>
         /// Constructor.
         /// </summary>
