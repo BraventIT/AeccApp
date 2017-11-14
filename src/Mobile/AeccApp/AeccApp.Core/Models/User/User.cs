@@ -13,15 +13,12 @@ namespace AeccApp.Core.Models
         public string Image { get; set; }
 
         public string FirstName { get; set; }
+
         public string Surname { get; set; }
 
         public string Name { get; set; }
 
-        //public object Telephone { get; set; }
-        //public string Address { get; set; }
-        //public string PostalCode { get; set; }
-        //public string City { get; set; }
-        //public string Province { get; set; }
+        public string Description { get; set; }
 
         public int? Age { get; set; }
         public string Gender { get; set; }

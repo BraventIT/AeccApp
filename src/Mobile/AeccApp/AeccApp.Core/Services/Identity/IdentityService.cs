@@ -48,6 +48,10 @@ namespace AeccApp.Core.Services
                     result = true;
                 }
             }
+            catch (ArgumentNullException)
+            {
+                LogOff();
+            }
             catch (MsalException ex)
             {
                 // Checking the exception message 

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace AeccApp.Core.Extensions
+namespace Aecc.Extensions
 {
-    public static class StringCompareExtension
+    public static class StringExtension
     {
         public static bool Contains(this string source, string toCheck, StringComparison comp)
         {
