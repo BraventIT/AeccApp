@@ -3,6 +3,7 @@ using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
+using AeccBot.MessageRouting;
 using Microsoft.Bot.Connector.DirectLine;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,7 @@ namespace AeccApp.Core.ViewModels
          
 
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
+            MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
             ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
             ChatService.MessagesReceived += OnMesagesReceived;
@@ -70,6 +72,7 @@ namespace AeccApp.Core.ViewModels
         public override void Deactivate()
         {
             MessagingCenter.Unsubscribe<ChatStateMessage>(this, string.Empty);
+            MessagingCenter.Unsubscribe<ChatEventMessage>(this, string.Empty);
             ChatFiltersPopupVM.AppliedFilters -= OnChatAppliedFilters;
             ChatLeaseConversationPopupVM.LeaseChatConversation -= OnLeaseConversation;
             ChatService.MessagesReceived -= OnMesagesReceived;
@@ -264,7 +267,7 @@ namespace AeccApp.Core.ViewModels
                 var selectedVolunteer = obj as UserData;
                 PartyId = selectedVolunteer.PartyId;
                 //Muestra popup de espera en la conexión
-                NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
+                await NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
                 await InitializeChatAsync();
             });
         }
@@ -319,14 +322,30 @@ namespace AeccApp.Core.ViewModels
 
         private bool VolunterFilter(UserData vol)
         {
-            return vol.Age < ChatFiltersPopupVM.MaximumAge
-                && vol.Age > ChatFiltersPopupVM.MinimumAge
+            return !vol.Age.HasValue ||
+                (vol.Age < ChatFiltersPopupVM.MaximumAge && vol.Age > ChatFiltersPopupVM.MinimumAge)
                 && (ChatFiltersPopupVM.Gender != null && vol.Gender.StartsWith(ChatFiltersPopupVM.Gender));
         }
 
         private void OnChatState(ChatStateMessage obj)
         {
             VolunteerIsActive = obj.VolunteerIsActive;
+        }
+
+        private async Task OnChatEventAsync(ChatEventMessage obj)
+        {
+            if (obj.Type == MessageRouterResultType.Connected)
+            {
+                Messages.Insert(0, new Message
+                {
+                    DateTime = DateTime.UtcNow,
+                    Activity = new Activity()
+                    {
+                        Text = obj.Message
+                    }
+                });
+                await NavigationService.HidePopupAsync();
+            }
         }
 
         private async Task InitializeChatAsync()
@@ -348,11 +367,6 @@ namespace AeccApp.Core.ViewModels
         {
             foreach (var message in messages.Reverse())
             {
-                if (message.Activity.Text.StartsWith("ahora estás hablando con"))
-                {
-                    //Oculta popup de espera en la conexión //TODO Revisar cuando llegue codigo unico de mensaje
-                    NavigationService.HidePopupAsync();
-                }
                 Messages.Insert(0, message);
             }
         }

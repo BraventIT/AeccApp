@@ -15,7 +15,6 @@ namespace AeccApp.Core.Messages
 
         public string MessageTitle { get; set; }
 
-
         public ChatEventMessage(MessageRouterResultType type,  string message)
         {
             Type = type;
