@@ -76,7 +76,7 @@
                     </Grid>
                 </StackLayout>
 
-                <BoxView HeightRequest="1" Color="Black" />
+                <BoxView HeightRequest="1" Color="LightGray" />
 
                 <Button
                     Margin="10"

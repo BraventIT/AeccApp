@@ -58,7 +58,7 @@
                             Grid.Row="2"
                             Grid.ColumnSpan="2"
                             HeightRequest="1"
-                            Color="Black" />
+                            Color="LightGray" />
 
                     </Grid>
                 </ViewCell>

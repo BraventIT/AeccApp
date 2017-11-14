@@ -95,7 +95,7 @@
                             Grid.Row="2"
                             Grid.ColumnSpan="3"
                             HeightRequest="1"
-                            Color="Black" />
+                            Color="LightGray" />
 
                     </Grid>
                 </ViewCell>
