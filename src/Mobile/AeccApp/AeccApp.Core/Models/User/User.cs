@@ -20,6 +20,11 @@ namespace AeccApp.Core.Models
 
         public string Description { get; set; }
 
+        public string DisplayDescription
+        {
+            get { return $"{Age} años - {Description}"; }
+        }
+
         public int? Age { get; set; }
         public string Gender { get; set; }
 
