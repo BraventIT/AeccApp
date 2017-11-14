@@ -23,6 +23,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
 
@@ -37,9 +38,9 @@
                         <Label
                             Grid.Row="1"
                             Grid.Column="0"
-                            Margin="20,10,0,0"
+                            Margin="20,0,0,5"
                             FontAttributes="Bold"
-                            FontSize="{StaticResource MediumSize}"
+                            FontSize="{StaticResource MidMediumSize}"
                             Text="{Binding Province}"
                             TextColor="{StaticResource GreyTextDark}" />
 
@@ -52,6 +53,12 @@
                             HorizontalOptions="End"
                             SourcePlatform="right_arrow"
                             WidthRequest="25" />
+
+                        <BoxView
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            Color="Black" />
 
                     </Grid>
                 </ViewCell>

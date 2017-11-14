@@ -21,6 +21,7 @@
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
 
@@ -41,6 +42,11 @@
                             HorizontalOptions="End"
                             SourcePlatform="right_arrow"
                             WidthRequest="25" />
+                        <BoxView
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            Color="Black" />
 
                     </Grid>
                 </ViewCell>
@@ -108,7 +114,9 @@
             <ListView.Footer>
                 <StackLayout HorizontalOptions="Center">
                     <Label
+                        FontSize="{StaticResource LargeSize}"
                         HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
                         IsVisible="{Binding ProvinceHasNotRequestAvailable}"
                         Text="{Binding [HomeRequestChooseTypeNoRequestsInProvince]}" />
                     <Grid>
@@ -122,6 +130,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label
@@ -138,6 +147,11 @@
                             HorizontalOptions="End"
                             SourcePlatform="right_arrow"
                             WidthRequest="25" />
+                        <BoxView
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            Color="Black" />
                     </Grid>
                 </StackLayout>
             </ListView.Footer>

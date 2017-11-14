@@ -24,6 +24,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <ctrl:CustomImage
@@ -89,6 +90,11 @@
                             SourcePlatform="right_arrow"
                             VerticalOptions="Center"
                             WidthRequest="30" />
+                        <BoxView
+                            Grid.Row="2"
+                            Grid.ColumnSpan="3"
+                            HeightRequest="1"
+                            Color="Black" />
 
                     </Grid>
                 </ViewCell>
