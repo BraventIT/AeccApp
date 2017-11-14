@@ -23,7 +23,7 @@ namespace AeccApp.Core.Models
         public int? Age { get; set; }
         public string Gender { get; set; }
 
-        public bool? IsMen
+        public bool? IsMan
         {
             get
             {

@@ -35,10 +35,50 @@ namespace AeccApp.Core.ViewModels.Popups
             set { Set(ref _maximumAge, value); }
         }
 
-        public enum Gender
+        public string Gender { get; set; }
+
+        public bool GenderMen
         {
-            Male,
-            Female
+            get
+            {
+                return Gender.StartsWith("h", StringComparison.CurrentCultureIgnoreCase);
+            }
+            set
+            {
+                if (!value)
+                {
+                    if (!GenderWomen)
+                    {
+                        Gender = null;
+                    }
+                }
+                else
+                    Gender = "h";
+
+                NotifyPropertyChanged(nameof(GenderWomen));
+            }
+        }
+
+        public bool GenderWomen
+        {
+            get
+            {
+                return Gender.StartsWith("m", StringComparison.CurrentCultureIgnoreCase);
+            }
+            set
+            {
+                if (!value)
+                {
+                    if (!GenderMen)
+                    {
+                        Gender = null;
+                    }
+                }
+                else
+                    Gender = "m";
+
+                NotifyPropertyChanged(nameof(GenderMen));
+            }
         }
 
         private Command _applyFiltersCommand;

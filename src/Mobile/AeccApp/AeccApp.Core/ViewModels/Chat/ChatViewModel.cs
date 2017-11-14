@@ -319,8 +319,9 @@ namespace AeccApp.Core.ViewModels
 
         private bool VolunterFilter(UserData vol)
         {
-            return vol.Age < ChatFiltersPopupVM.MaximumAge 
-                && vol.Age > ChatFiltersPopupVM.MinimumAge;
+            return vol.Age < ChatFiltersPopupVM.MaximumAge
+                && vol.Age > ChatFiltersPopupVM.MinimumAge
+                && (ChatFiltersPopupVM.Gender != null && vol.Gender.StartsWith(ChatFiltersPopupVM.Gender));
         }
 
         private void OnChatState(ChatStateMessage obj)
