@@ -140,7 +140,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _resetAddressFinderCommand ??
-                    (_resetAddressFinderCommand = new Command(o => OnResetAddressFinder(), o => !IsBusy));
+                    (_resetAddressFinderCommand = new Command(o => OnResetAddressFinder()));
             }
         }
 

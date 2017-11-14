@@ -92,6 +92,10 @@
         <Setter Property="WidthRequest" Value="{StaticResource ImageButtonLargeWidth}" />
     </Style>
 
+    <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
+        <Setter Property="WidthRequest" Value="{StaticResource ImageButtonLargeWidth}" />
+    </Style>
+
     <Style
         x:Key="SwitchTextStyle"
         BasedOn="{StaticResource GreyLabelStyle}"

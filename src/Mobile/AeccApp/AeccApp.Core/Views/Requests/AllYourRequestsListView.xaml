@@ -84,7 +84,7 @@
             <!--  Sub navigation bar with home and hospital tabs  -->
             <StackLayout
                 BackgroundColor="Gray"
-                HeightRequest="65"
+                HeightRequest="100"
                 HorizontalOptions="FillAndExpand">
                 <Grid HorizontalOptions="Center">
                     <Grid.ColumnDefinitions>
@@ -113,7 +113,10 @@
                             SourcePlatform="bell"
                             VerticalOptions="Center"
                             WidthRequest="50" />
-                        <Label Text="{Binding [AllYourRequestsHome]}" VerticalOptions="Center" />
+                        <Label
+                            FontSize="{StaticResource MediumSize}"
+                            Text="{Binding [AllYourRequestsHome]}"
+                            VerticalOptions="Center" />
                     </StackLayout>
 
                     <StackLayout
@@ -135,7 +138,10 @@
                             SourcePlatform="bell"
                             VerticalOptions="Center"
                             WidthRequest="50" />
-                        <Label Text="{Binding [AllYourRequestsHospital]}" VerticalOptions="Center" />
+                        <Label
+                            FontSize="{StaticResource MediumSize}"
+                            Text="{Binding [AllYourRequestsHospital]}"
+                            VerticalOptions="Center" />
                     </StackLayout>
                 </Grid>
             </StackLayout>
@@ -149,8 +155,14 @@
                         IsVisible="{Binding IsHomeRequestsListEmpty}"
                         VerticalOptions="Center">
                         <ctrl:CustomImage Source="round_question_icon" />
-                        <Label Text="{Binding [AllYourRequestsListOops]}" />
-                        <Label Text="{Binding [AllYourRequestsListNoHomeRequests]}" />
+                        <Label
+                            FontSize="{StaticResource LargeSize}"
+                            HorizontalOptions="Center"
+                            Text="{Binding [AllYourRequestsListOops]}" />
+                        <Label
+                            FontSize="{StaticResource LargeSize}"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding [AllYourRequestsListNoHomeRequests]}" />
                     </StackLayout>
 
                     <ListView
