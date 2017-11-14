@@ -23,6 +23,7 @@ namespace Aecc.Models
             FirstName = Properties?[nameof(FirstName)]?.ToString();
             Surname = Properties?[nameof(Surname)]?.ToString();
             Email = Properties?[nameof(Email)]?.ToString();
+            Description = Properties?[nameof(Description)]?.ToString();
             Age = Properties?[nameof(Age)]?.ToObject<int>();
             Gender = Properties?[nameof(Gender)]?.ToString();
 #endif
@@ -35,6 +36,8 @@ namespace Aecc.Models
         public string FirstName { get; set; }
 
         public string Surname { get; set; }
+
+        public string Description { get; set; }
 
         public int? Age { get; set; }
 
