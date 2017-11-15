@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Xamarin.Forms;
-using AeccApp.Core.Controls;
-using AeccApp.Droid.Renderers;
-using Xamarin.Forms.Platform.Android;
+﻿using AeccApp.Droid.Renderers;
 using Android.Graphics.Drawables;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(CustomButton), typeof(CustomButtonRender))]
+[assembly: ExportRenderer(typeof(Xamarin.Forms.Button), typeof(ButtonRender))]
 
 namespace AeccApp.Droid.Renderers
 {
-    public class CustomButtonRender : ButtonRenderer
+    public class ButtonRender : ButtonRenderer
     {
 
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Button> e)
