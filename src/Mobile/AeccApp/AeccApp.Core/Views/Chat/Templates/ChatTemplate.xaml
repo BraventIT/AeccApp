@@ -109,8 +109,6 @@
                             ShapeColor="#b9bfc9"
                             WidthRequest="14" />
 
-
-
                         <ctrl:CustomImage
                             Grid.RowSpan="2"
                             Grid.Column="0"
