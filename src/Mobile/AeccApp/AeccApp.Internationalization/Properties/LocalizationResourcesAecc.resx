@@ -135,6 +135,9 @@
   <data name="AllYourRequestsListOops" xml:space="preserve">
     <value>¡Ups!</value>
   </data>
+  <data name="ChatConnectingPopupText" xml:space="preserve">
+    <value>Conectando con el voluntario . . .</value>
+  </data>
   <data name="ChatListViewText" xml:space="preserve">
     <value>Abre un nuevo chat, elige y habla con el voluntario que más se adapte a tus preferencias y necesidades.</value>
   </data>
