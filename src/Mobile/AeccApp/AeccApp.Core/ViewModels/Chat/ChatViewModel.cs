@@ -35,12 +35,6 @@ namespace AeccApp.Core.ViewModels
 
         public override Task ActivateAsync()
         {
-            if (IsVolunteer == false && Settings.TermsAndConditionsAccept == false)
-            {
-                return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
-            }
-
-
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
@@ -262,14 +256,21 @@ namespace AeccApp.Core.ViewModels
 
         private Task OnChooseVolunteerAsync(object obj)
         {
-            return ExecuteOperationAsync(async () =>
+            if (IsVolunteer == false && Settings.TermsAndConditionsAccept == false)
             {
-                var selectedVolunteer = obj as UserData;
-                PartyId = selectedVolunteer.PartyId;
+                return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
+            }
+            else
+            {
+                return ExecuteOperationAsync(async () =>
+                {
+                    var selectedVolunteer = obj as UserData;
+                    PartyId = selectedVolunteer.PartyId;
                 //Muestra popup de espera en la conexión
                 await NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
-                await InitializeChatAsync();
-            });
+                    await InitializeChatAsync();
+                });
+            }
         }
         #endregion
 
@@ -391,7 +392,7 @@ namespace AeccApp.Core.ViewModels
             }
             else
             {
-                //BUSQUEDA POR GENERO NO FUNCIONAL HASTA QUE AD DEVUELVA 'H' O 'M'
+                //FILTRADO POR GENERO NO FUNCIONAL HASTA QUE AD DEVUELVA 'H' O 'M' EN VEZ DE null
                 _volunteers.AddRange(_listVolunteers.Where((o => o.Gender.StartsWith(ChatFiltersPopupVM.Gender, StringComparison.CurrentCultureIgnoreCase) && o.Age < ChatFiltersPopupVM.MaximumAge
                     && o.Age > ChatFiltersPopupVM.MinimumAge)));
             }
