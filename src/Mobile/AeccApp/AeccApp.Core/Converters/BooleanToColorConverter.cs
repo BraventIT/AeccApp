@@ -9,7 +9,7 @@ namespace AeccApp.Core.Converters
     public class BooleanToColorConverter : IValueConverter
     {
 
-        public BooleanToColorConverter() : this(Color.Black, Color.Transparent)
+        public BooleanToColorConverter() : this(Color.LightGreen, Color.Transparent)
         {
 
         }
