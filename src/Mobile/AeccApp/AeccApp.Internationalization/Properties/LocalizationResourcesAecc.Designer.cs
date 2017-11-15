@@ -116,6 +116,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Conectando con el voluntario . . ..
+        /// </summary>
+        public static string ChatConnectingPopupText {
+            get {
+                return ResourceManager.GetString("ChatConnectingPopupText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Abre un nuevo chat, elige y habla con el voluntario que más se adapte a tus preferencias y necesidades..
         /// </summary>
         public static string ChatListViewText {

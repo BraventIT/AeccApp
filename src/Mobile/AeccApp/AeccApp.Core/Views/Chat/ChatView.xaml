@@ -42,14 +42,15 @@
     </ContentPage.ToolbarItems>
 
     <Grid>
+        <!--  INDICATOR  -->
+        <ctrl:CustomActivityIndicatorControl />
+
         <!--  Chat page  -->
         <temp:ChatTemplate IsVisible="{Binding PartyId, Converter={StaticResource IsNotNullConverter}}" />
 
         <!--  Volunteer list page  -->
         <temp:ChooseVolunteerTemplate IsVisible="{Binding PartyId, Converter={StaticResource IsNullConverter}}" />
 
-        <!--  INDICATOR  -->
-        <ctrl:CustomActivityIndicatorControl />
     </Grid>
 
 </v:BaseContentPage>
