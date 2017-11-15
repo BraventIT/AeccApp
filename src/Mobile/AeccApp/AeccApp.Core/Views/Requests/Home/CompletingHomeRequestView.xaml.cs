@@ -20,11 +20,7 @@ namespace AeccApp.Core.Views
             MessagingCenter.Subscribe<GeolocatorMessage>(this, string.Empty, MoveCameraMap);
         }
 
-        private void Map_InfoWindowClicked(object sender, InfoWindowClickedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
+   
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
-    public class ChatFiltersPopupViewModel: ViewModelBase
+    public class ChatFiltersPopupViewModel : ViewModelBase
     {
         private const int MIN_AGE = 18;
         private const int MAX_AGE = 80;
@@ -35,11 +35,79 @@ namespace AeccApp.Core.ViewModels.Popups
             set { Set(ref _maximumAge, value); }
         }
 
-        public enum Gender
+
+
+        public string Gender { get; set; }
+
+
+        private bool _genderMen;
+
+        public bool GenderMen
         {
-            Male,
-            Female
+
+            get { return Gender == null ? false : Gender.StartsWith("h", StringComparison.CurrentCultureIgnoreCase); }
+            set { Set(ref _genderMen, value); }
         }
+    
+
+        private bool _genderWomen;
+
+        public bool GenderWomen
+        {
+            get { return Gender == null ? false : Gender.StartsWith("m", StringComparison.CurrentCultureIgnoreCase); }
+            set { Set(ref _genderWomen, value); }
+
+        }
+
+
+        private Command _switchGenderCommand;
+        public ICommand SwitchGenderCommand
+        {
+            get
+            {
+                return _switchGenderCommand ??
+                    (_switchGenderCommand = new Command(OnSwitchGenderCommand, o => !IsBusy));
+            }
+        }
+
+        void OnSwitchGenderCommand(object obj)
+        {
+            switch (obj)
+            {
+                case "0"://female
+                    if(Gender.StartsWith("m", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        Gender = "default";
+                    }
+                    else
+                    {
+                    Gender = "m";
+                    }
+
+                    NotifyPropertyChanged(nameof(GenderMen));
+                    NotifyPropertyChanged(nameof(GenderWomen));
+
+                    break;
+
+                case "1"://male
+                    if (Gender.StartsWith("h", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        Gender = "default";
+                    }
+                    else
+                    {
+                        Gender = "h";
+                    }
+                    NotifyPropertyChanged(nameof(GenderMen));
+                    NotifyPropertyChanged(nameof(GenderWomen));
+                    break;
+
+            }
+
+        }
+
+
+
 
         private Command _applyFiltersCommand;
         public ICommand ApplyFiltersCommand
@@ -47,12 +115,13 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _applyFiltersCommand ??
-                    (_applyFiltersCommand = new Command(o=> AppliedFilters?.Invoke(this, null)));
+                    (_applyFiltersCommand = new Command(o => AppliedFilters?.Invoke(this, null)));
             }
         }
 
         public void Reset()
         {
+            Gender = "default";
             MinimumAge = MIN_AGE;
             MaximumAge = MAX_AGE;
         }

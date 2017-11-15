@@ -223,7 +223,8 @@ namespace AeccBot.MessageRouting
                     await MessageRouterManager.SendMessageToPartyByBotAsync(aggregationParty, messageActivity);
 
                     eventToConversationClient = string.Empty;
-                    messageToConversationClient = AeccStrings.EngagementInitiated_ClientText;
+                    if (!conversationClientParty.AllowBackchannel)
+                        messageToConversationClient = AeccStrings.EngagementInitiated_ClientText;
                 }
                 else
                     messageToConversationClient = AeccStrings.EngagementInitiated_AggregationNotFoundClientText;
@@ -255,7 +256,6 @@ namespace AeccBot.MessageRouting
                 string commandKeyword = AeccStrings.GetCommandKeyword(conversationClientParty, conversationOwnerParty);
                 string endEngagementCommand = $"{commandKeyword} {Commands.CommandEndEngagement}";
 
-                eventToConversationClient = string.Empty;
                 eventToConversationOwner = string.Empty;
                 messageToConversationOwner = (conversationOwnerParty.AllowBackchannel) ?
                     string.Format(AeccStrings.EngagementAdded_OwnerEventText, conversationClientName) :

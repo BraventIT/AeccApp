@@ -135,6 +135,9 @@
   <data name="AllYourRequestsListOops" xml:space="preserve">
     <value>¡Ups!</value>
   </data>
+  <data name="ChatConnectingPopupText" xml:space="preserve">
+    <value>Conectando con el voluntario . . .</value>
+  </data>
   <data name="ChatListViewText" xml:space="preserve">
     <value>Abre un nuevo chat, elige y habla con el voluntario que más se adapte a tus preferencias y necesidades.</value>
   </data>
@@ -380,6 +383,9 @@
   </data>
   <data name="NewHomeAddressViewNameTheAddressPlaceHolder" xml:space="preserve">
     <value>Ponle un nombre a esta dirección</value>
+  </data>
+  <data name="NewHomeAddressViewNoHospitalsInList" xml:space="preserve">
+    <value>No se han encontrado resultados con esta busqueda. Intentalo de nuevo.</value>
   </data>
   <data name="NewHomeAddressViewNumberPlaceHolder" xml:space="preserve">
     <value>Número</value>

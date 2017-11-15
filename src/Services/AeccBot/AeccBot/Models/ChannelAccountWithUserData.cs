@@ -4,20 +4,16 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.DirectLine;
 #endif
 using Newtonsoft.Json;
+using System;
 
 namespace Aecc.Models
 {
+  
     public class ChannelAccountWithUserData : ChannelAccount
     {
         public ChannelAccountWithUserData()
         {
 
-        }
-
-        public ChannelAccountWithUserData(string id = null, string name = null)
-        {
-            Id = id;
-            Name = name;
         }
 
         public ChannelAccountWithUserData(ChannelAccount account)
@@ -27,6 +23,9 @@ namespace Aecc.Models
             FirstName = Properties?[nameof(FirstName)]?.ToString();
             Surname = Properties?[nameof(Surname)]?.ToString();
             Email = Properties?[nameof(Email)]?.ToString();
+            Description = Properties?[nameof(Description)]?.ToString();
+            Age = Properties?[nameof(Age)]?.ToObject<int>();
+            Gender = Properties?[nameof(Gender)]?.ToString();
 #endif
             Id = account.Id;
             Name = account.Name;
@@ -38,7 +37,11 @@ namespace Aecc.Models
 
         public string Surname { get; set; }
 
-        public int Age { get; set; }
+        public string Description { get; set; }
+
+        public int? Age { get; set; }
+
+        public string Gender { get; set; }
 
         public string ToJsonString()
         {

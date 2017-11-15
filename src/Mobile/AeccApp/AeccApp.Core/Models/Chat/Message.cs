@@ -10,12 +10,13 @@ namespace AeccApp.Core.Models
         {
             get
             {
-                return (Activity.From == null || Activity.From.Id == GlobalSetting.Instance.User.UserId) ?
+                return (Activity.From == null || Activity.From.Id == GlobalSetting.Instance.User.Id) ?
                      MessageType.Sent : MessageType.Received;
             }
         }
 
         public DateTime DateTime { get; set; }
+
         public string UserTime
         {
             get {

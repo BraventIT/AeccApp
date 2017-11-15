@@ -14,9 +14,33 @@
         Style="{StaticResource BorderStyle}"
         VerticalOptions="Center">
         <ContentView Style="{StaticResource InternalViewStyle}">
-            <StackLayout Margin="30">
 
-                <Label Text="tESTtESTConnectinGtESTtEST" />
+            <StackLayout
+                Margin="30"
+                Padding="30"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <ActivityIndicator
+                    HeightRequest="50"
+                    HorizontalOptions="Center"
+                    IsRunning="True"
+                    IsVisible="True"
+                    VerticalOptions="Center"
+                    Color="{StaticResource AccentColor}">
+                    <ActivityIndicator.WidthRequest>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="50"
+                            WinPhone="400"
+                            iOS="50" />
+                    </ActivityIndicator.WidthRequest>
+                </ActivityIndicator>
+                <Label
+                    Margin="10"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource TitleLabelStyle}"
+                    Text="{Binding [ChatConnectingPopupText]}" />
 
             </StackLayout>
         </ContentView>

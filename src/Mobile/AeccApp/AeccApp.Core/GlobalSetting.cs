@@ -16,19 +16,22 @@ namespace AeccApp.Core
 
             // AZURE TEST BOT
             AeccBotSecret = "xb0KJwZiN3g.cwA.Crw.MkqbuqDBWCEtkOv8sprBqScs6AWw9IBDKaFXzjnh3M8";
+            // LOCAL BOT ALFRA
+            //AeccBotSecret = "Ch31g-A6LJo.cwA.AZo.-GJpdQLh0kGznJxIlBn926-dKWSrW3qXTC81cNRF6wc";
 
             AzureAdB2COptions = new AzureAdB2COptions()
             {
                 Tenant = "alfraso.onmicrosoft.com",
                 ClientId = "24b548ab-933a-47c0-9b3c-c9b334219cc7",
-                SignUpSignInPolicyId = "B2C_1_inicioDeSesion",
+                SignUpSignInPolicyId = "B2C_1_SignUpSignIn",
                 EditProfilePolicyId = "B2C_1_EditProfile",
                 ResetPasswordPolicyId = "B2C_1_resetPassword",
                 AppID = "aeccapi",
                 Scope = "read"
             };
 
-            ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
+            ApiEndpoint = "http://alfraaeccapi.azurewebsites.net";
+            //"http://alfraso-aeccapi.azurewebsites.net";
         }
 
         public static GlobalSetting Instance
@@ -67,7 +70,7 @@ namespace AeccApp.Core
         #endregion
 
         #region User data
-        public UserData User { get; set; }
+        public CurrentUser User { get; set; }
         #endregion
         
     }

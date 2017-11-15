@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Aecc.Extensions;
+using Aecc.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Aecc.Models;
-using AeccApi.Extensions;
-using Microsoft.AspNetCore.Authorization;
-using AeccApi.Models;
 
 namespace AeccApi.Controllers
 {

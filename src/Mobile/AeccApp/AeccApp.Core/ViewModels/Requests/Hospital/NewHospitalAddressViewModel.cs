@@ -1,4 +1,5 @@
-﻿using Aecc.Models;
+﻿using Aecc.Extensions;
+using Aecc.Models;
 using AeccApp.Core.Extensions;
 using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
@@ -83,6 +84,13 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _addressFinder, value); }
         }
 
+        private bool _hospitalsListIsEmpty;
+        public bool HospitalsListIsEmpty
+        {
+            get { return _hospitalsListIsEmpty; }
+            set { Set(ref _hospitalsListIsEmpty, value); }
+        }
+
         private bool _isSearchIconVisible;
         public bool IsSearchIconVisible
         {
@@ -141,6 +149,7 @@ namespace AeccApp.Core.ViewModels
             AddressSelected = null;
             AddressFinder = string.Empty;
             IsSearchIconVisible = false;
+            HospitalsListIsEmpty = false;
             Hospitals.Clear();
             await ExecuteOperationAsync(async cancelToken =>
             {
@@ -160,13 +169,14 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _addressChangedCommand ??
-                    (_addressChangedCommand = new Command(OnAddressChanged));
+                   (_addressChangedCommand = new Command(o => OnAddressChanged(o)));
             }
         }
 
-        private async void OnAddressChanged(object obj)
+        private async Task OnAddressChanged(object obj)
         {
-
+            HospitalsListIsEmpty = false;
+            var hospitals = GlobalSetting.Instance.Hospitals;
             string result = string.Empty;
             if (obj is string)
             {
@@ -184,7 +194,6 @@ namespace AeccApp.Core.ViewModels
                     {
                         if (!Hospitals.Any())
                         {
-                            var hospitals = GlobalSetting.Instance.Hospitals;
                             Hospitals.AddRange(hospitals);
                         }
                     });
@@ -194,6 +203,16 @@ namespace AeccApp.Core.ViewModels
                     RefreshHospitalList(result);
                     IsSearchIconVisible = true;
                 }
+            }
+            if (result.Length < 1)
+            {
+                IsSearchIconVisible = false;             
+                Hospitals.Clear();
+                Hospitals.AddRange(hospitals);
+            }
+            else
+            {
+                IsSearchIconVisible = true;
             }
         }
 
@@ -245,6 +264,7 @@ namespace AeccApp.Core.ViewModels
 
         async void OnHospitalListTabCommand(object obj)
         {
+            HospitalsListIsEmpty = false;
             SwitchBetweenAndHospitalList = false;
             await ExecuteOperationAsync(async cancelToken =>
             {
@@ -287,13 +307,20 @@ namespace AeccApp.Core.ViewModels
 
         #region Methods
 
-         void RefreshHospitalList(string search)
+        void RefreshHospitalList(string search)
         {
+            HospitalsListIsEmpty = false;
             Hospitals.Clear();
             var hospitals = GlobalSetting.Instance.Hospitals;
-            Hospitals.AddRange(hospitals.Where(o => o.Name.StartsWith(search, StringComparison.CurrentCultureIgnoreCase)));
-
-            
+            Hospitals.AddRange(hospitals.Where(o => o.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase)));
+            if (Hospitals.Count == 0)
+            {
+                Hospitals.AddRange(hospitals.Where(o => o.Province.Contains(search, StringComparison.CurrentCultureIgnoreCase)));
+            }
+            if (Hospitals.Count == 0)
+            {
+                HospitalsListIsEmpty = true;
+            }
         }
 
         private async Task<Xamarin.Forms.GoogleMaps.Position> GetLocationForHospitalAsync(Hospital hospital, CancellationToken cancelToken)

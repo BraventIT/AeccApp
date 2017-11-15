@@ -3,6 +3,7 @@ using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
+using AeccBot.MessageRouting;
 using Plugin.Permissions.Abstractions;
 using System;
 using System.Threading.Tasks;
@@ -159,6 +160,10 @@ namespace AeccApp.Core.ViewModels
 
         private async Task OnChatEventAsync(ChatEventMessage obj)
         {
+            if (obj.Type == MessageRouterResultType.Connected)
+                return;
+
+            await NavigationService.HidePopupAsync();
             await NavigationService.NavigateToAsync<ChatEventViewModel>(obj, isModal: true);
         }
         #endregion
