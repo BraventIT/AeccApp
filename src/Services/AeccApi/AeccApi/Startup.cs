@@ -25,7 +25,8 @@ namespace AeccApi
         {
             services.
                 AddDbContext<AeccContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AeccConnection")))
-                .Configure<EmailOptions>(Configuration.GetSection("EmailData"));
+                .Configure<EmailOptions>(Configuration.GetSection("EmailData"))
+                .Configure<NewsOptions>(Configuration.GetSection("NewsData"));
 
             // Email service
             services.AddTransient<IEmailService, EmailService>();
