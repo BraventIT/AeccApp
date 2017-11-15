@@ -29,7 +29,8 @@
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignEntitlements>
+    </CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -171,6 +172,7 @@
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\TabbedPageRenderer.cs" />
     <Compile Include="Services\LocationProviderSettings.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
@@ -178,8 +180,12 @@
     <Compile Include="Services\FileProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Entitlements.plist" />
-    <None Include="Info.plist" />
+    <None Include="Entitlements.plist">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
     <BundleResource Include="Resources\AppIcons\Contents.json" />
   </ItemGroup>
   <ItemGroup>
@@ -387,6 +393,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\mock_new_firma_convenio.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\logoHeader.png">
+      <Link>Resources\logoHeader.png</Link>
+    </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -38,7 +38,7 @@
                         VerticalOptions="Center" />
                 </StackLayout>
 
-                <ctrl:CustomButton
+                <Button
                     Margin="20,0"
                     Command="{Binding EnterCommand}"
                     HorizontalOptions="CenterAndExpand"
