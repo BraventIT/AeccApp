@@ -1,7 +1,10 @@
-﻿using Android.App;
+﻿using AeccApp.Core.Messages;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using Android.Views;
+using Android.Widget;
 using Microsoft.Identity.Client;
 using Plugin.Permissions;
 using Xamarin;
@@ -25,6 +28,16 @@ namespace AeccApp.Droid
 
             LoadApplication(new App());
             App.UiParent = new UIParent(Forms.Context as Activity);
+
+
+            // Only logo visible in dashboard page
+            MessagingCenter.Subscribe<ToolbarMessage>(this, string.Empty, m =>
+            {
+                var logo = FindViewById<ImageView>(Resource.Id.LogoImageLayout);
+
+                logo.Visibility = (m.ShowLogo) ?
+                    ViewStates.Visible : ViewStates.Invisible;
+            });
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
