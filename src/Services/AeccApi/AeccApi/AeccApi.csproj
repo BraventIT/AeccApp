@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\..\Mobile\AeccApp\AeccApp.Core\Extensions\ListExtension.cs" Link="Extensions\ListExtension.cs" />
     <Compile Include="..\..\..\Mobile\AeccApp\AeccApp.Core\Extensions\StringExtension.cs" Link="Extensions\StringExtension.cs" />
   </ItemGroup>
   

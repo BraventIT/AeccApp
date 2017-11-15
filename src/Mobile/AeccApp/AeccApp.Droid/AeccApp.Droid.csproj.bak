@@ -9,7 +9,7 @@
     <RootNamespace>AeccApp.Droid</RootNamespace>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <AssemblyName>AeccApp.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -60,7 +60,7 @@
     <Compile Include="..\AeccApp.UWP\CustomRenderer\XLabs\ImageButtonRenderer.Shared.cs">
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
-    <Compile Include="Renderers\CustomButtonRender.cs" />
+    <Compile Include="Renderers\ButtonRender.cs" />
     <Compile Include="Services\LocationProviderSettings.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
