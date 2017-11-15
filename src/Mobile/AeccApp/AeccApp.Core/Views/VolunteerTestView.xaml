@@ -10,7 +10,7 @@
     vm:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{StaticResource BackgroundColor}"
     NavigationPage.HasNavigationBar="false">
-    
+
     <ScrollView HorizontalOptions="Center">
         <StackLayout
             Margin="12,0"
@@ -38,12 +38,12 @@
                         VerticalOptions="Center" />
                 </StackLayout>
 
-                <Button
+                <ctrl:CustomButton
                     Margin="20,0"
                     Command="{Binding EnterCommand}"
                     HorizontalOptions="CenterAndExpand"
                     Style="{StaticResource ButtonStyle}"
-                    Text="Continuar" />
+                    Text="CONTINUAR" />
 
             </StackLayout>
 

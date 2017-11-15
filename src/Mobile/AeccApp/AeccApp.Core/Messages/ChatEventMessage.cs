@@ -1,9 +1,4 @@
 ﻿using AeccBot.MessageRouting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AeccApp.Core.Messages
 {
@@ -14,7 +9,6 @@ namespace AeccApp.Core.Messages
         public string Message { get; set; }
 
         public string MessageTitle { get; set; }
-
 
         public ChatEventMessage(MessageRouterResultType type,  string message)
         {

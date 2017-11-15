@@ -13,7 +13,7 @@
     vm:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{StaticResource BackgroundColor}"
     IconPlatform="home_tab_icon">
-    
+
     <Grid>
         <ScrollView>
             <StackLayout>

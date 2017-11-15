@@ -16,6 +16,7 @@ namespace AeccApp.Core.Models
         }
 
         public DateTime DateTime { get; set; }
+
         public string UserTime
         {
             get {

@@ -12,7 +12,7 @@
     <OnPlatform
         x:Key="ButtonWidth"
         x:TypeArguments="x:Double"
-        Android="170"
+        Android="211"
         WinPhone="150"
         iOS="150" />
 
@@ -31,6 +31,9 @@
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="WidthRequest" Value="{StaticResource ButtonWidth}" />
+        <Setter Property="HeightRequest" Value="44" />
+        <Setter Property="BorderRadius" Value="22" />
+        <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
     </Style>
