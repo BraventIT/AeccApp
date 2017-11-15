@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Xamarin.Forms;
-using AeccApp.Core.Controls;
+﻿using Xamarin.Forms;
 using AeccApp.Droid.Renderers;
 using Xamarin.Forms.Platform.Android;
-using System.Reflection;
 using DLToolkit.Forms.Controls;
 
 [assembly: ExportRenderer(typeof(FlowListView), typeof(NonScrollableListViewRenderer))]
@@ -21,11 +8,7 @@ namespace AeccApp.Droid.Renderers
 {
     public class NonScrollableListViewRenderer : ListViewRenderer
     {
-        public static void Initialize()
-        {
-            var test = DateTime.UtcNow;
-
-        }
+       
         /// <summary>
         /// Deactivates Scroll of NonScrollableListView control
         /// </summary>

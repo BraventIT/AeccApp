@@ -60,6 +60,7 @@
     <Compile Include="..\AeccApp.UWP\CustomRenderer\XLabs\ImageButtonRenderer.Shared.cs">
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
+    <Compile Include="Renderers\CustomButtonRender.cs" />
     <Compile Include="Services\LocationProviderSettings.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,7 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView">
-      <Version>2.0.8</Version>
+      <Version>2.0.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Identity.Client">
       <Version>1.1.1-alpha0393</Version>
@@ -141,13 +142,13 @@
       <Version>25.4.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>2.4.0.38779</Version>
+      <Version>2.4.0.74863</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.GoogleMaps">
-      <Version>2.2.0</Version>
+      <Version>2.2.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.RangeSlider">
-      <Version>0.7.13</Version>
+      <Version>0.7.14</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
