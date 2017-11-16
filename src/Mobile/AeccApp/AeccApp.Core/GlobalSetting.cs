@@ -30,8 +30,7 @@ namespace AeccApp.Core
                 Scope = "read"
             };
 
-            ApiEndpoint = "http://alfraaeccapi.azurewebsites.net";
-            //"http://alfraso-aeccapi.azurewebsites.net";
+            ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
         }
 
         public static GlobalSetting Instance

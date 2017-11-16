@@ -70,7 +70,7 @@
                         VerticalOptions="Center"
                         WidthRequest="100">
                         <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="0" />
+                            <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="m" />
                         </ctrl:CustomImage.GestureRecognizers>
                     </ctrl:CustomImage>
 
@@ -84,7 +84,7 @@
                         VerticalOptions="Center"
                         WidthRequest="100">
                         <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="1" />
+                            <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="h" />
                         </ctrl:CustomImage.GestureRecognizers>
                     </ctrl:CustomImage>
 

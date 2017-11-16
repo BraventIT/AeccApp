@@ -233,7 +233,7 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No hay voluntarios para el filtro que has pueto..
+        ///   Looks up a localized string similar to No hay voluntarios para el filtro que has puesto..
         /// </summary>
         public static string ChatViewThereAreNoVolunteersFiltered {
             get {
@@ -1030,6 +1030,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string NoConnectionViewTextTitle {
             get {
                 return ResourceManager.GetString("NoConnectionViewTextTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Nothing {
+            get {
+                return ResourceManager.GetString("Nothing", resourceCulture);
             }
         }
         

@@ -175,7 +175,7 @@
     <value>No hay voluntarios. Intentalo más tarde</value>
   </data>
   <data name="ChatViewThereAreNoVolunteersFiltered" xml:space="preserve">
-    <value>No hay voluntarios para el filtro que has pueto.</value>
+    <value>No hay voluntarios para el filtro que has puesto.</value>
   </data>
   <data name="ChatViewViewVolunteerProfile" xml:space="preserve">
     <value>Perfil del voluntario</value>
@@ -440,6 +440,9 @@
   </data>
   <data name="NoConnectionViewTextTitle" xml:space="preserve">
     <value>¡Vaya!</value>
+  </data>
+  <data name="Nothing" xml:space="preserve">
+    <value />
   </data>
   <data name="PopupChatEventConnectionRejectedNotVolunteer" xml:space="preserve">
     <value>Ha habido un problema, intentalo mas tarde</value>

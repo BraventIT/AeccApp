@@ -145,7 +145,6 @@ namespace AeccApp.Core.ViewModels
         public ChatRatingPopupViewModel ChatRatingPopupVM { get; private set; }
         public ChatCounterpartProfilePopupViewModel ChatCounterpartProfilePopupVM { get; private set; }
 
-
         #endregion
 
         #endregion
@@ -384,23 +383,13 @@ namespace AeccApp.Core.ViewModels
             VolunteersIsEmpty = !_listVolunteers.Any();
             CanFilterVolunteers = !VolunteersIsEmpty;
 
-            Volunteers.Clear();
-            ObservableCollection<UserData> _volunteers = new ObservableCollection<UserData>();
-            if (ChatFiltersPopupVM.Gender.StartsWith("default", StringComparison.CurrentCultureIgnoreCase))
-            {
-                _volunteers.AddRange(_listVolunteers.Where((o => o.Age < ChatFiltersPopupVM.MaximumAge && o.Age > ChatFiltersPopupVM.MinimumAge)));
-            }
-            else
-            {
-                //FILTRADO POR GENERO NO FUNCIONAL HASTA QUE AD DEVUELVA 'H' O 'M' EN VEZ DE null
-                _volunteers.AddRange(_listVolunteers.Where((o => o.Gender.StartsWith(ChatFiltersPopupVM.Gender, StringComparison.CurrentCultureIgnoreCase) && o.Age < ChatFiltersPopupVM.MaximumAge
-                    && o.Age > ChatFiltersPopupVM.MinimumAge)));
-            }
+            var volunteersFiltered = _listVolunteers.Where((o =>
+                (!o.Age.HasValue || (o.Age < ChatFiltersPopupVM.MaximumAge && o.Age > ChatFiltersPopupVM.MinimumAge)) &&
+                (o.Gender == null || o.Gender.StartsWith(ChatFiltersPopupVM.Gender, StringComparison.CurrentCultureIgnoreCase)))).ToList();
 
-
-            for (int i = 0; i < _volunteers.Count; i++)
+            for (int i = 0; i < volunteersFiltered.Count; i++)
             {
-                var aggregation = _volunteers[i];
+                var aggregation = volunteersFiltered[i];
                 if (Volunteers.Count > i)
                 {
                     if (!aggregation.Equals(Volunteers[i]))
@@ -415,7 +404,7 @@ namespace AeccApp.Core.ViewModels
                 }
             }
 
-            while (Volunteers.Count != _volunteers.Count)
+            while (Volunteers.Count != volunteersFiltered.Count)
             {
                 Volunteers.RemoveAt(Volunteers.Count - 1);
             }
