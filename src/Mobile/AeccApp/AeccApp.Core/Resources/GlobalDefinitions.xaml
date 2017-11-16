@@ -6,7 +6,7 @@
 
     <!--  COLORS  -->
     <Color x:Key="ErrorColor">#ff5252</Color>
-    <Color x:Key="BackgroundColor">#F3F3F3</Color>
+    <Color x:Key="BackgroundColor">#FFFFFF</Color>
     <Color x:Key="AccentColor">#7ED321</Color>
     <Color x:Key="SeeThrough">#B2FFFFFF</Color>
     <Color x:Key="GreyText">#394A59</Color>

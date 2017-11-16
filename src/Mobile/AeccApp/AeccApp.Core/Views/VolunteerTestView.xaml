@@ -24,7 +24,7 @@
                 MaximumWidthRequest="400"
                 SourcePlatform="logo" />
 
-            <StackLayout Padding="10" BackgroundColor="White">
+            <StackLayout Padding="10" BackgroundColor="LightGray">
                 <Label Style="{StaticResource NormalLabelStyle}" Text="Página de prueba para poder seleccionar rol de voluntario sin realizar cambios en Azure AD. Sólo para entorno de prueba" />
 
                 <StackLayout
