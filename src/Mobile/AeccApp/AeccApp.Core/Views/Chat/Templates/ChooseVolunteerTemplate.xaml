@@ -4,81 +4,63 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
-    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls">
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:cv="clr-namespace:AeccApp.Core.Converters">
 
     <!--  Volunteers list item template  -->
     <ContentView.Resources>
         <ResourceDictionary>
+            <cv:GenderToImageConverter x:Key="GenderToImageConverter" />
+
             <DataTemplate x:Key="volunteerTemplate">
-                <ViewCell IsEnabled="False">
-                    <StackLayout BackgroundColor="LightGray">
-                        <StackLayout
-                            Margin="0,0,0,0.5"
-                            Padding="10"
-                            HorizontalOptions="FillAndExpand"
-                            Orientation="Horizontal"
-                            VerticalOptions="FillAndExpand">
+                <ViewCell>
+                    <Grid Padding="20,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                            <ctrl:CustomImage
-                                HeightRequest="50"
-                                HorizontalOptions="Center"
-                                SourcePlatform="round_no_profile_image"
-                                VerticalOptions="Center"
-                                WidthRequest="50" />
+                        <BoxView
+                            Grid.ColumnSpan="3"
+                            HeightRequest="1"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Start"
+                            Color="{StaticResource LightGrey}" />
 
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
+                        <ctrl:CustomImage
+                            Grid.RowSpan="2"
+                            Margin="0,0,15,0"
+                            HeightRequest="60"
+                            SourcePlatform="{Binding Gender, Converter={StaticResource GenderToImageConverter}}"
+                            VerticalOptions="Center" />
 
-                                <Label
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    Grid.ColumnSpan="2"
-                                    FontAttributes="Bold"
-                                    HorizontalOptions="Start"
-                                    Style="{StaticResource SubTitleLabelStyle}"
-                                    Text="{Binding Name}"
-                                    VerticalOptions="Start" />
+                        <Label
+                            Grid.Column="1"
+                            Style="{StaticResource SubTitleLabelStyle}"
+                            Text="{Binding Name}"
+                            VerticalOptions="End" />
 
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            LineBreakMode="TailTruncation"
+                            Style="{StaticResource SubTitleLabelItalicStyle}"
+                            Text="{Binding DisplayDescription}" />
 
-                                <Label
-                                    Grid.Row="1"
-                                    Grid.Column="0"
-                                    Margin="5,0,0,0"
-                                    LineBreakMode="TailTruncation"
-                                    Style="{StaticResource MediumLabelStyle}"
-                                    Text="{Binding DisplayDescription}"
-                                    VerticalOptions="Start">
+                        <ctrl:CustomImage
+                            Grid.RowSpan="2"
+                            Grid.Column="2"
+                            Margin="15,0,0,0"
+                            SourcePlatform="right_arrow"
+                            VerticalOptions="Center"
+                            WidthRequest="15" />
+                    </Grid>
 
-                                    <Label.WidthRequest>
-                                        <OnPlatform
-                                            x:TypeArguments="x:Double"
-                                            Android="290"
-                                            WinPhone="230"
-                                            iOS="260" />
-                                    </Label.WidthRequest>
-                                </Label>
-
-                                <ctrl:CustomImage
-                                    Grid.RowSpan="2"
-                                    Grid.Column="2"
-                                    HeightRequest="20"
-                                    HorizontalOptions="Center"
-                                    SourcePlatform="right_arrow"
-                                    VerticalOptions="Center"
-                                    WidthRequest="20" />
-
-                            </Grid>
-
-                        </StackLayout>
-                    </StackLayout>
                 </ViewCell>
             </DataTemplate>
         </ResourceDictionary>
@@ -91,14 +73,9 @@
                 HorizontalOptions="FillAndExpand"
                 ItemTemplate="{StaticResource volunteerTemplate}"
                 ItemsSource="{Binding Volunteers}"
+                RowHeight="100"
                 VerticalOptions="FillAndExpand">
-                <ListView.RowHeight>
-                    <OnPlatform x:TypeArguments="x:Int32">
-                        <On Platform="iOS">100</On>
-                        <On Platform="Android">100</On>
-                        <On Platform="UWP">100</On>
-                    </OnPlatform>
-                </ListView.RowHeight>
+
                 <ListView.Behaviors>
                     <beh:EventToCommandBehavior
                         Command="{Binding ChooseVolunteerCommand}"

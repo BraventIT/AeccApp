@@ -23,7 +23,6 @@
         <Setter Property="Margin" Value="20, 12" />
     </Style>
 
-
     <Style
         x:Key="SubTitleLabelStyle"
         BasedOn="{StaticResource GreyLabelStyle}"
@@ -31,6 +30,14 @@
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
         <Setter Property="Margin" Value="0,6,0,3" />
+    </Style>
+
+    <Style
+        x:Key="SubTitleLabelItalicStyle"
+        BasedOn="{StaticResource SubTitleLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
     <Style

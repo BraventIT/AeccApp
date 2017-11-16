@@ -22,7 +22,13 @@ namespace AeccApp.Core.Models
 
         public string DisplayDescription
         {
-            get { return $"{Age} años - {Description}"; }
+            get
+            {
+                return (!Age.HasValue) ? (string.IsNullOrEmpty(Description)) ?
+                    "-" :
+                    $"{Description}" :
+                    $"{Age} años - {Description}";
+            }
         }
 
         public int? Age { get; set; }

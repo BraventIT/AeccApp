@@ -3,15 +3,15 @@
     x:Class="AeccApp.Core.Views.Popups.ChatFiltersPopupView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:AeccApp.Core.Converters"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
+    xmlns:cv="clr-namespace:AeccApp.Core.Converters"
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
     <vPop:PopupPage.Resources>
         <ResourceDictionary>
-            <converters:BooleanToColorConverter x:Key="BooleanToColorConverter" />
+            <cv:BooleanToColorConverter x:Key="BooleanToColorConverter" />
         </ResourceDictionary>
     </vPop:PopupPage.Resources>
 

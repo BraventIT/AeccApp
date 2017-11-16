@@ -242,9 +242,6 @@
     <BundleResource Include="Resources\exit_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\filters_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\gender_female.png" />
   </ItemGroup>
   <ItemGroup>
@@ -261,9 +258,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\requests_tab_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\round_no_profile_image.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\round_no_profile_image_v2.png" />
@@ -398,6 +392,22 @@
     <BundleResource Include="..\AeccApp.Droid\Resources\drawable\logoHeader.png">
       <Link>Resources\logoHeader.png</Link>
     </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_girl.png">
+      <Link>Resources\ico_girl.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_man.png">
+      <Link>Resources\ico_man.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ico_sup_filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ico_sup_filter%402x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -6,11 +6,11 @@
 
     <!--  COLORS  -->
     <Color x:Key="ErrorColor">#ff5252</Color>
-    <Color x:Key="BackgroundColor">#F4F2F0</Color>
+    <Color x:Key="BackgroundColor">#F3F3F3</Color>
     <Color x:Key="AccentColor">#7ED321</Color>
     <Color x:Key="SeeThrough">#B2FFFFFF</Color>
-    <Color x:Key="GreyText">#abb5c3</Color>
-    <Color x:Key="LightGrey">#dce4ee</Color>
+    <Color x:Key="GreyText">#394A59</Color>
+    <Color x:Key="LightGrey">#1A394A59</Color>
     <Color x:Key="GreyTextDark">#798b9f</Color>
 
     <!--  FONT SIZES  -->
@@ -31,7 +31,7 @@
     <OnPlatform
         x:Key="MediumSize"
         x:TypeArguments="x:Double"
-        Android="16"
+        Android="15"
         WinPhone="16"
         iOS="14" />
 

@@ -33,6 +33,39 @@ namespace AeccApp.Core.Controls
 
 
         public ImageSource SourcePlatform
+        {
+            get { return (ImageSource)GetValue(MaximumWidthRequestProperty); }
+            set { SetValue(IsVisibleProperty, value); }
+        }
+
+        public static BindableProperty SourcePlatformProperty = BindableProperty.Create(
+            nameof(SourcePlatform), 
+            typeof(ImageSource), 
+            typeof(CustomImage), 
+            null, 
+            propertyChanged: OnSourcePlatformChanged);
+
+        private static void OnSourcePlatformChanged(BindableObject b, object oldValue, object newValue)
+        {
+            if (newValue == null)
+                return;
+
+            var customImage = (CustomImage)b;
+
+            var source = (FileImageSource)newValue;
+
+            string path = source.File;
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                path = (path.EndsWith(".jpg", StringComparison.CurrentCultureIgnoreCase)) ?
+                    $"Assets/{path}" : $"Assets/{path}.png";
+            }
+
+            source.File = path;
+            customImage.Source = source;
+        }
+
+        public ImageSource SourcePlatform2
 		{
 			get
 			{
