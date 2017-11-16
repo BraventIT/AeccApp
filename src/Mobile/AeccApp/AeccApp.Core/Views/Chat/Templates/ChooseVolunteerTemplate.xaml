@@ -10,7 +10,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="volunteerTemplate">
-                <ViewCell IsEnabled="False">
+                <ViewCell>
                     <StackLayout BackgroundColor="LightGray">
                         <StackLayout
                             Margin="0,0,0,0.5"

@@ -7,9 +7,9 @@ namespace AeccApp.Core.Models
     public class UserData
     {
         public string Id { get; set; }
-       
+
         public string Email { get; set; }
-       
+
         public string Image { get; set; }
 
         public string FirstName { get; set; }
@@ -18,7 +18,14 @@ namespace AeccApp.Core.Models
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
+
+        private string _description;
+
+        public string Description
+        {
+            get { return _description == null || _description.Equals(string.Empty) ? $"Hola, soy {Name} " : _description; }
+            set { _description = value; }
+        }
 
         public string DisplayDescription
         {
@@ -27,6 +34,35 @@ namespace AeccApp.Core.Models
 
         public int? Age { get; set; }
         public string Gender { get; set; }
+
+        private string _displayGender;
+
+        public string DisplayGender
+        {
+            get
+            {
+                if (Gender != null)
+                {
+                    switch (Gender.ToLower())
+                    {
+                        case "m":
+                            DisplayGender = "Hombre";
+                            break;
+                        case "h":
+                            DisplayGender = "Mujer";
+
+                            break;
+                        default:
+                            DisplayGender = "No especificado";
+
+                            break;
+                    }
+                }
+                    return _displayGender;
+            }
+            set { _displayGender = value; }
+        }
+
 
         public bool? IsMan
         {
