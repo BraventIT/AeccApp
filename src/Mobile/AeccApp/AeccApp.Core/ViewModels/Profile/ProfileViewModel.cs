@@ -33,24 +33,23 @@ namespace AeccApp.Core.ViewModels
             get { return GSetting.User?.Name; }
         }
 
+        public string Description
+        {
+            get { return GSetting.User.Description; }
+        }
+
         public string Email
         {
             get { return GSetting.User?.Email; }
         }
 
-        public string Telephone
-        {
-            get { return string.Empty; }
-        }
-
-        public string Address
-        {
-            get { return string.Empty; }
-        }
-
         public int? Age
         {
             get { return GSetting.User.Age; }
+        }
+        public string Gender
+        {
+            get { return GSetting.User.DisplayGender; }
         }
 
         public LogoutPopupViewModel LogoutPopupVM { get; private set; }

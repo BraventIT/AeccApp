@@ -359,7 +359,7 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Editar.
+        ///   Looks up a localized string similar to Editar biografía.
         /// </summary>
         public static string CommonEdit {
             get {
@@ -382,6 +382,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string CommonGender {
             get {
                 return ResourceManager.GetString("CommonGender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Género:.
+        /// </summary>
+        public static string CommonGenderTitle {
+            get {
+                return ResourceManager.GetString("CommonGenderTitle", resourceCulture);
             }
         }
         

@@ -217,13 +217,16 @@
     <value>Fecha</value>
   </data>
   <data name="CommonEdit" xml:space="preserve">
-    <value>Editar</value>
+    <value>Editar biografía</value>
   </data>
   <data name="CommonFilters" xml:space="preserve">
     <value>Filtros</value>
   </data>
   <data name="CommonGender" xml:space="preserve">
     <value>Género</value>
+  </data>
+  <data name="CommonGenderTitle" xml:space="preserve">
+    <value>Género:</value>
   </data>
   <data name="CommonIsYourFirstTime" xml:space="preserve">
     <value>¿Es tu primera vez aqui?</value>
