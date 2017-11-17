@@ -38,6 +38,7 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
+            ChatFiltersPopupVM.ResetFilters += OnChatResetFilters;
             ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
             ChatService.MessagesReceived += OnMesagesReceived;
             ChatService.AggregationsReceived += OnAggregationsReceived;
@@ -315,6 +316,11 @@ namespace AeccApp.Core.ViewModels
             _listVolunteers = await ChatService.GetListVolunteersAsync();
 
             RefreshVolunters();
+        }
+
+        private void OnChatResetFilters(object sender, EventArgs e)
+        {
+            OnResetVolunteers();
         }
 
         private async void OnChatAppliedFilters(object sender, EventArgs e)

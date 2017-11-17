@@ -15,6 +15,7 @@ namespace AeccApp.Core.ViewModels.Popups
         /// Raised when filters are applied
         /// </summary>
         public event EventHandler AppliedFilters;
+        public event EventHandler ResetFilters;
 
         public ChatFiltersPopupViewModel()
         {
@@ -86,6 +87,16 @@ namespace AeccApp.Core.ViewModels.Popups
             {
                 return _applyFiltersCommand ??
                     (_applyFiltersCommand = new Command(o => AppliedFilters?.Invoke(this, null)));
+            }
+        }
+
+        private Command _resetFiltersCommand;
+        public ICommand ResetFiltersCommand
+        {
+            get
+            {
+                return _resetFiltersCommand ??
+                    (_resetFiltersCommand = new Command(o => ResetFilters?.Invoke(this, null)));
             }
         }
 

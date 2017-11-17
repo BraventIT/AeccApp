@@ -62,6 +62,12 @@
         Android="35"
         WinPhone="60"
         iOS="40" />
+    <OnPlatform
+        x:Key="SmallImageButtonImageSize"
+        x:TypeArguments="x:Int32"
+        Android="17"
+        WinPhone="30"
+        iOS="20" />
 
     <OnPlatform
         x:Key="ImageButtonWidth"
@@ -69,6 +75,22 @@
         Android="200"
         WinPhone="180"
         iOS="200" />
+    <OnPlatform
+        x:Key="SmallImageButtonWidth"
+        x:TypeArguments="x:Double"
+        Android="50"
+        WinPhone="40"
+        iOS="50" />
+
+    <Style x:Key="SmallImageButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="Orientation" Value="ImageToLeft" />
+        <Setter Property="WidthRequest" Value="{StaticResource SmallImageButtonWidth}" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="ImageHeightRequest" Value="{StaticResource SmallImageButtonImageSize}" />
+        <Setter Property="ImageWidthRequest" Value="{StaticResource SmallImageButtonImageSize}" />
+        <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+    </Style>
 
     <Style x:Key="ImageButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
         <Setter Property="TextColor" Value="White" />

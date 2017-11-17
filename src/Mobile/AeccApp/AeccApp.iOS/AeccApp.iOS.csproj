@@ -409,5 +409,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\ico_sup_filter%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_clean_filter.png">
+      <Link>Resources\ico_clean_filter.png</Link>
+    </BundleResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -26,11 +26,12 @@
                         <Label
                             Margin="0,10,0,10"
                             HorizontalOptions="Center"
-                            Style="{StaticResource TitleLabelStyle}"
+                            Style="{StaticResource DarkGreyBigTitleLabelStyle}"
                             Text="{Binding Counterpart.Name}" />
                         <Label
                             Margin="0,0,0,10"
                             HorizontalOptions="Center"
+                            Style="{StaticResource DarkGreyLargeSubtitleLabelStyle}"
                             Text="{Binding Counterpart.Description}" />
                     </StackLayout>
                     <BoxView HeightRequest="1" Color="Gray" />
@@ -38,6 +39,7 @@
                         <Label
                             Margin="0,0,0,20"
                             HorizontalOptions="Center"
+                            Style="{StaticResource LightGreyMediumTitleLabelStyle}"
                             Text="{Binding [PopupVolunteerProfileInfo]}" />
                         <Grid HorizontalOptions="Center">
                             <Grid.ColumnDefinitions>
@@ -53,22 +55,30 @@
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 Margin="5"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
                                 Text="{Binding [CommonGender]}" />
                             <Label
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 Margin="50,5,5,5"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource DarkGreyLargeSubtitleLabelStyle}"
                                 Text="{Binding Counterpart.DisplayGender}" />
 
                             <Label
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Margin="5"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
                                 Text="{Binding [CommonAge]}" />
                             <Label
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Margin="50,5,5,5"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource DarkGreyLargeSubtitleLabelStyle}"
                                 Text="{Binding Counterpart.Age}" />
 
                         </Grid>

@@ -12,6 +12,9 @@
     <Color x:Key="GreyText">#394A59</Color>
     <Color x:Key="LightGrey">#1A394A59</Color>
     <Color x:Key="GreyTextDark">#798b9f</Color>
+    <Color x:Key="GrayTitle">#FF394A59</Color>
+    <Color x:Key="LightGraySubtitle">#66394A59</Color>
+
 
     <!--  FONT SIZES  -->
     <OnPlatform
@@ -34,6 +37,13 @@
         Android="15"
         WinPhone="16"
         iOS="14" />
+
+    <OnPlatform
+        x:Key="MidLargeSize"
+        x:TypeArguments="x:Double"
+        Android="18"
+        WinPhone="18"
+        iOS="15" />
 
     <OnPlatform
         x:Key="LargeSize"

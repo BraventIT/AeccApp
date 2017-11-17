@@ -29,6 +29,7 @@
                 <Label
                     Margin="10"
                     HorizontalOptions="Center"
+                    Style="{StaticResource LightGreyMediumTitleLabelStyle}"
                     Text="{Binding [CommonAge]}" />
 
                 <ctrlRange:RangeSlider
@@ -51,6 +52,7 @@
                 <Label
                     Margin="10"
                     HorizontalOptions="Center"
+                    Style="{StaticResource LightGreyMediumTitleLabelStyle}"
                     Text="{Binding [CommonGender]}" />
 
 
@@ -66,7 +68,7 @@
                         BackgroundColor="{Binding GenderWomen, Converter={StaticResource BooleanToColorConverter}}"
                         HeightRequest="100"
                         HorizontalOptions="Center"
-                        SourcePlatform="gender_female"
+                        SourcePlatform="ico_girl"
                         VerticalOptions="Center"
                         WidthRequest="100">
                         <ctrl:CustomImage.GestureRecognizers>
@@ -80,7 +82,7 @@
                         BackgroundColor="{Binding GenderMen, Converter={StaticResource BooleanToColorConverter}}"
                         HeightRequest="100"
                         HorizontalOptions="Center"
-                        SourcePlatform="gender_male"
+                        SourcePlatform="ico_man"
                         VerticalOptions="Center"
                         WidthRequest="100">
                         <ctrl:CustomImage.GestureRecognizers>
@@ -92,12 +94,32 @@
 
 
                 <BoxView HeightRequest="1" Color="LightGray" />
+                <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                    <Grid>
+                        <ctrl:CustomShapeDrawing
+                            Margin="0,-7,6,1"
+                            BorderColor="#4286f4"
+                            HeightRequest="12"
+                            HorizontalOptions="Center"
+                            PointsShapeCoordinate="0.7/0, 0/0, 0.9/1"
+                            ShapeColor="#4286f4"
+                            WidthRequest="14" />
+                        <ctrlXlabs:ImageButton
+                            BorderColor="LightGray"
+                            BorderRadius="90"
+                            Command="{Binding ResetFiltersCommand}"
+                            HorizontalOptions="EndAndExpand"
+                            SourcePlatform="ico_clean_filter"
+                            Style="{StaticResource SmallImageButtonStyle}"
+                            VerticalOptions="Center" />
+                    </Grid>
 
-                <Button
-                    Margin="10"
-                    Command="{Binding ApplyFiltersCommand}"
-                    Style="{StaticResource ButtonStyle}"
-                    Text="{Binding [CommonApplyFilters]}" />
+                    <Button
+                        Margin="10"
+                        Command="{Binding ApplyFiltersCommand}"
+                        Style="{StaticResource ButtonStyle}"
+                        Text="{Binding [CommonApplyFilters]}" />
+                </StackLayout>
             </StackLayout>
 
         </ContentView>
