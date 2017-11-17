@@ -9,14 +9,11 @@ namespace AeccApp.Core.Views
     {
         protected INavigableViewModel ViewModel => BindingContext as INavigableViewModel;
 
-        public BaseContentPage()
-        {
-        }
-
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-        }
+      
+        //protected override void OnSizeAllocated(double width, double height)
+        //{
+        //    base.OnSizeAllocated(width, height);
+        //}
 
         protected override async void OnAppearing()
         {

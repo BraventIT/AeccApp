@@ -7,50 +7,42 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     vm:ViewModelLocator.AutoWireViewModel="True"
-    BackgroundColor="{StaticResource SeeThrough}">
+    BackgroundColor="Gray">
 
-    <Grid
-        Margin="20"
-        Padding="0,20"
+    <Frame
+        Margin="45,0"
         BackgroundColor="{StaticResource BackgroundColor}"
+        CornerRadius="20"
         HorizontalOptions="Center"
         VerticalOptions="Center">
+        <StackLayout>
+            <ctrl:CustomImage
+                HeightRequest="25"
+                HorizontalOptions="Start"
+                SourcePlatform="x_icon"
+                WidthRequest="25">
+                <ctrl:CustomImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OkCommand}" />
+                </ctrl:CustomImage.GestureRecognizers>
+            </ctrl:CustomImage>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+            <ctrl:CustomImage
+                Margin="0,18,0,0"
+                HeightRequest="55"
+                HorizontalOptions="Center"
+                SourcePlatform="PopUp_Ico_thumbsdown" />
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+            <Label
+                Margin="0,27,0,0"
+                Style="{StaticResource TitleLabelStyleNormal}"
+                Text="{Binding Event.MessageTitle}" />
 
-        <ctrl:CustomImage
-            Grid.Column="1"
-            Margin="20,0"
-            HeightRequest="30"
-            SourcePlatform="x_icon"
-            VerticalOptions="Start"
-            WidthRequest="30">
-            <ctrl:CustomImage.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding OkCommand}" />
-            </ctrl:CustomImage.GestureRecognizers>
-        </ctrl:CustomImage>
+            <Label
+                Margin="8,20,8,30"
+                HorizontalTextAlignment=""
+                Style="{StaticResource SubTitleLabelStyleNormal}"
+                Text="{Binding Event.Message}" />
 
-        <Label
-            Grid.ColumnSpan="2"
-            Margin="50,12"
-            HorizontalTextAlignment="Center"
-            Style="{StaticResource TitleLabelStyle}"
-            Text="{Binding Event.MessageTitle}" />
-
-        <Label
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            Style="{StaticResource SubTitleLabelStyleCentered}"
-            Text="{Binding Event.Message}" />
-
-    </Grid>
-
+        </StackLayout>
+    </Frame>
 </v:BaseContentPage>

@@ -10,6 +10,7 @@ using AeccApp.Core.Views;
 using AeccApp.iOS.Renderers;
 using Xamarin.Forms.Platform.iOS;
 using CoreGraphics;
+using AeccApp.Core.Resources;
 
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(TabbedPageRenderer))]
 namespace AeccApp.iOS.Renderers
@@ -18,8 +19,8 @@ namespace AeccApp.iOS.Renderers
     {
         public TabbedPageRenderer()
         {
-            TabBar.TintColor = Color.FromHex("#8DD101").ToUIColor();
-            TabBar.UnselectedItemTintColor = Color.FromHex("#394A59").ToUIColor();
+            TabBar.TintColor = Color.FromHex(ResourcesReference.APPBAR_ACCENT_COLOR).ToUIColor();
+            TabBar.UnselectedItemTintColor = Color.FromHex(ResourcesReference.NAV_INACTIVE_COLOR).ToUIColor();
         }
 
         public override void ViewDidLayoutSubviews()
@@ -53,7 +54,8 @@ namespace AeccApp.iOS.Renderers
             if (NavigationController != null)
             {
                 NavigationController.TopViewController.NavigationItem.TitleView = imageView;
-                NavigationController.NavigationBar.BarTintColor = Color.FromHex("#8DD101").ToUIColor();
+                NavigationController.NavigationBar.BarTintColor = Color.FromHex(ResourcesReference.APPBAR_ACCENT_COLOR).ToUIColor();
+                NavigationController.NavigationBar.TintColor = Color.White.ToUIColor();
             }
         }
     }

@@ -8,6 +8,7 @@ using Microsoft.Bot.Connector.DirectLine;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -253,22 +254,26 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private Task OnChooseVolunteerAsync(object obj)
+        private async Task OnChooseVolunteerAsync(object obj)
         {
             if (IsVolunteer == false && Settings.TermsAndConditionsAccept == false)
             {
-                return NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
+                await NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
             }
             else
             {
-                return ExecuteOperationAsync(async () =>
+                try
                 {
                     var selectedVolunteer = obj as UserData;
                     PartyId = selectedVolunteer.PartyId;
-                //Muestra popup de espera en la conexión
-                await NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
+                    //Muestra popup de espera en la conexión
+                    await NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
                     await InitializeChatAsync();
-                });
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
             }
         }
         #endregion
