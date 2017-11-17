@@ -154,6 +154,9 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\mock_new_firma_convenio.jpg">
       <Link>Assets\mock_new_firma_convenio.jpg</Link>
     </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\PopUp_Ico_thumbsdown.png">
+      <Link>Assets\PopUp_Ico_thumbsdown.png</Link>
+    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\profile.png">
       <Link>Assets\profile.png</Link>
     </Content>

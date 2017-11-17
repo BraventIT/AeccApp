@@ -6728,20 +6728,20 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f020131
 			public const int notification_bg_normal_pressed = 2130837809;
 			
-			// aapt resource value: 0x7f020132
-			public const int notification_icon_background = 2130837810;
-			
 			// aapt resource value: 0x7f02014d
 			public const int notification_template_icon_bg = 2130837837;
 			
 			// aapt resource value: 0x7f02014e
 			public const int notification_template_icon_low_bg = 2130837838;
 			
+			// aapt resource value: 0x7f020132
+			public const int notification_tile_bg = 2130837810;
+			
 			// aapt resource value: 0x7f020133
 			public const int notification_tile_bg = 2130837811;
 			
 			// aapt resource value: 0x7f020134
-			public const int notify_panel_notification_icon_bg = 2130837812;
+			public const int PopUp_Ico_thumbsdown = 2130837812;
 			
 			// aapt resource value: 0x7f020135
 			public const int profile = 2130837813;

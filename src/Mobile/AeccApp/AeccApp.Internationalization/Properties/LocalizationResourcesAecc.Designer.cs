@@ -116,7 +116,7 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Conectando con el voluntario . . ..
+        ///   Looks up a localized string similar to Danos un momento, estamos conectando con el voluntario..
         /// </summary>
         public static string ChatConnectingPopupText {
             get {
@@ -1052,7 +1052,7 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ha habido un problema, intentalo mas tarde.
+        ///   Looks up a localized string similar to ¡Oh oh!.
         /// </summary>
         public static string PopupChatEventConnectionRejectedNotVolunteer {
             get {

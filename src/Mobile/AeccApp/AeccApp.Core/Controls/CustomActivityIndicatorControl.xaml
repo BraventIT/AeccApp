@@ -6,7 +6,7 @@
     IsVisible="{Binding IsBusy}">
 
     <ActivityIndicator
-        HeightRequest="50"
+        HeightRequest="38"
         HorizontalOptions="Center"
         IsRunning="{Binding IsBusy}"
         IsVisible="{Binding IsBusy}"
@@ -15,9 +15,9 @@
         <ActivityIndicator.WidthRequest>
             <OnPlatform
                 x:TypeArguments="x:Double"
-                Android="50"
+                Android="38"
                 WinPhone="400"
-                iOS="50" />
+                iOS="38" />
         </ActivityIndicator.WidthRequest>
     </ActivityIndicator>
 
