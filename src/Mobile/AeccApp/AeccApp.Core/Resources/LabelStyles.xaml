@@ -16,7 +16,7 @@
     </Style>
 
     <Style x:Key="DarkGreyLabelStyle" TargetType="{x:Type Label}">
-        <Setter Property="TextColor" Value="{StaticResource GrayTitle}" />
+        <Setter Property="TextColor" Value="{StaticResource GreyText}" />
     </Style>
     <Style x:Key="LightGreyLabelStyle" TargetType="{x:Type Label}">
         <Setter Property="TextColor" Value="{StaticResource LightGraySubtitle}" />
@@ -57,14 +57,20 @@
         <Setter Property="Margin" Value="20, 12" />
     </Style>
 
-    <Style x:Key="TitleLabelStyle" TargetType="{x:Type Label}"  BasedOn="{StaticResource GreyLabelStyle}">
+    <Style
+        x:Key="TitleLabelStyle"
+        BasedOn="{StaticResource GreyLabelStyle}"
+        TargetType="{x:Type Label}">
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="20, 12" />
     </Style>
 
-    <Style x:Key="TitleLabelStyleNormal" TargetType="{x:Type Label}"  BasedOn="{StaticResource TitleLabelStyle}">
+    <Style
+        x:Key="TitleLabelStyleNormal"
+        BasedOn="{StaticResource TitleLabelStyle}"
+        TargetType="{x:Type Label}">
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="Margin" Value="0" />
     </Style>
@@ -78,11 +84,14 @@
         <Setter Property="Margin" Value="0,6,0,3" />
     </Style>
 
-    <Style x:Key="SubTitleLabelStyleNormal" TargetType="{x:Type Label}"  BasedOn="{StaticResource SubTitleLabelStyle}">
+    <Style
+        x:Key="SubTitleLabelStyleNormal"
+        BasedOn="{StaticResource SubTitleLabelStyle}"
+        TargetType="{x:Type Label}">
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="Margin" Value="0" />
     </Style>
-    
+
     <Style
         x:Key="SubTitleLabelItalicStyle"
         BasedOn="{StaticResource SubTitleLabelStyle}"

@@ -415,5 +415,11 @@
   <ItemGroup>
     <BundleResource Include="Resources\PopUp_Ico_thumbsdown%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\PopUp_Ico_question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\PopUp_Ico_question%402x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

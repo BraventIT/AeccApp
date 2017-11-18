@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
-   public class ChatLeaseConversationPopupViewModel : ViewModelBase
+    public class ChatLeaseConversationPopupViewModel : ClosablePopupViewModelBase
     {
         public event EventHandler LeaseChatConversation;
 
@@ -19,25 +19,5 @@ namespace AeccApp.Core.ViewModels.Popups
                     (_yesCommand = new Command(o => LeaseChatConversation?.Invoke(this, null)));
             }
         }
-
-        private Command _noCommand;
-        public ICommand NoCommand
-        {
-            get
-            {
-                return _noCommand ??
-                    (_noCommand = new Command(OnLeaseConversationPopupClose));
-            }
-        }
-        private async void OnLeaseConversationPopupClose()
-        {
-            await NavigationService.HidePopupAsync();
-        }
-
-        public override bool OnBackButtonPressed()
-        {
-            return true;
-        }
-
     }
 }

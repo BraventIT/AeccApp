@@ -9,11 +9,9 @@ namespace AeccApp.Core.Services
 
         void Initialize();
 
-        Task NavigateToAsync<TViewModel>(bool isModal = false) where TViewModel : ViewModelBase;
+        Task NavigateToAsync<TViewModel>(object parameter = null, bool isModal = false) where TViewModel : ViewModelBase;
 
-        Task NavigateToAsync<TViewModel>(object parameter, bool isModal = false) where TViewModel : ViewModelBase;
-
-        Task ShowPopupAsync(ViewModelBase viewModel);
+        Task ShowPopupAsync(ViewModelBase viewModelobject, object parameter = null);
 
         Task HidePopupAsync();
 

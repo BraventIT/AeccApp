@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<v:BaseContentPage
-    x:Class="AeccApp.Core.Views.ChatEventView"
+<vPop:BasePopupPage
+    x:Class="AeccApp.Core.Views.Popups.ChatEventPopupView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
-    xmlns:v="clr-namespace:AeccApp.Core.Views"
-    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
-    vm:ViewModelLocator.AutoWireViewModel="True"
-    BackgroundColor="Gray">
+    xmlns:vPop="clr-namespace:AeccApp.Core.Views.Popups"
+    BackgroundColor="{StaticResource SeeThrough}">
 
     <Frame
         Margin="45,0"
@@ -17,12 +15,11 @@
         VerticalOptions="Center">
         <StackLayout>
             <ctrl:CustomImage
-                HeightRequest="25"
+                HeightRequest="12"
                 HorizontalOptions="Start"
-                SourcePlatform="x_icon"
-                WidthRequest="25">
+                SourcePlatform="x_icon">
                 <ctrl:CustomImage.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding OkCommand}" />
+                    <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
                 </ctrl:CustomImage.GestureRecognizers>
             </ctrl:CustomImage>
 
@@ -39,10 +36,10 @@
 
             <Label
                 Margin="8,20,8,30"
-                HorizontalTextAlignment=""
+                HorizontalTextAlignment="Center"
                 Style="{StaticResource SubTitleLabelStyleNormal}"
                 Text="{Binding Event.Message}" />
 
         </StackLayout>
     </Frame>
-</v:BaseContentPage>
+</vPop:BasePopupPage>
