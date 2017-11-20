@@ -9,68 +9,82 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <ContentView
-        Margin="20"
-        Style="{StaticResource BorderStyle}"
+    <!--#region Test-->
+
+    <Frame
+        Margin="45,0"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        CornerRadius="20"
+        HorizontalOptions="Center"
         VerticalOptions="Center">
-        <ContentView Style="{StaticResource InternalViewStyle}">
 
-            <Grid
-                Margin="20"
-                Padding="0,20"
-                BackgroundColor="{StaticResource BackgroundColor}"
-                VerticalOptions="Center">
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <ctrl:CustomImage
+                HeightRequest="12"
+                HorizontalOptions="Start"
+                SourcePlatform="x_icon">
+                <ctrl:CustomImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
+                </ctrl:CustomImage.GestureRecognizers>
+            </ctrl:CustomImage>
 
-                <ctrl:CustomImage
-                    Grid.ColumnSpan="2"
-                    HorizontalOptions="Center"
-                    SourcePlatform="round_question_icon" />
+            <ctrl:CustomImage
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="0,18,0,0"
+                HeightRequest="55"
+                HorizontalOptions="Center"
+                SourcePlatform="PopUp_Ico_question" />
 
-                <Label
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    HorizontalTextAlignment="Center"
-                    Style="{StaticResource TitleLabelStyle}"
-                    Text="{Binding [PopupChatLeaseConversationTextTitle]}" />
+            <Label
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Margin="0,27,0,0"
+                Style="{StaticResource TitleLabelStyleNormal}"
+                Text="{Binding [PopupChatLeaseConversationTextTitle]}" />
 
-                <Label
-                    Grid.Row="2"
-                    Grid.ColumnSpan="2"
-                    Style="{StaticResource SubTitleLabelStyleCentered}"
-                    Text="{Binding [PopupChatLeaseConversationText]}" />
+            <Label
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Margin="8,20,8,30"
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource SubTitleLabelStyleNormal}"
+                Text="{Binding [PopupChatLeaseConversationText]}" />
 
-                <Button
-                    Grid.Row="3"
-                    Margin="0,20,0,0"
-                    Command="{Binding YesCommand}"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource ButtonSmallStyle}"
-                    Text="{Binding [CommonYes]}" />
+            <BoxView
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                BackgroundColor="{StaticResource LightGrey}"
+                HeightRequest="40" />
+            <Button
+                Grid.Row="4"
+                Margin="0,1,0,0"
+                BorderRadius="0"
+                Command="{Binding YesCommand}"
+                Style="{StaticResource ButtonWhiteStyle}"
+                Text="{Binding [CommonYes]}" />
 
-                <Button
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Margin="0,20,0,0"
-                    Command="{Binding NoCommand}"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource ButtonSmallStyle}"
-                    Text="{Binding [CommonNo]}" />
-            </Grid>
+            <Button
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="1,1,0,0"
+                BorderRadius="0"
+                Command="{Binding ClosePopupCommand}"
+                Style="{StaticResource ButtonWhiteStyle}"
+                Text="{Binding [CommonNo]}" />
+        </Grid>
+    </Frame>
 
-
-
-
-        </ContentView>
-    </ContentView>
+    <!--#endregion-->
 </vPop:PopupPage>

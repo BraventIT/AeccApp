@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace AeccApp.Core.ViewModels
+namespace AeccApp.Core.ViewModels.Popups
 {
-    public class ChatEventViewModel : ViewModelBase
+    public class ChatEventPopupViewModel : ClosablePopupViewModelBase
     {
         private ChatEventMessage eventMessage;
         public ChatEventMessage Event
@@ -50,24 +50,5 @@ namespace AeccApp.Core.ViewModels
                 await NavigationService.NavigateBackAsync();
             }
         }
-
-        #region Popups Commands
-
-        private Command okCommand;
-        public ICommand OkCommand
-        {
-            get
-            {
-                return okCommand ??
-                    (okCommand = new Command(o => OnOkEventAsync()));
-            }
-        }
-
-        private Task OnOkEventAsync()
-        {
-            return NavigationService.NavigateBackAsync();
-        }
-        #endregion
-
     }
 }

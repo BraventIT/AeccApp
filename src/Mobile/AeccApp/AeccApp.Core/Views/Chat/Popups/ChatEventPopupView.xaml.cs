@@ -1,11 +1,11 @@
 ﻿using Xamarin.Forms.Xaml;
 
-namespace AeccApp.Core.Views
+namespace AeccApp.Core.Views.Popups
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ChatEventView : BaseContentPage
+	public partial class ChatEventPopupView : BasePopupPage
     {
-		public ChatEventView ()
+		public ChatEventPopupView()
 		{
 			InitializeComponent ();
 		}

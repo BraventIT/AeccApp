@@ -14,6 +14,7 @@ namespace AeccApp.Core.ViewModels.Popups
         {
             IsBusy = false;
         }
+
         public override bool OnBackButtonPressed()
         {
             return true;

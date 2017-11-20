@@ -56,6 +56,15 @@
         <Setter Property="WidthRequest" Value="{StaticResource ButtonSmallWidth}" />
     </Style>
 
+    <Style x:Key="ButtonWhiteStyle" TargetType="{x:Type Button}">
+        <Setter Property="TextColor" Value="{StaticResource GreenText}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="FontSize" Value="{StaticResource MidLargeSize}" />
+        <Setter Property="BackgroundColor" Value="White" />
+    </Style>
+
     <OnPlatform
         x:Key="ImageButtonImageSize"
         x:TypeArguments="x:Int32"

@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using AeccApp.Core.ViewModels.Popups;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -23,6 +24,7 @@ namespace AeccApp.Core.ViewModels
         public DashboardViewModel()
         {
             NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
+            ChatEventPopupVM = new ChatEventPopupViewModel();
         }
 
         public override async Task InitializeAsync(object navigationData)
@@ -97,6 +99,7 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
+        public ChatEventPopupViewModel ChatEventPopupVM { get; private set; }
         #endregion
 
         #region Commands
@@ -164,7 +167,7 @@ namespace AeccApp.Core.ViewModels
                 return;
 
             await NavigationService.HidePopupAsync();
-            await NavigationService.NavigateToAsync<ChatEventViewModel>(obj, isModal: true);
+            await NavigationService.ShowPopupAsync(ChatEventPopupVM, obj);
         }
         #endregion
     }

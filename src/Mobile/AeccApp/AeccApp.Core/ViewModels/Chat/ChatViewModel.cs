@@ -44,25 +44,7 @@ namespace AeccApp.Core.ViewModels
             ChatService.MessagesReceived += OnMesagesReceived;
             ChatService.AggregationsReceived += OnAggregationsReceived;
 
-            VolunteerIsActive = ChatService.VolunteerIsActive;
-
-            return ExecuteOperationAsync(async () =>
-            {
-                await ChatService.InitializeAsync();
-
-                PartyId = ConversationCounterpart?.PartyId;
-                if (string.IsNullOrEmpty(PartyId))
-                {
-                    if (!IsVolunteer)
-                    {
-                        await LoadVolunteersAsync();
-                    }
-                }
-                else
-                {
-                    await InitializeChatAsync();
-                }
-            });
+            return InitializeAsync();
         }
 
         public override void Deactivate()
@@ -88,6 +70,10 @@ namespace AeccApp.Core.ViewModels
                 if (Set(ref _partyId, value))
                 {
                     NotifyPropertyChanged(nameof(ConversationCounterpart));
+                    if (!string.IsNullOrEmpty(_partyId))
+                    {
+                        CanFilterVolunteers = false;
+                    }
                 }
             }
         }
@@ -201,12 +187,15 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnLeaseConversation(object sender, EventArgs e)
         {
-            await ExecuteOperationAsync(() => ChatService.EndChatAsync());
-            await NavigationService.HidePopupAsync();
-            if (!IsVolunteer)
+            await ExecuteOperationAsync(async () =>
             {
-                await NavigationService.ShowPopupAsync(ChatRatingPopupVM);
-            }
+                await NavigationService.HidePopupAsync();
+                await ChatService.EndChatAsync();
+                if (!IsVolunteer)
+                {
+                    await NavigationService.ShowPopupAsync(ChatRatingPopupVM);
+                }
+            });
         }
 
         private Command _leaseConversationPopupCommand;
@@ -314,6 +303,29 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Private Methods
+        private Task InitializeAsync()
+        {
+            VolunteerIsActive = ChatService.VolunteerIsActive;
+
+            return ExecuteOperationAsync(async () =>
+            {
+                await ChatService.InitializeAsync();
+
+                PartyId = ConversationCounterpart?.PartyId;
+                if (string.IsNullOrEmpty(PartyId))
+                {
+                    if (!IsVolunteer)
+                    {
+                        await LoadVolunteersAsync();
+                    }
+                }
+                else
+                {
+                    await InitializeChatAsync();
+                }
+            });
+        }
+
         private async Task LoadVolunteersAsync()
         {
             FilterVolunteersIsEmpty = false;
@@ -357,6 +369,10 @@ namespace AeccApp.Core.ViewModels
                     }
                 });
                 await NavigationService.HidePopupAsync();
+            }
+            else
+            {
+                await InitializeAsync();
             }
         }
 

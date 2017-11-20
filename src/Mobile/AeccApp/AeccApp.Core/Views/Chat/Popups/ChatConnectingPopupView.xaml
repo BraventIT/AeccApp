@@ -7,14 +7,15 @@
     xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:vPop="clr-namespace:AeccApp.Core.Views.Popups"
-    BackgroundColor="{StaticResource SeeThrough}">
+    BackgroundColor="{StaticResource SeeThroughWhite}"
+    CloseWhenBackgroundIsClicked="False">
 
     <StackLayout
         Padding="80,0"
         HorizontalOptions="Center"
         VerticalOptions="Center">
 
-        <Frame HeightRequest="38">        
+        <Frame HeightRequest="38">
             <ctrl:CustomActivityIndicatorControl HeightRequest="80" />
         </Frame>
 
