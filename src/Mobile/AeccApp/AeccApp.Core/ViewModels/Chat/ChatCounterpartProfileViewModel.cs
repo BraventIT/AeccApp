@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AeccApp.Core.ViewModels
 {
-   public class ChatCounterpartProfileViewModel : ViewModelBase
+    public class ChatCounterpartProfileViewModel : ViewModelBase
     {
 
         public override Task InitializeAsync(object navigationData)
@@ -24,12 +24,5 @@ namespace AeccApp.Core.ViewModels
             get { return _counterpart; }
             set { Set(ref _counterpart, value); }
         }
-
-        public override bool OnBackButtonPressed()
-        {
-            return true;
-        }
-
-
     }
 }

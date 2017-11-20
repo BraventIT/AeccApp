@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AeccApp.Core.Resources;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -9,7 +10,7 @@ namespace AeccApp.Core.Converters
     public class BooleanToColorConverter : IValueConverter
     {
 
-        public BooleanToColorConverter() : this(Color.LightGreen, Color.Transparent)
+        public BooleanToColorConverter() : this(Color.FromHex(ResourcesReference.ACCENT_COLOR), Color.Transparent)
         {
 
         }

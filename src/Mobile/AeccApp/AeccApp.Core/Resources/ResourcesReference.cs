@@ -7,6 +7,7 @@
         public const string GIRL_ICON = "ico_girl";
 
         //Colors
+        public const string ACCENT_COLOR = "#7ED321";
         public const string APPBAR_ACCENT_COLOR = "#8DD101";
         public const string NAV_INACTIVE_COLOR = "#394A59";
     }
