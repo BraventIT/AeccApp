@@ -15,7 +15,7 @@
         Margin="45,0"
         BackgroundColor="{StaticResource BackgroundColor}"
         CornerRadius="20"
-        HorizontalOptions="Center"
+        HorizontalOptions="Fill"
         VerticalOptions="Center">
 
         <Grid ColumnSpacing="0" RowSpacing="0">
@@ -72,6 +72,7 @@
                 Margin="0,1,0,0"
                 BorderRadius="0"
                 Command="{Binding YesCommand}"
+                HeightRequest="40"
                 Style="{StaticResource ButtonWhiteStyle}"
                 Text="{Binding [CommonYes]}" />
 
@@ -81,6 +82,7 @@
                 Margin="1,1,0,0"
                 BorderRadius="0"
                 Command="{Binding ClosePopupCommand}"
+                HeightRequest="40"
                 Style="{StaticResource ButtonWhiteStyle}"
                 Text="{Binding [CommonNo]}" />
         </Grid>

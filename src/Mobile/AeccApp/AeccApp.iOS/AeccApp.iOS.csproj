@@ -172,6 +172,7 @@
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\BoxViewKeyboardHeightRenderer.cs" />
     <Compile Include="Renderers\TabbedPageRenderer.cs" />
     <Compile Include="Services\LocationProviderSettings.cs" />
     <Compile Include="Main.cs" />
