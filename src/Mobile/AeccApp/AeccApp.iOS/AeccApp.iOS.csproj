@@ -424,5 +424,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\PopUp_Ico_question%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_clean_filter.png">
+      <Link>Resources\ico_clean_filter.png</Link>
+    </BundleResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
