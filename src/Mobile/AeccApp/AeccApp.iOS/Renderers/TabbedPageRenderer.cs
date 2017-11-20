@@ -37,6 +37,10 @@ namespace AeccApp.iOS.Renderers
 
                 leftNativeButtons.ForEach(x => x.ImageInsets = new UIEdgeInsets(-8, 0, 0, 0));
                 rightNativeButtons.ForEach(x => x.ImageInsets = new UIEdgeInsets(-8, 0, 0, 0));
+
+                this.NavigationController.NavigationBar.TintColor = UIColor.White;
+
+
             }
         }
 
@@ -48,11 +52,16 @@ namespace AeccApp.iOS.Renderers
             var imageView = new UIImageView(new CGRect(0, 0, 140, 70));
 
             imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
-            imageView.Image = image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal);
+
+            var titleView = new UIView(new CGRect(0, 0, 100, 45));
+            imageView.Frame = titleView.Bounds;
+            titleView.AddSubview(imageView);
+
+            imageView.Image = image.ImageWithRenderingMode(UIImageRenderingMode.Automatic);
 
             if (NavigationController != null)
             {
-                NavigationController.TopViewController.NavigationItem.TitleView = imageView;
+                NavigationController.TopViewController.NavigationItem.TitleView = titleView;
                 NavigationController.NavigationBar.BarTintColor = Color.FromHex("#8DD101").ToUIColor();
             }
         }
