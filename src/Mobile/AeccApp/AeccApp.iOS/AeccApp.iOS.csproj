@@ -228,6 +228,9 @@
     <PackageReference Include="Xamarin.Build.Download">
       <Version>0.4.7</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.4.0.91020</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms.GoogleMaps">
       <Version>2.2.1</Version>
     </PackageReference>
