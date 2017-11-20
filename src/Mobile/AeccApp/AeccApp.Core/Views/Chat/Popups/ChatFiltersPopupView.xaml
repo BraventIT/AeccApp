@@ -7,56 +7,70 @@
     xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:cv="clr-namespace:AeccApp.Core.Converters"
-    xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-    BackgroundColor="{StaticResource SeeThrough}">
+    xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
     <vPop:PopupPage.Resources>
         <ResourceDictionary>
             <cv:BooleanToColorConverter x:Key="BooleanToColorConverter" />
         </ResourceDictionary>
     </vPop:PopupPage.Resources>
 
-    <ContentView
-        Margin="20"
-        Style="{StaticResource BorderStyle}"
-        VerticalOptions="Center">
+    <ContentView Style="{StaticResource BorderStyle}" VerticalOptions="Start">
         <ContentView Style="{StaticResource InternalViewStyle}">
 
-            <StackLayout
-                Margin="1"
-                Padding="20"
-                BackgroundColor="{StaticResource BackgroundColor}">
+            <StackLayout Margin="0,30,0,0" BackgroundColor="{StaticResource BackgroundColor}">
 
                 <Label
-                    Margin="10"
+                    Margin="0,36,0,0"
                     HorizontalOptions="Center"
                     Style="{StaticResource LightGreyMediumTitleLabelStyle}"
                     Text="{Binding [CommonAge]}" />
 
-                <ctrlRange:RangeSlider
-                    BarHeight="10"
-                    LowerValue="{Binding MinimumAge, Mode=TwoWay}"
-                    MaximumValue="80"
-                    MinimumValue="18"
-                    ShowTextAboveThumbs="True"
-                    StepValue="1"
-                    StepValueContinuously="True"
-                    TextSize="15"
-                    UpperValue="{Binding MaximumAge, Mode=TwoWay}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
+                    <Label
+                        Grid.Column="0"
+                        Margin="20,0,2,0"
+                        FontFamily="Bold"
+                        Text="{Binding MinimumAge}"
+                        TextColor="{StaticResource GreyText}" />
+
+                    <ctrlRange:RangeSlider
+                        Grid.Column="1"
+                        BarHeight="10"
+                        LowerValue="{Binding MinimumAge, Mode=TwoWay}"
+                        MaximumValue="80"
+                        MinimumValue="18"
+                        StepValue="1"
+                        StepValueContinuously="True"
+                        TextSize="15"
+                        UpperValue="{Binding MaximumAge, Mode=TwoWay}" />
+                    <Label
+                        Grid.Column="2"
+                        Margin="2,0,20,0"
+                        FontFamily="Bold"
+                        Text="{Binding MaximumAge}"
+                        TextColor="{StaticResource GreyText}" />
+
+                </Grid>
 
                 <BoxView
-                    Margin="0,10,0,0"
+                    Margin="0,36,0,0"
                     HeightRequest="1"
-                    Color="Black" />
+                    Color="{StaticResource LightGrey}" />
 
                 <Label
-                    Margin="10"
+                    Margin="0,24,0,0"
                     HorizontalOptions="Center"
                     Style="{StaticResource LightGreyMediumTitleLabelStyle}"
                     Text="{Binding [CommonGender]}" />
 
 
-                <Grid HorizontalOptions="Center">
+                <Grid Margin="0,0,0,36" HorizontalOptions="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
@@ -93,29 +107,21 @@
                 </Grid>
 
 
-                <BoxView HeightRequest="1" Color="LightGray" />
-                <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
-                    <Grid>
-                        <ctrl:CustomShapeDrawing
-                            Margin="0,-7,6,1"
-                            BorderColor="#4286f4"
-                            HeightRequest="12"
-                            HorizontalOptions="Center"
-                            PointsShapeCoordinate="0.7/0, 0/0, 0.9/1"
-                            ShapeColor="#4286f4"
-                            WidthRequest="14" />
-                        <ctrlXlabs:ImageButton
-                            BorderColor="LightGray"
-                            BorderRadius="90"
-                            Command="{Binding ResetFiltersCommand}"
-                            HorizontalOptions="EndAndExpand"
-                            SourcePlatform="ico_clean_filter"
-                            Style="{StaticResource SmallImageButtonStyle}"
-                            VerticalOptions="Center" />
-                    </Grid>
+                <BoxView HeightRequest="1" Color="{StaticResource LightGrey}" />
+                <StackLayout
+                    Margin="0,24,0,35"
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal">
+
+                    <ctrlXlabs:ImageButton
+                        Command="{Binding ResetFiltersCommand}"
+                        HorizontalOptions="EndAndExpand"
+                        SourcePlatform="ico_clean_filter"
+                        Style="{StaticResource RoundGreyButtonStyle}"
+                        VerticalOptions="Center" />
+
 
                     <Button
-                        Margin="10"
                         Command="{Binding ApplyFiltersCommand}"
                         Style="{StaticResource ButtonStyle}"
                         Text="{Binding [CommonApplyFilters]}" />

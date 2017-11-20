@@ -42,6 +42,7 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
 
+
     <OnPlatform
         x:Key="ButtonSmallWidth"
         x:TypeArguments="x:Double"
@@ -110,6 +111,15 @@
         <Setter Property="ImageWidthRequest" Value="{StaticResource ImageButtonImageSize}" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+    </Style>
+
+    <Style x:Key="RoundGreyButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
+        <Setter Property="BorderColor" Value="{StaticResource LightGrayBorders}" />
+        <Setter Property="BorderWidth" Value="3" />
+        <Setter Property="ImageHeightRequest" Value="{StaticResource SmallImageButtonImageSize}" />
+        <Setter Property="ImageWidthRequest" Value="{StaticResource SmallImageButtonImageSize}" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="BorderRadius" Value="45" />
     </Style>
 
     <OnPlatform
