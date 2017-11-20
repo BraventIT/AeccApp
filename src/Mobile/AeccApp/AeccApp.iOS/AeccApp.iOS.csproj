@@ -24,13 +24,14 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchFastDev>true</MtouchFastDev>
-    <MtouchProfiling>true</MtouchProfiling>
+    <MtouchProfiling>false</MtouchProfiling>
     <IOSDebuggerPort>64452</IOSDebuggerPort>
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <CodesignEntitlements>
     </CodesignEntitlements>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -178,6 +179,8 @@
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
     <Compile Include="Renderers\XLabs\ImageButtonRenderer.cs" />
     <Compile Include="Services\FileProvider.cs" />
+    <Compile Include="Renderers\RangeSliderEffect.cs" />
+    <Compile Include="RangeSliderInitialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist">
