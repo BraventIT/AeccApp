@@ -6728,6 +6728,9 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f020131
 			public const int notification_icon_background = 2130837809;
 			
+			// aapt resource value: 0x7f02014d
+			public const int notification_template_icon_bg = 2130837837;
+			
 			// aapt resource value: 0x7f02014e
 			public const int notification_template_icon_bg = 2130837838;
 			
