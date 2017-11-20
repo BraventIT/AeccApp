@@ -53,6 +53,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Chat\ChatCounterpartProfileView.xaml.cs">
+      <DependentUpon>ChatCounterpartProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Chat\Popups\ChatEventPopupView.xaml.cs">
       <DependentUpon>ChatEventPopupView.xaml</DependentUpon>
     </Compile>
