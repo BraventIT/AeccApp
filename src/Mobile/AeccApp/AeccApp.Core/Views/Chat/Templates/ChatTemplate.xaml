@@ -9,113 +9,82 @@
 
     <ContentView.Resources>
         <ResourceDictionary>
+            <Style
+                x:Key="ChatLabelStyle"
+                BasedOn="{StaticResource MediumLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
+            </Style>
+
+            <DataTemplate x:Key="TimeTemplate">
+                <ViewCell IsEnabled="False">
+
+                    <Label
+                        Margin="10"
+                        HorizontalTextAlignment="Center"
+                        Rotation="180"
+                        Style="{StaticResource ChatLabelStyle}"
+                        Text="{Binding DateTime, StringFormat='{0:ddd} - {0:t}'}"
+                        TextColor="{StaticResource LightGrey2}" />
+
+                </ViewCell>
+            </DataTemplate>
+
             <!--  Client chat messages list template  -->
             <DataTemplate x:Key="ClientTemplate">
                 <ViewCell IsEnabled="False">
-                    <Grid Rotation="180">
-                        <Grid.HorizontalOptions>
-                            <OnPlatform
-                                x:TypeArguments="LayoutOptions"
-                                Android="Start"
-                                WinPhone="End"
-                                iOS="Start" />
-                        </Grid.HorizontalOptions>
+                    <Grid Margin="10" Rotation="180">
+                        <Frame
+                            BackgroundColor="{StaticResource PlanarGreenColor}"
+                            CornerRadius="18"
+                            HorizontalOptions="End">
+                            <Label Style="{StaticResource ChatLabelStyle}" Text="{Binding Activity.Text}" />
 
+                        </Frame>
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <StackLayout
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Margin="5,2,5,0"
-                            Padding="5"
-                            BackgroundColor="#4286f4"
-                            HorizontalOptions="Start">
-                            <Label
-                                HorizontalOptions="FillAndExpand"
-                                Text="{Binding Activity.Text}"
-                                TextColor="White" />
-                            <Label
-                                FontSize="Micro"
-                                HorizontalOptions="End"
-                                Text="{Binding UserTime}"
-                                TextColor="White" />
-                        </StackLayout>
-                        <ctrl:CustomShapeDrawing
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Margin="0,-7,6,1"
-                            BorderColor="#4286f4"
-                            HeightRequest="12"
+                        <BoxView
+                            BackgroundColor="{StaticResource PlanarGreenColor}"
+                            HeightRequest="18"
                             HorizontalOptions="End"
-                            PointsShapeCoordinate="0.7/0, 0/0, 0.9/1"
-                            ShapeColor="#4286f4"
-                            WidthRequest="14" />
-
-                        <ctrl:CustomImage
-                            Grid.RowSpan="2"
-                            Grid.Column="1"
-                            HeightRequest="60"
-                            SourcePlatform="round_no_profile_image"
                             VerticalOptions="End"
-                            WidthRequest="60" />
+                            WidthRequest="18" />
 
                     </Grid>
                 </ViewCell>
             </DataTemplate>
+
             <!--  Server chat messages list template  -->
             <DataTemplate x:Key="ServerTemplate">
                 <ViewCell IsEnabled="False">
-                    <Grid Rotation="180">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                    <Grid Margin="10" Rotation="180">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <StackLayout
-                            Grid.Row="0"
+                        <Frame
                             Grid.Column="1"
-                            Margin="5,2,5,0"
-                            Padding="5"
-                            BackgroundColor="#b9bfc9"
+                            BackgroundColor="{StaticResource PlanarLightGrey}"
+                            CornerRadius="18"
                             HorizontalOptions="Start">
-                            <Label HorizontalOptions="FillAndExpand" Text="{Binding Activity.Text}" />
-                            <Label
-                                FontSize="Micro"
-                                HorizontalOptions="Start"
-                                Text="{Binding UserTime}" />
-                        </StackLayout>
-                        <ctrl:CustomShapeDrawing
-                            Grid.Row="1"
+                            <Label Style="{StaticResource ChatLabelStyle}" Text="{Binding Activity.Text}" />
+
+                        </Frame>
+
+                        <BoxView
                             Grid.Column="1"
-                            Margin="6,-7,0,1"
-                            BorderColor="#b9bfc9"
-                            HeightRequest="12"
+                            BackgroundColor="{StaticResource PlanarLightGrey}"
+                            HeightRequest="18"
                             HorizontalOptions="Start"
-                            PointsShapeCoordinate="0.3/0, 0.1/1, 1/0"
-                            ShapeColor="#b9bfc9"
-                            WidthRequest="14" />
+                            VerticalOptions="End"
+                            WidthRequest="18" />
 
                         <ctrl:CustomImage
-                            Grid.RowSpan="2"
-                            Grid.Column="0"
-                            HeightRequest="60"
-                            SourcePlatform="round_no_profile_image"
+                            HeightRequest="35"
+                            SourcePlatform="{Binding Activity.From.Gender, Converter={StaticResource GenderToImageConverter}}"
                             VerticalOptions="End"
-                            WidthRequest="60" />
+                            WidthRequest="35" />
 
                     </Grid>
                 </ViewCell>
@@ -124,7 +93,8 @@
             <slct:ChatDataTemplateSelector
                 x:Key="ChatDataTemplateSelector"
                 ClientTemplate="{StaticResource ClientTemplate}"
-                ServerTemplate="{StaticResource ServerTemplate}" />
+                ServerTemplate="{StaticResource ServerTemplate}"
+                TimeTemplate="{StaticResource TimeTemplate}" />
         </ResourceDictionary>
     </ContentView.Resources>
 
@@ -147,6 +117,13 @@
             ItemsSource="{Binding Messages}"
             Rotation="180" />
 
+        <BoxView
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            BackgroundColor="{StaticResource BlackColor}"
+            HeightRequest="2"
+            VerticalOptions="Start" />
+
         <!--  Chat text entry  -->
         <Entry
             x:Name="Entry"
@@ -163,9 +140,9 @@
         <ctrl:CustomImage
             Grid.Row="1"
             Grid.Column="1"
-            HeightRequest="60"
+            HeightRequest="18"
             SourcePlatform="send_icon"
-            WidthRequest="60">
+            WidthRequest="18">
             <ctrl:CustomImage.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
             </ctrl:CustomImage.GestureRecognizers>

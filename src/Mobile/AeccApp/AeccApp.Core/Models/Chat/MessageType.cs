@@ -3,6 +3,7 @@
     public enum MessageType
     {
         Sent,
-        Received            
+        Received,
+        Time
     }
 }

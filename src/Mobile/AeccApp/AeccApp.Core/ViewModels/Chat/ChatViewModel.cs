@@ -18,8 +18,11 @@ namespace AeccApp.Core.ViewModels
 {
     public class ChatViewModel : ViewModelBase
     {
+        const int MIN_MINUTES_INTEVAL = 5;
+
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
         private IList<UserData> _listVolunteers;
+        private DateTime _lastMessageTime;
 
         #region Contructor & Initialize
         public ChatViewModel()
@@ -170,14 +173,18 @@ namespace AeccApp.Core.ViewModels
                 string textToSend = Text;
                 Text = string.Empty;
 
-                Messages.Insert(0, new Message
+                var newMessage = new Message
                 {
                     DateTime = DateTime.UtcNow,
                     Activity = new Activity()
                     {
                         Text = textToSend
                     }
-                });
+                };
+
+                TryToInsertTimeMessage(newMessage, true);
+                Messages.Insert(0, newMessage);
+               
                 await ChatService.SendMessageAsync(textToSend);
             });
         }
@@ -383,7 +390,25 @@ namespace AeccApp.Core.ViewModels
             }
             else
             {
+                DateTime nextMessageTime = DateTime.MinValue;
+                foreach (var message in ChatService.GetConversationMessages())
+                {
+                    Messages.Add(message);
+                    TryToInsertTimeMessage(message);
+                }
                 Messages.AddRange(ChatService.GetConversationMessages());
+            }
+        }
+
+        private void TryToInsertTimeMessage(Message message, bool firstPosition = false)
+        {
+            if (_lastMessageTime < message.DateTime)
+            {
+                if (firstPosition)
+                    Messages.Insert(0, new Message() { DateTime = message.DateTime });
+                else
+                    Messages.Add(new Message() { DateTime = message.DateTime });
+                _lastMessageTime = message.DateTime.AddMinutes(MIN_MINUTES_INTEVAL);
             }
         }
 
@@ -391,6 +416,7 @@ namespace AeccApp.Core.ViewModels
         {
             foreach (var message in messages.Reverse())
             {
+                TryToInsertTimeMessage(message, true);
                 Messages.Insert(0, message);
             }
         }

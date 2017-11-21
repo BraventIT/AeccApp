@@ -10,7 +10,7 @@
     <!--  Volunteers list item template  -->
     <ContentView.Resources>
         <ResourceDictionary>
-            <cv:GenderToImageConverter x:Key="GenderToImageConverter" />
+
 
             <DataTemplate x:Key="volunteerTemplate">
                 <ViewCell>

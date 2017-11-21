@@ -19,6 +19,7 @@
             <cv:IsNullConverter x:Key="IsNullConverter" />
             <cv:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
             <cv:ToggledEventArgsConverter x:Key="ToggledEventArgsConverter" />
+            <cv:GenderToImageConverter x:Key="GenderToImageConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -17,6 +17,7 @@
     <Style x:Key="LightGreyLabelStyle" TargetType="{x:Type Label}">
         <Setter Property="TextColor" Value="{StaticResource LightGraySubtitle}" />
     </Style>
+
     <Style
         x:Key="DarkGreyBigTitleLabelStyle"
         BasedOn="{StaticResource GreyLabelStyle}"
@@ -26,6 +27,7 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="Margin" Value="20, 12" />
     </Style>
+
     <Style
         x:Key="DarkGreyLargeSubtitleLabelStyle"
         BasedOn="{StaticResource GreyLabelStyle}"
@@ -34,6 +36,7 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="Margin" Value="20, 12" />
     </Style>
+
     <Style
         x:Key="DarkGreyMidLargeSizeTitleLabelStyle"
         BasedOn="{StaticResource GreyLabelStyle}"
@@ -43,6 +46,7 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="Margin" Value="20, 12" />
     </Style>
+
     <Style
         x:Key="DarkGreyMediumSizeTitleLabelStyle"
         BasedOn="{StaticResource GreyLabelStyle}"
