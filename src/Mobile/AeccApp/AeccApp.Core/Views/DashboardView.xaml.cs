@@ -22,7 +22,7 @@ namespace AeccApp.Core.Views
             MessagingCenter.Subscribe<DashboardEnableAndDisableChatTab>(this, string.Empty, OnEnableAndDisableChatTab);
             MessagingCenter.Subscribe<DashboardHideRequestsTabMessage>(this, string.Empty, OnHideRequestsTab);
             MessagingCenter.Subscribe<DashboardTabMessage>(this, string.Empty, OnTabChanged);
-            MessagingCenter.Send(new ToolbarMessage(true), string.Empty);
+            MessagingCenter.Send(new ToolbarMessage(true,""), string.Empty);
             ViewModel?.ActivateAsync();
         }
 
@@ -51,7 +51,7 @@ namespace AeccApp.Core.Views
             MessagingCenter.Unsubscribe<DashboardEnableAndDisableChatTab>(this, string.Empty);
             MessagingCenter.Unsubscribe<DashboardHideRequestsTabMessage>(this, string.Empty);
             MessagingCenter.Unsubscribe<DashboardTabMessage>(this, string.Empty);
-            MessagingCenter.Send(new ToolbarMessage(false), string.Empty);
+            MessagingCenter.Send(new ToolbarMessage(false,""), string.Empty);
             ViewModel?.Deactivate();
         }
     }

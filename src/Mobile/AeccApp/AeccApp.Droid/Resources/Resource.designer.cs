@@ -2225,13 +2225,7 @@ namespace AeccApp.Droid
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.abc_textfield_search_material = global::AeccApp.Droid.Resource.Drawable.abc_textfield_search_material;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.abc_vector_test = global::AeccApp.Droid.Resource.Drawable.abc_vector_test;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_hide_password = global::AeccApp.Droid.Resource.Drawable.avd_hide_password;
-			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_hide_password_1 = global::AeccApp.Droid.Resource.Drawable.avd_hide_password_1;
-			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_hide_password_2 = global::AeccApp.Droid.Resource.Drawable.avd_hide_password_2;
-			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_hide_password_3 = global::AeccApp.Droid.Resource.Drawable.avd_hide_password_3;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_show_password = global::AeccApp.Droid.Resource.Drawable.avd_show_password;
-			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_show_password_1 = global::AeccApp.Droid.Resource.Drawable.avd_show_password_1;
-			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_show_password_2 = global::AeccApp.Droid.Resource.Drawable.avd_show_password_2;
-			global::Xamarin.RangeSlider.Forms.Resource.Drawable.avd_show_password_3 = global::AeccApp.Droid.Resource.Drawable.avd_show_password_3;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.design_bottom_navigation_item_background = global::AeccApp.Droid.Resource.Drawable.design_bottom_navigation_item_background;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.design_fab_background = global::AeccApp.Droid.Resource.Drawable.design_fab_background;
 			global::Xamarin.RangeSlider.Forms.Resource.Drawable.design_ic_visibility = global::AeccApp.Droid.Resource.Drawable.design_ic_visibility;
@@ -6044,26 +6038,8 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020150
-			public const int avd_hide_password_1 = 2130837840;
-			
-			// aapt resource value: 0x7f020151
-			public const int avd_hide_password_2 = 2130837841;
-			
-			// aapt resource value: 0x7f020152
-			public const int avd_hide_password_3 = 2130837842;
-			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
-			
-			// aapt resource value: 0x7f020153
-			public const int avd_show_password_1 = 2130837843;
-			
-			// aapt resource value: 0x7f020154
-			public const int avd_show_password_2 = 2130837844;
-			
-			// aapt resource value: 0x7f020155
-			public const int avd_show_password_3 = 2130837845;
 			
 			// aapt resource value: 0x7f020055
 			public const int bell = 2130837589;
@@ -6727,9 +6703,6 @@ namespace AeccApp.Droid
 			
 			// aapt resource value: 0x7f020131
 			public const int notification_icon_background = 2130837809;
-			
-			// aapt resource value: 0x7f02014d
-			public const int notification_template_icon_bg = 2130837837;
 			
 			// aapt resource value: 0x7f02014e
 			public const int notification_template_icon_bg = 2130837838;
