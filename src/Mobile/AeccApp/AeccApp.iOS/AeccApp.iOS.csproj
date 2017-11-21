@@ -181,6 +181,7 @@
     <Compile Include="Renderers\XLabs\ImageButtonRenderer.cs" />
     <Compile Include="Services\FileProvider.cs" />
     <Compile Include="RangeSliderInitialization.cs" />
+    <Compile Include="Efects\EntryEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist">
