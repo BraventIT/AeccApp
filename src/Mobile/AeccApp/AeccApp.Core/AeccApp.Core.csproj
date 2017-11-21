@@ -29,7 +29,6 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.6.2" />
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.9" />
-    <PackageReference Include="LiveXAML" Version="1.3.10" />
     <PackageReference Include="Microsoft.Bot.Connector.DirectLine" Version="3.0.2" />
     <PackageReference Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
@@ -53,6 +52,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Chat\ChatCounterpartProfileView.xaml.cs">
+      <DependentUpon>ChatCounterpartProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Chat\Popups\ChatEventPopupView.xaml.cs">
       <DependentUpon>ChatEventPopupView.xaml</DependentUpon>
     </Compile>

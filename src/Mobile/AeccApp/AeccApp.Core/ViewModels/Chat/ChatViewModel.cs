@@ -28,7 +28,6 @@ namespace AeccApp.Core.ViewModels
             Volunteers = new ObservableCollection<UserData>();
             ChatFiltersPopupVM = new ChatFiltersPopupViewModel();
             ChatRatingPopupVM = new ChatRatingPopupViewModel();
-            ChatCounterpartProfilePopupVM = new ChatCounterpartProfilePopupViewModel();
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
             ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
             ChatConnectingPopupVM = new ChatConnectingPopupViewModel();
@@ -131,7 +130,6 @@ namespace AeccApp.Core.ViewModels
         public ChatFiltersPopupViewModel ChatFiltersPopupVM { get; private set; }
         public ChatLeaseConversationPopupViewModel ChatLeaseConversationPopupVM { get; private set; }
         public ChatRatingPopupViewModel ChatRatingPopupVM { get; private set; }
-        public ChatCounterpartProfilePopupViewModel ChatCounterpartProfilePopupVM { get; private set; }
 
         #endregion
 
@@ -152,8 +150,7 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnVolunteerProfileOpen(object obj)
         {
-            await NavigationService.HidePopupAsync();
-            await NavigationService.ShowPopupAsync(ChatCounterpartProfilePopupVM);
+            await NavigationService.NavigateToAsync<ChatCounterpartProfileViewModel>(ConversationCounterpart);
         }
 
         private Command _sendMessageCommand;
@@ -383,7 +380,6 @@ namespace AeccApp.Core.ViewModels
             {
                 await ChatService.InitializeChatAsync(_partyId);
                 NotifyPropertyChanged(nameof(ConversationCounterpart));
-                ChatCounterpartProfilePopupVM.Counterpart = ChatService.ConversationCounterpart;
             }
             else
             {

@@ -15,7 +15,7 @@
         HorizontalOptions="Center"
         VerticalOptions="Center">
 
-        <Frame HeightRequest="38">
+        <Frame HasShadow="False" HeightRequest="38">
             <ctrl:CustomActivityIndicatorControl HeightRequest="80" />
         </Frame>
 

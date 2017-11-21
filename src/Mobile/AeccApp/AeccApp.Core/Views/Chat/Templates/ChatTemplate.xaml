@@ -11,7 +11,7 @@
         <ResourceDictionary>
             <!--  Client chat messages list template  -->
             <DataTemplate x:Key="ClientTemplate">
-                <ViewCell>
+                <ViewCell IsEnabled="False">
                     <Grid Rotation="180">
                         <Grid.HorizontalOptions>
                             <OnPlatform
@@ -73,7 +73,7 @@
             </DataTemplate>
             <!--  Server chat messages list template  -->
             <DataTemplate x:Key="ServerTemplate">
-                <ViewCell>
+                <ViewCell IsEnabled="False">
                     <Grid Rotation="180">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -132,6 +132,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -140,7 +141,6 @@
 
         <!--  Chat messages list  -->
         <ListView
-            Grid.Row="0"
             Grid.ColumnSpan="2"
             HasUnevenRows="True"
             ItemTemplate="{StaticResource ChatDataTemplateSelector}"
@@ -151,7 +151,6 @@
         <Entry
             x:Name="Entry"
             Grid.Row="1"
-            Grid.Column="0"
             Margin="5,0,0,0"
             HorizontalOptions="FillAndExpand"
             Placeholder="{Binding [ChatViewChatEntryPlaceHolder]}"
@@ -172,6 +171,6 @@
             </ctrl:CustomImage.GestureRecognizers>
         </ctrl:CustomImage>
 
-
+        <ctrl:BoxViewKeyboardHeight Grid.Row="2" Grid.ColumnSpan="2" />
     </Grid>
 </ContentView>
