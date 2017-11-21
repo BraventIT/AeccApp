@@ -11,12 +11,18 @@ using AeccApp.iOS.Renderers;
 using Xamarin.Forms.Platform.iOS;
 using CoreGraphics;
 using AeccApp.Core.Resources;
+using AeccApp.Core.Messages;
 
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(TabbedPageRenderer))]
 namespace AeccApp.iOS.Renderers
 {
     public class TabbedPageRenderer : TabbedRenderer
     {
+        UIView titleView;
+        UIImageView iconView;
+        UILabel titleLabel;
+        UIImage imageIcon;
+
         public TabbedPageRenderer()
         {
             TabBar.TintColor = Color.FromHex(ResourcesReference.APPBAR_ACCENT_COLOR).ToUIColor();
@@ -40,30 +46,52 @@ namespace AeccApp.iOS.Renderers
                 rightNativeButtons.ForEach(x => x.ImageInsets = new UIEdgeInsets(-8, 0, 0, 0));
 
                 this.NavigationController.NavigationBar.TintColor = UIColor.White;
+
+
             }
         }
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            imageIcon = UIImage.FromBundle("logoHeader.png");
+            iconView = new UIImageView(new CGRect(0, 0, 200, 40));
+            titleLabel = new UILabel(new CGRect(0, 0, 200, 40));
+            titleLabel.TextAlignment = UITextAlignment.Center;
 
-            var image = UIImage.FromBundle("logoHeader.png");
-            var imageView = new UIImageView(new CGRect(0, 0, 140, 70));
+            iconView.ContentMode = UIViewContentMode.ScaleAspectFit;
 
-            imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+            titleView = new UIView(new CGRect(0, 0, 200, 40));
+            iconView.Frame = titleView.Bounds;
 
-            var titleView = new UIView(new CGRect(0, 0, 100, 45));
-            imageView.Frame = titleView.Bounds;
-            titleView.AddSubview(imageView);
-
-            imageView.Image = image.ImageWithRenderingMode(UIImageRenderingMode.Automatic);
+            iconView.Image = imageIcon.ImageWithRenderingMode(UIImageRenderingMode.Automatic);
 
             if (NavigationController != null)
             {
-                NavigationController.TopViewController.NavigationItem.TitleView = imageView;
                 NavigationController.NavigationBar.BarTintColor = Color.FromHex(ResourcesReference.APPBAR_ACCENT_COLOR).ToUIColor();
                 NavigationController.NavigationBar.TintColor = Color.White.ToUIColor();
             }
+
+            MessagingCenter.Subscribe<ToolbarMessage>(this, string.Empty, m =>
+            {
+                if (NavigationController != null)
+                {
+                    if (m.ShowLogo)
+                    {
+                        titleView.AddSubview(iconView);
+                        titleLabel.RemoveFromSuperview();
+                    }
+                    else
+                    {
+                        iconView.RemoveFromSuperview();
+                        titleLabel.Text = m._NavigationTitle;
+                        titleLabel.TextColor = UIColor.White;
+                        titleView.AddSubview(titleLabel);
+                    }
+                    NavigationController.TopViewController.NavigationItem.TitleView = titleView;
+                }
+
+            });
         }
     }
 }

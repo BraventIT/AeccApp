@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using System.Windows.Input;
 using AeccApp.Core.ViewModels.Popups;
 using System;
+using AeccApp.Core.Messages;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -20,6 +21,7 @@ namespace AeccApp.Core.ViewModels
         public override async Task ActivateAsync()
         {
             LogoutPopupVM.Logout += OnLogoutPopupLogout;
+            MessagingCenter.Send(new ToolbarMessage(false,LocalizationResourceManager.GetString("ChatViewViewVolunteerProfile")), string.Empty);
         }
 
         public override void Deactivate()

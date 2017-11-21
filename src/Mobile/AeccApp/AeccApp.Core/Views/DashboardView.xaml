@@ -28,7 +28,7 @@
             x:TypeArguments="BindingBase"
             Android="{Binding [Nothing]}"
             WinPhone="{Binding [DashboardAppTitle]}"
-            iOS="{Binding [Nothing]}" />
+            iOS="{Binding [DashboardAppTitle]}" />
     </TabbedPage.Title>
 
     <TabbedPage.Children>
