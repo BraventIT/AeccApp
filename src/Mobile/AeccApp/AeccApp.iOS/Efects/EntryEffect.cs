@@ -4,6 +4,7 @@ using PrismForms.iOS.Effects;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using Foundation;
  
 [assembly: ResolutionGroupName("EntryEffects")]
 [assembly: ExportEffect(typeof(EntryEffect), "EntryEffect")]
@@ -25,11 +26,13 @@ namespace PrismForms.iOS.Effects
         private UIToolbar BuildDismiss()
         {
             var toolbar = new UIToolbar(new CGRect(0.0f, 0.0f, Control.Frame.Size.Width, 44.0f));
+            UIBarButtonItem doneButton = new UIBarButtonItem(UIBarButtonSystemItem.Done, delegate { Control.ResignFirstResponder(); });
+            doneButton.TintColor = UIColor.Green;
 
             toolbar.Items = new[]
             {
                 new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace),
-                new UIBarButtonItem(UIBarButtonSystemItem.Done, delegate { Control.ResignFirstResponder(); })
+                doneButton
             };
 
             return toolbar;
