@@ -23,6 +23,8 @@
     <Color x:Key="LightGrey2">#662C3947</Color>
     <Color x:Key="PlanarGreenColor">#DCF1B2</Color>
 
+
+
     <!--  FONT SIZES  -->
     <OnPlatform
         x:Key="LittleSize"

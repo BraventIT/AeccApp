@@ -76,50 +76,69 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <ctrl:CustomImage
-                        Grid.Column="0"
+                    <Frame
                         Margin="20"
+                        Padding="0"
                         BackgroundColor="{Binding GenderWomen, Converter={StaticResource BooleanToColorConverter}}"
-                        HeightRequest="100"
+                        CornerRadius="52"
+                        HeightRequest="104"
                         HorizontalOptions="Center"
-                        SourcePlatform="ico_girl"
                         VerticalOptions="Center"
-                        WidthRequest="100">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="m" />
-                        </ctrl:CustomImage.GestureRecognizers>
-                    </ctrl:CustomImage>
+                        WidthRequest="104">
+                        <ctrl:CustomImage
+                            HeightRequest="100"
+                            HorizontalOptions="Center"
+                            SourcePlatform="ico_girl"
+                            VerticalOptions="Center"
+                            WidthRequest="100">
+                            <ctrl:CustomImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="m" />
+                            </ctrl:CustomImage.GestureRecognizers>
+                        </ctrl:CustomImage>
+                    </Frame>
 
-                    <ctrl:CustomImage
+                    <Frame
                         Grid.Column="1"
                         Margin="20"
+                        Padding="0"
                         BackgroundColor="{Binding GenderMen, Converter={StaticResource BooleanToColorConverter}}"
-                        HeightRequest="100"
+                        CornerRadius="52"
+                        HeightRequest="104"
                         HorizontalOptions="Center"
-                        SourcePlatform="ico_man"
                         VerticalOptions="Center"
-                        WidthRequest="100">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="h" />
-                        </ctrl:CustomImage.GestureRecognizers>
-                    </ctrl:CustomImage>
+                        WidthRequest="104">
+                        <ctrl:CustomImage
+                            HeightRequest="100"
+                            HorizontalOptions="Center"
+                            SourcePlatform="ico_man"
+                            VerticalOptions="Center"
+                            WidthRequest="100">
+                            <ctrl:CustomImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="h" />
+                            </ctrl:CustomImage.GestureRecognizers>
+                        </ctrl:CustomImage>
+                    </Frame>
 
                 </Grid>
 
-
                 <BoxView HeightRequest="1" Color="{StaticResource LightGrey}" />
+
                 <StackLayout
                     Margin="0,24,0,35"
                     HorizontalOptions="Center"
                     Orientation="Horizontal">
 
-                    <ctrlXlabs:ImageButton
-                        Command="{Binding ResetFiltersCommand}"
-                        HorizontalOptions="EndAndExpand"
-                        SourcePlatform="ico_clean_filter"
-                        Style="{StaticResource RoundGreyButtonStyle}"
-                        VerticalOptions="Center" />
+                    <Grid Margin="0,0,20,0">
 
+                        <Button Command="{Binding ResetFiltersCommand}" Style="{StaticResource CircularButtonStyle}" />
+
+                        <ctrl:CustomImage
+                            HorizontalOptions="Center"
+                            SourcePlatform="ico_clean_filter"
+                            VerticalOptions="Center"
+                            WidthRequest="16" />
+
+                    </Grid>
 
                     <Button
                         Command="{Binding ApplyFiltersCommand}"

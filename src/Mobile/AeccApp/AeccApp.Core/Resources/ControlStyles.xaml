@@ -12,9 +12,9 @@
     <OnPlatform
         x:Key="ButtonWidth"
         x:TypeArguments="x:Double"
-        Android="211"
+        Android="210"
         WinPhone="150"
-        iOS="150" />
+        iOS="210" />
 
     <Style TargetType="{x:Type ListView}">
         <Setter Property="SeparatorVisibility" Value="None" />
@@ -32,10 +32,28 @@
         <Setter Property="TextColor" Value="White" />
         <Setter Property="WidthRequest" Value="{StaticResource ButtonWidth}" />
         <Setter Property="HeightRequest" Value="44" />
-        <Setter Property="BorderRadius" Value="22" />
+        <Setter Property="BorderRadius" Value="28" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+    </Style>
+
+    <Style x:Key="CircularButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="WidthRequest" Value="44" />
+        <Setter Property="HeightRequest" Value="44" />
+        <Setter Property="BorderRadius" Value="22" />
+        <Setter Property="BorderWidth" Value="2" />
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+        <Setter Property="BorderColor" Value="{StaticResource LightGrayBorders}" />
+    </Style>
+
+
+    <Style
+        x:Key="CircularButtonStyleTransparent"
+        BasedOn="{StaticResource CircularButtonStyle}"
+        TargetType="{x:Type Button}">
+
+        <Setter Property="BorderColor" Value="Transparent" />
     </Style>
 
     <Style x:Key="RoundGreenButtonStyle" TargetType="{x:Type Button}">

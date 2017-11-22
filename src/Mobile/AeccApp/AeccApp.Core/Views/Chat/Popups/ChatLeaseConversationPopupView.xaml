@@ -13,6 +13,7 @@
 
     <Frame
         Margin="45,0"
+        Padding="0"
         BackgroundColor="{StaticResource BackgroundColor}"
         CornerRadius="20"
         HorizontalOptions="Fill"
@@ -30,14 +31,18 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <Button
+                Margin="4,4,0,0"
+                Command="{Binding ClosePopupCommand}"
+                HorizontalOptions="Start"
+                Style="{StaticResource CircularButtonStyle}"
+                VerticalOptions="Start" />
+
             <ctrl:CustomImage
+                Margin="20,220,0,0"
                 HeightRequest="12"
                 HorizontalOptions="Start"
-                SourcePlatform="x_icon">
-                <ctrl:CustomImage.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
-                </ctrl:CustomImage.GestureRecognizers>
-            </ctrl:CustomImage>
+                SourcePlatform="x_icon" />
 
             <ctrl:CustomImage
                 Grid.Row="1"
@@ -50,14 +55,14 @@
             <Label
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
-                Margin="0,27,0,0"
+                Margin="20,27,20,0"
                 Style="{StaticResource TitleLabelStyleNormal}"
                 Text="{Binding [PopupChatLeaseConversationTextTitle]}" />
 
             <Label
                 Grid.Row="3"
                 Grid.ColumnSpan="2"
-                Margin="8,20,8,30"
+                Margin="28,20,28,30"
                 HorizontalTextAlignment="Center"
                 Style="{StaticResource SubTitleLabelStyleNormal}"
                 Text="{Binding [PopupChatLeaseConversationText]}" />
