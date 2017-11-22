@@ -9,12 +9,7 @@
 
     <ContentView.Resources>
         <ResourceDictionary>
-            <Style
-                x:Key="ChatLabelStyle"
-                BasedOn="{StaticResource MediumLabelStyle}"
-                TargetType="{x:Type Label}">
-                <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
-            </Style>
+
 
             <DataTemplate x:Key="TimeTemplate">
                 <ViewCell IsEnabled="False">

@@ -224,7 +224,7 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No hay voluntarios. Intentalo más tarde.
+        ///   Looks up a localized string similar to ¡Lo sentimos! Actualmente no tenemos ningún voluntario disponible para hablar. Inténtalo de nuevo más tarde..
         /// </summary>
         public static string ChatViewThereAreNoVolunteers {
             get {
@@ -233,11 +233,29 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No hay voluntarios para el filtro que has puesto..
+        ///   Looks up a localized string similar to No hemos econtrado ningún voluntario con los filtros aplicados. Por favor, prueba a buscar otros parámetros o limpia los filtros pulsando el botón de arriba..
         /// </summary>
         public static string ChatViewThereAreNoVolunteersFiltered {
             get {
                 return ResourceManager.GetString("ChatViewThereAreNoVolunteersFiltered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sin resultados.
+        /// </summary>
+        public static string ChatViewThereAreNoVolunteersFilteredTitle {
+            get {
+                return ResourceManager.GetString("ChatViewThereAreNoVolunteersFilteredTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No hay voluntarios.
+        /// </summary>
+        public static string ChatViewThereAreNoVolunteersTitle {
+            get {
+                return ResourceManager.GetString("ChatViewThereAreNoVolunteersTitle", resourceCulture);
             }
         }
         

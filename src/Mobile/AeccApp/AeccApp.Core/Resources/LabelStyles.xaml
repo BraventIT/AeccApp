@@ -131,4 +131,15 @@
         <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
     </Style>
 
+    <Style x:Key="ChatTitleStyle" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
+    </Style>
+
+    <Style
+        x:Key="ChatLabelStyle"
+        BasedOn="{StaticResource MediumLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
+    </Style>
 </ResourceDictionary>

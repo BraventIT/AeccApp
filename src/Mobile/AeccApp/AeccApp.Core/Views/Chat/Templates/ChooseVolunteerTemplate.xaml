@@ -85,35 +85,49 @@
             </ListView>
 
             <StackLayout
+                Margin="78,0"
                 HorizontalOptions="Center"
                 IsVisible="{Binding VolunteersIsEmpty}"
                 VerticalOptions="Center">
+                <ctrl:CustomImage
+                    HeightRequest="55"
+                    HorizontalOptions="Center"
+                    SourcePlatform="Ico_cruz" />
                 <Label
+                    Margin="0,35,0,0"
                     HorizontalTextAlignment="Center"
-                    Style="{StaticResource SubTitleLabelStyle}"
+                    Style="{StaticResource ChatTitleStyle}"
+                    Text="{Binding [ChatViewThereAreNoVolunteersTitle]}" />
+                <Label
+                    Margin="0,20"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource ChatLabelStyle}"
                     Text="{Binding [ChatViewThereAreNoVolunteers]}" />
                 <Button
-                    Margin="20"
                     Command="{Binding RefreshVolunteersCommand}"
-                    HorizontalOptions="CenterAndExpand"
+                    HorizontalOptions="Center"
                     Style="{StaticResource ButtonStyle}"
                     Text="{Binding [CommonRefreshList]}" />
             </StackLayout>
 
             <StackLayout
+                Margin="78,0"
                 HorizontalOptions="Center"
                 IsVisible="{Binding FilterVolunteersIsEmpty}"
                 VerticalOptions="Center">
+                <ctrl:CustomImage
+                    HeightRequest="55"
+                    HorizontalOptions="Center"
+                    SourcePlatform="ico_clean_refresh" />
+                <Label
+                    Margin="0,35,0,20"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource ChatTitleStyle}"
+                    Text="{Binding [ChatViewThereAreNoVolunteersFilteredTitle]}" />
                 <Label
                     HorizontalTextAlignment="Center"
-                    Style="{StaticResource SubTitleLabelStyle}"
+                    Style="{StaticResource ChatLabelStyle}"
                     Text="{Binding [ChatViewThereAreNoVolunteersFiltered]}" />
-                <Button
-                    Margin="20"
-                    Command="{Binding ResetVolunteersFilterCommand}"
-                    HorizontalOptions="CenterAndExpand"
-                    Style="{StaticResource ButtonStyle}"
-                    Text="{Binding [ChatViewResetFilter]}" />
             </StackLayout>
 
             <Label

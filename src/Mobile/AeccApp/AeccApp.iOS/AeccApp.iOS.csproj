@@ -433,5 +433,15 @@
       <Link>Resources\ico_clean_filter.png</Link>
     </BundleResource>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\Ico_cruz.png">
+      <Link>Resources\Ico_cruz.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_clean_refresh.png">
+      <Link>Resources\ico_clean_refresh.png</Link>
+    </BundleResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -172,10 +172,16 @@
     <value>Enviar</value>
   </data>
   <data name="ChatViewThereAreNoVolunteers" xml:space="preserve">
-    <value>No hay voluntarios. Intentalo más tarde</value>
+    <value>¡Lo sentimos! Actualmente no tenemos ningún voluntario disponible para hablar. Inténtalo de nuevo más tarde.</value>
   </data>
   <data name="ChatViewThereAreNoVolunteersFiltered" xml:space="preserve">
-    <value>No hay voluntarios para el filtro que has puesto.</value>
+    <value>No hemos econtrado ningún voluntario con los filtros aplicados. Por favor, prueba a buscar otros parámetros o limpia los filtros pulsando el botón de arriba.</value>
+  </data>
+  <data name="ChatViewThereAreNoVolunteersFilteredTitle" xml:space="preserve">
+    <value>Sin resultados</value>
+  </data>
+  <data name="ChatViewThereAreNoVolunteersTitle" xml:space="preserve">
+    <value>No hay voluntarios</value>
   </data>
   <data name="ChatViewViewVolunteerProfile" xml:space="preserve">
     <value>Perfil del voluntario</value>
