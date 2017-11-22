@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.CheckBoxImage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Image x:Name="Image">
+        <Image.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnImageTapped" />
+        </Image.GestureRecognizers>
+    </Image>
+
+</ContentView>

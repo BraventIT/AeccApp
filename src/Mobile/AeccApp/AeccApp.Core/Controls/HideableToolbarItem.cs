@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AeccApp.Core.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,30 +57,25 @@ namespace AeccApp.Core.Controls
             }
         }
 
-        public ImageSource IconPlatform
+        public string IconPlatform
         {
-            get
-            {
-                return (ImageSource)GetValue(IconProperty);
-            }
-            set
-            {
-                if (value == null)
-                {
-                    return;
-                }
+            get { return (string)GetValue(IconPlatformProperty); }
+            set { SetValue(IconPlatformProperty, value); }
+        }
 
-                var source = (FileImageSource)value;
+        public static BindableProperty IconPlatformProperty = BindableProperty.Create(
+            nameof(IconPlatform),
+            typeof(string),
+            typeof(HideableToolbarItem),
+            null,
+            propertyChanged: OnSourcePlatformChanged);
 
-                string path = source.File;
-                if (Device.RuntimePlatform == Device.UWP)
-                {
-                    path = $"Assets/{path}.png";
-                }
-
-                source.File = path;
-                SetValue(IconProperty, source);
-            }
+        private static void OnSourcePlatformChanged(BindableObject b, object oldValue, object newValue)
+        {
+            if (newValue == null)
+                return;
+            var control = (HideableToolbarItem)b;
+            control.SetSourcePlatform((string)newValue);
         }
     }
 }

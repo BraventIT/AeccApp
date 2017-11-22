@@ -103,6 +103,12 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\chat_tab_icon.png">
       <Link>Assets\chat_tab_icon.png</Link>
     </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\CheckBoxOff.png">
+      <Link>Assets\CheckBoxOff.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\CheckBoxOn.png">
+      <Link>Assets\CheckBoxOn.png</Link>
+    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\date_icon.png">
       <Link>Assets\date_icon.png</Link>
     </Content>

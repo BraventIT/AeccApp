@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AeccApp.Core.Extensions;
+using System;
 using System.Globalization;
 using Xamarin.Forms;
 
@@ -17,13 +18,7 @@ namespace AeccApp.Core.Converters
 				return value;
 			}
 
-            if (Device.RuntimePlatform == Device.UWP)
-			{
-				var pathUwp = $"Assets/{value}.png";
-				return pathUwp;
-			}
-
-			return value;
+			return SourceExtensions.GetPathFixed((string)value);
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

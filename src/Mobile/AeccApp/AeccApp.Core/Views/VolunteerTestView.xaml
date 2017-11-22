@@ -38,6 +38,13 @@
                         VerticalOptions="Center" />
                 </StackLayout>
 
+                <!--<ctrl:CheckBoxImage
+                    HeightRequest="20"
+                    IsChecked="{Binding IsVolunteer, Mode=TwoWay}"
+                    SourceChecked="CheckBoxOn"
+                    SourceUnchecked="CheckBoxOff"
+                    WidthRequest="20" />-->
+
                 <Button
                     Margin="20,0"
                     Command="{Binding EnterCommand}"

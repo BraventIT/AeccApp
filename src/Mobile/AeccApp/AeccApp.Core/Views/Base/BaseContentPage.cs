@@ -2,6 +2,7 @@
 using AeccApp.Core.ViewModels;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using AeccApp.Core.Extensions;
 
 namespace AeccApp.Core.Views
 {
@@ -33,30 +34,25 @@ namespace AeccApp.Core.Views
             return ViewModel?.OnBackButtonPressed() ?? base.OnBackButtonPressed();
         }
 
-        public ImageSource IconPlatform
+        public string IconPlatform
         {
-            get
-            {
-                return (ImageSource)GetValue(IconProperty);
-            }
-            set
-            {
-                if (value == null)
-                {
-                    return;
-                }
+            get { return (string)GetValue(IconPlatformProperty); }
+            set { SetValue(IconPlatformProperty, value); }
+        }
 
-                var source = (FileImageSource)value;
+        public static BindableProperty IconPlatformProperty = BindableProperty.Create(
+            nameof(IconPlatform),
+            typeof(string),
+            typeof(BaseContentPage),
+            null,
+            propertyChanged: OnSourcePlatformChanged);
 
-                string path = source.File;
-                if (Device.RuntimePlatform == Device.UWP)
-                {
-                    path = $"Assets/{path}.png";
-                }
-
-                source.File = path;
-                SetValue(IconProperty, source);
-            }
+        private static void OnSourcePlatformChanged(BindableObject b, object oldValue, object newValue)
+        {
+            if (newValue == null)
+                return;
+            var control = (BaseContentPage)b;
+            control.SetSourcePlatform((string)newValue);
         }
     }
 }
