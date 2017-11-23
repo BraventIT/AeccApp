@@ -14,93 +14,69 @@
         Padding="0"
         BackgroundColor="{StaticResource BackgroundColor}"
         CornerRadius="20"
-        HorizontalOptions="Fill"
+        HorizontalOptions="Center"
         VerticalOptions="Center">
 
-        <StackLayout Spacing="0">
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
             <Button
-                Margin="4,4,0,0"
+                Margin="9,9,0,0"
                 Command="{Binding ClosePopupCommand}"
                 HorizontalOptions="Start"
-                Style="{StaticResource CircularButtonStyle}"
+                Style="{StaticResource CircularButtonStyleTransparent}"
                 VerticalOptions="Start" />
 
             <ctrl:CustomImage
-                Margin="20,220,0,0"
-                HeightRequest="12"
+                Margin="25,25,0,0"
+                HeightRequest="13"
                 HorizontalOptions="Start"
-                SourcePlatform="x_icon" />
+                SourcePlatform="x_icon"
+                VerticalOptions="Start" />
 
             <Label
-                Margin="0,20"
+                Margin="20,55,20,20"
                 HorizontalTextAlignment="Center"
                 Style="{StaticResource ChatTitleStyle}"
-                Text="{Binding [CommonTermsAndConditions]}" />
-            <ScrollView>
-                <Label
-                    Margin="0,20"
-                    HorizontalTextAlignment="Center"
-                    Style="{StaticResource ChatLabelStyle}"
-                    Text="Aliquam suscipit, metus nec dignissim congue, est sapien finibus diam, vel suscipit ante turpis a quam. Aliquam erat volutpat. Proin lacinia sem neque, quis congue erat placerat in. Mauris ac augue maximus, dictum diam vel, posuere nisl. Aliquam maximus nibh a ipsum ornare, blandit placerat est blandit. Quisque nibh arcu, viverra in tincidunt at, posuere eu nibh. Vestibulum scelerisque a dolor et vulputate. Integer hendrerit aliquam elit, ac vulputate ante tempor eu. Sed eu aliquam risus. Nullam a elit mauris.  Ut euismod hendrerit dapibus. Cras bibendum ante ac libero varius eleifend. Donec a neque tincidunt, ullamcorper purus at, sodales libero. Maecenas eget tempus nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean ornare finibus enim. Proin hendrerit magna at lacus tristique posuere. Nam laoreet urna ac magna cursus pulvinar. Pellentesque ipsum purus, ullamcorper ac lacus eleifend, condimentum fermentum augue. Proin lobortis ac nibh et commodo. Phasellus vel suscipit ligula, eu vulputate augue. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc eget euismod quam, et varius sapien. Sed a euismod ex, aliquam venenatis ligula. Mauris fermentum pharetra lacinia.  Nam bibendum sed nulla in fringilla. Quisque suscipit libero et ultrices sollicitudin. Aenean pharetra hendrerit lorem, eu dictum tortor faucibus id. Phasellus convallis, arcu non dictum vestibulum, sem dolor fringilla orci, eu posuere massa ipsum sit amet purus. Mauris at mi ut justo semper feugiat. Duis quis arcu ex. Aliquam sit amet neque rutrum, ultricies augue rutrum, varius ante. Donec ornare eu libero malesuada sodales. Quisque sed euismod ipsum. Ut ac ligula nibh. Sed accumsan aliquam fringilla.  Pellentesque eget augue vulputate, rhoncus turpis vel, blandit justo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Pellentesque dignissim sapien ac dolor convallis, quis porta lacus scelerisque. Quisque at diam eget augue sagittis tempor. Sed pharetra ullamcorper dui, id tempor ante luctus nec. Integer nec enim consectetur, faucibus diam sed, pulvinar nisi. Cras ut imperdiet urna. Mauris consequat, mauris a porttitor placerat, justo leo efficitur quam, in tempus lacus libero eu purus.  Cras eu ultricies purus. Nulla eu dui vel sapien semper facilisis ac ac nisi. Quisque vitae orci vitae turpis eleifend aliquam at eget arcu. Nam odio nunc" />
+                Text="{Binding [PopupTermsAndConditionsTitle]}" />
 
-            </ScrollView>
-            <Button
-                Command="{Binding RefreshVolunteersCommand}"
-                HorizontalOptions="Center"
-                Style="{StaticResource ButtonStyle}"
-                Text="{Binding [CommonRefreshList]}" />
-        </StackLayout>
-    </Frame>
-    <ContentView
-        Margin="20"
-        Style="{StaticResource BorderStyle}"
-        VerticalOptions="Center">
-        <ContentView HorizontalOptions="Center" Style="{StaticResource InternalViewStyle}">
+            <StackLayout Grid.Row="1">
+                <ScrollView IsClippedToBounds="True">
+                    <Label
+                        Margin="30,0,30,10"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource ChatLabelStyle}"
+                        Text="{Binding [PopupTermsAndConditionsContent]}" />
 
-            <StackLayout
-                BackgroundColor="{StaticResource BackgroundColor}"
-                HorizontalOptions="Center"
-                VerticalOptions="Center">
-                <ScrollView Padding="20">
-                    <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-
-                        <Button
-                            Grid.Row="0"
-                            Command="{Binding RejectTermsCommand}"
-                            HorizontalOptions="End"
-                            Style="{StaticResource ButtonSmallStyle}"
-                            Text="{Binding [CommonClose]}" />
-
-                        <Label
-                            Grid.Row="1"
-                            Margin="0,10,0,20"
-                            HorizontalOptions="Center"
-                            Text="{Binding [CommonTermsAndConditions]}" />
-
-                        <Label
-                            Grid.Row="2"
-                            Margin="0,0,0,20"
-                            HorizontalOptions="Center"
-                            Text="Aliquam suscipit, metus nec dignissim congue, est sapien finibus diam, vel suscipit ante turpis a quam. Aliquam erat volutpat. Proin lacinia sem neque, quis congue erat placerat in. Mauris ac augue maximus, dictum diam vel, posuere nisl. Aliquam maximus nibh a ipsum ornare, blandit placerat est blandit. Quisque nibh arcu, viverra in tincidunt at, posuere eu nibh. Vestibulum scelerisque a dolor et vulputate. Integer hendrerit aliquam elit, ac vulputate ante tempor eu. Sed eu aliquam risus. Nullam a elit mauris.  Ut euismod hendrerit dapibus. Cras bibendum ante ac libero varius eleifend. Donec a neque tincidunt, ullamcorper purus at, sodales libero. Maecenas eget tempus nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean ornare finibus enim. Proin hendrerit magna at lacus tristique posuere. Nam laoreet urna ac magna cursus pulvinar. Pellentesque ipsum purus, ullamcorper ac lacus eleifend, condimentum fermentum augue. Proin lobortis ac nibh et commodo. Phasellus vel suscipit ligula, eu vulputate augue. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc eget euismod quam, et varius sapien. Sed a euismod ex, aliquam venenatis ligula. Mauris fermentum pharetra lacinia.  Nam bibendum sed nulla in fringilla. Quisque suscipit libero et ultrices sollicitudin. Aenean pharetra hendrerit lorem, eu dictum tortor faucibus id. Phasellus convallis, arcu non dictum vestibulum, sem dolor fringilla orci, eu posuere massa ipsum sit amet purus. Mauris at mi ut justo semper feugiat. Duis quis arcu ex. Aliquam sit amet neque rutrum, ultricies augue rutrum, varius ante. Donec ornare eu libero malesuada sodales. Quisque sed euismod ipsum. Ut ac ligula nibh. Sed accumsan aliquam fringilla.  Pellentesque eget augue vulputate, rhoncus turpis vel, blandit justo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Pellentesque dignissim sapien ac dolor convallis, quis porta lacus scelerisque. Quisque at diam eget augue sagittis tempor. Sed pharetra ullamcorper dui, id tempor ante luctus nec. Integer nec enim consectetur, faucibus diam sed, pulvinar nisi. Cras ut imperdiet urna. Mauris consequat, mauris a porttitor placerat, justo leo efficitur quam, in tempus lacus libero eu purus.  Cras eu ultricies purus. Nulla eu dui vel sapien semper facilisis ac ac nisi. Quisque vitae orci vitae turpis eleifend aliquam at eget arcu. Nam odio nunc" />
-
-
-                        <Button
-                            Grid.Row="3"
-                            Command="{Binding AcceptTermsCommand}"
-                            Style="{StaticResource ButtonStyle}"
-                            Text="{Binding [CommonTermsAndConditionsAccept]}" />
-                    </Grid>
                 </ScrollView>
             </StackLayout>
 
+            <ctrl:CheckBoxImage
+                Grid.Row="2"
+                Margin="25,20,25,20"
+                IsChecked="{Binding AcceptTerms, Mode=TwoWay}"
+                Text="{Binding [PopupTermsAndConditionsAccept]}" />
 
-        </ContentView>
-    </ContentView>
+            <BoxView
+                Grid.Row="3"
+                BackgroundColor="{StaticResource LightGrey}"
+                HeightRequest="1"
+                VerticalOptions="Start" />
+
+            <Button
+                Grid.Row="4"
+                Command="{Binding AcceptTermsCommand}"
+                Style="{StaticResource ButtonWhiteStyle}"
+                Text="{Binding [CommonContinue]}" />
+
+        </Grid>
+
+    </Frame>
+
 </vPop:PopupPage>

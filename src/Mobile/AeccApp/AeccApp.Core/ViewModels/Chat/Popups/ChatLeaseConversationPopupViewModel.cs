@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -10,13 +8,13 @@ namespace AeccApp.Core.ViewModels.Popups
     {
         public event EventHandler LeaseChatConversation;
 
-        private Command _yesCommand;
-        public ICommand YesCommand
+        private Command _leaseChatCommand;
+        public ICommand LeaseChatCommand
         {
             get
             {
-                return _yesCommand ??
-                    (_yesCommand = new Command(o => LeaseChatConversation?.Invoke(this, null)));
+                return _leaseChatCommand ??
+                    (_leaseChatCommand = new Command(o => LeaseChatConversation?.Invoke(this, null)));
             }
         }
     }

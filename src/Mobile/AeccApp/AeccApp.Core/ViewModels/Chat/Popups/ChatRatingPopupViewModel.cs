@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using AeccApp.Core.Models.Email;
 using AeccApp.Core.Services;
@@ -65,7 +62,7 @@ namespace AeccApp.Core.ViewModels.Popups
                 finallyAction: async () =>
                 {
                     await NavigationService.HidePopupAsync();
-                    await ExecuteOperationAsync(() => NavigationService.NavigateToAsync<DashboardViewModel>());
+                    await NavigationService.NavigateToAsync<DashboardViewModel>();
                 });
         }
     }

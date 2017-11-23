@@ -332,6 +332,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancelar.
+        /// </summary>
+        public static string CommonCancel {
+            get {
+                return ResourceManager.GetString("CommonCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Elige tu petición.
         /// </summary>
         public static string CommonChooseRequestType {
@@ -517,24 +526,6 @@ namespace AeccApp.Internationalization.Properties {
         public static string CommonRefreshList {
             get {
                 return ResourceManager.GetString("CommonRefreshList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Términos y condiciones.
-        /// </summary>
-        public static string CommonTermsAndConditions {
-            get {
-                return ResourceManager.GetString("CommonTermsAndConditions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Aceptas los términos.
-        /// </summary>
-        public static string CommonTermsAndConditionsAccept {
-            get {
-                return ResourceManager.GetString("CommonTermsAndConditionsAccept", resourceCulture);
             }
         }
         
@@ -1273,6 +1264,24 @@ namespace AeccApp.Internationalization.Properties {
         public static string PopupTermsAndConditionsAccept {
             get {
                 return ResourceManager.GetString("PopupTermsAndConditionsAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aliquam suscipit, metus nec dignissim congue, est sapien finibus diam, vel suscipit ante turpis a quam. Aliquam erat volutpat. Proin lacinia sem neque, quis congue erat placerat in. Mauris ac augue maximus, dictum diam vel, posuere nisl. Aliquam maximus nibh a ipsum ornare, blandit placerat est blandit. Quisque nibh arcu, viverra in tincidunt at, posuere eu nibh. Vestibulum scelerisque a dolor et vulputate. Integer hendrerit aliquam elit, ac vulputate ante tempor eu. Sed eu aliquam risus. Nullam a elit maur [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string PopupTermsAndConditionsContent {
+            get {
+                return ResourceManager.GetString("PopupTermsAndConditionsContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Términos y condiciones.
+        /// </summary>
+        public static string PopupTermsAndConditionsTitle {
+            get {
+                return ResourceManager.GetString("PopupTermsAndConditionsTitle", resourceCulture);
             }
         }
         

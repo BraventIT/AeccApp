@@ -24,7 +24,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="60" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -32,17 +32,18 @@
             </Grid.ColumnDefinitions>
 
             <Button
-                Margin="4,4,0,0"
+                Margin="9,9,0,0"
                 Command="{Binding ClosePopupCommand}"
                 HorizontalOptions="Start"
-                Style="{StaticResource CircularButtonStyle}"
+                Style="{StaticResource CircularButtonStyleTransparent}"
                 VerticalOptions="Start" />
 
             <ctrl:CustomImage
-                Margin="20,220,0,0"
-                HeightRequest="12"
+                Margin="25,25,0,0"
+                HeightRequest="13"
                 HorizontalOptions="Start"
-                SourcePlatform="x_icon" />
+                SourcePlatform="x_icon"
+                VerticalOptions="Start" />
 
             <ctrl:CustomImage
                 Grid.Row="1"
@@ -70,24 +71,20 @@
             <BoxView
                 Grid.Row="4"
                 Grid.ColumnSpan="2"
-                BackgroundColor="{StaticResource LightGrey}"
-                HeightRequest="40" />
+                Margin="0,0,0,20"
+                BackgroundColor="{StaticResource LightGrey}" />
             <Button
                 Grid.Row="4"
-                Margin="0,1,0,0"
-                BorderRadius="0"
-                Command="{Binding YesCommand}"
-                HeightRequest="40"
+                Margin="0,1,0,20"
+                Command="{Binding LeaseChatCommand}"
                 Style="{StaticResource ButtonWhiteStyle}"
                 Text="{Binding [CommonYes]}" />
 
             <Button
                 Grid.Row="4"
                 Grid.Column="1"
-                Margin="1,1,0,0"
-                BorderRadius="0"
+                Margin="1,1,0,20"
                 Command="{Binding ClosePopupCommand}"
-                HeightRequest="40"
                 Style="{StaticResource ButtonWhiteStyle}"
                 Text="{Binding [CommonNo]}" />
         </Grid>

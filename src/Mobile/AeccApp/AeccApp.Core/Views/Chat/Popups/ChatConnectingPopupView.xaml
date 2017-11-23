@@ -7,24 +7,43 @@
     xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:vPop="clr-namespace:AeccApp.Core.Views.Popups"
-    BackgroundColor="{StaticResource SeeThroughWhite}"
+    BackgroundColor="{StaticResource SeeThrough}"
     CloseWhenBackgroundIsClicked="False">
 
-    <StackLayout
-        Padding="80,0"
+    <Frame
+        Margin="40,0"
+        Padding="0"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        CornerRadius="20"
         HorizontalOptions="Center"
         VerticalOptions="Center">
+        <StackLayout>
 
-        <Frame HasShadow="False" HeightRequest="38">
-            <ctrl:CustomActivityIndicatorControl HeightRequest="80" />
-        </Frame>
+            <Frame
+                Margin="0,20,0,0"
+                HasShadow="False"
+                HeightRequest="38">
+                <ctrl:CustomActivityIndicatorControl HeightRequest="80" />
+            </Frame>
 
-        <Label
-            Margin="0,34,0,0"
-            HorizontalTextAlignment="Center"
-            Style="{StaticResource MediumLabelStyle}"
-            Text="{Binding [ChatConnectingPopupText]}" />
+            <Label
+                Margin="20,34,20,20"
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource MediumLabelStyle}"
+                Text="{Binding [ChatConnectingPopupText]}" />
 
-    </StackLayout>
+            <BoxView
+                BackgroundColor="{StaticResource LightGrey}"
+                HeightRequest="1"
+                VerticalOptions="Start" />
+
+            <Button
+                Margin="0,0,0,20"
+                Command="{Binding LeaseChatCommand}"
+                Style="{StaticResource ButtonWhiteStyle}"
+                Text="{Binding [CommonCancel]}" />
+
+        </StackLayout>
+    </Frame>
 
 </vPop:BasePopupPage>

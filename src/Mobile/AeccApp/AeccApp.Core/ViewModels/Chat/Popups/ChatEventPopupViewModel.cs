@@ -1,8 +1,6 @@
 ﻿using AeccApp.Core.Messages;
 using AeccBot.MessageRouting;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
 {

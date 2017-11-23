@@ -10,8 +10,6 @@
     <!--  Volunteers list item template  -->
     <ContentView.Resources>
         <ResourceDictionary>
-
-
             <DataTemplate x:Key="volunteerTemplate">
                 <ViewCell>
                     <Grid Padding="20,0">

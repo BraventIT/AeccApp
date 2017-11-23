@@ -55,7 +55,7 @@
                             <TapGestureRecognizer Command="{Binding RatingCommand}">
                                 <TapGestureRecognizer.CommandParameter>
                                     <x:Int32>2</x:Int32>
-                                </TapGestureRecognizer.CommandParameter>                                
+                                </TapGestureRecognizer.CommandParameter>
                             </TapGestureRecognizer>
                         </ctrl:CustomImage.GestureRecognizers>
 

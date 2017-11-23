@@ -3,11 +3,11 @@
     x:Class="AeccApp.Core.Resources.ControlStyles"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:eff="clr-namespace:AeccApp.Core.Effects"
     xmlns:res="clr-namespace:AeccApp.Core.Resources"
     MergedWith="res:LabelStyles">
-
 
     <OnPlatform
         x:Key="ButtonWidth"
@@ -178,6 +178,15 @@
 
     <Style TargetType="Switch">
         <Setter Property="eff:SwitchEffects.Clear" Value="True" />
+    </Style>
+
+    <Style TargetType="ctrl:CheckBoxImage">
+        <Setter Property="ImageHeight" Value="24" />
+        <Setter Property="ImageWidth" Value="24" />
+        <Setter Property="SourceChecked" Value="CheckBoxOn" />
+        <Setter Property="SourceUnchecked" Value="CheckBoxOff" />
+        <Setter Property="Spacing" Value="8" />
+        <Setter Property="TextStyle" Value="{StaticResource MediumLabelStyle}" />
     </Style>
 
 </ResourceDictionary>

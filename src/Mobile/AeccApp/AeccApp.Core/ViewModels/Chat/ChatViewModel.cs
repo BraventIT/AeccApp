@@ -23,6 +23,7 @@ namespace AeccApp.Core.ViewModels
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
         private IList<UserData> _listVolunteers;
         private DateTime _lastMessageTime;
+        private bool _inConversation;
 
         #region Contructor & Initialize
         public ChatViewModel()
@@ -42,6 +43,7 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
             ChatFiltersPopupVM.ResetFilters += OnChatResetFilters;
+            ChatConnectingPopupVM.LeaseChatConversation += OnLeaseConversation;
             ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
             ChatService.MessagesReceived += OnMesagesReceived;
             ChatService.AggregationsReceived += OnAggregationsReceived;
@@ -54,6 +56,7 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Unsubscribe<ChatStateMessage>(this, string.Empty);
             MessagingCenter.Unsubscribe<ChatEventMessage>(this, string.Empty);
             ChatFiltersPopupVM.AppliedFilters -= OnChatAppliedFilters;
+            ChatConnectingPopupVM.LeaseChatConversation -= OnLeaseConversation;
             ChatLeaseConversationPopupVM.LeaseChatConversation -= OnLeaseConversation;
             ChatService.MessagesReceived -= OnMesagesReceived;
             ChatService.AggregationsReceived -= OnAggregationsReceived;
@@ -189,18 +192,6 @@ namespace AeccApp.Core.ViewModels
             });
         }
 
-        private async void OnLeaseConversation(object sender, EventArgs e)
-        {
-            await ExecuteOperationAsync(async () =>
-            {
-                await NavigationService.HidePopupAsync();
-                await ChatService.EndChatAsync();
-                if (!IsVolunteer)
-                {
-                    await NavigationService.ShowPopupAsync(ChatRatingPopupVM);
-                }
-            });
-        }
 
         private Command _leaseConversationPopupCommand;
         public ICommand LeaseConversationPopupCommand
@@ -250,24 +241,23 @@ namespace AeccApp.Core.ViewModels
 
         private async Task OnChooseVolunteerAsync(object obj)
         {
-            if (IsVolunteer == false && Settings.TermsAndConditionsAccept == false)
+            if (!Settings.TermsAndConditionsAccept)
             {
                 await NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
+                return;
             }
-            else
+
+            try
             {
-                try
-                {
-                    var selectedVolunteer = obj as UserData;
-                    PartyId = selectedVolunteer.PartyId;
-                    //Muestra popup de espera en la conexión
-                    await NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
-                    await InitializeChatAsync();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                }
+                var selectedVolunteer = obj as UserData;
+                PartyId = selectedVolunteer.PartyId;
+                //Muestra popup de espera en la conexión
+                await NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
+                await InitializeChatAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
         #endregion
@@ -339,6 +329,20 @@ namespace AeccApp.Core.ViewModels
             RefreshVolunters();
         }
 
+        private async void OnLeaseConversation(object sender, EventArgs e)
+        {
+            await ExecuteOperationAsync(async () =>
+            {
+                PartyId = null;
+                await NavigationService.HidePopupAsync();
+                await ChatService.EndChatAsync();
+                if (!IsVolunteer && _inConversation)
+                {
+                    await NavigationService.ShowPopupAsync(ChatRatingPopupVM);
+                }
+            });
+        }
+
         private void OnChatResetFilters(object sender, EventArgs e)
         {
             OnResetVolunteers();
@@ -364,6 +368,7 @@ namespace AeccApp.Core.ViewModels
         {
             if (obj.Type == MessageRouterResultType.Connected)
             {
+                _inConversation = true;
                 Messages.Insert(0, new Message
                 {
                     DateTime = DateTime.UtcNow,

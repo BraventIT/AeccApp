@@ -9,23 +9,24 @@ namespace AeccApp.Core.Extensions
     {
         public static void SetSourcePlatform(this Image image, string sourcePath)
         {
-            image.Source = GetSourceFixed(sourcePath);
+            var source= GetSourceFixed(sourcePath);
+            image.Source = source;
         }
         public static void SetSourcePlatform(this ToolbarItem image, string sourcePath)
         {
-            image.Icon = GetSourceFixed(sourcePath);
+            image.Icon = (FileImageSource)GetSourceFixed(sourcePath);
         }
 
         public static void SetSourcePlatform(this ContentPage image, string sourcePath)
         {
-            image.Icon = GetSourceFixed(sourcePath);
+            image.Icon = (FileImageSource)GetSourceFixed(sourcePath);
         }
 
 
-        private static FileImageSource GetSourceFixed(string sourcePath)
+        private static ImageSource GetSourceFixed(string sourcePath)
         {
-            var path =  GetPathFixed( sourcePath);
-            return (FileImageSource)ImageSource.FromFile(path);
+            var path = GetPathFixed(sourcePath);
+            return ImageSource.FromFile(path);
         }
 
         public static string GetPathFixed(string sourcePath)
