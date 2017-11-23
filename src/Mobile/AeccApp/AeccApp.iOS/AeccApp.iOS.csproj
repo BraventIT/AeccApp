@@ -411,12 +411,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ico_sup_filter.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ico_sup_filter%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\PopUp_Ico_thumbsdown.png" />
   </ItemGroup>
   <ItemGroup>
@@ -441,6 +435,11 @@
   <ItemGroup>
     <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_clean_refresh.png">
       <Link>Resources\ico_clean_refresh.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_sup_filter.png">
+      <Link>Resources\ico_sup_filter.png</Link>
     </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

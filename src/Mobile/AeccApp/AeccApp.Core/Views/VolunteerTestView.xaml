@@ -50,7 +50,7 @@
                     Command="{Binding EnterCommand}"
                     HorizontalOptions="CenterAndExpand"
                     Style="{StaticResource ButtonStyle}"
-                    Text="CONTINUAR" />
+                    Text="Continuar" />
 
             </StackLayout>
 

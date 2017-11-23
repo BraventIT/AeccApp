@@ -75,11 +75,12 @@
         <Setter Property="WidthRequest" Value="{StaticResource ButtonSmallWidth}" />
     </Style>
 
-    <Style x:Key="ButtonWhiteStyle" TargetType="{x:Type Button}">
+    <Style x:Key="ButtonWhiteStyle" TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource GreenText}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="BorderRadius" Value="20" />
         <Setter Property="FontSize" Value="{StaticResource MidLargeSize}" />
         <Setter Property="BackgroundColor" Value="White" />
     </Style>
@@ -187,6 +188,33 @@
         <Setter Property="SourceUnchecked" Value="CheckBoxOff" />
         <Setter Property="Spacing" Value="8" />
         <Setter Property="TextStyle" Value="{StaticResource MediumLabelStyle}" />
+    </Style>
+
+    <Style
+        x:Key="ClosePopupButtonStyle"
+        BasedOn="{StaticResource CircularButtonStyleTransparent}"
+        TargetType="{x:Type Button}">
+
+        <Setter Property="Margin" Value="9,9,0,0" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Start" />
+    </Style>
+
+    <Style x:Key="ClosePopupImageStyle" TargetType="ctrl:CustomImage">
+        <Setter Property="Margin" Value="25,25,0,0" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="HeightRequest" Value="13" />
+        <Setter Property="SourcePlatform" Value="x_icon" />
+    </Style>
+
+    <Style x:Key="PopupFrameStyle" TargetType="Frame">
+        <Setter Property="Margin" Value="45" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
     </Style>
 
 </ResourceDictionary>

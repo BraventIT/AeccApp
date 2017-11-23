@@ -7,12 +7,7 @@
     xmlns:vPop="clr-namespace:AeccApp.Core.Views.Popups"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <Frame
-        Margin="45,0"
-        BackgroundColor="{StaticResource BackgroundColor}"
-        CornerRadius="20"
-        HorizontalOptions="Center"
-        VerticalOptions="Center">
+    <Frame Style="{StaticResource PopupFrameStyle}">
         <StackLayout>
             <ctrl:CustomImage
                 HeightRequest="12"

@@ -10,40 +10,35 @@
     BackgroundColor="{StaticResource SeeThrough}"
     CloseWhenBackgroundIsClicked="False">
 
-    <Frame
-        Margin="40,0"
-        Padding="0"
-        BackgroundColor="{StaticResource BackgroundColor}"
-        CornerRadius="20"
-        HorizontalOptions="Center"
-        VerticalOptions="Center">
-        <StackLayout>
+    <Frame Style="{StaticResource PopupFrameStyle}">
+
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Button Command="{Binding LeaseChatCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
+
+            <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
             <Frame
-                Margin="0,20,0,0"
+                Grid.Row="1"
+                Margin="0,0,0,0"
                 HasShadow="False"
                 HeightRequest="38">
                 <ctrl:CustomActivityIndicatorControl HeightRequest="80" />
             </Frame>
 
             <Label
-                Margin="20,34,20,20"
+                Grid.Row="2"
+                Margin="20,34,20,40"
                 HorizontalTextAlignment="Center"
                 Style="{StaticResource MediumLabelStyle}"
                 Text="{Binding [ChatConnectingPopupText]}" />
 
-            <BoxView
-                BackgroundColor="{StaticResource LightGrey}"
-                HeightRequest="1"
-                VerticalOptions="Start" />
-
-            <Button
-                Margin="0,0,0,20"
-                Command="{Binding LeaseChatCommand}"
-                Style="{StaticResource ButtonWhiteStyle}"
-                Text="{Binding [CommonCancel]}" />
-
-        </StackLayout>
+        </Grid>
     </Frame>
 
 </vPop:BasePopupPage>

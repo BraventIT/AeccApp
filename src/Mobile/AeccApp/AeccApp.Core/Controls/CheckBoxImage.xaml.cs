@@ -142,7 +142,6 @@ namespace AeccApp.Core.Controls
 
         private void OnImageTapped(object sender, EventArgs args)
         {
-            var image = (Image)sender;
             IsChecked = !IsChecked;
         }
     }

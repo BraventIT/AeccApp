@@ -22,6 +22,10 @@
             BindingContext="{x:Reference root}"
             Style="{Binding TextStyle}"
             Text="{Binding Text}"
-            VerticalOptions="Start" />
+            VerticalOptions="Start">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnImageTapped" />
+            </Label.GestureRecognizers>
+        </Label>
     </StackLayout>
 </ContentView>

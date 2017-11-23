@@ -9,13 +9,7 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <Frame
-        Margin="45,52"
-        Padding="0"
-        BackgroundColor="{StaticResource BackgroundColor}"
-        CornerRadius="20"
-        HorizontalOptions="Center"
-        VerticalOptions="Center">
+    <Frame Style="{StaticResource PopupFrameStyle}">
 
         <Grid ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
@@ -23,22 +17,11 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Button
-                Margin="9,9,0,0"
-                Command="{Binding ClosePopupCommand}"
-                HorizontalOptions="Start"
-                Style="{StaticResource CircularButtonStyleTransparent}"
-                VerticalOptions="Start" />
+            <Button Command="{Binding ClosePopupCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
 
-            <ctrl:CustomImage
-                Margin="25,25,0,0"
-                HeightRequest="13"
-                HorizontalOptions="Start"
-                SourcePlatform="x_icon"
-                VerticalOptions="Start" />
+            <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
             <Label
                 Margin="20,55,20,20"
@@ -70,7 +53,8 @@
                 VerticalOptions="Start" />
 
             <Button
-                Grid.Row="4"
+                Grid.Row="3"
+                Margin="0,1,0,0"
                 Command="{Binding AcceptTermsCommand}"
                 Style="{StaticResource ButtonWhiteStyle}"
                 Text="{Binding [CommonContinue]}" />
