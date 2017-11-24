@@ -620,6 +620,42 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Estamos para ayudarte. Inicia un chat, elige y habla con el voluntario que más se adapte a tus preferencias y necesidades..
+        /// </summary>
+        public static string FirstChat {
+            get {
+                return ResourceManager.GetString("FirstChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Iniciar un chat.
+        /// </summary>
+        public static string FirstChatStartChat {
+            get {
+                return ResourceManager.GetString("FirstChatStartChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¿Necesitas hablar?.
+        /// </summary>
+        public static string FirstChatTitle {
+            get {
+                return ResourceManager.GetString("FirstChatTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Iniciar un chat.
+        /// </summary>
+        public static string FirstChatToolbarTitle {
+            get {
+                return ResourceManager.GetString("FirstChatToolbarTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Indica tu domicilio.
         /// </summary>
         public static string HomeAddressesListViewTitle {
@@ -1318,6 +1354,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string RequestsViewText {
             get {
                 return ResourceManager.GetString("RequestsViewText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Elige voluntario.
+        /// </summary>
+        public static string VolunteersListToolbarTitle {
+            get {
+                return ResourceManager.GetString("VolunteersListToolbarTitle", resourceCulture);
             }
         }
     }

@@ -30,7 +30,11 @@ namespace AeccApp.Core.Controls
         }
 
         public static BindableProperty MaximumWidthRequestProperty =
-            BindableProperty.Create(nameof(MaximumWidthRequest), typeof(double), typeof(CustomImage), double.NaN);
+            BindableProperty.Create(
+                nameof(MaximumWidthRequest), 
+                typeof(double), 
+                typeof(CustomImage), 
+                double.NaN);
 
 
         public string SourcePlatform

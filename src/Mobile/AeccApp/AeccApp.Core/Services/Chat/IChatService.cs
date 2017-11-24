@@ -29,11 +29,15 @@ namespace AeccApp.Core.Services
         /// </summary>
         Task InitializeAsync();
 
+        Task LogOffAsync();
+
+        Message GetMyMessage(string messageText);
+
         /// <summary>
         /// Send text message in current conversation
         /// </summary>
-        /// <param name="messageText">message to send</param>
-        Task SendMessageAsync(string messageText);
+        /// <param name="message">message to send</param>
+        Task SendMessageAsync(Message message);
 
         /// <summary>
         /// Raised when a new text message is received

@@ -84,7 +84,7 @@ namespace AeccApp.iOS.Renderers
                     else
                     {
                         iconView.RemoveFromSuperview();
-                        titleLabel.Text = m._NavigationTitle;
+                        titleLabel.Text = m.Title;
                         titleLabel.TextColor = UIColor.White;
                         titleView.AddSubview(titleLabel);
                     }

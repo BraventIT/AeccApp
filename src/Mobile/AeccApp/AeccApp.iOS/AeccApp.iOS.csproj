@@ -442,5 +442,10 @@
       <Link>Resources\ico_sup_filter.png</Link>
     </BundleResource>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ICO_firstCHAT.png">
+      <Link>Resources\ICO_firstCHAT.png</Link>
+    </BundleResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

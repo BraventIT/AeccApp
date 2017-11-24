@@ -303,6 +303,18 @@
   <data name="DashboardNotifications" xml:space="preserve">
     <value>Notif.</value>
   </data>
+  <data name="FirstChat" xml:space="preserve">
+    <value>Estamos para ayudarte. Inicia un chat, elige y habla con el voluntario que más se adapte a tus preferencias y necesidades.</value>
+  </data>
+  <data name="FirstChatStartChat" xml:space="preserve">
+    <value>Iniciar un chat</value>
+  </data>
+  <data name="FirstChatTitle" xml:space="preserve">
+    <value>¿Necesitas hablar?</value>
+  </data>
+  <data name="FirstChatToolbarTitle" xml:space="preserve">
+    <value>Iniciar un chat</value>
+  </data>
   <data name="HomeAddressesListViewTitle" xml:space="preserve">
     <value>Indica tu domicilio</value>
   </data>
@@ -536,5 +548,8 @@
   </data>
   <data name="RequestsViewText" xml:space="preserve">
     <value>¿Estás en el hospital o en tu domicilio? Haz peticiones estés donde estés.</value>
+  </data>
+  <data name="VolunteersListToolbarTitle" xml:space="preserve">
+    <value>Elige voluntario</value>
   </data>
 </root>

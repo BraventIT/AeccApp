@@ -5,11 +5,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
-    xmlns:slct="clr-namespace:AeccApp.Core.Selectors">
+    xmlns:cv="clr-namespace:AeccApp.Core.Converters"
+    xmlns:slct="clr-namespace:AeccApp.Core.Selectors"
+    x:Name="root">
 
     <ContentView.Resources>
         <ResourceDictionary>
 
+            <cv:NullToColorConverter
+                x:Key="ClientTypeConverter"
+                ColorToNotNull="{StaticResource PlanarGreenColor}"
+                ColorToNull="Transparent" />
 
             <DataTemplate x:Key="TimeTemplate">
                 <ViewCell IsEnabled="False">
@@ -28,9 +34,9 @@
             <!--  Client chat messages list template  -->
             <DataTemplate x:Key="ClientTemplate">
                 <ViewCell IsEnabled="False">
-                    <Grid Margin="10" Rotation="180">
+                    <Grid Margin="30,10" Rotation="180">
                         <Frame
-                            BackgroundColor="{StaticResource PlanarGreenColor}"
+                            BackgroundColor="{Binding Activity.From, Converter={StaticResource ClientTypeConverter}}}"
                             CornerRadius="18"
                             HorizontalOptions="End">
                             <Label Style="{StaticResource ChatLabelStyle}" Text="{Binding Activity.Text}" />
@@ -38,7 +44,7 @@
                         </Frame>
 
                         <BoxView
-                            BackgroundColor="{StaticResource PlanarGreenColor}"
+                            BackgroundColor="{Binding Activity.From, Converter={StaticResource ClientTypeConverter}}}"
                             HeightRequest="18"
                             HorizontalOptions="End"
                             VerticalOptions="End"
@@ -51,12 +57,22 @@
             <!--  Server chat messages list template  -->
             <DataTemplate x:Key="ServerTemplate">
                 <ViewCell IsEnabled="False">
-                    <Grid Margin="10" Rotation="180">
+                    <Grid Margin="30,10" Rotation="180">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
+
+                        <ctrl:CustomImage
+                            HeightRequest="35"
+                            SourcePlatform="{Binding Activity.From.Gender, Converter={StaticResource GenderToImageConverter}}"
+                            VerticalOptions="End"
+                            WidthRequest="35">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CounterpartClickCommand, Source={x:Reference root}}" />
+                            </Image.GestureRecognizers>
+                        </ctrl:CustomImage>
 
                         <Frame
                             Grid.Column="1"
@@ -74,13 +90,6 @@
                             HorizontalOptions="Start"
                             VerticalOptions="End"
                             WidthRequest="18" />
-
-                        <ctrl:CustomImage
-                            HeightRequest="35"
-                            SourcePlatform="{Binding Activity.From.Gender, Converter={StaticResource GenderToImageConverter}}"
-                            VerticalOptions="End"
-                            WidthRequest="35" />
-
                     </Grid>
                 </ViewCell>
             </DataTemplate>
@@ -93,7 +102,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <Grid Margin="10" IsVisible="{Binding IsVolunteerProfileVisible, Converter={StaticResource InverseBoolConverter}}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -123,7 +132,7 @@
         <Entry
             x:Name="Entry"
             Grid.Row="1"
-            Margin="5,0,0,0"
+            Margin="10,0"
             HorizontalOptions="FillAndExpand"
             Placeholder="{Binding [ChatViewChatEntryPlaceHolder]}"
             Text="{Binding Text, Mode=TwoWay}">
@@ -135,9 +144,10 @@
         <ctrl:CustomImage
             Grid.Row="1"
             Grid.Column="1"
-            HeightRequest="18"
+            Margin="0,0,10,0"
+            HeightRequest="19"
             SourcePlatform="send_icon"
-            WidthRequest="18">
+            WidthRequest="19">
             <ctrl:CustomImage.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
             </ctrl:CustomImage.GestureRecognizers>

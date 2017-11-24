@@ -7,11 +7,12 @@
     xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-    BackgroundColor="{StaticResource SeeThrough}">
+    BackgroundColor="{StaticResource SeeThrough}"
+    CloseWhenBackgroundIsClicked="True">
 
     <Frame Style="{StaticResource PopupFrameStyle}">
 
-        <Grid ColumnSpacing="0" RowSpacing="0">
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />

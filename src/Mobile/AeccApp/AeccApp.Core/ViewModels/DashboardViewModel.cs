@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using AeccApp.Core.ViewModels.Popups;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -35,21 +34,12 @@ namespace AeccApp.Core.ViewModels
                 var tabIndex = ((TabParameter)navigationData).TabIndex;
                 MessagingCenter.Send(new TabMessage(tabIndex), string.Empty);
             }
-
-
         }
 
         public override Task ActivateAsync()
         {
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, o => OnChatEngagementEventAsync(o));
-
-            if (IsVolunteer)
-            {
-                //review
-              //  MessagingCenter.Send(new DashboardEnableAndDisableChatTab(false), string.Empty);
-                MessagingCenter.Send(new DashboardHideRequestsTabMessage(TabsEnum.Requests), string.Empty);
-            }
 
             return ExecuteOperationAsync(async (token) =>
              {
@@ -158,6 +148,7 @@ namespace AeccApp.Core.ViewModels
         #region Private Methods
         private async Task OnChatEngagementEventAsync(ChatEngagementEventMessage chatEngagementEvent)
         {
+            await NavigationService.HidePopupAsync();
             await NavigationService.NavigateToAsync<ChatRequestViewModel>(chatEngagementEvent.RequestPartyId, isModal: true);
         }
 

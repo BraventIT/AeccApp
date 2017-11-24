@@ -5,36 +5,44 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:vPop="clr-namespace:AeccApp.Core.Views.Popups"
-    BackgroundColor="{StaticResource SeeThrough}">
+    BackgroundColor="{StaticResource SeeThrough}"
+    CloseWhenBackgroundIsClicked="True">
 
     <Frame Style="{StaticResource PopupFrameStyle}">
-        <StackLayout>
-            <ctrl:CustomImage
-                HeightRequest="12"
-                HorizontalOptions="Start"
-                SourcePlatform="x_icon">
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Button Command="{Binding ClosePopupCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
+
+            <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}">
                 <ctrl:CustomImage.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
                 </ctrl:CustomImage.GestureRecognizers>
             </ctrl:CustomImage>
 
             <ctrl:CustomImage
-                Margin="0,18,0,0"
+                Margin="0,55,0,0"
                 HeightRequest="55"
                 HorizontalOptions="Center"
                 SourcePlatform="PopUp_Ico_thumbsdown" />
 
             <Label
-                Margin="0,27,0,0"
+                Grid.Row="1"
+                Margin="20,27,20,0"
                 Style="{StaticResource TitleLabelStyleNormal}"
                 Text="{Binding Event.MessageTitle}" />
 
             <Label
-                Margin="8,20,8,30"
+                Grid.Row="2"
+                Margin="32,20,32,55"
                 HorizontalTextAlignment="Center"
                 Style="{StaticResource SubTitleLabelStyleNormal}"
                 Text="{Binding Event.Message}" />
 
-        </StackLayout>
+        </Grid>
     </Frame>
 </vPop:BasePopupPage>

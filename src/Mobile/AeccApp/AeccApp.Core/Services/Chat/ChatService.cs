@@ -152,19 +152,33 @@ namespace AeccApp.Core.Services
                 _initializeLock.Release();
             }
         }
+
+        public async Task LogOffAsync()
+        {
+            if (InConversation)
+            {
+               await EndChatAsync();
+            }
+            _mainConversation = null;
+        }
         #endregion
 
         #region Public Methods
-        public async Task SendMessageAsync(string messageText)
+        public Message GetMyMessage(string messageText)
         {
-            var ct = new CancellationTokenSource(TIMEOUT_MS);
-            await SendActivity(messageText, type: ActivityTypes.Message, token: ct.Token);
-
-            _conversationMessages.Insert(0, new Message
+            return new Message
             {
                 DateTime = DateTime.UtcNow,
-                Activity = new Activity() { Text = messageText, From= _account }
-            });
+                Activity = new Activity() { Text = messageText, From = _account }
+            };
+        }
+
+        public async Task SendMessageAsync(Message message)
+        {
+            var ct = new CancellationTokenSource(TIMEOUT_MS);
+            await SendActivity(message.Activity.Text, type: ActivityTypes.Message, token: ct.Token);
+
+            _conversationMessages.Insert(0, message);
         }
 
         public async Task<IList<UserData>> GetListVolunteersAsync()

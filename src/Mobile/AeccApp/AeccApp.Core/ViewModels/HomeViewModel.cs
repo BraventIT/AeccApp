@@ -23,7 +23,8 @@ namespace AeccApp.Core.ViewModels
         {
             MessagingCenter.Subscribe<ChatMessageReceivedMessage>(this, string.Empty, OnMessageReceived);
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
-            MessagingCenter.Send(new ToolbarMessage(true,""), string.Empty);
+
+            MessagingCenter.Send(new ToolbarMessage(true), string.Empty);
 
             await ExecuteOperationAsync(async () =>
             {

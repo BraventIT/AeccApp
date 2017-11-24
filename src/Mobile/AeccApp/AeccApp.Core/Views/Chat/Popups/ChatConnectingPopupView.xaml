@@ -16,7 +16,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Button Command="{Binding LeaseChatCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
@@ -24,8 +23,7 @@
             <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
             <Frame
-                Grid.Row="1"
-                Margin="0,0,0,0"
+                Margin="0,55,0,0"
                 HasShadow="False"
                 HeightRequest="38">
                 <ctrl:CustomActivityIndicatorControl HeightRequest="80" />
@@ -33,7 +31,7 @@
 
             <Label
                 Grid.Row="2"
-                Margin="20,34,20,40"
+                Margin="20,34,20,55"
                 HorizontalTextAlignment="Center"
                 Style="{StaticResource MediumLabelStyle}"
                 Text="{Binding [ChatConnectingPopupText]}" />

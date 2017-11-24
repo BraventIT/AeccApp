@@ -9,36 +9,30 @@ namespace AeccApp.Core.Views
     public partial class DashboardView : TabbedPage
     {
         protected INavigableViewModel ViewModel => BindingContext as INavigableViewModel;
-        private bool HasBeenAlreadyInitialized = false;
 
         public DashboardView()
         {
             InitializeComponent();
-
+            if (GlobalSetting.Instance.User?.IsVolunteer ?? false)
+            {
+                Children.Remove(Children[(int)TabsEnum.Requests]);
+            }
         }
 
         protected override void OnAppearing()
         {
-            MessagingCenter.Subscribe<DashboardEnableAndDisableChatTab>(this, string.Empty, OnEnableAndDisableChatTab);
-            MessagingCenter.Subscribe<DashboardHideRequestsTabMessage>(this, string.Empty, OnHideRequestsTab);
             MessagingCenter.Subscribe<DashboardTabMessage>(this, string.Empty, OnTabChanged);
-            MessagingCenter.Send(new ToolbarMessage(true,""), string.Empty);
+            MessagingCenter.Subscribe<ToolbarMessage>(this, string.Empty, OnToolbarChanged);
+           
             ViewModel?.ActivateAsync();
         }
 
-        void OnEnableAndDisableChatTab(DashboardEnableAndDisableChatTab message)
+        private void OnToolbarChanged(ToolbarMessage message)
         {
-            Children[(int)TabsEnum.Chat].IsEnabled =  message.Message;
+            Title = (message.ShowLogo) ?
+                string.Empty : message.Title;
         }
-        void OnHideRequestsTab(DashboardHideRequestsTabMessage message)
-        {
-            if(HasBeenAlreadyInitialized == false)
-            {
-               Children.Remove(Children[(int)message.Message]);
-                HasBeenAlreadyInitialized = true;
-            }
 
-        }
 
         void OnTabChanged(DashboardTabMessage message)
         {
@@ -48,10 +42,8 @@ namespace AeccApp.Core.Views
 
         protected override void OnDisappearing()
         {
-            MessagingCenter.Unsubscribe<DashboardEnableAndDisableChatTab>(this, string.Empty);
-            MessagingCenter.Unsubscribe<DashboardHideRequestsTabMessage>(this, string.Empty);
             MessagingCenter.Unsubscribe<DashboardTabMessage>(this, string.Empty);
-            MessagingCenter.Send(new ToolbarMessage(false,""), string.Empty);
+            MessagingCenter.Unsubscribe<ToolbarMessage>(this, string.Empty);
             ViewModel?.Deactivate();
         }
     }

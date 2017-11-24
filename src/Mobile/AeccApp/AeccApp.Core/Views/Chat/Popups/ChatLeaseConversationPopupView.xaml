@@ -7,83 +7,83 @@
     xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-    BackgroundColor="{StaticResource SeeThrough}">
+    BackgroundColor="{StaticResource SeeThrough}"
+    CloseWhenBackgroundIsClicked="True">
 
     <!--#region Test-->
 
-    <Frame Style="{StaticResource PopupFrameStyle}">
+    <Frame HorizontalOptions="Fill" Style="{StaticResource PopupFrameStyle}">
+        <StackLayout>
+            <Grid ColumnSpacing="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <Grid
-            ColumnSpacing="0"
-            HorizontalOptions="Fill"
-            RowSpacing="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                <Button Command="{Binding ClosePopupCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
 
-            <Button Command="{Binding ClosePopupCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
+                <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
-            <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
+                <ctrl:CustomImage
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,55,0,0"
+                    HeightRequest="55"
+                    HorizontalOptions="Center"
+                    SourcePlatform="PopUp_Ico_question" />
 
-            <ctrl:CustomImage
-                Grid.Row="0"
-                Grid.ColumnSpan="2"
-                Margin="0,55,0,0"
-                HeightRequest="55"
-                HorizontalOptions="Center"
-                SourcePlatform="PopUp_Ico_question" />
+                <Label
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="20,27,20,0"
+                    Style="{StaticResource TitleLabelStyleNormal}"
+                    Text="{Binding [PopupChatLeaseConversationTextTitle]}" />
 
-            <Label
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Margin="20,27,20,0"
-                Style="{StaticResource TitleLabelStyleNormal}"
-                Text="{Binding [PopupChatLeaseConversationTextTitle]}" />
+                <Label
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="28,20,28,30"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource SubTitleLabelStyleNormal}"
+                    Text="{Binding [PopupChatLeaseConversationText]}" />
 
-            <Label
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                Margin="28,20,28,30"
-                HorizontalTextAlignment="Center"
-                Style="{StaticResource SubTitleLabelStyleNormal}"
-                Text="{Binding [PopupChatLeaseConversationText]}" />
+                <BoxView
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    HeightRequest="1"
+                    VerticalOptions="Start" />
 
-            <BoxView
-                Grid.Row="3"
-                Grid.ColumnSpan="2"
-                BackgroundColor="{StaticResource LightGrey}"
-                HeightRequest="1"
-                VerticalOptions="Start" />
+                <BoxView
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    HorizontalOptions="Center"
+                    WidthRequest="1" />
 
-            <BoxView
-                Grid.Row="3"
-                Grid.ColumnSpan="2"
-                BackgroundColor="{StaticResource LightGrey}"
-                HorizontalOptions="Center"
-                WidthRequest="1" />
+                <Button
+                    Grid.Row="3"
+                    Margin="0,1,1,0"
+                    Command="{Binding LeaseChatCommand}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonYes]}" />
 
-            <Button
-                Grid.Row="3"
-                Margin="0,1,1,0"
-                Command="{Binding LeaseChatCommand}"
-                Style="{StaticResource ButtonWhiteStyle}"
-                Text="{Binding [CommonYes]}" />
-
-            <Button
-                Grid.Row="3"
-                Grid.Column="1"
-                Margin="1,1,0,0"
-                Command="{Binding ClosePopupCommand}"
-                Style="{StaticResource ButtonWhiteStyle}"
-                Text="{Binding [CommonNo]}" />
-        </Grid>
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="1,1,0,0"
+                    Command="{Binding ClosePopupCommand}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonNo]}" />
+            </Grid>
+        </StackLayout>
     </Frame>
 
     <!--#endregion-->

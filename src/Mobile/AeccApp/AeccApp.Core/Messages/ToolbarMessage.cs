@@ -3,12 +3,16 @@
     public class ToolbarMessage
     {
         public bool ShowLogo { get; set; }
-        public string _NavigationTitle { get; set; }
+        public string Title { get; set; }
 
-        public ToolbarMessage(bool showLogo, string navigationTitle)
+        public ToolbarMessage(bool showLogo, string navigationTitle= "")
         {
             ShowLogo = showLogo;
-            _NavigationTitle = navigationTitle;
+            Title = navigationTitle;
+        }
+
+        public ToolbarMessage(string navigationTitle): this(false, navigationTitle)
+        {
         }
     }
 }

@@ -10,18 +10,18 @@ namespace AeccApp.Core.ViewModels
 {
     public class ProfileViewModel : ViewModelBase
     {
-        private readonly IIdentityService _identityService;
+        private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
+        private IChatService ChatService { get; } = ServiceLocator.ChatService;
 
         public ProfileViewModel()
         {
-            _identityService = ServiceLocator.IdentityService;
             LogoutPopupVM = new LogoutPopupViewModel();
         }
 
         public override async Task ActivateAsync()
         {
             LogoutPopupVM.Logout += OnLogoutPopupLogout;
-            MessagingCenter.Send(new ToolbarMessage(false,LocalizationResourceManager.GetString("ChatViewViewVolunteerProfile")), string.Empty);
+            MessagingCenter.Send(new ToolbarMessage(false, LocalizationResourceManager.GetString("ChatViewViewVolunteerProfile")), string.Empty);
         }
 
         public override void Deactivate()
@@ -71,7 +71,7 @@ namespace AeccApp.Core.ViewModels
                     (_showLogoutPopupCommand = new Command(o => NavigationService.ShowPopupAsync(LogoutPopupVM)));
             }
         }
-         
+
         private Command _editProfileCommand;
         public ICommand EditProfileCommand
         {
@@ -87,7 +87,7 @@ namespace AeccApp.Core.ViewModels
         /// <returns></returns>
         private async Task OnEditProfileAsync()
         {
-           await _identityService.EditProfileAsync();
+            await IdentityService.EditProfileAsync();
             NotifyPropertyChanged(nameof(Name));
             NotifyPropertyChanged(nameof(Email));
         }
@@ -101,7 +101,8 @@ namespace AeccApp.Core.ViewModels
         private async void OnLogoutPopupLogout(object sender, EventArgs e)
         {
             await NavigationService.HidePopupAsync();
-            _identityService.LogOff();
+            IdentityService.LogOff();
+            await ChatService.LogOffAsync();
             await NavigationService.NavigateToAsync<LoginViewModel>();
             await NavigationService.RemoveBackStackAsync();
         }

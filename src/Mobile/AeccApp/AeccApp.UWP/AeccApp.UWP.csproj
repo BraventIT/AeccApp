@@ -142,6 +142,9 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\Ico_cruz.png">
       <Link>Assets\Ico_cruz.png</Link>
     </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\ICO_firstCHAT.png">
+      <Link>Assets\ICO_firstCHAT.png</Link>
+    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\ico_girl.png">
       <Link>Assets\ico_girl.png</Link>
     </Content>

@@ -30,6 +30,7 @@ namespace AeccApp.Core.ViewModels
         {
             Messages = new ObservableCollection<Message>();
             Volunteers = new ObservableCollection<UserData>();
+
             ChatFiltersPopupVM = new ChatFiltersPopupViewModel();
             ChatRatingPopupVM = new ChatRatingPopupViewModel();
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
@@ -37,7 +38,7 @@ namespace AeccApp.Core.ViewModels
             ChatConnectingPopupVM = new ChatConnectingPopupViewModel();
         }
 
-        public override Task ActivateAsync()
+        public override async Task ActivateAsync()
         {
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
@@ -48,7 +49,12 @@ namespace AeccApp.Core.ViewModels
             ChatService.MessagesReceived += OnMesagesReceived;
             ChatService.AggregationsReceived += OnAggregationsReceived;
 
-            return InitializeAsync();
+            if (FirstChat)
+            {
+                MessagingCenter.Send(new ToolbarMessage(this["FirstChatToolbarTitle"]), string.Empty);
+            }
+            else
+                await InitializeAsync();
         }
 
         public override void Deactivate()
@@ -64,7 +70,10 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Properties
-        public ChatConnectingPopupViewModel ChatConnectingPopupVM { get; set; }
+        public bool FirstChat
+        {
+            get { return Settings.FirstChat; }
+        }
 
         private string _partyId;
         public string PartyId
@@ -132,10 +141,11 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Popups Properties
-        public ChatTermsAndConditionsPopupViewModel ChatTermsAndConditionsPopupVM { get; private set; }
-        public ChatFiltersPopupViewModel ChatFiltersPopupVM { get; private set; }
-        public ChatLeaseConversationPopupViewModel ChatLeaseConversationPopupVM { get; private set; }
-        public ChatRatingPopupViewModel ChatRatingPopupVM { get; private set; }
+        private ChatConnectingPopupViewModel ChatConnectingPopupVM { get;  set; }
+        private ChatTermsAndConditionsPopupViewModel ChatTermsAndConditionsPopupVM { get;  set; }
+        private ChatFiltersPopupViewModel ChatFiltersPopupVM { get;  set; }
+        private ChatLeaseConversationPopupViewModel ChatLeaseConversationPopupVM { get;  set; }
+        private ChatRatingPopupViewModel ChatRatingPopupVM { get;  set; }
 
         #endregion
 
@@ -143,18 +153,36 @@ namespace AeccApp.Core.ViewModels
 
         #region Commands
 
-        #region Chat Commands
-        private Command _viewVolunteerProfileCommand;
-        public ICommand ViewVolunteerProfileCommand
+        private Command _firstChatCommand;
+        public ICommand FirstChatCommand
         {
             get
             {
-                return _viewVolunteerProfileCommand ??
-                    (_viewVolunteerProfileCommand = new Command(OnVolunteerProfileOpen, o => !IsBusy));
+                return _firstChatCommand ??
+                    (_firstChatCommand = new Command(o => OnFirstChatAsync(), o => !IsBusy));
             }
         }
 
-        private async void OnVolunteerProfileOpen(object obj)
+        private async Task OnFirstChatAsync()
+        {
+            Settings.FirstChat = false;
+            NotifyPropertyChanged(nameof(FirstChat));
+            await InitializeAsync();
+        }
+
+
+        #region Chat Commands
+        private Command _viewCounterpartProfileCommand;
+        public Command ViewCounterpartProfileCommand
+        {
+            get
+            {
+                return _viewCounterpartProfileCommand ??
+                    (_viewCounterpartProfileCommand = new Command(OnCounterpartProfileOpen));
+            }
+        }
+
+        private async void OnCounterpartProfileOpen(object obj)
         {
             await NavigationService.NavigateToAsync<ChatCounterpartProfileViewModel>(ConversationCounterpart);
         }
@@ -176,19 +204,12 @@ namespace AeccApp.Core.ViewModels
                 string textToSend = Text;
                 Text = string.Empty;
 
-                var newMessage = new Message
-                {
-                    DateTime = DateTime.UtcNow,
-                    Activity = new Activity()
-                    {
-                        Text = textToSend
-                    }
-                };
+                var newMessage = ChatService.GetMyMessage(textToSend);
 
                 TryToInsertTimeMessage(newMessage, true);
                 Messages.Insert(0, newMessage);
-               
-                await ChatService.SendMessageAsync(textToSend);
+
+                await ChatService.SendMessageAsync(newMessage);
             });
         }
 
@@ -262,6 +283,7 @@ namespace AeccApp.Core.ViewModels
         }
         #endregion
 
+        #region Filter Commands
         private Command _openVolunteersFiltersCommand;
         public ICommand OpenVolunteersFiltersCommand
         {
@@ -293,6 +315,7 @@ namespace AeccApp.Core.ViewModels
             ChatFiltersPopupVM.Reset();
             RefreshVolunters();
         }
+        #endregion
 
         #endregion
 
@@ -323,6 +346,7 @@ namespace AeccApp.Core.ViewModels
         private async Task LoadVolunteersAsync()
         {
             FilterVolunteersIsEmpty = false;
+            MessagingCenter.Send(new ToolbarMessage(this["VolunteersListToolbarTitle"]), string.Empty);
 
             _listVolunteers = await ChatService.GetListVolunteersAsync();
 
@@ -388,6 +412,7 @@ namespace AeccApp.Core.ViewModels
         private async Task InitializeChatAsync()
         {
             Messages.Clear();
+          
             if (!ChatService.InConversation)
             {
                 await ChatService.InitializeChatAsync(_partyId);
@@ -403,6 +428,7 @@ namespace AeccApp.Core.ViewModels
                 }
                 Messages.AddRange(ChatService.GetConversationMessages());
             }
+            MessagingCenter.Send(new ToolbarMessage(ConversationCounterpart.Name), string.Empty);
         }
 
         private void TryToInsertTimeMessage(Message message, bool firstPosition = false)

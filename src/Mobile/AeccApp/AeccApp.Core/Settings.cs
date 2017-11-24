@@ -24,6 +24,9 @@ namespace AeccApp.Core
         private const string TermsAndConditionsAcceptKey = "TermsAndConditions_accept";
         private static readonly bool TermsAndConditionsAcceptDefault = false;
 
+        private const string FirstChatKey = "First_chat";
+        private static readonly bool FirstChatDefault = true;
+
         private const string HomeHeaderBannerAcceptClosedKey = "HomeHeaderBanner_closed";
         private static readonly bool HomeHeaderBannerAcceptClosedDefault = true;
         #endregion
@@ -57,6 +60,18 @@ namespace AeccApp.Core
             }
         }
 
+        public static bool FirstChat
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(FirstChatKey, FirstChatDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(FirstChatKey, value);
+            }
+        }
+
         /// <summary>
         /// returns bool with HomeHeaderBanner visibility current status
         /// </summary>
@@ -72,5 +87,6 @@ namespace AeccApp.Core
             }
         }
 
+       
     }
 }
