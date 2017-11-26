@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Views.Templates.FirstChatTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls">
+
+    <StackLayout Margin="50,0" VerticalOptions="Center">
+        <ctrl:CustomImage
+            HeightRequest="130"
+            HorizontalOptions="Center"
+            SourcePlatform="ICO_firstCHAT" />
+        <Label
+            Margin="0,44,0,0"
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource ChatTitleStyle}"
+            Text="{Binding [FirstChatTitle]}" />
+        <Label
+            Margin="0,25,0,58"
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource ChatLabelStyle}"
+            Text="{Binding [FirstChat]}" />
+        <Button
+            Command="{Binding FirstChatCommand}"
+            HorizontalOptions="Center"
+            Style="{StaticResource ButtonStyle}"
+            Text="{Binding [FirstChatStartChat]}" />
+    </StackLayout>
+
+</ContentView>

@@ -24,13 +24,14 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchFastDev>true</MtouchFastDev>
-    <MtouchProfiling>true</MtouchProfiling>
+    <MtouchProfiling>false</MtouchProfiling>
     <IOSDebuggerPort>64452</IOSDebuggerPort>
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <CodesignEntitlements>
     </CodesignEntitlements>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -172,12 +173,15 @@
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\BoxViewKeyboardHeightRenderer.cs" />
     <Compile Include="Renderers\TabbedPageRenderer.cs" />
     <Compile Include="Services\LocationProviderSettings.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
     <Compile Include="Renderers\XLabs\ImageButtonRenderer.cs" />
     <Compile Include="Services\FileProvider.cs" />
+    <Compile Include="RangeSliderInitialization.cs" />
+    <Compile Include="Efects\EntryEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist">
@@ -228,6 +232,9 @@
     <PackageReference Include="Xamarin.Build.Download">
       <Version>0.4.7</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.4.0.91020</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms.GoogleMaps">
       <Version>2.2.1</Version>
     </PackageReference>
@@ -240,9 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\exit_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\filters_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\gender_female.png" />
@@ -261,9 +265,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\requests_tab_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\round_no_profile_image.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\round_no_profile_image_v2.png" />
@@ -397,6 +398,53 @@
   <ItemGroup>
     <BundleResource Include="..\AeccApp.Droid\Resources\drawable\logoHeader.png">
       <Link>Resources\logoHeader.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_girl.png">
+      <Link>Resources\ico_girl.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_man.png">
+      <Link>Resources\ico_man.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\PopUp_Ico_thumbsdown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\PopUp_Ico_thumbsdown%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\PopUp_Ico_question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\PopUp_Ico_question%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_clean_filter.png">
+      <Link>Resources\ico_clean_filter.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\Ico_cruz.png">
+      <Link>Resources\Ico_cruz.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_clean_refresh.png">
+      <Link>Resources\ico_clean_refresh.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_sup_filter.png">
+      <Link>Resources\ico_sup_filter.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ICO_firstCHAT.png">
+      <Link>Resources\ICO_firstCHAT.png</Link>
     </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

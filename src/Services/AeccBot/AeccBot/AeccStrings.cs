@@ -51,10 +51,10 @@ namespace AeccBot
 
         public const string EngagementInitiated_AlreadyClientText = "Estamos intentando iniciar la conversación. Si quieres cancelarla, teclea: {0}";
         public const string EngagementInitiated_AlreadyClientEventText = "Estamos intentando iniciar la conversación. Si quieres cancelarla, pulsa el botón cancelar.";
-        public const string EngagementInitiated_TimeoutClientText = "No hemos podido iniciar la conversación. Puedes intentarlo con otros voluntarios.";
+        public const string EngagementInitiated_TimeoutClientText = "Lo sentimos, el voluntario que has seleccionado ahora no puede hablar. Prueba más adelante o elige a otro voluntario.";
 
         public const string RejectRequest_OwnerText = "Petición del beneficiario \"{0}\" rechazada.";
-        public const string RejectRequest_ClientText = "Desgraciadamente tu petición no puede ser procesada.";
+        public const string RejectRequest_ClientText = "Lo sentimos, el voluntario que has seleccionado ahora no puede hablar. Prueba más adelante o elige a otro voluntario.";
         public const string RejectRequest_AlreadyRejectClientText = "Conversación cancelada.";
 
         public const string EngagementAdded_OwnerEventText = "Estás conectado con el beneficiario \"{0}\". Cuando termines la conversación pulsa el botón cancelar.";

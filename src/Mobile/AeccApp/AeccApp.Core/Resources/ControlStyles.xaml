@@ -3,18 +3,18 @@
     x:Class="AeccApp.Core.Resources.ControlStyles"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:eff="clr-namespace:AeccApp.Core.Effects"
     xmlns:res="clr-namespace:AeccApp.Core.Resources"
     MergedWith="res:LabelStyles">
 
-
     <OnPlatform
         x:Key="ButtonWidth"
         x:TypeArguments="x:Double"
-        Android="211"
+        Android="210"
         WinPhone="150"
-        iOS="150" />
+        iOS="210" />
 
     <Style TargetType="{x:Type ListView}">
         <Setter Property="SeparatorVisibility" Value="None" />
@@ -32,15 +32,34 @@
         <Setter Property="TextColor" Value="White" />
         <Setter Property="WidthRequest" Value="{StaticResource ButtonWidth}" />
         <Setter Property="HeightRequest" Value="44" />
-        <Setter Property="BorderRadius" Value="22" />
+        <Setter Property="BorderRadius" Value="28" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
     </Style>
 
+    <Style x:Key="CircularButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="WidthRequest" Value="44" />
+        <Setter Property="HeightRequest" Value="44" />
+        <Setter Property="BorderRadius" Value="22" />
+        <Setter Property="BorderWidth" Value="2" />
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+        <Setter Property="BorderColor" Value="{StaticResource LightGrayBorders}" />
+    </Style>
+
+
+    <Style
+        x:Key="CircularButtonStyleTransparent"
+        BasedOn="{StaticResource CircularButtonStyle}"
+        TargetType="{x:Type Button}">
+
+        <Setter Property="BorderColor" Value="Transparent" />
+    </Style>
+
     <Style x:Key="RoundGreenButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
+
 
     <OnPlatform
         x:Key="ButtonSmallWidth"
@@ -56,12 +75,28 @@
         <Setter Property="WidthRequest" Value="{StaticResource ButtonSmallWidth}" />
     </Style>
 
+    <Style x:Key="ButtonWhiteStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource GreenText}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="BorderRadius" Value="20" />
+        <Setter Property="FontSize" Value="{StaticResource MidLargeSize}" />
+        <Setter Property="BackgroundColor" Value="White" />
+    </Style>
+
     <OnPlatform
         x:Key="ImageButtonImageSize"
         x:TypeArguments="x:Int32"
         Android="35"
         WinPhone="60"
         iOS="40" />
+    <OnPlatform
+        x:Key="SmallImageButtonImageSize"
+        x:TypeArguments="x:Int32"
+        Android="17"
+        WinPhone="30"
+        iOS="20" />
 
     <OnPlatform
         x:Key="ImageButtonWidth"
@@ -69,6 +104,22 @@
         Android="200"
         WinPhone="180"
         iOS="200" />
+    <OnPlatform
+        x:Key="SmallImageButtonWidth"
+        x:TypeArguments="x:Double"
+        Android="50"
+        WinPhone="40"
+        iOS="50" />
+
+    <Style x:Key="SmallImageButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="Orientation" Value="ImageToLeft" />
+        <Setter Property="WidthRequest" Value="{StaticResource SmallImageButtonWidth}" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="ImageHeightRequest" Value="{StaticResource SmallImageButtonImageSize}" />
+        <Setter Property="ImageWidthRequest" Value="{StaticResource SmallImageButtonImageSize}" />
+        <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+    </Style>
 
     <Style x:Key="ImageButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
         <Setter Property="TextColor" Value="White" />
@@ -79,6 +130,15 @@
         <Setter Property="ImageWidthRequest" Value="{StaticResource ImageButtonImageSize}" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+    </Style>
+
+    <Style x:Key="RoundGreyButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
+        <Setter Property="BorderColor" Value="{StaticResource LightGrayBorders}" />
+        <Setter Property="BorderWidth" Value="3" />
+        <Setter Property="ImageHeightRequest" Value="{StaticResource SmallImageButtonImageSize}" />
+        <Setter Property="ImageWidthRequest" Value="{StaticResource SmallImageButtonImageSize}" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="BorderRadius" Value="45" />
     </Style>
 
     <OnPlatform
@@ -119,6 +179,42 @@
 
     <Style TargetType="Switch">
         <Setter Property="eff:SwitchEffects.Clear" Value="True" />
+    </Style>
+
+    <Style TargetType="ctrl:CheckBoxImage">
+        <Setter Property="ImageHeight" Value="24" />
+        <Setter Property="ImageWidth" Value="24" />
+        <Setter Property="SourceChecked" Value="CheckBoxOn" />
+        <Setter Property="SourceUnchecked" Value="CheckBoxOff" />
+        <Setter Property="Spacing" Value="8" />
+        <Setter Property="TextStyle" Value="{StaticResource MediumLabelStyle}" />
+    </Style>
+
+    <Style
+        x:Key="ClosePopupButtonStyle"
+        BasedOn="{StaticResource CircularButtonStyleTransparent}"
+        TargetType="{x:Type Button}">
+
+        <Setter Property="Margin" Value="9,9,0,0" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Start" />
+    </Style>
+
+    <Style x:Key="ClosePopupImageStyle" TargetType="ctrl:CustomImage">
+        <Setter Property="Margin" Value="25,25,0,0" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="HeightRequest" Value="13" />
+        <Setter Property="SourcePlatform" Value="x_icon" />
+    </Style>
+
+    <Style x:Key="PopupFrameStyle" TargetType="Frame">
+        <Setter Property="Margin" Value="45" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
     </Style>
 
 </ResourceDictionary>

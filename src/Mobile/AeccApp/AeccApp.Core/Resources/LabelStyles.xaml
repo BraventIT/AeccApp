@@ -12,17 +12,77 @@
     </Style>
 
     <Style x:Key="GreyLabelStyle" TargetType="{x:Type Label}">
-        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="TextColor" Value="{StaticResource GreyText}" />
+    </Style>
+    <Style x:Key="LightGreyLabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="TextColor" Value="{StaticResource LightGraySubtitle}" />
     </Style>
 
-
-    <Style x:Key="TitleLabelStyle" TargetType="{x:Type Label}">
+    <Style
+        x:Key="DarkGreyBigTitleLabelStyle"
+        BasedOn="{StaticResource GreyLabelStyle}"
+        TargetType="{x:Type Label}">
         <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource BigSize}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="20, 12" />
+    </Style>
+
+    <Style
+        x:Key="DarkGreyLargeSubtitleLabelStyle"
+        BasedOn="{StaticResource GreyLabelStyle}"
+        TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="Margin" Value="20, 12" />
     </Style>
 
+    <Style
+        x:Key="DarkGreyMidLargeSizeTitleLabelStyle"
+        BasedOn="{StaticResource GreyLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource MidLargeSize}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="20, 12" />
+    </Style>
+
+    <Style
+        x:Key="DarkGreyMediumSizeTitleLabelStyle"
+        BasedOn="{StaticResource GreyLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="20, 12" />
+    </Style>
+
+    <Style
+        x:Key="LightGreyMediumTitleLabelStyle"
+        BasedOn="{StaticResource LightGreyLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="{StaticResource MidLargeSize}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="20, 12" />
+    </Style>
+
+    <Style
+        x:Key="TitleLabelStyle"
+        BasedOn="{StaticResource GreyLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="20, 12" />
+    </Style>
+
+    <Style
+        x:Key="TitleLabelStyleNormal"
+        BasedOn="{StaticResource TitleLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
 
     <Style
         x:Key="SubTitleLabelStyle"
@@ -31,6 +91,22 @@
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
         <Setter Property="Margin" Value="0,6,0,3" />
+    </Style>
+
+    <Style
+        x:Key="SubTitleLabelStyleNormal"
+        BasedOn="{StaticResource SubTitleLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style
+        x:Key="SubTitleLabelItalicStyle"
+        BasedOn="{StaticResource SubTitleLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
     <Style
@@ -55,4 +131,15 @@
         <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
     </Style>
 
+    <Style x:Key="ChatTitleStyle" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
+    </Style>
+
+    <Style
+        x:Key="ChatLabelStyle"
+        BasedOn="{StaticResource MediumLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
+    </Style>
 </ResourceDictionary>

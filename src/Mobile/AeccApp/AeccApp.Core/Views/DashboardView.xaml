@@ -23,6 +23,14 @@
 
     <!--  Pages can be added as references or inline  -->
 
+    <TabbedPage.Title>
+        <OnPlatform
+            x:TypeArguments="BindingBase"
+            Android="{Binding [Nothing]}"
+            WinPhone="{Binding [DashboardAppTitle]}"
+            iOS="{Binding [DashboardAppTitle]}" />
+    </TabbedPage.Title>
+
     <TabbedPage.Children>
         <pages:HomeView />
         <pages:ChatView />

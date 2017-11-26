@@ -1,14 +1,13 @@
-﻿
-using Xamarin.Forms.Platform.Android;
-using Xamarin.Forms;
+﻿using AeccApp.Core.Views;
+using AeccApp.Droid.Renderers;
 using Android.App;
-using AeccApp.Core.Views;
-using AeccApp.Droid;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(LoginView), typeof(LoginViewRenderer))]
-namespace AeccApp.Droid
+namespace AeccApp.Droid.Renderers
 {
-	class LoginViewRenderer : PageRenderer
+    class LoginViewRenderer : PageRenderer
 	{
 		LoginView page;
 

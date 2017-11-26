@@ -3,101 +3,153 @@
     x:Class="AeccApp.Core.Views.Popups.ChatFiltersPopupView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:AeccApp.Core.Converters"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
+    xmlns:cv="clr-namespace:AeccApp.Core.Converters"
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-    BackgroundColor="{StaticResource SeeThrough}">
+    CloseWhenBackgroundIsClicked="True">
+
     <vPop:PopupPage.Resources>
         <ResourceDictionary>
-            <converters:BooleanToColorConverter x:Key="BooleanToColorConverter" />
+            <cv:BooleanToColorConverter
+                x:Key="BooleanToColorConverter"
+                ColorToFalse="Transparent"
+                ColorToTrue="{StaticResource AccentColor}" />
         </ResourceDictionary>
     </vPop:PopupPage.Resources>
 
-    <ContentView
-        Margin="20"
-        Style="{StaticResource BorderStyle}"
-        VerticalOptions="Center">
+    <ContentView Style="{StaticResource BorderStyle}" VerticalOptions="Start">
         <ContentView Style="{StaticResource InternalViewStyle}">
 
-            <StackLayout
-                Margin="1"
-                Padding="20"
-                BackgroundColor="{StaticResource BackgroundColor}">
+            <StackLayout Margin="0,30,0,0" BackgroundColor="{StaticResource BackgroundColor}">
 
                 <Label
-                    Margin="10"
+                    Margin="0,36,0,0"
                     HorizontalOptions="Center"
+                    Style="{StaticResource LightGreyMediumTitleLabelStyle}"
                     Text="{Binding [CommonAge]}" />
 
-                <ctrlRange:RangeSlider
-                    BarHeight="10"
-                    LowerValue="{Binding MinimumAge, Mode=TwoWay}"
-                    MaximumValue="80"
-                    MinimumValue="18"
-                    ShowTextAboveThumbs="True"
-                    StepValue="1"
-                    StepValueContinuously="True"
-                    TextSize="15"
-                    UpperValue="{Binding MaximumAge, Mode=TwoWay}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
+                    <Label
+                        Grid.Column="0"
+                        Margin="20,0,2,0"
+                        FontFamily="Bold"
+                        Text="{Binding MinimumAge}"
+                        TextColor="{StaticResource GreyText}" />
+
+                    <ctrlRange:RangeSlider
+                        Grid.Column="1"
+                        BarHeight="10"
+                        LowerValue="{Binding MinimumAge, Mode=TwoWay}"
+                        MaximumValue="80"
+                        MinimumValue="18"
+                        StepValue="1"
+                        StepValueContinuously="True"
+                        TextSize="15"
+                        UpperValue="{Binding MaximumAge, Mode=TwoWay}" />
+                    <Label
+                        Grid.Column="2"
+                        Margin="2,0,20,0"
+                        FontFamily="Bold"
+                        Text="{Binding MaximumAge}"
+                        TextColor="{StaticResource GreyText}" />
+
+                </Grid>
 
                 <BoxView
-                    Margin="0,10,0,0"
+                    Margin="0,36,0,0"
                     HeightRequest="1"
-                    Color="Black" />
+                    Color="{StaticResource LightGrey}" />
 
                 <Label
-                    Margin="10"
+                    Margin="0,24,0,0"
                     HorizontalOptions="Center"
+                    Style="{StaticResource LightGreyMediumTitleLabelStyle}"
                     Text="{Binding [CommonGender]}" />
 
 
-                <Grid HorizontalOptions="Center">
+                <Grid Margin="0,0,0,36" HorizontalOptions="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <ctrl:CustomImage
-                        Grid.Column="0"
+                    <Frame
                         Margin="20"
+                        Padding="0"
                         BackgroundColor="{Binding GenderWomen, Converter={StaticResource BooleanToColorConverter}}"
-                        HeightRequest="100"
+                        CornerRadius="52"
+                        HeightRequest="104"
                         HorizontalOptions="Center"
-                        SourcePlatform="gender_female"
                         VerticalOptions="Center"
-                        WidthRequest="100">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="0" />
-                        </ctrl:CustomImage.GestureRecognizers>
-                    </ctrl:CustomImage>
+                        WidthRequest="104">
+                        <ctrl:CustomImage
+                            HeightRequest="100"
+                            HorizontalOptions="Center"
+                            SourcePlatform="ico_girl"
+                            VerticalOptions="Center"
+                            WidthRequest="100">
+                            <ctrl:CustomImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="m" />
+                            </ctrl:CustomImage.GestureRecognizers>
+                        </ctrl:CustomImage>
+                    </Frame>
 
-                    <ctrl:CustomImage
+                    <Frame
                         Grid.Column="1"
                         Margin="20"
+                        Padding="0"
                         BackgroundColor="{Binding GenderMen, Converter={StaticResource BooleanToColorConverter}}"
-                        HeightRequest="100"
+                        CornerRadius="52"
+                        HeightRequest="104"
                         HorizontalOptions="Center"
-                        SourcePlatform="gender_male"
                         VerticalOptions="Center"
-                        WidthRequest="100">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="1" />
-                        </ctrl:CustomImage.GestureRecognizers>
-                    </ctrl:CustomImage>
+                        WidthRequest="104">
+                        <ctrl:CustomImage
+                            HeightRequest="100"
+                            HorizontalOptions="Center"
+                            SourcePlatform="ico_man"
+                            VerticalOptions="Center"
+                            WidthRequest="100">
+                            <ctrl:CustomImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SwitchGenderCommand}" CommandParameter="h" />
+                            </ctrl:CustomImage.GestureRecognizers>
+                        </ctrl:CustomImage>
+                    </Frame>
 
                 </Grid>
 
+                <BoxView HeightRequest="1" Color="{StaticResource LightGrey}" />
 
-                <BoxView HeightRequest="1" Color="LightGray" />
+                <StackLayout
+                    Margin="0,24,0,35"
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal">
 
-                <Button
-                    Margin="10"
-                    Command="{Binding ApplyFiltersCommand}"
-                    Style="{StaticResource ButtonStyle}"
-                    Text="{Binding [CommonApplyFilters]}" />
+                    <Grid Margin="0,0,20,0">
+
+                        <Button Command="{Binding ResetFiltersCommand}" Style="{StaticResource CircularButtonStyle}" />
+
+                        <ctrl:CustomImage
+                            HorizontalOptions="Center"
+                            SourcePlatform="ico_clean_filter"
+                            VerticalOptions="Center"
+                            WidthRequest="16" />
+
+                    </Grid>
+
+                    <Button
+                        Command="{Binding ApplyFiltersCommand}"
+                        Style="{StaticResource ButtonStyle}"
+                        Text="{Binding [CommonApplyFilters]}" />
+                </StackLayout>
             </StackLayout>
 
         </ContentView>

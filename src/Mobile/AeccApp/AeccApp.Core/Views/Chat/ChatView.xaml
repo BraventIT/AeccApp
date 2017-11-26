@@ -9,6 +9,7 @@
     xmlns:temp="clr-namespace:AeccApp.Core.Views.Templates"
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    x:Name="root"
     Title="{Binding [ChatListViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True"
     IconPlatform="chat_tab_icon"
@@ -25,32 +26,35 @@
 
         <ctrl:HideableToolbarItem
             Command="{Binding OpenVolunteersFiltersCommand}"
-            IconPlatform="filters_icon"
+            IconPlatform="ico_sup_filter"
             IsVisible="{Binding CanFilterVolunteers}"
             Order="Primary"
             Priority="0"
             Text="{Binding [CommonFilters]}" />
 
-        <ctrl:HideableToolbarItem
+        <!--<ctrl:HideableToolbarItem
             Command="{Binding ViewVolunteerProfileCommand}"
             IconPlatform="profile_icon"
             IsVisible="{Binding PartyId, Converter={StaticResource IsNotNullConverter}}"
             Order="Primary"
             Priority="0"
-            Text="{Binding [ChatViewViewVolunteerProfile]}" />
+            Text="{Binding [ChatViewViewVolunteerProfile]}" />-->
 
     </ContentPage.ToolbarItems>
 
     <Grid>
-        <!--  INDICATOR  -->
-        <ctrl:CustomActivityIndicatorControl />
+        <temp:FirstChatTemplate IsVisible="{Binding FirstChat}" />
 
-        <!--  Chat page  -->
-        <temp:ChatTemplate IsVisible="{Binding PartyId, Converter={StaticResource IsNotNullConverter}}" />
+        <Grid IsVisible="{Binding FirstChat, Converter={StaticResource InverseBoolConverter}}">
+            <!--  INDICATOR  -->
+            <ctrl:CustomActivityIndicatorControl />
 
-        <!--  Volunteer list page  -->
-        <temp:ChooseVolunteerTemplate IsVisible="{Binding PartyId, Converter={StaticResource IsNullConverter}}" />
+            <!--  Chat page  -->
+            <temp:ChatTemplate CounterpartClickCommand="{Binding ViewCounterpartProfileCommand}" IsVisible="{Binding PartyId, Converter={StaticResource IsNotNullConverter}}" />
 
+            <!--  Volunteer list page  -->
+            <temp:ChooseVolunteerTemplate IsVisible="{Binding PartyId, Converter={StaticResource IsNullConverter}}" />
+
+        </Grid>
     </Grid>
-
 </v:BaseContentPage>

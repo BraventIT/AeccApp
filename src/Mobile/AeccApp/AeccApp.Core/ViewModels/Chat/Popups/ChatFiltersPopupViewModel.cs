@@ -15,6 +15,7 @@ namespace AeccApp.Core.ViewModels.Popups
         /// Raised when filters are applied
         /// </summary>
         public event EventHandler AppliedFilters;
+        public event EventHandler ResetFilters;
 
         public ChatFiltersPopupViewModel()
         {
@@ -37,28 +38,29 @@ namespace AeccApp.Core.ViewModels.Popups
 
 
 
-        public string Gender { get; set; }
-
-
-        private bool _genderMen;
-
+        private string _gender = string.Empty;
+        public string Gender
+        {
+            get { return _gender; }
+            set
+            {
+                if (Set(ref _gender, value))
+                {
+                    NotifyPropertyChanged(nameof(GenderWomen));
+                    NotifyPropertyChanged(nameof(GenderMen));
+                }
+            }
+        }
+       
         public bool GenderMen
         {
-
-            get { return Gender == null ? false : Gender.StartsWith("h", StringComparison.CurrentCultureIgnoreCase); }
-            set { Set(ref _genderMen, value); }
+            get { return Gender.StartsWith("h", StringComparison.CurrentCultureIgnoreCase); }
         }
     
-
-        private bool _genderWomen;
-
         public bool GenderWomen
         {
-            get { return Gender == null ? false : Gender.StartsWith("m", StringComparison.CurrentCultureIgnoreCase); }
-            set { Set(ref _genderWomen, value); }
-
+            get { return Gender.StartsWith("m", StringComparison.CurrentCultureIgnoreCase); }
         }
-
 
         private Command _switchGenderCommand;
         public ICommand SwitchGenderCommand
@@ -66,48 +68,17 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _switchGenderCommand ??
-                    (_switchGenderCommand = new Command(OnSwitchGenderCommand, o => !IsBusy));
+                    (_switchGenderCommand = new Command(OnSwitchGenderCommand));
             }
         }
 
         void OnSwitchGenderCommand(object obj)
         {
-            switch (obj)
-            {
-                case "0"://female
-                    if(Gender.StartsWith("m", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        Gender = "default";
-                    }
-                    else
-                    {
-                    Gender = "m";
-                    }
+            string selectedGender = (string)obj;
 
-                    NotifyPropertyChanged(nameof(GenderMen));
-                    NotifyPropertyChanged(nameof(GenderWomen));
-
-                    break;
-
-                case "1"://male
-                    if (Gender.StartsWith("h", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        Gender = "default";
-                    }
-                    else
-                    {
-                        Gender = "h";
-                    }
-                    NotifyPropertyChanged(nameof(GenderMen));
-                    NotifyPropertyChanged(nameof(GenderWomen));
-                    break;
-
-            }
-
+            Gender = (Gender.StartsWith(selectedGender, StringComparison.CurrentCultureIgnoreCase)) ?
+                      string.Empty : selectedGender;
         }
-
-
-
 
         private Command _applyFiltersCommand;
         public ICommand ApplyFiltersCommand
@@ -119,9 +90,19 @@ namespace AeccApp.Core.ViewModels.Popups
             }
         }
 
+        private Command _resetFiltersCommand;
+        public ICommand ResetFiltersCommand
+        {
+            get
+            {
+                return _resetFiltersCommand ??
+                    (_resetFiltersCommand = new Command(o => ResetFilters?.Invoke(this, null)));
+            }
+        }
+
         public void Reset()
         {
-            Gender = "default";
+            Gender = string.Empty;
             MinimumAge = MIN_AGE;
             MaximumAge = MAX_AGE;
         }

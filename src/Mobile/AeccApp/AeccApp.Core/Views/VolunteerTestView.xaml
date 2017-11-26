@@ -24,7 +24,7 @@
                 MaximumWidthRequest="400"
                 SourcePlatform="logo" />
 
-            <StackLayout Padding="10" BackgroundColor="White">
+            <StackLayout Padding="10" BackgroundColor="LightGray">
                 <Label Style="{StaticResource NormalLabelStyle}" Text="Página de prueba para poder seleccionar rol de voluntario sin realizar cambios en Azure AD. Sólo para entorno de prueba" />
 
                 <StackLayout
@@ -38,12 +38,19 @@
                         VerticalOptions="Center" />
                 </StackLayout>
 
+                <!--<ctrl:CheckBoxImage
+                    HeightRequest="20"
+                    IsChecked="{Binding IsVolunteer, Mode=TwoWay}"
+                    SourceChecked="CheckBoxOn"
+                    SourceUnchecked="CheckBoxOff"
+                    WidthRequest="20" />-->
+
                 <Button
                     Margin="20,0"
                     Command="{Binding EnterCommand}"
                     HorizontalOptions="CenterAndExpand"
                     Style="{StaticResource ButtonStyle}"
-                    Text="CONTINUAR" />
+                    Text="Continuar" />
 
             </StackLayout>
 

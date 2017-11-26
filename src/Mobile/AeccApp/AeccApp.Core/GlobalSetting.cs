@@ -1,6 +1,7 @@
 ﻿using Aecc.Models;
 using AeccApp.Core.Models;
 using System.Collections.ObjectModel;
+using AeccApp.Core.Models.Email;
 
 namespace AeccApp.Core
 {
@@ -9,7 +10,7 @@ namespace AeccApp.Core
         private string _baseEndpoint;
         private string _apiEndpoint;
         private static readonly GlobalSetting _instance = new GlobalSetting();
-
+        
         public GlobalSetting()
         {
             GooglePlacesApiKey = "AIzaSyBrlsD3dhg3Bo6oaAugOCexgVoNcQDaQgQ";
@@ -30,8 +31,11 @@ namespace AeccApp.Core
                 Scope = "read"
             };
 
-            ApiEndpoint = "http://alfraaeccapi.azurewebsites.net";
-            //"http://alfraso-aeccapi.azurewebsites.net";
+            ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
+
+            EmailChatTemplate = new EmailChatTemplate("El beneficiario %UserName% %UserSurname% ha reportado una conversación con " +
+                                                      "%CounterpartName% %CounterpartSurname% cuya valoración es %ChatRating%.\n" +
+                                                      "Detalle de conversación:\n\n%Conversation%");
         }
 
         public static GlobalSetting Instance
@@ -70,8 +74,17 @@ namespace AeccApp.Core
         #endregion
 
         #region User data
-        public CurrentUser User { get; set; }
-        #endregion
         
+        public CurrentUser User { get; set; }
+        
+        #endregion
+
+        #region Chat
+
+        public EmailChatTemplate EmailChatTemplate { get; set; }
+        public string EmailChatAddress { get; set; }
+
+        #endregion
+
     }
 }

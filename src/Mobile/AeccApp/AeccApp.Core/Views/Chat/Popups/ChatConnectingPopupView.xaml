@@ -1,48 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<vPop:PopupPage
+<vPop:BasePopupPage
     x:Class="AeccApp.Core.Views.Popups.ChatConnectingPopupView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
-    xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-    BackgroundColor="{StaticResource SeeThrough}">
+    xmlns:vPop="clr-namespace:AeccApp.Core.Views.Popups"
+    BackgroundColor="{StaticResource SeeThrough}"
+    CloseWhenBackgroundIsClicked="False">
 
-    <ContentView
-        Margin="20"
-        Style="{StaticResource BorderStyle}"
-        VerticalOptions="Center">
-        <ContentView Style="{StaticResource InternalViewStyle}">
+    <Frame Style="{StaticResource PopupFrameStyle}">
 
-            <StackLayout
-                Margin="30"
-                Padding="30"
-                HorizontalOptions="Center"
-                VerticalOptions="Center">
-                <ActivityIndicator
-                    HeightRequest="50"
-                    HorizontalOptions="Center"
-                    IsRunning="True"
-                    IsVisible="True"
-                    VerticalOptions="Center"
-                    Color="{StaticResource AccentColor}">
-                    <ActivityIndicator.WidthRequest>
-                        <OnPlatform
-                            x:TypeArguments="x:Double"
-                            Android="50"
-                            WinPhone="400"
-                            iOS="50" />
-                    </ActivityIndicator.WidthRequest>
-                </ActivityIndicator>
-                <Label
-                    Margin="10"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Style="{StaticResource TitleLabelStyle}"
-                    Text="{Binding [ChatConnectingPopupText]}" />
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            </StackLayout>
-        </ContentView>
-    </ContentView>
-</vPop:PopupPage>
+            <Button Command="{Binding LeaseChatCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
+
+            <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
+
+            <Frame
+                Margin="0,55,0,0"
+                HasShadow="False"
+                HeightRequest="38">
+                <ctrl:CustomActivityIndicatorControl HeightRequest="80" />
+            </Frame>
+
+            <Label
+                Grid.Row="2"
+                Margin="20,34,20,55"
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource MediumLabelStyle}"
+                Text="{Binding [ChatConnectingPopupText]}" />
+
+        </Grid>
+    </Frame>
+
+</vPop:BasePopupPage>

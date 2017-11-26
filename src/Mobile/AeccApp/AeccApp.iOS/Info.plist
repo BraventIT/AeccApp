@@ -46,8 +46,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>XSAppIconAssets</key>
-	<string>Resources/Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -60,7 +58,7 @@
 		</dict>
 	</array>
 	<key>CFBundleDisplayName</key>
-	<string>Aecc</string>
+	<string>AeccApp</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

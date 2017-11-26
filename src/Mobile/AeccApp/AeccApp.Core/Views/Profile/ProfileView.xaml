@@ -12,117 +12,101 @@
     IconPlatform="profile_tab_icon">
     <ScrollView>
         <Grid>
-
             <Grid HorizontalOptions="Center">
-                <Grid Padding="5" HorizontalOptions="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
+                <StackLayout HorizontalOptions="Center">
                     <ctrl:CustomImage
-                        Grid.Row="0"
-                        Grid.ColumnSpan="2"
                         Margin="0,30"
                         HorizontalOptions="Center"
                         MaximumWidthRequest="200"
                         SourcePlatform="profile" />
-                    <!--  Profile info  -->
                     <Label
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        HorizontalOptions="Start"
-                        Style="{StaticResource SubTitleLabelStyle}"
-                        Text="{Binding [CommonNameTitle]}" />
-                    <Label
-                        Grid.Row="1"
-                        Grid.Column="1"
                         HorizontalOptions="Center"
                         Style="{StaticResource NormalLabelStyle}"
                         Text="{Binding Name}" />
                     <Label
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        HorizontalOptions="Start"
-                        Style="{StaticResource SubTitleLabelStyle}"
-                        Text="{Binding [CommonMailTitle]}" />
-                    <Label
-                        Grid.Row="2"
-                        Grid.Column="1"
                         HorizontalOptions="Center"
                         Style="{StaticResource NormalLabelStyle}"
-                        Text="{Binding Email}" />
+                        Text="{Binding Description}" />
                     <Label
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        HorizontalOptions="Start"
-                        Style="{StaticResource SubTitleLabelStyle}"
-                        Text="{Binding [CommonPhoneTitle]}" />
-                    <Label
-                        Grid.Row="3"
-                        Grid.Column="1"
                         HorizontalOptions="Center"
                         Style="{StaticResource NormalLabelStyle}"
-                        Text="{Binding Telephone}" />
+                        Text="{Binding [CommonEdit]}"
+                        TextColor="LightGreen">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditProfileCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <BoxView
+                        Margin="1,0,1,0"
+                        HeightRequest="1"
+                        Color="LightGray" />
                     <Label
-                        Grid.Row="4"
-                        Grid.Column="0"
-                        HorizontalOptions="Start"
-                        Style="{StaticResource SubTitleLabelStyle}"
-                        Text="{Binding [CommonAddressTitle]}" />
-                    <Label
-                        Grid.Row="4"
-                        Grid.Column="1"
                         HorizontalOptions="Center"
                         Style="{StaticResource NormalLabelStyle}"
-                        Text="{Binding Address}" />
+                        Text="{Binding [PopupVolunteerProfileInfo]}" />
+                    <Grid Padding="5" HorizontalOptions="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                    <Label
-                        Grid.Row="5"
-                        Grid.Column="0"
-                        HorizontalOptions="Start"
-                        Style="{StaticResource SubTitleLabelStyle}"
-                        Text="{Binding [CommonAgeTitle]}" />
-                    <Label
-                        Grid.Row="5"
-                        Grid.Column="1"
-                        HorizontalOptions="Center"
-                        Style="{StaticResource NormalLabelStyle}"
-                        Text="{Binding Age}" />
-
-                    <!--  Logout and edit profile buttons  -->
-                    <StackLayout
-                        Grid.Row="7"
-                        Grid.ColumnSpan="2"
-                        Margin="0,0,0,10"
-                        HorizontalOptions="Center"
-                        Orientation="Horizontal">
-
-                        <Button
-                            Command="{Binding ShowLogoutPopupCommand}"
-                            Style="{StaticResource ButtonSmallStyle}"
-                            Text="{Binding [CommonLogout]}" />
-                        <Button
-                            Command="{Binding EditProfileCommand}"
-                            Style="{StaticResource ButtonSmallStyle}"
-                            Text="{Binding [CommonEdit]}" />
-                    </StackLayout>
-                </Grid>
-
-
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource SubTitleLabelStyle}"
+                            Text="{Binding [CommonMailTitle]}" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource NormalLabelStyle}"
+                            Text="{Binding Email}" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource SubTitleLabelStyle}"
+                            Text="{Binding [CommonGenderTitle]}" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource NormalLabelStyle}"
+                            Text="{Binding Gender}" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource SubTitleLabelStyle}"
+                            Text="{Binding [CommonAgeTitle]}" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource NormalLabelStyle}"
+                            Text="{Binding Age}" />
+                        <!--  Logout and edit profile buttons  -->
+                        <StackLayout
+                            Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,10"
+                            HorizontalOptions="Center"
+                            Orientation="Horizontal">
+                            <Button
+                                Command="{Binding ShowLogoutPopupCommand}"
+                                Style="{StaticResource ButtonSmallStyle}"
+                                Text="{Binding [CommonLogout]}" />
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
             </Grid>
-
             <!--  INDICATOR  -->
             <ctrl:CustomActivityIndicatorControl />
         </Grid>

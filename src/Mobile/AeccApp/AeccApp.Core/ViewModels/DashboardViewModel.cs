@@ -23,6 +23,7 @@ namespace AeccApp.Core.ViewModels
         public DashboardViewModel()
         {
             NoLocationProviderPopupVM = new NoLocationProviderPopupViewModel();
+            ChatEventPopupVM = new ChatEventPopupViewModel();
         }
 
         public override async Task InitializeAsync(object navigationData)
@@ -33,21 +34,12 @@ namespace AeccApp.Core.ViewModels
                 var tabIndex = ((TabParameter)navigationData).TabIndex;
                 MessagingCenter.Send(new TabMessage(tabIndex), string.Empty);
             }
-
-
         }
 
         public override Task ActivateAsync()
         {
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
             MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, o => OnChatEngagementEventAsync(o));
-
-            if (IsVolunteer)
-            {
-                //review
-              //  MessagingCenter.Send(new DashboardEnableAndDisableChatTab(false), string.Empty);
-                MessagingCenter.Send(new DashboardHideRequestsTabMessage(TabsEnum.Requests), string.Empty);
-            }
 
             return ExecuteOperationAsync(async (token) =>
              {
@@ -97,6 +89,7 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
+        public ChatEventPopupViewModel ChatEventPopupVM { get; private set; }
         #endregion
 
         #region Commands
@@ -155,6 +148,7 @@ namespace AeccApp.Core.ViewModels
         #region Private Methods
         private async Task OnChatEngagementEventAsync(ChatEngagementEventMessage chatEngagementEvent)
         {
+            await NavigationService.HidePopupAsync();
             await NavigationService.NavigateToAsync<ChatRequestViewModel>(chatEngagementEvent.RequestPartyId, isModal: true);
         }
 
@@ -164,7 +158,7 @@ namespace AeccApp.Core.ViewModels
                 return;
 
             await NavigationService.HidePopupAsync();
-            await NavigationService.NavigateToAsync<ChatEventViewModel>(obj, isModal: true);
+            await NavigationService.ShowPopupAsync(ChatEventPopupVM, obj);
         }
         #endregion
     }

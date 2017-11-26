@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AeccApp.Core.Extensions;
+using System;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.Controls
 {
     public class CustomImage : Image
-	{
+    {
         /// <summary>
         /// Custom control made to load assets managing UWP folder (Assets/), iOS and Android at the same time.
         /// </summary>
@@ -29,34 +30,32 @@ namespace AeccApp.Core.Controls
         }
 
         public static BindableProperty MaximumWidthRequestProperty =
-            BindableProperty.Create(nameof(MaximumWidthRequest), typeof(double), typeof(CustomImage), double.NaN);
+            BindableProperty.Create(
+                nameof(MaximumWidthRequest), 
+                typeof(double), 
+                typeof(CustomImage), 
+                double.NaN);
 
 
-        public ImageSource SourcePlatform
-		{
-			get
-			{
-				return (ImageSource)GetValue(SourceProperty);
-			}
-			set
-			{
-				if (value == null)
-				{
-					return;
-				}
+        public string SourcePlatform
+        {
+            get { return (string)GetValue(SourcePlatformProperty); }
+            set { SetValue(SourcePlatformProperty, value); }
+        }
 
-				var source = (FileImageSource)value;
+        public static BindableProperty SourcePlatformProperty = BindableProperty.Create(
+            nameof(SourcePlatform),
+            typeof(string),
+            typeof(CustomImage),
+            null,
+            propertyChanged: OnSourcePlatformChanged);
 
-				string path = source.File;
-                if (Device.RuntimePlatform == Device.UWP)
-                {
-                    path = (path.EndsWith(".jpg", StringComparison.CurrentCultureIgnoreCase)) ?
-                        $"Assets/{path}": $"Assets/{path}.png";
-                }
-
-				source.File = path;
-				SetValue(SourceProperty, source);
-			}
-		}
-	}
+        private static void OnSourcePlatformChanged(BindableObject b, object oldValue, object newValue)
+        {
+            if (newValue == null)
+                return;
+            var control = (CustomImage)b;
+            control.SetSourcePlatform((string)newValue);
+        }
+    }
 }

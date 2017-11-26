@@ -136,7 +136,7 @@
     <value>¡Ups!</value>
   </data>
   <data name="ChatConnectingPopupText" xml:space="preserve">
-    <value>Conectando con el voluntario . . .</value>
+    <value>Danos un momento, estamos conectando con el voluntario.</value>
   </data>
   <data name="ChatListViewText" xml:space="preserve">
     <value>Abre un nuevo chat, elige y habla con el voluntario que más se adapte a tus preferencias y necesidades.</value>
@@ -172,10 +172,16 @@
     <value>Enviar</value>
   </data>
   <data name="ChatViewThereAreNoVolunteers" xml:space="preserve">
-    <value>No hay voluntarios. Intentalo más tarde</value>
+    <value>¡Lo sentimos! Actualmente no tenemos ningún voluntario disponible para hablar. Inténtalo de nuevo más tarde.</value>
   </data>
   <data name="ChatViewThereAreNoVolunteersFiltered" xml:space="preserve">
-    <value>No hay voluntarios para el filtro que has pueto.</value>
+    <value>No hemos econtrado ningún voluntario con los filtros aplicados. Por favor, prueba a buscar otros parámetros o limpia los filtros pulsando el botón de arriba.</value>
+  </data>
+  <data name="ChatViewThereAreNoVolunteersFilteredTitle" xml:space="preserve">
+    <value>Sin resultados</value>
+  </data>
+  <data name="ChatViewThereAreNoVolunteersTitle" xml:space="preserve">
+    <value>No hay voluntarios</value>
   </data>
   <data name="ChatViewViewVolunteerProfile" xml:space="preserve">
     <value>Perfil del voluntario</value>
@@ -201,6 +207,9 @@
   <data name="CommonApplyFilters" xml:space="preserve">
     <value>Aplicar filtros</value>
   </data>
+  <data name="CommonCancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
   <data name="CommonChooseRequestType" xml:space="preserve">
     <value>Elige tu petición</value>
   </data>
@@ -217,13 +226,16 @@
     <value>Fecha</value>
   </data>
   <data name="CommonEdit" xml:space="preserve">
-    <value>Editar</value>
+    <value>Editar biografía</value>
   </data>
   <data name="CommonFilters" xml:space="preserve">
     <value>Filtros</value>
   </data>
   <data name="CommonGender" xml:space="preserve">
     <value>Género</value>
+  </data>
+  <data name="CommonGenderTitle" xml:space="preserve">
+    <value>Género:</value>
   </data>
   <data name="CommonIsYourFirstTime" xml:space="preserve">
     <value>¿Es tu primera vez aqui?</value>
@@ -261,12 +273,6 @@
   <data name="CommonRefreshList" xml:space="preserve">
     <value>Actualizar lista</value>
   </data>
-  <data name="CommonTermsAndConditions" xml:space="preserve">
-    <value>Términos y condiciones</value>
-  </data>
-  <data name="CommonTermsAndConditionsAccept" xml:space="preserve">
-    <value>Aceptas los términos</value>
-  </data>
   <data name="CommonTime" xml:space="preserve">
     <value>Hora</value>
   </data>
@@ -296,6 +302,18 @@
   </data>
   <data name="DashboardNotifications" xml:space="preserve">
     <value>Notif.</value>
+  </data>
+  <data name="FirstChat" xml:space="preserve">
+    <value>Estamos para ayudarte. Inicia un chat, elige y habla con el voluntario que más se adapte a tus preferencias y necesidades.</value>
+  </data>
+  <data name="FirstChatStartChat" xml:space="preserve">
+    <value>Iniciar un chat</value>
+  </data>
+  <data name="FirstChatTitle" xml:space="preserve">
+    <value>¿Necesitas hablar?</value>
+  </data>
+  <data name="FirstChatToolbarTitle" xml:space="preserve">
+    <value>Iniciar un chat</value>
   </data>
   <data name="HomeAddressesListViewTitle" xml:space="preserve">
     <value>Indica tu domicilio</value>
@@ -441,8 +459,11 @@
   <data name="NoConnectionViewTextTitle" xml:space="preserve">
     <value>¡Vaya!</value>
   </data>
+  <data name="Nothing" xml:space="preserve">
+    <value />
+  </data>
   <data name="PopupChatEventConnectionRejectedNotVolunteer" xml:space="preserve">
-    <value>Ha habido un problema, intentalo mas tarde</value>
+    <value>¡Oh oh!</value>
   </data>
   <data name="PopupChatEventConnectionRejectedVolunteer" xml:space="preserve">
     <value>Petición rechazada</value>
@@ -510,6 +531,12 @@
   <data name="PopupTermsAndConditionsAccept" xml:space="preserve">
     <value>Acepto los términos y condiciones</value>
   </data>
+  <data name="PopupTermsAndConditionsContent" xml:space="preserve">
+    <value>Aliquam suscipit, metus nec dignissim congue, est sapien finibus diam, vel suscipit ante turpis a quam. Aliquam erat volutpat. Proin lacinia sem neque, quis congue erat placerat in. Mauris ac augue maximus, dictum diam vel, posuere nisl. Aliquam maximus nibh a ipsum ornare, blandit placerat est blandit. Quisque nibh arcu, viverra in tincidunt at, posuere eu nibh. Vestibulum scelerisque a dolor et vulputate. Integer hendrerit aliquam elit, ac vulputate ante tempor eu. Sed eu aliquam risus. Nullam a elit mauris.  Ut euismod hendrerit dapibus. Cras bibendum ante ac libero varius eleifend. Donec a neque tincidunt, ullamcorper purus at, sodales libero. Maecenas eget tempus nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean ornare finibus enim. Proin hendrerit magna at lacus tristique posuere. Nam laoreet urna ac magna cursus pulvinar. Pellentesque ipsum purus, ullamcorper ac lacus eleifend, condimentum fermentum augue. Proin lobortis ac nibh et commodo. Phasellus vel suscipit ligula, eu vulputate augue. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc eget euismod quam, et varius sapien. Sed a euismod ex, aliquam venenatis ligula. Mauris fermentum pharetra lacinia.  Nam bibendum sed nulla in fringilla. Quisque suscipit libero et ultrices sollicitudin. Aenean pharetra hendrerit lorem, eu dictum tortor faucibus id. Phasellus convallis, arcu non dictum vestibulum, sem dolor fringilla orci, eu posuere massa ipsum sit amet purus. Mauris at mi ut justo semper feugiat. Duis quis arcu ex. Aliquam sit amet neque rutrum, ultricies augue rutrum, varius ante. Donec ornare eu libero malesuada sodales. Quisque sed euismod ipsum. Ut ac ligula nibh. Sed accumsan aliquam fringilla.  Pellentesque eget augue vulputate, rhoncus turpis vel, blandit justo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Pellentesque dignissim sapien ac dolor convallis, quis porta lacus scelerisque. Quisque at diam eget augue sagittis tempor. Sed pharetra ullamcorper dui, id tempor ante luctus nec. Integer nec enim consectetur, faucibus diam sed, pulvinar nisi. Cras ut imperdiet urna. Mauris consequat, mauris a porttitor placerat, justo leo efficitur quam, in tempus lacus libero eu purus.  Cras eu ultricies purus. Nulla eu dui vel sapien semper facilisis ac ac nisi. Quisque vitae orci vitae turpis eleifend aliquam at eget arcu. Nam odio nunc</value>
+  </data>
+  <data name="PopupTermsAndConditionsTitle" xml:space="preserve">
+    <value>Términos y condiciones</value>
+  </data>
   <data name="PopupThereIsNoResultsText" xml:space="preserve">
     <value>No encontramos una dirección valida, por favor revisa los datos</value>
   </data>
@@ -521,5 +548,8 @@
   </data>
   <data name="RequestsViewText" xml:space="preserve">
     <value>¿Estás en el hospital o en tu domicilio? Haz peticiones estés donde estés.</value>
+  </data>
+  <data name="VolunteersListToolbarTitle" xml:space="preserve">
+    <value>Elige voluntario</value>
   </data>
 </root>

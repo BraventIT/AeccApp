@@ -4,22 +4,24 @@ using Xamarin.Forms;
 using System.Windows.Input;
 using AeccApp.Core.ViewModels.Popups;
 using System;
+using AeccApp.Core.Messages;
 
 namespace AeccApp.Core.ViewModels
 {
     public class ProfileViewModel : ViewModelBase
     {
-        private readonly IIdentityService _identityService;
+        private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
+        private IChatService ChatService { get; } = ServiceLocator.ChatService;
 
         public ProfileViewModel()
         {
-            _identityService = ServiceLocator.IdentityService;
             LogoutPopupVM = new LogoutPopupViewModel();
         }
 
         public override async Task ActivateAsync()
         {
             LogoutPopupVM.Logout += OnLogoutPopupLogout;
+            MessagingCenter.Send(new ToolbarMessage(false, LocalizationResourceManager.GetString("ChatViewViewVolunteerProfile")), string.Empty);
         }
 
         public override void Deactivate()
@@ -33,24 +35,23 @@ namespace AeccApp.Core.ViewModels
             get { return GSetting.User?.Name; }
         }
 
+        public string Description
+        {
+            get { return GSetting.User.Description; }
+        }
+
         public string Email
         {
             get { return GSetting.User?.Email; }
         }
 
-        public string Telephone
-        {
-            get { return string.Empty; }
-        }
-
-        public string Address
-        {
-            get { return string.Empty; }
-        }
-
         public int? Age
         {
             get { return GSetting.User.Age; }
+        }
+        public string Gender
+        {
+            get { return GSetting.User.DisplayGender; }
         }
 
         public LogoutPopupViewModel LogoutPopupVM { get; private set; }
@@ -70,7 +71,7 @@ namespace AeccApp.Core.ViewModels
                     (_showLogoutPopupCommand = new Command(o => NavigationService.ShowPopupAsync(LogoutPopupVM)));
             }
         }
-         
+
         private Command _editProfileCommand;
         public ICommand EditProfileCommand
         {
@@ -86,7 +87,7 @@ namespace AeccApp.Core.ViewModels
         /// <returns></returns>
         private async Task OnEditProfileAsync()
         {
-           await _identityService.EditProfileAsync();
+            await IdentityService.EditProfileAsync();
             NotifyPropertyChanged(nameof(Name));
             NotifyPropertyChanged(nameof(Email));
         }
@@ -100,7 +101,8 @@ namespace AeccApp.Core.ViewModels
         private async void OnLogoutPopupLogout(object sender, EventArgs e)
         {
             await NavigationService.HidePopupAsync();
-            _identityService.LogOff();
+            IdentityService.LogOff();
+            await ChatService.LogOffAsync();
             await NavigationService.NavigateToAsync<LoginViewModel>();
             await NavigationService.RemoveBackStackAsync();
         }

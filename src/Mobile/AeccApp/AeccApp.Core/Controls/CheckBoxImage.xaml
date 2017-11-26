@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Controls.CheckBoxImage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="root">
+
+    <StackLayout
+        HorizontalOptions="FillAndExpand"
+        Orientation="Horizontal"
+        Spacing="{Binding Spacing, Source={x:Reference root}}">
+        <Image
+            x:Name="Image"
+            HeightRequest="{Binding ImageHeight, Source={x:Reference root}}"
+            WidthRequest="{Binding ImageWidth, Source={x:Reference root}}">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnImageTapped" />
+            </Image.GestureRecognizers>
+        </Image>
+
+        <Label
+            BindingContext="{x:Reference root}"
+            Style="{Binding TextStyle}"
+            Text="{Binding Text}"
+            VerticalOptions="Start">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnImageTapped" />
+            </Label.GestureRecognizers>
+        </Label>
+    </StackLayout>
+</ContentView>

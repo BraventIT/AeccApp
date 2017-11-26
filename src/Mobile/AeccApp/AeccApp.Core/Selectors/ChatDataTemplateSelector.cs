@@ -9,6 +9,8 @@ namespace AeccApp.Core.Selectors
 
         public DataTemplate ClientTemplate { get; set; }
 
+        public DataTemplate TimeTemplate { get; set; }
+
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             var model = item as Message;
@@ -18,8 +20,10 @@ namespace AeccApp.Core.Selectors
                 case MessageType.Sent:
                     return ClientTemplate;
                 case MessageType.Received:
-                default:
                     return ServerTemplate;
+                case MessageType.Time:
+                default:
+                    return TimeTemplate;
             }
         }
     }

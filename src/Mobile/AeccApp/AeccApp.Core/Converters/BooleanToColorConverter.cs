@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AeccApp.Core.Resources;
+using System;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.Converters
 {
-    public class BooleanToColorConverter : IValueConverter
+    public class BooleanToColorConverter : BaseNotifyProperty, IValueConverter
     {
 
-        public BooleanToColorConverter() : this(Color.LightGreen, Color.Transparent)
+        public BooleanToColorConverter() : this(Color.White, Color.Black)
         {
 
         }
@@ -20,9 +19,21 @@ namespace AeccApp.Core.Converters
             ColorToFalse = falseColor;
         }
 
-        public Color ColorToTrue { get; set; }
+        private Color _colorToTrue;
 
-        public Color ColorToFalse { get; set; }
+        public Color ColorToTrue
+        {
+            get { return _colorToTrue; }
+            set { Set(ref _colorToTrue, value); }
+        }
+
+        private Color _colorToFalse;
+
+        public Color ColorToFalse
+        {
+            get { return _colorToFalse; }
+            set { Set(ref _colorToFalse, value); }
+        }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

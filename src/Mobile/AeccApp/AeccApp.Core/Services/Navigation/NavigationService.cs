@@ -33,14 +33,27 @@ namespace AeccApp.Core.Services
             Application.Current.MainPage = navigationPage;
         }
 
-        public Task NavigateToAsync<TViewModel>(bool isModal = false) where TViewModel : ViewModelBase
+        public async Task NavigateToAsync<TViewModel>(object parameter = null, bool isModal = false) where TViewModel : ViewModelBase
         {
-            return InternalNavigateToAsync(typeof(TViewModel), null, isModal);
-        }
+            Page page = CreatePage(typeof(TViewModel), parameter);
 
-        public Task NavigateToAsync<TViewModel>(object parameter, bool isModal = false) where TViewModel : ViewModelBase
-        {
-            return InternalNavigateToAsync(typeof(TViewModel), parameter, isModal);
+            var navigationPage = Application.Current.MainPage as NavigationPage;
+            if (page is DashboardView || navigationPage == null)
+            {
+                navigationPage.Popped -= OnPagePopped;
+                navigationPage = new NavigationPage(page); ;
+                navigationPage.Popped += OnPagePopped;
+                Application.Current.MainPage = navigationPage;
+            }
+            else
+            {
+                if (isModal)
+                    await navigationPage.Navigation.PushModalAsync(page);
+                else
+                    await navigationPage.PushAsync(page);
+            }
+            ViewModelBase.UpdateToken();
+            await (page.BindingContext as INavigableViewModel).InitializeAsync(parameter);
         }
 
         public async Task NavigateBackAsync()
@@ -84,29 +97,6 @@ namespace AeccApp.Core.Services
             return Task.CompletedTask;
         }
 
-        private async Task InternalNavigateToAsync(Type viewModelType, object parameter, bool isModal)
-        {
-            Page page = CreatePage(viewModelType, parameter);
-
-            var navigationPage = Application.Current.MainPage as NavigationPage;
-            if (page is DashboardView || navigationPage == null)
-            {
-                navigationPage.Popped -= OnPagePopped;
-                navigationPage = new NavigationPage(page); ;
-                navigationPage.Popped += OnPagePopped;
-                Application.Current.MainPage = navigationPage;
-            }
-            else
-            {
-                if (isModal)
-                    await navigationPage.Navigation.PushModalAsync(page);
-                else
-                    await navigationPage.PushAsync(page);
-            }
-            ViewModelBase.UpdateToken();
-            await (page.BindingContext as INavigableViewModel).InitializeAsync(parameter);
-        }
-
         private void OnPagePopped(object sender, NavigationEventArgs e)
         {
             var mainPage = Application.Current.MainPage as NavigationPage;
@@ -137,10 +127,13 @@ namespace AeccApp.Core.Services
         }
 
         #region Popups
-        public async Task ShowPopupAsync(ViewModelBase viewModel)
+        public async Task ShowPopupAsync(ViewModelBase viewModel, object parameter = null)
         {
             PopupPage popupPage = CreatePopupPage(viewModel.GetType());
-
+            if (parameter != null)
+            {
+                await viewModel.InitializeAsync(parameter);
+            }
             popupPage.BindingContext = viewModel;
             await PopupNavigation.PushAsync(popupPage);
         }
