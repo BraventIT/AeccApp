@@ -21,6 +21,8 @@ namespace AeccApp.Core.Services
             IocContainer.RegisterAsSingleton<IEmailService, EmailService>();
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
             IocContainer.RegisterAsSingleton<IHomeRequestService, HomeRequestService>();
+            IocContainer.RegisterAsSingleton<INewsRequestService, NewsRequestService>();
+
             IocContainer.RegisterAsSingleton<IAddressesDataService, AddressesDataService>();
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
@@ -87,6 +89,19 @@ namespace AeccApp.Core.Services
                   Resolve<IEmailService>();
             }
         }
+
+        static INewsRequestService _newsService;
+        public static INewsRequestService NewsService
+        {
+            set { _newsService = value; }
+            get
+            {
+                return (_newsService != null) ?
+                  _newsService :
+                  Resolve<INewsRequestService>();
+            }
+        }
+
 
         public static IGeolocator GeolocatorService
         {

@@ -37,29 +37,14 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-
-                        <ctrl:CustomImage
+                        <Image
                             Grid.RowSpan="2"
                             Grid.Column="0"
-                            BackgroundColor="Yellow"
                             HorizontalOptions="FillAndExpand"
-                            SourcePlatform="bell"
-                            VerticalOptions="Center">
-                            <ctrl:CustomImage.WidthRequest>
-                                <OnPlatform
-                                    x:TypeArguments="x:Double"
-                                    Android="200"
-                                    WinPhone="200"
-                                    iOS="150" />
-                            </ctrl:CustomImage.WidthRequest>
-                            <ctrl:CustomImage.HeightRequest>
-                                <OnPlatform
-                                    x:TypeArguments="x:Double"
-                                    Android="200"
-                                    WinPhone="200"
-                                    iOS="150" />
-                            </ctrl:CustomImage.HeightRequest>
-                        </ctrl:CustomImage>
+                            WidthRequest="200"
+                            HeightRequest="200"
+                            Source="{Binding Imagen}"
+                            VerticalOptions="Center" />
 
 
                         <StackLayout
@@ -73,7 +58,7 @@
                                 VerticalOptions="Start" />
                             <Label
                                 FontAttributes="Bold"
-                                Text="{Binding Content}"
+                                Text="{Binding ContentSummary}"
                                 TextColor="Black"
                                 VerticalOptions="Start" />
                         </StackLayout>

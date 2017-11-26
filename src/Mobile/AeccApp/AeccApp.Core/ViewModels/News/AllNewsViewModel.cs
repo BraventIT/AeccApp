@@ -1,5 +1,8 @@
-﻿using AeccApp.Core.Models;
+﻿using Aecc.Models;
+using AeccApp.Core.Models;
+using AeccApp.Core.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -7,23 +10,32 @@ namespace AeccApp.Core.ViewModels
 {
     public class AllNewsViewModel : ViewModelBase
     {
-        #region Propeties
-        private List<NewsModel> newsList;
+        private INewsRequestService NewsService { get; } = ServiceLocator.NewsService;
 
-        public List<NewsModel> NewsList
+        public override async Task ActivateAsync()
+        {
+         
+
+            await ExecuteOperationAsync(async cancelToken =>
+            {
+         
+                NewsList = await NewsService.GetNewsAsync(cancelToken, 5);
+            });
+        }
+
+
+        #region Propeties
+        private IEnumerable<NewsModel> newsList;
+        public IEnumerable<NewsModel> NewsList
         {
             get
             {
-                if (newsList == null)
-                {
-                    newsList = new List<NewsModel>()
-                    {
-                        new NewsModel("id1", null, "Titulo de noticia mock 1", "Esto representa el contenido resumido de una noticia lorem ipsum"),
-                        new NewsModel("id2", null, "Titulo de noticia mock 2", "Esto representa el contenido resumido de una noticia lorem ipsum 2"),
-                        new NewsModel("id3", null, "Titulo de noticia mock 3", "Esto representa el contenido resumido de una noticia lorem ipsum 3")
-                    };
-                }
                 return newsList;
+            }
+            set
+            {
+                Set(ref newsList, value);
+
             }
         }
         #endregion

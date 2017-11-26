@@ -18,6 +18,7 @@
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Hospital.cs" Link="Models\Request\Hospital.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\HospitalAssignment.cs" Link="Models\Request\HospitalAssignment.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\Identity\AzureAdB2COptions.cs" Link="Models\Identity\AzureAdB2COptions.cs" />
+    <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\News\NewsModel.cs" Link="Models\News\NewsModel.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\RequestSourceEnum.cs" Link="Models\Request\RequestSourceEnum.cs" />
     <Compile Include="..\..\..\Services\AeccApi\AeccApi\Models\RequestType.cs" Link="Models\Request\RequestType.cs" />
     <Compile Include="..\..\..\Services\AeccBot\AeccBot\CommandHandling\Definitions\BackChannelCommands.cs" Link="Services\Chat\BackChannelCommands.cs" />
@@ -49,6 +50,7 @@
 
   <ItemGroup>
     <Folder Include="Models\Identity\" />
+    <Folder Include="Models\News\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

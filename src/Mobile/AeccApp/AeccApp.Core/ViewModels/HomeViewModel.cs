@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.Messages;
+﻿using Aecc.Models;
+using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using System;
@@ -12,6 +13,7 @@ namespace AeccApp.Core.ViewModels
     class HomeViewModel : ViewModelBase
     {
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
+        private INewsRequestService NewsService { get; } = ServiceLocator.NewsService;
 
         #region Contructor & Initialize
         public HomeViewModel()
@@ -24,12 +26,13 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Subscribe<ChatMessageReceivedMessage>(this, string.Empty, OnMessageReceived);
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
 
-            await ExecuteOperationAsync(async () =>
+            await ExecuteOperationAsync(async cancelToken =>
             {
                 await ChatService.InitializeAsync();
 
                 VolunteerIsActive = ChatService.VolunteerIsActive;
                 InConversation = ChatService.InConversation;
+                NewsList = await NewsService.GetNewsAsync(cancelToken);
             });
         }
 
@@ -74,18 +77,18 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref lastMessage, value); }
         }
 
-        public List<NewsModel> NewsList
+
+        private IEnumerable<NewsModel> newsList;
+        public IEnumerable<NewsModel> NewsList
         {
             get
             {
-                return new List<NewsModel>()
-                {
-                    new NewsModel("id1", null, "La FEHM y la AECC firman un convenio para la promoción de actividades orientadas a la prevención, información y concienciación sobre el cáncer", "La presidenta ejecutiva de la Federación Empresarial Hotelera de Mallorca (FEHM), Inmaculada de Benito, y el presidente de la Asociación Española contra el Cáncer de Baleares (AECC), Javier Cortés, han firmado un convenio de colaboración con el objetivo de promover una serie de acciones dirigidas tanto a los trabajadores  de las empresas asociadas a la Federación como a los clientes de los establecimientos hoteleros, que incidan en la prevención, información y concienciación del cáncer, así como la promoción de actividades orientadas a la lucha contra esta enfermedad"),
-                    new NewsModel("id2",null, "El cantante Dani Fernández, acompañado por Tony Aguilar, da nombre a una nueva sala infantil del 12 de Octubre.", "El presentador y locutor Tony Aguilar y el joven cantante y compositor y ex miembro del grupo Auryn Dani Fernández visitaron la planta de Oncología Infantil del Hospital 12 de Octubre, de Madrid, para mostrar su solidaridad con los pequeños pacientes hospitalizados y protagonizar la remodelación de la sala de espera infantil de Medicina Nuclear."),
-                    new NewsModel("id3", null, "La AECC presenta el World Cancer Research Day en ESMO", "El Día Mundial de la Investigación en Cáncer (WCRD en sus siglas en inglés), la iniciativa impulsada por la Asociación Española Contra el Cáncer (AECC) que se puso en marcha el año pasado y que tiene como objetivo promover un movimiento global a favor de la investigación oncológica, inaugura su campaña 2017 con un acto enmarcado dentro de la celebración del congreso de la Sociedad Europea de Oncología Médica, ESMO 2017. Este acto, que lleva por título Oncología e investigación en España y su entorno: compartiendo conocimiento en cáncer."),
-                    new NewsModel("id4", null, "La AECC presenta el World Cancer Research Day en ESMO", "El Día Mundial de la Investigación en Cáncer (WCRD en sus siglas en inglés), la iniciativa impulsada por la Asociación Española Contra el Cáncer (AECC) que se puso en marcha el año pasado y que tiene como objetivo promover un movimiento global a favor de la investigación oncológica, inaugura su campaña 2017 con un acto enmarcado dentro de la celebración del congreso de la Sociedad Europea de Oncología Médica, ESMO 2017. Este acto, que lleva por título Oncología e investigación en España y su entorno: compartiendo conocimiento en cáncer."),
-              
-                };
+                return newsList;
+            }
+            set
+            {
+                Set(ref newsList, value);
+                
             }
         }
 
@@ -95,6 +98,7 @@ namespace AeccApp.Core.ViewModels
             get { return _volunteerIsActive; }
             set
             {
+
                 if (Set(ref _volunteerIsActive, value) && !IsBusy)
                 {
                     OnVolunteerStateChangedAsync(value);

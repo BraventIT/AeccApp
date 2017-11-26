@@ -51,6 +51,12 @@ namespace Aecc.Models
             set { content = value; }
         }
 
+#if !SERVICE
+        public string ContentSummary
+        {
+            get { return content.Length > 100 ? content.Substring(0, 100) + "..." : content; }
+        }
+#endif
 
     }
 }

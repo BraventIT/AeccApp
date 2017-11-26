@@ -262,27 +262,18 @@
                         <flv:FlowListView
                             x:Name="NewsFlowListView"
                             Grid.Row="2"
-                            FlowColumnCount="2"
+                            FlowColumnCount="1"
                             FlowItemTappedCommand="{Binding ChooseNewCommand}"
                             FlowItemsSource="{Binding NewsList}"
                             HasUnevenRows="true"
                             HorizontalOptions="FillAndExpand">
-
-                            <flv:FlowListView.HeightRequest>
-                                <OnPlatform x:TypeArguments="x:Double">
-                                    <OnPlatform.iOS>200</OnPlatform.iOS>
-                                    <OnPlatform.Android>210</OnPlatform.Android>
-                                    <OnPlatform.WinPhone>180</OnPlatform.WinPhone>
-                                </OnPlatform>
-                            </flv:FlowListView.HeightRequest>
-
                             <flv:FlowListView.FlowColumnTemplate>
                                 <DataTemplate>
                                     <StackLayout Padding="5">
-                                        <ctrl:CustomImage
-                                            Margin="0,10,0,0"
+                                        <Image
+                                           Margin="0,10,0,0"
                                             HorizontalOptions="FillAndExpand"
-                                            SourcePlatform="mock_new_firma_convenio.jpg" />
+                                            Source="{Binding Imagen}"/>
                                         <Label
                                             Margin="0,0,0,5"
                                             FontAttributes="Bold"

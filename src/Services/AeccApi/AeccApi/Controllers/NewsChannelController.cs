@@ -11,7 +11,7 @@ using Aecc.Models;
 namespace AeccApi.Controllers.API
 {
     [Produces("application/json")]
-    [Route("api/News")]
+    [Route("api/NewsChannel")]
     public class NewsChannelController : Controller
     {
 
@@ -49,14 +49,14 @@ namespace AeccApi.Controllers.API
 
             var ahref = node.Descendants("a").FirstOrDefault();
             result.Title = ahref.InnerText;
-            result.NewsId = ahref.Attributes["href"].Value;
+            result.NewsId = newsOptions.UrlBase + ahref.Attributes["href"].Value;
 
             HtmlWeb web = new HtmlWeb();
-            var htmlDoc = web.Load(newsOptions.UrlBase + result.NewsId);
+            var htmlDoc = web.Load(result.NewsId);
             var nodeMainContent = htmlDoc.DocumentNode.SelectSingleNode("//div[@id=\"mainContent\"]");
 
 
-            result.Imagen = nodeMainContent.Descendants("img").FirstOrDefault()?.Attributes["src"].Value;
+            result.Imagen = newsOptions.UrlBase  + nodeMainContent.Descendants("img").FirstOrDefault()?.Attributes["src"].Value;
             result.Content = string.Join(Environment.NewLine,
                    nodeMainContent.Descendants("span")
                     .Where(x => x.InnerText != string.Empty)

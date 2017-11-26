@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.Models;
+﻿using Aecc.Models;
+using AeccApp.Core.Models;
 using System.Threading.Tasks;
 
 namespace AeccApp.Core.ViewModels
@@ -15,6 +16,7 @@ namespace AeccApp.Core.ViewModels
             {
                 CurrentNewContent = CurrentNew.Content;
                 CurrentNewTitle = CurrentNew.Title;
+                CurrentNewImagen = CurrentNew.Imagen;
             }
 
             return Task.CompletedTask;
@@ -37,6 +39,16 @@ namespace AeccApp.Core.ViewModels
             {
                 currentNewTitle = value;
                 NotifyPropertyChanged(nameof(CurrentNewTitle));
+            }
+        }
+        private string currentNewImagen;
+
+        public string CurrentNewImagen {
+            get { return currentNewImagen; }
+            set
+            {
+                currentNewImagen = value;
+                NotifyPropertyChanged(nameof(CurrentNewImagen));
             }
         }
 
