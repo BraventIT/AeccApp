@@ -28,7 +28,7 @@ namespace AeccApp.Core.ViewModels
 
             MessagingCenter.Send(new ToolbarMessage(true), string.Empty);
 
-            await ExecuteOperationAsync(async cancel =>
+            await ExecuteOperationAsync(async cancelToken =>
             {
                 await ChatService.InitializeAsync();
 

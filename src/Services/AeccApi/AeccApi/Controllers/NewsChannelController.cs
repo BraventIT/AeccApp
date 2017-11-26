@@ -33,12 +33,12 @@ namespace AeccApi.Controllers.API
             var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"listadoItems\"]").Take(
                 numNewsToLoad.HasValue ? numNewsToLoad.Value : newsOptions.NumNewsToLoad);
 
-
-            foreach (var node in nodes)
-            {
-                result.Add(ExtractNews(node));
-            }
-
+            
+            Parallel.ForEach<HtmlNode>(
+                nodes,
+                new ParallelOptions() { MaxDegreeOfParallelism = 2 },
+                node => result.Add(ExtractNews(node)));
+            
 
             return Ok(result);
         }
