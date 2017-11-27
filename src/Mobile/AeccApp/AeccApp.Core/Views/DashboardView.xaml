@@ -35,6 +35,6 @@
         <pages:HomeView />
         <pages:ChatView />
         <pages:RequestsView />
-        <pages:ProfileView />
+        <pages:SettingsDashboardView />
     </TabbedPage.Children>
 </TabbedPage>

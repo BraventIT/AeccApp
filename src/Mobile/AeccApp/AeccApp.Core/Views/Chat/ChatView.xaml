@@ -33,7 +33,7 @@
             Text="{Binding [CommonFilters]}" />
 
         <ctrl:HideableToolbarItem
-            Command="{Binding ViewVolunteerProfileCommand}"
+            Command="{Binding ViewCounterpartProfileCommand}"
             IconPlatform="profile_icon"
             IsVisible="{Binding PartyId, Converter={StaticResource IsNotNullConverter}}"
             Order="Primary"

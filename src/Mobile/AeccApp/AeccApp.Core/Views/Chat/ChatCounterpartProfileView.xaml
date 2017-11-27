@@ -32,12 +32,11 @@
                         Text="{Binding Counterpart.Name}" />
                     <Label
                         Margin="0,0,0,34"
-                        FontFamily="Italic"
                         HorizontalOptions="Center"
-                        Style="{StaticResource DarkGreyMediumSizeTitleLabelStyle}"
+                        Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
                         Text="{Binding Counterpart.Description}" />
                 </StackLayout>
-                <BoxView HeightRequest="1" Color="Gray" />
+                <BoxView HeightRequest="1" Color="{StaticResource LightGrey2}" />
 
                 <StackLayout Margin="0,24,0,20">
                     <Label
@@ -59,9 +58,8 @@
                                 WidthRequest="150" />
                             <Label
                                 Margin="25,0,0,0"
-                                FontFamily="Italic"
                                 HorizontalOptions="End"
-                                Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                                Style="{StaticResource DarkGreyMidLargeSizeSubtitleLabelStyle}"
                                 Text="{Binding Counterpart.DisplayGender}" />
 
                         </StackLayout>
@@ -69,14 +67,13 @@
                         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                             <Label
                                 HorizontalOptions="Start"
-                                Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                                Style="{StaticResource DarkGreyMidLargeSizeSubtitleLabelStyle}"
                                 Text="{Binding [CommonAge]}"
                                 WidthRequest="150" />
                             <Label
                                 Margin="25,0,0,0"
-                                FontFamily="Italic"
                                 HorizontalOptions="End"
-                                Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                                Style="{StaticResource DarkGreyMidLargeSizeSubtitleLabelStyle}"
                                 Text="{Binding Counterpart.Age}" />
                         </StackLayout>
 

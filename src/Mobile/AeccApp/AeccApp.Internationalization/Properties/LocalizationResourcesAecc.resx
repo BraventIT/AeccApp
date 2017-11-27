@@ -549,6 +549,27 @@
   <data name="RequestsViewText" xml:space="preserve">
     <value>¿Estás en el hospital o en tu domicilio? Haz peticiones estés donde estés.</value>
   </data>
+  <data name="SettingsContactWithProfesional" xml:space="preserve">
+    <value>Contactar con un profesional</value>
+  </data>
+  <data name="SettingsLastNews" xml:space="preserve">
+    <value>Últimas noticias</value>
+  </data>
+  <data name="SettingsLogout" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
+  <data name="SettingsPrivacity" xml:space="preserve">
+    <value>Privacidad de datos</value>
+  </data>
+  <data name="SettingsSeeAndEditProfile" xml:space="preserve">
+    <value>Ver o editar perfil</value>
+  </data>
+  <data name="SettingsServicesInfo" xml:space="preserve">
+    <value>Información sobre servicios</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Opciones</value>
+  </data>
   <data name="VolunteersListToolbarTitle" xml:space="preserve">
     <value>Elige voluntario</value>
   </data>
