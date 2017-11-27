@@ -4,6 +4,7 @@ using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -34,6 +35,10 @@ namespace AeccApp.Core.ViewModels
 
                 VolunteerIsActive = ChatService.VolunteerIsActive;
                 InConversation = ChatService.InConversation;
+                if (ChatService.MessagesWitoutReading)
+                {
+                    LastMessage = ChatService.GetConversationMessages().Last();
+                }
                 NewsList = await NewsService.GetNewsAsync(cancelToken);
             });
         }
@@ -283,7 +288,6 @@ namespace AeccApp.Core.ViewModels
                 returnValue = true;
             }
          
-
             return returnValue;
         }
 

@@ -115,6 +115,7 @@
 
         <!--  Chat messages list  -->
         <ListView
+            x:Name="MessageList"
             Grid.ColumnSpan="2"
             HasUnevenRows="True"
             ItemTemplate="{StaticResource ChatDataTemplateSelector}"
@@ -147,6 +148,7 @@
             Margin="0,0,10,0"
             HeightRequest="19"
             SourcePlatform="send_icon"
+            VerticalOptions="Center"
             WidthRequest="19">
             <ctrl:CustomImage.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding SendMessageCommand}" />

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AeccApp.Core.Models
 {
-    public class UserData
+    public class UserData : IEquatable<UserData>
     {
         public string Id { get; set; }
 
@@ -102,6 +102,16 @@ namespace AeccApp.Core.Models
             Gender = party.ChannelAccount.Gender;
 
             PartyId = party.ToJsonString();
+        }
+
+        public bool Equals(UserData other)
+        {
+            return other.Id == Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as UserData);
         }
     }
 }

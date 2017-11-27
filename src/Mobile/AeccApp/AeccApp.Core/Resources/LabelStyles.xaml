@@ -14,13 +14,16 @@
     <Style x:Key="GreyLabelStyle" TargetType="{x:Type Label}">
         <Setter Property="TextColor" Value="{StaticResource GreyText}" />
     </Style>
+    <Style x:Key="DarkGreyLabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
+    </Style>
     <Style x:Key="LightGreyLabelStyle" TargetType="{x:Type Label}">
         <Setter Property="TextColor" Value="{StaticResource LightGraySubtitle}" />
     </Style>
 
     <Style
         x:Key="DarkGreyBigTitleLabelStyle"
-        BasedOn="{StaticResource GreyLabelStyle}"
+        BasedOn="{StaticResource DarkGreyLabelStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource BigSize}" />
@@ -30,7 +33,7 @@
 
     <Style
         x:Key="DarkGreyLargeSubtitleLabelStyle"
-        BasedOn="{StaticResource GreyLabelStyle}"
+        BasedOn="{StaticResource DarkGreyLabelStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
         <Setter Property="HorizontalOptions" Value="Center" />
@@ -39,7 +42,7 @@
 
     <Style
         x:Key="DarkGreyMidLargeSizeTitleLabelStyle"
-        BasedOn="{StaticResource GreyLabelStyle}"
+        BasedOn="{StaticResource DarkGreyLabelStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource MidLargeSize}" />
@@ -49,7 +52,7 @@
 
     <Style
         x:Key="DarkGreyMediumSizeTitleLabelStyle"
-        BasedOn="{StaticResource GreyLabelStyle}"
+        BasedOn="{StaticResource DarkGreyLabelStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
@@ -131,10 +134,20 @@
         <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
     </Style>
 
+    <Style
+        x:Key="MediumLabelLightGreyStyle"
+        BasedOn="{StaticResource MediumLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="TextColor" Value="{StaticResource LightGrey2}" />
+    </Style>
+
     <Style x:Key="ChatTitleStyle" TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
         <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
     </Style>
+
+
+
 
     <Style
         x:Key="ChatLabelStyle"

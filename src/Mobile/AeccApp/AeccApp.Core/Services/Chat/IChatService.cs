@@ -17,6 +17,8 @@ namespace AeccApp.Core.Services
         /// </summary>
         UserData ConversationCounterpart { get; }
 
+        bool MessagesWitoutReading { get; }
+
         #region Only Volunteers Properties
         /// <summary>
         /// Is volunteer active (online)

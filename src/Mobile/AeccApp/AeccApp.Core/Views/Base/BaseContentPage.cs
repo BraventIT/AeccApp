@@ -19,6 +19,7 @@ namespace AeccApp.Core.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            ViewModelBase.UpdateToken();
             await Task.Delay(200);
             ViewModel?.ActivateAsync();
         }
@@ -26,6 +27,7 @@ namespace AeccApp.Core.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
+            ViewModelBase.TryCancelToken();
             ViewModel?.Deactivate();
         }
 

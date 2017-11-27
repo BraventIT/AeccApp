@@ -18,7 +18,7 @@ namespace AeccApp.Core.ViewModels
 {
     public class ChatViewModel : ViewModelBase
     {
-        const int MIN_MINUTES_INTEVAL = 5;
+        const int MIN_MINUTES_INTEVAL = 1;
 
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
         private IList<UserData> _listVolunteers;
@@ -42,6 +42,7 @@ namespace AeccApp.Core.ViewModels
         {
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
+
             ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
             ChatFiltersPopupVM.ResetFilters += OnChatResetFilters;
             ChatConnectingPopupVM.LeaseChatConversation += OnLeaseConversation;
@@ -72,7 +73,7 @@ namespace AeccApp.Core.ViewModels
         #region Properties
         public bool FirstChat
         {
-            get { return Settings.FirstChat; }
+            get { return Settings.FirstChat && !IsVolunteer; }
         }
 
         private string _partyId;
@@ -262,6 +263,10 @@ namespace AeccApp.Core.ViewModels
 
         private async Task OnChooseVolunteerAsync(object obj)
         {
+            var selectedVolunteer = obj as UserData;
+            if (selectedVolunteer == null)
+                return;
+
             if (!Settings.TermsAndConditionsAccept)
             {
                 await NavigationService.ShowPopupAsync(ChatTermsAndConditionsPopupVM);
@@ -270,11 +275,9 @@ namespace AeccApp.Core.ViewModels
 
             try
             {
-                var selectedVolunteer = obj as UserData;
-                PartyId = selectedVolunteer.PartyId;
                 //Muestra popup de espera en la conexión
                 await NavigationService.ShowPopupAsync(ChatConnectingPopupVM);
-                await InitializeChatAsync();
+                await InitializeChatAsync(selectedVolunteer.PartyId);
             }
             catch (Exception ex)
             {
@@ -338,7 +341,7 @@ namespace AeccApp.Core.ViewModels
                 }
                 else
                 {
-                    await InitializeChatAsync();
+                    await InitializeChatAsync(PartyId);
                 }
             });
         }
@@ -392,6 +395,7 @@ namespace AeccApp.Core.ViewModels
         {
             if (obj.Type == MessageRouterResultType.Connected)
             {
+                PartyId = ConversationCounterpart?.PartyId;
                 _inConversation = true;
                 Messages.Insert(0, new Message
                 {
@@ -409,14 +413,13 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private async Task InitializeChatAsync()
+        private async Task InitializeChatAsync(string partyId)
         {
             Messages.Clear();
           
             if (!ChatService.InConversation)
             {
-                await ChatService.InitializeChatAsync(_partyId);
-                NotifyPropertyChanged(nameof(ConversationCounterpart));
+                await ChatService.InitializeChatAsync(partyId);
             }
             else
             {

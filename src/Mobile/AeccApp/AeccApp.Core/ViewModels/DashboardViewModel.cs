@@ -43,12 +43,6 @@ namespace AeccApp.Core.ViewModels
 
             return ExecuteOperationAsync(async (token) =>
              {
-                 await ExecuteOperationAsync(async () =>
-                 {
-                     await ChatService.InitializeAsync();
-                     InConversation = ChatService.InConversation;
-                 });
-
                  try
                  {
                      var hasPermission = await PermissionsService.CheckPermissionsAsync(Permission.Location);
@@ -78,16 +72,6 @@ namespace AeccApp.Core.ViewModels
 
         #region Properties
         public NoLocationProviderPopupViewModel NoLocationProviderPopupVM { get; private set; }
-
-        private bool inConversation;
-        public bool InConversation
-        {
-            get { return inConversation; }
-            set
-            {
-                Set(ref inConversation, value);
-            }
-        }
 
         public ChatEventPopupViewModel ChatEventPopupVM { get; private set; }
         #endregion

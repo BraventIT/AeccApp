@@ -15,7 +15,9 @@ namespace AeccApp.Core.Views.Templates
         public ChatTemplate()
         {
             InitializeComponent();
+
             Entry.Effects.Add(Effect.Resolve("EntryEffects.EntryEffect"));
+            MessageList.ItemSelected += (sender, e) => ((ListView)sender).SelectedItem = null;
         }
 
         public Command CounterpartClickCommand

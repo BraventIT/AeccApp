@@ -89,6 +89,8 @@ namespace AeccApp.Core.Services
             }
         }
 
+        public bool MessagesWitoutReading { get; private set; }
+
         private bool _volunteerIsActive;
         public bool VolunteerIsActive
         {
@@ -153,17 +155,18 @@ namespace AeccApp.Core.Services
             }
         }
 
+        #endregion
+
+        #region Public Methods
         public async Task LogOffAsync()
         {
             if (InConversation)
             {
-               await EndChatAsync();
+                await EndChatAsync();
             }
             _mainConversation = null;
         }
-        #endregion
 
-        #region Public Methods
         public Message GetMyMessage(string messageText)
         {
             return new Message
@@ -387,6 +390,7 @@ namespace AeccApp.Core.Services
                         }
 
                         MessagesReceived?.Invoke(this, newMessages);
+                        MessagesWitoutReading = MessagesReceived == null;
                     }
                 }
                 catch (Exception ex)
