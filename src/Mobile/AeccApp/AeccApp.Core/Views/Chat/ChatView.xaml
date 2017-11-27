@@ -32,13 +32,13 @@
             Priority="0"
             Text="{Binding [CommonFilters]}" />
 
-        <!--<ctrl:HideableToolbarItem
-            Command="{Binding ViewVolunteerProfileCommand}"
+        <ctrl:HideableToolbarItem
+            Command="{Binding ViewCounterpartProfileCommand}"
             IconPlatform="profile_icon"
             IsVisible="{Binding PartyId, Converter={StaticResource IsNotNullConverter}}"
             Order="Primary"
             Priority="0"
-            Text="{Binding [ChatViewViewVolunteerProfile]}" />-->
+            Text="{Binding [ChatViewViewVolunteerProfile]}" />
 
     </ContentPage.ToolbarItems>
 

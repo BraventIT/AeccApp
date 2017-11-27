@@ -12,21 +12,10 @@ namespace AeccApp.Core.ViewModels
     {
         private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
-
-        public ProfileViewModel()
-        {
-            LogoutPopupVM = new LogoutPopupViewModel();
-        }
-
+  
         public override async Task ActivateAsync()
         {
-            LogoutPopupVM.Logout += OnLogoutPopupLogout;
             MessagingCenter.Send(new ToolbarMessage(false, LocalizationResourceManager.GetString("ChatViewViewVolunteerProfile")), string.Empty);
-        }
-
-        public override void Deactivate()
-        {
-            LogoutPopupVM.Logout -= OnLogoutPopupLogout;
         }
 
         #region Properties
@@ -62,15 +51,7 @@ namespace AeccApp.Core.ViewModels
         /// <summary>
         /// Show logout popup
         /// </summary>
-        private Command _showLogoutPopupCommand;
-        public ICommand ShowLogoutPopupCommand
-        {
-            get
-            {
-                return _showLogoutPopupCommand ??
-                    (_showLogoutPopupCommand = new Command(o => NavigationService.ShowPopupAsync(LogoutPopupVM)));
-            }
-        }
+       
 
         private Command _editProfileCommand;
         public ICommand EditProfileCommand
@@ -94,17 +75,6 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
-        /// <summary>
-        /// Logout 
-        /// </summary>
-        /// <returns></returns>
-        private async void OnLogoutPopupLogout(object sender, EventArgs e)
-        {
-            await NavigationService.HidePopupAsync();
-            IdentityService.LogOff();
-            await ChatService.LogOffAsync();
-            await NavigationService.NavigateToAsync<LoginViewModel>();
-            await NavigationService.RemoveBackStackAsync();
-        }
+      
     }
 }

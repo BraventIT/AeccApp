@@ -1358,6 +1358,69 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contactar con un profesional.
+        /// </summary>
+        public static string SettingsContactWithProfesional {
+            get {
+                return ResourceManager.GetString("SettingsContactWithProfesional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Últimas noticias.
+        /// </summary>
+        public static string SettingsLastNews {
+            get {
+                return ResourceManager.GetString("SettingsLastNews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cerrar sesión.
+        /// </summary>
+        public static string SettingsLogout {
+            get {
+                return ResourceManager.GetString("SettingsLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacidad de datos.
+        /// </summary>
+        public static string SettingsPrivacity {
+            get {
+                return ResourceManager.GetString("SettingsPrivacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ver o editar perfil.
+        /// </summary>
+        public static string SettingsSeeAndEditProfile {
+            get {
+                return ResourceManager.GetString("SettingsSeeAndEditProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Información sobre servicios.
+        /// </summary>
+        public static string SettingsServicesInfo {
+            get {
+                return ResourceManager.GetString("SettingsServicesInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opciones.
+        /// </summary>
+        public static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Elige voluntario.
         /// </summary>
         public static string VolunteersListToolbarTitle {

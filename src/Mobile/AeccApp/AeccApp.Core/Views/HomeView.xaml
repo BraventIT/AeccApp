@@ -271,9 +271,9 @@
                                 <DataTemplate>
                                     <StackLayout Padding="5">
                                         <Image
-                                           Margin="0,10,0,0"
+                                            Margin="0,10,0,0"
                                             HorizontalOptions="FillAndExpand"
-                                            Source="{Binding Imagen}"/>
+                                            Source="{Binding Imagen}" />
                                         <Label
                                             Margin="0,0,0,5"
                                             FontAttributes="Bold"
