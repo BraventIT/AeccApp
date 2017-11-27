@@ -18,11 +18,12 @@
     <Color x:Key="LightGraySubtitle">#66394A59</Color>
     <Color x:Key="LightGrayBorders">#80D9E2E9</Color>
     <Color x:Key="LightSilver">#FFF3F3F3</Color>
-    <Color x:Key="ChatTextColor">#2C3947</Color>
+    <Color x:Key="DarkGreyTextColor">#2C3947</Color>
     <Color x:Key="BlackColor">#335B5B5B</Color>
     <Color x:Key="LightGrey2">#662C3947</Color>
     <Color x:Key="PlanarGreenColor">#DCF1B2</Color>
     <Color x:Key="TextGreenColor">#FF8DD101</Color>
+
     <!--  FONT SIZES  -->
     <OnPlatform
         x:Key="LittleSize"

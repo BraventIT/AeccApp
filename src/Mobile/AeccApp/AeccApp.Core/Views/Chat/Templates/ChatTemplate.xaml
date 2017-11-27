@@ -19,14 +19,14 @@
 
             <DataTemplate x:Key="TimeTemplate">
                 <ViewCell IsEnabled="False">
-
-                    <Label
-                        Margin="10"
-                        HorizontalTextAlignment="Center"
-                        Rotation="180"
-                        Style="{StaticResource ChatLabelStyle}"
-                        Text="{Binding DateTime, StringFormat='{0:ddd} - {0:t}'}"
-                        TextColor="{StaticResource LightGrey2}" />
+                    <Frame Padding="0" Rotation="180">
+                        <Label
+                            Margin="10"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource DarkGreyMediumLabelStyle}"
+                            Text="{Binding DateTime, StringFormat='{0:ddd} - {0:t}'}"
+                            TextColor="{StaticResource LightGrey2}" />
+                    </Frame>
 
                 </ViewCell>
             </DataTemplate>
@@ -34,22 +34,28 @@
             <!--  Client chat messages list template  -->
             <DataTemplate x:Key="ClientTemplate">
                 <ViewCell IsEnabled="False">
-                    <Grid Margin="30,10" Rotation="180">
+                    <Grid Rotation="180">
                         <Frame
+                            Margin="30,10"
+                            Padding="0"
                             BackgroundColor="{Binding Activity.From, Converter={StaticResource ClientTypeConverter}}}"
                             CornerRadius="18"
                             HorizontalOptions="End">
-                            <Label Style="{StaticResource ChatLabelStyle}" Text="{Binding Activity.Text}" />
+
+                            <Label
+                                Margin="16,12,16,15"
+                                Style="{StaticResource DarkGreyMediumLabelStyle}"
+                                Text="{Binding Activity.Text}" />
 
                         </Frame>
 
                         <BoxView
+                            Margin="30,10"
                             BackgroundColor="{Binding Activity.From, Converter={StaticResource ClientTypeConverter}}}"
                             HeightRequest="18"
                             HorizontalOptions="End"
                             VerticalOptions="End"
                             WidthRequest="18" />
-
                     </Grid>
                 </ViewCell>
             </DataTemplate>
@@ -57,39 +63,55 @@
             <!--  Server chat messages list template  -->
             <DataTemplate x:Key="ServerTemplate">
                 <ViewCell IsEnabled="False">
-                    <Grid Margin="30,10" Rotation="180">
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <ctrl:CustomImage
-                            HeightRequest="35"
-                            SourcePlatform="{Binding Activity.From.Gender, Converter={StaticResource GenderToImageConverter}}"
-                            VerticalOptions="End"
-                            WidthRequest="35">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding CounterpartClickCommand, Source={x:Reference root}}" />
-                            </Image.GestureRecognizers>
-                        </ctrl:CustomImage>
-
+                    <Grid Rotation="180">
                         <Frame
-                            Grid.Column="1"
+                            Margin="75,10,30,10"
+                            Padding="0"
                             BackgroundColor="{StaticResource PlanarLightGrey}"
-                            CornerRadius="18"
-                            HorizontalOptions="Start">
-                            <Label Style="{StaticResource ChatLabelStyle}" Text="{Binding Activity.Text}" />
+                            CornerRadius="18">
 
+                            <Label
+                                Margin="16,12,16,15"
+                                Style="{StaticResource DarkGreyMediumLabelStyle}"
+                                Text="{Binding Activity.Text}" />
                         </Frame>
-
                         <BoxView
-                            Grid.Column="1"
+                            Margin="75,0,0,10"
                             BackgroundColor="{StaticResource PlanarLightGrey}"
                             HeightRequest="18"
                             HorizontalOptions="Start"
                             VerticalOptions="End"
                             WidthRequest="18" />
+
+                        <ctrl:CustomImage
+                            Margin="30,0,0,10"
+                            HeightRequest="35"
+                            HorizontalOptions="Start"
+                            SourcePlatform="{Binding Activity.From.Gender, Converter={StaticResource GenderToImageConverter}}"
+                            VerticalOptions="End"
+                            WidthRequest="35">
+                            <!--<Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CounterpartClickCommand, Source={x:Reference root}}" />
+                            </Image.GestureRecognizers>-->
+                        </ctrl:CustomImage>
+                        <Grid
+                            Margin="80,10"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+
+
+
+                        </Grid>
                     </Grid>
                 </ViewCell>
             </DataTemplate>
@@ -117,6 +139,7 @@
         <ListView
             x:Name="MessageList"
             Grid.ColumnSpan="2"
+            Margin="0"
             HasUnevenRows="True"
             ItemTemplate="{StaticResource ChatDataTemplateSelector}"
             ItemsSource="{Binding Messages}"
@@ -135,8 +158,17 @@
             Grid.Row="1"
             Margin="10,0"
             HorizontalOptions="FillAndExpand"
+            Keyboard="Chat"
             Placeholder="{Binding [ChatViewChatEntryPlaceHolder]}"
             Text="{Binding Text, Mode=TwoWay}">
+            <!--<Entry.Keyboard>
+                <Keyboard x:FactoryMethod="Create">
+                    <x:Arguments>
+                        <KeyboardFlags>Suggestions</KeyboardFlags>
+                    </x:Arguments>
+                </Keyboard>
+            </Entry.Keyboard>-->
+
             <Entry.Behaviors>
                 <beh:EventToCommandBehavior Command="{Binding SendMessageCommand}" EventName="Completed" />
             </Entry.Behaviors>
@@ -146,15 +178,16 @@
             Grid.Row="1"
             Grid.Column="1"
             Margin="0,0,10,0"
-            HeightRequest="19"
             SourcePlatform="send_icon"
-            VerticalOptions="Center"
-            WidthRequest="19">
+            VerticalOptions="Center">
             <ctrl:CustomImage.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
             </ctrl:CustomImage.GestureRecognizers>
         </ctrl:CustomImage>
 
-        <ctrl:BoxViewKeyboardHeight Grid.Row="2" Grid.ColumnSpan="2" />
+        <ctrl:BoxViewKeyboardHeight
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            IsVisible="False" />
     </Grid>
 </ContentView>
