@@ -67,6 +67,7 @@ namespace AeccApp.Core.ViewModels
             IocContainer.Register<ChatCounterpartProfileViewModel>();
             IocContainer.Register<MapDetailViewModel>();
             IocContainer.Register<SettingsDashboardViewModel>();
+            IocContainer.Register<ChatFiltersViewModel>();
 
 
 

@@ -26,6 +26,13 @@
 
         <ctrl:HideableToolbarItem
             Command="{Binding OpenVolunteersFiltersCommand}"
+            IsVisible="{Binding CanFilterVolunteers}"
+            Order="Primary"
+            Priority="0"
+            Text="{Binding [CommonFilters]}" />
+
+        <ctrl:HideableToolbarItem
+            Command="{Binding OpenVolunteersFiltersCommand}"
             IconPlatform="ico_sup_filter"
             IsVisible="{Binding CanFilterVolunteers}"
             Order="Primary"

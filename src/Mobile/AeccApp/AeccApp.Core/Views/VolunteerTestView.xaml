@@ -16,6 +16,9 @@
             Margin="12,0"
             HorizontalOptions="Center"
             VerticalOptions="Center">
+
+
+
             <Label Style="{StaticResource TitleLabelStyle}" Text="Volunteer Test" />
 
             <ctrl:CustomImage
