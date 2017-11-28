@@ -20,7 +20,7 @@
     </Style>
 
     <Style x:Key="DarkGreyLabelStyle" TargetType="{x:Type Label}">
-        <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource DarkGreyTextColor}" />
     </Style>
     <Style x:Key="LightGreyLabelStyle" TargetType="{x:Type Label}">
         <Setter Property="TextColor" Value="{StaticResource LightGraySubtitle}" />
@@ -37,20 +37,10 @@
     </Style>
 
     <Style
-        x:Key="DarkGreyLargeSubtitleLabelStyle"
-        BasedOn="{StaticResource DarkGreyLabelStyle}"
-        TargetType="{x:Type Label}">
-        <Setter Property="FontAttributes" Value="Italic" />
-        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="Margin" Value="20, 12" />
-    </Style>
-
-    <Style
         x:Key="DarkGreyMidLargeSizeTitleLabelStyle"
-        BasedOn="{StaticResource DarkGreyLabelStyle}"
+        BasedOn="{StaticResource GreyLabelStyle}"
         TargetType="{x:Type Label}">
-        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource MidLargeSize}" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="Margin" Value="20, 12" />
@@ -60,8 +50,26 @@
         x:Key="DarkGreyMediumSizeTitleLabelStyle"
         BasedOn="{StaticResource DarkGreyLabelStyle}"
         TargetType="{x:Type Label}">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+    </Style>
+
+    <Style
+        x:Key="DarkGreyMediumSizeSubtitleLabelStyle"
+        BasedOn="{StaticResource GreyLabelStyle}"
+        TargetType="{x:Type Label}">
         <Setter Property="FontAttributes" Value="Italic" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="20, 12" />
+    </Style>
+
+    <Style
+        x:Key="DarkGreyLargeSubtitleLabelStyle"
+        BasedOn="{StaticResource DarkGreyLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="Margin" Value="20, 12" />
     </Style>
@@ -147,19 +155,18 @@
         <Setter Property="TextColor" Value="{StaticResource LightGrey2}" />
     </Style>
 
-    <Style x:Key="ChatTitleStyle" TargetType="{x:Type Label}">
+    <Style
+        x:Key="DarkGreyTitleStyle"
+        BasedOn="{StaticResource DarkGreyLabelStyle}"
+        TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
-        <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
     </Style>
 
-
-
-
     <Style
-        x:Key="ChatLabelStyle"
-        BasedOn="{StaticResource MediumLabelStyle}"
+        x:Key="DarkGreyMediumLabelStyle"
+        BasedOn="{StaticResource DarkGreyLabelStyle}"
         TargetType="{x:Type Label}">
-        <Setter Property="TextColor" Value="{StaticResource ChatTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
     </Style>
 
     <Style

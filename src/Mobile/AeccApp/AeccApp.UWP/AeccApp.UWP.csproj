@@ -244,6 +244,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomRenderer\CustomShapeDrawingRenderer.cs" />
+    <Compile Include="CustomRenderer\FrameRender.cs" />
     <Compile Include="CustomRenderer\NonScrollableListViewRenderer.cs" />
     <Compile Include="CustomRenderer\XLabs\ImageButtonRenderer.Shared.cs" />
     <Compile Include="CustomRenderer\XLabs\ImageButtonRenderer.cs" />

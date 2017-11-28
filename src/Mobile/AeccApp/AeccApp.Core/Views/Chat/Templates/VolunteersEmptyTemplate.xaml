@@ -13,12 +13,12 @@
         <Label
             Margin="0,35,0,0"
             HorizontalTextAlignment="Center"
-            Style="{StaticResource ChatTitleStyle}"
+            Style="{StaticResource DarkGreyTitleStyle}"
             Text="{Binding [ChatViewThereAreNoVolunteersTitle]}" />
         <Label
             Margin="0,20"
             HorizontalTextAlignment="Center"
-            Style="{StaticResource ChatLabelStyle}"
+            Style="{StaticResource DarkGreyMediumLabelStyle}"
             Text="{Binding [ChatViewThereAreNoVolunteers]}" />
         <Button
             Command="{Binding RefreshVolunteersCommand}"
