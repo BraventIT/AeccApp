@@ -37,26 +37,6 @@
     </Style>
 
     <Style
-        x:Key="DarkGreyMidLargeSizeTitleLabelStyle"
-        BasedOn="{StaticResource GreyLabelStyle}"
-        TargetType="{x:Type Label}">
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="{StaticResource MidLargeSize}" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="Margin" Value="20, 12" />
-    </Style>
-
-    <Style
-        x:Key="DarkGreyMediumSizeTitleLabelStyle"
-        BasedOn="{StaticResource GreyLabelStyle}"
-        TargetType="{x:Type Label}">
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="Margin" Value="20, 12" />
-    </Style>
-
-    <Style
         x:Key="DarkGreyLargeSubtitleLabelStyle"
         BasedOn="{StaticResource DarkGreyLabelStyle}"
         TargetType="{x:Type Label}">
