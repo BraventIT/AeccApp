@@ -31,20 +31,34 @@ namespace AeccApp.Core.ViewModels
             Messages = new ObservableCollection<Message>();
             Volunteers = new ObservableCollection<UserData>();
 
-            ChatFiltersPopupVM = new ChatFiltersPopupViewModel();
+            _filters = ViewModelLocator.ChatFiltersVM;
             ChatRatingPopupVM = new ChatRatingPopupViewModel();
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
             ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
             ChatConnectingPopupVM = new ChatConnectingPopupViewModel();
         }
+        //public override Task InitializeAsync(object navigationData)
+        //{
+        //    if(navigationData!= null)
+        //    {
+        //        Filters = navigationData as ChatFiltersModel;
+        //    }
+        //    else
+        //    {
+        //        Filters = new ChatFiltersModel(18, 80, string.Empty);
+        //    }
+
+
+        //    return Task.CompletedTask;
+        //}
+
 
         public override async Task ActivateAsync()
         {
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
 
-            ChatFiltersPopupVM.AppliedFilters += OnChatAppliedFilters;
-            ChatFiltersPopupVM.ResetFilters += OnChatResetFilters;
+           
             ChatConnectingPopupVM.LeaseChatConversation += OnLeaseConversation;
             ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
             ChatService.MessagesReceived += OnMesagesReceived;
@@ -62,7 +76,6 @@ namespace AeccApp.Core.ViewModels
         {
             MessagingCenter.Unsubscribe<ChatStateMessage>(this, string.Empty);
             MessagingCenter.Unsubscribe<ChatEventMessage>(this, string.Empty);
-            ChatFiltersPopupVM.AppliedFilters -= OnChatAppliedFilters;
             ChatConnectingPopupVM.LeaseChatConversation -= OnLeaseConversation;
             ChatLeaseConversationPopupVM.LeaseChatConversation -= OnLeaseConversation;
             ChatService.MessagesReceived -= OnMesagesReceived;
@@ -106,6 +119,8 @@ namespace AeccApp.Core.ViewModels
         }
 
         #region Chat Properties
+        private ChatFiltersViewModel _filters;
+    
         public ObservableCollection<Message> Messages { get; private set; }
 
         private string text;
@@ -144,7 +159,6 @@ namespace AeccApp.Core.ViewModels
         #region Popups Properties
         private ChatConnectingPopupViewModel ChatConnectingPopupVM { get;  set; }
         private ChatTermsAndConditionsPopupViewModel ChatTermsAndConditionsPopupVM { get;  set; }
-        private ChatFiltersPopupViewModel ChatFiltersPopupVM { get;  set; }
         private ChatLeaseConversationPopupViewModel ChatLeaseConversationPopupVM { get;  set; }
         private ChatRatingPopupViewModel ChatRatingPopupVM { get;  set; }
 
@@ -297,10 +311,9 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        void OnVolunteersFiltersOpen(object obj)
+        async void OnVolunteersFiltersOpen(object obj)
         {
-            NavigationService.HidePopupAsync();
-            NavigationService.ShowPopupAsync(ChatFiltersPopupVM);
+            await NavigationService.NavigateToAsync<ChatFiltersViewModel>();
         }
 
         private Command _resetVolunteersFilterCommand;
@@ -315,7 +328,7 @@ namespace AeccApp.Core.ViewModels
 
         void OnResetVolunteers()
         {
-            ChatFiltersPopupVM.Reset();
+            _filters.Reset();
             RefreshVolunters();
         }
         #endregion
@@ -375,15 +388,7 @@ namespace AeccApp.Core.ViewModels
             OnResetVolunteers();
         }
 
-        private async void OnChatAppliedFilters(object sender, EventArgs e)
-        {
-            await ExecuteOperationAsync(async () =>
-            {
-                await NavigationService.HidePopupAsync();
-
-                RefreshVolunters();
-            });
-        }
+ 
 
 
         private void OnChatState(ChatStateMessage obj)
@@ -467,8 +472,8 @@ namespace AeccApp.Core.ViewModels
             CanFilterVolunteers = !VolunteersIsEmpty;
 
             var volunteersFiltered = _listVolunteers.Where((o =>
-                (!o.Age.HasValue || (o.Age < ChatFiltersPopupVM.MaximumAge && o.Age > ChatFiltersPopupVM.MinimumAge)) &&
-                (o.Gender == null || o.Gender.StartsWith(ChatFiltersPopupVM.Gender, StringComparison.CurrentCultureIgnoreCase)))).ToList();
+                (!o.Age.HasValue || (o.Age < _filters.MaximumAge && o.Age > _filters.MinimumAge)) &&
+                (o.Gender == null || o.Gender.StartsWith(_filters.Gender, StringComparison.CurrentCultureIgnoreCase)))).ToList();
 
             for (int i = 0; i < volunteersFiltered.Count; i++)
             {

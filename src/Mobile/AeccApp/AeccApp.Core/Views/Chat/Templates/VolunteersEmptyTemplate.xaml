@@ -6,10 +6,20 @@
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls">
 
     <StackLayout>
-        <ctrl:CustomImage
-            HeightRequest="55"
-            HorizontalOptions="Center"
-            SourcePlatform="Ico_cruz" />
+        <Grid Margin="0,0,20,0">
+            <Button
+                BackgroundColor="Transparent"
+                BorderColor="Transparent"
+                Command="{Binding RefreshVolunteersCommand}"
+                Style="{StaticResource CircularButtonStyle}" />
+
+            <ctrl:CustomImage
+                HorizontalOptions="Center"
+                InputTransparent="True"
+                SourcePlatform="Ico_cruz"
+                VerticalOptions="Center" />
+
+        </Grid>
         <Label
             Margin="0,35,0,0"
             HorizontalTextAlignment="Center"
@@ -20,10 +30,6 @@
             HorizontalTextAlignment="Center"
             Style="{StaticResource DarkGreyMediumLabelStyle}"
             Text="{Binding [ChatViewThereAreNoVolunteers]}" />
-        <Button
-            Command="{Binding RefreshVolunteersCommand}"
-            HorizontalOptions="Center"
-            Style="{StaticResource ButtonStyle}"
-            Text="{Binding [CommonRefreshList]}" />
+
     </StackLayout>
 </ContentView>

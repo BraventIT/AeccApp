@@ -1,8 +1,10 @@
-﻿using System;
+﻿using AeccApp.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -12,25 +14,25 @@ namespace AeccApp.Core.ViewModels
         private const int MIN_AGE = 18;
         private const int MAX_AGE = 80;
 
-        /// <summary>
-        /// Raised when filters are applied
-        /// </summary>
-        public event EventHandler AppliedFilters;
-        public event EventHandler ResetFilters;
 
-        public ChatFiltersViewModel ChatFiltersVM; 
+        public override Task InitializeAsync(object navigationData)
+        {
+            ChatFiltersModel Filters;
+            if (navigationData != null)
+            {
+                Filters = navigationData as ChatFiltersModel;
+                MinimumAge = Filters.MinimumAge;
+                MaximumAge = Filters.MaximumAge;
+                Gender = Filters.Gender;
+            }         
+
+            return Task.CompletedTask;
+
+        }
+
 
         public ChatFiltersViewModel()
         {
-            if (ChatFiltersVM == null)
-            {
-                ChatFiltersVM = new ChatFiltersViewModel();
-            }
-            else
-            {
-                ChatFiltersVM = this;
-            }
-
             Reset();
         }
 
@@ -98,8 +100,13 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _applyFiltersCommand ??
-                    (_applyFiltersCommand = new Command(o => AppliedFilters?.Invoke(this, null)));
+                    (_applyFiltersCommand = new Command(OnApplyFilters));
             }
+        }
+
+        async void OnApplyFilters()
+        {
+            await NavigationService.NavigateBackAsync();
         }
 
         private Command _resetFiltersCommand;
@@ -108,8 +115,13 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _resetFiltersCommand ??
-                    (_resetFiltersCommand = new Command(o => ResetFilters?.Invoke(this, null)));
+                    (_resetFiltersCommand = new Command(OnResetFilters));
             }
+        }
+
+        void OnResetFilters()
+        {
+            Reset();
         }
 
         public void Reset()

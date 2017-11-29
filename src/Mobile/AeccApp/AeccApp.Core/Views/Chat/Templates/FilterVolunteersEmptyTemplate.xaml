@@ -6,10 +6,21 @@
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls">
 
     <StackLayout>
-        <ctrl:CustomImage
-            HeightRequest="55"
-            HorizontalOptions="Center"
-            SourcePlatform="ico_clean_refresh" />
+        <Grid Margin="0,0,20,0">
+
+            <Button
+                BackgroundColor="Transparent"
+                BorderColor="Transparent"
+                Command="{Binding ResetVolunteersFilterCommand}"
+                Style="{StaticResource CircularButtonStyle}" />
+
+            <ctrl:CustomImage
+                HorizontalOptions="Center"
+                InputTransparent="True"
+                SourcePlatform="ico_clean_filter"
+                VerticalOptions="Center" />
+
+        </Grid>
         <Label
             Margin="0,35,0,20"
             HorizontalTextAlignment="Center"

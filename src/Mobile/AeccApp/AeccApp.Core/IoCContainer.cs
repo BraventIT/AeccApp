@@ -30,6 +30,16 @@ namespace AeccApp.Core
             _builder.RegisterType<O>().As<I>();
         }
 
+        public static void RegisterAsSingleton<O>() 
+        {
+            if (_builder == null)
+            {
+                _builder = new ContainerBuilder();
+            }
+
+            _builder.RegisterType<O>().SingleInstance();
+        }
+
         public static void RegisterAsSingleton<I, O>() where O : I
         {
             if (_builder == null)
