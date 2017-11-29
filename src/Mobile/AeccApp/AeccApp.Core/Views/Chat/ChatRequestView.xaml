@@ -9,53 +9,79 @@
     vm:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <Grid
-        Margin="20"
-        Padding="0,20"
-        BackgroundColor="{StaticResource BackgroundColor}"
-        VerticalOptions="Center">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Frame HorizontalOptions="Fill" Style="{StaticResource PopupFrameStyle}">
+        <StackLayout>
+            <Grid ColumnSpacing="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <Label
-            Grid.Row="0"
-            Grid.ColumnSpan="2"
-            HorizontalTextAlignment="Center"
-            Style="{StaticResource TitleLabelStyle}"
-            Text="{Binding [ChatRequestAssistance]}" />
+                <Button Command="{Binding RejectRequestCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
 
-        <Label
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            Style="{StaticResource SubTitleLabelStyleCentered}"
-            Text="{Binding RequestMessage}" />
+                <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
-        <Button
-            Grid.Row="2"
-            Margin="0,20,0,0"
-            Command="{Binding AcceptRequestCommand}"
-            HorizontalOptions="Center"
-            Style="{StaticResource ButtonSmallStyle}"
-            Text="{Binding [ChatRequestAccept]}" />
+                <ctrl:CustomImage
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,55,0,0"
+                    HeightRequest="55"
+                    HorizontalOptions="Center"
+                    SourcePlatform="ICO_firstCHAT" />
 
-        <Button
-            Grid.Row="2"
-            Grid.Column="1"
-            Margin="0,20,0,0"
-            Command="{Binding RejectRequestCommand}"
-            HorizontalOptions="Center"
-            Style="{StaticResource ButtonSmallStyle}"
-            Text="{Binding [ChatRequestReject]}" />
+                <Label
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="20,27,20,0"
+                    Style="{StaticResource TitleLabelStyleNormal}"
+                    Text="{Binding [ChatRequestAssistance]}" />
 
-        <!--  INDICATOR  -->
-        <ctrl:CustomActivityIndicatorControl Grid.RowSpan="3" Grid.ColumnSpan="2" />
-    </Grid>
+                <Label
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="28,20,28,30"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource SubTitleLabelStyleNormal}"
+                    Text="{Binding RequestMessage}" />
+
+                <BoxView
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    HeightRequest="1"
+                    VerticalOptions="Start" />
+
+                <BoxView
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    HorizontalOptions="Center"
+                    WidthRequest="1" />
+
+                <Button
+                    Grid.Row="3"
+                    Margin="0,1,1,0"
+                    Command="{Binding RejectRequestCommand}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonNo]}" />
+
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="1,1,0,0"
+                    Command="{Binding AcceptRequestCommand}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonYes]}" />
+            </Grid>
+        </StackLayout>
+    </Frame>
+
 </v:BaseContentPage>

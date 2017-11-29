@@ -152,7 +152,7 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Petición de asistencia..
+        ///   Looks up a localized string similar to Solicitud de asistencia.
         /// </summary>
         public static string ChatRequestAssistance {
             get {
@@ -166,6 +166,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string ChatRequestReject {
             get {
                 return ResourceManager.GetString("ChatRequestReject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to quiere iniciar una conversación contigo. ¿Aceptas el chat?.
+        /// </summary>
+        public static string ChatRequestText {
+            get {
+                return ResourceManager.GetString("ChatRequestText", resourceCulture);
             }
         }
         

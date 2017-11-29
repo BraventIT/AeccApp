@@ -24,7 +24,7 @@ namespace AeccApp.Core.ViewModels
                 if (party != null)
                 {
                     _requestPartyId = (string)navigationData;
-                    RequestMessage = $"Usuario: {party.ChannelAccount.Name}";
+                    RequestMessage = $"{party.ChannelAccount.Name} "+ this["ChatRequestText"];
                 }
             }
             else

@@ -148,10 +148,13 @@
     <value>Aceptar</value>
   </data>
   <data name="ChatRequestAssistance" xml:space="preserve">
-    <value>Petición de asistencia.</value>
+    <value>Solicitud de asistencia</value>
   </data>
   <data name="ChatRequestReject" xml:space="preserve">
     <value>Rechazar</value>
+  </data>
+  <data name="ChatRequestText" xml:space="preserve">
+    <value>quiere iniciar una conversación contigo. ¿Aceptas el chat?</value>
   </data>
   <data name="ChatViewChatEntryPlaceHolder" xml:space="preserve">
     <value>Escribe aqui...</value>
