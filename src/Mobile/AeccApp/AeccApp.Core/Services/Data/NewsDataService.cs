@@ -7,7 +7,7 @@ namespace AeccApp.Core.Services
     {
         protected override string FileName => "News.json";
 
-        protected override int MaxItems { get { return 20; } }
+        public override int MaxItems { get { return 20; } }
 
         public Task InsertOrUpdateAsync(NewsModel newData)
         {

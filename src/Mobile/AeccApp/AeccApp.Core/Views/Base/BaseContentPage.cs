@@ -19,8 +19,8 @@ namespace AeccApp.Core.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            ViewModelBase.UpdateToken();
             await Task.Delay(200);
+            ViewModelBase.UpdateToken();
             ViewModel?.ActivateAsync();
         }
 

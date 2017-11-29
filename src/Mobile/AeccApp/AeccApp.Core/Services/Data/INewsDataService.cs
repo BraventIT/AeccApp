@@ -6,8 +6,11 @@ namespace AeccApp.Core.Services
 {
     public interface INewsDataService
     {
+        int MaxItems { get; }
+        int Count { get; }
+
         Task<List<NewsModel>> GetListAsync();
 
-        Task InsertOrUpdateAsync(NewsModel address);
+        Task InsertOrUpdateAsync(NewsModel newData);
     }
 }

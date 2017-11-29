@@ -15,7 +15,7 @@ namespace AeccApp.Core.ViewModels
     class HomeViewModel : ViewModelBase
     {
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
-        public INewsDataService NewsDataService { get; } = ServiceLocator.NewsDataService;
+        private INewsDataService NewsDataService { get; } = ServiceLocator.NewsDataService;
         private INewsRequestService NewsService { get; } = ServiceLocator.NewsService;
 
         #region Contructor & Initialize
@@ -50,7 +50,7 @@ namespace AeccApp.Core.ViewModels
             var today = DateTime.Today.ToUniversalTime();
             if (Settings.LastNewsChecked != today)
             {
-                var news = await NewsService.GetNewsAsync(cancelToken);
+                var news = await NewsService.GetNewsAsync(cancelToken, 3);
 
                 foreach (var newData in news.Reverse())
                 {

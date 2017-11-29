@@ -7,7 +7,7 @@ namespace AeccApp.Core.Services
     {
         protected override string FileName => "HomeAddresses.json";
 
-        protected override int MaxItems { get { return 10; } }
+        public override int MaxItems { get { return 10; } }
 
         public Task InsertOrUpdateAsync(AddressModel address)
         {

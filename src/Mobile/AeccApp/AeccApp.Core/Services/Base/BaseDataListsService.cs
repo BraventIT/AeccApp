@@ -9,7 +9,9 @@ namespace AeccApp.Core.Services
     {
         protected List<T> _data;
 
-        protected virtual int MaxItems { get { return -1; } }
+        public virtual int MaxItems { get { return -1; } }
+
+        public int Count { get { return _data?.Count ?? 0; } }
 
         public async Task<List<T>> GetListAsync()
         {
