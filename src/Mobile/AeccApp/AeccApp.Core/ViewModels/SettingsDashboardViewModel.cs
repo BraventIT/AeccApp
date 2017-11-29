@@ -19,6 +19,10 @@ namespace AeccApp.Core.ViewModels
         public SettingsDashboardViewModel()
         {
             LogoutPopupVM = new LogoutPopupViewModel();
+            SettingsList.Add(this["SettingsPrivacity"]);
+            SettingsList.Add(this["SettingsLastNews"]);
+            SettingsList.Add(this["SettingsServicesInfo"]);
+            SettingsList.Add(this["SettingsContactWithProfesional"]);       
         }
 
         public override async Task ActivateAsync()
@@ -44,42 +48,36 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-
-        private Command _talkToAeccCommand;
-        public ICommand TalkToAeccCommand
+        private Command _chooseOptionCommand;
+        public ICommand ChooseOptionCommand
         {
             get
             {
-                return _talkToAeccCommand ??
-                    (_talkToAeccCommand = new Command(OnTalkToAeccCommand, o => !IsBusy));
+                return _chooseOptionCommand ??
+                    (_chooseOptionCommand = new Command(OnChooseOptionCommand, o => !IsBusy));
             }
         }
 
-        public void OnTalkToAeccCommand(object obj)
+        public async void OnChooseOptionCommand(object obj)
         {
-            //Llamada al telefono de infocancer de AECC
-            Device.OpenUri(new Uri("tel://900100036"));
-
-        }
-
-
-        private Command openAllNewsCommand;
-        public ICommand OpenAllNewsCommand
-        {
-            get
+            string i = obj as string;                  
+            switch (i)
             {
-                return openAllNewsCommand ??
-                    (openAllNewsCommand = new Command(o => OnOpenAllNewsViewAsync()));
+                case "Privacidad de datos":
+                    break;
+                case "Últimas noticias":
+                    await NavigationService.NavigateToAsync<AllNewsViewModel>();
+                    break;
+                case "Información sobre servicios":
+                    break;
+                case "Contactar con un profesional":
+                    Device.OpenUri(new Uri("tel://900100036"));
+                    break;
             }
-        }
+         
 
+        }
        
-        private async Task OnOpenAllNewsViewAsync()
-        {
-            await NavigationService.NavigateToAsync<AllNewsViewModel>();
-        }
-
-
         private Command _openUserProfile;
         public ICommand OpenUserProfile
         {
@@ -98,6 +96,16 @@ namespace AeccApp.Core.ViewModels
 
 
         #region Properties
+        private List<String> _settingsList = new List<string>();
+
+        public List<String> SettingsList
+        {
+            get { return _settingsList; }
+            set { Set(ref _settingsList, value); }
+        }
+
+
+
         public LogoutPopupViewModel LogoutPopupVM { get; private set; }
 
 

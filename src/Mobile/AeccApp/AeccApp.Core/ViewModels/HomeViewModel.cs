@@ -40,6 +40,7 @@ namespace AeccApp.Core.ViewModels
                     LastMessage = ChatService.GetConversationMessages().Last();
                 }
                 NewsList = await NewsService.GetNewsAsync(cancelToken);
+                int i = 0;
             });
         }
 
