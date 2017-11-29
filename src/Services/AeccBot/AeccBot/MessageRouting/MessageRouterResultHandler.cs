@@ -255,8 +255,7 @@ namespace AeccBot.MessageRouting
             {
                 string commandKeyword = AeccStrings.GetCommandKeyword(conversationClientParty, conversationOwnerParty);
                 string endEngagementCommand = $"{commandKeyword} {Commands.CommandEndEngagement}";
-
-                eventToConversationOwner = string.Empty;
+                
                 messageToConversationOwner = (conversationOwnerParty.AllowBackchannel) ?
                     string.Format(AeccStrings.EngagementAdded_OwnerEventText, conversationClientName) :
                     string.Format(AeccStrings.EngagementAdded_OwnerText, conversationClientName, endEngagementCommand);

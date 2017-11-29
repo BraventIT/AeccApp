@@ -21,7 +21,7 @@ namespace AeccApp.Core.Models
         public override string ToString()
         {
             return string.Concat(DateTime.ToLocalTime().ToString("dd MMM yyy HH:mm:ss"),
-                " - ", Activity.Text);
+                " - ", Activity?.Text);
 
         }
     }

@@ -68,7 +68,8 @@
                             Margin="75,10,30,10"
                             Padding="0"
                             BackgroundColor="{StaticResource PlanarLightGrey}"
-                            CornerRadius="18">
+                            CornerRadius="18"
+                            HorizontalOptions="Start">
 
                             <Label
                                 Margin="16,12,16,15"
