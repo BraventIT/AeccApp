@@ -9,6 +9,8 @@ namespace AeccApp.Core.ViewModels
 {
     public class ChatRequestViewModel : ViewModelBase
     {
+        const int DELAY = 500;
+
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
 
         private string _requestPartyId;
@@ -74,9 +76,9 @@ namespace AeccApp.Core.ViewModels
                     {
                         if (await ChatService.AcceptAndRejectRequestAsync(true, _requestPartyId))
                         {
-                            await NavigationService.NavigateBackAsync();
+                           await NavigationService.NavigateBackAsync();
                             // Wait for load back page
-                            await Task.Delay(200);
+                            await Task.Delay(DELAY);
                             MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Chat), string.Empty);
                         }
                     }
@@ -110,7 +112,7 @@ namespace AeccApp.Core.ViewModels
         {
             await NavigationService.NavigateBackAsync();
             // Wait for load back page
-            await Task.Delay(200);
+            await Task.Delay(DELAY * 2);
             // Resend ChatEvent message
             MessagingCenter.Send(obj, string.Empty);
         }

@@ -35,7 +35,7 @@ namespace AeccApp.Core.Services
 #endif
 
         private const int POOLING_MS = 750;
-        private const int AGGREGATION_POOLING_CNT = (15 * 1000) / POOLING_MS; // 15 sg
+        private const int AGGREGATION_POOLING_CNT = (30 * 1000) / POOLING_MS; // 30 sg
         private double _pooling_cnt;
 
         /// <summary>
@@ -107,7 +107,11 @@ namespace AeccApp.Core.Services
 
         public UserData ConversationCounterpart
         {
-            get { return new UserData(_conversationCounterpartParty); }
+            get
+            {
+                return _conversationCounterpartParty != null ?
+                  new UserData(_conversationCounterpartParty) : null;
+            }
         }
 
         private GlobalSetting GSetting { get { return GlobalSetting.Instance; } }
@@ -202,24 +206,16 @@ namespace AeccApp.Core.Services
 
         public async Task<bool> InitializeChatAsync(string partyId)
         {
-            try
-            {
-                var ct = new CancellationTokenSource(TIMEOUT_MS);
-                await SendActivity(BackChannelCommands.CommandInitiateEngagement, data: partyId, token: ct.Token);
+            var ct = new CancellationTokenSource(TIMEOUT_MS);
+            await SendActivity(BackChannelCommands.CommandInitiateEngagement, data: partyId, token: ct.Token);
 
-                _conversationMessages.Clear();
-                _initiateEngagementTask = new TaskCompletionSource<bool>();
-                ct.Token.Register(() => _initiateEngagementTask?.TrySetCanceled(), false);
+            _conversationMessages.Clear();
+            _initiateEngagementTask = new TaskCompletionSource<bool>();
+            ct.Token.Register(() => _initiateEngagementTask?.TrySetCanceled(), false);
 
-                _conversationCounterpartParty = Party.FromJsonString(partyId);
-                bool result = await _initiateEngagementTask?.Task;
-                return result;
-            }
-            catch (Exception)
-            {
-                InConversation = false;
-                throw;
-            }
+            _conversationCounterpartParty = Party.FromJsonString(partyId);
+            bool result = await _initiateEngagementTask?.Task;
+            return result;
         }
 
         public async Task<bool> EndChatAsync()
@@ -227,13 +223,12 @@ namespace AeccApp.Core.Services
             var ct = new CancellationTokenSource(TIMEOUT_MS);
             await SendActivity(BackChannelCommands.CommandEndEngagement, token: ct.Token);
 
+            InConversation = false;
+
             _endEngagementTask = new TaskCompletionSource<bool>();
             ct.Token.Register(() => _endEngagementTask?.TrySetCanceled(), false);
 
             bool result = await _endEngagementTask.Task;
-
-            InConversation = false;
-
             return result;
         }
 
@@ -633,6 +628,12 @@ namespace AeccApp.Core.Services
                 IList<Message> messages = messagesBulk?.ToObject<List<Message>>();
                 if (messages != null)
                 {
+                    foreach (var message in messages)
+                    {
+                        if (message.Activity.From.Id == _conversationCounterpartParty.ChannelAccount.Id)
+                            message.Activity.From = _conversationCounterpartParty.ChannelAccount;
+                    }
+
                     _conversationMessages = messages;
                     InConversation = true;
                     MessagesReceived?.Invoke(this, _conversationMessages);
@@ -662,7 +663,7 @@ namespace AeccApp.Core.Services
                 Activity = activity
             };
 
-            message.Activity.From = _conversationCounterpartParty.ChannelAccount;
+            message.Activity.From = _conversationCounterpartParty?.ChannelAccount;
             InConversation = true;
 
             // Send message with the new message received

@@ -92,7 +92,7 @@ namespace AeccBot.MessageRouting.DataStore
 
         public virtual IList<Party> GetPendingRequestsWithoutActivity(DateTimeOffset maxDate)
         {
-            var userWithoutActivity = GetPendingRequests().Where(x => (x as PartyWithTimestamps)?.ConnectionRequestTime < maxDate).ToList();
+            var userWithoutActivity = GetPendingRequests().Where(x => (x as PartyWithTimestamps)?.ConnectionRequestTime == DateTime.MinValue || (x as PartyWithTimestamps)?.ConnectionRequestTime < maxDate).ToList();
             return userWithoutActivity;
         }
 

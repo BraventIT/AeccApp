@@ -127,6 +127,7 @@ namespace AeccBot.MessageRouting
 
             return result;
         }
+
         /// <summary>
         /// Check unused conversation to delete
         /// </summary>
@@ -389,9 +390,6 @@ namespace AeccBot.MessageRouting
         }
         #endregion
 
-       
-
-
         /// <summary>
         /// Handles the incoming message activities. For instance, if it is a message from party
         /// engaged in a chat, the message will be forwarded to the counterpart in whatever
@@ -449,6 +447,9 @@ namespace AeccBot.MessageRouting
 
                 if (partyToForwardMessageTo != null)
                 {
+                    if (partyToForwardMessageTo.AllowBackchannel)
+                        addClientNameToMessage = false;
+
                     result.ConversationOwnerParty = partyToForwardMessageTo;
                     string message = addClientNameToMessage ?
                         $"{senderParty.ChannelAccount.Name}: {activity.Text}" : activity.Text;
@@ -466,7 +467,11 @@ namespace AeccBot.MessageRouting
                 await SendMessageToPartyByBotAsync(senderParty, AeccStrings.SendText_AlreadyAggregation);
                 result.Type = MessageRouterResultType.OK;
             }
-            
+            else if(senderParty.AllowBackchannel)
+            {
+                result.Type = MessageRouterResultType.OK; 
+            }
+
             return result;
         }
     }

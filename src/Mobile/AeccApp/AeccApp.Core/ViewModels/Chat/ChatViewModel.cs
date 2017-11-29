@@ -1,5 +1,4 @@
-﻿using AeccApp.Core.Extensions;
-using AeccApp.Core.Messages;
+﻿using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
@@ -23,7 +22,6 @@ namespace AeccApp.Core.ViewModels
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
         private IList<UserData> _listVolunteers;
         private DateTime _lastMessageTime;
-        private bool _inConversation;
 
         #region Contructor & Initialize
         public ChatViewModel()
@@ -350,9 +348,14 @@ namespace AeccApp.Core.ViewModels
         {
             FilterVolunteersIsEmpty = false;
             MessagingCenter.Send(new ToolbarMessage(this["VolunteersListToolbarTitle"]), string.Empty);
-
-            _listVolunteers = await ChatService.GetListVolunteersAsync();
-
+            try
+            {
+                _listVolunteers = await ChatService.GetListVolunteersAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
             RefreshVolunters();
         }
 
@@ -360,10 +363,13 @@ namespace AeccApp.Core.ViewModels
         {
             await ExecuteOperationAsync(async () =>
             {
-                PartyId = null;
                 await NavigationService.HidePopupAsync();
+                PartyId = null;
                 await ChatService.EndChatAsync();
-                if (!IsVolunteer && _inConversation)
+            },
+            finallyAction: async () =>
+            {
+                if (!IsVolunteer && ChatService.GetConversationMessages().Any())
                 {
                     await NavigationService.ShowPopupAsync(ChatRatingPopupVM);
                 }
@@ -396,7 +402,7 @@ namespace AeccApp.Core.ViewModels
             if (obj.Type == MessageRouterResultType.Connected)
             {
                 PartyId = ConversationCounterpart?.PartyId;
-                _inConversation = true;
+
                 Messages.Insert(0, new Message
                 {
                     DateTime = DateTime.UtcNow,
@@ -429,7 +435,6 @@ namespace AeccApp.Core.ViewModels
                     Messages.Add(message);
                     TryToInsertTimeMessage(message);
                 }
-                Messages.AddRange(ChatService.GetConversationMessages());
             }
             MessagingCenter.Send(new ToolbarMessage(ConversationCounterpart.Name), string.Empty);
         }
@@ -463,8 +468,11 @@ namespace AeccApp.Core.ViewModels
 
         private void RefreshVolunters()
         {
-            VolunteersIsEmpty = !_listVolunteers.Any();
+            VolunteersIsEmpty = !_listVolunteers?.Any()?? true;
             CanFilterVolunteers = !VolunteersIsEmpty;
+
+            if (_listVolunteers == null)
+                return;
 
             var volunteersFiltered = _listVolunteers.Where((o =>
                 (!o.Age.HasValue || (o.Age < ChatFiltersPopupVM.MaximumAge && o.Age > ChatFiltersPopupVM.MinimumAge)) &&
