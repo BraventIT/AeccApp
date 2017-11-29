@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace AeccApp.Core.Services
 {
     public abstract class BaseDataListsService<T>: BaseReferredDataService<List<T>>
     {
         protected List<T> _data;
-       
+
+        protected virtual int MaxItems { get { return -1; } }
+
         public async Task<List<T>> GetListAsync()
         {
             if (_data == null)
@@ -16,7 +19,7 @@ namespace AeccApp.Core.Services
             return _data;
         }
 
-        protected async Task AddOrUpdateDataAsync(Func<T, bool> findPredicate, T data)
+        protected async Task InsertOrUpdateDataAsync(Func<T, bool> findPredicate, T data)
         {
             List<T> dataList = await GetListAsync();
             var oldData = dataList.FirstOrDefault(findPredicate);
@@ -24,7 +27,12 @@ namespace AeccApp.Core.Services
             {
                 dataList.Remove(oldData);
             }
-            dataList.Add(data);
+            dataList.Insert(0, data);
+
+            if (MaxItems>0 && dataList.Count > MaxItems)
+            {
+                dataList.RemoveAt(dataList.Count - 1);
+            }
             Save(dataList);
         }
     }

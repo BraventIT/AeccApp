@@ -10,7 +10,7 @@ namespace AeccApp.Core
         private string _baseEndpoint;
         private string _apiEndpoint;
         private static readonly GlobalSetting _instance = new GlobalSetting();
-        
+
         public GlobalSetting()
         {
             GooglePlacesApiKey = "AIzaSyBrlsD3dhg3Bo6oaAugOCexgVoNcQDaQgQ";
@@ -18,7 +18,7 @@ namespace AeccApp.Core
             // AZURE TEST BOT
             AeccBotSecret = "xb0KJwZiN3g.cwA.Crw.MkqbuqDBWCEtkOv8sprBqScs6AWw9IBDKaFXzjnh3M8";
             // LOCAL BOT ALFRA
-           // AeccBotSecret = "Ch31g-A6LJo.cwA.AZo.-GJpdQLh0kGznJxIlBn926-dKWSrW3qXTC81cNRF6wc";
+            // AeccBotSecret = "Ch31g-A6LJo.cwA.AZo.-GJpdQLh0kGznJxIlBn926-dKWSrW3qXTC81cNRF6wc";
 
             AzureAdB2COptions = new AzureAdB2COptions()
             {
@@ -32,10 +32,11 @@ namespace AeccApp.Core
             };
 
             ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
+            // ApiEndpoint = "http://localhost:14724";
 
             EmailChatTemplate = new EmailChatTemplate("El beneficiario %UserName% %UserSurname% ha reportado una conversación con " +
-                                                      "%CounterpartName% %CounterpartSurname% cuya valoración es %ChatRating%.\n" +
-                                                      "Detalle de conversación:\n\n%Conversation%");
+                                                     "%CounterpartName% %CounterpartSurname% cuya valoración es %ChatRating%.\n" +
+                                                     "Detalle de conversación:\n\n%Conversation%");
         }
 
         public static GlobalSetting Instance

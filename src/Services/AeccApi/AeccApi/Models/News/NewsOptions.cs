@@ -10,5 +10,7 @@ namespace AeccApi.Models
         public string UrlBase { get; set; }
         public string UrlNews { get; set; }
         public short NumNewsToLoad { get; set; }
+
+        public short TimeToLiveHrs { get; set; }
     }
 }

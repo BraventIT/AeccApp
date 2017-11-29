@@ -14,32 +14,43 @@ namespace AeccApi.Controllers.API
     [Route("api/NewsChannel")]
     public class NewsChannelController : Controller
     {
+        static List<NewsModel> _lastResult;
+        static DateTime _lastUpdate;
 
         private NewsOptions newsOptions;
         public NewsChannelController(IOptions<NewsOptions> options)
         {
             newsOptions = options.Value;
         }
+
         [HttpGet]
         public IActionResult GetNews(int? numNewsToLoad)
         {
             List<NewsModel> result = new List<NewsModel>();
 
-            HtmlWeb web = new HtmlWeb();
+            if (_lastUpdate > DateTime.UtcNow.AddHours(-newsOptions.TimeToLiveHrs) && _lastUpdate != null)
+            {
+                result = _lastResult;
+            }
+            else
+            {
+                HtmlWeb web = new HtmlWeb();
 
-            var htmlDoc = web.Load(newsOptions.UrlNews);
+                var htmlDoc = web.Load(newsOptions.UrlNews);
 
 
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"listadoItems\"]").Take(
-                numNewsToLoad.HasValue ? numNewsToLoad.Value : newsOptions.NumNewsToLoad);
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"listadoItems\"]").Take(
+                    numNewsToLoad.HasValue ? numNewsToLoad.Value : newsOptions.NumNewsToLoad);
 
-            
-            Parallel.ForEach<HtmlNode>(
-                nodes,
-                new ParallelOptions() { MaxDegreeOfParallelism = 2 },
-                node => result.Add(ExtractNews(node)));
-            
 
+                Parallel.ForEach(
+                    nodes,
+                    new ParallelOptions() { MaxDegreeOfParallelism = 2 },
+                    node => result.Add(ExtractNews(node)));
+
+                _lastResult = result;
+                _lastUpdate = DateTime.UtcNow;
+            }
             return Ok(result);
         }
 

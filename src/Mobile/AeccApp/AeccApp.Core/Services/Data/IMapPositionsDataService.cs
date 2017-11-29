@@ -9,6 +9,6 @@ namespace AeccApp.Core.Services
     {
         Task<Position> GetAsync(string key);
 
-        Task AddOrUpdateAsync(string key ,Position pos);
+        Task InsertOrUpdateAsync(string key ,Position pos);
     }
 }
