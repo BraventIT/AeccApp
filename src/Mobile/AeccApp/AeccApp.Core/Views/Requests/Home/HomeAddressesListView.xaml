@@ -86,11 +86,11 @@
                             Grid.RowSpan="2"
                             Grid.Column="2"
                             Margin="15,0,0,0"
-                            HeightRequest="30"
+                            HeightRequest="17"
                             HorizontalOptions="Center"
                             SourcePlatform="right_arrow"
                             VerticalOptions="Center"
-                            WidthRequest="30" />
+                            WidthRequest="9" />
                         <BoxView
                             Grid.Row="2"
                             Grid.ColumnSpan="3"
@@ -99,16 +99,6 @@
 
                     </Grid>
                 </ViewCell>
-            </DataTemplate>
-
-            <DataTemplate x:Key="homeAddressHeaderTemplate">
-                <ContentView>
-                    <Label
-                        Margin="0,10,0,10"
-                        HorizontalOptions="Center"
-                        Style="{StaticResource TitleLabelStyle}"
-                        Text="{Binding [HomeAddressesListViewYourAddresses]}" />
-                </ContentView>
             </DataTemplate>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -121,11 +111,21 @@
 
         <ListView
             HasUnevenRows="True"
-            HeaderTemplate="{StaticResource homeAddressHeaderTemplate}"
             IsVisible="{Binding HomeAddressesIsEmpty, Converter={StaticResource InverseBoolConverter}}"
             ItemTemplate="{StaticResource homeAddressesListTemplate}"
             ItemsSource="{Binding HomeAddressesList}">
 
+            <ListView.Header>
+                <ContentView>
+                    <Label
+                        Margin="25"
+                        FontAttributes="None"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
+                        Text="{Binding [HomeAddressesListViewYourAddresses]}"
+                        TextColor="{StaticResource LightGraySubtitle}" />
+                </ContentView>
+            </ListView.Header>
             <ListView.Behaviors>
                 <beh:EventToCommandBehavior
                     Command="{Binding ChooseAddressCommand}"
@@ -142,13 +142,12 @@
             Text="{Binding [NewHomeAddressListViewAddressesEmpty]}"
             VerticalOptions="Center" />
 
-        <ctrlXlabs:ImageButton
+        <Button
             Grid.Row="1"
-            Margin="10"
+            Margin="15,15,15,40"
             Command="{Binding NewHomeAddressCommand}"
             HorizontalOptions="Center"
-            SourcePlatform="round_plus"
-            Style="{StaticResource ImageButtonLargeStyle}"
+            Style="{StaticResource DarkButtonStyle}"
             Text="{Binding [CommonNewAddress]}" />
 
         <!--  INDICATOR  -->

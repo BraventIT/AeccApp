@@ -13,31 +13,27 @@
     <ScrollView>
         <!--  Without requests landing page  -->
         <StackLayout>
-            <StackLayout.Margin>
-                <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="iOS" Value="30,30,30,0" />
-                    <On Platform="Android" Value="10,10,10,20" />
-                </OnPlatform>
-            </StackLayout.Margin>
 
             <ctrl:CustomImage
-                Margin="10"
-                HeightRequest="150"
+                Margin="0,50,0,34"
+                HeightRequest="130"
                 HorizontalOptions="Center"
-                SourcePlatform="round_new_here"
-                WidthRequest="150" />
+                SourcePlatform="ico_first_request"
+                WidthRequest="130" />
 
             <Label
+                Margin="0"
                 HorizontalTextAlignment="Center"
-                Style="{StaticResource TitleLabelStyle}"
+                Style="{StaticResource TitleLabelStyleNormal}"
                 Text="{Binding [CommonIsYourFirstTime]}" />
             <Label
+                Margin="0,25,0,36"
                 HorizontalTextAlignment="Center"
-                Style="{StaticResource SubTitleLabelStyle}"
+                Style="{StaticResource SubTitleLabelStyleNormal}"
                 Text="{Binding [RequestsViewText]}" />
 
             <Button
-                Margin="0,20"
+                Margin="0,0,0,0"
                 Command="{Binding NewRequestCommand}"
                 HorizontalOptions="Center"
                 Style="{StaticResource ButtonStyle}"

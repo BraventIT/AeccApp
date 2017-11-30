@@ -17,13 +17,19 @@
 
                 <!--  Header  -->
                 <StackLayout
-                    Padding="35"
+                    Margin="0"
+                    Padding="0"
                     BackgroundColor="LightGray"
+                    HeightRequest="100"
                     HorizontalOptions="FillAndExpand">
                     <Label
-                        FontSize="{StaticResource MediumSize}"
+                        Margin="30"
+                        FontSize="{StaticResource MidLargeSize}"
                         HorizontalOptions="Center"
-                        Text="{Binding RequestTypeHeader}" />
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource TitleLabelStyleNormal}"
+                        Text="{Binding RequestTypeHeader}"
+                        VerticalOptions="Center" />
                 </StackLayout>
 
 
@@ -32,9 +38,9 @@
                     <Grid.HeightRequest>
                         <OnPlatform
                             x:TypeArguments="x:Double"
-                            Android="150"
-                            WinPhone="250"
-                            iOS="150" />
+                            Android="130"
+                            WinPhone="130"
+                            iOS="130" />
                     </Grid.HeightRequest>
 
                     <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
@@ -54,10 +60,12 @@
 
                 <!--  Date and time text and button  -->
                 <Label
-                    Margin="10"
-                    FontSize="{StaticResource MediumSize}"
+                    Margin="0,25,0,25"
                     HorizontalOptions="Center"
-                    Text="{Binding [CompletingRequestTimeAndDate]}" />
+                    Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
+                    Text="{Binding [CompletingRequestTimeAndDate]}"
+                    TextColor="{StaticResource LightGraySubtitle}" />
+
 
                 <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                     <StackLayout
@@ -68,7 +76,6 @@
                             <TapGestureRecognizer Command="{Binding OpenDateAndTimePopupCommand}" />
                         </StackLayout.GestureRecognizers>
 
-
                         <ctrl:CustomImage
                             HeightRequest="30"
                             HorizontalOptions="End"
@@ -77,11 +84,6 @@
 
                         <Label Text="{Binding [CompletingRequestTimeAndDate]}" VerticalOptions="Center" />
 
-                        <ctrl:CustomImage
-                            HeightRequest="30"
-                            HorizontalOptions="End"
-                            SourcePlatform="time_icon"
-                            WidthRequest="30" />
                     </StackLayout>
 
 
@@ -94,9 +96,11 @@
                 <!--  Comments text and entry  -->
                 <Label
                     Margin="10"
-                    FontSize="{StaticResource MediumSize}"
                     HorizontalOptions="Center"
-                    Text="{Binding [CompletingRequestComments]}" />
+                    Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
+                    Text="{Binding [CompletingRequestComments]}"
+                    TextColor="{StaticResource LightGraySubtitle}" />
+
 
                 <StackLayout WidthRequest="350">
                     <Entry
