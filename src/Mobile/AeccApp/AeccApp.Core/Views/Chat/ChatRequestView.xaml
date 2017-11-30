@@ -34,7 +34,7 @@
                     Margin="0,55,0,0"
                     HeightRequest="55"
                     HorizontalOptions="Center"
-                    SourcePlatform="ICO_firstCHAT" />
+                    SourcePlatform="PopUp_Ico_chatrequest" />
 
                 <Label
                     Grid.Row="1"

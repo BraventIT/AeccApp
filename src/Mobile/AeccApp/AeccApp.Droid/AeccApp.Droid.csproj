@@ -276,5 +276,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\settings_gear.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\PopUp_Ico_chatrequest.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
