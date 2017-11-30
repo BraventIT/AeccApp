@@ -37,5 +37,26 @@ namespace AeccApp.Core.Services
             }
             Save(dataList);
         }
+
+        protected async Task InsertOrIgnoreDataAsync(Func<T, bool> findPredicate, T data)
+        {
+            bool requiredSave = false;
+
+            List<T> dataList = await GetListAsync();
+            var oldData = dataList.FirstOrDefault(findPredicate);
+            if (oldData == null)
+            {
+                dataList.Insert(0, data);
+                requiredSave = true;
+
+                if (MaxItems > 0 && dataList.Count > MaxItems)
+                {
+                    dataList.RemoveAt(dataList.Count - 1);
+                }
+            }
+
+            if (requiredSave)
+                Save(dataList);
+        }
     }
 }

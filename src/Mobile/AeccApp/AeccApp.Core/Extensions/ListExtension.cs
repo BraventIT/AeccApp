@@ -16,5 +16,30 @@ namespace AeccApp.Core.Extensions
                 oc.Add(item);
             }
         }
+
+        public static void SyncExact<T>(this IList<T> oc, IList<T> source)
+        {
+            for (int i = 0; i < source.Count; i++)
+            {
+                var item = source[i];
+                if (oc.Count > i)
+                {
+                    if (!item.Equals(oc[i]))
+                    {
+                        oc.RemoveAt(i);
+                        oc.Insert(i, item);
+                    }
+                }
+                else
+                {
+                    oc.Add(item);
+                }
+            }
+
+            while (oc.Count != source.Count)
+            {
+                oc.RemoveAt(oc.Count - 1);
+            }
+        }
     }
 }

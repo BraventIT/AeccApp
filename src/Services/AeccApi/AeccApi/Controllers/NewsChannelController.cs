@@ -29,8 +29,7 @@ namespace AeccApi.Controllers.API
         [HttpGet]
         public IActionResult GetNews(int? numNewsToLoad)
         {
-            if (_lastUpdate < DateTime.UtcNow.AddHours(-newsOptions.TimeToLiveHrs)
-                || _newsCache.Count < numNewsToLoad)
+            if (_lastUpdate < DateTime.UtcNow.AddHours(-newsOptions.TimeToLiveHrs))
             {
                 HtmlWeb web = new HtmlWeb();
 
@@ -43,7 +42,7 @@ namespace AeccApi.Controllers.API
                 Parallel.ForEach(
                     nodes,
                     new ParallelOptions() { MaxDegreeOfParallelism = newsOptions.NumNewsToLoad },
-                    node => ProcessNode(node));
+                    node => ProcessHtmlNode(node));
 
                 _lastUpdate = DateTime.UtcNow;
             }
@@ -55,7 +54,7 @@ namespace AeccApi.Controllers.API
             return Ok(result);
         }
 
-        private void ProcessNode(HtmlNode node)
+        private void ProcessHtmlNode(HtmlNode node)
         {
             var newData = ExtractNews(node);
             if (_newsCache.FirstOrDefault(n => n.NewsId == newData.NewsId) == null)
