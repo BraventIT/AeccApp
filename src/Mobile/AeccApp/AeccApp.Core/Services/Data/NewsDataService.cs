@@ -11,7 +11,7 @@ namespace AeccApp.Core.Services
 
         public Task InsertOrUpdateAsync(NewsModel newData)
         {
-            return InsertOrUpdateDataAsync(o => o.NewsId == newData.NewsId, newData);
+            return InsertOrIgnoreDataAsync(o => o.NewsId == newData.NewsId, newData);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace AeccApp.Core.Services
 {
     public interface INewsRequestService
     {
-        Task<IEnumerable<NewsModel>> GetNewsAsync(CancellationToken cancelToken, int? numNewsToLoad = 2);
+        Task<IList<NewsModel>> GetNewsAsync(CancellationToken cancelToken, int? numNewsToLoad = 2);
 
     }
 }

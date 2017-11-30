@@ -1,12 +1,14 @@
 ﻿using Aecc.Models;
-using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using AeccApp.Core.Extensions;
 using System.Linq;
+using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -15,41 +17,25 @@ namespace AeccApp.Core.ViewModels
         private INewsDataService NewsDataService { get; } = ServiceLocator.NewsDataService;
         private INewsRequestService NewsService { get; } = ServiceLocator.NewsService;
 
-        public override async Task ActivateAsync()
+        #region Contructor & Initialize
+        public AllNewsViewModel()
         {
-            await ExecuteOperationAsync(async cancelToken =>
-            {
-                var today = DateTime.Today.ToUniversalTime();
-                int numItemsRequired = NewsDataService.MaxItems / 2;
-                if (Settings.LastNewsChecked != today || NewsDataService.Count < numItemsRequired)
-                {
-                    var news = await NewsService.GetNewsAsync(cancelToken, numItemsRequired);
-
-                    foreach (var newData in news.Reverse())
-                    {
-                        await NewsDataService.InsertOrUpdateAsync(newData);
-                    }
-                    Settings.LastNewsChecked = today;
-                }
-
-                NewsList = await NewsDataService.GetListAsync();
-            });
+            NewsList = new ObservableCollection<NewsModel>();
         }
 
+        public override async Task ActivateAsync()
+        {
+            await ExecuteOperationAsync(FillNewsAsync);
+            await ExecuteOperationQuietlyAsync(cancelToken => TryToUpdateNewsAsync(cancelToken));
+        }
+        #endregion
 
         #region Propeties
-        private IEnumerable<NewsModel> newsList;
-        public IEnumerable<NewsModel> NewsList
+        private ObservableCollection<NewsModel> newsList;
+        public ObservableCollection<NewsModel> NewsList
         {
-            get
-            {
-                return newsList;
-            }
-            set
-            {
-                Set(ref newsList, value);
-
-            }
+            get { return newsList; }
+            set { Set(ref newsList, value); }
         }
         #endregion
 
@@ -69,6 +55,35 @@ namespace AeccApp.Core.ViewModels
             var selectedNew = obj as NewsModel;                                 
             await NavigationService.NavigateToAsync<NewsDetailViewModel>(selectedNew);
             await NavigationService.RemoveLastFromBackStackAsync();
+        }
+        #endregion
+
+        #region Private Methods
+        private async Task FillNewsAsync(CancellationToken cancelToken)
+        {
+            var news = (await NewsDataService.GetListAsync()).ToList();
+            if (news.Any())
+            {
+                NewsList.SyncExact(news);
+            }
+        }
+
+        private async Task TryToUpdateNewsAsync(CancellationToken cancelToken)
+        {
+            var today = DateTime.Today.ToUniversalTime();
+            int numItemsRequired = NewsDataService.MaxItems / 2;
+            if (Settings.LastNewsChecked != today || NewsDataService.Count < numItemsRequired)
+            {
+                var news = await NewsService.GetNewsAsync(cancelToken, numItemsRequired);
+
+                foreach (var newData in news.Reverse())
+                {
+                    await NewsDataService.InsertOrUpdateAsync(newData);
+                }
+                NewsList.SyncExact(news);
+
+                Settings.LastNewsChecked = today;
+            }
         }
         #endregion
     }

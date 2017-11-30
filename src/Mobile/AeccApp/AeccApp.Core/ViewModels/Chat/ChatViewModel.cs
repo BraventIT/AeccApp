@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.Messages;
+﻿using AeccApp.Core.Extensions;
+using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
@@ -394,8 +395,6 @@ namespace AeccApp.Core.ViewModels
             OnResetVolunteers();
         }
 
- 
-
 
         private void OnChatState(ChatStateMessage obj)
         {
@@ -483,27 +482,7 @@ namespace AeccApp.Core.ViewModels
                 (!o.Age.HasValue || (o.Age < _filters.MaximumAge && o.Age > _filters.MinimumAge)) &&
                 (o.Gender == null || o.Gender.StartsWith(_filters.Gender, StringComparison.CurrentCultureIgnoreCase)))).ToList();
 
-            for (int i = 0; i < volunteersFiltered.Count; i++)
-            {
-                var aggregation = volunteersFiltered[i];
-                if (Volunteers.Count > i)
-                {
-                    if (!aggregation.Equals(Volunteers[i]))
-                    {
-                        Volunteers.RemoveAt(i);
-                        Volunteers.Insert(i, aggregation);
-                    }
-                }
-                else
-                {
-                    Volunteers.Add(aggregation);
-                }
-            }
-
-            while (Volunteers.Count != volunteersFiltered.Count)
-            {
-                Volunteers.RemoveAt(Volunteers.Count - 1);
-            }
+            Volunteers.SyncExact(volunteersFiltered);
 
             FilterVolunteersIsEmpty = !VolunteersIsEmpty && !Volunteers.Any();
         }

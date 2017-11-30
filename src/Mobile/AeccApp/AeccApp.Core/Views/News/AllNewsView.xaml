@@ -40,11 +40,11 @@
                         <Image
                             Grid.RowSpan="2"
                             Grid.Column="0"
-                            HorizontalOptions="FillAndExpand"
-                            WidthRequest="200"
                             HeightRequest="200"
+                            HorizontalOptions="FillAndExpand"
                             Source="{Binding Imagen}"
-                            VerticalOptions="Center" />
+                            VerticalOptions="Center"
+                            WidthRequest="200" />
 
 
                         <StackLayout

@@ -17,7 +17,7 @@ namespace AeccApp.Core.Services
             _requestProvider = requestProvider;
         }
 
-        public async Task<IEnumerable<NewsModel>> GetNewsAsync(CancellationToken cancelToken, int? numNewsToLoad  = 2)
+        public async Task<IList<NewsModel>> GetNewsAsync(CancellationToken cancelToken, int? numNewsToLoad  = 2)
         {
             UriBuilder uribuilder = new UriBuilder(GlobalSetting.Instance.ApiEndpoint)
             {
@@ -26,7 +26,7 @@ namespace AeccApp.Core.Services
             };
             
             var identityToken = await _identityService.GetTokenAsync();
-            return await _requestProvider.GetAsync<IEnumerable<NewsModel>>(uribuilder.ToString(), cancelToken, identityToken);
+            return await _requestProvider.GetAsync<IList<NewsModel>>(uribuilder.ToString(), cancelToken, identityToken);
         }
     }
 }

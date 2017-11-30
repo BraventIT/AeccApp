@@ -1,9 +1,10 @@
 ﻿using Aecc.Models;
+using AeccApp.Core.Extensions;
 using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace AeccApp.Core.ViewModels
 {
     class HomeViewModel : ViewModelBase
     {
+        private const int NUM_NEWS = 3;
+
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
         private INewsDataService NewsDataService { get; } = ServiceLocator.NewsDataService;
         private INewsRequestService NewsService { get; } = ServiceLocator.NewsService;
@@ -22,6 +25,7 @@ namespace AeccApp.Core.ViewModels
         public HomeViewModel()
         {
             IsHeaderInfoBannerVisible = Settings.HomeHeaderBannerClosed;
+            NewsList = new ObservableCollection<NewsModel>();
         }
 
         public override async Task ActivateAsync()
@@ -31,7 +35,7 @@ namespace AeccApp.Core.ViewModels
 
             MessagingCenter.Send(new ToolbarMessage(true), string.Empty);
 
-            await ExecuteOperationAsync(async cancelToken =>
+            await ExecuteOperationAsync(async () =>
             {
                 await ChatService.InitializeAsync();
 
@@ -40,26 +44,13 @@ namespace AeccApp.Core.ViewModels
                 LastMessage = (ChatService.MessagesWitoutReading) ?
                   ChatService.GetConversationMessages().Last() : null;
 
-                if (newsList == null)
-                    await FillNews(cancelToken);
+                if (!NewsList.Any())
+                    await FillNewsAsync();
             });
+
+            await ExecuteOperationQuietlyAsync(cancelToken => TryToUpdateNewsAsync(cancelToken));
         }
 
-        private async Task FillNews(CancellationToken cancelToken)
-        {
-            var today = DateTime.Today.ToUniversalTime();
-            if (Settings.LastNewsChecked != today)
-            {
-                var news = await NewsService.GetNewsAsync(cancelToken, 3);
-
-                foreach (var newData in news.Reverse())
-                {
-                    await NewsDataService.InsertOrUpdateAsync(newData);
-                }
-                Settings.LastNewsChecked = today;
-            }
-            NewsList = (await NewsDataService.GetListAsync()).Take(3).ToList();
-        }
 
         public override void Deactivate()
         {
@@ -85,29 +76,29 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private bool inConversation;
+        private bool _inConversation;
         public bool InConversation
         {
-            get { return inConversation; }
+            get { return _inConversation; }
             set
             {
-                Set(ref inConversation, value);
+                Set(ref _inConversation, value);
             }
         }
 
-        private Message lastMessage;
+        private Message _lastMessage;
         public Message LastMessage
         {
-            get { return lastMessage; }
-            set { Set(ref lastMessage, value); }
+            get { return _lastMessage; }
+            set { Set(ref _lastMessage, value); }
         }
 
 
-        private IEnumerable<NewsModel> newsList;
-        public IEnumerable<NewsModel> NewsList
+        private ObservableCollection<NewsModel> _newsList;
+        public ObservableCollection<NewsModel> NewsList
         {
-            get { return newsList; }
-            set { Set(ref newsList, value); }
+            get { return _newsList; }
+            set { Set(ref _newsList, value); }
         }
 
         private bool _volunteerIsActive;
@@ -289,6 +280,32 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Private Methods
+        private async Task FillNewsAsync()
+        {
+            var news = (await NewsDataService.GetListAsync()).Take(NUM_NEWS).ToList();
+            if (news.Any())
+            {
+                NewsList.SyncExact(news);
+            }
+        }
+
+        private async Task TryToUpdateNewsAsync(CancellationToken cancelToken)
+        {
+            var today = DateTime.Today.ToUniversalTime();
+            if (Settings.LastNewsChecked != today)
+            {
+                var news = await NewsService.GetNewsAsync(cancelToken, NUM_NEWS);
+
+                foreach (var newData in news.Reverse())
+                {
+                    await NewsDataService.InsertOrUpdateAsync(newData);
+                }
+                NewsList.SyncExact(news);
+
+
+                Settings.LastNewsChecked = today;
+            }
+        }
 
         public override bool OnBackButtonPressed()
         {

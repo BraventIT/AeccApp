@@ -119,14 +119,31 @@ namespace AeccApp.Core.ViewModels
 
         public virtual void Deactivate()  { }
 
-        protected async Task ExecuteOperationAsync(Func<Task> executeAction, Action finallyAction = null)
+        protected Task ExecuteOperationAsync(Func<Task> executeAction, Action finallyAction = null)
+        {
+            return InternalExecuteOperationAsync(StartOperation, (c) => executeAction(), finallyAction, FinishOperation);
+        }
+
+        protected Task ExecuteOperationAsync(Func<CancellationToken, Task> executeAction, Action finallyAction = null)
+        {
+            return InternalExecuteOperationAsync(StartOperation, executeAction, finallyAction, FinishOperation);
+        }
+
+        protected Task ExecuteOperationQuietlyAsync(Func<CancellationToken, Task> executeAction, Action finallyAction = null)
+        {
+            return InternalExecuteOperationAsync(null, executeAction, finallyAction, null);
+        }
+
+        private async Task InternalExecuteOperationAsync(Action startAction, Func<CancellationToken, Task> executeAction, Action finallyAction, Action finishAction)
         {
             try
             {
-                StartOperation();
+                startAction?.Invoke();
 
-                await executeAction();
+                if (!_currentToken.IsCancellationRequested)
+                    await executeAction(_currentToken);
             }
+            catch (OperationCanceledException) { }
             catch (HttpRequestException ex)
             {
                 // TODO popup para reintentar
@@ -139,32 +156,7 @@ namespace AeccApp.Core.ViewModels
             {
                 finallyAction?.Invoke();
 
-                FinishOperation();
-            }
-        }
-
-        protected async Task ExecuteOperationAsync(Func<CancellationToken, Task> executeAction, Action finallyAction = null)
-        {
-            try
-            {
-                StartOperation();
-
-                if (!_currentToken.IsCancellationRequested)
-                    await executeAction(_currentToken);
-            }
-            catch (OperationCanceledException ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                finallyAction?.Invoke();
-
-                FinishOperation();
+                finishAction?.Invoke();
             }
         }
 
