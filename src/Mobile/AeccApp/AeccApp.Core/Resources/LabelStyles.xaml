@@ -55,6 +55,16 @@
     </Style>
 
     <Style
+        x:Key="DarkGreyMidLargeSizeSubtitleLabelStyle"
+        BasedOn="{StaticResource GreyLabelStyle}"
+        TargetType="{x:Type Label}">
+        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="20, 12" />
+    </Style>
+
+    <Style
         x:Key="DarkGreyMediumSizeSubtitleLabelStyle"
         BasedOn="{StaticResource GreyLabelStyle}"
         TargetType="{x:Type Label}">
