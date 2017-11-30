@@ -13,7 +13,7 @@
         <ResourceDictionary>
             <DataTemplate x:Key="requestTypesTemplate">
                 <ViewCell>
-                    <Grid>
+                    <Grid RowSpacing="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
@@ -28,7 +28,7 @@
                         <Label
                             Grid.Row="0"
                             Grid.Column="0"
-                            Margin="20,10,0,0"
+                            Margin="30,26,0,0"
                             FontAttributes="Bold"
                             FontSize="{StaticResource MediumSize}"
                             Text="{Binding Name}"
@@ -37,14 +37,16 @@
                         <ctrl:CustomImage
                             Grid.Row="0"
                             Grid.Column="1"
-                            Margin="0,10,20,0"
-                            HeightRequest="25"
+                            Margin="0,26,20,0"
+                            HeightRequest="17"
                             HorizontalOptions="End"
                             SourcePlatform="right_arrow"
-                            WidthRequest="25" />
+                            VerticalOptions="Center"
+                            WidthRequest="9" />
                         <BoxView
                             Grid.Row="1"
                             Grid.ColumnSpan="2"
+                            Margin="0,26,0,0"
                             HeightRequest="1"
                             Color="LightGray" />
 
@@ -57,7 +59,7 @@
         <!--  Header  -->
         <StackLayout
             Padding="35"
-            BackgroundColor="{StaticResource GreyText}"
+            BackgroundColor="{StaticResource LightSilver}"
             HorizontalOptions="FillAndExpand">
 
             <Grid HorizontalOptions="Center">
@@ -84,8 +86,9 @@
                         WidthRequest="25" />
 
                     <Label
-                        FontSize="{StaticResource LargeSize}"
+                        FontAttributes="Bold"
                         HorizontalOptions="Center"
+                        Style="{StaticResource TitleLabelStyleNormal}"
                         Text="{Binding MyAddress.Name}"
                         VerticalOptions="Center" />
                 </StackLayout>
@@ -135,18 +138,19 @@
                         </Grid.RowDefinitions>
                         <Label
                             Grid.Column="0"
-                            Margin="20,10,0,0"
+                            Margin="30,26,0,26"
                             FontAttributes="Bold"
                             FontSize="{StaticResource MediumSize}"
                             Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
                             TextColor="{StaticResource GreyTextDark}" />
                         <ctrl:CustomImage
                             Grid.Column="1"
-                            Margin="0,10,20,0"
-                            HeightRequest="25"
+                            Margin="0,26,20,26"
+                            HeightRequest="17"
                             HorizontalOptions="End"
                             SourcePlatform="right_arrow"
-                            WidthRequest="25" />
+                            VerticalOptions="Center"
+                            WidthRequest="9" />
                         <BoxView
                             Grid.Row="1"
                             Grid.ColumnSpan="2"
