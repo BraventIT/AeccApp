@@ -13,7 +13,10 @@ namespace AeccApp.Core.ViewModels
         public override Task InitializeAsync(object navigationData)
         {
             Counterpart = (UserData)navigationData;
-
+            if (Counterpart == null)
+            {
+                int i = 0;
+            }
             return Task.CompletedTask;
         }
 

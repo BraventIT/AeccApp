@@ -25,55 +25,63 @@
 
                 <StackLayout>
                     <Label
-                        Margin="0,16,0,10"
+                        Margin="0,26,0,5"
                         FontFamily="Bold"
                         HorizontalOptions="Center"
                         Style="{StaticResource DarkGreyBigTitleLabelStyle}"
                         Text="{Binding Counterpart.Name}" />
                     <Label
-                        Margin="0,0,0,34"
+                        Margin="0"
                         HorizontalOptions="Center"
                         Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
                         Text="{Binding Counterpart.Description}" />
                 </StackLayout>
-                <BoxView HeightRequest="1" Color="{StaticResource LightGrey2}" />
+                <BoxView
+                    Margin="0,24,0,14"
+                    HeightRequest="1"
+                    Color="{StaticResource LightGrey2}" />
 
-                <StackLayout Margin="0,24,0,20">
+                <StackLayout Margin="0,0,0,0">
                     <Label
+                        Margin="0"
                         HorizontalOptions="Center"
                         Style="{StaticResource LightGreyMediumTitleLabelStyle}"
                         Text="{Binding [PopupVolunteerProfileInfo]}" />
 
-                    <StackLayout
-                        Margin="0,20,0,0"
-                        HorizontalOptions="FillAndExpand"
-                        Orientation="Vertical">
+                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical">
 
 
-                        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                        <StackLayout
+                            Margin="0,25,0,0"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal">
                             <Label
+                                Margin="20,0,0,0"
                                 HorizontalOptions="Start"
                                 Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
                                 Text="{Binding [CommonGender]}"
                                 WidthRequest="150" />
                             <Label
-                                Margin="25,0,0,0"
+                                Margin="15,0,0,0"
+                                FontAttributes="None"
                                 HorizontalOptions="End"
-                                Style="{StaticResource DarkGreyMidLargeSizeSubtitleLabelStyle}"
+                                Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
                                 Text="{Binding Counterpart.DisplayGender}" />
 
                         </StackLayout>
 
                         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                             <Label
+                                Margin="20,0,0,0"
                                 HorizontalOptions="Start"
-                                Style="{StaticResource DarkGreyMidLargeSizeSubtitleLabelStyle}"
+                                Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
                                 Text="{Binding [CommonAge]}"
                                 WidthRequest="150" />
                             <Label
-                                Margin="25,0,0,0"
+                                Margin="15,0,0,0"
+                                FontAttributes="None"
                                 HorizontalOptions="End"
-                                Style="{StaticResource DarkGreyMidLargeSizeSubtitleLabelStyle}"
+                                Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
                                 Text="{Binding Counterpart.Age}" />
                         </StackLayout>
 
