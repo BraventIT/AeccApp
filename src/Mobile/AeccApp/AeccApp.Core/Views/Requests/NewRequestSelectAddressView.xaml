@@ -12,18 +12,21 @@
     <ContentPage.Content>
 
         <ScrollView>
-            <StackLayout HorizontalOptions="Center">
-                <StackLayout.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="WinPhone, Windows" Value="15,15,15,0" />
-                        <On Platform="iOS" Value="0" />
-                        <On Platform="Android" Value="10,10,10,20" />
-                    </OnPlatform>
-                </StackLayout.Margin>
-                <Label Style="{StaticResource TitleLabelStyle}" Text="{Binding [NewHomeRequestSelectAddressWhereAreYouTitle]}" />
-                <Label Style="{StaticResource SubTitleLabelStyleCentered}" Text="{Binding [NewHomeRequestSelectAddressWhereAreYouText]}" />
+            <StackLayout Margin="40,0,40,0" HorizontalOptions="Center">
 
-                <Grid HorizontalOptions="Center">
+                <Label
+                    Margin="0,72,0,0"
+                    FontAttributes="Bold"
+                    Style="{StaticResource TitleLabelStyleNormal}"
+                    Text="{Binding [NewHomeRequestSelectAddressWhereAreYouTitle]}" />
+                <Label
+                    Margin="0,26,0,0"
+                    FontAttributes="None"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource SubTitleLabelStyleNormal}"
+                    Text="{Binding [NewHomeRequestSelectAddressWhereAreYouText]}" />
+
+                <Grid Margin="0,64,0,0" HorizontalOptions="Center">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -38,18 +41,10 @@
                     <ctrl:CustomImage
                         Grid.Row="0"
                         Grid.Column="0"
-                        HeightRequest="150"
+                        HeightRequest="120"
                         HorizontalOptions="Center"
                         SourcePlatform="from_home"
-                        WidthRequest="150">
-
-                        <ctrl:CustomImage.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone, Windows" Value="15,15,15,0" />
-                                <On Platform="iOS" Value="0" />
-                                <On Platform="Android" Value="10,10,10,20" />
-                            </OnPlatform>
-                        </ctrl:CustomImage.Margin>
+                        WidthRequest="120">
 
                         <ctrl:CustomImage.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AtHomeCommand}" />
@@ -59,25 +54,22 @@
                     <Label
                         Grid.Row="1"
                         Grid.Column="0"
+                        Margin="0,25,0,0"
+                        FontAttributes="None"
                         HorizontalOptions="Center"
-                        Style="{StaticResource SubTitleLabelStyle}"
+                        Style="{StaticResource SubTitleLabelStyleNormal}"
                         Text="{Binding [NewHomeRequestSelectAddressImAtHome]}" />
 
 
                     <ctrl:CustomImage
                         Grid.Row="0"
                         Grid.Column="1"
-                        HeightRequest="150"
+                        Margin="27,0,0,0"
+                        HeightRequest="120"
                         HorizontalOptions="Center"
                         SourcePlatform="from_hospital"
-                        WidthRequest="150">
-                        <ctrl:CustomImage.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone, Windows" Value="15,15,15,0" />
-                                <On Platform="iOS" Value="10,10,10,0" />
-                                <On Platform="Android" Value="10,10,10,20" />
-                            </OnPlatform>
-                        </ctrl:CustomImage.Margin>
+                        WidthRequest="120">
+
                         <ctrl:CustomImage.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AtHospitalCommand}" />
                         </ctrl:CustomImage.GestureRecognizers>
@@ -86,8 +78,11 @@
                     <Label
                         Grid.Row="1"
                         Grid.Column="1"
+                        Margin="36,25,0,0"
+                        FontAttributes="None"
+                        HorizontalTextAlignment="Center"
                         HorizontalOptions="Center"
-                        Style="{StaticResource SubTitleLabelStyle}"
+                        Style="{StaticResource SubTitleLabelStyleNormal}"
                         Text="{Binding [NewHomeRequestSelectAddressImAtHospital]}" />
 
                 </Grid>
