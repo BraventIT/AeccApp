@@ -31,8 +31,8 @@ namespace AeccApp.Core
                 Scope = "read"
             };
 
-            //ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
-             ApiEndpoint = "http://localhost:14724";
+            ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
+            //ApiEndpoint = "http://localhost:14724";
 
             EmailChatTemplate = new EmailChatTemplate("El beneficiario %UserName% %UserSurname% ha reportado una conversación con " +
                                                      "%CounterpartName% %CounterpartSurname% cuya valoración es %ChatRating%.\n" +
