@@ -550,7 +550,7 @@
     <value>Información personal</value>
   </data>
   <data name="RequestsViewText" xml:space="preserve">
-    <value>¿Estás en el hospital o en tu domicilio? Haz peticiones estés donde estés.</value>
+    <value>¿Estás en el hospital o en tu domicilio? Haz peticiones estés donde estés y estaremos encantados de ayudarte.</value>
   </data>
   <data name="SettingsContactWithProfesional" xml:space="preserve">
     <value>Contactar con un profesional</value>

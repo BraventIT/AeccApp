@@ -1358,7 +1358,7 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ¿Estás en el hospital o en tu domicilio? Haz peticiones estés donde estés..
+        ///   Looks up a localized string similar to ¿Estás en el hospital o en tu domicilio? Haz peticiones estés donde estés y estaremos encantados de ayudarte..
         /// </summary>
         public static string RequestsViewText {
             get {
