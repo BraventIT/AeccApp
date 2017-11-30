@@ -80,8 +80,8 @@
                         Grid.Column="1"
                         Margin="36,25,0,0"
                         FontAttributes="None"
-                        HorizontalTextAlignment="Center"
                         HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
                         Style="{StaticResource SubTitleLabelStyleNormal}"
                         Text="{Binding [NewHomeRequestSelectAddressImAtHospital]}" />
 

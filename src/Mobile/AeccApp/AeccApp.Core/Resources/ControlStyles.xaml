@@ -38,6 +38,16 @@
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
     </Style>
 
+    <Style x:Key="DarkButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="WidthRequest" Value="{StaticResource ButtonWidth}" />
+        <Setter Property="HeightRequest" Value="44" />
+        <Setter Property="BorderRadius" Value="28" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource GreyText}" />
+    </Style>
+
     <Style x:Key="CircularButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="WidthRequest" Value="44" />
         <Setter Property="HeightRequest" Value="44" />
