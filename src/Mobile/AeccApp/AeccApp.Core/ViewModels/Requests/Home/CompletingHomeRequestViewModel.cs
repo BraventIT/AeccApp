@@ -1,13 +1,10 @@
 ﻿using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
-using AeccApp.Core.Models.Email;
-using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -132,11 +129,11 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _commentsEntryListenerCommand ??
-                    (_commentsEntryListenerCommand = new Command(OnCommentsEntryListenerCommand, o => !IsBusy));
+                    (_commentsEntryListenerCommand = new Command(OnCommentsEntryListener, o => !IsBusy));
             }
         }
 
-        private void OnCommentsEntryListenerCommand(object obj)
+        private void OnCommentsEntryListener(object obj)
         {
             string result = string.Empty;
             if (obj is string)
@@ -256,8 +253,6 @@ namespace AeccApp.Core.ViewModels
 
 
         #endregion
-
-      
 
     }
 }
