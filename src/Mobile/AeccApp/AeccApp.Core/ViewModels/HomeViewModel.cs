@@ -5,6 +5,7 @@ using AeccApp.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,6 +15,7 @@ namespace AeccApp.Core.ViewModels
     class HomeViewModel : ViewModelBase
     {
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
+        private INewsDataService NewsDataService { get; } = ServiceLocator.NewsDataService;
         private INewsRequestService NewsService { get; } = ServiceLocator.NewsService;
 
         #region Contructor & Initialize
@@ -35,13 +37,28 @@ namespace AeccApp.Core.ViewModels
 
                 VolunteerIsActive = ChatService.VolunteerIsActive;
                 InConversation = ChatService.InConversation;
-                if (ChatService.MessagesWitoutReading)
-                {
-                    LastMessage = ChatService.GetConversationMessages().Last();
-                }
-                NewsList = await NewsService.GetNewsAsync(cancelToken);
-                int i = 0;
+                LastMessage = (ChatService.MessagesWitoutReading) ?
+                  ChatService.GetConversationMessages().Last() : null;
+
+                if (newsList == null)
+                    await FillNews(cancelToken);
             });
+        }
+
+        private async Task FillNews(CancellationToken cancelToken)
+        {
+            var today = DateTime.Today.ToUniversalTime();
+            if (Settings.LastNewsChecked != today)
+            {
+                var news = await NewsService.GetNewsAsync(cancelToken, 3);
+
+                foreach (var newData in news.Reverse())
+                {
+                    await NewsDataService.InsertOrUpdateAsync(newData);
+                }
+                Settings.LastNewsChecked = today;
+            }
+            NewsList = (await NewsDataService.GetListAsync()).Take(3).ToList();
         }
 
         public override void Deactivate()
@@ -89,15 +106,8 @@ namespace AeccApp.Core.ViewModels
         private IEnumerable<NewsModel> newsList;
         public IEnumerable<NewsModel> NewsList
         {
-            get
-            {
-                return newsList;
-            }
-            set
-            {
-                Set(ref newsList, value);
-                
-            }
+            get { return newsList; }
+            set { Set(ref newsList, value); }
         }
 
         private bool _volunteerIsActive;

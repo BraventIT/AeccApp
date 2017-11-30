@@ -1,6 +1,7 @@
 // Helpers/Settings.cs
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using System;
 
 namespace AeccApp.Core
 {
@@ -29,6 +30,10 @@ namespace AeccApp.Core
 
         private const string HomeHeaderBannerAcceptClosedKey = "HomeHeaderBanner_closed";
         private static readonly bool HomeHeaderBannerAcceptClosedDefault = true;
+
+        private const string LastNewsCheckedKey = "Last_news_checked";
+        private static readonly DateTime LastNewsCheckedDefault = DateTime.MinValue;
+
         #endregion
 
 
@@ -87,6 +92,16 @@ namespace AeccApp.Core
             }
         }
 
-       
+        public static DateTime LastNewsChecked
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(LastNewsCheckedKey, LastNewsCheckedDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(LastNewsCheckedKey, value);
+            }
+        }
     }
 }

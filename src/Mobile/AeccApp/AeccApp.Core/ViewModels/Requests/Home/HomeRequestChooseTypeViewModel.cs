@@ -91,7 +91,7 @@ namespace AeccApp.Core.ViewModels
                 if (MyAddress.WillBeSaved)
                 {
                     MyAddress.WillBeSaved = false;
-                    await HomeAddressesDataService.AddOrUpdateAsync(MyAddress);
+                    await HomeAddressesDataService.InsertOrUpdateAsync(MyAddress);
                 }
             });
         }

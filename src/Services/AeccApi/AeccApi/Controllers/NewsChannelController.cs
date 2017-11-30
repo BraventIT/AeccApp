@@ -14,33 +14,59 @@ namespace AeccApi.Controllers.API
     [Route("api/NewsChannel")]
     public class NewsChannelController : Controller
     {
+        static List<NewsModel> _newsCache;
+        static DateTime _lastUpdate;
+
+        private const int MAXCACHEITEMS = 50;
 
         private NewsOptions newsOptions;
         public NewsChannelController(IOptions<NewsOptions> options)
         {
             newsOptions = options.Value;
+            _newsCache = new List<NewsModel>();
         }
+
         [HttpGet]
         public IActionResult GetNews(int? numNewsToLoad)
         {
-            List<NewsModel> result = new List<NewsModel>();
+            if (_lastUpdate < DateTime.UtcNow.AddHours(-newsOptions.TimeToLiveHrs)
+                || _newsCache.Count < numNewsToLoad)
+            {
+                HtmlWeb web = new HtmlWeb();
 
-            HtmlWeb web = new HtmlWeb();
+                var htmlDoc = web.Load(newsOptions.UrlNews);
 
-            var htmlDoc = web.Load(newsOptions.UrlNews);
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"listadoItems\"]")
+                    .Take(newsOptions.NumNewsToLoad)
+                    .Reverse();
 
+                Parallel.ForEach(
+                    nodes,
+                    new ParallelOptions() { MaxDegreeOfParallelism = newsOptions.NumNewsToLoad },
+                    node => ProcessNode(node));
 
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"listadoItems\"]").Take(
-                numNewsToLoad.HasValue ? numNewsToLoad.Value : newsOptions.NumNewsToLoad);
+                _lastUpdate = DateTime.UtcNow;
+            }
 
-            
-            Parallel.ForEach<HtmlNode>(
-                nodes,
-                new ParallelOptions() { MaxDegreeOfParallelism = 2 },
-                node => result.Add(ExtractNews(node)));
-            
+            var result = _newsCache
+                    .Take(numNewsToLoad.HasValue ? numNewsToLoad.Value : newsOptions.NumNewsToLoad)
+                    .ToList();
 
             return Ok(result);
+        }
+
+        private void ProcessNode(HtmlNode node)
+        {
+            var newData = ExtractNews(node);
+            if (_newsCache.FirstOrDefault(n => n.NewsId == newData.NewsId) == null)
+            {
+                _newsCache.Insert(0, newData);
+
+                if (_newsCache.Count > MAXCACHEITEMS)
+                {
+                    _newsCache.RemoveAt(_newsCache.Count - 1);
+                }
+            }
         }
 
         private NewsModel ExtractNews(HtmlNode node)

@@ -8,6 +8,6 @@ namespace AeccApp.Core.Services
     {
         Task<List<AddressModel>> GetListAsync();
 
-        Task AddOrUpdateAsync(AddressModel address);
+        Task InsertOrUpdateAsync(AddressModel address);
     }
 }

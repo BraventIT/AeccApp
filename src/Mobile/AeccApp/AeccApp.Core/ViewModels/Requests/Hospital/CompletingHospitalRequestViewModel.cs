@@ -179,7 +179,7 @@ namespace AeccApp.Core.ViewModels
             if (IsAddressGettingSaved)
             {
                 CurrentRequest.RequestAddress.IsHospitalAddress = true;
-                await HomeAddressesDataService.AddOrUpdateAsync(CurrentRequest.RequestAddress);
+                await HomeAddressesDataService.InsertOrUpdateAsync(CurrentRequest.RequestAddress);
             }
             await NavigationService.HidePopupAsync();
             //TODO #33 Send request with email service 

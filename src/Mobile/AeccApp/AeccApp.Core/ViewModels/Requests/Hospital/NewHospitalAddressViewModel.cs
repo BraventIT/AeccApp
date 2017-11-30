@@ -335,7 +335,7 @@ namespace AeccApp.Core.ViewModels
                 {
                     location = await GoogleMapsService.FindAddressGeocodingAsync($"{hospital.Name}, {hospital.Province}", cancelToken);
                     if (location.Latitude != 0)
-                        await MapPositionsDataService.AddOrUpdateAsync(hospitalAddress, location);
+                        await MapPositionsDataService.InsertOrUpdateAsync(hospitalAddress, location);
                 }
             }
             return location;
