@@ -131,6 +131,13 @@
         WinPhone="40"
         iOS="50" />
 
+    <OnPlatform
+        x:Key="MediumImageButtonWidth"
+        x:TypeArguments="x:Double"
+        Android="150"
+        WinPhone="140"
+        iOS="150" />
+
     <Style x:Key="SmallImageButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="Orientation" Value="ImageToLeft" />

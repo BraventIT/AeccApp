@@ -593,11 +593,20 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fecha y hora.
+        ///   Looks up a localized string similar to Indica fecha y hora.
         /// </summary>
         public static string CompletingRequestTimeAndDate {
             get {
                 return ResourceManager.GetString("CompletingRequestTimeAndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fecha y hora.
+        /// </summary>
+        public static string CompletingRequestTimeAndDateButtonText {
+            get {
+                return ResourceManager.GetString("CompletingRequestTimeAndDateButtonText", resourceCulture);
             }
         }
         

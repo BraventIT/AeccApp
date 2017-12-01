@@ -295,6 +295,9 @@
     <value>Enviar petición</value>
   </data>
   <data name="CompletingRequestTimeAndDate" xml:space="preserve">
+    <value>Indica fecha y hora</value>
+  </data>
+  <data name="CompletingRequestTimeAndDateButtonText" xml:space="preserve">
     <value>Fecha y hora</value>
   </data>
   <data name="CompletingRequestTitle" xml:space="preserve">
