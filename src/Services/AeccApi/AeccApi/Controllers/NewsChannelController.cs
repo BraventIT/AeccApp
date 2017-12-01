@@ -14,16 +14,17 @@ namespace AeccApi.Controllers.API
     [Route("api/NewsChannel")]
     public class NewsChannelController : Controller
     {
-        static List<NewsModel> _newsCache;
+        static List<NewsModel> _newsCache = new List<NewsModel>();
         static DateTime _lastUpdate;
 
         private const int MAXCACHEITEMS = 50;
 
         private NewsOptions newsOptions;
+        private object _operationObj = new object();
+
         public NewsChannelController(IOptions<NewsOptions> options)
         {
             newsOptions = options.Value;
-            _newsCache = new List<NewsModel>();
         }
 
         [HttpGet]
@@ -57,13 +58,17 @@ namespace AeccApi.Controllers.API
         private void ProcessHtmlNode(HtmlNode node)
         {
             var newData = ExtractNews(node);
-            if (_newsCache.FirstOrDefault(n => n.NewsId == newData.NewsId) == null)
-            {
-                _newsCache.Insert(0, newData);
 
-                if (_newsCache.Count > MAXCACHEITEMS)
+            lock (_operationObj)
+            {
+                if (_newsCache.FirstOrDefault(n => n.NewsId == newData.NewsId) == null)
                 {
-                    _newsCache.RemoveAt(_newsCache.Count - 1);
+                    _newsCache.Insert(0, newData);
+
+                    if (_newsCache.Count > MAXCACHEITEMS)
+                    {
+                        _newsCache.RemoveAt(_newsCache.Count - 1);
+                    }
                 }
             }
         }

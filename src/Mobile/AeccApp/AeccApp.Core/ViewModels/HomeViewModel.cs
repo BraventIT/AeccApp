@@ -56,6 +56,8 @@ namespace AeccApp.Core.ViewModels
         {
             MessagingCenter.Unsubscribe<ChatMessageReceivedMessage>(this, string.Empty);
             MessagingCenter.Unsubscribe<ChatStateMessage>(this, string.Empty);
+
+            MessagingCenter.Send(new ToolbarMessage(false), string.Empty);
         }
         #endregion
 
@@ -292,7 +294,7 @@ namespace AeccApp.Core.ViewModels
         private async Task TryToUpdateNewsAsync(CancellationToken cancelToken)
         {
             var today = DateTime.Today.ToUniversalTime();
-            if (Settings.LastNewsChecked != today)
+            if (Settings.LastNewsChecked != today || !NewsList.Any())
             {
                 var news = await NewsService.GetNewsAsync(cancelToken, NUM_NEWS);
 
@@ -301,7 +303,6 @@ namespace AeccApp.Core.ViewModels
                     await NewsDataService.InsertOrUpdateAsync(newData);
                 }
                 NewsList.SyncExact(news);
-
 
                 Settings.LastNewsChecked = today;
             }

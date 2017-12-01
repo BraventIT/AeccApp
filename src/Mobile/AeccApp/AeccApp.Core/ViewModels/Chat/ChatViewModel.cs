@@ -31,27 +31,11 @@ namespace AeccApp.Core.ViewModels
             Volunteers = new ObservableCollection<UserData>();
 
             _filters = ViewModelLocator.ChatFiltersVM;
-            ChatRatingPopupVM = new ChatRatingPopupViewModel();
             ChatLeaseConversationPopupVM = new ChatLeaseConversationPopupViewModel();
             ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
             ChatConnectingPopupVM = new ChatConnectingPopupViewModel();
         }
-        //public override Task InitializeAsync(object navigationData)
-        //{
-        //    if(navigationData!= null)
-        //    {
-        //        Filters = navigationData as ChatFiltersModel;
-        //    }
-        //    else
-        //    {
-        //        Filters = new ChatFiltersModel(18, 80, string.Empty);
-        //    }
-
-
-        //    return Task.CompletedTask;
-        //}
-
-
+       
         public override async Task ActivateAsync()
         {
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
@@ -375,6 +359,7 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnLeaseConversation(object sender, EventArgs e)
         {
+            var counterpart = ConversationCounterpart;
             await ExecuteOperationAsync(async () =>
             {
                 await NavigationService.HidePopupAsync();
@@ -385,7 +370,7 @@ namespace AeccApp.Core.ViewModels
             {
                 if (!IsVolunteer && ChatService.GetConversationMessages().Any())
                 {
-                    await NavigationService.ShowPopupAsync(ChatRatingPopupVM);
+                    await NavigationService.ShowPopupAsync(new ChatRatingPopupViewModel(counterpart));
                 }
             });
         }

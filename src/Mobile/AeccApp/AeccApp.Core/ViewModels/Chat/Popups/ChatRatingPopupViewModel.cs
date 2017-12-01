@@ -1,26 +1,24 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Input;
-using AeccApp.Core.Models.Email;
+﻿using AeccApp.Core.Models;
 using AeccApp.Core.Services;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
-    public class ChatRatingPopupViewModel : ViewModelBase
+    public class ChatRatingPopupViewModel : ClosablePopupViewModelBase
     {
-        private readonly IChatService _chatService;
-        private readonly IEmailService _emailService;
+        private const int MIN_RATING = 3;
 
+        private IChatService ChatService { get; } = ServiceLocator.ChatService;
+        private IEmailService EmailService { get; } = ServiceLocator.EmailService;
 
-        #region Contructor & Initialize
+        private UserData _counterpart;
 
-        public ChatRatingPopupViewModel()
+        public ChatRatingPopupViewModel(UserData counterpart)
         {
-            _chatService = ServiceLocator.ChatService;
-            _emailService = ServiceLocator.EmailService;
+            _counterpart = counterpart;
         }
-
-        #endregion
 
         #region Commands
         private Command<int> _ratingCommand;
@@ -29,34 +27,22 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _ratingCommand ??
-                    (_ratingCommand = new Command<int>((rating) => OnRatingCommand(rating).ConfigureAwait(false), (o) => !IsBusy));
+                    (_ratingCommand = new Command<int>((rating) => OnRatingAsync(rating).ConfigureAwait(false), (o) => !IsBusy));
             }
         }
 
-        #endregion
-
-        #region Public methods
-
-        public override bool OnBackButtonPressed()
-        {
-            return true;
-        }
-
-        #endregion
-
-
-        #region Private Methods
-
-        private Task OnRatingCommand(int rating)
+        private Task OnRatingAsync(int rating)
         {
             return ExecuteOperationAsync(
                 executeAction: async cancelToken =>
                 {
-                    if (rating <= 3)
+                    if (rating <= MIN_RATING)
                     {
-                        var emailFromChat = new EmailFromChat(_chatService.ConversationCounterpart,
-                            _chatService.GetConversationMessages(), rating);
-                        await _emailService.SendAsync(emailFromChat, cancelToken);
+                        var emailFromChat = new EmailFromChat(
+                            _counterpart,
+                            ChatService.GetConversationMessages(),
+                            rating);
+                        await EmailService.SendAsync(emailFromChat, cancelToken);
                     }
                 },
                 finallyAction: async () =>
@@ -65,8 +51,14 @@ namespace AeccApp.Core.ViewModels.Popups
                     await NavigationService.NavigateToAsync<DashboardViewModel>();
                 });
         }
-    }
+        #endregion
+
+        #region Private Methods
+        protected override void OnIsBusyChanged()
+        {
+            _ratingCommand.ChangeCanExecute();
+        }
 
         #endregion
-    
+    }
 }

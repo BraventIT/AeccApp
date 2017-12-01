@@ -9,116 +9,104 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
-
     <Frame HorizontalOptions="Fill" Style="{StaticResource PopupFrameStyle}">
-        <StackLayout Padding="0,55,0,19">
-            <Grid ColumnSpacing="0" RowSpacing="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Label
-                    Grid.Row="0"
-                    Margin="35,0,35,0"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource TitleLabelStyleNormal}"
-                    Text="{Binding [PopupChatRatingTextTitle]}" />
-                <Label
-                    Grid.Row="1"
-                    Margin="33,25,33,0"
-                    FontAttributes="None"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Style="{StaticResource SubTitleLabelStyleNormal}"
-                    Text="{Binding [PopupChatRatingText]}" />
 
-                <BoxView
-                    Grid.Row="2"
-                    Margin="0,45,0,20"
-                    BackgroundColor="{StaticResource LightGrey}"
-                    HeightRequest="1"
-                    HorizontalOptions="FillAndExpand" />
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Margin="35,55,35,0"
+                HorizontalOptions="Center"
+                Style="{StaticResource TitleLabelStyleNormal}"
+                Text="{Binding [PopupChatRatingTextTitle]}" />
+            <Label
+                Grid.Row="1"
+                Margin="33,25,33,45"
+                FontAttributes="None"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource SubTitleLabelStyleNormal}"
+                Text="{Binding [PopupChatRatingText]}" />
 
-                <StackLayout
-                    Grid.Row="3"
-                    HorizontalOptions="Center"
-                    Orientation="Horizontal">
+            <BoxView
+                Grid.Row="2"
+                BackgroundColor="{StaticResource LightGrey}"
+                HeightRequest="1"
+                VerticalOptions="Start" />
 
-                    <ctrl:CustomImage
-                        Margin="0,0,12,0"
-                        HeightRequest="20"
-                        SourcePlatform="rating_star"
-                        WidthRequest="20">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RatingCommand}">
-                                <TapGestureRecognizer.CommandParameter>
-                                    <x:Int32>1</x:Int32>
-                                </TapGestureRecognizer.CommandParameter>
-                            </TapGestureRecognizer>
-                        </ctrl:CustomImage.GestureRecognizers>
+            <StackLayout
+                Grid.Row="2"
+                Margin="0,20"
+                HorizontalOptions="Center"
+                Orientation="Horizontal">
 
-                    </ctrl:CustomImage>
-                    <ctrl:CustomImage
-                        Margin="0,0,12,0"
-                        HeightRequest="20"
-                        SourcePlatform="rating_star"
-                        WidthRequest="20">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RatingCommand}">
-                                <TapGestureRecognizer.CommandParameter>
-                                    <x:Int32>2</x:Int32>
-                                </TapGestureRecognizer.CommandParameter>
-                            </TapGestureRecognizer>
-                        </ctrl:CustomImage.GestureRecognizers>
+                <StackLayout.Resources>
+                    <ResourceDictionary>
+                        <Style BasedOn="{StaticResource CircularButtonStyle}" TargetType="Button" />
+                        <Style TargetType="ctrl:CustomImage">
+                            <Setter Property="SourcePlatform" Value="rating_star" />
+                            <Setter Property="InputTransparent" Value="True" />
+                        </Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="WidthRequest" Value="20" />
+                            <Setter Property="HeightRequest" Value="20" />
+                        </Style>
+                    </ResourceDictionary>
+                </StackLayout.Resources>
 
-                    </ctrl:CustomImage>
-                    <ctrl:CustomImage
-                        Margin="0,0,12,0"
-                        HeightRequest="20"
-                        SourcePlatform="rating_star"
-                        WidthRequest="20">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RatingCommand}">
-                                <TapGestureRecognizer.CommandParameter>
-                                    <x:Int32>3</x:Int32>
-                                </TapGestureRecognizer.CommandParameter>
-                            </TapGestureRecognizer>
-                        </ctrl:CustomImage.GestureRecognizers>
+                <Grid Margin="0,0,12,0">
+                    <Button Command="{Binding RatingCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>1</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <ctrl:CustomImage />
+                </Grid>
 
-                    </ctrl:CustomImage>
-                    <ctrl:CustomImage
-                        Margin="0,0,12,0"
-                        HeightRequest="20"
-                        SourcePlatform="rating_star"
-                        WidthRequest="20">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RatingCommand}">
-                                <TapGestureRecognizer.CommandParameter>
-                                    <x:Int32>4</x:Int32>
-                                </TapGestureRecognizer.CommandParameter>
-                            </TapGestureRecognizer>
-                        </ctrl:CustomImage.GestureRecognizers>
+                <Grid Margin="0,0,12,0">
+                    <Button Command="{Binding RatingCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>2</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <ctrl:CustomImage />
+                </Grid>
 
-                    </ctrl:CustomImage>
-                    <ctrl:CustomImage
-                        HeightRequest="20"
-                        SourcePlatform="rating_star"
-                        WidthRequest="20">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RatingCommand}">
-                                <TapGestureRecognizer.CommandParameter>
-                                    <x:Int32>5</x:Int32>
-                                </TapGestureRecognizer.CommandParameter>
-                            </TapGestureRecognizer>
-                        </ctrl:CustomImage.GestureRecognizers>
+                <Grid Margin="0,0,12,0">
+                    <Button Command="{Binding RatingCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>3</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <ctrl:CustomImage />
+                </Grid>
 
-                    </ctrl:CustomImage>
-                </StackLayout>
+                <Grid Margin="0,0,12,0">
+                    <Button Command="{Binding RatingCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>4</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <ctrl:CustomImage />
+                </Grid>
 
+                <Grid>
+                    <Button Command="{Binding RatingCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>5</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <ctrl:CustomImage />
+                </Grid>
 
-            </Grid>
-        </StackLayout>
+            </StackLayout>
+
+            <ctrl:CustomActivityIndicatorControl Grid.Row="1" Grid.RowSpan="2" />
+        </Grid>
+
     </Frame>
 </vPop:PopupPage>

@@ -1,7 +1,6 @@
 ﻿using Aecc.Models;
 using AeccApp.Core.Models;
 using System.Collections.ObjectModel;
-using AeccApp.Core.Models.Email;
 
 namespace AeccApp.Core
 {
@@ -34,9 +33,11 @@ namespace AeccApp.Core
             ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
             //ApiEndpoint = "http://localhost:14724";
 
-            EmailChatTemplate = new EmailChatTemplate("El beneficiario %UserName% %UserSurname% ha reportado una conversación con " +
-                                                     "%CounterpartName% %CounterpartSurname% cuya valoración es %ChatRating%.\n" +
-                                                     "Detalle de conversación:\n\n%Conversation%");
+            EmailChatAddress = "afraj@bravent.net";
+            EmailChatTemplate = 
+                "El beneficiario %UserName% %UserSurname% ha reportado una conversación con " +
+                "%CounterpartName% %CounterpartSurname% cuya valoración es %ChatRating%.\n" +
+                "Detalle de conversación:\n\n%Conversation%";
         }
 
         public static GlobalSetting Instance
@@ -82,7 +83,7 @@ namespace AeccApp.Core
 
         #region Chat
 
-        public EmailChatTemplate EmailChatTemplate { get; set; }
+        public string EmailChatTemplate { get; set; }
         public string EmailChatAddress { get; set; }
 
         #endregion
