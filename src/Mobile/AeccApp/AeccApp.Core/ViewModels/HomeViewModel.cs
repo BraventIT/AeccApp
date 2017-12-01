@@ -37,8 +37,6 @@ namespace AeccApp.Core.ViewModels
 
             await ExecuteOperationAsync(async () =>
             {
-                await ChatService.InitializeAsync();
-
                 VolunteerIsActive = ChatService.VolunteerIsActive;
                 InConversation = ChatService.InConversation;
                 LastMessage = (ChatService.MessagesWitoutReading) ?

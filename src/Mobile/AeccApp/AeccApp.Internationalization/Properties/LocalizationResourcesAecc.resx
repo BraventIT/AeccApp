@@ -378,8 +378,17 @@
   <data name="LoginViewLogin" xml:space="preserve">
     <value>Entrar</value>
   </data>
-  <data name="LoginViewUserPlaceHolder" xml:space="preserve">
-    <value>Nombre de usuario</value>
+  <data name="LoginViewLoginTitle" xml:space="preserve">
+    <value>¡Bienvenido!</value>
+  </data>
+  <data name="LoginViewPostLoginText" xml:space="preserve">
+    <value>Inicializando...</value>
+  </data>
+  <data name="LoginViewPreLoginSilentText" xml:space="preserve">
+    <value>Estamos validando tus credenciales...</value>
+  </data>
+  <data name="LoginViewPreLoginText" xml:space="preserve">
+    <value>Vamos a pedirte que te identifiques...</value>
   </data>
   <data name="NewHomeAddressListViewAddressesEmpty" xml:space="preserve">
     <value>No tienes ninguna dirección guardada. ¡Crea una nueva!</value>

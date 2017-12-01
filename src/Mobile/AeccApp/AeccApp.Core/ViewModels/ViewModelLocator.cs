@@ -44,7 +44,6 @@ namespace AeccApp.Core.ViewModels
         {
             //Add here further view models to navigate to
             // View models
-            IocContainer.Register<VolunteerTestViewModel>();
             IocContainer.Register<LoginViewModel>();
             IocContainer.Register<DashboardViewModel>();
             IocContainer.Register<HomeViewModel>();

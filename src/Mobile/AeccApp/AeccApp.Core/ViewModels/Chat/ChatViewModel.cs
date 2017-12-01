@@ -325,8 +325,6 @@ namespace AeccApp.Core.ViewModels
 
             return ExecuteOperationAsync(async () =>
             {
-                await ChatService.InitializeAsync();
-
                 PartyId = ConversationCounterpart?.PartyId;
                 if (string.IsNullOrEmpty(PartyId))
                 {

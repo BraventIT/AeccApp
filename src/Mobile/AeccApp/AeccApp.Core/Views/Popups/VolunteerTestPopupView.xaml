@@ -1,21 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<v:BaseContentPage
-    x:Class="AeccApp.Core.Views.VolunteerTestView"
+<vPop:PopupPage
+    x:Class="AeccApp.Core.Views.Popups.VolunteerTestPopupView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
-    xmlns:eff="clr-namespace:AeccApp.Core.Effects"
-    xmlns:v="clr-namespace:AeccApp.Core.Views"
-    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
-    vm:ViewModelLocator.AutoWireViewModel="True"
-    BackgroundColor="{StaticResource BackgroundColor}"
-    NavigationPage.HasNavigationBar="false">
+    xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    BackgroundColor="{StaticResource SeeThrough}"
+    CloseWhenBackgroundIsClicked="False">
 
-    <ScrollView HorizontalOptions="Center">
-        <StackLayout
-            Margin="12,0"
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
+    <Frame Style="{StaticResource PopupFrameStyle}">
+        <StackLayout Margin="12">
 
             <Label Style="{StaticResource TitleLabelStyle}" Text="Volunteer Test" />
 
@@ -39,13 +33,6 @@
                         VerticalOptions="Center" />
                 </StackLayout>
 
-                <!--<ctrl:CheckBoxImage
-                    HeightRequest="20"
-                    IsChecked="{Binding IsVolunteer, Mode=TwoWay}"
-                    SourceChecked="CheckBoxOn"
-                    SourceUnchecked="CheckBoxOff"
-                    WidthRequest="20" />-->
-
                 <Button
                     Margin="20,0"
                     Command="{Binding EnterCommand}"
@@ -56,5 +43,5 @@
             </StackLayout>
 
         </StackLayout>
-    </ScrollView>
-</v:BaseContentPage>
+    </Frame>
+</vPop:PopupPage>

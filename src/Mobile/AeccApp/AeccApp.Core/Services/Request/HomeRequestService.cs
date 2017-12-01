@@ -9,11 +9,10 @@ namespace AeccApp.Core.Services
     public class HomeRequestService : IHomeRequestService
     {
         private readonly IHttpRequestProvider _requestProvider;
-        private readonly IIdentityService _identityService;
+        private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
 
-        public HomeRequestService(IIdentityService identityService, IHttpRequestProvider requestProvider)
+        public HomeRequestService(IHttpRequestProvider requestProvider)
         {
-            _identityService = identityService;
             _requestProvider = requestProvider;
         }
 
@@ -24,7 +23,7 @@ namespace AeccApp.Core.Services
                 Path = "api/RequestTypes",
                 Query = $"requestSource={RequestSourceEnum.Domicilio.ToString()}"
             };
-            var identityToken = await _identityService.GetTokenAsync();
+            var identityToken = await IdentityService.GetTokenAsync();
             return await _requestProvider.GetAsync<IEnumerable<RequestType>>(uribuilder.ToString(), cancelToken, identityToken);
         }
 
@@ -35,7 +34,7 @@ namespace AeccApp.Core.Services
                 Path = "api/Coordinators",
                 Query = $"requestSource={RequestSourceEnum.Hospital.ToString()}&province={province}"
             };
-            var identityToken = await _identityService.GetTokenAsync();
+            var identityToken = await IdentityService.GetTokenAsync();
             return await _requestProvider.GetAsync<IEnumerable<Coordinator>>(uribuilder.ToString(), cancelToken, identityToken);
         }
     }

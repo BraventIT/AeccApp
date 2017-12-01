@@ -41,8 +41,7 @@ namespace AeccApp.Core.ViewModels
         public override Task ActivateAsync()
         {
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, OnChatEvent);
-
-            return ExecuteOperationAsync(() => ChatService.InitializeAsync());
+            return Task.CompletedTask;
         }
         #endregion
 

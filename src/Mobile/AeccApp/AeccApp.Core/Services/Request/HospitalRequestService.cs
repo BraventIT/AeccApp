@@ -9,11 +9,10 @@ namespace AeccApp.Core.Services
     public class HospitalRequestService : IHospitalRequestService
     {
         private readonly IHttpRequestProvider _requestProvider;
-        private readonly IIdentityService _identityService;
+        private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
 
-        public HospitalRequestService(IIdentityService identityService, IHttpRequestProvider requestProvider)
+        public HospitalRequestService( IHttpRequestProvider requestProvider)
         {
-            _identityService = identityService;
             _requestProvider = requestProvider;
         }
 
@@ -24,7 +23,7 @@ namespace AeccApp.Core.Services
                 Path = "api/RequestTypes",
                 Query = $"requestSource={RequestSourceEnum.Hospital.ToString()}"
             };
-            var identityToken = await _identityService.GetTokenAsync();
+            var identityToken = await IdentityService.GetTokenAsync();
             return await _requestProvider.GetAsync<IEnumerable<RequestType>>(uribuilder.ToString(), cancelToken, identityToken);
         }
 
@@ -35,7 +34,7 @@ namespace AeccApp.Core.Services
                 Path = "api/Hospitals",
                 Query = $"province={province}"
             };
-            var identityToken = await _identityService.GetTokenAsync();
+            var identityToken = await IdentityService.GetTokenAsync();
             return await _requestProvider.GetAsync<IEnumerable<Hospital>>(uribuilder.ToString(), cancelToken, identityToken);
         }
 
@@ -45,7 +44,7 @@ namespace AeccApp.Core.Services
             {
                 Path = $"api/Hospitals/{hospitalId}"
             };
-            var identityToken = await _identityService.GetTokenAsync();
+            var identityToken = await IdentityService.GetTokenAsync();
             return await _requestProvider.GetAsync<Hospital>(uribuilder.ToString(), cancelToken, identityToken);
         }
     }

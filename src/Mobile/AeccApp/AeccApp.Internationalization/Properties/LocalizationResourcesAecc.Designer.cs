@@ -845,11 +845,38 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nombre de usuario.
+        ///   Looks up a localized string similar to ¡Bienvenido!.
         /// </summary>
-        public static string LoginViewUserPlaceHolder {
+        public static string LoginViewLoginTitle {
             get {
-                return ResourceManager.GetString("LoginViewUserPlaceHolder", resourceCulture);
+                return ResourceManager.GetString("LoginViewLoginTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inicializando....
+        /// </summary>
+        public static string LoginViewPostLoginText {
+            get {
+                return ResourceManager.GetString("LoginViewPostLoginText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estamos validando tus credenciales....
+        /// </summary>
+        public static string LoginViewPreLoginSilentText {
+            get {
+                return ResourceManager.GetString("LoginViewPreLoginSilentText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vamos a pedirte que te identifiques....
+        /// </summary>
+        public static string LoginViewPreLoginText {
+            get {
+                return ResourceManager.GetString("LoginViewPreLoginText", resourceCulture);
             }
         }
         

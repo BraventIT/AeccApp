@@ -7,11 +7,10 @@ namespace AeccApp.Core.Services
     public class UserService : IUserService
     {
         private readonly IHttpRequestProvider _requestProvider;
-        private readonly IIdentityService _identityService;
+        private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
 
-        public UserService(IIdentityService identityService, IHttpRequestProvider requestProvider)
+        public UserService( IHttpRequestProvider requestProvider)
         {
-            _identityService = identityService;
             _requestProvider = requestProvider;
         }
 
@@ -21,7 +20,7 @@ namespace AeccApp.Core.Services
             UriBuilder uribuilder = new UriBuilder(GlobalSetting.Instance.ApiEndpoint);
             uribuilder.Path += "users/info";
             
-            var token = await _identityService.GetTokenAsync();
+            var token = await IdentityService.GetTokenAsync();
             return await _requestProvider.GetAsync<UserData>(uribuilder.ToString(), token: token);
         }
     }

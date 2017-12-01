@@ -8,11 +8,10 @@ namespace AeccApp.Core.Services
     public class EmailService : IEmailService
     {
         private readonly IHttpRequestProvider _requestProvider;
-        private readonly IIdentityService _identityService;
+        private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
 
-        public EmailService(IIdentityService identityService, IHttpRequestProvider requestProvider)
+        public EmailService(IHttpRequestProvider requestProvider)
         {
-            _identityService = identityService;
             _requestProvider = requestProvider;
         }
 
@@ -22,7 +21,7 @@ namespace AeccApp.Core.Services
             {
                 Path = "api/Email"
             };
-            var identityToken = await _identityService.GetTokenAsync();
+            var identityToken = await IdentityService.GetTokenAsync();
             await _requestProvider.PostAsync(uribuilder.ToString(), emailMessage, cancelToken, identityToken);
         }
     }

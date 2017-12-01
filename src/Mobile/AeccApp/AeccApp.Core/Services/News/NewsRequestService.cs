@@ -9,11 +9,10 @@ namespace AeccApp.Core.Services
     public class NewsRequestService : INewsRequestService
     {
         private readonly IHttpRequestProvider _requestProvider;
-        private readonly IIdentityService _identityService;
+        private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
 
-        public NewsRequestService(IIdentityService identityService, IHttpRequestProvider requestProvider)
+        public NewsRequestService(IHttpRequestProvider requestProvider)
         {
-            _identityService = identityService;
             _requestProvider = requestProvider;
         }
 
@@ -25,7 +24,7 @@ namespace AeccApp.Core.Services
                 Query = $"numNewsToLoad={numNewsToLoad}"
             };
             
-            var identityToken = await _identityService.GetTokenAsync();
+            var identityToken = await IdentityService.GetTokenAsync();
             return await _requestProvider.GetAsync<IList<NewsModel>>(uribuilder.ToString(), cancelToken, identityToken);
         }
     }

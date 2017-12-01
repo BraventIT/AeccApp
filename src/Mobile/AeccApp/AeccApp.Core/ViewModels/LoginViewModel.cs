@@ -1,15 +1,16 @@
 ﻿using AeccApp.Core.Services;
+using AeccApp.Core.ViewModels.Popups;
+using Microsoft.Identity.Client;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using System.Diagnostics;
-using Microsoft.Identity.Client;
 
 namespace AeccApp.Core.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        private IChatService ChatService { get; } = ServiceLocator.ChatService;
         private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
 
         #region Activate & Deactive Methods
@@ -26,6 +27,15 @@ namespace AeccApp.Core.ViewModels
             get { return _isLoginRequired; }
             set { Set(ref _isLoginRequired, value); }
         }
+
+        private string _text;
+        public string Text
+        {
+            get { return _text; }
+            set { Set(ref _text, value); }
+        }
+
+        VolunteerTestPopupViewModel _volunteerTestPopupVM;
         #endregion
 
         #region Commands
@@ -50,19 +60,43 @@ namespace AeccApp.Core.ViewModels
             {
                 try
                 {
+                    IsLoginRequired = false;
+                    Text = (silentLogin) ?
+                        this["LoginViewPreLoginSilentText"] :
+                        this["LoginViewPreLoginText"];
                     if (await IdentityService.TryToLoginAsync(silentLogin))
                     {
-                        await NavigationService.NavigateToAsync<VolunteerTestViewModel>();
-                        await NavigationService.RemoveLastFromBackStackAsync();
+                        IsLoginRequired = false;
+                        _volunteerTestPopupVM = new VolunteerTestPopupViewModel();
+                        _volunteerTestPopupVM.Continue += OnVolunteerTestPopupVMContinue;
+                        await NavigationService.ShowPopupAsync(_volunteerTestPopupVM);
                     }
                 }
-                catch (MsalException ex)
+                catch (MsalException)
                 {
                     //ex.ErrorCode== "request_timeout"
                     throw;
                 }
-               
             }, finallyAction: () => IsLoginRequired = true);
+        }
+
+        private async void OnVolunteerTestPopupVMContinue(object sender, EventArgs e)
+        {
+            _volunteerTestPopupVM.Continue -= OnVolunteerTestPopupVMContinue;
+            await NavigationService.HidePopupAsync();
+            ContinueLoadingAsync();
+        }
+
+        private Task ContinueLoadingAsync()
+        {
+            Text = this["LoginViewPostLoginText"];
+
+            return ExecuteOperationAsync(async () =>
+            {
+                await ChatService.InitializeAsync();
+                await NavigationService.NavigateToAsync<DashboardViewModel>();
+                //await NavigationService.RemoveLastFromBackStackAsync();
+            });
         }
 
         protected override void OnIsBusyChanged()
