@@ -456,6 +456,9 @@
   <data name="NewsDetailViewTitle" xml:space="preserve">
     <value>Detalles de la noticia</value>
   </data>
+  <data name="NoConnectionViewRetry" xml:space="preserve">
+    <value>Reintentar</value>
+  </data>
   <data name="NoConnectionViewText" xml:space="preserve">
     <value>Conexión perdida. Toca la pantalla para volver a intentarlo.</value>
   </data>

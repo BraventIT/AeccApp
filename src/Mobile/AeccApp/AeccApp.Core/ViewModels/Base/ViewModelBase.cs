@@ -9,6 +9,7 @@ using AeccApp.Core.Services;
 using System.Diagnostics;
 using System.Threading;
 using System.Net.Http;
+using AeccApp.Core.ViewModels.Popups;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -119,23 +120,24 @@ namespace AeccApp.Core.ViewModels
 
         public virtual void Deactivate()  { }
 
-        protected Task ExecuteOperationAsync(Func<Task> executeAction, Action finallyAction = null)
+        protected Task ExecuteOperationAsync(Func<Task> executeAction, Action finallyAction = null, bool retry = true)
         {
-            return InternalExecuteOperationAsync(StartOperation, (c) => executeAction(), finallyAction, FinishOperation);
+            return InternalExecuteOperationAsync(StartOperation, (c) => executeAction(), finallyAction, FinishOperation, retry);
         }
 
-        protected Task ExecuteOperationAsync(Func<CancellationToken, Task> executeAction, Action finallyAction = null)
+        protected Task ExecuteOperationAsync(Func<CancellationToken, Task> executeAction, Action finallyAction = null, bool retry = true)
         {
-            return InternalExecuteOperationAsync(StartOperation, executeAction, finallyAction, FinishOperation);
+            return InternalExecuteOperationAsync(StartOperation, executeAction, finallyAction, FinishOperation, retry);
         }
 
-        protected Task ExecuteOperationQuietlyAsync(Func<CancellationToken, Task> executeAction, Action finallyAction = null)
+        protected Task ExecuteOperationQuietlyAsync(Func<CancellationToken, Task> executeAction, Action finallyAction = null, bool retry = false)
         {
-            return InternalExecuteOperationAsync(null, executeAction, finallyAction, null);
+            return InternalExecuteOperationAsync(null, executeAction, finallyAction, null, retry);
         }
 
-        private async Task InternalExecuteOperationAsync(Action startAction, Func<CancellationToken, Task> executeAction, Action finallyAction, Action finishAction)
+        private async Task InternalExecuteOperationAsync(Action startAction, Func<CancellationToken, Task> executeAction, Action finallyAction, Action finishAction, bool retry)
         {
+            bool execFinally = true;
             try
             {
                 startAction?.Invoke();
@@ -144,9 +146,16 @@ namespace AeccApp.Core.ViewModels
                     await executeAction(_currentToken);
             }
             catch (OperationCanceledException) { }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException) when (retry)
             {
-                // TODO popup para reintentar
+                execFinally = false;
+                // popup para reintentar
+                await NavigationService.ShowPopupAsync(new RetryPopupViewModel(() =>
+                    InternalExecuteOperationAsync(
+                        startAction,
+                        executeAction,
+                        finallyAction,
+                        finishAction, true)));
             }
             catch (Exception ex)
             {
@@ -154,9 +163,12 @@ namespace AeccApp.Core.ViewModels
             }
             finally
             {
-                finallyAction?.Invoke();
+                if (execFinally)
+                {
+                    finallyAction?.Invoke();
 
-                finishAction?.Invoke();
+                    finishAction?.Invoke();
+                }
             }
         }
 

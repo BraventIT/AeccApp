@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<vPop:BasePopupPage
-    x:Class="AeccApp.Core.Views.Popups.ChatEventPopupView"
+<vPop:PopupPage
+    x:Class="AeccApp.Core.Views.Popups.RetryPopupView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
-    xmlns:vPop="clr-namespace:AeccApp.Core.Views.Popups"
+    xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}"
-    CloseWhenBackgroundIsClicked="True">
+    CloseWhenBackgroundIsClicked="False">
 
     <Frame Style="{StaticResource PopupFrameStyle}">
         <Grid ColumnSpacing="0" RowSpacing="0">
@@ -14,11 +14,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="60" />
             </Grid.RowDefinitions>
-
-            <Button Command="{Binding ClosePopupCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
-
-            <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
             <ctrl:CustomImage
                 Margin="0,55,0,0"
@@ -30,15 +27,28 @@
                 Grid.Row="1"
                 Margin="20,27,20,0"
                 Style="{StaticResource TitleLabelStyleNormal}"
-                Text="{Binding Event.MessageTitle}" />
+                Text="{Binding [NoConnectionViewTextTitle]}" />
 
             <Label
                 Grid.Row="2"
                 Margin="32,20,32,55"
                 HorizontalTextAlignment="Center"
                 Style="{StaticResource SubTitleLabelStyleNormal}"
-                Text="{Binding Event.Message}" />
+                Text="{Binding [NoConnectionViewText]}" />
+
+            <BoxView
+                Grid.Row="3"
+                BackgroundColor="{StaticResource LightGrey}"
+                HeightRequest="1"
+                VerticalOptions="Start" />
+
+            <Button
+                Grid.Row="3"
+                Margin="0,1,0,0"
+                Command="{Binding RetryCommand}"
+                Style="{StaticResource ButtonWhiteStyle}"
+                Text="{Binding [NoConnectionViewRetry]}" />
 
         </Grid>
     </Frame>
-</vPop:BasePopupPage>
+</vPop:PopupPage>

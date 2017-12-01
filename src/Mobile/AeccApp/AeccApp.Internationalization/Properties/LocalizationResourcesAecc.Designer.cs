@@ -1079,6 +1079,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reintentar.
+        /// </summary>
+        public static string NoConnectionViewRetry {
+            get {
+                return ResourceManager.GetString("NoConnectionViewRetry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Conexión perdida. Toca la pantalla para volver a intentarlo..
         /// </summary>
         public static string NoConnectionViewText {

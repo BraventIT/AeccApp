@@ -30,8 +30,8 @@ namespace AeccApp.Core
                 Scope = "read"
             };
 
-            ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
-            //ApiEndpoint = "http://localhost:14724";
+            //ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
+            ApiEndpoint = "http://localhost:14724";
 
             EmailChatAddress = "afraj@bravent.net";
             EmailChatTemplate = 
