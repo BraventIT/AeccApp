@@ -130,6 +130,11 @@ namespace AeccApp.Core.ViewModels
             return InternalExecuteOperationAsync(StartOperation, executeAction, finallyAction, FinishOperation, retry);
         }
 
+        protected Task ExecuteOperationQuietlyAsync(Func<Task> executeAction, Action finallyAction = null, bool retry = false)
+        {
+            return InternalExecuteOperationAsync(null, (c) => executeAction(), finallyAction, null, retry);
+        }
+
         protected Task ExecuteOperationQuietlyAsync(Func<CancellationToken, Task> executeAction, Action finallyAction = null, bool retry = false)
         {
             return InternalExecuteOperationAsync(null, executeAction, finallyAction, null, retry);
@@ -146,7 +151,7 @@ namespace AeccApp.Core.ViewModels
                     await executeAction(_currentToken);
             }
             catch (OperationCanceledException) { }
-            catch (HttpRequestException) when (retry)
+            catch (HttpRequestException ex) when (retry)
             {
                 execFinally = false;
                 // popup para reintentar
@@ -156,6 +161,7 @@ namespace AeccApp.Core.ViewModels
                         executeAction,
                         finallyAction,
                         finishAction, true)));
+                Debug.WriteLine(ex);
             }
             catch (Exception ex)
             {

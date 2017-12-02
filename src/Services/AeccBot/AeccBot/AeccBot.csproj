@@ -217,7 +217,6 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Properties\PublishProfiles\Alfra - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\AlfraAeccBot - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Alfraso-AeccBot - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

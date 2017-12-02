@@ -66,10 +66,14 @@ namespace AeccApp.Core.ViewModels
                         this["LoginViewPreLoginText"];
                     if (await IdentityService.TryToLoginAsync(silentLogin))
                     {
-                        IsLoginRequired = false;
+                        #region ONLY FOR TEST
                         _volunteerTestPopupVM = new VolunteerTestPopupViewModel();
                         _volunteerTestPopupVM.Continue += OnVolunteerTestPopupVMContinue;
                         await NavigationService.ShowPopupAsync(_volunteerTestPopupVM);
+                        #endregion
+
+                        //Text = this["LoginViewPostLoginText"];
+                        //await ContinueLoadingAsync();
                     }
                 }
                 catch (MsalException)
@@ -80,29 +84,28 @@ namespace AeccApp.Core.ViewModels
             }, finallyAction: () => IsLoginRequired = true);
         }
 
+        #region ONLY FOR TEST
         private async void OnVolunteerTestPopupVMContinue(object sender, EventArgs e)
         {
+            IsLoginRequired = false;
             _volunteerTestPopupVM.Continue -= OnVolunteerTestPopupVMContinue;
             await NavigationService.HidePopupAsync();
-            ContinueLoadingAsync();
-        }
-
-        private Task ContinueLoadingAsync()
-        {
             Text = this["LoginViewPostLoginText"];
+            await ExecuteOperationAsync(async () => await ContinueLoadingAsync());
+        }
+        #endregion
 
-            return ExecuteOperationAsync(async () =>
-            {
-                await ChatService.InitializeAsync();
-                await NavigationService.NavigateToAsync<DashboardViewModel>();
-                //await NavigationService.RemoveLastFromBackStackAsync();
-            });
+        private async Task ContinueLoadingAsync()
+        {
+            await ChatService.InitializeAsync();
+            await NavigationService.NavigateToAsync<DashboardViewModel>();
+            //await NavigationService.RemoveLastFromBackStackAsync();
         }
 
         protected override void OnIsBusyChanged()
         {
             _signInCommand.ChangeCanExecute();
         }
-#endregion
+        #endregion
     }
 }

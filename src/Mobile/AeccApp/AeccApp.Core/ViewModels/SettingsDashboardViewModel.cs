@@ -118,8 +118,6 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
 
-
-
         private async void OnLogoutPopupLogout(object sender, EventArgs e)
         {
             await NavigationService.HidePopupAsync();

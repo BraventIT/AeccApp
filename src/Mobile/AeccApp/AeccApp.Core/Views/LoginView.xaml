@@ -10,50 +10,51 @@
     BackgroundColor="{StaticResource BackgroundColor}"
     NavigationPage.HasNavigationBar="false">
 
-    <ScrollView>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
 
-            <Label
-                Grid.Row="1"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+
+        <StackLayout
+            HorizontalOptions="Center"
+            IsVisible="{Binding IsLoginRequired}"
+            VerticalOptions="Center">
+            <Label Style="{StaticResource TitleLabelStyleNormal}" Text="{Binding [LoginViewLoginTitle]}" />
+
+            <ctrl:CustomImage
                 Margin="30,0"
-                HorizontalTextAlignment="Center"
-                IsVisible="{Binding IsBusy}"
-                Style="{StaticResource SubTitleLabelStyleNormal}"
-                Text="{Binding Text}"
-                VerticalOptions="Center" />
-
-            <StackLayout
                 HorizontalOptions="Center"
-                IsVisible="{Binding IsLoginRequired}"
-                VerticalOptions="Center">
-                <Label Style="{StaticResource TitleLabelStyleNormal}" Text="{Binding [LoginViewLoginTitle]}" />
+                MaximumWidthRequest="300"
+                SourcePlatform="logo" />
+        </StackLayout>
 
-                <ctrl:CustomImage
-                    Margin="30,0"
-                    HorizontalOptions="Center"
-                    MaximumWidthRequest="300"
-                    SourcePlatform="logo" />
-            </StackLayout>
+        <!--  LOGIN BUTTON  -->
+        <Label
+            Grid.Row="1"
+            Margin="30,0"
+            HorizontalOptions="Center"
+            IsVisible="{Binding IsBusy}"
+            Style="{StaticResource SubTitleLabelStyleNormal}"
+            Text="{Binding Text}"
+            VerticalOptions="Center" />
 
-            <!--  LOGIN BUTTON  -->
-            <Button
-                Grid.Row="1"
-                Margin="20,0"
-                Command="{Binding SignInCommand}"
-                HorizontalOptions="Center"
-                IsVisible="{Binding IsLoginRequired}"
-                Style="{StaticResource ButtonStyle}"
-                Text="{Binding [LoginViewLogin]}"
-                VerticalOptions="Center" />
+        <Button
+            Grid.Row="1"
+            Margin="20,0"
+            Command="{Binding SignInCommand}"
+            HorizontalOptions="Center"
+            IsVisible="{Binding IsLoginRequired}"
+            Style="{StaticResource ButtonStyle}"
+            Text="{Binding [LoginViewLogin]}"
+            VerticalOptions="Center" />
 
 
-            <!--  INDICATOR  -->
-            <ctrl:CustomActivityIndicatorControl VerticalOptions="End" />
-        </Grid>
-    </ScrollView>
+        <!--  INDICATOR  -->
+        <ctrl:CustomActivityIndicatorControl VerticalOptions="End" />
+    </Grid>
 
 </v:BaseContentPage>

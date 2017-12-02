@@ -65,8 +65,6 @@ namespace AeccApp.Core.Services
         private TaskCompletionSource<bool> _acceptAndRejectRequestTask;
         private TaskCompletionSource<string> _engagementCounterpartTask;
 
-        private SemaphoreSlim _initializeLock;
-
         public event EventHandler<IList<Message>> MessagesReceived;
         public event EventHandler<IList<UserData>> AggregationsReceived;
 
@@ -120,43 +118,29 @@ namespace AeccApp.Core.Services
         public ChatService()
         {
             _conversationMessages = new List<Message>();
-            _initializeLock = new SemaphoreSlim(1);
         }
 
         public async Task InitializeAsync()
         {
-            try
-            {
-                await _initializeLock.WaitAsync();
+            if (_mainConversation != null)
+                return;
 
-                if (_mainConversation == null)
-                {
-                    var user = GSetting.User;
+            var user = GSetting.User;
 
-                    _client = new DirectLineClient(GSetting.AeccBotSecret);
-                    _mainConversation = await _client.Conversations.StartConversationAsync();
-                    _account = new ChannelAccountWithUserData()
-                    {
-                        Id = user.Id,
-                        Name = user.Name,
-                        FirstName = user.FirstName,
-                        Surname = user.Surname,
-                        Email = user.Email,
-                        Age = user.Age,
-                        Gender = user.Gender
-                    };
-                    ListenToBotMessages();
-                    await TryToFillConversationCounterpartAsync();
-                }
-            }
-            catch (Exception ex)
+            _client = new DirectLineClient(GSetting.AeccBotSecret);
+            _mainConversation = await _client.Conversations.StartConversationAsync();
+            _account = new ChannelAccountWithUserData()
             {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                _initializeLock.Release();
-            }
+                Id = user.Id,
+                Name = user.Name,
+                FirstName = user.FirstName,
+                Surname = user.Surname,
+                Email = user.Email,
+                Age = user.Age,
+                Gender = user.Gender
+            };
+            ListenToBotMessages();
+            await TryToFillConversationCounterpartAsync();
         }
 
         #endregion
@@ -308,9 +292,10 @@ namespace AeccApp.Core.Services
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 InConversation = false;
+                Debug.WriteLine(ex);
             }
         }
 

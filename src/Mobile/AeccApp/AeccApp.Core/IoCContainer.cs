@@ -61,6 +61,7 @@ namespace AeccApp.Core
             return _container.Resolve(O);
         }
 
+
         public static void Build()
         {
             if (_container != null)
@@ -71,6 +72,7 @@ namespace AeccApp.Core
             {
                 _container = _builder.Build();
             }
+            _builder = null;
         }
     }
 }

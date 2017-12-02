@@ -319,25 +319,25 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Private Methods
-        private Task InitializeAsync()
+        private async Task InitializeAsync()
         {
             VolunteerIsActive = ChatService.VolunteerIsActive;
+            PartyId = ConversationCounterpart?.PartyId;
 
-            return ExecuteOperationAsync(async () =>
+            if (string.IsNullOrEmpty(PartyId))
             {
-                PartyId = ConversationCounterpart?.PartyId;
-                if (string.IsNullOrEmpty(PartyId))
+                if (!IsVolunteer)
                 {
-                    if (!IsVolunteer)
-                    {
-                        await LoadVolunteersAsync();
-                    }
+                    if (Volunteers.Any())
+                        await ExecuteOperationQuietlyAsync(cancelToken => LoadVolunteersAsync());
+                    else
+                        await ExecuteOperationAsync(() => LoadVolunteersAsync());
                 }
-                else
-                {
-                    await InitializeChatAsync(PartyId);
-                }
-            });
+            }
+            else
+            {
+                await ExecuteOperationAsync(() => InitializeChatAsync(PartyId));
+            }
         }
 
         private async Task LoadVolunteersAsync()
