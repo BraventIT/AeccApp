@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using System.Threading.Tasks;
 using AeccApp.Core.Services;
+using System.Collections.Generic;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -23,26 +24,29 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
+                HomeRequestsList = new List<RequestModel>();
+                HospitalRequestsList = new List<RequestModel>();
+
                 var HomeRequests = await HomeRequestsDataService.GetListAsync();
+                HomeRequestsList.AddRange(HomeRequests);
                 var HospitalRequest = await HospitalRequestDataService.GetListAsync();
+                HospitalRequestsList.AddRange(HospitalRequest);
 
-                int i = 0;
+                if (HomeRequestsList.Count == 0)
+                {
+                    IsHomeRequestsListEmpty = true;
+                }
+                if (HospitalRequestsList.Count == 0)
+                {
+                    IsHospitalRequestsListEmpty = true;
+                }
+
             });
+
+
         }
 
-        public override Task InitializeAsync(object navigationData)
-        {
-            if (HomeRequestsList.Count == 0)
-            {
-                IsHomeRequestsListEmpty = true;
-            }
-            if (HospitalRequestsList.Count == 0)
-            {
-                IsHospitalRequestsListEmpty = true;
-            }
-
-            return Task.CompletedTask;
-        }
+     
         #endregion
 
         #region Commands
@@ -61,10 +65,6 @@ namespace AeccApp.Core.ViewModels
         void OnHospitalTabCommand(object obj)
         {
             SwitchHomeAndHospitalList = true;
-            RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Hospital rey Juan Carlos", "Fake street", "Madrid", "123", "1a", "", new Position(0, 0)));
-            HospitalRequestsList.Add(mockRequest);
-
-
         }
         private Command _homeTabCommand;
         public ICommand HomeTabCommand
@@ -79,29 +79,8 @@ namespace AeccApp.Core.ViewModels
         void OnHomeTabCommand(object obj)
         {
             SwitchHomeAndHospitalList = false;
-
-            RequestModel mockRequest = new RequestModel(new RequestType() { Name = "tipo" }, "location", "fecha", "hora", "comentarios", new AddressModel("Mi casa", "Fake street", "Madrid", "123", "1a", "", new Position(0, 0)));
-            HomeRequestsList.Add(mockRequest);
         }
-
-     
-
-        private Command _applyFiltersCommand;
-        public ICommand ApplyFiltersCommand
-        {
-            get
-            {
-                return _applyFiltersCommand ??
-                    (_applyFiltersCommand = new Command(OnApplyFiltersCommand, o => !IsBusy));
-            }
-        }
-
-        void OnApplyFiltersCommand(object obj)
-        {
-            //TODO Apply home requests filters
-            //TimeToFilterWith
-            //DateToFilterWith
-        }
+ 
 
         private Command _newRequestCommand;
         public ICommand NewRequestCommand
@@ -119,7 +98,6 @@ namespace AeccApp.Core.ViewModels
 
 
         }
-
 
         #endregion
 
@@ -140,39 +118,19 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _isHospitalRequestsListEmpty, value); }
         }
 
+        private List<RequestModel> _homeRequestsList;
 
-
-        private ObservableCollection<RequestModel> _homeRequestsList = new ObservableCollection<RequestModel>();
-
-        public ObservableCollection<RequestModel> HomeRequestsList
+        public List<RequestModel> HomeRequestsList
         {
             get { return _homeRequestsList; }
             set { Set(ref _homeRequestsList, value); }
         }
-        private ObservableCollection<RequestModel> _hospitalRequestsList = new ObservableCollection<RequestModel>();
+        private List<RequestModel> _hospitalRequestsList;
 
-        public ObservableCollection<RequestModel> HospitalRequestsList
+        public List<RequestModel> HospitalRequestsList
         {
             get { return _hospitalRequestsList; }
             set { Set(ref _hospitalRequestsList, value); }
-        }
-
-
-        private DateTime _dateToFilterWith = DateTime.Now;
-
-        public DateTime DateToFilterWith
-        {
-            get { return _dateToFilterWith; }
-            set { Set(ref _dateToFilterWith, value); }
-        }
-
-
-        private TimeSpan _timeToFilterWith = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-
-        public TimeSpan TimeToFilterWith
-        {
-            get { return _timeToFilterWith; }
-            set { Set(ref _timeToFilterWith, value); }
         }
 
 
@@ -188,9 +146,7 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
-        #region Methods
-      
-        #endregion
+   
 
     }
 }

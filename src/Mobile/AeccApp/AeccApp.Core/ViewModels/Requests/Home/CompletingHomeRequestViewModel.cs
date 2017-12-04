@@ -159,6 +159,8 @@ namespace AeccApp.Core.ViewModels
             CurrentRequest.RequestDate = DateToApplyParsed;
             CurrentRequest.RequestTime = TimeToApplyParsed;
             //TODO #33 Send request with email service
+            CurrentRequest.RequestTimeStamp = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
+
             await HomeRequestsDataService.InsertOrUpdateAsync(CurrentRequest);
             await NavigationService.HidePopupAsync();
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);

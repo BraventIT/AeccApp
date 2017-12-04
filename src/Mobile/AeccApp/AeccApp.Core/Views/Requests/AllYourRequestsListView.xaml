@@ -23,54 +23,27 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-
-
-
                         <Label
                             Grid.Row="0"
                             Grid.Column="0"
-                            Text="{Binding RequestType}">
-                            <Label.Margin>
-                                <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="WinPhone, Windows" Value="50,15,0,5" />
-                                    <On Platform="iOS" Value="35,15,0,5" />
-                                    <On Platform="Android" Value="55,15,0,5" />
-                                </OnPlatform>
-                            </Label.Margin>
-
-                        </Label>
+                            Text="{Binding RequestType.Name}" />
                         <Label
                             Grid.Row="0"
                             Grid.Column="1"
                             HorizontalOptions="End"
-                            Text="{Binding RequestDate}">
-                            <Label.Margin>
-                                <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="WinPhone, Windows" Value="100,15,15,5" />
-                                    <On Platform="iOS" Value="70,15,15,5" />
-                                    <On Platform="Android" Value="100,15,15,5" />
-                                </OnPlatform>
-                            </Label.Margin>
-                        </Label>
-
+                            Text="{Binding RequestDate}" />
 
                         <Label
                             Grid.Row="1"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
-                            Text="{Binding RequestAddress.DisplayAddress}">
-
-                            <Label.Margin>
-                                <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="WinPhone, Windows" Value="50,15,0,5" />
-                                    <On Platform="iOS" Value="35,15,0,5" />
-                                    <On Platform="Android" Value="55,15,0,5" />
-                                </OnPlatform>
-                            </Label.Margin>
-
-
-                        </Label>
+                            Text="{Binding RequestAddress.DisplayAddress}" />
+                        <BoxView
+                            Grid.Row="2"
+                            HorizontalOptions="FillAndExpand"
+                            Color="LightGray" />
                     </Grid>
                 </ViewCell>
             </DataTemplate>
@@ -83,8 +56,8 @@
 
             <!--  Sub navigation bar with home and hospital tabs  -->
             <StackLayout
-                BackgroundColor="Gray"
-                HeightRequest="100"
+                BackgroundColor="{StaticResource AccentColor}"
+                HeightRequest="56"
                 HorizontalOptions="FillAndExpand">
                 <Grid HorizontalOptions="Center">
                     <Grid.ColumnDefinitions>
@@ -104,15 +77,15 @@
                             <OnPlatform x:TypeArguments="Thickness">
                                 <On Platform="WinPhone, Windows" Value="0" />
                                 <On Platform="iOS" Value="0,15,25,15" />
-                                <On Platform="Android" Value="0,15,25,15" />
+                                <On Platform="Android" Value="0,15,100,15" />
                             </OnPlatform>
                         </StackLayout.Margin>
 
                         <ctrl:CustomImage
-                            HeightRequest="50"
-                            SourcePlatform="bell"
+                            HeightRequest="25"
+                            SourcePlatform="ico_house"
                             VerticalOptions="Center"
-                            WidthRequest="50" />
+                            WidthRequest="25" />
                         <Label
                             FontSize="{StaticResource MediumSize}"
                             Text="{Binding [AllYourRequestsHome]}"
@@ -134,10 +107,10 @@
                             </OnPlatform>
                         </StackLayout.Margin>
                         <ctrl:CustomImage
-                            HeightRequest="50"
-                            SourcePlatform="bell"
+                            HeightRequest="25"
+                            SourcePlatform="ico_hospital"
                             VerticalOptions="Center"
-                            WidthRequest="50" />
+                            WidthRequest="25" />
                         <Label
                             FontSize="{StaticResource MediumSize}"
                             Text="{Binding [AllYourRequestsHospital]}"

@@ -177,6 +177,9 @@ namespace AeccApp.Core.ViewModels
             CurrentRequest.RequestComments = RequestComments;
             CurrentRequest.RequestDate = DateToApplyParsed;
             CurrentRequest.RequestTime = TimeToApplyParsed;
+
+            CurrentRequest.RequestTimeStamp = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
+
             if (IsAddressGettingSaved)
             {
                 CurrentRequest.RequestAddress.IsHospitalAddress = true;
