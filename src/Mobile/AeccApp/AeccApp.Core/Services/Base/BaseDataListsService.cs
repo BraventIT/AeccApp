@@ -31,7 +31,19 @@ namespace AeccApp.Core.Services
             }
             dataList.Insert(0, data);
 
-            if (MaxItems>0 && dataList.Count > MaxItems)
+            if (MaxItems > 0 && dataList.Count > MaxItems)
+            {
+                dataList.RemoveAt(dataList.Count - 1);
+            }
+            Save(dataList);
+        }
+        protected async Task InsertDataAsync( T data)
+        {
+            List<T> dataList = await GetListAsync();
+         
+            dataList.Insert(0, data);
+
+            if (MaxItems > 0 && dataList.Count > MaxItems)
             {
                 dataList.RemoveAt(dataList.Count - 1);
             }

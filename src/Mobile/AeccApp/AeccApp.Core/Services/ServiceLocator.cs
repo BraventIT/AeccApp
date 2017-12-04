@@ -22,9 +22,12 @@ namespace AeccApp.Core.Services
             IocContainer.RegisterAsSingleton<IEmailService, EmailService>();
             IocContainer.RegisterAsSingleton<IUserService, UserService>();
             IocContainer.RegisterAsSingleton<IHomeRequestService, HomeRequestService>();
-            IocContainer.RegisterAsSingleton<INewsRequestService, NewsRequestService>();
+            IocContainer.RegisterAsSingleton<INewsRequestService, NewsRequestService>();  
 
+            IocContainer.RegisterAsSingleton<IHospitalRequestDataService, HospitalRequestDataService>();
+            IocContainer.RegisterAsSingleton<IHomeRequestsDataService, HomeRequestsDataService>();
             IocContainer.RegisterAsSingleton<IAddressesDataService, AddressesDataService>();
+   
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.Register<IHttpRequestProvider, HttpRequestProvider>();
@@ -55,6 +58,15 @@ namespace AeccApp.Core.Services
         public static IAddressesDataService HomeAddressesDataService
         {
             get { return Resolve<IAddressesDataService>(); }
+        }
+
+        public static IHomeRequestsDataService HomeRequestsDataService
+        {
+            get { return Resolve<IHomeRequestsDataService>(); }
+        }
+        public static IHospitalRequestDataService HospitalRequestDataService
+        {
+            get { return Resolve<IHospitalRequestDataService>(); }
         }
 
         public static INewsDataService NewsDataService

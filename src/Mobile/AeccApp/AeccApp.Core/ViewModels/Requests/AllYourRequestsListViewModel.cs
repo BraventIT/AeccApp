@@ -6,23 +6,28 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using System.Threading.Tasks;
+using AeccApp.Core.Services;
 
 namespace AeccApp.Core.ViewModels
 {
     class AllYourRequestsListViewModel : ViewModelBase
     {
 
+        private IHomeRequestsDataService HomeRequestsDataService { get; } = ServiceLocator.HomeRequestsDataService;
+        private IHospitalRequestDataService HospitalRequestDataService { get; } = ServiceLocator.HospitalRequestDataService;
 
         #region Constructor and initialize
-        public AllYourRequestsListViewModel()
-        {
 
-        }
 
         public override Task ActivateAsync()
         {
-            //TODO LOAD HOME AND HOSPITAL REQUESTS
-            return Task.CompletedTask;
+            return ExecuteOperationAsync(async () =>
+            {
+                var HomeRequests = await HomeRequestsDataService.GetListAsync();
+                var HospitalRequest = await HospitalRequestDataService.GetListAsync();
+
+                int i = 0;
+            });
         }
 
         public override Task InitializeAsync(object navigationData)

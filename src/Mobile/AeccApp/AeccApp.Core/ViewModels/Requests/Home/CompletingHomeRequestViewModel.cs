@@ -1,5 +1,6 @@
 ﻿using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
+using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using System;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace AeccApp.Core.ViewModels
 {
     public class CompletingHomeRequestViewModel : ViewModelBase
     {
+        private IHomeRequestsDataService HomeRequestsDataService { get; } = ServiceLocator.HomeRequestsDataService;
+
         #region Constructor and initialization
 
         public CompletingHomeRequestViewModel()
@@ -156,6 +159,7 @@ namespace AeccApp.Core.ViewModels
             CurrentRequest.RequestDate = DateToApplyParsed;
             CurrentRequest.RequestTime = TimeToApplyParsed;
             //TODO #33 Send request with email service
+            await HomeRequestsDataService.InsertOrUpdateAsync(CurrentRequest);
             await NavigationService.HidePopupAsync();
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
