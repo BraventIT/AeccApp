@@ -68,7 +68,7 @@
                     BackgroundColor="{StaticResource LightSilver}"
                     BorderRadius="25"
                     Command="{Binding OpenDateAndTimePopupCommand}"
-                    HeightRequest="40"
+                    HeightRequest="46"
                     HorizontalOptions="CenterAndExpand"
                     ImageHeightRequest="12"
                     ImageWidthRequest="12"
@@ -88,24 +88,46 @@
                     Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
                     Text="{Binding [CompletingRequestComments]}"
                     TextColor="{StaticResource LightGraySubtitle}" />
-                <StackLayout Margin="0,0,0,15" WidthRequest="350">
-                    <Frame>
-                        <Entry
-                            Margin="0,0,0,15"
+                <StackLayout
+                    Margin="0,0,0,15"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Frame
+                        Margin="35,0,35,0"
+                        Padding="1"
+                        BackgroundColor="{StaticResource LightGraySubtitle}"
+                        CornerRadius="20"
+                        HasShadow="False"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        <Frame
+                            Margin="0"
+                            Padding="15,3,75,3"
+                            BackgroundColor="White"
+                            CornerRadius="20"
+                            HasShadow="False"
                             HorizontalOptions="Center"
-                            HorizontalTextAlignment="Start"
-                            Placeholder="{Binding [CompletingRequestCommentsPlaceHolder]}"
-                            Text="{Binding RequestComments}">
-                            <Entry.Behaviors>
-                                <beh:EventToCommandBehavior
-                                    Command="{Binding CommentsEntryListenerCommand}"
-                                    EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
-                                    EventName="TextChanged" />
-                            </Entry.Behaviors>
-                        </Entry>
+                            VerticalOptions="Center">
+
+
+                            <Entry
+                                Margin="0"
+                                FontSize="{StaticResource MidLargeSize}"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Start"
+                                Placeholder="{Binding [CompletingRequestCommentsPlaceHolder]}"
+                                Text="{Binding RequestComments}">
+                                <Entry.Behaviors>
+                                    <beh:EventToCommandBehavior
+                                        Command="{Binding CommentsEntryListenerCommand}"
+                                        EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
+                                        EventName="TextChanged" />
+                                </Entry.Behaviors>
+                            </Entry>
+                        </Frame>
                     </Frame>
                     <Label
-                        Margin="0,0,60,0"
+                        Margin="0,0,39,0"
                         HorizontalOptions="End"
                         Text="{Binding CommentsLenghtReminder}" />
                 </StackLayout>
