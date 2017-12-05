@@ -406,7 +406,7 @@
     <value>Piso,Letra</value>
   </data>
   <data name="NewHomeAddressViewHelp" xml:space="preserve">
-    <value>Teclea la dirección y selecciónala de la lista</value>
+    <value>Indica primero tu calle a través del buscador, y luego añade más información adicional de interés.</value>
   </data>
   <data name="NewHomeAddressViewMoreInfo" xml:space="preserve">
     <value>Amplía la información</value>

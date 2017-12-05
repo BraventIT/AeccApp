@@ -926,7 +926,7 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Teclea la dirección y selecciónala de la lista.
+        ///   Looks up a localized string similar to Indica primero tu calle a través del buscador, y luego añade más información adicional de interés..
         /// </summary>
         public static string NewHomeAddressViewHelp {
             get {
