@@ -28,10 +28,14 @@
                         <Label
                             Grid.Row="0"
                             Grid.Column="0"
-                            Text="{Binding RequestType.Name}" />
+                            Margin="20,25,23,0"
+                            LineBreakMode="TailTruncation"
+                            Text="{Binding RequestType.Name}"
+                            WidthRequest="270" />
                         <Label
                             Grid.Row="0"
                             Grid.Column="1"
+                            Margin="0,25,20,0"
                             HorizontalOptions="End"
                             Text="{Binding RequestDate}" />
 
@@ -39,9 +43,12 @@
                             Grid.Row="1"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
+                            Margin="20,5,0,25"
                             Text="{Binding RequestAddress.DisplayAddress}" />
                         <BoxView
                             Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
                             HorizontalOptions="FillAndExpand"
                             Color="LightGray" />
                     </Grid>
@@ -51,148 +58,123 @@
     </ContentView.Resources>
 
     <StackLayout>
+        <!--  Sub navigation bar with home and hospital tabs  -->
+        <StackLayout
+            Padding="20,5,20,5"
+            BackgroundColor="{StaticResource AccentColor}"
+            HeightRequest="56"
+            HorizontalOptions="FillAndExpand">
+            <Grid HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout
+                    Margin="0,0,70,0"
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding HomeTabCommand}" />
+                    </StackLayout.GestureRecognizers>
+
+                    <ctrl:CustomImage
+                        HeightRequest="25"
+                        SourcePlatform="ico_house"
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
+                    <Label
+                        FontSize="{StaticResource MediumSize}"
+                        Text="{Binding [AllYourRequestsHome]}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding HospitalTabCommand}" />
+                    </StackLayout.GestureRecognizers>
+
+                    <ctrl:CustomImage
+                        HeightRequest="25"
+                        SourcePlatform="ico_hospital"
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
+                    <Label
+                        FontSize="{StaticResource MediumSize}"
+                        Text="{Binding [AllYourRequestsHospital]}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+
+        <!--  Home requests list  -->
         <StackLayout>
-
-
-            <!--  Sub navigation bar with home and hospital tabs  -->
-            <StackLayout
-                BackgroundColor="{StaticResource AccentColor}"
-                HeightRequest="56"
-                HorizontalOptions="FillAndExpand">
-                <Grid HorizontalOptions="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <StackLayout
-                        Grid.Column="0"
+            <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
+                <StackLayout
+                    Margin="0"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsHomeRequestsListEmpty}"
+                    VerticalOptions="Center">
+                    <ctrl:CustomImage Source="round_question_icon" />
+                    <Label
+                        FontSize="{StaticResource LargeSize}"
                         HorizontalOptions="Center"
-                        Orientation="Horizontal">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding HomeTabCommand}" />
-                        </StackLayout.GestureRecognizers>
+                        Text="{Binding [AllYourRequestsListOops]}" />
+                    <Label
+                        FontSize="{StaticResource LargeSize}"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding [AllYourRequestsListNoHomeRequests]}" />
+                </StackLayout>
 
-                        <StackLayout.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone, Windows" Value="0" />
-                                <On Platform="iOS" Value="0,15,25,15" />
-                                <On Platform="Android" Value="0,15,100,15" />
-                            </OnPlatform>
-                        </StackLayout.Margin>
-
-                        <ctrl:CustomImage
-                            HeightRequest="25"
-                            SourcePlatform="ico_house"
-                            VerticalOptions="Center"
-                            WidthRequest="25" />
-                        <Label
-                            FontSize="{StaticResource MediumSize}"
-                            Text="{Binding [AllYourRequestsHome]}"
-                            VerticalOptions="Center" />
-                    </StackLayout>
-
-                    <StackLayout
-                        Grid.Column="1"
-                        HorizontalOptions="Center"
-                        Orientation="Horizontal">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding HospitalTabCommand}" />
-                        </StackLayout.GestureRecognizers>
-                        <StackLayout.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone, Windows" Value="0" />
-                                <On Platform="iOS" Value="0,15,25,15" />
-                                <On Platform="Android" Value="0,15,25,15" />
-                            </OnPlatform>
-                        </StackLayout.Margin>
-                        <ctrl:CustomImage
-                            HeightRequest="25"
-                            SourcePlatform="ico_hospital"
-                            VerticalOptions="Center"
-                            WidthRequest="25" />
-                        <Label
-                            FontSize="{StaticResource MediumSize}"
-                            Text="{Binding [AllYourRequestsHospital]}"
-                            VerticalOptions="Center" />
-                    </StackLayout>
-                </Grid>
+                <ListView
+                    HasUnevenRows="True"
+                    HeightRequest="600"
+                    ItemTemplate="{StaticResource requestsList}"
+                    ItemsSource="{Binding HomeRequestsList}">
+                    <ListView.Footer>
+                        <!--  New request button  -->
+                        <Button
+                            Margin="10,35,10,10"
+                            Command="{Binding NewRequestCommand}"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource ButtonStyle}"
+                            Text="{Binding [CommonNewRequest]}" />
+                    </ListView.Footer>
+                </ListView>
             </StackLayout>
 
-            <!--  Home requests list  -->
-            <StackLayout Padding="15">
-                <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
-                    <StackLayout
-                        Margin="20"
-                        HorizontalOptions="Center"
-                        IsVisible="{Binding IsHomeRequestsListEmpty}"
-                        VerticalOptions="Center">
-                        <ctrl:CustomImage Source="round_question_icon" />
-                        <Label
-                            FontSize="{StaticResource LargeSize}"
+            <!--  Hospital requests list  -->
+            <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList}">
+                <StackLayout
+                    Margin="0"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsHospitalRequestsListEmpty}"
+                    VerticalOptions="Center">
+                    <ctrl:CustomImage Source="round_question_icon" />
+                    <Label Text="{Binding [AllYourRequestsListOops]}" />
+                    <Label Text="{Binding [AllYourRequestsListNoHospitalRequests]}" />
+                </StackLayout>
+                <ListView
+                    HasUnevenRows="True"
+                    HeightRequest="600"
+                    ItemTemplate="{StaticResource requestsList}"
+                    ItemsSource="{Binding HospitalRequestsList}">
+
+                    <ListView.Footer>
+                        <!--  New request button  -->
+                        <Button
+                            Margin="10,35,10,10"
+                            Command="{Binding NewRequestCommand}"
                             HorizontalOptions="Center"
-                            Text="{Binding [AllYourRequestsListOops]}" />
-                        <Label
-                            FontSize="{StaticResource LargeSize}"
-                            HorizontalTextAlignment="Center"
-                            Text="{Binding [AllYourRequestsListNoHomeRequests]}" />
-                    </StackLayout>
-
-                    <ListView
-                        HasUnevenRows="True"
-                        HeightRequest="600"
-                        ItemTemplate="{StaticResource requestsList}"
-                        ItemsSource="{Binding HomeRequestsList}">
-                        <ListView.Footer>
-                            <!--  New request button  -->
-                            <ctrlXlabs:ImageButton
-                                Grid.Row="1"
-                                Margin="10"
-                                Command="{Binding NewRequestCommand}"
-                                HorizontalOptions="Center"
-                                SourcePlatform="round_plus"
-                                Style="{StaticResource ImageButtonLargeStyle}"
-                                Text="{Binding [CommonNewRequest]}" />
-                        </ListView.Footer>
-                    </ListView>
-                </StackLayout>
-
-                <!--  Hospital requests list  -->
-                <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList}">
-                    <StackLayout
-                        Margin="20"
-                        HorizontalOptions="Center"
-                        IsVisible="{Binding IsHospitalRequestsListEmpty}"
-                        VerticalOptions="Center">
-                        <ctrl:CustomImage Source="round_question_icon" />
-                        <Label Text="{Binding [AllYourRequestsListOops]}" />
-                        <Label Text="{Binding [AllYourRequestsListNoHospitalRequests]}" />
-                    </StackLayout>
-                    <ListView
-                        HasUnevenRows="True"
-                        HeightRequest="600"
-                        ItemTemplate="{StaticResource requestsList}"
-                        ItemsSource="{Binding HospitalRequestsList}">
-
-                        <ListView.Footer>
-                            <!--  New request button  -->
-                            <ctrlXlabs:ImageButton
-                                Grid.Row="1"
-                                Margin="10"
-                                Command="{Binding NewRequestCommand}"
-                                HorizontalOptions="Center"
-                                SourcePlatform="round_plus"
-                                Style="{StaticResource ImageButtonLargeStyle}"
-                                Text="{Binding [CommonNewRequest]}" />
-
-                        </ListView.Footer>
-                        <ListView.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone, Windows" Value="100" />
-                            </OnPlatform>
-                        </ListView.Margin>
-                    </ListView>
-                </StackLayout>
+                            Style="{StaticResource ButtonStyle}"
+                            Text="{Binding [CommonNewRequest]}" />
+                    </ListView.Footer>
+                </ListView>
             </StackLayout>
         </StackLayout>
     </StackLayout>

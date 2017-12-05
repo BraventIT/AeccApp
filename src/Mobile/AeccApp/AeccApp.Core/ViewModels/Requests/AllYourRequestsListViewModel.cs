@@ -24,9 +24,9 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
+                //TODO no carga la primera vez, si la segunda. Para reproducir abrir pantalla, volver a dashboard, volver a pantalla
                 HomeRequestsList = new List<RequestModel>();
                 HospitalRequestsList = new List<RequestModel>();
-
                 var HomeRequests = await HomeRequestsDataService.GetListAsync();
                 HomeRequestsList.AddRange(HomeRequests);
                 var HospitalRequest = await HospitalRequestDataService.GetListAsync();
