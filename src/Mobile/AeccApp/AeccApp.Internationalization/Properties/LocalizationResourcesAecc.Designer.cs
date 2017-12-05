@@ -1331,7 +1331,7 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tu petición ha sido enviada satisfactoriamente. Pronto te comunicaremos su estado..
+        ///   Looks up a localized string similar to Tu petición ha sido enviada. Pronto nos pondremos en contacto contigo vía email..
         /// </summary>
         public static string PopupRequestSentText {
             get {

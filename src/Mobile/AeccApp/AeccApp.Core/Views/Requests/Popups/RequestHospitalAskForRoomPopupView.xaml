@@ -9,72 +9,56 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <ContentView
-        Margin="20"
-        Style="{StaticResource BorderStyle}"
-        VerticalOptions="Center">
-        <ContentView Style="{StaticResource InternalViewStyle}">
+    <Frame Style="{StaticResource PopupFrameStyle}">
 
-            <Grid
-                Margin="20"
-                Padding="5"
-                BackgroundColor="{StaticResource BackgroundColor}"
+        <StackLayout Padding="20">
+            <ctrl:CustomImage
+                Margin="10"
+                HeightRequest="30"
+                HorizontalOptions="End"
+                SourcePlatform="x_icon"
+                VerticalOptions="Center"
+                WidthRequest="30">
+                <ctrl:CustomImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
+                </ctrl:CustomImage.GestureRecognizers>
+
+            </ctrl:CustomImage>
+
+            <ctrl:CustomImage
+                HeightRequest="50"
                 HorizontalOptions="Center"
-                VerticalOptions="Center">
+                SourcePlatform="round_question_icon"
+                VerticalOptions="Center"
+                WidthRequest="50" />
 
-                <StackLayout>
-                    <ctrl:CustomImage
-                        Grid.Column="0"
-                        Margin="10"
-                        HeightRequest="30"
-                        HorizontalOptions="End"
-                        SourcePlatform="x_icon"
-                        VerticalOptions="Center"
-                        WidthRequest="30">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
-                        </ctrl:CustomImage.GestureRecognizers>
+            <Label
+                Margin="10,10,10,5"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Text="{Binding [PopupHospitalAskForRoomTitle]}" />
 
-                    </ctrl:CustomImage>
+            <Label
+                Margin="10,5,10,10"
+                HorizontalOptions="Center"
+                Text="{Binding [PopupHospitalAskForRoomText]}" />
 
-                    <ctrl:CustomImage
-                        Grid.Column="0"
-                        HeightRequest="50"
-                        HorizontalOptions="Center"
-                        SourcePlatform="round_question_icon"
-                        VerticalOptions="Center"
-                        WidthRequest="50" />
+            <Entry HorizontalOptions="FillAndExpand" Text="{Binding Room}" />
 
-                    <Label
-                        Margin="10,10,10,5"
-                        FontSize="Large"
-                        HorizontalOptions="Center"
-                        Text="{Binding [PopupHospitalAskForRoomTitle]}" />
+            <Label
+                Margin="10,5,10,10"
+                HorizontalOptions="Center"
+                Text="{Binding [PopupHospitalAskForRoomTextTwo]}" />
 
-                    <Label
-                        Margin="10,5,10,10"
-                        HorizontalOptions="Center"
-                        Text="{Binding [PopupHospitalAskForRoomText]}" />
+            <Entry HorizontalOptions="FillAndExpand" Text="{Binding Hall}" />
 
-                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Room}" />
+            <Button
+                Command="{Binding ContinueWithRequestCommand}"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource ButtonStyle}"
+                Text="{Binding [CommonContinue]}" />
 
-                    <Label
-                        Margin="10,5,10,10"
-                        HorizontalOptions="Center"
-                        Text="{Binding [PopupHospitalAskForRoomTextTwo]}" />
+        </StackLayout>
 
-                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Hall}" />
-
-                    <Button
-                        Command="{Binding ContinueWithRequestCommand}"
-                        HorizontalOptions="CenterAndExpand"
-                        Style="{StaticResource ButtonStyle}"
-                        Text="{Binding [CommonContinue]}" />
-
-                </StackLayout>
-
-            </Grid>
-
-        </ContentView>
-    </ContentView>
+    </Frame>
 </vPop:PopupPage>

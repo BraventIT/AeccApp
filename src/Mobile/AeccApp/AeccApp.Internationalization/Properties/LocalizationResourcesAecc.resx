@@ -541,7 +541,7 @@
     <value>¿Estás seguro de que quieres enviar la petición?</value>
   </data>
   <data name="PopupRequestSentText" xml:space="preserve">
-    <value>Tu petición ha sido enviada satisfactoriamente. Pronto te comunicaremos su estado.</value>
+    <value>Tu petición ha sido enviada. Pronto nos pondremos en contacto contigo vía email.</value>
   </data>
   <data name="PopupRequestSentTextTitle" xml:space="preserve">
     <value>¡Gracias!</value>

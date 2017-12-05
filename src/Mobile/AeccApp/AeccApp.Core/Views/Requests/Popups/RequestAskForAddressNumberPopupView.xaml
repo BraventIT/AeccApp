@@ -9,38 +9,28 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <ContentView
-        Margin="20"
-        Style="{StaticResource BorderStyle}"
-        VerticalOptions="Center">
-        <ContentView Style="{StaticResource InternalViewStyle}">
+    <Frame Style="{StaticResource PopupFrameStyle}">
+        <StackLayout Padding="30">
 
-            <Grid
-                Padding="15"
-                BackgroundColor="{StaticResource BackgroundColor}"
+            <Label
+                FontAttributes="Bold"
                 HorizontalOptions="Center"
-                VerticalOptions="Center">
-                <StackLayout>
+                HorizontalTextAlignment="Center"
+                Text="{Binding [PopupRequestAskForAddresNumberText]}" />
 
-                    <Label HorizontalOptions="Center" Text="{Binding [PopupRequestAskForAddresNumberText]}" />
+            <StackLayout HorizontalOptions="Center">
+                <Button
+                    Command="{Binding ContinueWithoutInputANumberCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource ButtonStyle}"
+                    Text="{Binding [CommonContinue]}" />
+                <Button
+                    Command="{Binding ClosePopupCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource ButtonStyle}"
+                    Text="{Binding [CommonAddANumber]}" />
 
-                    <StackLayout HorizontalOptions="Center">
-                        <Button
-                            Command="{Binding ContinueWithoutInputANumberCommand}"
-                            HorizontalOptions="CenterAndExpand"
-                            Style="{StaticResource ButtonStyle}"
-                            Text="{Binding [CommonContinue]}" />
-                        <Button
-                            Command="{Binding ClosePopupCommand}"
-                            HorizontalOptions="CenterAndExpand"
-                            Style="{StaticResource ButtonStyle}"
-                            Text="{Binding [CommonAddANumber]}" />
-
-                    </StackLayout>
-                </StackLayout>
-            </Grid>
-
-
-        </ContentView>
-    </ContentView>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
 </vPop:PopupPage>
