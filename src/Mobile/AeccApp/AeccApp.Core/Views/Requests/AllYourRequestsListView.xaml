@@ -148,7 +148,7 @@
         <StackLayout>
             <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
                 <StackLayout
-                    Margin="0"
+                    Margin="0,70,0,35"
                     HorizontalOptions="Center"
                     IsVisible="{Binding IsHomeRequestsListEmpty}"
                     VerticalOptions="Center">
@@ -156,6 +156,7 @@
                     <Label
                         FontSize="{StaticResource LargeSize}"
                         HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
                         Text="{Binding [AllYourRequestsListOops]}" />
                     <Label
                         FontSize="{StaticResource LargeSize}"
@@ -183,14 +184,22 @@
             <!--  Hospital requests list  -->
             <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList}">
                 <StackLayout
-                    Margin="0"
+                    Margin="0,70,0,35"
                     HorizontalOptions="Center"
                     IsVisible="{Binding IsHospitalRequestsListEmpty}"
                     VerticalOptions="Center">
                     <ctrl:CustomImage Source="Ico_cruz" />
-                    <Label Text="{Binding [AllYourRequestsListOops]}" />
-                    <Label Text="{Binding [AllYourRequestsListNoHospitalRequests]}" />
+                    <Label
+                        FontSize="{StaticResource LargeSize}"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding [AllYourRequestsListOops]}" />
+                    <Label
+                        FontSize="{StaticResource LargeSize}"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding [AllYourRequestsListNoHomeRequests]}" />
                 </StackLayout>
+
                 <ListView
                     HasUnevenRows="True"
                     HeightRequest="600"

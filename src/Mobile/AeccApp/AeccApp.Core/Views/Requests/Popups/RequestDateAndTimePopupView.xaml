@@ -9,83 +9,61 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <ContentView
-        Margin="20"
-        Style="{StaticResource BorderStyle}"
-        VerticalOptions="Center">
-        <ContentView Style="{StaticResource InternalViewStyle}">
-
-            <Grid
-                BackgroundColor="{StaticResource BackgroundColor}"
-                HorizontalOptions="Center"
-                VerticalOptions="Center">
-                <Grid.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="WinPhone, Windows" Value="10" />
-                        <On Platform="iOS" Value="50" />
-                        <On Platform="Android" Value="50" />
-                    </OnPlatform>
-                </Grid.Margin>
+    <Frame Padding="15" Style="{StaticResource PopupFrameStyle}">
+        <StackLayout>
 
 
-                <StackLayout>
+            <Grid BackgroundColor="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-
-                    <Grid BackgroundColor="LightGray">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <ctrl:CustomImage
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Margin="10"
-                            HorizontalOptions="Start"
-                            SourcePlatform="x_icon"
-                            VerticalOptions="Center">
-                            <ctrl:CustomImage.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
-                            </ctrl:CustomImage.GestureRecognizers>
-                        </ctrl:CustomImage>
-                        <ctrl:CustomImage
-                            Grid.Column="1"
-                            Margin="10"
-                            HorizontalOptions="End"
-                            SourcePlatform="tick_icon"
-                            VerticalOptions="Center">
-                            <ctrl:CustomImage.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ApplyDateAndTimeCommand}" />
-                            </ctrl:CustomImage.GestureRecognizers>
-                        </ctrl:CustomImage>
-
-                    </Grid>
-
-                    <StackLayout
-                        Padding="10"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="Start">
-                        <Label
-                            Margin="10,10,10,5"
-                            HorizontalOptions="Center"
-                            Text="{Binding [CommonDate]}" />
-                        <DatePicker Margin="10,5,10,5" Date="{Binding DateSelected, Mode=TwoWay}" />
-
-                        <Label
-                            Margin="10,5,10,5"
-                            HorizontalOptions="Center"
-                            Text="{Binding [CommonTime]}" />
-                        <TimePicker Margin="10" Time="{Binding TimeSelected, Mode=TwoWay}" />
-                    </StackLayout>
-
-
-                </StackLayout>
+                <ctrl:CustomImage
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="10"
+                    HorizontalOptions="Start"
+                    SourcePlatform="x_icon"
+                    VerticalOptions="Center">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+                </ctrl:CustomImage>
+                <ctrl:CustomImage
+                    Grid.Column="1"
+                    Margin="10"
+                    HorizontalOptions="End"
+                    SourcePlatform="tick_icon"
+                    VerticalOptions="Center">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ApplyDateAndTimeCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+                </ctrl:CustomImage>
 
             </Grid>
 
-        </ContentView>
-    </ContentView>
+            <StackLayout
+                Padding="10"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start">
+                <Label
+                    Margin="10,10,10,5"
+                    HorizontalOptions="Center"
+                    Text="{Binding [CommonDate]}" />
+                <DatePicker Margin="10,5,10,5" Date="{Binding DateSelected, Mode=TwoWay}" />
+
+                <Label
+                    Margin="10,5,10,5"
+                    HorizontalOptions="Center"
+                    Text="{Binding [CommonTime]}" />
+                <TimePicker Margin="10" Time="{Binding TimeSelected, Mode=TwoWay}" />
+            </StackLayout>
+
+
+        </StackLayout>
+    </Frame>
 </vPop:PopupPage>
