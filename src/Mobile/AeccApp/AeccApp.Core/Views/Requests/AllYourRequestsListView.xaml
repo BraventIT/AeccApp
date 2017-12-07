@@ -29,28 +29,32 @@
                             Grid.Row="0"
                             Grid.Column="0"
                             Margin="20,25,23,0"
+                            FontAttributes="Bold"
                             LineBreakMode="TailTruncation"
                             Text="{Binding RequestType.Name}"
-                            WidthRequest="270" />
+                            TextColor="{StaticResource GreyText2}"
+                            WidthRequest="200" />
                         <Label
                             Grid.Row="0"
                             Grid.Column="1"
                             Margin="0,25,20,0"
                             HorizontalOptions="End"
-                            Text="{Binding RequestDate}" />
+                            Text="{Binding RequestDate}"
+                            TextColor="{StaticResource LightGrey2}" />
 
                         <Label
                             Grid.Row="1"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Margin="20,5,0,25"
-                            Text="{Binding RequestAddress.DisplayAddress}" />
+                            Text="{Binding RequestAddress.DisplayAddress}"
+                            TextColor="{StaticResource GreyText2}" />
                         <BoxView
                             Grid.Row="2"
                             Grid.ColumnSpan="2"
                             HeightRequest="1"
                             HorizontalOptions="FillAndExpand"
-                            Color="LightGray" />
+                            Color="{StaticResource GreyText}" />
                     </Grid>
                 </ViewCell>
             </DataTemplate>
@@ -61,17 +65,22 @@
         <!--  Sub navigation bar with home and hospital tabs  -->
         <StackLayout
             Padding="20,5,20,5"
-            BackgroundColor="{StaticResource AccentColor}"
-            HeightRequest="56"
+            BackgroundColor="{StaticResource TextGreenColor}"
+            HeightRequest="45"
             HorizontalOptions="FillAndExpand">
             <Grid HorizontalOptions="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
                 <StackLayout
-                    Margin="0,0,70,0"
+                    Margin="0,0,0,0"
                     HorizontalOptions="Center"
                     Orientation="Horizontal">
                     <StackLayout.GestureRecognizers>
@@ -89,9 +98,23 @@
                         TextColor="White"
                         VerticalOptions="Center" />
                 </StackLayout>
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HeightRequest="2"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}"
+                    VerticalOptions="End"
+                    Color="Black" />
+
+                <BoxView
+                    Grid.Column="1"
+                    WidthRequest="70"
+                    Color="Transparent" />
 
                 <StackLayout
-                    Grid.Column="1"
+                    Grid.Column="2"
+                    Margin="0"
                     HorizontalOptions="Center"
                     Orientation="Horizontal">
                     <StackLayout.GestureRecognizers>
@@ -109,6 +132,15 @@
                         TextColor="White"
                         VerticalOptions="Center" />
                 </StackLayout>
+
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    HeightRequest="2"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding SwitchHomeAndHospitalList}"
+                    VerticalOptions="End"
+                    Color="Black" />
             </Grid>
         </StackLayout>
 
@@ -120,7 +152,7 @@
                     HorizontalOptions="Center"
                     IsVisible="{Binding IsHomeRequestsListEmpty}"
                     VerticalOptions="Center">
-                    <ctrl:CustomImage Source="round_question_icon" />
+                    <ctrl:CustomImage Source="Ico_cruz" />
                     <Label
                         FontSize="{StaticResource LargeSize}"
                         HorizontalOptions="Center"
@@ -155,7 +187,7 @@
                     HorizontalOptions="Center"
                     IsVisible="{Binding IsHospitalRequestsListEmpty}"
                     VerticalOptions="Center">
-                    <ctrl:CustomImage Source="round_question_icon" />
+                    <ctrl:CustomImage Source="Ico_cruz" />
                     <Label Text="{Binding [AllYourRequestsListOops]}" />
                     <Label Text="{Binding [AllYourRequestsListNoHospitalRequests]}" />
                 </StackLayout>

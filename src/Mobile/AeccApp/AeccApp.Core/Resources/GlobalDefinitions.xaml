@@ -11,6 +11,7 @@
     <Color x:Key="SeeThroughWhite">#B2FFFFFF</Color>
     <Color x:Key="SeeThrough">#B2000000</Color>
     <Color x:Key="GreyText">#394A59</Color>
+    <Color x:Key="GreyText2">#FF2C3947</Color>
     <Color x:Key="GreenText">#8DD101</Color>
     <Color x:Key="LightGrey">#1A394A59</Color>
     <Color x:Key="PlanarLightGrey">#EBECEE</Color>
