@@ -49,10 +49,10 @@
                             Grid.RowSpan="2"
                             Grid.Column="1"
                             Margin="0,10,20,0"
-                            HeightRequest="25"
+                            HeightRequest="17"
                             HorizontalOptions="End"
                             SourcePlatform="right_arrow"
-                            WidthRequest="25" />
+                            WidthRequest="9" />
 
                         <BoxView
                             Grid.Row="2"
@@ -84,92 +84,88 @@
 
         <StackLayout>
             <!--  Sub navigation bar with map and hospital list  -->
-            <StackLayout BackgroundColor="LightGray" HorizontalOptions="FillAndExpand">
+            <StackLayout
+                Padding="20,5,20,5"
+                BackgroundColor="{StaticResource TextGreenColor}"
+                HeightRequest="45"
+                HorizontalOptions="FillAndExpand">
                 <Grid HorizontalOptions="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <BoxView
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Margin="0,0,10,0"
-                        BackgroundColor="GreenYellow"
-                        HeightRequest="7"
-                        HorizontalOptions="FillAndExpand"
-                        IsVisible="{Binding SwitchBetweenAndHospitalList}" />
-                    <BoxView
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="10,0,0,0"
-                        BackgroundColor="GreenYellow"
-                        HeightRequest="7"
-                        HorizontalOptions="FillAndExpand"
-                        IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}" />
-
                     <StackLayout
-                        Grid.Column="1"
-                        Margin="10,0,0,0"
-                        HorizontalOptions="Center"
-                        Orientation="Horizontal">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding HospitalListTabCommand}" />
-                        </StackLayout.GestureRecognizers>
-                        <StackLayout.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone, Windows" Value="0" />
-                                <On Platform="iOS" Value="0,15,25,10" />
-                                <On Platform="Android" Value="0,5,25,5" />
-                            </OnPlatform>
-                        </StackLayout.Margin>
-                        <ctrl:CustomImage
-                            HeightRequest="50"
-                            SourcePlatform="bell"
-                            VerticalOptions="Center"
-                            WidthRequest="50" />
-                        <Label
-                            FontSize="{StaticResource MediumSize}"
-                            Text="{Binding [CommonList]}"
-                            VerticalOptions="Center" />
-                    </StackLayout>
-
-
-                    <StackLayout
-                        Grid.Column="0"
-                        Margin="0,0,10,0"
+                        Margin="0,0,0,0"
                         HorizontalOptions="Center"
                         Orientation="Horizontal">
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding HospitalMapTabCommand}" />
                         </StackLayout.GestureRecognizers>
 
-                        <StackLayout.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone, Windows" Value="0" />
-                                <On Platform="iOS" Value="0,15,25,15" />
-                                <On Platform="Android" Value="0,5,25,5" />
-                            </OnPlatform>
-                        </StackLayout.Margin>
-
                         <ctrl:CustomImage
-                            HeightRequest="50"
-                            SourcePlatform="bell"
+                            HeightRequest="25"
+                            SourcePlatform="map_icon"
                             VerticalOptions="Center"
-                            WidthRequest="50" />
+                            WidthRequest="25" />
                         <Label
                             FontSize="{StaticResource MediumSize}"
                             Text="{Binding [CommonMap]}"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+                    </StackLayout>
+                    <BoxView
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HeightRequest="2"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding SwitchBetweenAndHospitalList}"
+                        VerticalOptions="End"
+                        Color="Black" />
+
+                    <BoxView
+                        Grid.Column="1"
+                        WidthRequest="70"
+                        Color="Transparent" />
+
+                    <StackLayout
+                        Grid.Column="2"
+                        Margin="0"
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding HospitalListTabCommand}" />
+                        </StackLayout.GestureRecognizers>
+
+                        <ctrl:CustomImage
+                            HeightRequest="25"
+                            SourcePlatform="list_icon"
+                            VerticalOptions="Center"
+                            WidthRequest="25" />
+                        <Label
+                            FontSize="{StaticResource MediumSize}"
+                            Text="{Binding [CommonList]}"
+                            TextColor="White"
                             VerticalOptions="Center" />
                     </StackLayout>
 
+                    <BoxView
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        HeightRequest="2"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}"
+                        VerticalOptions="End"
+                        Color="Black" />
+
                 </Grid>
             </StackLayout>
+
 
             <StackLayout>
                 <!--  Hospitals map  -->
@@ -197,56 +193,74 @@
 
                 <StackLayout IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
                     <!--  Address search entry  -->
-                    <Grid
-                        Margin="5,10,5,0"
-                        Padding="0,5,0,5"
-                        BackgroundColor="LightGray">
-                        <Grid.HeightRequest>
-                            <OnPlatform
-                                x:TypeArguments="x:Double"
-                                Android="60"
-                                WinPhone="60"
-                                iOS="60" />
-                        </Grid.HeightRequest>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="25" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="25" />
-                        </Grid.ColumnDefinitions>
-
-                        <ctrl:CustomImage
-                            Grid.Column="0"
-                            Margin="5,10"
-                            HorizontalOptions="Center"
-                            IsVisible="{Binding IsSearchIconVisible, Converter={StaticResource InverseBoolConverter}}"
-                            SourcePlatform="search_mini_icon"
-                            VerticalOptions="Center" />
-
-                        <Entry
-                            Grid.Column="1"
-                            BackgroundColor="Transparent"
-                            Placeholder="{Binding [NewHomeAddressViewSearchAddress]}"
-                            Text="{Binding AddressFinder}">
-
-                            <Entry.Behaviors>
-                                <beh:EventToCommandBehavior
-                                    Command="{Binding AddressChangedCommand}"
-                                    EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
-                                    EventName="TextChanged" />
-                            </Entry.Behaviors>
-                        </Entry>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <Frame
-                            Grid.Column="2"
-                            Padding="5,10"
+                            Grid.Row="0"
+                            Margin="20,20,20,20"
+                            Padding="1"
+                            BackgroundColor="{StaticResource LightGraySubtitle}"
+                            CornerRadius="25"
+                            HasShadow="False"
                             HorizontalOptions="Center"
-                            IsVisible="{Binding IsSearchIconVisible}">
-                            <ctrl:CustomImage SourcePlatform="x_icon" VerticalOptions="Center" />
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ResetAddressFinderCommand}" />
-                            </Frame.GestureRecognizers>
-                        </Frame>
+                            VerticalOptions="Center">
+                            <Frame
+                                Margin="0"
+                                Padding="0"
+                                BackgroundColor="White"
+                                CornerRadius="25"
+                                HasShadow="False"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                                <Grid Padding="5,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="35" />
+                                    </Grid.ColumnDefinitions>
 
+                                    <ctrl:CustomImage
+                                        Grid.Column="0"
+                                        Margin="5,10"
+                                        HorizontalOptions="Center"
+                                        SourcePlatform="search_mini_icon"
+                                        VerticalOptions="Center" />
+
+                                    <Entry
+                                        Grid.Column="1"
+                                        BackgroundColor="Transparent"
+                                        Placeholder="{Binding [NewHomeAddressViewSearchAddress]}"
+                                        Text="{Binding AddressFinder}"
+                                        WidthRequest="300">
+                                        <Entry.Behaviors>
+                                            <beh:EventToCommandBehavior
+                                                Command="{Binding AddressChangedCommand}"
+                                                EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
+                                                EventName="TextChanged" />
+                                        </Entry.Behaviors>
+                                    </Entry>
+
+
+                                    <Frame
+                                        Grid.Column="2"
+                                        Margin="0"
+                                        Padding="10"
+                                        BackgroundColor="Transparent"
+                                        HorizontalOptions="Center"
+                                        IsVisible="{Binding IsSearchIconVisible}">
+                                        <ctrl:CustomImage SourcePlatform="x_icon" VerticalOptions="Center" />
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ResetAddressFinderCommand}" />
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                </Grid>
+                            </Frame>
+                        </Frame>
                     </Grid>
+                    <BoxView HeightRequest="1" Color="LightGray" />
 
                     <Grid
                         Margin="5"
