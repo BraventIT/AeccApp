@@ -10,7 +10,6 @@
     Title="{Binding [HospitalAddressesListViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True">
 
-    <!--  Home address list item template  -->
     <ContentView.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="hospitalAddressesListTemplate">
@@ -66,7 +65,6 @@
                         <Label
                             Grid.Row="1"
                             Grid.Column="1"
-                            Grid.ColumnSpan="2"
                             FontSize="{StaticResource MidMediumSize}"
                             Text="{Binding DisplayAddress}">
 
@@ -74,7 +72,7 @@
                                 <OnPlatform x:TypeArguments="Thickness">
                                     <On Platform="WinPhone, Windows" Value="5,10,0,10" />
                                     <On Platform="iOS" Value="5,0,0,10" />
-                                    <On Platform="Android" Value="5,0,0,10" />
+                                    <On Platform="Android" Value="5,0,5,10" />
                                 </OnPlatform>
                             </Label.Margin>
 
@@ -84,12 +82,12 @@
                             Grid.Row="0"
                             Grid.RowSpan="2"
                             Grid.Column="2"
-                            Margin="15,0,0,0"
-                            HeightRequest="30"
+                            Margin="0,0,15,0"
+                            HeightRequest="17"
                             HorizontalOptions="Center"
                             SourcePlatform="right_arrow"
                             VerticalOptions="Center"
-                            WidthRequest="30" />
+                            WidthRequest="9" />
                         <BoxView
                             Grid.Row="2"
                             Grid.ColumnSpan="3"
@@ -99,18 +97,9 @@
                     </Grid>
                 </ViewCell>
             </DataTemplate>
-
-            <DataTemplate x:Key="hospitalAddressHeaderTemplate">
-                <ContentView>
-                    <Label
-                        Margin="0,10,0,10"
-                        HorizontalOptions="Center"
-                        Style="{StaticResource TitleLabelStyle}"
-                        Text="{Binding [HospitalAddressesListViewYourAddresses]}" />
-                </ContentView>
-            </DataTemplate>
         </ResourceDictionary>
     </ContentView.Resources>
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -120,11 +109,22 @@
 
         <ListView
             HasUnevenRows="True"
-            HeaderTemplate="{StaticResource hospitalAddressHeaderTemplate}"
             HeightRequest="600"
             IsVisible="{Binding HospitalAddressesIsEmpty, Converter={StaticResource InverseBoolConverter}}"
             ItemTemplate="{StaticResource hospitalAddressesListTemplate}"
-            ItemsSource="{Binding HospitalAddressesList}" />
+            ItemsSource="{Binding HospitalAddressesList}">
+            <ListView.Header>
+                <ContentView>
+                    <Label
+                        Margin="25"
+                        FontAttributes="None"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
+                        Text="{Binding [HospitalAddressesListViewYourAddresses]}"
+                        TextColor="{StaticResource LightGraySubtitle}" />
+                </ContentView>
+            </ListView.Header>
+        </ListView>
 
         <Label
             Margin="20,0"
@@ -134,16 +134,15 @@
             Text="{Binding [NewHospitalAddressListViewAddressesEmpty]}"
             VerticalOptions="Center" />
 
-        <ctrlXlabs:ImageButton
+
+        <Button
             Grid.Row="1"
-            Margin="10"
+            Margin="15,15,15,40"
             Command="{Binding NewHospitalAddressCommand}"
-            HeightRequest="50"
-            HorizontalOptions="CenterAndExpand"
-            SourcePlatform="round_plus"
-            Style="{StaticResource ImageButtonLargeStyle}"
-            Text="{Binding [CommonNewAddress]}"
-            VerticalOptions="FillAndExpand" />
+            HorizontalOptions="Center"
+            Style="{StaticResource DarkButtonStyle}"
+            Text="{Binding [CommonNewAddress]}" />
+
 
         <!--  INDICATOR  -->
         <ctrl:CustomActivityIndicatorControl />

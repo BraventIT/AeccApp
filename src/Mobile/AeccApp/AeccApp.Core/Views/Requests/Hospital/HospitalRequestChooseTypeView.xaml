@@ -99,66 +99,70 @@
         </StackLayout>
 
         <!--  Requests types list  -->
-        <ListView
-            HasUnevenRows="True"
-            ItemTemplate="{StaticResource requestTypesTemplate}"
-            ItemsSource="{Binding RequestTypes}">
+        <Grid>
+            <ctrl:CustomActivityIndicatorControl HorizontalOptions="Center" VerticalOptions="Center" />
 
-            <ListView.Behaviors>
-                <beh:EventToCommandBehavior
-                    Command="{Binding RequestTypeCommand}"
-                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                    EventName="ItemTapped" />
-            </ListView.Behaviors>
 
-            <!--  Footer  -->
-            <ListView.Footer>
-                <StackLayout HorizontalOptions="Center">
-                    <Label
-                        FontSize="{StaticResource LargeSize}"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"
-                        IsVisible="{Binding ProvinceHasNotRequestAvailable}"
-                        Text="{Binding [HomeRequestChooseTypeNoRequestsInProvince]}" />
-                    <Grid>
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
-                        </Grid.GestureRecognizers>
+            <ListView
+                HasUnevenRows="True"
+                ItemTemplate="{StaticResource requestTypesTemplate}"
+                ItemsSource="{Binding RequestTypes}">
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                <ListView.Behaviors>
+                    <beh:EventToCommandBehavior
+                        Command="{Binding RequestTypeCommand}"
+                        EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                        EventName="ItemTapped" />
+                </ListView.Behaviors>
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                <!--  Footer  -->
+                <ListView.Footer>
+                    <StackLayout HorizontalOptions="Center">
                         <Label
-                            Grid.Column="0"
-                            Margin="20,10,0,0"
-                            FontAttributes="Bold"
-                            FontSize="{StaticResource MediumSize}"
-                            Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
-                            TextColor="{StaticResource GreyTextDark}" />
-                        <ctrl:CustomImage
-                            Grid.Column="1"
-                            Margin="0,10,20,0"
-                            HeightRequest="25"
-                            HorizontalOptions="End"
-                            SourcePlatform="right_arrow"
-                            WidthRequest="25" />
-                        <BoxView
-                            Grid.Row="1"
-                            Grid.ColumnSpan="2"
-                            HeightRequest="1"
-                            Color="LightGray" />
-                    </Grid>
-                </StackLayout>
-            </ListView.Footer>
+                            FontSize="{StaticResource LargeSize}"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            IsVisible="{Binding ProvinceHasNotRequestAvailable}"
+                            Text="{Binding [HomeRequestChooseTypeNoRequestsInProvince]}" />
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
+                            </Grid.GestureRecognizers>
 
-        </ListView>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                Margin="20,10,0,0"
+                                FontAttributes="Bold"
+                                FontSize="{StaticResource MediumSize}"
+                                Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
+                                TextColor="{StaticResource GreyTextDark}" />
+                            <ctrl:CustomImage
+                                Grid.Column="1"
+                                Margin="0,10,20,0"
+                                HeightRequest="25"
+                                HorizontalOptions="End"
+                                SourcePlatform="right_arrow"
+                                WidthRequest="25" />
+                            <BoxView
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                HeightRequest="1"
+                                Color="LightGray" />
+                        </Grid>
+                    </StackLayout>
+                </ListView.Footer>
+
+            </ListView>
+        </Grid>
 
     </StackLayout>
 </v:BaseContentPage>

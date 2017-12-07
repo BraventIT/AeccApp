@@ -71,7 +71,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <StackLayout
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
@@ -101,67 +100,70 @@
         </StackLayout>
 
         <!--  Requests types list  -->
-        <ListView
-            HasUnevenRows="True"
-            ItemTemplate="{StaticResource requestTypesTemplate}"
-            ItemsSource="{Binding RequestTypes}">
+        <Grid>
+            <ctrl:CustomActivityIndicatorControl HorizontalOptions="Center" VerticalOptions="Center" />
 
-            <ListView.Behaviors>
-                <beh:EventToCommandBehavior
-                    Command="{Binding RequestTypeCommand}"
-                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                    EventName="ItemTapped" />
-            </ListView.Behaviors>
+            <ListView
+                HasUnevenRows="True"
+                ItemTemplate="{StaticResource requestTypesTemplate}"
+                ItemsSource="{Binding RequestTypes}">
 
-            <!--  Footer  -->
-            <ListView.Footer>
-                <StackLayout HorizontalOptions="Center">
-                    <Label
-                        FontSize="{StaticResource LargeSize}"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"
-                        IsVisible="{Binding ProvinceHasNotRequestAvailable}"
-                        Text="{Binding [HomeRequestChooseTypeNoRequestsInProvince]}" />
-                    <Grid>
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
-                        </Grid.GestureRecognizers>
+                <ListView.Behaviors>
+                    <beh:EventToCommandBehavior
+                        Command="{Binding RequestTypeCommand}"
+                        EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                        EventName="ItemTapped" />
+                </ListView.Behaviors>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                <!--  Footer  -->
+                <ListView.Footer>
+                    <StackLayout HorizontalOptions="Center">
                         <Label
-                            Grid.Column="0"
-                            Margin="30,26,0,26"
-                            FontAttributes="Bold"
-                            FontSize="{StaticResource MediumSize}"
-                            Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
-                            TextColor="{StaticResource GreyTextDark}" />
-                        <ctrl:CustomImage
-                            Grid.Column="1"
-                            Margin="0,26,20,26"
-                            HeightRequest="17"
-                            HorizontalOptions="End"
-                            SourcePlatform="right_arrow"
-                            VerticalOptions="Center"
-                            WidthRequest="9" />
-                        <BoxView
-                            Grid.Row="1"
-                            Grid.ColumnSpan="2"
-                            HeightRequest="1"
-                            Color="LightGray" />
-                    </Grid>
-                </StackLayout>
-            </ListView.Footer>
+                            FontSize="{StaticResource LargeSize}"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            IsVisible="{Binding ProvinceHasNotRequestAvailable}"
+                            Text="{Binding [HomeRequestChooseTypeNoRequestsInProvince]}" />
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
+                            </Grid.GestureRecognizers>
 
-        </ListView>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                Margin="30,26,0,26"
+                                FontAttributes="Bold"
+                                FontSize="{StaticResource MediumSize}"
+                                Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
+                                TextColor="{StaticResource GreyTextDark}" />
+                            <ctrl:CustomImage
+                                Grid.Column="1"
+                                Margin="0,26,20,26"
+                                HeightRequest="17"
+                                HorizontalOptions="End"
+                                SourcePlatform="right_arrow"
+                                VerticalOptions="Center"
+                                WidthRequest="9" />
+                            <BoxView
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                HeightRequest="1"
+                                Color="LightGray" />
+                        </Grid>
+                    </StackLayout>
+                </ListView.Footer>
+
+            </ListView>
+        </Grid>
 
     </StackLayout>
 </v:BaseContentPage>

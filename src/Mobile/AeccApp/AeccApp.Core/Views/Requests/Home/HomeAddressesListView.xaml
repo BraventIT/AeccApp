@@ -67,7 +67,6 @@
                         <Label
                             Grid.Row="1"
                             Grid.Column="1"
-                            Grid.ColumnSpan="2"
                             FontSize="{StaticResource MidMediumSize}"
                             Text="{Binding FinderAddress}">
 
@@ -75,7 +74,7 @@
                                 <OnPlatform x:TypeArguments="Thickness">
                                     <On Platform="WinPhone, Windows" Value="5,10,0,10" />
                                     <On Platform="iOS" Value="5,0,0,10" />
-                                    <On Platform="Android" Value="5,0,0,10" />
+                                    <On Platform="Android" Value="5,0,5,10" />
                                 </OnPlatform>
                             </Label.Margin>
 
@@ -85,7 +84,7 @@
                             Grid.Row="0"
                             Grid.RowSpan="2"
                             Grid.Column="2"
-                            Margin="15,0,0,0"
+                            Margin="0,0,15,0"
                             HeightRequest="17"
                             HorizontalOptions="Center"
                             SourcePlatform="right_arrow"
