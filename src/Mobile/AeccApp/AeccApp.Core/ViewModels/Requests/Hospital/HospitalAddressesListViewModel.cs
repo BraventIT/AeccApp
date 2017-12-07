@@ -59,6 +59,25 @@ namespace AeccApp.Core.ViewModels
 
         #region Commands
 
+        private Command _chooseHospitalCommand;
+        public ICommand ChooseHospitalCommand
+        {
+            get
+            {
+                return _chooseHospitalCommand ??
+                    (_chooseHospitalCommand = new Command(OnChooseHospitalCommand, o => !IsBusy));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj">obj contains the HomeAddressList item tapped</param>
+        private async void OnChooseHospitalCommand(object obj)
+        {
+            var selectedAddress = obj as AddressModel;
+            await NavigationService.NavigateToAsync<HospitalRequestChooseTypeViewModel>(selectedAddress);
+        }
 
         private Command _newHospitalAddressCommand;
         public ICommand NewHospitalAddressCommand
