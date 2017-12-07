@@ -21,11 +21,11 @@
                 <ctrl:CustomImage
                     Grid.Column="0"
                     Margin="10"
-                    HeightRequest="30"
-                    HorizontalOptions="End"
+                    HeightRequest="13"
+                    HorizontalOptions="Start"
                     SourcePlatform="x_icon"
                     VerticalOptions="Center"
-                    WidthRequest="30">
+                    WidthRequest="13">
                     <ctrl:CustomImage.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CloseRequestSentPopupCommand}" />
                     </ctrl:CustomImage.GestureRecognizers>

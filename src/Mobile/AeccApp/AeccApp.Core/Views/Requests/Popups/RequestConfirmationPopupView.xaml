@@ -9,130 +9,124 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <ContentView
-        Margin="10"
-        Style="{StaticResource BorderStyle}"
-        VerticalOptions="Center">
-        <ContentView Style="{StaticResource InternalViewStyle}">
-            <ScrollView>
-                <StackLayout
-                    Margin="20,70,20,70"
-                    Padding="20,10,20,10"
-                    BackgroundColor="{StaticResource BackgroundColor}">
-                    <ctrl:CustomImage
-                        Margin="20"
-                        HeightRequest="50"
+    <Frame Style="{StaticResource PopupFrameStyle}">
+        <ScrollView>
+            <StackLayout>
+                <ctrl:CustomImage
+                    Grid.Column="0"
+                    Margin="25,25,0,0"
+                    HeightRequest="13"
+                    HorizontalOptions="Start"
+                    SourcePlatform="x_icon"
+                    VerticalOptions="Center"
+                    WidthRequest="13">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseConfimationPopupCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+
+                </ctrl:CustomImage>
+                <ctrl:CustomImage
+                    Margin="0,17,0,0"
+                    HeightRequest="55"
+                    HorizontalOptions="Center"
+                    SourcePlatform="round_question_icon"
+                    VerticalOptions="Center"
+                    WidthRequest="55" />
+
+                <Label
+                    Margin="33,27,33,20"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding [PopupRequestConfirmationTextTitle]}"
+                    TextColor="{StaticResource GreyText}" />
+
+                <Label
+                    Margin="0"
+                    FontAttributes="None"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding DisplayRequestInfo}"
+                    TextColor="{StaticResource LightGrey2}" />
+
+                <Frame
+                    Margin="35,20,35,25"
+                    Padding="1"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    CornerRadius="25"
+                    HasShadow="False"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Frame
+                        Margin="0"
+                        Padding="15,3,15,3"
+                        BackgroundColor="{StaticResource LightSilver}"
+                        CornerRadius="25"
+                        HasShadow="False"
                         HorizontalOptions="Center"
-                        SourcePlatform="round_question_icon"
-                        VerticalOptions="Center"
-                        WidthRequest="50" />
+                        VerticalOptions="Center">
+                        <StackLayout Orientation="Horizontal">
+                            <ctrl:CustomImage
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="5"
+                                HeightRequest="13"
+                                HorizontalOptions="Center"
+                                SourcePlatform="date_icon"
+                                VerticalOptions="Center"
+                                WidthRequest="13" />
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding DisplayDate}"
+                                VerticalOptions="Center" />
+                        </StackLayout>
+                    </Frame>
+                </Frame>
 
-                    <Label
-                        Margin="0,0,0,20"
-                        FontSize="Large"
+
+                <Grid ColumnSpacing="0" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <BoxView
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource LightGrey}"
+                        HeightRequest="1"
+                        VerticalOptions="Start" />
+
+                    <BoxView
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource LightGrey}"
                         HorizontalOptions="Center"
-                        Text="{Binding [PopupRequestConfirmationTextTitle]}" />
+                        WidthRequest="1" />
 
-                    <Label
-                        Margin="0,0,0,20"
-                        HorizontalOptions="Center"
-                        Text="{Binding DisplayRequestInfo}"
-                        TextColor="LightGray" />
+                    <Button
+                        Grid.Row="0"
+                        Margin="0,1,1,0"
+                        Command="{Binding ClosePopupCommand}"
+                        Style="{StaticResource ButtonWhiteStyle}"
+                        Text="{Binding [CommonNo]}" />
 
-                    <Grid
-                        Padding="5"
-                        BackgroundColor="LightGray"
-                        HorizontalOptions="FillAndExpand">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Grid.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone,Windows" Value="70,0,70,10" />
-                                <On Platform="iOS" Value="50,0,50,10" />
-                                <On Platform="Android" Value="60,0,60,10" />
-                            </OnPlatform>
-                        </Grid.Margin>
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="1,1,0,0"
+                        Command="{Binding SendRequestConfirmationCommand}"
+                        Style="{StaticResource ButtonWhiteStyle}"
+                        Text="{Binding [CommonYes]}" />
 
 
+                </Grid>
 
-                        <ctrl:CustomImage
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Margin="5"
-                            HeightRequest="30"
-                            HorizontalOptions="Center"
-                            SourcePlatform="date_icon"
-                            VerticalOptions="Center"
-                            WidthRequest="30" />
-                        <Label
-                            Grid.Column="1"
-                            Text="{Binding DisplayDate}"
-                            VerticalOptions="Center" />
-                    </Grid>
+            </StackLayout>
+        </ScrollView>
+    </Frame>
 
-                    <Grid
-                        Padding="5"
-                        BackgroundColor="LightGray"
-                        HorizontalOptions="FillAndExpand">
-                        <Grid.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone,Windows" Value="70,0,70,10" />
-                                <On Platform="iOS" Value="50,0,50,10" />
-                                <On Platform="Android" Value="60,0,60,10" />
-                            </OnPlatform>
-                        </Grid.Margin>
-
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <ctrl:CustomImage
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Margin="5"
-                            HeightRequest="30"
-                            HorizontalOptions="Center"
-                            SourcePlatform="time_icon"
-                            VerticalOptions="Center"
-                            WidthRequest="30" />
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Text="{Binding DisplayTime}"
-                            VerticalOptions="Center" />
-                    </Grid>
-
-                    <StackLayout
-                        Margin="0,20,0,0"
-                        HorizontalOptions="Center"
-                        Orientation="Horizontal">
-
-                        <Button
-                            Command="{Binding SendRequestConfirmationCommand}"
-                            HorizontalOptions="CenterAndExpand"
-                            Style="{StaticResource ButtonSmallStyle}"
-                            Text="{Binding [CommonYes]}" />
-                        <Button
-                            Command="{Binding ClosePopupCommand}"
-                            HorizontalOptions="CenterAndExpand"
-                            Style="{StaticResource ButtonSmallStyle}"
-                            Text="{Binding [CommonNo]}" />
-
-                    </StackLayout>
-
-
-                </StackLayout>
-            </ScrollView>
-        </ContentView>
-    </ContentView>
 </vPop:PopupPage>

@@ -29,6 +29,7 @@ namespace AeccApp.Core.ViewModels
             CurrentRequest = navigationData as RequestModel;
             CurrentAddress = CurrentRequest.RequestAddress;
             RequestTypeHeader = CurrentRequest.RequestType.Name;
+            DisplayRequestInfo = "Tu petición es:\n \""+CurrentRequest.RequestType.Name+"\"\n"+CurrentRequest.RequestAddress.DisplayAddress;
             return Task.CompletedTask;
         }
         public override Task ActivateAsync()
@@ -77,23 +78,16 @@ namespace AeccApp.Core.ViewModels
         {
             if (DateToApplyParsed==null)
             {
-                RequestConfirmationPopupVM.DisplayDate = DateTime.Now.ToString().Remove(10);
                 DateToApplyParsed = DateTime.Now.ToString().Remove(10);
             }
-            else
-            {
-                RequestConfirmationPopupVM.DisplayDate = DateToApplyParsed;
-            }
-
+        
             if (TimeToApplyParsed == null)
             {
-                RequestConfirmationPopupVM.DisplayTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
                 TimeToApplyParsed = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
             }
-            else
-            {
-                RequestConfirmationPopupVM.DisplayTime = TimeToApplyParsed;
-            }
+
+            RequestConfirmationPopupVM.DisplayRequestInfo = DisplayRequestInfo;
+            RequestConfirmationPopupVM.DisplayDate = DateToApplyParsed+","+TimeToApplyParsed;
 
             await NavigationService.ShowPopupAsync(RequestConfirmationPopupVM);
 
@@ -166,6 +160,20 @@ namespace AeccApp.Core.ViewModels
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
 
+        private Command _closeConfimationPopupCommand;
+        public ICommand CloseConfimationPopupCommand
+        {
+            get
+            {
+                return _closeConfimationPopupCommand ??
+                    (_closeConfimationPopupCommand = new Command(OnCloseConfimationPopupCommand, o => !IsBusy));
+            }
+        }
+
+        private async void OnCloseConfimationPopupCommand(object obj)
+        {
+            await NavigationService.HidePopupAsync();
+        }
 
         #endregion
 
@@ -174,6 +182,15 @@ namespace AeccApp.Core.ViewModels
         public RequestConfirmationPopupViewModel RequestConfirmationPopupVM { get; private set; }
         public RequestSentPopupViewModel RequestSentPopupVM { get; private set; }
         public RequestDateAndTimePopupViewModel RequestDateAndTimePopupVM { get; private set; }
+
+
+        private string _displayRequestInfo;
+
+        public string DisplayRequestInfo
+        {
+            get { return _displayRequestInfo; }
+            set { Set(ref _displayRequestInfo, value); }
+        }
 
 
         private string _requestTypeHeader;
