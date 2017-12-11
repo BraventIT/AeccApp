@@ -10,6 +10,11 @@
   <ItemGroup>
     <Compile Remove="Models\Request\Position.cs" />
     <Compile Remove="Models\User\Volunteer.cs" />
+    <Compile Remove="Views\Requests\NewRequestSelectAddressView.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\Requests\NewRequestSelectAddressView.xaml" />
   </ItemGroup>
 
   <ItemGroup>

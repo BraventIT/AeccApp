@@ -31,6 +31,9 @@ namespace AeccApp.Core
         private const string HomeHeaderBannerAcceptClosedKey = "HomeHeaderBanner_closed";
         private static readonly bool HomeHeaderBannerAcceptClosedDefault = true;
 
+        private const string FirstRequestLandingPageSeenKey = "FirstRequestLandingPage_seen";
+        private static readonly bool FirstRequestLandingPageSeenDefault = false;
+
         private const string LastNewsCheckedKey = "Last_news_checked";
         private static readonly DateTime LastNewsCheckedDefault = DateTime.MinValue;
 
@@ -89,6 +92,21 @@ namespace AeccApp.Core
             set
             {
                 AppSettings.AddOrUpdateValue(HomeHeaderBannerAcceptClosedKey, value);
+            }
+        }    
+        
+        /// <summary>
+        /// returns bool with FirstRequestLandingPage visibility current status
+        /// </summary>
+        public static bool FirstRequestLandingPageSeen
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(FirstRequestLandingPageSeenKey, FirstRequestLandingPageSeenDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(FirstRequestLandingPageSeenKey, value);
             }
         }
 

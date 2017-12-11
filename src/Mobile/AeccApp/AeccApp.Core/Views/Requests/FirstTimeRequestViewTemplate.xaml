@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AeccApp.Core.Views.FirstTimeRequestViewTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls">
+    <StackLayout>
+
+        <ctrl:CustomImage
+            Margin="0,50,0,34"
+            HeightRequest="130"
+            HorizontalOptions="Center"
+            SourcePlatform="ico_first_request"
+            WidthRequest="130" />
+
+        <Label
+            Margin="0"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource TitleLabelStyleNormal}"
+            Text="{Binding [CommonIsYourFirstTime]}" />
+        <Label
+            Margin="0,25,0,36"
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource SubTitleLabelStyleNormal}"
+            Text="{Binding [RequestsViewText]}" />
+
+        <Button
+            Margin="0,0,0,0"
+            Command="{Binding NewRequestCommand}"
+            HorizontalOptions="Center"
+            Style="{StaticResource ButtonStyle}"
+            Text="{Binding [CommonNewRequest]}" />
+
+    </StackLayout>
+</ContentView>
