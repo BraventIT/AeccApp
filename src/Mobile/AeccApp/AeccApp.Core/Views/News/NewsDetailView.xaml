@@ -7,18 +7,23 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [NewsDetailViewTitle]}"
-    BackgroundColor="{StaticResource BackgroundColor}"
-    vm:ViewModelLocator.AutoWireViewModel="True">
-    <StackLayout Padding="20" Orientation="Vertical" VerticalOptions="FillAndExpand">
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}">
+    <ScrollView Margin="20,0,20,0">
+        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
             <Image
-              
-                HorizontalOptions="CenterAndExpand"
-                Source="{Binding CurrentNewImagen}"/>
-            <Label Text="{Binding CurrentNewTitle}" />
-        <ScrollView VerticalOptions="FillAndExpand">
-                <Label Text="{Binding CurrentNewContent}" />
-            </ScrollView>
+                HeightRequest="250"
+                HorizontalOptions="FillAndExpand"
+                Source="{Binding CurrentNewImagen}"
+                VerticalOptions="FillAndExpand" />
+
+            <Label
+                Margin="20"
+                Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                Text="{Binding CurrentNewTitle}" />
+            <Label Style="{StaticResource NormalLabelStyle}" Text="{Binding CurrentNewContent}" />
         </StackLayout>
+    </ScrollView>
 
 
 </v:BaseContentPage>
