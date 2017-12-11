@@ -11,7 +11,7 @@
     <Frame Style="{StaticResource PopupFrameStyle}">
         <StackLayout Margin="12">
 
-            <Label Style="{StaticResource TitleLabelStyle}" Text="Volunteer Test" />
+            <Label Style="{StaticResource TitleLabelStyleNormal}" Text="Volunteer Test" />
 
             <ctrl:CustomImage
                 Margin="30"

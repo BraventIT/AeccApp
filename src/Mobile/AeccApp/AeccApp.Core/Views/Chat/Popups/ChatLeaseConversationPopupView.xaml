@@ -31,7 +31,6 @@
                 <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
                 <ctrl:CustomImage
-                    Grid.Row="0"
                     Grid.ColumnSpan="2"
                     Margin="0,55,0,0"
                     HeightRequest="55"
@@ -41,7 +40,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.ColumnSpan="2"
-                    Margin="20,27,20,0"
+                    Margin="33,27,33,0"
                     Style="{StaticResource TitleLabelStyleNormal}"
                     Text="{Binding [PopupChatLeaseConversationTextTitle]}" />
 
@@ -49,7 +48,6 @@
                     Grid.Row="2"
                     Grid.ColumnSpan="2"
                     Margin="28,20,28,30"
-                    HorizontalOptions="FillAndExpand"
                     HorizontalTextAlignment="Center"
                     Style="{StaticResource SubTitleLabelStyleNormal}"
                     Text="{Binding [PopupChatLeaseConversationText]}" />
@@ -70,18 +68,20 @@
 
                 <Button
                     Grid.Row="3"
+                    Margin="1,1,0,0"
+                    Command="{Binding ClosePopupCommand}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonNo]}" />
+
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
                     Margin="0,1,1,0"
                     Command="{Binding LeaseChatCommand}"
                     Style="{StaticResource ButtonWhiteStyle}"
                     Text="{Binding [CommonYes]}" />
 
-                <Button
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Margin="1,1,0,0"
-                    Command="{Binding ClosePopupCommand}"
-                    Style="{StaticResource ButtonWhiteStyle}"
-                    Text="{Binding [CommonNo]}" />
+
             </Grid>
         </StackLayout>
     </Frame>

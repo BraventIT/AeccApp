@@ -94,21 +94,11 @@
     </Style>
 
     <Style
-        x:Key="TitleLabelStyle"
+        x:Key="TitleLabelStyleNormal"
         BasedOn="{StaticResource GreyLabelStyle}"
         TargetType="{x:Type Label}">
-        <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="Margin" Value="20, 12" />
-    </Style>
-
-    <Style
-        x:Key="TitleLabelStyleNormal"
-        BasedOn="{StaticResource TitleLabelStyle}"
-        TargetType="{x:Type Label}">
-        <Setter Property="FontAttributes" Value="None" />
-        <Setter Property="Margin" Value="0" />
     </Style>
 
     <Style

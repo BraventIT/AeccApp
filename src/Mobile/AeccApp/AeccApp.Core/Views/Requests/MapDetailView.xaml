@@ -10,13 +10,8 @@
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [CompletingRequestTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
-        <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
-        <maps:Map
-            x:Name="map"
-            HasZoomEnabled="True"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand" />
 
-    </Grid>
+    <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
+    <maps:Map x:Name="map" HasZoomEnabled="True" />
+
 </v:BaseContentPage>

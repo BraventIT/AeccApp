@@ -37,7 +37,7 @@
                     Grid.Row="1"
                     Grid.ColumnSpan="2"
                     HorizontalTextAlignment="Center"
-                    Style="{StaticResource TitleLabelStyle}"
+                    Style="{StaticResource TitleLabelStyleNormal}"
                     Text="{Binding [PopupLogoutTextTitle]}" />
 
                 <Label

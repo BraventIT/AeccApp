@@ -9,124 +9,109 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <Frame Style="{StaticResource PopupFrameStyle}">
-        <ScrollView>
-            <StackLayout>
-                <ctrl:CustomImage
-                    Grid.Column="0"
-                    Margin="25,25,0,0"
-                    HeightRequest="13"
-                    HorizontalOptions="Start"
-                    SourcePlatform="x_icon"
-                    VerticalOptions="Center"
-                    WidthRequest="13">
-                    <ctrl:CustomImage.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding CloseConfimationPopupCommand}" />
-                    </ctrl:CustomImage.GestureRecognizers>
+    <Frame HorizontalOptions="Fill" Style="{StaticResource PopupFrameStyle}">
+        <StackLayout>
+            <Grid ColumnSpacing="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                </ctrl:CustomImage>
+                <Button Command="{Binding ClosePopupCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
+
+                <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
+
                 <ctrl:CustomImage
-                    Margin="0,17,0,0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,55,0,0"
                     HeightRequest="55"
                     HorizontalOptions="Center"
-                    SourcePlatform="round_question_icon"
-                    VerticalOptions="Center"
-                    WidthRequest="55" />
+                    SourcePlatform="round_question_icon" />
 
                 <Label
-                    Margin="33,27,33,20"
-                    FontAttributes="Bold"
-                    FontSize="Large"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Text="{Binding [PopupRequestConfirmationTextTitle]}"
-                    TextColor="{StaticResource GreyText}" />
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="33,27,33,0"
+                    Style="{StaticResource TitleLabelStyleNormal}"
+                    Text="{Binding [PopupRequestConfirmationTextTitle]}" />
 
                 <Label
-                    Margin="0"
-                    FontAttributes="None"
-                    HorizontalOptions="Center"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="33,20,33,0"
                     HorizontalTextAlignment="Center"
-                    Text="{Binding DisplayRequestInfo}"
-                    TextColor="{StaticResource LightGrey2}" />
+                    Style="{StaticResource SubTitleLabelStyleNormal}"
+                    Text="{Binding DisplayRequestInfo}" />
 
                 <Frame
-                    Margin="35,20,35,25"
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Margin="0,20,0,35"
                     Padding="1"
                     BackgroundColor="{StaticResource LightGrey}"
                     CornerRadius="25"
-                    HasShadow="False"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center">
+                    HorizontalOptions="Center">
                     <Frame
                         Margin="0"
-                        Padding="15,3,15,3"
+                        Padding="17,13"
                         BackgroundColor="{StaticResource LightSilver}"
-                        CornerRadius="25"
-                        HasShadow="False"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
+                        CornerRadius="25">
+
                         <StackLayout Orientation="Horizontal">
                             <ctrl:CustomImage
-                                Grid.Row="0"
-                                Grid.Column="0"
                                 Margin="5"
-                                HeightRequest="13"
+                                HeightRequest="15"
                                 HorizontalOptions="Center"
                                 SourcePlatform="date_icon"
-                                VerticalOptions="Center"
-                                WidthRequest="13" />
+                                VerticalOptions="Center" />
                             <Label
-                                Grid.Column="1"
+                                Margin="5,0"
+                                Style="{StaticResource SubTitleLabelStyleNormal}"
                                 Text="{Binding DisplayDate}"
+                                TextColor="{StaticResource DarkGrey2TextColor}"
                                 VerticalOptions="Center" />
                         </StackLayout>
                     </Frame>
                 </Frame>
 
+                <BoxView
+                    Grid.Row="4"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    HeightRequest="1"
+                    VerticalOptions="Start" />
 
-                <Grid ColumnSpacing="0" RowSpacing="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <BoxView
-                        Grid.Row="0"
-                        Grid.ColumnSpan="2"
-                        BackgroundColor="{StaticResource LightGrey}"
-                        HeightRequest="1"
-                        VerticalOptions="Start" />
+                <BoxView
+                    Grid.Row="4"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    HorizontalOptions="Center"
+                    WidthRequest="1" />
 
-                    <BoxView
-                        Grid.Row="0"
-                        Grid.ColumnSpan="2"
-                        BackgroundColor="{StaticResource LightGrey}"
-                        HorizontalOptions="Center"
-                        WidthRequest="1" />
+                <Button
+                    Grid.Row="4"
+                    Margin="0,1,1,0"
+                    Command="{Binding ClosePopupCommand}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonNo]}" />
 
-                    <Button
-                        Grid.Row="0"
-                        Margin="0,1,1,0"
-                        Command="{Binding ClosePopupCommand}"
-                        Style="{StaticResource ButtonWhiteStyle}"
-                        Text="{Binding [CommonNo]}" />
+                <Button
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="1,1,0,0"
+                    Command="{Binding SendRequestConfirmationCommand}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonYes]}" />
 
-                    <Button
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Margin="1,1,0,0"
-                        Command="{Binding SendRequestConfirmationCommand}"
-                        Style="{StaticResource ButtonWhiteStyle}"
-                        Text="{Binding [CommonYes]}" />
-
-
-                </Grid>
-
-            </StackLayout>
-        </ScrollView>
+            </Grid>
+        </StackLayout>
     </Frame>
 
 </vPop:PopupPage>

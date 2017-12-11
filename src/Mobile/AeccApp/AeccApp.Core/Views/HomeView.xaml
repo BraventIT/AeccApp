@@ -76,7 +76,7 @@
                                 </Grid>
                                 <Label
                                     HorizontalOptions="Center"
-                                    Style="{StaticResource TitleLabelStyle}"
+                                    Style="{StaticResource TitleLabelStyleNormal}"
                                     Text="{Binding UserName}" />
                                 <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                                     <Switch
