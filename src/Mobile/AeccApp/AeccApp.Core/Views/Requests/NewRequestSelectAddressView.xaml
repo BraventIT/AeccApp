@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BaseContentPage
+    x:Class="AeccApp.Core.Views.NewRequestSelectAddressView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:temp="clr-namespace:AeccApp.Core.Views.Templates"
+    xmlns:v="clr-namespace:AeccApp.Core.Views"
+    xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    Title="{Binding [HomeViewRequests]}"
+    vm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid>
+        <temp:FirstTimeRequestViewTemplate IsVisible="{Binding FirstTimeLandingPageVisible}" />
+
+        <Grid Margin="40,0" IsVisible="{Binding FirstTimeLandingPageVisible, Converter={StaticResource InverseBoolConverter}}">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.ColumnSpan="2"
+                Margin="0,72,0,0"
+                Style="{StaticResource TitleLabelStyleNormal}"
+                Text="{Binding [NewHomeRequestSelectAddressWhereAreYouTitle]}" />
+
+            <Label
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="0,26,0,64"
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource SubTitleLabelStyleNormal}"
+                Text="{Binding [NewHomeRequestSelectAddressWhereAreYouText]}" />
+
+            <Button
+                Grid.Row="2"
+                BackgroundColor="{StaticResource PlanarLightGrey}"
+                BorderRadius="60"
+                Command="{Binding AtHomeCommand}"
+                HeightRequest="120"
+                HorizontalOptions="Center"
+                Style="{StaticResource ButtonTransparentStyle}"
+                WidthRequest="120" />
+
+            <ctrl:CustomImage
+                Grid.Row="2"
+                HeightRequest="120"
+                HorizontalOptions="Center"
+                InputTransparent="True"
+                SourcePlatform="from_home" />
+
+            <Label
+                Grid.Row="3"
+                Margin="0,25,0,0"
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource SubTitleLabelStyleNormal}"
+                Text="{Binding [NewHomeRequestSelectAddressImAtHome]}" />
+
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource PlanarLightGrey}"
+                BorderRadius="60"
+                Command="{Binding AtHospitalCommand}"
+                HeightRequest="120"
+                HorizontalOptions="Center"
+                Style="{StaticResource ButtonTransparentStyle}"
+                WidthRequest="120" />
+
+            <ctrl:CustomImage
+                Grid.Row="2"
+                Grid.Column="1"
+                HeightRequest="120"
+                HorizontalOptions="Center"
+                InputTransparent="True"
+                SourcePlatform="from_hospital" />
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="1"
+                Margin="0,25,0,0"
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource SubTitleLabelStyleNormal}"
+                Text="{Binding [NewHomeRequestSelectAddressImAtHospital]}" />
+
+        </Grid>
+    </Grid>
+</v:BaseContentPage>

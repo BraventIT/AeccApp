@@ -53,7 +53,6 @@ namespace AeccApp.Core.ViewModels
             IocContainer.Register<AllNewsViewModel>();
             IocContainer.Register<NewsDetailViewModel>();
             IocContainer.Register<NewRequestSelectAddressViewModel>();
-            IocContainer.Register<AllYourRequestsListViewModel>();
             IocContainer.Register<NewHomeAddressViewModel>();
             IocContainer.Register<HomeAddressesListViewModel>();
             IocContainer.Register<HomeRequestChooseTypeViewModel>();

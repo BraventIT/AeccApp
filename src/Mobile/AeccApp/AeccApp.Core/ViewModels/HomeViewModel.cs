@@ -182,12 +182,9 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        async void OnOpenAllRequest()
+        void OnOpenAllRequest()
         {
-            //TODO Navigate to AllYourRequestListView if there are active requests
-            //TODO Navigate to RequestsView if there are not active requests
-
-            await NavigationService.NavigateToAsync<AllYourRequestsListViewModel>();
+            MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Requests), string.Empty);
         }
 
         private Command _newRequestCommand;
