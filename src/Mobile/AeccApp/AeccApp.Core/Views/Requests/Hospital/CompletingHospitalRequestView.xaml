@@ -73,7 +73,7 @@
                     <Label Style="{StaticResource SwitchTextStyle}" Text="{Binding [NewHomeAddressViewSaveAddress]}" />
                 </StackLayout>
                 <!--  Room text  -->
-                <StackLayout>
+                <StackLayout IsVisible="{Binding HasUserFilledRoomForm}">
                     <BoxView HeightRequest="1" Color="LightGray" />
                     <Label
                         Margin="0,15,0,15"

@@ -135,6 +135,12 @@
   <data name="AllYourRequestsListOops" xml:space="preserve">
     <value>¡Ups!</value>
   </data>
+  <data name="AskForRoomPopupIndicatorText" xml:space="preserve">
+    <value>Puedes indicarnos la sala o habitación del hospital en la que estás para facilitar el tramite</value>
+  </data>
+  <data name="AskForRoomPopupPlaceHolder" xml:space="preserve">
+    <value>Escribe la sala</value>
+  </data>
   <data name="ChatConnectingPopupText" xml:space="preserve">
     <value>Danos un momento, estamos conectando con el voluntario.</value>
   </data>
@@ -275,6 +281,9 @@
   </data>
   <data name="CommonRefreshList" xml:space="preserve">
     <value>Actualizar lista</value>
+  </data>
+  <data name="CommonSkip" xml:space="preserve">
+    <value>Saltar</value>
   </data>
   <data name="CommonTime" xml:space="preserve">
     <value>Hora</value>

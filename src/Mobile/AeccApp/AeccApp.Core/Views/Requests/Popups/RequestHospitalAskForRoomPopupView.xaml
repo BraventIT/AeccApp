@@ -3,6 +3,7 @@
     x:Class="AeccApp.Core.Views.Popups.RequestHospitalAskForRoomPopupView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
     xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
@@ -11,14 +12,14 @@
 
     <Frame Style="{StaticResource PopupFrameStyle}">
 
-        <StackLayout Padding="20">
+        <StackLayout>
             <ctrl:CustomImage
-                Margin="10"
-                HeightRequest="30"
-                HorizontalOptions="End"
+                Margin="25"
+                HeightRequest="12"
+                HorizontalOptions="Start"
                 SourcePlatform="x_icon"
                 VerticalOptions="Center"
-                WidthRequest="30">
+                WidthRequest="12">
                 <ctrl:CustomImage.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
                 </ctrl:CustomImage.GestureRecognizers>
@@ -26,31 +27,96 @@
             </ctrl:CustomImage>
 
             <ctrl:CustomImage
-                HeightRequest="50"
+                HeightRequest="55"
                 HorizontalOptions="Center"
                 SourcePlatform="round_question_icon"
                 VerticalOptions="Center"
-                WidthRequest="50" />
+                WidthRequest="55" />
 
             <Label
                 Margin="10,10,10,5"
                 FontSize="Large"
                 HorizontalOptions="Center"
-                Text="{Binding [PopupHospitalAskForRoomTitle]}" />
-
-            <Label
-                Margin="10,5,10,10"
-                HorizontalOptions="Center"
                 Text="{Binding [PopupHospitalAskForRoomText]}" />
 
-            <Entry HorizontalOptions="FillAndExpand" Text="{Binding Room}" />
+            <Frame
+                Margin="20,20,20,0"
+                Padding="1"
+                BackgroundColor="{StaticResource LightGraySubtitle}"
+                CornerRadius="25"
+                HasShadow="False"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Frame
+                    Margin="0"
+                    Padding="15,0,15,0"
+                    BackgroundColor="White"
+                    CornerRadius="25"
+                    HasShadow="False"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Entry
+                        HorizontalOptions="FillAndExpand"
+                        Placeholder="{Binding [AskForRoomPopupPlaceHolder]}"
+                        Text="{Binding Room}"
+                        WidthRequest="200">
+                        <Entry.Behaviors>
+                            <beh:EventToCommandBehavior
+                                Command="{Binding RoomEventArgsCommand}"
+                                EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
+                                EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
+            </Frame>
+
+            <StackLayout Margin="37,2,37,35">
+                <Label HorizontalOptions="End" Text="{Binding MaxLenghtIndicator}" />
+                <Label Text="{Binding [AskForRoomPopupIndicatorText]}" />
+            </StackLayout>
+
+            <Grid ColumnSpacing="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <BoxView
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    HeightRequest="1"
+                    VerticalOptions="Start" />
+
+                <BoxView
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    HorizontalOptions="Center"
+                    WidthRequest="1" />
+
+                <Button
+                    Grid.Row="0"
+                    Margin="0,1,1,0"
+                    Command="{Binding ContinueWithRequestCommand}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonSkip]}" />
+
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="1,1,0,0"
+                    Command="{Binding ContinueWithRequestCommand}"
+                    IsEnabled="{Binding IsRoomFormFilled}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonContinue]}"
+                    TextColor="{StaticResource TextGreenColor}" />
 
 
-            <Button
-                Command="{Binding ContinueWithRequestCommand}"
-                HorizontalOptions="CenterAndExpand"
-                Style="{StaticResource ButtonStyle}"
-                Text="{Binding [CommonContinue]}" />
+            </Grid>
+
 
         </StackLayout>
 

@@ -27,6 +27,10 @@ namespace AeccApp.Core.ViewModels
         {
             CurrentRequest = navigationData as RequestModel;
             CurrentAddress = CurrentRequest.RequestAddress;
+            if(CurrentAddress.HospitalRoom == null || CurrentAddress.HospitalRoom == string.Empty )
+            {
+                HasUserFilledRoomForm = false;
+            }
             RequestTypeHeader = CurrentRequest.RequestType.Name;
             DisplayRequestInfo = "Tu petición es:\n \"" + CurrentRequest.RequestType.Name + "\"\n" + CurrentRequest.RequestAddress.DisplayAddress;
 
@@ -194,6 +198,16 @@ namespace AeccApp.Core.ViewModels
         public RequestConfirmationPopupViewModel RequestConfirmationPopupVM { get; private set; }
         public RequestSentPopupViewModel RequestSentPopupVM { get; private set; }
         public RequestDateAndTimePopupViewModel RequestDateAndTimePopupVM { get; private set; }
+
+
+        private bool _hasUserFilledRoomForm = true;
+
+        public bool HasUserFilledRoomForm
+        {
+            get { return _hasUserFilledRoomForm; }
+            set { Set(ref _hasUserFilledRoomForm, value); }
+        }
+
 
         private string _displayRequestInfo;
 

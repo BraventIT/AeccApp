@@ -116,6 +116,24 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Puedes indicarnos la sala o habitación del hospital en la que estás para facilitar el tramite.
+        /// </summary>
+        public static string AskForRoomPopupIndicatorText {
+            get {
+                return ResourceManager.GetString("AskForRoomPopupIndicatorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Escribe la sala.
+        /// </summary>
+        public static string AskForRoomPopupPlaceHolder {
+            get {
+                return ResourceManager.GetString("AskForRoomPopupPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Danos un momento, estamos conectando con el voluntario..
         /// </summary>
         public static string ChatConnectingPopupText {
@@ -535,6 +553,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string CommonRefreshList {
             get {
                 return ResourceManager.GetString("CommonRefreshList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saltar.
+        /// </summary>
+        public static string CommonSkip {
+            get {
+                return ResourceManager.GetString("CommonSkip", resourceCulture);
             }
         }
         
