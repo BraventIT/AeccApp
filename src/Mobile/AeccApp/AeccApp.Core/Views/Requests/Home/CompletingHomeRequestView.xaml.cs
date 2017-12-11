@@ -10,7 +10,7 @@ namespace AeccApp.Core.Views
 	public partial class CompletingHomeRequestView : BaseContentPage
 	{
         public CompletingHomeRequestView()
-		{
+        {
             InitializeComponent();
 
             map.UiSettings.ScrollGesturesEnabled = false;
@@ -24,6 +24,7 @@ namespace AeccApp.Core.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
+           // map.IsVisible = false;
             MessagingCenter.Unsubscribe<GeolocatorMessage>(this,string.Empty);
         }
 
@@ -46,7 +47,7 @@ namespace AeccApp.Core.Views
 
             map.Pins.Add(addressPin);
 
-            var animState = await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
+            await map.AnimateCamera(CameraUpdateFactory.NewPositionZoom(
                      message.Position, 16d), TimeSpan.FromSeconds(1));
         }
     }

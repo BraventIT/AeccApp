@@ -9,32 +9,16 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <Frame Padding="15" Style="{StaticResource PopupFrameStyle}">
+    <Frame Style="{StaticResource PopupFrameStyle}">
         <StackLayout>
 
+            <Grid ColumnSpacing="0" RowSpacing="0">
 
-            <Grid BackgroundColor="Transparent">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+                <Button Command="{Binding ClosePopupCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
+
+                <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
                 <ctrl:CustomImage
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="10"
-                    HorizontalOptions="Start"
-                    SourcePlatform="x_icon"
-                    VerticalOptions="Center">
-                    <ctrl:CustomImage.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
-                    </ctrl:CustomImage.GestureRecognizers>
-                </ctrl:CustomImage>
-                <ctrl:CustomImage
-                    Grid.Column="1"
                     Margin="10"
                     HorizontalOptions="End"
                     SourcePlatform="tick_icon"
@@ -46,20 +30,17 @@
 
             </Grid>
 
-            <StackLayout
-                Padding="10"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="Start">
+            <StackLayout Padding="10">
                 <Label
                     Margin="10,10,10,5"
-                    HorizontalOptions="Center"
-                    Text="{Binding [CommonDate]}" />
+                    Text="{Binding [CommonDate]}"
+                    VerticalTextAlignment="Center" />
                 <DatePicker Margin="10,5,10,5" Date="{Binding DateSelected, Mode=TwoWay}" />
 
                 <Label
                     Margin="10,5,10,5"
-                    HorizontalOptions="Center"
-                    Text="{Binding [CommonTime]}" />
+                    Text="{Binding [CommonTime]}"
+                    VerticalTextAlignment="Center" />
                 <TimePicker Margin="10" Time="{Binding TimeSelected, Mode=TwoWay}" />
             </StackLayout>
 

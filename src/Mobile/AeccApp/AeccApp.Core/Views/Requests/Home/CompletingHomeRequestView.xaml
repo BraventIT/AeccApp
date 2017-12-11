@@ -11,129 +11,123 @@
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [CompletingRequestTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True">
+
     <ScrollView>
-        <Grid>
-            <StackLayout>
-                <!--  Header  -->
-                <StackLayout
-                    Margin="0"
-                    Padding="0"
-                    BackgroundColor="{StaticResource LightSilver}"
-                    HeightRequest="100"
-                    HorizontalOptions="FillAndExpand">
-                    <Label
-                        Margin="30"
-                        FontSize="{StaticResource MidLargeSize}"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"
-                        Style="{StaticResource TitleLabelStyleNormal}"
-                        Text="{Binding RequestTypeHeader}"
-                        VerticalOptions="Center" />
-                </StackLayout>
 
-                <!--  Map  -->
-                <Grid HeightRequest="130" HorizontalOptions="FillAndExpand">
-
-
-                    <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
-                    <maps:Map
-                        x:Name="map"
-                        HasZoomEnabled="False"
-                        HorizontalOptions="FillAndExpand"
-                        IsEnabled="False"
-                        VerticalOptions="FillAndExpand" />
-
-                    <BoxView Margin="0" Style="{StaticResource TransparentBoxViewStyle}">
-                        <BoxView.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding MapDetailCommand}" />
-                        </BoxView.GestureRecognizers>
-                    </BoxView>
-                </Grid>
-                <!--  Date and time text and button  -->
+        <StackLayout>
+            <!--  Header  -->
+            <Frame
+                Padding="0"
+                BackgroundColor="{StaticResource LightSilver}"
+                HeightRequest="100">
                 <Label
-                    Margin="0,20,0,20"
-                    FontAttributes="None"
+                    Margin="30"
+                    FontSize="{StaticResource MidLargeSize}"
                     HorizontalOptions="Center"
-                    Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
-                    Text="{Binding [CompletingRequestTimeAndDateButtonText]}"
-                    TextColor="{StaticResource LightGraySubtitle}" />
-                <ctrlXlabs:ImageButton
-                    Margin="25,0,25,15"
-                    BackgroundColor="{StaticResource LightSilver}"
-                    BorderRadius="25"
-                    Command="{Binding OpenDateAndTimePopupCommand}"
-                    HeightRequest="46"
-                    HorizontalOptions="CenterAndExpand"
-                    ImageHeightRequest="12"
-                    ImageWidthRequest="12"
-                    SourcePlatform="date_icon"
-                    Style="{StaticResource ImageButtonStyle}"
-                    Text="{Binding [CompletingRequestTimeAndDate]}"
-                    TextColor="{StaticResource GreyText}" />
-                <BoxView
-                    Margin="0,0,0,15"
-                    HeightRequest="1"
-                    Color="LightGray" />
-                <!--  Comments text and entry  -->
-                <Label
-                    Margin="0,0,0,15"
-                    FontAttributes="None"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
-                    Text="{Binding [CompletingRequestComments]}"
-                    TextColor="{StaticResource LightGraySubtitle}" />
-                <StackLayout
-                    Margin="0,0,0,15"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center">
-                    <Frame
-                        Margin="35,0,35,0"
-                        Padding="1"
-                        BackgroundColor="{StaticResource LightGraySubtitle}"
-                        CornerRadius="25"
-                        HasShadow="False"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
-                        <Frame
-                            Margin="0"
-                            Padding="15,3,15,3"
-                            BackgroundColor="White"
-                            CornerRadius="25"
-                            HasShadow="False"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center">
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource TitleLabelStyleNormal}"
+                    Text="{Binding RequestTypeHeader}"
+                    VerticalOptions="Center" />
+            </Frame>
 
+            <!--  Map  -->
+            <Grid>
+                <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
+                <maps:Map
+                    x:Name="map"
+                    HasRotationEnabled="False"
+                    HasScrollEnabled="False"
+                    HasZoomEnabled="False"
+                    HeightRequest="130" />
 
-                            <Entry
-                                Margin="0"
-                                FontSize="{StaticResource MediumSize}"
-                                HorizontalOptions="Center"
-                                HorizontalTextAlignment="Start"
-                                Placeholder="{Binding [CompletingRequestCommentsPlaceHolder]}"
-                                Text="{Binding RequestComments}">
-                                <Entry.Behaviors>
-                                    <beh:EventToCommandBehavior
-                                        Command="{Binding CommentsEntryListenerCommand}"
-                                        EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
-                                        EventName="TextChanged" />
-                                </Entry.Behaviors>
-                            </Entry>
-                        </Frame>
-                    </Frame>
-                    <Label
-                        Margin="0,0,39,0"
-                        HorizontalOptions="End"
-                        Text="{Binding CommentsLenghtReminder}" />
-                </StackLayout>
-                <!--  Confirmate request button  -->
                 <Button
-                    Margin="0,0,0,60"
-                    Command="{Binding OpenRequestConfirmationPopupCommand}"
-                    HorizontalOptions="CenterAndExpand"
-                    Style="{StaticResource ButtonStyle}"
-                    Text="{Binding [CompletingRequestSendRequest]}" />
+                    Margin="0"
+                    BackgroundColor="{StaticResource SeeThroughWhite}"
+                    Command="{Binding MapDetailCommand}" />
+            </Grid>
+
+            <!--  Date and time text and button  -->
+            <Label
+                Margin="0,20,0,20"
+                FontAttributes="None"
+                HorizontalOptions="Center"
+                Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
+                Text="{Binding [CompletingRequestTimeAndDateButtonText]}"
+                TextColor="{StaticResource LightGraySubtitle}" />
+
+            <ctrlXlabs:ImageButton
+                Margin="25,0,25,15"
+                BackgroundColor="{StaticResource LightSilver}"
+                BorderRadius="25"
+                Command="{Binding OpenDateAndTimePopupCommand}"
+                HeightRequest="46"
+                HorizontalOptions="CenterAndExpand"
+                ImageHeightRequest="12"
+                ImageWidthRequest="12"
+                SourcePlatform="date_icon"
+                Style="{StaticResource ImageButtonStyle}"
+                Text="{Binding [CompletingRequestTimeAndDate]}"
+                TextColor="{StaticResource GreyText}" />
+
+            <BoxView
+                Margin="0,0,0,15"
+                HeightRequest="1"
+                Color="LightGray" />
+
+            <!--  Comments text and entry  -->
+            <Label
+                Margin="0,0,0,15"
+                FontAttributes="None"
+                HorizontalOptions="Center"
+                Style="{StaticResource DarkGreyMediumSizeSubtitleLabelStyle}"
+                Text="{Binding [CompletingRequestComments]}"
+                TextColor="{StaticResource LightGraySubtitle}" />
+
+            <StackLayout Margin="0,0,0,15" VerticalOptions="Center">
+                <Frame
+                    Margin="35,0,35,0"
+                    Padding="1"
+                    BackgroundColor="{StaticResource LightGraySubtitle}"
+                    CornerRadius="25"
+                    HasShadow="False">
+                    <Frame
+                        Margin="0"
+                        Padding="15,3,15,3"
+                        BackgroundColor="White"
+                        CornerRadius="25"
+                        HasShadow="False">
+
+                        <Entry
+                            Margin="0"
+                            FontSize="{StaticResource MediumSize}"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Start"
+                            Placeholder="{Binding [CompletingRequestCommentsPlaceHolder]}"
+                            Text="{Binding RequestComments}">
+                            <Entry.Behaviors>
+                                <beh:EventToCommandBehavior
+                                    Command="{Binding CommentsEntryListenerCommand}"
+                                    EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
+                                    EventName="TextChanged" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </Frame>
+                <Label
+                    Margin="0,0,39,0"
+                    HorizontalOptions="End"
+                    Text="{Binding CommentsLenghtReminder}" />
             </StackLayout>
-        </Grid>
+
+            <!--  Confirmate request button  -->
+            <Button
+                Margin="0,0,0,60"
+                Command="{Binding OpenRequestConfirmationPopupCommand}"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource ButtonStyle}"
+                Text="{Binding [CompletingRequestSendRequest]}" />
+        </StackLayout>
+
     </ScrollView>
 
 
