@@ -13,6 +13,7 @@ namespace AeccApp.Core.ViewModels
     {
         private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
         private IHospitalRequestDataService HospitalRequestDataService { get; } = ServiceLocator.HospitalRequestDataService;
+        private IEmailService EmailService { get; } = ServiceLocator.EmailService;
 
         #region Constructor and initialization
 
@@ -27,7 +28,7 @@ namespace AeccApp.Core.ViewModels
         {
             CurrentRequest = navigationData as RequestModel;
             CurrentAddress = CurrentRequest.RequestAddress;
-            if(CurrentAddress.HospitalRoom == null || CurrentAddress.HospitalRoom == string.Empty )
+            if (CurrentAddress.HospitalRoom == null || CurrentAddress.HospitalRoom == string.Empty)
             {
                 HasUserFilledRoomForm = false;
             }
@@ -178,7 +179,7 @@ namespace AeccApp.Core.ViewModels
             CurrentRequest.RequestTime = TimeToApplyParsed;
 
             CurrentRequest.RequestTimeStamp = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
-            
+
             if (IsAddressGettingSaved)
             {
                 CurrentRequest.RequestAddress.IsHospitalAddress = true;
@@ -187,6 +188,11 @@ namespace AeccApp.Core.ViewModels
             }
             await NavigationService.HidePopupAsync();
             //TODO #33 Send request with email service 
+            // string[] s = new string[] { "aquiemail@detesteo"};
+            // await OnSendRequestAsync(s);
+
+
+            //borrar al descomentar el envio de correo
             await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
 
@@ -306,6 +312,24 @@ namespace AeccApp.Core.ViewModels
 
 
 
+        #endregion
+
+        #region Methods
+        private Task OnSendRequestAsync(string[] receiversAddresses)
+        {
+            return ExecuteOperationAsync(
+                executeAction: async cancelToken =>
+                {
+                    var email = new EmailFromHospital(CurrentRequest, receiversAddresses);
+                    await EmailService.SendAsync(email, cancelToken);
+
+                },
+                finallyAction: async () =>
+                {
+                    await NavigationService.HidePopupAsync();
+                    await NavigationService.ShowPopupAsync(RequestSentPopupVM);
+                });
+        }
         #endregion
     }
 }
