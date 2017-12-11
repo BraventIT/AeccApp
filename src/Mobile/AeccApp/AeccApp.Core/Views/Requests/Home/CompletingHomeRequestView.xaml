@@ -32,14 +32,8 @@
                 </StackLayout>
 
                 <!--  Map  -->
-                <Grid HorizontalOptions="FillAndExpand">
-                    <Grid.HeightRequest>
-                        <OnPlatform
-                            x:TypeArguments="x:Double"
-                            Android="130"
-                            WinPhone="130"
-                            iOS="130" />
-                    </Grid.HeightRequest>
+                <Grid HeightRequest="130" HorizontalOptions="FillAndExpand">
+
 
                     <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
                     <maps:Map

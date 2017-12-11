@@ -98,8 +98,8 @@
     <Style x:Key="ButtonWhiteStyle" TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource GreenText}" />
         <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="VerticalOptions" Value="Fill" />
         <Setter Property="BorderRadius" Value="20" />
         <Setter Property="FontSize" Value="{StaticResource MidLargeSize}" />
         <Setter Property="BackgroundColor" Value="White" />
@@ -237,7 +237,7 @@
     </Style>
 
     <Style x:Key="PopupFrameStyle" TargetType="Frame">
-        <Setter Property="Margin" Value="45" />
+        <Setter Property="Margin" Value="45,0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
