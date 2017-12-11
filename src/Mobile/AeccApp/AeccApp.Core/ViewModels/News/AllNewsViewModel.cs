@@ -54,7 +54,6 @@ namespace AeccApp.Core.ViewModels
         {
             var selectedNew = obj as NewsModel;                                 
             await NavigationService.NavigateToAsync<NewsDetailViewModel>(selectedNew);
-            await NavigationService.RemoveLastFromBackStackAsync();
         }
         #endregion
 
@@ -71,7 +70,7 @@ namespace AeccApp.Core.ViewModels
         private async Task TryToUpdateNewsAsync(CancellationToken cancelToken)
         {
             var today = DateTime.Today.ToUniversalTime();
-            int numItemsRequired = NewsDataService.MaxItems / 2;
+            int numItemsRequired = NewsDataService.MaxItems;
             if (Settings.LastNewsChecked != today || NewsDataService.Count < numItemsRequired)
             {
                 var news = await NewsService.GetNewsAsync(cancelToken, numItemsRequired);

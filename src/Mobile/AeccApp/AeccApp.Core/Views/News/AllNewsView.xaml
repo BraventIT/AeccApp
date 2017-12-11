@@ -5,93 +5,42 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:beh="clr-namespace:AeccApp.Core.Behaviors"
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls"
+    xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [AllNewsViewTitle]}"
-    vm:ViewModelLocator.AutoWireViewModel="True">
-
-    <!--  NewsList list item template  -->
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <DataTemplate x:Key="newTemplate">
-                <ViewCell>
-                    <Grid>
-
-                        <Grid.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone, Windows" Value="15,15,15,0" />
-                                <On Platform="iOS" Value="10,10,10,0" />
-                                <On Platform="Android" Value="15,15,15,0" />
-                            </OnPlatform>
-                        </Grid.Margin>
-
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Image
-                            Grid.RowSpan="2"
-                            Grid.Column="0"
-                            HeightRequest="200"
-                            HorizontalOptions="FillAndExpand"
-                            Source="{Binding Imagen}"
-                            VerticalOptions="Center"
-                            WidthRequest="200" />
-
-
-                        <StackLayout
-                            Grid.RowSpan="2"
-                            Grid.Column="1"
-                            Orientation="Vertical">
-                            <Label
-                                FontAttributes="Bold"
-                                Text="{Binding Title}"
-                                TextColor="Black"
-                                VerticalOptions="Start" />
-                            <Label
-                                FontAttributes="Bold"
-                                Text="{Binding ContentSummary}"
-                                TextColor="Black"
-                                VerticalOptions="Start" />
-                        </StackLayout>
-
-
-
-                    </Grid>
-
-
-
-                </ViewCell>
-            </DataTemplate>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
+    Padding="15,30,15,30"
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource LightSilver}">
 
     <!--  NewsList list  -->
-    <ListView
-        x:Name="NewsListView"
-        BackgroundColor="Transparent"
+    <flv:FlowListView
+        x:Name="NewsFlowListView"
+        FlowColumnCount="2"
+        FlowItemTappedCommand="{Binding ChooseNewCommand}"
+        FlowItemsSource="{Binding NewsList}"
         HasUnevenRows="true"
         HorizontalOptions="FillAndExpand"
-        ItemTemplate="{StaticResource newTemplate}"
-        ItemsSource="{Binding NewsList}"
-        SeparatorColor="Black"
-        VerticalOptions="FillAndExpand">
-
-        <ListView.Behaviors>
-            <beh:EventToCommandBehavior
-                Command="{Binding ChooseNewCommand}"
-                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                EventName="ItemTapped" />
-        </ListView.Behaviors>
-    </ListView>
-
+        RowHeight="214">
+        <flv:FlowListView.FlowColumnTemplate>
+            <DataTemplate>
+                <StackLayout
+                    Margin="7"
+                    BackgroundColor="White"
+                    VerticalOptions="Fill">
+                    <Image
+                        Margin="0"
+                        HeightRequest="107"
+                        HorizontalOptions="FillAndExpand"
+                        Source="{Binding Imagen}" />
+                    <Label
+                        Margin="5"
+                        FontAttributes="Bold"
+                        Text="{Binding Title}"
+                        TextColor="Black"
+                        VerticalOptions="Start" />
+                </StackLayout>
+            </DataTemplate>
+        </flv:FlowListView.FlowColumnTemplate>
+    </flv:FlowListView>
 </v:BaseContentPage>
