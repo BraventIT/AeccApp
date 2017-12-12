@@ -11,12 +11,13 @@
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [HomeViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True"
-    BackgroundColor="{StaticResource BackgroundColor}"
+    BackgroundColor="{StaticResource LightSilver}"
     IconPlatform="home_tab_icon">
 
     <Grid>
         <ScrollView>
             <StackLayout>
+                <!--  Info call banner  -->
                 <Grid
                     BackgroundColor="{StaticResource LightGrey}"
                     HeightRequest="50"
@@ -52,28 +53,21 @@
                     <!--#region Volunteer state panel-->
                     <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
                         <Frame
-                            Padding="10"
+                            Margin="15,20"
+                            Padding="20,20,0,20"
                             BackgroundColor="White"
                             IsVisible="{Binding IsVolunteer}">
 
-                            <StackLayout Margin="10">
-                                <Grid HorizontalOptions="Center">
-                                    <ctrl:CustomShapeDrawing
-                                        Margin="0,-7,6,1"
-                                        BorderColor="#4286f4"
-                                        HeightRequest="12"
-                                        HorizontalOptions="Center"
-                                        PointsShapeCoordinate="0.7/0, 0/0, 0.9/1"
-                                        ShapeColor="#4286f4"
-                                        WidthRequest="14" />
+                            <StackLayout Margin="0">
 
-                                    <ctrl:CustomImage
-                                        HeightRequest="100"
-                                        HorizontalOptions="Center"
-                                        SourcePlatform="round_no_profile_image"
-                                        VerticalOptions="Center"
-                                        WidthRequest="100" />
-                                </Grid>
+
+                                <ctrl:CustomImage
+                                    HeightRequest="100"
+                                    HorizontalOptions="Center"
+                                    SourcePlatform="ICO_firstCHAT"
+                                    VerticalOptions="Center"
+                                    WidthRequest="100" />
+
                                 <Label
                                     HorizontalOptions="Center"
                                     Style="{StaticResource TitleLabelStyleNormal}"
@@ -93,16 +87,23 @@
 
                     <!--#region Request state panel-->
                     <StackLayout
-                        Padding="10,10,0,10"
+                        Margin="15,20"
+                        Padding="20,20,0,20"
                         BackgroundColor="White"
                         IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
                         Orientation="Horizontal">
-                        <StackLayout>
-                            <Label Style="{StaticResource SubTitleLabelStyle}" Text="{Binding [HomeViewRequests]}" />
+                        <ctrl:CustomImage
+                            Margin="0,0,12,0"
+                            HeightRequest="35"
+                            SourcePlatform="request_grey_icon"
+                            WidthRequest="28" />
+                        <StackLayout Margin="0" Padding="0">
                             <Label
-                                Style="{StaticResource NormalLabelStyle}"
-                                Text="{Binding [HomeViewAllRequests]}"
-                                TextColor="{StaticResource AccentColor}">
+                                Margin="0"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                                Text="{Binding [HomeViewRequests]}" />
+                            <Label Style="{StaticResource LightGreyLabelStyle}" Text="{Binding [HomeViewAllRequests]}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding OpenAllRequestsCommand}" />
                                 </Label.GestureRecognizers>
@@ -110,8 +111,11 @@
                         </StackLayout>
 
                         <ctrlXlabs:ImageButton
+                            Margin="0"
                             Command="{Binding NewRequestCommand}"
                             HorizontalOptions="EndAndExpand"
+                            ImageHeightRequest="50"
+                            ImageWidthRequest="50"
                             SourcePlatform="round_plus_green_background"
                             Style="{StaticResource RoundGreenButtonStyle}"
                             VerticalOptions="Center" />
@@ -120,26 +124,44 @@
                     <!--#endregion-->
 
                     <!--#region Chat state panel-->
-                    <StackLayout Padding="10,10,0,10" BackgroundColor="White">
+                    <StackLayout
+                        Margin="15,0,15,20"
+                        Padding="20,20,0,20"
+                        BackgroundColor="White">
                         <StackLayout Orientation="Horizontal">
+                            <ctrl:CustomImage
+                                Margin="0,0,12,0"
+                                HeightRequest="30"
+                                SourcePlatform="chat_grey_icon"
+                                WidthRequest="32" />
                             <StackLayout>
-                                <Label Style="{StaticResource SubTitleLabelStyle}" Text="{Binding [HomeViewChatsOnline]}" />
                                 <Label
+                                    Margin="0"
+                                    HorizontalOptions="Start"
+                                    Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                                    Text="{Binding [HomeViewChatsOnline]}" />
+                                <Label
+                                    Margin="0"
                                     IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
-                                    Style="{StaticResource NormalLabelStyle}"
-                                    Text="{Binding [HomeViewTalkToVolunteer]}"
-                                    TextColor="{StaticResource AccentColor}" />
+                                    Style="{StaticResource LightGreyLabelStyle}"
+                                    Text="{Binding [HomeViewTalkToVolunteer]}" />
                             </StackLayout>
                             <Grid
+                                Margin="0"
                                 HorizontalOptions="EndAndExpand"
                                 IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}"
                                 VerticalOptions="Center">
 
                                 <ctrlXlabs:ImageButton
+                                    Margin="0"
                                     Command="{Binding NewChatCommand}"
+                                    HorizontalOptions="EndAndExpand"
+                                    ImageHeightRequest="50"
+                                    ImageWidthRequest="50"
                                     IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
                                     SourcePlatform="round_plus_green_background"
-                                    Style="{StaticResource RoundGreenButtonStyle}" />
+                                    Style="{StaticResource RoundGreenButtonStyle}"
+                                    VerticalOptions="Center" />
                             </Grid>
                         </StackLayout>
 
@@ -175,12 +197,13 @@
                             </Grid.RowDefinitions>
 
                             <ctrl:CustomImage
-                                HeightRequest="35"
+                                HeightRequest="55"
                                 SourcePlatform="{Binding LastMessage.Activity.From.Gender, Converter={StaticResource GenderToImageConverter}}"
                                 VerticalOptions="End"
-                                WidthRequest="35" />
+                                WidthRequest="55" />
 
                             <StackLayout Grid.Column="1" VerticalOptions="Center">
+
                                 <Label
                                     LineBreakMode="TailTruncation"
                                     Style="{StaticResource MediumLabelStyle}"
@@ -205,22 +228,17 @@
                     <!--#endregion-->
 
                     <!--#region  News panel-->
-                    <Grid Padding="10" BackgroundColor="White">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                    <StackLayout Margin="20,0,0,15">
 
                         <Label
-                            Grid.Row="0"
-                            Style="{StaticResource SubTitleLabelStyle}"
+                            Margin="0"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
                             Text="{Binding [HomeViewLastNews]}" />
                         <Label
-                            Grid.Row="1"
-                            Style="{StaticResource NormalLabelStyle}"
-                            Text="{Binding [HomeViewAllNews]}"
-                            TextColor="{StaticResource AccentColor}">
+                            HorizontalOptions="Start"
+                            Style="{StaticResource LightGreyLabelStyle}"
+                            Text="{Binding [HomeViewAllNews]}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding OpenAllNewsCommand}" />
                             </Label.GestureRecognizers>
@@ -229,22 +247,25 @@
                         <flv:FlowListView
                             x:Name="NewsFlowListView"
                             Grid.Row="2"
-                            FlowColumnCount="1"
+                            FlowColumnCount="2"
                             FlowItemTappedCommand="{Binding ChooseNewCommand}"
                             FlowItemsSource="{Binding NewsList}"
                             HasUnevenRows="true"
                             HorizontalOptions="FillAndExpand">
                             <flv:FlowListView.FlowColumnTemplate>
                                 <DataTemplate>
-                                    <StackLayout Padding="5">
+                                    <StackLayout
+                                        Margin="0,7,7,7"
+                                        BackgroundColor="White"
+                                        VerticalOptions="Fill">
                                         <Image
-                                            Margin="0,10,0,0"
+                                            Margin="0"
+                                            HeightRequest="107"
                                             HorizontalOptions="FillAndExpand"
                                             Source="{Binding Imagen}" />
                                         <Label
-                                            Margin="0,0,0,5"
+                                            Margin="5"
                                             FontAttributes="Bold"
-                                            LineBreakMode="TailTruncation"
                                             Text="{Binding Title}"
                                             TextColor="Black"
                                             VerticalOptions="Start" />
@@ -252,7 +273,8 @@
                                 </DataTemplate>
                             </flv:FlowListView.FlowColumnTemplate>
                         </flv:FlowListView>
-                    </Grid>
+
+                    </StackLayout>
                     <!--#endregion-->
 
                 </StackLayout>
