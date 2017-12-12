@@ -10,5 +10,7 @@ namespace AeccApp.Core.Views.Templates
 		{
 			InitializeComponent ();
 		}
-	}
+
+     
+    }
 }

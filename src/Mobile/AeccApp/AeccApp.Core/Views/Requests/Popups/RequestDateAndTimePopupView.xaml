@@ -18,15 +18,18 @@
 
                 <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
+                <Button
+                    BackgroundColor="Transparent"
+                    Command="{Binding ApplyDateAndTimeCommand}"
+                    HeightRequest="20"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    WidthRequest="20" />
                 <ctrl:CustomImage
                     Margin="10"
                     HorizontalOptions="End"
                     SourcePlatform="tick_icon"
-                    VerticalOptions="Center">
-                    <ctrl:CustomImage.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ApplyDateAndTimeCommand}" />
-                    </ctrl:CustomImage.GestureRecognizers>
-                </ctrl:CustomImage>
+                    VerticalOptions="Center" />
 
             </Grid>
 

@@ -17,6 +17,7 @@ namespace AeccApp.Core.ViewModels
         #region Constructor and initialize
         public RequestsViewModel()
         {
+            FirstTimeLandingPageVisible = Settings.FirstRequestLandingPageSeen;
             _homeRequestsList = new List<RequestModel>();
             _hospitalRequestsList = new List<RequestModel>();
         }
@@ -94,6 +95,23 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
+        private Command _continueWithRequest;
+        public ICommand ContinueWithRequest
+        {
+            get
+            {
+                return _continueWithRequest ??
+                    (_continueWithRequest = new Command(OnContinueWithRequest));
+            }
+        }
+
+     
+        void OnContinueWithRequest(object obj)
+        {
+            Settings.FirstRequestLandingPageSeen = false;
+            FirstTimeLandingPageVisible = false;
+        }
+
         private Command _newRequestCommand;
         public ICommand NewRequestCommand
         {
@@ -108,10 +126,9 @@ namespace AeccApp.Core.ViewModels
         /// Navigates to NewRequestSelectAddressView
         /// </summary>
         /// <param name="obj"></param>
-         void OnNewRequestCommand(object obj)
+        async void OnNewRequestCommand(object obj)
         {
-            Settings.FirstRequestLandingPageSeen = true;
-            FirstTimeLandingPageVisible = true;
+            await NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
         }
 
         private Command _hospitalTabCommand;
