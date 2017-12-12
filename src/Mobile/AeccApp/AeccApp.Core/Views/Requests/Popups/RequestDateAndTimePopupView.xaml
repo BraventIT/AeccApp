@@ -18,35 +18,37 @@
 
                 <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
-                <Button
-                    BackgroundColor="Transparent"
-                    Command="{Binding ApplyDateAndTimeCommand}"
-                    HeightRequest="20"
-                    HorizontalOptions="End"
-                    VerticalOptions="Center"
-                    WidthRequest="20" />
-                <ctrl:CustomImage
-                    Margin="10"
-                    HorizontalOptions="End"
-                    SourcePlatform="tick_icon"
-                    VerticalOptions="Center" />
-
             </Grid>
 
             <StackLayout Padding="10">
                 <Label
                     Margin="10,10,10,5"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
                     Text="{Binding [CommonDate]}"
                     VerticalTextAlignment="Center" />
                 <DatePicker Margin="10,5,10,5" Date="{Binding DateSelected, Mode=TwoWay}" />
 
                 <Label
                     Margin="10,5,10,5"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
                     Text="{Binding [CommonTime]}"
                     VerticalTextAlignment="Center" />
                 <TimePicker Margin="10" Time="{Binding TimeSelected, Mode=TwoWay}" />
             </StackLayout>
 
+            <BoxView
+                HeightRequest="1"
+                HorizontalOptions="FillAndExpand"
+                Color="{StaticResource LightGrey2}" />
+            <Button
+                BackgroundColor="Transparent"
+                Command="{Binding ApplyDateAndTimeCommand}"
+                FontSize="{StaticResource MidLargeSize}"
+                Text="{Binding [CommonApply]}"
+                TextColor="{StaticResource TextGreenColor}"
+                VerticalOptions="Center" />
 
         </StackLayout>
     </Frame>

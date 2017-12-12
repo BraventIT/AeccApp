@@ -350,6 +350,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aplicar.
+        /// </summary>
+        public static string CommonApply {
+            get {
+                return ResourceManager.GetString("CommonApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aplicar filtros.
         /// </summary>
         public static string CommonApplyFilters {

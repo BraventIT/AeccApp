@@ -213,6 +213,9 @@
   <data name="CommonAgeTitle" xml:space="preserve">
     <value>Edad:</value>
   </data>
+  <data name="CommonApply" xml:space="preserve">
+    <value>Aplicar</value>
+  </data>
   <data name="CommonApplyFilters" xml:space="preserve">
     <value>Aplicar filtros</value>
   </data>
