@@ -7,21 +7,18 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     BackgroundColor="{StaticResource SeeThrough}">
 
-    <ContentView
-        Margin="20"
-        Style="{StaticResource BorderStyle}"
-        VerticalOptions="Center">
-        <ContentView Style="{StaticResource InternalViewStyle}">
+    <Frame HorizontalOptions="Fill" Style="{StaticResource PopupFrameStyle}">
+        <StackLayout>
             <Grid
                 Margin="1"
-                Padding="0,20"
+                Padding="0,20,0,0"
                 BackgroundColor="{StaticResource BackgroundColor}">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -30,8 +27,10 @@
 
                 <ctrl:CustomImage
                     Grid.ColumnSpan="2"
+                    HeightRequest="75"
                     HorizontalOptions="Center"
-                    SourcePlatform="round_question_icon" />
+                    SourcePlatform="round_question_icon"
+                    WidthRequest="75" />
 
                 <Label
                     Grid.Row="1"
@@ -46,24 +45,37 @@
                     Style="{StaticResource SubTitleLabelStyleCentered}"
                     Text="{Binding [PopupLogoutText]}" />
 
+                <BoxView
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    HeightRequest="1"
+                    VerticalOptions="Start" />
+
+                <BoxView
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    HorizontalOptions="Center"
+                    WidthRequest="1" />
+
                 <Button
                     Grid.Row="3"
-                    Margin="0,20,0,0"
-                    Command="{Binding LogoutCommand}"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource ButtonSmallStyle}"
-                    Text="Si" />
+                    Margin="0,1,1,0"
+                    Command="{Binding ClosePopupCommand}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonNo]}" />
 
                 <Button
                     Grid.Row="3"
                     Grid.Column="1"
-                    Margin="0,20,0,0"
-                    Command="{Binding ClosePopupCommand}"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource ButtonSmallStyle}"
-                    Text="No" />
+                    Margin="1,1,0,0"
+                    Command="{Binding LogoutCommand}"
+                    Style="{StaticResource ButtonWhiteStyle}"
+                    Text="{Binding [CommonYes]}" />
+
             </Grid>
-        </ContentView>
-    </ContentView>
+        </StackLayout>
+    </Frame>
 
 </vPop:PopupPage>
