@@ -44,8 +44,7 @@
             BackgroundColor="{StaticResource LightGraySubtitle}"
             CornerRadius="25"
             HasShadow="False"
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
+            HorizontalOptions="Center">
             <Frame
                 Margin="0"
                 Padding="0"
@@ -148,117 +147,103 @@
         <ScrollView Grid.Row="1" IsVisible="{Binding AddressSelected, Converter={StaticResource IsNotNullConverter}}">
             <StackLayout>
                 <BoxView
+                    Margin="0,20,0,0"
                     HeightRequest="1"
                     HorizontalOptions="FillAndExpand"
                     Color="{StaticResource LightGraySubtitle}" />
 
                 <Label
-                    Margin="0,10,0,0"
-                    FontSize="Medium"
+                    Margin="0,24,0,20"
+                    FontSize="{StaticResource MidLargeSize}"
                     HorizontalOptions="Center"
                     Text="{Binding [NewHomeAddressViewMoreInfo]}"
                     TextColor="{StaticResource LightGraySubtitle}" />
 
-                <Grid HorizontalOptions="Center">
+                <Grid Margin="20,0" ColumnSpacing="10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
                     <Frame
                         Grid.Column="0"
-                        Margin="20,20,20,0"
                         Padding="1"
                         BackgroundColor="{StaticResource LightGraySubtitle}"
                         CornerRadius="25"
                         HasShadow="False"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
+                        HorizontalOptions="Fill">
                         <Frame
                             Margin="0"
                             Padding="5,0,5,0"
                             BackgroundColor="White"
                             CornerRadius="25"
-                            HasShadow="False"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center">
+                            HasShadow="False">
                             <Entry Placeholder="{Binding [NewHomeAddressViewNumberPlaceHolder]}" Text="{Binding AddressNumber}" />
                         </Frame>
                     </Frame>
                     <Frame
                         Grid.Column="1"
-                        Margin="20,20,20,0"
                         Padding="1"
                         BackgroundColor="{StaticResource LightGraySubtitle}"
                         CornerRadius="25"
-                        HasShadow="False"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
+                        HasShadow="False">
                         <Frame
                             Margin="0"
                             Padding="5,0,5,0"
                             BackgroundColor="White"
                             CornerRadius="25"
-                            HasShadow="False"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center">
+                            HasShadow="False">
                             <Entry Placeholder="{Binding [NewHomeAddressViewPortalPlaceHolder]}" Text="{Binding AddressSelected.Portal}" />
                         </Frame>
                     </Frame>
                     <Frame
                         Grid.Column="2"
-                        Margin="20,20,20,0"
                         Padding="1"
                         BackgroundColor="{StaticResource LightGraySubtitle}"
                         CornerRadius="25"
-                        HasShadow="False"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
+                        HasShadow="False">
                         <Frame
                             Margin="0"
                             Padding="5,0,5,0"
                             BackgroundColor="White"
                             CornerRadius="25"
-                            HasShadow="False"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center">
+                            HasShadow="False">
                             <Entry Placeholder="{Binding [NewHomeAddressViewFloorPlaceHolder]}" Text="{Binding AddressSelected.Floor}" />
                         </Frame>
                     </Frame>
-                </Grid>
-
-                <StackLayout Margin="0,10,0,10" HorizontalOptions="Center">
                     <Frame
-                        Margin="20,20,20,0"
+                        Grid.Row="2"
+                        Grid.ColumnSpan="3"
+                        Margin="0,20,0,0"
                         Padding="1"
                         BackgroundColor="{StaticResource LightGraySubtitle}"
                         CornerRadius="25"
-                        HasShadow="False"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
+                        HasShadow="False">
                         <Frame
                             Margin="0"
                             Padding="10,0,5,0"
                             BackgroundColor="White"
                             CornerRadius="25"
-                            HasShadow="False"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center">
+                            HasShadow="False">
                             <Entry
                                 Placeholder="{Binding [NewHomeAddressViewNameTheAddressPlaceHolder]}"
                                 Text="{Binding AddressName.Value}"
                                 WidthRequest="300" />
                         </Frame>
                     </Frame>
-                    <Label
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"
-                        Style="{StaticResource ValidationErrorLabelStyle}"
-                        Text="{Binding AddressName.Errors, Converter={StaticResource FirstValidationErrorConverter}" />
-                </StackLayout>
+                </Grid>
+
+                <Label
+                    HorizontalOptions="Center"
+                    Style="{StaticResource ValidationErrorLabelStyle}"
+                    Text="{Binding AddressName.Errors, Converter={StaticResource FirstValidationErrorConverter}" />
 
                 <StackLayout
-                    Margin="10"
+                    Margin="20"
                     HorizontalOptions="Center"
                     Orientation="Horizontal">
                     <Switch VerticalOptions="Center">
@@ -274,11 +259,9 @@
                 </StackLayout>
 
                 <ctrlXlabs:ImageButton
-                    Margin="10"
+                    Margin="0,20,0,0"
                     BackgroundColor="{StaticResource GreyText}"
-                    BorderRadius="25"
                     Command="{Binding ContinueWithRequestCommand}"
-                    HeightRequest="40"
                     HorizontalOptions="CenterAndExpand"
                     Orientation="ImageToRight"
                     SourcePlatform="right_arrow_big"

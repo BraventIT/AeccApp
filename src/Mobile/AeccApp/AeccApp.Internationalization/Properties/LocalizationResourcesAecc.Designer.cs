@@ -521,7 +521,7 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nueva petición.
+        ///   Looks up a localized string similar to NUEVA PETICIÓN.
         /// </summary>
         public static string CommonNewRequest {
             get {
@@ -908,6 +908,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nueva petición.
+        /// </summary>
+        public static string MakeRequestToolbarTitle {
+            get {
+                return ResourceManager.GetString("MakeRequestToolbarTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No tienes ninguna dirección guardada. ¡Crea una nueva!.
         /// </summary>
         public static string NewHomeAddressListViewAddressesEmpty {
@@ -1129,6 +1138,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string NewHospitalAddressListViewAddressesEmpty {
             get {
                 return ResourceManager.GetString("NewHospitalAddressListViewAddressesEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Iniciar una petición.
+        /// </summary>
+        public static string NewRequestToolbarTitle {
+            get {
+                return ResourceManager.GetString("NewRequestToolbarTitle", resourceCulture);
             }
         }
         
@@ -1507,6 +1525,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string VolunteersListToolbarTitle {
             get {
                 return ResourceManager.GetString("VolunteersListToolbarTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tus peticiones.
+        /// </summary>
+        public static string YourRequestsToolbarTitle {
+            get {
+                return ResourceManager.GetString("YourRequestsToolbarTitle", resourceCulture);
             }
         }
     }

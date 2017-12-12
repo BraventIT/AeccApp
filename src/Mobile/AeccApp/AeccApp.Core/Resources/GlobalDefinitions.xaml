@@ -44,7 +44,7 @@
     <OnPlatform
         x:Key="MediumSize"
         x:TypeArguments="x:Double"
-        Android="15"
+        Android="16"
         WinPhone="16"
         iOS="14" />
 

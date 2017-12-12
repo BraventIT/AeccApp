@@ -55,6 +55,7 @@
             </DataTemplate>
         </ResourceDictionary>
     </ContentView.Resources>
+
     <StackLayout>
         <!--  Header  -->
         <StackLayout

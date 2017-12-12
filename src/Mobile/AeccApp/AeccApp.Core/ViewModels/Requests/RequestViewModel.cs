@@ -1,7 +1,8 @@
 ﻿using AeccApp.Core.Extensions;
+using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,47 +18,30 @@ namespace AeccApp.Core.ViewModels
         #region Constructor and initialize
         public RequestsViewModel()
         {
-            FirstTimeLandingPageVisible = Settings.FirstRequestLandingPageSeen;
-            _homeRequestsList = new List<RequestModel>();
-            _hospitalRequestsList = new List<RequestModel>();
+            _homeRequestsList = new ObservableCollection<RequestModel>();
+            _hospitalRequestsList = new ObservableCollection<RequestModel>();
         }
 
         public override async Task ActivateAsync()
         {
-            FirstTimeLandingPageVisible = Settings.FirstRequestLandingPageSeen;
-
-            if (!FirstTimeLandingPageVisible)
-                await ExecuteOperationAsync(async () =>
-                {
-                    var homeRequests = await HomeRequestsDataService.GetListAsync();
-                    HomeRequestsList.SyncExact(homeRequests);
-                    var HospitalRequest = await HospitalRequestDataService.GetListAsync();
-                    HospitalRequestsList.AddRange(HospitalRequest);
-
-                    if (!HomeRequestsList.Any())
-                    {
-                        IsHomeRequestsListEmpty = true;
-                    }
-                    if (!HospitalRequestsList.Any())
-                    {
-                        IsHospitalRequestsListEmpty = true;
-                    }
-                });
+            if (FirstTimeLandingPageVisible)
+                MessagingCenter.Send(new ToolbarMessage(this["NewRequestToolbarTitle"]), string.Empty);
+            else {
+                MessagingCenter.Send(new ToolbarMessage(this["YourRequestsToolbarTitle"]), string.Empty);
+                await RefreshRequestAsync(SwitchHomeAndHospitalList);
+            }
         }
 
         #endregion
 
         #region Properties
         private bool _firstTimeLandingPageVisible;
-
         public bool FirstTimeLandingPageVisible
         {
-            get { return _firstTimeLandingPageVisible; }
-            set { Set(ref _firstTimeLandingPageVisible, value); }
+            get { return Settings.FirstRequestLandingPageSeen; }
         }
 
         private bool _isHomeRequestsListEmpty;
-
         public bool IsHomeRequestsListEmpty
         {
             get { return _isHomeRequestsListEmpty; }
@@ -65,32 +49,35 @@ namespace AeccApp.Core.ViewModels
         }
 
         private bool _isHospitalRequestsListEmpty;
-
         public bool IsHospitalRequestsListEmpty
         {
             get { return _isHospitalRequestsListEmpty; }
             set { Set(ref _isHospitalRequestsListEmpty, value); }
         }
 
-        private List<RequestModel> _homeRequestsList;
-
-        public List<RequestModel> HomeRequestsList
+        private ObservableCollection<RequestModel> _homeRequestsList;
+        public ObservableCollection<RequestModel> HomeRequestsList
         {
             get { return _homeRequestsList; }
         }
-        private List<RequestModel> _hospitalRequestsList;
 
-        public List<RequestModel> HospitalRequestsList
+        private ObservableCollection<RequestModel> _hospitalRequestsList;
+        public ObservableCollection<RequestModel> HospitalRequestsList
         {
             get { return _hospitalRequestsList; }
         }
 
         private bool _switchHomeAndHospitalList;
-
         public bool SwitchHomeAndHospitalList
         {
             get { return _switchHomeAndHospitalList; }
-            set { Set(ref _switchHomeAndHospitalList, value); }
+            set
+            {
+                if (Set(ref _switchHomeAndHospitalList, value))
+                {
+                    RefreshRequestAsync(_switchHomeAndHospitalList);
+                }
+            }
         }
         #endregion
 
@@ -101,34 +88,16 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _continueWithRequest ??
-                    (_continueWithRequest = new Command(OnContinueWithRequest));
+                    (_continueWithRequest = new Command(o=> OnContinueWithRequestAsync()));
             }
         }
 
-     
-        void OnContinueWithRequest(object obj)
+        async Task OnContinueWithRequestAsync()
         {
             Settings.FirstRequestLandingPageSeen = false;
-            FirstTimeLandingPageVisible = false;
-        }
+            NotifyPropertyChanged(nameof(FirstTimeLandingPageVisible));
 
-        private Command _newRequestCommand;
-        public ICommand NewRequestCommand
-        {
-            get
-            {
-                return _newRequestCommand ??
-                    (_newRequestCommand = new Command(OnNewRequestCommand));
-            }
-        }
-
-        /// <summary>
-        /// Navigates to NewRequestSelectAddressView
-        /// </summary>
-        /// <param name="obj"></param>
-        async void OnNewRequestCommand(object obj)
-        {
-            await NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
+            await RefreshRequestAsync(SwitchHomeAndHospitalList);
         }
 
         private Command _hospitalTabCommand;
@@ -151,11 +120,59 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
+        private Command _atHomeCommand;
+        public ICommand AtHomeCommand
+        {
+            get
+            {
+                return _atHomeCommand ??
+                    (_atHomeCommand = new Command(OnAtHomeCommand));
+            }
+        }
+
+        async void OnAtHomeCommand(object obj)
+        {
+            await NavigationService.NavigateToAsync<HomeAddressesListViewModel>();
+        }
+
+
+        private Command _atHospitalCommand;
+        public ICommand AtHospitalCommand
+        {
+            get
+            {
+                return _atHospitalCommand ??
+                    (_atHospitalCommand = new Command(OnAtHospitalCommand));
+            }
+        }
+
+        async void OnAtHospitalCommand(object obj)
+        {
+            await NavigationService.NavigateToAsync<HospitalAddressesListViewModel>();
+        }
+
         #endregion
 
+        #region Private Methods
+        private Task RefreshRequestAsync(bool switchHomeAndHospitalList)
+        {
+            return ExecuteOperationAsync(async () =>
+            {
+                if (switchHomeAndHospitalList)
+                {
+                    var hospitalRequest = await HospitalRequestDataService.GetListAsync();
+                    HospitalRequestsList.SyncExact(hospitalRequest);
+                    IsHospitalRequestsListEmpty = !HospitalRequestsList.Any();
+                }
+                else
+                {
+                    var homeRequests = await HomeRequestsDataService.GetListAsync();
+                    HomeRequestsList.SyncExact(homeRequests);
+                    IsHomeRequestsListEmpty = !HomeRequestsList.Any();
+                }
+            });
+        }
 
-
-
-
+        #endregion
     }
 }
