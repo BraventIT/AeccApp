@@ -40,6 +40,7 @@
                             Padding="0"
                             BackgroundColor="{Binding Activity.From, Converter={StaticResource ClientTypeConverter}}}"
                             CornerRadius="18"
+                            HasShadow="False"
                             HorizontalOptions="End">
 
                             <Label
@@ -69,6 +70,7 @@
                             Padding="0"
                             BackgroundColor="{StaticResource PlanarLightGrey}"
                             CornerRadius="18"
+                            HasShadow="False"
                             HorizontalOptions="Start">
 
                             <Label
@@ -154,26 +156,26 @@
             VerticalOptions="Start" />
 
         <!--  Chat text entry  -->
-        <Entry
+        <!--  Placeholder="{Binding [ChatViewChatEntryPlaceHolder]}"  -->
+        <ctrl:ExpandableEditor
             x:Name="Entry"
             Grid.Row="1"
             Margin="10,0"
             HorizontalOptions="FillAndExpand"
-            Keyboard="Chat"
-            Placeholder="{Binding [ChatViewChatEntryPlaceHolder]}"
+            Keyboard="Text"
             Text="{Binding Text, Mode=TwoWay}">
-            <!--<Entry.Keyboard>
+            <ctrl:ExpandableEditor.Keyboard>
                 <Keyboard x:FactoryMethod="Create">
                     <x:Arguments>
                         <KeyboardFlags>Suggestions</KeyboardFlags>
                     </x:Arguments>
                 </Keyboard>
-            </Entry.Keyboard>-->
+            </ctrl:ExpandableEditor.Keyboard>
 
-            <Entry.Behaviors>
+            <ctrl:ExpandableEditor.Behaviors>
                 <beh:EventToCommandBehavior Command="{Binding SendMessageCommand}" EventName="Completed" />
-            </Entry.Behaviors>
-        </Entry>
+            </ctrl:ExpandableEditor.Behaviors>
+        </ctrl:ExpandableEditor>
 
         <ctrl:CustomImage
             Grid.Row="1"
