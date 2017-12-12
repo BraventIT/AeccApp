@@ -29,7 +29,7 @@ namespace AeccApp.Core.Validations
         public List<string> Errors
         {
             get { return _errors; }
-            set { Set(ref _errors, value); }
+            private set { Set(ref _errors, value); }
         }
 
         private bool _isValid;
@@ -37,7 +37,7 @@ namespace AeccApp.Core.Validations
         public bool IsValid
         {
             get { return _isValid; }
-            set { Set(ref _isValid , value); }
+            private set { Set(ref _isValid , value); }
         }
 
         private readonly List<IValidationRule<T>> _validations;
@@ -54,8 +54,6 @@ namespace AeccApp.Core.Validations
 
         public bool Validate()
         {
-            Errors.Clear();
-
             IEnumerable<string> errors = _validations
                 .Where(v => !v.Check(Value))
                 .Select(v => v.ValidationMessage);
@@ -64,6 +62,11 @@ namespace AeccApp.Core.Validations
             IsValid = !Errors.Any();
 
             return IsValid;
+        }
+
+        public void Clear()
+        {
+            Errors = null;
         }
     }
 }

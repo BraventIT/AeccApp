@@ -138,6 +138,7 @@
         <Setter Property="Orientation" Value="ImageToLeft" />
         <Setter Property="WidthRequest" Value="{StaticResource SmallImageButtonWidth}" />
         <Setter Property="HeightRequest" Value="40" />
+
         <Setter Property="ImageHeightRequest" Value="{StaticResource SmallImageButtonImageSize}" />
         <Setter Property="ImageWidthRequest" Value="{StaticResource SmallImageButtonImageSize}" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
@@ -146,8 +147,9 @@
     <Style x:Key="ImageButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="Orientation" Value="ImageToLeft" />
+        <Setter Property="BorderRadius" Value="28" />
         <Setter Property="WidthRequest" Value="{StaticResource ImageButtonWidth}" />
-        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="HeightRequest" Value="44" />
         <Setter Property="ImageHeightRequest" Value="{StaticResource ImageButtonImageSize}" />
         <Setter Property="ImageWidthRequest" Value="{StaticResource ImageButtonImageSize}" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />

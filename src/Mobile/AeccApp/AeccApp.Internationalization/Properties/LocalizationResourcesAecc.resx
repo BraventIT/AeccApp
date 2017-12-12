@@ -271,7 +271,7 @@
     <value>Nuevo chat</value>
   </data>
   <data name="CommonNewRequest" xml:space="preserve">
-    <value>Nueva petición</value>
+    <value>NUEVA PETICIÓN</value>
   </data>
   <data name="CommonNo" xml:space="preserve">
     <value>No</value>
@@ -399,6 +399,9 @@
   <data name="LoginViewPreLoginText" xml:space="preserve">
     <value>Vamos a pedirte que te identifiques...</value>
   </data>
+  <data name="MakeRequestToolbarTitle" xml:space="preserve">
+    <value>Nueva petición</value>
+  </data>
   <data name="NewHomeAddressListViewAddressesEmpty" xml:space="preserve">
     <value>No tienes ninguna dirección guardada. ¡Crea una nueva!</value>
   </data>
@@ -473,6 +476,9 @@
   </data>
   <data name="NewHospitalAddressListViewAddressesEmpty" xml:space="preserve">
     <value>No tienes ninguna dirección guardada. ¡Crea una nueva!</value>
+  </data>
+  <data name="NewRequestToolbarTitle" xml:space="preserve">
+    <value>Iniciar una petición</value>
   </data>
   <data name="NewsDetailViewTitle" xml:space="preserve">
     <value>Detalles de la noticia</value>
@@ -599,5 +605,8 @@
   </data>
   <data name="VolunteersListToolbarTitle" xml:space="preserve">
     <value>Elige voluntario</value>
+  </data>
+  <data name="YourRequestsToolbarTitle" xml:space="preserve">
+    <value>Tus peticiones</value>
   </data>
 </root>

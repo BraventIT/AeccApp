@@ -2,6 +2,6 @@
 {
     public interface IValidity
     {
-        bool IsValid { get; set; }
+        bool IsValid { get; }
     }
 }

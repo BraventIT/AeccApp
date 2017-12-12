@@ -247,6 +247,7 @@ namespace AeccApp.Core.ViewModels
                 result = (bool)obj;
 
             IsAddressGettingSaved = result;
+            AddressName.Clear();
         }
         #endregion
 

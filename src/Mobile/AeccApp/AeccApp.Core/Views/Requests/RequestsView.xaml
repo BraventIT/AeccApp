@@ -67,12 +67,15 @@
 
         <StackLayout IsVisible="{Binding FirstTimeLandingPageVisible, Converter={StaticResource InverseBoolConverter}}">
             <!--  Sub navigation bar with home and hospital tabs  -->
-            <StackLayout BackgroundColor="{StaticResource TextGreenColor}" HeightRequest="170">
+            <StackLayout BackgroundColor="{StaticResource TextGreenColor}" VerticalOptions="Fill">
                 <Grid HorizontalOptions="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
 
                     <Button
                         BackgroundColor="{StaticResource TextGreenColor}"
@@ -142,22 +145,8 @@
 
             <!--  Home requests list  -->
             <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
-                <StackLayout
-                    Margin="0,70,0,35"
-                    HorizontalOptions="Center"
-                    IsVisible="{Binding IsHomeRequestsListEmpty}"
-                    VerticalOptions="Center">
-                    <ctrl:CustomImage Source="Ico_cruz" />
-                    <Label
-                        FontSize="{StaticResource LargeSize}"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"
-                        Text="{Binding [AllYourRequestsListOops]}" />
-                    <Label
-                        FontSize="{StaticResource LargeSize}"
-                        HorizontalTextAlignment="Center"
-                        Text="{Binding [AllYourRequestsListNoHomeRequests]}" />
-                </StackLayout>
+
+                <temp:HomeRequestsEmptyTemplate Margin="78,73,78,0" IsVisible="{Binding IsHomeRequestsListEmpty}" />
 
                 <ListView
                     HasUnevenRows="True"
@@ -167,8 +156,8 @@
                     <ListView.Footer>
                         <!--  New request button  -->
                         <Button
-                            Margin="10,35,10,10"
-                            Command="{Binding NewRequestCommand}"
+                            Margin="10,30"
+                            Command="{Binding AtHomeCommand}"
                             HorizontalOptions="Center"
                             Style="{StaticResource ButtonStyle}"
                             Text="{Binding [CommonNewRequest]}" />
@@ -178,22 +167,8 @@
 
             <!--  Hospital requests list  -->
             <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList}">
-                <StackLayout
-                    Margin="0,70,0,35"
-                    HorizontalOptions="Center"
-                    IsVisible="{Binding IsHospitalRequestsListEmpty}"
-                    VerticalOptions="Center">
-                    <ctrl:CustomImage Source="Ico_cruz" />
-                    <Label
-                        FontSize="{StaticResource LargeSize}"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"
-                        Text="{Binding [AllYourRequestsListOops]}" />
-                    <Label
-                        FontSize="{StaticResource LargeSize}"
-                        HorizontalTextAlignment="Center"
-                        Text="{Binding [AllYourRequestsListNoHomeRequests]}" />
-                </StackLayout>
+
+                <temp:HospitalRequestsEmptyTemplate Margin="78,73,78,0" IsVisible="{Binding IsHospitalRequestsListEmpty}" />
 
                 <ListView
                     HasUnevenRows="True"
@@ -204,8 +179,8 @@
                     <ListView.Footer>
                         <!--  New request button  -->
                         <Button
-                            Margin="10,35,10,10"
-                            Command="{Binding NewRequestCommand}"
+                            Margin="10,30"
+                            Command="{Binding AtHospitalCommand}"
                             HorizontalOptions="Center"
                             Style="{StaticResource ButtonStyle}"
                             Text="{Binding [CommonNewRequest]}" />

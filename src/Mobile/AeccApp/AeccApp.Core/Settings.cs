@@ -32,7 +32,7 @@ namespace AeccApp.Core
         private static readonly bool HomeHeaderBannerAcceptClosedDefault = true;
 
         private const string FirstRequestLandingPageSeenKey = "FirstRequestLandingPage_seen";
-        private static readonly bool FirstRequestLandingPageSeenDefault = false;
+        private static readonly bool FirstRequestLandingPageSeenDefault = true;
 
         private const string LastNewsCheckedKey = "Last_news_checked";
         private static readonly DateTime LastNewsCheckedDefault = DateTime.MinValue;
