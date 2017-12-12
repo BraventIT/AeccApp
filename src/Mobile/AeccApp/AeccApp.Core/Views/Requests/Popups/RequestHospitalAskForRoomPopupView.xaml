@@ -112,7 +112,7 @@
                     IsEnabled="{Binding IsRoomFormFilled}"
                     Style="{StaticResource ButtonWhiteStyle}"
                     Text="{Binding [CommonContinue]}"
-                    TextColor="{StaticResource TextGreenColor}" />
+                    TextColor="{StaticResource GreenText}" />
 
 
             </Grid>

@@ -14,6 +14,21 @@
     BackgroundColor="{StaticResource LightSilver}"
     IconPlatform="home_tab_icon">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="GreenCircularButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="4,2,0,0" />
+                <Setter Property="WidthRequest" Value="43" />
+                <Setter Property="HeightRequest" Value="43" />
+                <Setter Property="BorderRadius" Value="20" />
+                <Setter Property="BorderWidth" Value="0" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenText}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <Grid>
         <ScrollView>
             <StackLayout>
@@ -88,7 +103,7 @@
                     <!--#region Request state panel-->
                     <StackLayout
                         Margin="15,20"
-                        Padding="20,20,0,20"
+                        Padding="20"
                         BackgroundColor="White"
                         IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
                         Orientation="Horizontal">
@@ -110,23 +125,21 @@
                             </Label>
                         </StackLayout>
 
-                        <ctrlXlabs:ImageButton
-                            Margin="0"
-                            Command="{Binding NewRequestCommand}"
-                            HorizontalOptions="EndAndExpand"
-                            ImageHeightRequest="50"
-                            ImageWidthRequest="50"
-                            SourcePlatform="round_plus_green_background"
-                            Style="{StaticResource RoundGreenButtonStyle}"
-                            VerticalOptions="Center" />
+                        <Grid HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                            <Button Command="{Binding NewRequestCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
 
+                            <ctrl:CustomImage
+                                HeightRequest="50"
+                                InputTransparent="True"
+                                SourcePlatform="round_plus_green_background" />
+                        </Grid>
                     </StackLayout>
                     <!--#endregion-->
 
                     <!--#region Chat state panel-->
                     <StackLayout
                         Margin="15,0,15,20"
-                        Padding="20,20,0,20"
+                        Padding="20"
                         BackgroundColor="White">
                         <StackLayout Orientation="Horizontal">
                             <ctrl:CustomImage
@@ -146,23 +159,19 @@
                                     Style="{StaticResource LightGreyLabelStyle}"
                                     Text="{Binding [HomeViewTalkToVolunteer]}" />
                             </StackLayout>
+
                             <Grid
-                                Margin="0"
                                 HorizontalOptions="EndAndExpand"
                                 IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}"
                                 VerticalOptions="Center">
+                                <Button Command="{Binding NewChatCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
 
-                                <ctrlXlabs:ImageButton
-                                    Margin="0"
-                                    Command="{Binding NewChatCommand}"
-                                    HorizontalOptions="EndAndExpand"
-                                    ImageHeightRequest="50"
-                                    ImageWidthRequest="50"
-                                    IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
-                                    SourcePlatform="round_plus_green_background"
-                                    Style="{StaticResource RoundGreenButtonStyle}"
-                                    VerticalOptions="Center" />
+                                <ctrl:CustomImage
+                                    HeightRequest="50"
+                                    InputTransparent="True"
+                                    SourcePlatform="round_plus_green_background" />
                             </Grid>
+
                         </StackLayout>
 
                         <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">

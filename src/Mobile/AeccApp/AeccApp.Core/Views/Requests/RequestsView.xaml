@@ -33,7 +33,7 @@
                             FontAttributes="Bold"
                             LineBreakMode="TailTruncation"
                             Text="{Binding RequestType.Name}"
-                            TextColor="{StaticResource GreyText2}"
+                            TextColor="{StaticResource DarkGreyTextColor}"
                             WidthRequest="200" />
                         <Label
                             Grid.Row="0"
@@ -49,7 +49,7 @@
                             Grid.ColumnSpan="2"
                             Margin="20,5,0,25"
                             Text="{Binding RequestAddress.DisplayAddress}"
-                            TextColor="{StaticResource GreyText2}" />
+                            TextColor="{StaticResource DarkGreyTextColor}" />
                         <BoxView
                             Grid.Row="2"
                             Grid.ColumnSpan="2"
@@ -67,7 +67,7 @@
 
         <StackLayout IsVisible="{Binding FirstTimeLandingPageVisible, Converter={StaticResource InverseBoolConverter}}">
             <!--  Sub navigation bar with home and hospital tabs  -->
-            <StackLayout BackgroundColor="{StaticResource TextGreenColor}" VerticalOptions="Fill">
+            <StackLayout BackgroundColor="{StaticResource GreenText}" VerticalOptions="Fill">
                 <Grid HorizontalOptions="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -78,7 +78,7 @@
                     </Grid.RowDefinitions>
 
                     <Button
-                        BackgroundColor="{StaticResource TextGreenColor}"
+                        BackgroundColor="{StaticResource GreenText}"
                         Command="{Binding HomeTabCommand}"
                         Style="{StaticResource ButtonTransparentStyle}" />
                     <StackLayout
@@ -109,7 +109,7 @@
 
                     <Button
                         Grid.Column="1"
-                        BackgroundColor="{StaticResource TextGreenColor}"
+                        BackgroundColor="{StaticResource GreenText}"
                         Command="{Binding HospitalTabCommand}"
                         Style="{StaticResource ButtonTransparentStyle}" />
 

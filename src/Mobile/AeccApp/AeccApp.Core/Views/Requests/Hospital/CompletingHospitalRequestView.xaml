@@ -81,7 +81,7 @@
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"
                         Text="{Binding CurrentAddress.HospitalRoom}"
-                        TextColor="{Binding GreyText2}" />
+                        TextColor="{Binding DarkGreyTextColor}" />
                     <BoxView HeightRequest="1" Color="LightGray" />
                 </StackLayout>
                 <!--  Date and time text and button  -->

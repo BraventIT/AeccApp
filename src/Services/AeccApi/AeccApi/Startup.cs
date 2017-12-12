@@ -37,8 +37,12 @@ namespace AeccApi
             })
             .AddAzureAdB2C(options => Configuration.Bind("AzureAdB2C", options));
 
+            services.AddMemoryCache();
+
             // Add framework services.
             services.AddMvc();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

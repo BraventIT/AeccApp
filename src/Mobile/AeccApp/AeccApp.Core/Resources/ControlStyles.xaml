@@ -62,19 +62,14 @@
         <Setter Property="BorderColor" Value="{StaticResource LightGrayBorders}" />
     </Style>
 
+   
     <Style x:Key="BigCircularButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="WidthRequest" Value="80" />
         <Setter Property="HeightRequest" Value="80" />
         <Setter Property="BorderRadius" Value="40" />
-        <Setter Property="BorderWidth" Value="2" />
         <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
         <Setter Property="BorderColor" Value="{StaticResource LightGrayBorders}" />
     </Style>
-
-    <Style x:Key="RoundGreenButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="BackgroundColor" Value="Transparent" />
-    </Style>
-
 
     <OnPlatform
         x:Key="ButtonSmallWidth"

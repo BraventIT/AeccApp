@@ -86,7 +86,7 @@
             <!--  Sub navigation bar with map and hospital list  -->
             <StackLayout
                 Padding="20,5,20,5"
-                BackgroundColor="{StaticResource TextGreenColor}"
+                BackgroundColor="{StaticResource GreenText}"
                 HeightRequest="45"
                 HorizontalOptions="FillAndExpand">
                 <Grid HorizontalOptions="Center">
