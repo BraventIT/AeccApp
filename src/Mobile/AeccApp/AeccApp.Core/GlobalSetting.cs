@@ -31,9 +31,9 @@ namespace AeccApp.Core
             };
 
             // AZURE TEST API
-            //ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
+            ApiEndpoint = "http://alfraso-aeccapi.azurewebsites.net";
             // LOCAL TEST API ALFRA
-            ApiEndpoint = "http://localhost:14724";
+            //ApiEndpoint = "http://localhost:14724";
 
             EmailChatAddress = "afraj@bravent.net";
             EmailChatTemplate =

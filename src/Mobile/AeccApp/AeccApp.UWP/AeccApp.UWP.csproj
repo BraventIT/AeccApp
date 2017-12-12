@@ -181,9 +181,6 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\profile_icon.png">
       <Link>Assets\profile_icon.png</Link>
     </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\profile_tab_icon.png">
-      <Link>Assets\profile_tab_icon.png</Link>
-    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\rating_star.png">
       <Link>Assets\rating_star.png</Link>
     </Content>
