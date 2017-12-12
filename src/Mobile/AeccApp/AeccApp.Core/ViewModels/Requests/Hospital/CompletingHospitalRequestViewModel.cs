@@ -19,6 +19,7 @@ namespace AeccApp.Core.ViewModels
 
         public CompletingHospitalRequestViewModel()
         {
+            DateAndTimeButtonText = this["CompletingRequestTimeAndDate"];
             RequestDateAndTimePopupVM = new RequestDateAndTimePopupViewModel();
             RequestConfirmationPopupVM = new RequestConfirmationPopupViewModel();
             RequestSentPopupVM = new RequestSentPopupViewModel();
@@ -141,6 +142,7 @@ namespace AeccApp.Core.ViewModels
             //Applies date and time to the request:
             DateToApplyParsed = RequestDateAndTimePopupVM.DateSelected.Date.ToString().Remove(10);
             TimeToApplyParsed = RequestDateAndTimePopupVM.TimeSelected.ToString().Remove(5);
+            DateAndTimeButtonText = DateToApplyParsed + "," + TimeToApplyParsed;
             await NavigationService.HidePopupAsync();
 
         }
@@ -204,6 +206,14 @@ namespace AeccApp.Core.ViewModels
         public RequestConfirmationPopupViewModel RequestConfirmationPopupVM { get; private set; }
         public RequestSentPopupViewModel RequestSentPopupVM { get; private set; }
         public RequestDateAndTimePopupViewModel RequestDateAndTimePopupVM { get; private set; }
+
+        private string _dateAndTimeButtonText ;
+
+        public string DateAndTimeButtonText
+        {
+            get { return _dateAndTimeButtonText; }
+            set { Set(ref _dateAndTimeButtonText, value); }
+        }
 
 
         private bool _hasUserFilledRoomForm = true;
