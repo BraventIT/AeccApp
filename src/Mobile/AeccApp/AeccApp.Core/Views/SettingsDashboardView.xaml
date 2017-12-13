@@ -55,76 +55,85 @@
                 EventName="ItemTapped" />
         </ListView.Behaviors>
         <ListView.Header>
-            <Grid
-                BackgroundColor="{StaticResource LightSilver}"
-                HeightRequest="150"
-                HorizontalOptions="FillAndExpand">
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding OpenUserProfile}" />
-                </Grid.GestureRecognizers>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <StackLayout
-                    Grid.RowSpan="2"
-                    Grid.Column="0"
-                    Margin="30,48,0,10"
-                    HorizontalOptions="Start">
-                    <Label
-                        Margin="0"
-                        Style="{StaticResource DarkGreyBigTitleLabelStyle}"
-                        Text="{Binding UserName}" />
-                    <Label
-                        Margin="0"
-                        FontAttributes="None"
-                        Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
-                        Text="{Binding [SettingsSeeAndEditProfile]}" />
+            <Grid>
+                <Button
+                    Margin="0"
+                    BackgroundColor="{StaticResource LightSilver}"
+                    BorderRadius="0"
+                    Command="{Binding OpenUserProfile}" />
 
-                </StackLayout>
                 <Grid
-                    Grid.RowSpan="2"
-                    Grid.Column="1"
-                    Margin="0,0,40,0"
-                    HorizontalOptions="End"
-                    VerticalOptions="Center">
-                    <Button BackgroundColor="White" Style="{StaticResource BigCircularButtonStyle}" />
-                    <ctrl:CustomImage SourcePlatform="round_no_profile_image_v2" WidthRequest="16" />
+                    HeightRequest="150"
+                    HorizontalOptions="FillAndExpand"
+                    InputTransparent="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackLayout
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Margin="30,48,0,10"
+                        HorizontalOptions="Start">
+                        <Label
+                            Margin="0"
+                            Style="{StaticResource DarkGreyBigTitleLabelStyle}"
+                            Text="{Binding UserName}" />
+                        <Label
+                            Margin="0"
+                            FontAttributes="None"
+                            Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                            Text="{Binding [SettingsSeeAndEditProfile]}" />
+
+                    </StackLayout>
+                    <Grid
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Margin="0,0,40,0"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center">
+                        <Button BackgroundColor="White" Style="{StaticResource BigCircularButtonStyle}" />
+                        <ctrl:CustomImage SourcePlatform="round_no_profile_image_v2" WidthRequest="16" />
+
+                    </Grid>
 
                 </Grid>
-
             </Grid>
         </ListView.Header>
         <ListView.Footer>
             <Grid>
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ShowLogoutPopupCommand}" />
-                </Grid.GestureRecognizers>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <ctrl:CustomImage
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="15,0,0,0"
-                    SourcePlatform="logout_icon"
-                    VerticalOptions="Center"
-                    WidthRequest="15" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="10,25,0,25"
-                    HorizontalOptions="Start"
-                    Style="{StaticResource GreenMidLargeSizeTitleLabelStyle}"
-                    Text="{Binding [SettingsLogout]}" />
+                <Button
+                    Margin="0"
+                    BackgroundColor="White"
+                    BorderRadius="0"
+                    Command="{Binding ShowLogoutPopupCommand}" />
+                <Grid InputTransparent="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ctrl:CustomImage
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="15,0,0,0"
+                        SourcePlatform="logout_icon"
+                        VerticalOptions="Center"
+                        WidthRequest="15" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="10,25,0,25"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource GreenMidLargeSizeTitleLabelStyle}"
+                        Text="{Binding [SettingsLogout]}" />
 
+                </Grid>
             </Grid>
         </ListView.Footer>
 

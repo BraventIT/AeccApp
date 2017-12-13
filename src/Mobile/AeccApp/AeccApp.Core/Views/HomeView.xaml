@@ -34,7 +34,7 @@
             <StackLayout>
                 <!--  Info call banner  -->
                 <Grid
-                    BackgroundColor="{StaticResource LightGrey}"
+                    ColumnSpacing="0"
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand"
                     IsVisible="{Binding IsHeaderInfoBannerVisible}">
@@ -42,25 +42,33 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Label
-                        Grid.Column="0"
-                        HorizontalOptions="Center"
-                        Text="{Binding [HomeViewHeaderInfoBannerText]}"
-                        VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding HeaderInfoBannerCall}" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <ctrl:CustomImage
-                        Grid.Column="1"
-                        Margin="0,0,10,0"
-                        HorizontalOptions="End"
-                        SourcePlatform="x_icon"
-                        VerticalOptions="Center">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding HeaderInfoBannerClose}" />
-                        </ctrl:CustomImage.GestureRecognizers>
-                    </ctrl:CustomImage>
+                    <Grid Grid.Column="0" Margin="0">
+                        <Button
+                            Margin="0"
+                            BackgroundColor="{StaticResource LightGrey}"
+                            BorderRadius="0"
+                            Command="{Binding HeaderInfoBannerCall}" />
+                        <Label
+                            HorizontalOptions="Center"
+                            InputTransparent="True"
+                            Text="{Binding [HomeViewHeaderInfoBannerText]}"
+                            VerticalOptions="Center" />
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="0">
+                        <Button
+                            Margin="0"
+                            BackgroundColor="{StaticResource LightGrey}"
+                            BorderRadius="0"
+                            Command="{Binding HeaderInfoBannerClose}" />
+
+                        <ctrl:CustomImage
+                            Margin="0,0,10,0"
+                            HorizontalOptions="End"
+                            InputTransparent="True"
+                            SourcePlatform="x_icon_grey"
+                            VerticalOptions="Center" />
+                    </Grid>
+
                 </Grid>
 
                 <StackLayout Padding="10,5,10,10" VerticalOptions="FillAndExpand">
