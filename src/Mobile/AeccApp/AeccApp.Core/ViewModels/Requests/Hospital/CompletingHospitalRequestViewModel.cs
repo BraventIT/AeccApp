@@ -1,8 +1,11 @@
-﻿using AeccApp.Core.Messages;
+﻿using Aecc.Models;
+using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,6 +17,8 @@ namespace AeccApp.Core.ViewModels
         private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
         private IHospitalRequestDataService HospitalRequestDataService { get; } = ServiceLocator.HospitalRequestDataService;
         private IEmailService EmailService { get; } = ServiceLocator.EmailService;
+        private IHospitalRequestService HospitalRequestService { get; } = ServiceLocator.HospitalRequestService;
+
 
         #region Constructor and initialization
 
@@ -189,13 +194,25 @@ namespace AeccApp.Core.ViewModels
                 await HomeAddressesDataService.InsertOrUpdateAsync(CurrentRequest.RequestAddress);
             }
             await NavigationService.HidePopupAsync();
-            //TODO #33 Send request with email service 
-            // string[] s = new string[] { "aquiemail@detesteo"};
-            // await OnSendRequestAsync(s);
 
+           //TODO UNCOMMENT WHEN BACK OFFICE HAS FILLED COORDINATORS EMAILS 
+           //await ExecuteOperationAsync(async cancelToken =>
+           //{
+           //    var currentHospitalSelected = await HospitalRequestService.GetHospitalDetail(CurrentAddress.HospitalID, cancelToken);
+           //    List<HospitalAssignment> HospitalAssignments = new List<HospitalAssignment>();
+           //    HospitalAssignments.AddRange(currentHospitalSelected.HospitalAssignments); 
+           //    string[] coordinatorsEmails = new string[HospitalAssignments.Count];
+           //    for (int i = 0; i < currentHospitalSelected.HospitalAssignments.Count ; i++)
+           //    {
+           //        coordinatorsEmails[i] = HospitalAssignments[i].Coordinator.Email;
+           //    }
+           //    await OnSendRequestAsync(coordinatorsEmails);
+           //});
+           
+           //LEAVE THIS FOR EMAIL TESTING
+            string[] s = new string[] { "afraj@bravent.net", "acabrera@bravent.net"};       
+            await OnSendRequestAsync(s);
 
-            //borrar al descomentar el envio de correo
-            await NavigationService.ShowPopupAsync(RequestSentPopupVM);
         }
 
 

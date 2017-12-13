@@ -17,6 +17,23 @@ namespace AeccApp.Core.Models
 
         }
 
+        private string _displayComments;
+
+        public string DisplayComments
+        {
+            get
+            {
+                if (RequestComments == null || RequestComments == string.Empty)
+                {
+                    return "No se han incluido comentarios en esta petición";
+                }
+                else
+                {
+                    return RequestComments;
+                }
+            }
+            set { _displayComments = value; }
+        }
         public RequestModel(RequestType RequestType,string RequestLocation, string RequestDate, string RequestTime, string RequestComments, AddressModel RequestAddress)
         {
             this.RequestType = RequestType;

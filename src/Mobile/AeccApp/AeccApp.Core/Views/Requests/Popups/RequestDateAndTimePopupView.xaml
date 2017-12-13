@@ -47,7 +47,7 @@
                 Command="{Binding ApplyDateAndTimeCommand}"
                 FontSize="{StaticResource MidLargeSize}"
                 Text="{Binding [CommonApply]}"
-                TextColor="{StaticResource TextGreenColor}"
+                TextColor="{StaticResource GreenText}"
                 VerticalOptions="Center" />
 
         </StackLayout>

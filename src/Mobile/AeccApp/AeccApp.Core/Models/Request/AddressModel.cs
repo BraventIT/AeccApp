@@ -17,6 +17,28 @@ namespace AeccApp.Core.Models
         public string HospitalHall { get; set; }
         public bool WillBeSaved { get; set; }
         public string PlaceId { get; set; }
+        public int HospitalID { get; set; }
+        private string _displayRoom;
+
+        public string DisplayRoom
+        {
+            get
+            {
+                if (HospitalRoom == null || HospitalRoom == string.Empty)
+                {
+                    return "sin especificar";
+                }
+                else
+                {
+                    return HospitalRoom;
+                }
+            }
+
+            set { _displayRoom = value; }
+        }
+
+      
+
 
         private Position _coordinates;
 
@@ -52,7 +74,7 @@ namespace AeccApp.Core.Models
             PlaceId = item.PlaceId;
             int numTerms = item.Terms.Count();
 
-            if (numTerms<2)
+            if (numTerms < 2)
             {
                 return;
             }
@@ -93,6 +115,6 @@ namespace AeccApp.Core.Models
             this.Coordinates = Coordinates;
         }
 
-       
+
     }
 }

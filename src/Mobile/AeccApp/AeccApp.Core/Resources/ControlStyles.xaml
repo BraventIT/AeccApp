@@ -62,7 +62,7 @@
         <Setter Property="BorderColor" Value="{StaticResource LightGrayBorders}" />
     </Style>
 
-   
+
     <Style x:Key="BigCircularButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="WidthRequest" Value="80" />
         <Setter Property="HeightRequest" Value="80" />

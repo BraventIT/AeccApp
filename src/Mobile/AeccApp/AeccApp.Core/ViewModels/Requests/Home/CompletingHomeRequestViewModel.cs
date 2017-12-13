@@ -1,8 +1,10 @@
-﻿using AeccApp.Core.Messages;
+﻿using Aecc.Models;
+using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -13,6 +15,7 @@ namespace AeccApp.Core.ViewModels
     {
         private IHomeRequestsDataService HomeRequestsDataService { get; } = ServiceLocator.HomeRequestsDataService;
         private IEmailService EmailService { get; } = ServiceLocator.EmailService;
+        private IHomeRequestService HomeRequestService { get; } = ServiceLocator.HomeRequestService;
 
         #region Constructor and initialization
 
@@ -159,12 +162,25 @@ namespace AeccApp.Core.ViewModels
 
             await HomeRequestsDataService.InsertOrUpdateAsync(CurrentRequest);
             await NavigationService.HidePopupAsync();
-            //TODO #33 Send request with email service
-            // string[] s = new string[] { "aquiemail@detesteo"};
-            //await OnSendRequestAsync(s);
 
-            // borrar cuando se descomente arriba
-            await NavigationService.ShowPopupAsync(RequestSentPopupVM);
+            //TODO UNCOMMENT WHEN BACK OFFICE HAS FILLED COORDINATORS EMAILS 
+
+            //await ExecuteOperationAsync(async cancelToken =>
+            //{
+            //    var currentProvinceCoordinators = await HomeRequestService.GetCoordinatorsAsync(CurrentAddress.Province, cancelToken);
+            //    List<Coordinator> coordinators = new List<Coordinator>();
+            //    coordinators.AddRange(currentProvinceCoordinators);
+            //    string[] coordinatorsEmails = new string[coordinators.Count];
+            //    for (int i = 0; i < coordinators.Count; i++)
+            //    {
+            //        coordinatorsEmails[i] = coordinators[i].Email;
+            //    }
+            //    await OnSendRequestAsync(coordinatorsEmails);
+            //});
+
+            //LEAVE THIS FOR EMAIL TESTING
+            string[] s = new string[] { "afraj@bravent.net", "acabrera@bravent.net" };
+            await OnSendRequestAsync(s);
 
         }
 

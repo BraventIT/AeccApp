@@ -65,7 +65,7 @@ namespace AeccApp.Core.ViewModels
                     {
                         var location = await GetLocationForHospitalAsync(hospital, cancelToken);
                         if (location != null)
-                            PinManagement(hospital.Street, hospital.Name, location.Latitude, location.Longitude);
+                            PinManagement(hospital.Street, hospital.Name,hospital.ID ,location.Latitude, location.Longitude);
                     }
                 }
             });
@@ -229,7 +229,7 @@ namespace AeccApp.Core.ViewModels
         async Task OnInfoWindowClickedCommand(object obj)
         {
             var pinClicked = obj as Pin;
-
+            AddressSelected.HospitalID = (int)pinClicked.Tag;
             AddressSelected.Street = pinClicked.Address;
             AddressSelected.Coordinates = pinClicked.Position;
             AddressSelected.Name = pinClicked.Label;
@@ -295,6 +295,7 @@ namespace AeccApp.Core.ViewModels
                 return;
             await ExecuteOperationAsync(async cancelToken =>
             {
+                AddressSelected.HospitalID = hospitalSelected.ID;
                 AddressSelected.Street = hospitalSelected.Street;
                 AddressSelected.Name = hospitalSelected.Name;
                 AddressSelected.Coordinates = await GetLocationForHospitalAsync(hospitalSelected, cancelToken);
@@ -341,9 +342,9 @@ namespace AeccApp.Core.ViewModels
             return location;
         }
 
-        private void PinManagement(string hospitalAddress, string hospitalName, double lat, double lng)
+        private void PinManagement(string hospitalAddress, string hospitalName,int hospitalID, double lat, double lng)
         {
-            Pin pin = new Pin() { Address = hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
+            Pin pin = new Pin() {Tag=hospitalID,  Address = hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
                 case TargetPlatform.Android:
