@@ -35,13 +35,13 @@ namespace AeccApp.Core.Views
             switch (Device.OS)
             {
                 case TargetPlatform.Android:
-                    //   pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin.png");
+                    pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"map_location_pin_green.png");
                     break;
                 case TargetPlatform.iOS:
-                    pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"location_pin.png");
+                    pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"map_location_pin_green.png");
                     break;
                 default:
-                    pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"Assets/location_pin.png");
+                    pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"Assets/map_location_pin_green.png");
                     break;
             }
 

@@ -347,14 +347,14 @@ namespace AeccApp.Core.ViewModels
             Pin pin = new Pin() {Tag=hospitalID,  Address = hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
             switch (Device.OS)
             {
-                case TargetPlatform.Android:
-                    // pinBravent.Icon = BitmapDescriptorFactory.FromBundle($"location_pin_hospital_map.png");
+                case TargetPlatform.Android:                    
+                    pin.Icon = BitmapDescriptorFactory.FromBundle($"map_location_pin_green.png");
                     break;
                 case TargetPlatform.iOS:
-                    pin.Icon = BitmapDescriptorFactory.FromBundle($"location_pin_hospital_map.png");
+                    pin.Icon = BitmapDescriptorFactory.FromBundle($"map_location_pin_green.png");
                     break;
                 default:
-                    pin.Icon = BitmapDescriptorFactory.FromBundle($"Assets/location_pin_hospital_map.png");
+                    pin.Icon = BitmapDescriptorFactory.FromBundle($"Assets/map_location_pin_green.png");
                     break;
             }
 

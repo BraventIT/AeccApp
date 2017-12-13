@@ -42,7 +42,7 @@
 
                 <Button
                     Margin="0"
-                    BackgroundColor="{StaticResource SeeThroughWhite}"
+                    BackgroundColor="Transparent"
                     Command="{Binding MapDetailCommand}" />
             </Grid>
 
