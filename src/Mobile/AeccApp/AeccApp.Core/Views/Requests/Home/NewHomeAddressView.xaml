@@ -88,6 +88,7 @@
                         Margin="0"
                         Padding="10"
                         BackgroundColor="Transparent"
+                        HasShadow="False"
                         HorizontalOptions="Center"
                         IsVisible="{Binding IsSearchIconVisible}">
                         <ctrl:CustomImage SourcePlatform="x_icon" VerticalOptions="Center" />
@@ -254,7 +255,6 @@
                                 EventName="Toggled" />
                         </Switch.Behaviors>
                     </Switch>
-
                     <Label Style="{StaticResource SwitchTextStyle}" Text="{Binding [NewHomeAddressViewSaveAddress]}" />
                 </StackLayout>
 

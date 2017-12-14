@@ -63,10 +63,12 @@
 
                         <ctrl:CustomImage
                             Margin="0,0,10,0"
+                            HeightRequest="13"
                             HorizontalOptions="End"
                             InputTransparent="True"
                             SourcePlatform="x_icon_grey"
-                            VerticalOptions="Center" />
+                            VerticalOptions="Center"
+                            WidthRequest="13" />
                     </Grid>
 
                 </Grid>

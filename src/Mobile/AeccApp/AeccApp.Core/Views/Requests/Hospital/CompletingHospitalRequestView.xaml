@@ -41,8 +41,6 @@
                             WinPhone="130"
                             iOS="130" />
                     </Grid.HeightRequest>
-
-                    <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
                     <maps:Map
                         x:Name="map"
                         HasZoomEnabled="False"
@@ -55,6 +53,40 @@
                             <TapGestureRecognizer Command="{Binding MapDetailCommand}" />
                         </BoxView.GestureRecognizers>
                     </BoxView>
+
+                    <Grid InputTransparent="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <BoxView Grid.Row="0" BackgroundColor="Transparent" />
+                        <Frame
+                            Grid.Row="1"
+                            Margin="35,0,35,0"
+                            Padding="1"
+                            BackgroundColor="{StaticResource LightGraySubtitle}"
+                            CornerRadius="25"
+                            HasShadow="False"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <Frame
+                                Margin="0"
+                                Padding="15,3,15,3"
+                                BackgroundColor="White"
+                                CornerRadius="25"
+                                HasShadow="False"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                                <Label
+                                    Margin="0"
+                                    FontSize="{StaticResource MediumSize}"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Start"
+                                    Text="{Binding CurrentAddress.DisplayAddress}" />
+                            </Frame>
+                        </Frame>
+                    </Grid>
+                    <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
                 </Grid>
                 <!--  Save hospital switch  -->
                 <StackLayout

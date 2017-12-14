@@ -9,7 +9,7 @@
     Title="{Binding [NewsDetailViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{StaticResource BackgroundColor}">
-    <ScrollView Margin="20,0,20,0">
+    <ScrollView Padding="20,0,20,0">
         <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
             <Image
                 HeightRequest="250"
