@@ -14,7 +14,7 @@
     <ContentView Style="{StaticResource InternalViewStyle}">
 
         <ScrollView>
-            <StackLayout BackgroundColor="White">
+            <StackLayout BackgroundColor="{StaticResource WhiteColor}">
                 <ctrl:CustomImage
                     BackgroundColor="LightGray"
                     HeightRequest="200"

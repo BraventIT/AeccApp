@@ -72,7 +72,6 @@
             </Grid.RowDefinitions>
 
             <!--  Sub navigation bar with home and hospital tabs  -->
-
             <Grid BackgroundColor="{StaticResource SubNavegationBackgroundColor}" ColumnSpacing="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -83,22 +82,21 @@
                 </Grid.RowDefinitions>
 
                 <Button
-                    Grid.Column="0"
                     BackgroundColor="{StaticResource SubNavegationBackgroundColor}"
                     BorderRadius="0"
                     Command="{Binding HomeTabCommand}"
                     Style="{StaticResource ButtonTransparentStyle}" />
+
                 <StackLayout
-                    Grid.Column="0"
                     HorizontalOptions="Center"
                     InputTransparent="True"
                     Orientation="Horizontal">
 
                     <ctrl:CustomImage
                         Margin="10"
-                        HeightRequest="25"
                         SourcePlatform="ico_house"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
                     <Label
                         Margin="0,0,10,0"
                         FontSize="{StaticResource MediumSize}"
@@ -106,6 +104,7 @@
                         TextColor="{StaticResource SubNavegationTextColor}"
                         VerticalOptions="Center" />
                 </StackLayout>
+
                 <BoxView
                     Margin="20,0"
                     HeightRequest="2"
@@ -129,9 +128,9 @@
 
                     <ctrl:CustomImage
                         Margin="10"
-                        HeightRequest="25"
                         SourcePlatform="ico_hospital"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
                     <Label
                         Margin="0,0,10,0"
                         FontSize="{StaticResource MediumSize}"
@@ -172,7 +171,7 @@
                     </ListView.Footer>
                 </ListView>
             </StackLayout>
-            
+
             <!--  Hospital requests list  -->
             <StackLayout Grid.Row="1" IsVisible="{Binding SwitchHomeAndHospitalList}">
 

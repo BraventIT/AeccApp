@@ -7,7 +7,10 @@
 
     <StackLayout>
 
-        <ctrl:CustomImage HorizontalOptions="Center" SourcePlatform="Ico_cruz" />
+        <ctrl:CustomImage
+            HorizontalOptions="Center"
+            SourcePlatform="Ico_cruz"
+            WidthRequest="55" />
 
         <Label
             Margin="0,35,0,0"

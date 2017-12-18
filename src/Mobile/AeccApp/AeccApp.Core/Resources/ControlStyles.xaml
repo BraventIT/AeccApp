@@ -24,12 +24,12 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="0.3" />
-        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
     </Style>
 
 
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="TextColor" Value="White" />
+        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
         <Setter Property="WidthRequest" Value="{StaticResource ButtonWidth}" />
         <Setter Property="HeightRequest" Value="44" />
         <Setter Property="BorderRadius" Value="28" />
@@ -39,7 +39,7 @@
     </Style>
 
     <Style x:Key="DarkButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="TextColor" Value="White" />
+        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
         <Setter Property="WidthRequest" Value="{StaticResource ButtonWidth}" />
         <Setter Property="HeightRequest" Value="44" />
         <Setter Property="BorderRadius" Value="28" />
@@ -58,7 +58,7 @@
         <Setter Property="HeightRequest" Value="44" />
         <Setter Property="BorderRadius" Value="22" />
         <Setter Property="BorderWidth" Value="2" />
-        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
         <Setter Property="BorderColor" Value="{StaticResource LightGrayBorders}" />
     </Style>
 
@@ -67,7 +67,7 @@
         <Setter Property="WidthRequest" Value="80" />
         <Setter Property="HeightRequest" Value="80" />
         <Setter Property="BorderRadius" Value="40" />
-        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
         <Setter Property="BorderColor" Value="{StaticResource LightGrayBorders}" />
     </Style>
 
@@ -92,7 +92,7 @@
         <Setter Property="VerticalOptions" Value="Fill" />
         <Setter Property="BorderRadius" Value="20" />
         <Setter Property="FontSize" Value="{StaticResource MidLargeSize}" />
-        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
     </Style>
 
     <OnPlatform
@@ -129,7 +129,7 @@
         iOS="150" />
 
     <Style x:Key="SmallImageButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
-        <Setter Property="TextColor" Value="White" />
+        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
         <Setter Property="Orientation" Value="ImageToLeft" />
         <Setter Property="WidthRequest" Value="{StaticResource SmallImageButtonWidth}" />
         <Setter Property="HeightRequest" Value="40" />
@@ -140,7 +140,7 @@
     </Style>
 
     <Style x:Key="ImageButtonStyle" TargetType="{x:Type ctrlXlabs:ImageButton}">
-        <Setter Property="TextColor" Value="White" />
+        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
         <Setter Property="Orientation" Value="ImageToLeft" />
         <Setter Property="BorderRadius" Value="28" />
         <Setter Property="WidthRequest" Value="{StaticResource ImageButtonWidth}" />
@@ -156,7 +156,7 @@
         <Setter Property="BorderWidth" Value="3" />
         <Setter Property="ImageHeightRequest" Value="{StaticResource SmallImageButtonImageSize}" />
         <Setter Property="ImageWidthRequest" Value="{StaticResource SmallImageButtonImageSize}" />
-        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
         <Setter Property="BorderRadius" Value="45" />
     </Style>
 
@@ -187,7 +187,7 @@
     </Style>
 
     <Style x:Key="InternalViewStyle" TargetType="ContentView">
-        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
         <Setter Property="VerticalOptions" Value="Fill" />
     </Style>
 
@@ -235,7 +235,7 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="CornerRadius" Value="20" />
-        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
     </Style>
 
 </ResourceDictionary>

@@ -50,7 +50,7 @@
                 <Frame
                     Margin="0"
                     Padding="15,0,15,0"
-                    BackgroundColor="White"
+                    BackgroundColor="{StaticResource WhiteColor}"
                     CornerRadius="25"
                     HasShadow="False"
                     HorizontalOptions="Center"

@@ -8,7 +8,7 @@
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [NewsDetailViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True"
-    BackgroundColor="{StaticResource BackgroundColor}">
+    BackgroundColor="{StaticResource WhiteColor}">
     <ScrollView Padding="20,0,20,0">
         <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
             <Image

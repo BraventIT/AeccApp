@@ -80,7 +80,7 @@
                         <Frame
                             Margin="15,20"
                             Padding="20,20,0,20"
-                            BackgroundColor="White"
+                            BackgroundColor="{StaticResource WhiteColor}"
                             IsVisible="{Binding IsVolunteer}">
 
                             <StackLayout Margin="0">
@@ -114,7 +114,7 @@
                     <StackLayout
                         Margin="15,20"
                         Padding="20"
-                        BackgroundColor="White"
+                        BackgroundColor="{StaticResource WhiteColor}"
                         IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
                         Orientation="Horizontal">
                         <ctrl:CustomImage
@@ -150,7 +150,7 @@
                     <StackLayout
                         Margin="15,0,15,20"
                         Padding="20"
-                        BackgroundColor="White">
+                        BackgroundColor="{StaticResource WhiteColor}">
                         <StackLayout Orientation="Horizontal">
                             <ctrl:CustomImage
                                 Margin="0,0,12,0"
@@ -275,7 +275,7 @@
                                 <DataTemplate>
                                     <StackLayout
                                         Margin="0,7,7,7"
-                                        BackgroundColor="White"
+                                        BackgroundColor="{StaticResource WhiteColor}"
                                         VerticalOptions="Fill">
                                         <Image
                                             Margin="0"

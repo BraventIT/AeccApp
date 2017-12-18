@@ -95,7 +95,7 @@
                         Margin="0,0,40,0"
                         HorizontalOptions="End"
                         VerticalOptions="Center">
-                        <Button BackgroundColor="White" Style="{StaticResource BigCircularButtonStyle}" />
+                        <Button BackgroundColor="{StaticResource WhiteColor}" Style="{StaticResource BigCircularButtonStyle}" />
                         <ctrl:CustomImage
                             Margin="7"
                             HeightRequest="25"
@@ -111,7 +111,7 @@
             <Grid>
                 <Button
                     Margin="0"
-                    BackgroundColor="White"
+                    BackgroundColor="{StaticResource WhiteColor}"
                     BorderRadius="0"
                     Command="{Binding ShowLogoutPopupCommand}" />
                 <Grid InputTransparent="True">
