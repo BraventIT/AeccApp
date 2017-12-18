@@ -65,87 +65,93 @@
     <Grid>
         <temp:FirstTimeRequestViewTemplate IsVisible="{Binding FirstTimeLandingPageVisible}" />
 
-        <StackLayout IsVisible="{Binding FirstTimeLandingPageVisible, Converter={StaticResource InverseBoolConverter}}">
+        <Grid IsVisible="{Binding FirstTimeLandingPageVisible, Converter={StaticResource InverseBoolConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
             <!--  Sub navigation bar with home and hospital tabs  -->
-            <StackLayout BackgroundColor="{StaticResource GreenText}" VerticalOptions="Fill">
-                <Grid HorizontalOptions="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
 
-                    <Button
-                        BackgroundColor="{StaticResource GreenText}"
-                        Command="{Binding HomeTabCommand}"
-                        Style="{StaticResource ButtonTransparentStyle}" />
-                    <StackLayout
-                        HorizontalOptions="Center"
-                        InputTransparent="True"
-                        Orientation="Horizontal">
+            <Grid BackgroundColor="{StaticResource SubNavegationBackgroundColor}" ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
 
-                        <ctrl:CustomImage
-                            Margin="10,0"
-                            HeightRequest="25"
-                            SourcePlatform="ico_house"
-                            VerticalOptions="Center" />
-                        <Label
-                            Margin="0,0,10,0"
-                            FontSize="{StaticResource MediumSize}"
-                            Text="{Binding [AllYourRequestsHome]}"
-                            TextColor="White"
-                            VerticalOptions="Center" />
-                    </StackLayout>
-                    <BoxView
-                        Grid.Column="0"
-                        Margin="20,0"
-                        HeightRequest="2"
-                        HorizontalOptions="Fill"
-                        IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}"
-                        VerticalOptions="End"
-                        Color="Black" />
+                <Button
+                    Grid.Column="0"
+                    BackgroundColor="{StaticResource SubNavegationBackgroundColor}"
+                    BorderRadius="0"
+                    Command="{Binding HomeTabCommand}"
+                    Style="{StaticResource ButtonTransparentStyle}" />
+                <StackLayout
+                    Grid.Column="0"
+                    HorizontalOptions="Center"
+                    InputTransparent="True"
+                    Orientation="Horizontal">
 
-                    <Button
-                        Grid.Column="1"
-                        BackgroundColor="{StaticResource GreenText}"
-                        Command="{Binding HospitalTabCommand}"
-                        Style="{StaticResource ButtonTransparentStyle}" />
+                    <ctrl:CustomImage
+                        Margin="10"
+                        HeightRequest="25"
+                        SourcePlatform="ico_house"
+                        VerticalOptions="Center" />
+                    <Label
+                        Margin="0,0,10,0"
+                        FontSize="{StaticResource MediumSize}"
+                        Text="{Binding [AllYourRequestsHome]}"
+                        TextColor="{StaticResource SubNavegationTextColor}"
+                        VerticalOptions="Center" />
+                </StackLayout>
+                <BoxView
+                    Margin="20,0"
+                    HeightRequest="2"
+                    HorizontalOptions="Fill"
+                    IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}"
+                    VerticalOptions="End"
+                    Color="{StaticResource TransparentBlackColor}" />
 
-                    <StackLayout
-                        Grid.Column="1"
-                        HorizontalOptions="Center"
-                        InputTransparent="True"
-                        Orientation="Horizontal">
+                <Button
+                    Grid.Column="1"
+                    BackgroundColor="{StaticResource SubNavegationBackgroundColor}"
+                    BorderRadius="0"
+                    Command="{Binding HospitalTabCommand}"
+                    Style="{StaticResource ButtonTransparentStyle}" />
 
-                        <ctrl:CustomImage
-                            Margin="10,0"
-                            HeightRequest="25"
-                            SourcePlatform="ico_hospital"
-                            VerticalOptions="Center" />
-                        <Label
-                            Margin="0,0,10,0"
-                            FontSize="{StaticResource MediumSize}"
-                            Text="{Binding [AllYourRequestsHospital]}"
-                            TextColor="White"
-                            VerticalOptions="Center" />
-                    </StackLayout>
+                <StackLayout
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    InputTransparent="True"
+                    Orientation="Horizontal">
 
-                    <BoxView
-                        Grid.Column="1"
-                        Margin="20,0"
-                        HeightRequest="2"
-                        HorizontalOptions="Fill"
-                        IsVisible="{Binding SwitchHomeAndHospitalList}"
-                        VerticalOptions="End"
-                        Color="Black" />
-                </Grid>
-            </StackLayout>
+                    <ctrl:CustomImage
+                        Margin="10"
+                        HeightRequest="25"
+                        SourcePlatform="ico_hospital"
+                        VerticalOptions="Center" />
+                    <Label
+                        Margin="0,0,10,0"
+                        FontSize="{StaticResource MediumSize}"
+                        Text="{Binding [AllYourRequestsHospital]}"
+                        TextColor="{StaticResource SubNavegationTextColor}"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <BoxView
+                    Grid.Column="1"
+                    Margin="20,0"
+                    HeightRequest="2"
+                    HorizontalOptions="Fill"
+                    IsVisible="{Binding SwitchHomeAndHospitalList}"
+                    VerticalOptions="End"
+                    Color="{StaticResource TransparentBlackColor}" />
+            </Grid>
 
             <!--  Home requests list  -->
-            <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
-
+            <StackLayout Grid.Row="1" IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
                 <temp:HomeRequestsEmptyTemplate Margin="78,73,78,0" IsVisible="{Binding IsHomeRequestsListEmpty}" />
 
                 <ListView
@@ -153,22 +159,24 @@
                     HeightRequest="600"
                     ItemTemplate="{StaticResource requestsList}"
                     ItemsSource="{Binding HomeRequestsList}">
+
                     <ListView.Footer>
                         <!--  New request button  -->
-                        <Button
-                            Margin="10,30"
-                            Command="{Binding AtHomeCommand}"
-                            HorizontalOptions="Center"
-                            Style="{StaticResource ButtonStyle}"
-                            Text="{Binding [CommonNewRequest]}" />
+                        <Frame Padding="0,30">
+                            <Button
+                                Command="{Binding AtHomeCommand}"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource ButtonStyle}"
+                                Text="{Binding [CommonNewRequest]}" />
+                        </Frame>
                     </ListView.Footer>
                 </ListView>
             </StackLayout>
-
+            
             <!--  Hospital requests list  -->
-            <StackLayout IsVisible="{Binding SwitchHomeAndHospitalList}">
+            <StackLayout Grid.Row="1" IsVisible="{Binding SwitchHomeAndHospitalList}">
 
-                <temp:HospitalRequestsEmptyTemplate Margin="78,73,78,0" IsVisible="{Binding IsHospitalRequestsListEmpty}" />
+                <temp:HospitalRequestsEmptyTemplate Padding="78,73,78,0" IsVisible="{Binding IsHospitalRequestsListEmpty}" />
 
                 <ListView
                     HasUnevenRows="True"
@@ -178,17 +186,19 @@
 
                     <ListView.Footer>
                         <!--  New request button  -->
-                        <Button
-                            Margin="10,30"
-                            Command="{Binding AtHospitalCommand}"
-                            HorizontalOptions="Center"
-                            Style="{StaticResource ButtonStyle}"
-                            Text="{Binding [CommonNewRequest]}" />
+                        <Frame Padding="0,30">
+                            <Button
+                                Command="{Binding AtHospitalCommand}"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource ButtonStyle}"
+                                Text="{Binding [CommonNewRequest]}" />
+                        </Frame>
                     </ListView.Footer>
                 </ListView>
             </StackLayout>
+        </Grid>
 
-        </StackLayout>
+
 
         <!--  INDICATOR  -->
         <ctrl:CustomActivityIndicatorControl />

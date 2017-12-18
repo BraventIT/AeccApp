@@ -21,8 +21,23 @@
     <Color x:Key="DarkGreyTextColor">#2C3947</Color>
     <Color x:Key="DarkGrey2TextColor">#802C3947</Color>
     <Color x:Key="BlackColor">#335B5B5B</Color>
+    <Color x:Key="TransparentBlackColor">#3D000000</Color>
     <Color x:Key="LightGrey2">#662C3947</Color>
     <Color x:Key="PlanarGreenColor">#DCF1B2</Color>
+
+    <OnPlatform
+        x:Key="SubNavegationBackgroundColor"
+        x:TypeArguments="Color"
+        Android="{StaticResource PlanarLightGrey}"
+        WinPhone="{StaticResource PlanarLightGrey}"
+        iOS="{StaticResource GreenText}" />
+
+    <OnPlatform
+        x:Key="SubNavegationTextColor"
+        x:TypeArguments="Color"
+        Android="{StaticResource GreyText}"
+        WinPhone="{StaticResource GreyText}"
+        iOS="White" />
 
     <!--  FONT SIZES  -->
     <OnPlatform

@@ -6,7 +6,7 @@
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls">
 
     <StackLayout>
-        <ctrl:CustomImage Source="Ico_cruz" VerticalOptions="Center" />
+        <ctrl:CustomImage SourcePlatform="Ico_cruz" VerticalOptions="Center" />
 
         <Label
             Margin="0,35,0,0"
