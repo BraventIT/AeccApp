@@ -201,7 +201,7 @@ namespace AeccApp.Core.ViewModels
         /// </summary>
         void OnNewRequest()
         {
-            NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
+            MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Requests), string.Empty);
         }
         private Command _currentChatCommand;
         public ICommand CurrentChatCommand
