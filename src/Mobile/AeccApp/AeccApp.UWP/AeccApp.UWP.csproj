@@ -169,20 +169,11 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\list_icon.png">
       <Link>Assets\list_icon.png</Link>
     </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\location_pin.png">
-      <Link>Assets\location_pin.png</Link>
-    </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\location_pin_hospital_map.png">
-      <Link>Assets\location_pin_hospital_map.png</Link>
-    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\logo.png">
       <Link>Assets\logo.png</Link>
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\logoHeader.png">
       <Link>Assets\logoHeader.png</Link>
-    </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\logout.png">
-      <Link>Assets\logout.png</Link>
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\logout_icon.png">
       <Link>Assets\logout_icon.png</Link>
@@ -193,8 +184,8 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\map_location_pin_green.png">
       <Link>Assets\map_location_pin_green.png</Link>
     </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\mock_new_firma_convenio.jpg">
-      <Link>Assets\mock_new_firma_convenio.jpg</Link>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\no_profile_image_v2.png">
+      <Link>Assets\no_profile_image_v2.png</Link>
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\PopUp_Ico_chatrequest.png">
       <Link>Assets\PopUp_Ico_chatrequest.png</Link>
@@ -225,9 +216,6 @@
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\right_arrow_big.png">
       <Link>Assets\right_arrow_big.png</Link>
-    </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\round_new_here.png">
-      <Link>Assets\round_new_here.png</Link>
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\round_no_profile_image_v2.png">
       <Link>Assets\round_no_profile_image_v2.png</Link>
