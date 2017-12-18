@@ -97,7 +97,7 @@ namespace AeccApp.Core.ViewModels
             Settings.FirstRequestLandingPageSeen = false;
             NotifyPropertyChanged(nameof(FirstTimeLandingPageVisible));
 
-            await RefreshRequestAsync(SwitchHomeAndHospitalList);
+            await NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
         }
 
         private Command _hospitalTabCommand;

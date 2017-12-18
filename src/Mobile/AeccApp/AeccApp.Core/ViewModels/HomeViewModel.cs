@@ -201,7 +201,16 @@ namespace AeccApp.Core.ViewModels
         /// </summary>
         void OnNewRequest()
         {
+            if (Settings.FirstRequestLandingPageSeen)
+            {
             MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Requests), string.Empty);
+            }
+            else
+            {
+            NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
+            }
+
+
         }
         private Command _currentChatCommand;
         public ICommand CurrentChatCommand
