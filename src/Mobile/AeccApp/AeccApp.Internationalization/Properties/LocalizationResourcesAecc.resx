@@ -606,6 +606,9 @@
   <data name="SettingsTitle" xml:space="preserve">
     <value>Opciones</value>
   </data>
+  <data name="SettingsToolbarTitle" xml:space="preserve">
+    <value>Perfil y opciones</value>
+  </data>
   <data name="VolunteersListToolbarTitle" xml:space="preserve">
     <value>Elige voluntario</value>
   </data>

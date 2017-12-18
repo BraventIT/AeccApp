@@ -169,6 +169,9 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\list_icon.png">
       <Link>Assets\list_icon.png</Link>
     </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\location_pin.png">
+      <Link>Assets\location_pin.png</Link>
+    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\logo.png">
       <Link>Assets\logo.png</Link>
     </Content>
@@ -267,6 +270,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomRenderer\BorderlessEntryRenderer.cs" />
     <Compile Include="CustomRenderer\CustomShapeDrawingRenderer.cs" />
     <Compile Include="CustomRenderer\FrameRender.cs" />
     <Compile Include="CustomRenderer\NonScrollableListViewRenderer.cs" />

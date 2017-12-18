@@ -29,10 +29,7 @@
                         </Grid.RowDefinitions>
 
                         <ctrl:CustomImage
-                            Grid.Row="0"
                             Grid.RowSpan="2"
-                            Grid.Column="0"
-                            HeightRequest="30"
                             HorizontalOptions="Center"
                             SourcePlatform="location_pin"
                             VerticalOptions="Start"

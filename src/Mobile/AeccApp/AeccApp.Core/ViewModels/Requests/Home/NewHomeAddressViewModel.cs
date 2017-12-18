@@ -105,8 +105,11 @@ namespace AeccApp.Core.ViewModels
             get { return AddressSelected?.Number; }
             set
             {
-                AddressSelected.Number = value;
-                AddressSelected.PlaceId = null;
+                if (AddressSelected != null)
+                {
+                    AddressSelected.Number = value;
+                    AddressSelected.PlaceId = null;
+                }
             }
         }
 

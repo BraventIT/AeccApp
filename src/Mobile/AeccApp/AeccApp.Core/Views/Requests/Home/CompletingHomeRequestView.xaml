@@ -129,20 +129,21 @@
                         CornerRadius="25"
                         HasShadow="False">
 
-                        <Entry
+                        <ctrl:BorderlessEntry
                             Margin="0"
                             FontSize="{StaticResource MediumSize}"
                             HorizontalOptions="Center"
                             HorizontalTextAlignment="Start"
                             Placeholder="{Binding [CompletingRequestCommentsPlaceHolder]}"
-                            Text="{Binding RequestComments}">
+                            Text="{Binding RequestComments}"
+                            VerticalOptions="Center">
                             <Entry.Behaviors>
                                 <beh:EventToCommandBehavior
                                     Command="{Binding CommentsEntryListenerCommand}"
                                     EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
                                     EventName="TextChanged" />
                             </Entry.Behaviors>
-                        </Entry>
+                        </ctrl:BorderlessEntry>
                     </Frame>
                 </Frame>
                 <Label

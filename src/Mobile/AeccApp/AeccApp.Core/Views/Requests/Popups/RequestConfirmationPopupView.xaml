@@ -57,12 +57,14 @@
                     Padding="1"
                     BackgroundColor="{StaticResource LightGrey}"
                     CornerRadius="25"
+                    HasShadow="False"
                     HorizontalOptions="Center">
                     <Frame
                         Margin="0"
                         Padding="17,13"
                         BackgroundColor="{StaticResource LightSilver}"
-                        CornerRadius="25">
+                        CornerRadius="25"
+                        HasShadow="False">
 
                         <StackLayout Orientation="Horizontal">
                             <ctrl:CustomImage

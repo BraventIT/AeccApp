@@ -17,7 +17,8 @@
                 HorizontalOptions="Center"
                 InputTransparent="True"
                 SourcePlatform="Ico_cruz"
-                VerticalOptions="Center" />
+                VerticalOptions="Center"
+                WidthRequest="55" />
 
         </Grid>
         <Label

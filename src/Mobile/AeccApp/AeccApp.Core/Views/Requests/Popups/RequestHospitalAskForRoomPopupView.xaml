@@ -36,7 +36,7 @@
             <Label
                 Margin="10,10,10,5"
                 FontSize="Large"
-                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
                 Text="{Binding [PopupHospitalAskForRoomText]}" />
 
             <Frame
@@ -55,10 +55,12 @@
                     HasShadow="False"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
-                    <Entry
+
+                    <ctrl:BorderlessEntry
                         HorizontalOptions="FillAndExpand"
                         Placeholder="{Binding [AskForRoomPopupPlaceHolder]}"
                         Text="{Binding Room}"
+                        VerticalOptions="Center"
                         WidthRequest="200">
                         <Entry.Behaviors>
                             <beh:EventToCommandBehavior
@@ -66,7 +68,7 @@
                                 EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
                                 EventName="TextChanged" />
                         </Entry.Behaviors>
-                    </Entry>
+                    </ctrl:BorderlessEntry>
                 </Frame>
             </Frame>
 

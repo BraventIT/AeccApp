@@ -64,6 +64,7 @@ namespace AeccApp.Core.ViewModels
                     Text = (silentLogin) ?
                         this["LoginViewPreLoginSilentText"] :
                         this["LoginViewPreLoginText"];
+
                     if (await IdentityService.TryToLoginAsync(silentLogin))
                     {
                         #region ONLY FOR TEST

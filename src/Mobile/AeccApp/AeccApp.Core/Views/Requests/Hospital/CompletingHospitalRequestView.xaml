@@ -170,8 +170,7 @@
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
 
-
-                            <Entry
+                            <ctrl:BorderlessEntry
                                 Margin="0"
                                 FontSize="{StaticResource MediumSize}"
                                 HorizontalOptions="Center"
@@ -184,7 +183,7 @@
                                         EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
                                         EventName="TextChanged" />
                                 </Entry.Behaviors>
-                            </Entry>
+                            </ctrl:BorderlessEntry>
                         </Frame>
                     </Frame>
                     <Label

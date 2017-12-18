@@ -24,83 +24,48 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <ctrl:CustomImage
-                            Grid.Row="0"
                             Grid.RowSpan="2"
-                            Grid.Column="0"
-                            HeightRequest="30"
-                            HorizontalOptions="Center"
+                            Margin="15,10,0,0"
                             SourcePlatform="location_pin"
                             VerticalOptions="Start"
-                            WidthRequest="30">
-
-                            <Label.Margin>
-                                <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="WinPhone, Windows" Value="15,30,0,0" />
-                                    <On Platform="iOS" Value="15,10,0,0" />
-                                    <On Platform="Android" Value="15,10,0,0" />
-                                </OnPlatform>
-                            </Label.Margin>
-
-                        </ctrl:CustomImage>
+                            WidthRequest="30" />
 
                         <Label
-                            Grid.Row="0"
                             Grid.Column="1"
+                            Margin="5,10,0,5"
                             FontAttributes="Bold"
                             FontSize="{StaticResource MediumSize}"
                             HorizontalOptions="Start"
-                            Text="{Binding Name}">
-                            <Label.Margin>
-                                <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="WinPhone, Windows" Value="5,10,0,5" />
-                                    <On Platform="iOS" Value="5,10,0,5" />
-                                    <On Platform="Android" Value="5,10,0,5" />
-                                </OnPlatform>
-                            </Label.Margin>
-                        </Label>
+                            Text="{Binding Name}" />
 
                         <Label
                             Grid.Row="1"
                             Grid.Column="1"
+                            Margin="5,0,0,10"
                             FontSize="{StaticResource MidMediumSize}"
-                            Text="{Binding DisplayAddress}">
-
-                            <Label.Margin>
-                                <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="WinPhone, Windows" Value="5,10,0,10" />
-                                    <On Platform="iOS" Value="5,0,0,10" />
-                                    <On Platform="Android" Value="5,0,5,10" />
-                                </OnPlatform>
-                            </Label.Margin>
-
-                        </Label>
+                            Text="{Binding DisplayAddress}" />
 
                         <ctrl:CustomImage
-                            Grid.Row="0"
                             Grid.RowSpan="2"
                             Grid.Column="2"
                             Margin="0,0,15,0"
-                            HeightRequest="17"
-                            HorizontalOptions="Center"
                             SourcePlatform="right_arrow"
                             VerticalOptions="Center"
                             WidthRequest="9" />
                         <BoxView
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Grid.ColumnSpan="3"
                             HeightRequest="1"
+                            VerticalOptions="End"
                             Color="LightGray" />
-
                     </Grid>
                 </ViewCell>
             </DataTemplate>
         </ResourceDictionary>
     </ContentView.Resources>
-
 
     <Grid>
         <Grid.RowDefinitions>

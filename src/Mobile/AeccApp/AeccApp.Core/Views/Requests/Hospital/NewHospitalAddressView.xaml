@@ -68,236 +68,217 @@
     </ContentView.Resources>
 
     <Grid>
-        <ActivityIndicator
-            HeightRequest="50"
-            HorizontalOptions="Center"
-            IsRunning="{Binding IsBusy}"
-            IsVisible="{Binding IsBusy}"
-            VerticalOptions="Center"
-            Color="{StaticResource AccentColor}">
-            <ActivityIndicator.WidthRequest>
-                <OnPlatform
-                    x:TypeArguments="x:Double"
-                    Android="50"
-                    WinPhone="400"
-                    iOS="50" />
-            </ActivityIndicator.WidthRequest>
-        </ActivityIndicator>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <StackLayout>
-            <!--  Sub navigation bar with map and hospital list  -->
-            <Grid BackgroundColor="{StaticResource GreenText}" ColumnSpacing="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
+        <!--  Sub navigation bar with map and hospital list  -->
+        <Grid BackgroundColor="{StaticResource GreenText}" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-                <Button
-                    BackgroundColor="{StaticResource GreenText}"
-                    BorderRadius="0"
-                    Command="{Binding HospitalMapTabCommand}"
-                    Style="{StaticResource ButtonTransparentStyle}" />
+            <Button
+                BackgroundColor="{StaticResource GreenText}"
+                BorderRadius="0"
+                Command="{Binding HospitalMapTabCommand}"
+                Style="{StaticResource ButtonTransparentStyle}" />
 
-                <StackLayout
-                    HorizontalOptions="Center"
-                    InputTransparent="True"
-                    Orientation="Horizontal">
+            <StackLayout
+                HorizontalOptions="Center"
+                InputTransparent="True"
+                Orientation="Horizontal">
 
-                    <ctrl:CustomImage
-                        Margin="10"
-                        SourcePlatform="map_icon"
-                        VerticalOptions="Center"
-                        WidthRequest="25" />
-                    <Label
-                        Margin="0,0,10,0"
-                        FontSize="{StaticResource MediumSize}"
-                        Text="{Binding [CommonMap]}"
-                        TextColor="{StaticResource WhiteColor}"
-                        VerticalOptions="Center" />
-                </StackLayout>
-
-                <BoxView
-                    Margin="20,0"
-                    HeightRequest="2"
-                    HorizontalOptions="Fill"
-                    IsVisible="{Binding SwitchBetweenAndHospitalList}"
-                    VerticalOptions="End"
-                    Color="{StaticResource TransparentBlackColor}" />
-
-                <Button
-                    Grid.Column="1"
-                    BackgroundColor="{StaticResource GreenText}"
-                    BorderRadius="0"
-                    Command="{Binding HospitalListTabCommand}"
-                    Style="{StaticResource ButtonTransparentStyle}" />
-
-                <StackLayout
-                    Grid.Column="1"
-                    HorizontalOptions="Center"
-                    InputTransparent="True"
-                    Orientation="Horizontal">
-
-                    <ctrl:CustomImage
-                        Margin="10"
-                        SourcePlatform="list_icon"
-                        VerticalOptions="Center"
-                        WidthRequest="25" />
-                    <Label
-                        Margin="0,0,10,0"
-                        FontSize="{StaticResource MediumSize}"
-                        Text="{Binding [CommonList]}"
-                        TextColor="{StaticResource WhiteColor}"
-                        VerticalOptions="Center" />
-                </StackLayout>
-
-                <BoxView
-                    Grid.Column="1"
-                    Margin="20,0"
-                    HeightRequest="2"
-                    HorizontalOptions="Fill"
-                    IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}"
-                    VerticalOptions="End"
-                    Color="{StaticResource TransparentBlackColor}" />
-            </Grid>
-
-            <!--  Hospitals map  -->
-            <Grid
-                HorizontalOptions="FillAndExpand"
-                IsVisible="{Binding SwitchBetweenAndHospitalList}"
-                VerticalOptions="FillAndExpand">
-                <ctrl:CustomMap
-                    x:Name="map"
-                    HasZoomEnabled="True"
-                    HeightRequest="600"
-                    MapPins="{Binding MapPins}">
-
-                    <ctrl:CustomMap.Behaviors>
-                        <beh:EventToCommandBehavior
-                            Command="{Binding InfoWindowClickedCommand}"
-                            EventArgsConverter="{StaticResource InfoWindowClickedEventArgsConverter}"
-                            EventName="InfoWindowClicked" />
-                    </ctrl:CustomMap.Behaviors>
-
-                </ctrl:CustomMap>
-
-            </Grid>
-            <!--  Hospitals list  -->
-            <StackLayout IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
-                <!--  Address search entry  -->
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Frame
-                        Grid.Row="0"
-                        Margin="20,20,20,20"
-                        Padding="1"
-                        BackgroundColor="{StaticResource LightGraySubtitle}"
-                        CornerRadius="25"
-                        HasShadow="False"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
-                        <Frame
-                            Margin="0"
-                            Padding="0"
-                            BackgroundColor="{StaticResource WhiteColor}"
-                            CornerRadius="25"
-                            HasShadow="False"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center">
-                            <Grid Padding="5,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="35" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="35" />
-                                </Grid.ColumnDefinitions>
-
-                                <ctrl:CustomImage
-                                    Grid.Column="0"
-                                    Margin="5,10"
-                                    HorizontalOptions="Center"
-                                    SourcePlatform="search_mini_icon"
-                                    VerticalOptions="Center" />
-
-                                <Entry
-                                    Grid.Column="1"
-                                    BackgroundColor="Transparent"
-                                    Placeholder="{Binding [NewHomeAddressViewSearchAddress]}"
-                                    Text="{Binding AddressFinder}"
-                                    WidthRequest="300">
-                                    <Entry.Behaviors>
-                                        <beh:EventToCommandBehavior
-                                            Command="{Binding AddressChangedCommand}"
-                                            EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
-                                            EventName="TextChanged" />
-                                    </Entry.Behaviors>
-                                </Entry>
-
-
-                                <Frame
-                                    Grid.Column="2"
-                                    Margin="0"
-                                    Padding="10"
-                                    BackgroundColor="Transparent"
-                                    HorizontalOptions="Center"
-                                    IsVisible="{Binding IsSearchIconVisible}">
-                                    <ctrl:CustomImage SourcePlatform="x_icon" VerticalOptions="Center" />
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ResetAddressFinderCommand}" />
-                                    </Frame.GestureRecognizers>
-                                </Frame>
-
-                            </Grid>
-                        </Frame>
-                    </Frame>
-                </Grid>
-
-                <BoxView HeightRequest="1" Color="LightGray" />
-
-                <Grid
-                    Margin="5"
-                    HorizontalOptions="Center"
-                    IsVisible="{Binding HospitalsListIsEmpty}"
-                    VerticalOptions="FillAndExpand">
-                    <Grid.HeightRequest>
-                        <OnPlatform
-                            x:TypeArguments="x:Double"
-                            Android="70"
-                            WinPhone="80"
-                            iOS="70" />
-                    </Grid.HeightRequest>
-
-                    <Label
-                        FontSize="{StaticResource MediumSize}"
-                        HorizontalTextAlignment="Center"
-                        Text="{Binding [NewHomeAddressViewNoHospitalsInList]}" />
-
-                </Grid>
-                <Grid>
-                    <ListView
-                        HasUnevenRows="True"
-                        HeightRequest="600"
-                        ItemTemplate="{StaticResource hospitalListTemplate}"
-                        ItemsSource="{Binding Hospitals}">
-                        <ListView.Margin>
-                            <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="WinPhone, Windows" Value="100" />
-                            </OnPlatform>
-                        </ListView.Margin>
-
-                        <ListView.Behaviors>
-                            <beh:EventToCommandBehavior
-                                Command="{Binding NewHospitalSelectedCommand}"
-                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                                EventName="ItemTapped" />
-                        </ListView.Behaviors>
-                    </ListView>
-                </Grid>
+                <ctrl:CustomImage
+                    Margin="10"
+                    SourcePlatform="map_icon"
+                    VerticalOptions="Center"
+                    WidthRequest="25" />
+                <Label
+                    Margin="0,0,10,0"
+                    FontSize="{StaticResource MediumSize}"
+                    Text="{Binding [CommonMap]}"
+                    TextColor="{StaticResource WhiteColor}"
+                    VerticalOptions="Center" />
             </StackLayout>
 
+            <BoxView
+                Margin="20,0"
+                HeightRequest="2"
+                HorizontalOptions="Fill"
+                IsVisible="{Binding SwitchBetweenAndHospitalList}"
+                VerticalOptions="End"
+                Color="{StaticResource TransparentBlackColor}" />
+
+            <Button
+                Grid.Column="1"
+                BackgroundColor="{StaticResource GreenText}"
+                BorderRadius="0"
+                Command="{Binding HospitalListTabCommand}"
+                Style="{StaticResource ButtonTransparentStyle}" />
+
+            <StackLayout
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                InputTransparent="True"
+                Orientation="Horizontal">
+
+                <ctrl:CustomImage
+                    Margin="10"
+                    SourcePlatform="list_icon"
+                    VerticalOptions="Center"
+                    WidthRequest="25" />
+                <Label
+                    Margin="0,0,10,0"
+                    FontSize="{StaticResource MediumSize}"
+                    Text="{Binding [CommonList]}"
+                    TextColor="{StaticResource WhiteColor}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+
+            <BoxView
+                Grid.Column="1"
+                Margin="20,0"
+                HeightRequest="2"
+                HorizontalOptions="Fill"
+                IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}"
+                VerticalOptions="End"
+                Color="{StaticResource TransparentBlackColor}" />
+        </Grid>
+
+        <!--  Hospitals map  -->
+        <ctrl:CustomMap
+            x:Name="map"
+            Grid.Row="1"
+            HasZoomEnabled="True"
+            HeightRequest="600"
+            IsVisible="{Binding SwitchBetweenAndHospitalList}"
+            MapPins="{Binding MapPins}">
+
+            <ctrl:CustomMap.Behaviors>
+                <beh:EventToCommandBehavior
+                    Command="{Binding InfoWindowClickedCommand}"
+                    EventArgsConverter="{StaticResource InfoWindowClickedEventArgsConverter}"
+                    EventName="InfoWindowClicked" />
+            </ctrl:CustomMap.Behaviors>
+
+        </ctrl:CustomMap>
+
+        <!--  Hospitals list  -->
+        <StackLayout Grid.Row="1" IsVisible="{Binding SwitchBetweenAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
+            <!--  Address search entry  -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Frame
+                    Margin="20"
+                    Padding="1"
+                    BackgroundColor="{StaticResource LightGraySubtitle}"
+                    CornerRadius="25"
+                    HasShadow="False">
+                    <Frame
+                        Margin="0"
+                        Padding="0"
+                        BackgroundColor="{StaticResource WhiteColor}"
+                        CornerRadius="25"
+                        HasShadow="False">
+                        <Grid Padding="5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="35" />
+                            </Grid.ColumnDefinitions>
+
+                            <ctrl:CustomImage
+                                Grid.Column="0"
+                                Margin="5,10"
+                                HorizontalOptions="Center"
+                                SourcePlatform="search_mini_icon"
+                                VerticalOptions="Center" />
+
+                            <ctrl:BorderlessEntry
+                                Grid.Column="1"
+                                Placeholder="{Binding [NewHomeAddressViewSearchAddress]}"
+                                Text="{Binding AddressFinder}"
+                                VerticalOptions="Center"
+                                WidthRequest="300">
+                                <Entry.Behaviors>
+                                    <beh:EventToCommandBehavior
+                                        Command="{Binding AddressChangedCommand}"
+                                        EventArgsConverter="{StaticResource TextChangeEventArgsConverter}"
+                                        EventName="TextChanged" />
+                                </Entry.Behaviors>
+                            </ctrl:BorderlessEntry>
+
+
+                            <Frame
+                                Grid.Column="2"
+                                Margin="0"
+                                Padding="10"
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="Center"
+                                IsVisible="{Binding IsSearchIconVisible}">
+                                <ctrl:CustomImage SourcePlatform="x_icon" VerticalOptions="Center" />
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ResetAddressFinderCommand}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                        </Grid>
+                    </Frame>
+                </Frame>
+            </Grid>
+
+            <BoxView HeightRequest="1" Color="LightGray" />
+
+            <Grid
+                Margin="5"
+                HorizontalOptions="Center"
+                IsVisible="{Binding HospitalsListIsEmpty}"
+                VerticalOptions="FillAndExpand">
+                <Grid.HeightRequest>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="70"
+                        WinPhone="80"
+                        iOS="70" />
+                </Grid.HeightRequest>
+
+                <Label
+                    FontSize="{StaticResource MediumSize}"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding [NewHomeAddressViewNoHospitalsInList]}" />
+
+            </Grid>
+            <Grid>
+                <ListView
+                    HasUnevenRows="True"
+                    HeightRequest="600"
+                    ItemTemplate="{StaticResource hospitalListTemplate}"
+                    ItemsSource="{Binding Hospitals}">
+                    <ListView.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="WinPhone, Windows" Value="100" />
+                        </OnPlatform>
+                    </ListView.Margin>
+
+                    <ListView.Behaviors>
+                        <beh:EventToCommandBehavior
+                            Command="{Binding NewHospitalSelectedCommand}"
+                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                            EventName="ItemTapped" />
+                    </ListView.Behaviors>
+                </ListView>
+            </Grid>
         </StackLayout>
+
+        <!--  INDICATOR  -->
+        <ctrl:CustomActivityIndicatorControl Grid.Row="1" />
     </Grid>
 </v:BaseContentPage>

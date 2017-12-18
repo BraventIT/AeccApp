@@ -33,7 +33,11 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Subscribe<ChatMessageReceivedMessage>(this, string.Empty, OnMessageReceived);
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
 
-            MessagingCenter.Send(new ToolbarMessage(true), string.Empty);
+            var toolbarMessage = (Device.RuntimePlatform != Device.UWP) ?
+                new ToolbarMessage(true) :
+                new ToolbarMessage(this["DashboardAppTitle"]);
+
+            MessagingCenter.Send(toolbarMessage, string.Empty);
 
             await ExecuteOperationAsync(async () =>
             {

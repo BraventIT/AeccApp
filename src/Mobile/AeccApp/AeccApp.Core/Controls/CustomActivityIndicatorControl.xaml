@@ -6,10 +6,10 @@
     IsVisible="{Binding IsBusy}">
 
     <ActivityIndicator
+        BackgroundColor="Transparent"
         HeightRequest="38"
         HorizontalOptions="Center"
         IsRunning="{Binding IsBusy}"
-        IsVisible="{Binding IsBusy}"
         VerticalOptions="Center"
         Color="{StaticResource AccentColor}">
         <ActivityIndicator.WidthRequest>

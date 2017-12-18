@@ -1,19 +1,18 @@
-﻿using AeccApp.Core.Services;
+﻿using AeccApp.Core.Messages;
+using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels
 {
-   public class SettingsDashboardViewModel : ViewModelBase
+    public class SettingsDashboardViewModel : ViewModelBase
     {
         private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
-
 
         #region Ctor and initialize
         public SettingsDashboardViewModel()
@@ -25,9 +24,12 @@ namespace AeccApp.Core.ViewModels
             SettingsList.Add(this["SettingsContactWithProfesional"]);       
         }
 
-        public override async Task ActivateAsync()
+        public override Task ActivateAsync()
         {
             LogoutPopupVM.Logout += OnLogoutPopupLogout;
+            MessagingCenter.Send(new ToolbarMessage(this["SettingsToolbarTitle"]), string.Empty);
+
+            return Task.CompletedTask;
         }
 
         public override void Deactivate()
@@ -94,7 +96,6 @@ namespace AeccApp.Core.ViewModels
         }
         #endregion
 
-
         #region Properties
         private List<String> _settingsList = new List<string>();
 
@@ -116,7 +117,6 @@ namespace AeccApp.Core.ViewModels
 
 
         #endregion
-
 
         private async void OnLogoutPopupLogout(object sender, EventArgs e)
         {

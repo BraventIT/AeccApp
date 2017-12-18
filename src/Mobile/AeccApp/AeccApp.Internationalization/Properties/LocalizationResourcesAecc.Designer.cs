@@ -1529,6 +1529,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Perfil y opciones.
+        /// </summary>
+        public static string SettingsToolbarTitle {
+            get {
+                return ResourceManager.GetString("SettingsToolbarTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Elige voluntario.
         /// </summary>
         public static string VolunteersListToolbarTitle {

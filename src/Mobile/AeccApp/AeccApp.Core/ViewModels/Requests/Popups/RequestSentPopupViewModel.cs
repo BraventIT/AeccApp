@@ -1,28 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
-using Xamarin.Forms;
+﻿using System.Threading.Tasks;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
-   public class RequestSentPopupViewModel : ViewModelBase
+    public class RequestSentPopupViewModel : ClosablePopupViewModelBase
     {
-        
- private Command _closeRequestSentPopupCommand;
-        public ICommand CloseRequestSentPopupCommand
-        {
-            get
-            {
-                return _closeRequestSentPopupCommand ??
-                    (_closeRequestSentPopupCommand = new Command(OnClosePopupCommand));
-            }
-        }
-        private async void OnClosePopupCommand()
+        protected override async Task OnClosePopupCommandAsync()
         {
             await NavigationService.HidePopupAsync();
             await NavigationService.NavigateToAsync<DashboardViewModel>();
         }
 
+        public override bool OnBackButtonPressed()
+        {
+            OnClosePopupCommandAsync();
+            return base.OnBackButtonPressed();
+        }
     }
 }

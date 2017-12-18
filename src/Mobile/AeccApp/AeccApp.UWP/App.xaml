@@ -2,7 +2,6 @@
     x:Class="AeccApp.UWP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:AeccApp.UWP"
     RequestedTheme="Light">
 
     <Application.Resources>
@@ -10,6 +9,11 @@
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
         </Style>
+
+        <Style TargetType="PivotItem">
+            <Setter Property="Margin" Value="0" />
+        </Style>
+
     </Application.Resources>
 
 </Application>

@@ -7,55 +7,40 @@
     xmlns:ctrlRange="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
     xmlns:ctrlXlabs="clr-namespace:XLabs.Forms.Controls"
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-    BackgroundColor="{StaticResource SeeThrough}">
+    BackgroundColor="{StaticResource SeeThrough}"
+    CloseWhenBackgroundIsClicked="True">
 
     <Frame Style="{StaticResource PopupFrameStyle}">
-        <Grid
-            Margin="20"
-            Padding="5"
-            BackgroundColor="{StaticResource WhiteColor}"
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <StackLayout>
-                <ctrl:CustomImage
-                    Grid.Column="0"
-                    Margin="10"
-                    HeightRequest="13"
-                    HorizontalOptions="Start"
-                    SourcePlatform="x_icon"
-                    VerticalOptions="Center"
-                    WidthRequest="13">
-                    <ctrl:CustomImage.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding CloseRequestSentPopupCommand}" />
-                    </ctrl:CustomImage.GestureRecognizers>
+            <Button Command="{Binding ClosePopupCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
 
-                </ctrl:CustomImage>
+            <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
-                <ctrl:CustomImage
-                    Grid.Column="0"
-                    HeightRequest="55"
-                    HorizontalOptions="Center"
-                    SourcePlatform="thumb_up"
-                    VerticalOptions="Center"
-                    WidthRequest="55" />
+            <ctrl:CustomImage
+                Margin="0,55,0,0"
+                HeightRequest="55"
+                HorizontalOptions="Center"
+                SourcePlatform="thumb_up" />
 
-                <Label
-                    Margin="10,10,10,5"
-                    FontAttributes="Bold"
-                    FontSize="{StaticResource BigSize}"
-                    HorizontalOptions="Center"
-                    Text="{Binding [PopupRequestSentTextTitle]}" />
+            <Label
+                Grid.Row="1"
+                Margin="20,27,20,0"
+                Style="{StaticResource TitleLabelStyleNormal}"
+                Text="{Binding [PopupRequestSentTextTitle]}" />
 
-                <Label
-                    Margin="10,5,10,10"
-                    FontSize="{StaticResource MidLargeSize}"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Text="{Binding [PopupRequestSentText]}" />
+            <Label
+                Grid.Row="2"
+                Margin="32,20,32,55"
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource SubTitleLabelStyleNormal}"
+                Text="{Binding [PopupRequestSentText]}" />
 
-
-            </StackLayout>
 
         </Grid>
 

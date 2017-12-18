@@ -16,7 +16,7 @@ namespace AeccApp.Core.ViewModels
         #region Activate & Deactive Methods
         public HospitalAddressesListViewModel()
         {
-            _hospitalAddressesList = new ObservableCollection<AddressModel>();
+            HospitalAddressesList = new ObservableCollection<AddressModel>();
         }
 
         public override Task ActivateAsync()
@@ -31,13 +31,7 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Properties
-        private ObservableCollection<AddressModel> _hospitalAddressesList;
-
-        public ObservableCollection<AddressModel> HospitalAddressesList
-        {
-            get { return _hospitalAddressesList; }
-            set { Set(ref _hospitalAddressesList, value); }
-        }
+        public ObservableCollection<AddressModel> HospitalAddressesList { get; private set; }
 
         private bool _hospitalAddressesIsEmpty;
         public bool HospitalAddressesIsEmpty
@@ -86,8 +80,5 @@ namespace AeccApp.Core.ViewModels
 
 
         #endregion
-
-
-
     }
 }

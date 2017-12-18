@@ -151,6 +151,7 @@
 
             <!--  Home requests list  -->
             <StackLayout Grid.Row="1" IsVisible="{Binding SwitchHomeAndHospitalList, Converter={StaticResource InverseBoolConverter}}">
+
                 <temp:HomeRequestsEmptyTemplate Margin="78,73,78,0" IsVisible="{Binding IsHomeRequestsListEmpty}" />
 
                 <ListView
@@ -195,11 +196,10 @@
                     </ListView.Footer>
                 </ListView>
             </StackLayout>
+            <!--  INDICATOR  -->
+            <ctrl:CustomActivityIndicatorControl Grid.Row="1" />
         </Grid>
 
 
-
-        <!--  INDICATOR  -->
-        <ctrl:CustomActivityIndicatorControl />
     </Grid>
 </v:BaseContentPage>

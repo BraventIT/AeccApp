@@ -17,8 +17,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-
-
         <StackLayout
             HorizontalOptions="Center"
             IsVisible="{Binding IsLoginRequired}"
