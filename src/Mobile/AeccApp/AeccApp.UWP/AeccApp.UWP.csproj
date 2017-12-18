@@ -100,6 +100,9 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\chat.png">
       <Link>Assets\chat.png</Link>
     </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\chat_grey_icon.png">
+      <Link>Assets\chat_grey_icon.png</Link>
+    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\chat_tab_icon.png">
       <Link>Assets\chat_tab_icon.png</Link>
     </Content>
@@ -145,8 +148,17 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\ICO_firstCHAT.png">
       <Link>Assets\ICO_firstCHAT.png</Link>
     </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\ico_first_request.png">
+      <Link>Assets\ico_first_request.png</Link>
+    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\ico_girl.png">
       <Link>Assets\ico_girl.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\ico_hospital.png">
+      <Link>Assets\ico_hospital.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\ico_house.png">
+      <Link>Assets\ico_house.png</Link>
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\ico_man.png">
       <Link>Assets\ico_man.png</Link>
@@ -154,20 +166,29 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\ico_sup_filter.png">
       <Link>Assets\ico_sup_filter.png</Link>
     </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\location_pin.png">
-      <Link>Assets\location_pin.png</Link>
-    </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\location_pin_hospital_map.png">
-      <Link>Assets\location_pin_hospital_map.png</Link>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\list_icon.png">
+      <Link>Assets\list_icon.png</Link>
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\logo.png">
       <Link>Assets\logo.png</Link>
     </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\logout.png">
-      <Link>Assets\logout.png</Link>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\logoHeader.png">
+      <Link>Assets\logoHeader.png</Link>
     </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\mock_new_firma_convenio.jpg">
-      <Link>Assets\mock_new_firma_convenio.jpg</Link>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\logout_icon.png">
+      <Link>Assets\logout_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\map_icon.png">
+      <Link>Assets\map_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\map_location_pin_green.png">
+      <Link>Assets\map_location_pin_green.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\no_profile_image_v2.png">
+      <Link>Assets\no_profile_image_v2.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\PopUp_Ico_chatrequest.png">
+      <Link>Assets\PopUp_Ico_chatrequest.png</Link>
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\PopUp_Ico_question.png">
       <Link>Assets\PopUp_Ico_question.png</Link>
@@ -187,14 +208,14 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\requests_tab_icon.png">
       <Link>Assets\requests_tab_icon.png</Link>
     </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\request_grey_icon.png">
+      <Link>Assets\request_grey_icon.png</Link>
+    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\right_arrow.png">
       <Link>Assets\right_arrow.png</Link>
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\right_arrow_big.png">
       <Link>Assets\right_arrow_big.png</Link>
-    </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\round_new_here.png">
-      <Link>Assets\round_new_here.png</Link>
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\round_no_profile_image_v2.png">
       <Link>Assets\round_no_profile_image_v2.png</Link>
@@ -214,6 +235,9 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\send_icon.png">
       <Link>Assets\send_icon.png</Link>
     </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\settings_gear.png">
+      <Link>Assets\settings_gear.png</Link>
+    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\slideout.png">
       <Link>Assets\slideout.png</Link>
     </Content>
@@ -228,6 +252,9 @@
     </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\x_icon.png">
       <Link>Assets\x_icon.png</Link>
+    </Content>
+    <Content Include="..\AeccApp.Droid\Resources\drawable\x_icon_grey.png">
+      <Link>Assets\x_icon_grey.png</Link>
     </Content>
     <Content Include="Assets\Large1240.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
