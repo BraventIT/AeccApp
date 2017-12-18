@@ -1,11 +1,8 @@
 ﻿using AeccApp.Core.Extensions;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,13 +11,11 @@ namespace AeccApp.Core.ViewModels
 {
     public class HospitalAddressesListViewModel : ViewModelBase
     {
-        public readonly IAddressesDataService _homeAddressesDataService;
+        private IAddressesDataService AddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
 
         #region Activate & Deactive Methods
         public HospitalAddressesListViewModel()
         {
-            _homeAddressesDataService = ServiceLocator.HomeAddressesDataService;
-
             _hospitalAddressesList = new ObservableCollection<AddressModel>();
         }
 
@@ -28,14 +23,9 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                var hospitalAddresses = await _homeAddressesDataService.GetListAsync();
-
-                if (hospitalAddresses != null)
-                {
-                    HospitalAddressesList.Clear();
-                    HospitalAddressesList.AddRange(hospitalAddresses.Where(o => o.IsHospitalAddress));               
-                }
-                HospitalAddressesIsEmpty = hospitalAddresses == null ? true:!hospitalAddresses.Any();
+                var hospitalAddresses = await AddressesDataService.GetListAsync();
+                HospitalAddressesList.SyncExact(hospitalAddresses);
+                HospitalAddressesIsEmpty = !hospitalAddresses.Any();
             });
         }
         #endregion

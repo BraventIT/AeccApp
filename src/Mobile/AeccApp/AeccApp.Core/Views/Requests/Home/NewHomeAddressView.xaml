@@ -48,7 +48,7 @@
             <Frame
                 Margin="0"
                 Padding="0"
-                BackgroundColor="White"
+                BackgroundColor="{StaticResource WhiteColor}"
                 CornerRadius="25"
                 HasShadow="False"
                 HorizontalOptions="Center"
@@ -106,7 +106,7 @@
             <Frame
                 Margin="20,0,20,0"
                 Padding="0"
-                BackgroundColor="White"
+                BackgroundColor="{StaticResource WhiteColor}"
                 CornerRadius="25"
                 HasShadow="False"
                 HorizontalOptions="Center"
@@ -180,7 +180,7 @@
                         <Frame
                             Margin="0"
                             Padding="5,0,5,0"
-                            BackgroundColor="White"
+                            BackgroundColor="{StaticResource WhiteColor}"
                             CornerRadius="25"
                             HasShadow="False">
                             <Entry Placeholder="{Binding [NewHomeAddressViewNumberPlaceHolder]}" Text="{Binding AddressNumber}" />
@@ -195,7 +195,7 @@
                         <Frame
                             Margin="0"
                             Padding="5,0,5,0"
-                            BackgroundColor="White"
+                            BackgroundColor="{StaticResource WhiteColor}"
                             CornerRadius="25"
                             HasShadow="False">
                             <Entry Placeholder="{Binding [NewHomeAddressViewPortalPlaceHolder]}" Text="{Binding AddressSelected.Portal}" />
@@ -210,7 +210,7 @@
                         <Frame
                             Margin="0"
                             Padding="5,0,5,0"
-                            BackgroundColor="White"
+                            BackgroundColor="{StaticResource WhiteColor}"
                             CornerRadius="25"
                             HasShadow="False">
                             <Entry Placeholder="{Binding [NewHomeAddressViewFloorPlaceHolder]}" Text="{Binding AddressSelected.Floor}" />
@@ -227,7 +227,7 @@
                         <Frame
                             Margin="0"
                             Padding="10,0,5,0"
-                            BackgroundColor="White"
+                            BackgroundColor="{StaticResource WhiteColor}"
                             CornerRadius="25"
                             HasShadow="False">
                             <Entry

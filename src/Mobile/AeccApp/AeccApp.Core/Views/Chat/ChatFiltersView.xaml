@@ -23,7 +23,7 @@
 
     <Grid
         Margin="0,0,0,0"
-        BackgroundColor="{StaticResource BackgroundColor}"
+        BackgroundColor="{StaticResource WhiteColor}"
         VerticalOptions="Start">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />

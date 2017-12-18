@@ -72,7 +72,7 @@
                             <Frame
                                 Margin="0"
                                 Padding="15,3,15,3"
-                                BackgroundColor="White"
+                                BackgroundColor="{StaticResource WhiteColor}"
                                 CornerRadius="25"
                                 HasShadow="False"
                                 HorizontalOptions="Center"
@@ -164,7 +164,7 @@
                         <Frame
                             Margin="0"
                             Padding="15,3,15,3"
-                            BackgroundColor="White"
+                            BackgroundColor="{StaticResource WhiteColor}"
                             CornerRadius="25"
                             HasShadow="False"
                             HorizontalOptions="Center"

@@ -8,7 +8,7 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     vm:ViewModelLocator.AutoWireViewModel="True"
-    BackgroundColor="{StaticResource BackgroundColor}"
+    BackgroundColor="{StaticResource WhiteColor}"
     NavigationPage.HasNavigationBar="false">
 
     <ScrollView HorizontalOptions="Center">

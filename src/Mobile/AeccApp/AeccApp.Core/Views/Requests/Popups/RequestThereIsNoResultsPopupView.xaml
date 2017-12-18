@@ -18,7 +18,7 @@
             <Grid
                 Margin="20"
                 Padding="5"
-                BackgroundColor="{StaticResource BackgroundColor}"
+                BackgroundColor="{StaticResource WhiteColor}"
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
 
