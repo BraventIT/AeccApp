@@ -422,11 +422,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\map_location_pin_green.png">
-      <Link>Resources\map_location_pin_green.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\AeccApp.Droid\Resources\drawable\no_profile_image_v2.png">
       <Link>Resources\no_profile_image_v2.png</Link>
     </BundleResource>
@@ -547,6 +542,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\settings_gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\map_location_pin_green.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
