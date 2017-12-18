@@ -12,14 +12,21 @@
     <ScrollView>
         <Grid HorizontalOptions="FillAndExpand">
             <StackLayout>
-                <ctrl:CustomImage
-                    Margin="0,30"
-                    HorizontalOptions="Center"
-                    SourcePlatform="profile"
-                    WidthRequest="200" />
+                <Frame
+                    Padding="0"
+                    BackgroundColor="{StaticResource LightSilver}"
+                    HeightRequest="206">
+                    <ctrl:CustomImage
+                        Margin="0"
+                        HeightRequest="150"
+                        HorizontalOptions="Center"
+                        SourcePlatform="no_profile_image_v2"
+                        VerticalOptions="End"
+                        WidthRequest="150" />
+                </Frame>
                 <Label
                     HorizontalOptions="Center"
-                    Style="{StaticResource NormalLabelStyle}"
+                    Style="{StaticResource DarkGreyBigTitleLabelStyle}"
                     Text="{Binding Name}" />
                 <Label
                     HorizontalOptions="Center"
@@ -50,12 +57,13 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
+                        Margin="20,0,0,0"
                         HorizontalOptions="Start"
                         Style="{StaticResource SubTitleLabelStyle}"
                         Text="{Binding [CommonMailTitle]}" />
@@ -68,6 +76,7 @@
                     <Label
                         Grid.Row="1"
                         Grid.Column="0"
+                        Margin="20,0,0,0"
                         HorizontalOptions="Start"
                         Style="{StaticResource SubTitleLabelStyle}"
                         Text="{Binding [CommonGenderTitle]}" />
@@ -80,6 +89,7 @@
                     <Label
                         Grid.Row="2"
                         Grid.Column="0"
+                        Margin="20,0,0,0"
                         HorizontalOptions="Start"
                         Style="{StaticResource SubTitleLabelStyle}"
                         Text="{Binding [CommonAgeTitle]}" />

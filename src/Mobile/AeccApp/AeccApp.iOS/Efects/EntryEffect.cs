@@ -14,7 +14,8 @@ namespace PrismForms.iOS.Effects
     {
         protected override void OnAttached()
         {
-            var entry = (UITextField)Control;
+          
+            var entry = (UITextView)Control;
             entry.InputAccessoryView = BuildDismiss();
         }
 
