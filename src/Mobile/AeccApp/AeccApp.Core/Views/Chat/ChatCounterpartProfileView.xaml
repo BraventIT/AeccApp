@@ -19,7 +19,7 @@
                     BackgroundColor="LightGray"
                     HeightRequest="200"
                     HorizontalOptions="FillAndExpand"
-                    SourcePlatform="round_no_profile_image_v2"
+                    SourcePlatform="no_profile_image_v2.png"
                     VerticalOptions="Start"
                     WidthRequest="50" />
 

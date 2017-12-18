@@ -181,8 +181,10 @@
             Grid.Row="1"
             Grid.Column="1"
             Margin="0,0,10,0"
+            HeightRequest="30"
             SourcePlatform="send_icon"
-            VerticalOptions="Center">
+            VerticalOptions="Center"
+            WidthRequest="30">
             <ctrl:CustomImage.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
             </ctrl:CustomImage.GestureRecognizers>

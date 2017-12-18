@@ -96,7 +96,11 @@
                         HorizontalOptions="End"
                         VerticalOptions="Center">
                         <Button BackgroundColor="White" Style="{StaticResource BigCircularButtonStyle}" />
-                        <ctrl:CustomImage SourcePlatform="round_no_profile_image_v2" WidthRequest="16" />
+                        <ctrl:CustomImage
+                            Margin="7"
+                            HeightRequest="25"
+                            SourcePlatform="round_no_profile_image_v2"
+                            WidthRequest="15" />
 
                     </Grid>
 

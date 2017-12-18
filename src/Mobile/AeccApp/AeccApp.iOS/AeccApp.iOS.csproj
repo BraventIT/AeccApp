@@ -97,76 +97,43 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20@2x.png">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29@1x.png">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29@2x.png">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29@3x.png">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40@2x.png">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40@3x.png">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60@3x.png">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76@1x.png">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76@2x.png">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ItunesArtwork@2x.png">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Resources\Assets.xcassets\LaunchImages.launchimage\Contents.json">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\profile_generic.png" />
-    <BundleResource Include="Resources\profile_generic%402x.png" />
-    <BundleResource Include="Resources\profile_generic%403x.png" />
-    <BundleResource Include="Resources\slideout.png" />
-    <BundleResource Include="Resources\slideout%402x.png" />
-    <BundleResource Include="Resources\tab_about.png" />
-    <BundleResource Include="Resources\tab_about%402x.png" />
-    <BundleResource Include="Resources\tab_about%403x.png" />
-    <BundleResource Include="Resources\tab_feed.png" />
-    <BundleResource Include="Resources\tab_feed%402x.png" />
-    <BundleResource Include="Resources\tab_feed%403x.png" />
-    <BundleResource Include="Resources\xamarin_logo.png" />
-    <BundleResource Include="Resources\xamarin_logo%402x.png" />
-    <BundleResource Include="Resources\xamarin_logo%403x.png" />
-    <BundleResource Include="Resources\logo.png" />
-    <BundleResource Include="Resources\chat.png" />
-    <BundleResource Include="Resources\logout.png" />
-    <BundleResource Include="Resources\profile.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AeccApp.UWP\CustomRenderer\XLabs\ImageButtonRenderer.Shared.cs">
@@ -194,16 +161,10 @@
     <BundleResource Include="Resources\AppIcons\Contents.json" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AeccApp.Core\AeccApp.Core.csproj">
       <Project>{D0273099-9E5A-44E6-B696-C7E3D7ADA4AF}</Project>
       <Name>AeccApp.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bell%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac">
@@ -242,84 +203,6 @@
     <PackageReference Include="Xamarin.Forms.RangeSlider">
       <Version>0.7.14</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\chat_tab_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\exit_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\gender_female.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\gender_male.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\home_tab_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\profile_tab_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\rating_star.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\requests_tab_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\round_no_profile_image_v2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\round_plus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\send_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\right_arrow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\from_home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\from_hospital.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\thumb_up.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\location_pin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\search_mini_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\x_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\date_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\round_question_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\tick_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\time_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\right_arrow_big.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\round_new_here.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\profile_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\location_pin_hospital_map.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\AppIcons\Icon-App-20x20%401x.png" />
@@ -391,12 +274,6 @@
     <BundleResource Include="Resources\AppIcons\ItunesArtwork%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\round_plus_green_background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\mock_new_firma_convenio.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\AeccApp.Droid\Resources\drawable\logoHeader.png">
       <Link>Resources\logoHeader.png</Link>
     </BundleResource>
@@ -410,18 +287,6 @@
     <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_man.png">
       <Link>Resources\ico_man.png</Link>
     </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\PopUp_Ico_thumbsdown.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\PopUp_Ico_thumbsdown%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\PopUp_Ico_question.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\PopUp_Ico_question%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_clean_filter.png">
@@ -444,7 +309,231 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ico_sup_filter.png" />
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\chat_grey_icon.png">
+      <Link>Resources\chat_grey_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\CheckBoxOff.png">
+      <Link>Resources\CheckBoxOff.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\CheckBoxOn.png">
+      <Link>Resources\CheckBoxOn.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\bell.png">
+      <Link>Resources\bell.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\chat.png">
+      <Link>Resources\chat.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\date_icon.png">
+      <Link>Resources\date_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\exit_icon.png">
+      <Link>Resources\exit_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\from_home.png">
+      <Link>Resources\from_home.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\from_hospital.png">
+      <Link>Resources\from_hospital.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\gender_female.png">
+      <Link>Resources\gender_female.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\gender_male.png">
+      <Link>Resources\gender_male.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_first_request.png">
+      <Link>Resources\ico_first_request.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_hospital.png">
+      <Link>Resources\ico_hospital.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_house.png">
+      <Link>Resources\ico_house.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\ico_sup_filter.png">
+      <Link>Resources\ico_sup_filter.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\icon.png">
+      <Link>Resources\icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\list_icon.png">
+      <Link>Resources\list_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\logo.png">
+      <Link>Resources\logo.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\logout_icon.png">
+      <Link>Resources\logout_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\map_icon.png">
+      <Link>Resources\map_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\map_location_pin_green.png">
+      <Link>Resources\map_location_pin_green.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\no_profile_image_v2.png">
+      <Link>Resources\no_profile_image_v2.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\PopUp_Ico_chatrequest.png">
+      <Link>Resources\PopUp_Ico_chatrequest.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\PopUp_Ico_question.png">
+      <Link>Resources\PopUp_Ico_question.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\PopUp_Ico_thumbsdown.png">
+      <Link>Resources\PopUp_Ico_thumbsdown.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\profile.png">
+      <Link>Resources\profile.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\profile_icon.png">
+      <Link>Resources\profile_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\rating_star.png">
+      <Link>Resources\rating_star.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\request_grey_icon.png">
+      <Link>Resources\request_grey_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\right_arrow.png">
+      <Link>Resources\right_arrow.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\right_arrow_big.png">
+      <Link>Resources\right_arrow_big.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\round_no_profile_image_v2.png">
+      <Link>Resources\round_no_profile_image_v2.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\round_plus.png">
+      <Link>Resources\round_plus.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\round_plus_green_background.png">
+      <Link>Resources\round_plus_green_background.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\round_question_icon.png">
+      <Link>Resources\round_question_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\search_mini_icon.png">
+      <Link>Resources\search_mini_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\send_icon.png">
+      <Link>Resources\send_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\slideout.png">
+      <Link>Resources\slideout.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\thumb_up.png">
+      <Link>Resources\thumb_up.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\tick_icon.png">
+      <Link>Resources\tick_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\time_icon.png">
+      <Link>Resources\time_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\x_icon.png">
+      <Link>Resources\x_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\AeccApp.Droid\Resources\drawable\x_icon_grey.png">
+      <Link>Resources\x_icon_grey.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\chat_tab_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\home_tab_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\requests_tab_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\settings_gear.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
