@@ -172,16 +172,17 @@
 
                             <Grid
                                 HorizontalOptions="EndAndExpand"
-                                IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}"
+                                IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
                                 VerticalOptions="Center">
-                                <Button Command="{Binding NewChatCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
+                                <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
+                                    <Button Command="{Binding NewChatCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
 
-                                <ctrl:CustomImage
-                                    HeightRequest="50"
-                                    InputTransparent="True"
-                                    SourcePlatform="round_plus_green_background" />
+                                    <ctrl:CustomImage
+                                        HeightRequest="50"
+                                        InputTransparent="True"
+                                        SourcePlatform="round_plus_green_background" />
+                                </Grid>
                             </Grid>
-
                         </StackLayout>
 
                         <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
