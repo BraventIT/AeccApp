@@ -5,6 +5,7 @@ using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -62,9 +63,9 @@ namespace AeccApp.Core.ViewModels
             {
                 MessagingCenter.Send(new ToolbarMessage(false), string.Empty);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-              //TODO: Hacer algo
+                Debug.WriteLine(ex);
             }
             
         }

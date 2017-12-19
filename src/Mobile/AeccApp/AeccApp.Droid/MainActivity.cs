@@ -36,7 +36,7 @@ namespace AeccApp.Droid
                 var logo = FindViewById<ImageView>(Resource.Id.LogoImageLayout);
 
                 logo.Visibility = (m.ShowLogo) ?
-                    ViewStates.Visible : ViewStates.Invisible;
+                    ViewStates.Visible : ViewStates.Gone;
             });
         }
 
