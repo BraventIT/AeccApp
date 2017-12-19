@@ -160,9 +160,9 @@
                 <ctrl:CustomImage
                     HorizontalOptions="Center"
                     InputTransparent="True"
-                    SourcePlatform="ico_clean_filter"
+                    SourcePlatform="ico_clean_refresh"
                     VerticalOptions="Center"
-                    WidthRequest="16" />
+                    WidthRequest="44" />
 
             </Grid>
 

@@ -235,9 +235,6 @@
     <AndroidResource Include="Resources\drawable\PopUp_Ico_question.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ico_clean_filter.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\Ico_cruz.png" />
   </ItemGroup>
   <ItemGroup>

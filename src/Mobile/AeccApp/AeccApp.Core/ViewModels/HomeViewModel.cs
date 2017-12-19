@@ -54,7 +54,6 @@ namespace AeccApp.Core.ViewModels
             await ExecuteOperationQuietlyAsync(cancelToken => TryToUpdateNewsAsync(cancelToken));
         }
 
-
         public override void Deactivate()
         {
             MessagingCenter.Unsubscribe<ChatMessageReceivedMessage>(this, string.Empty);

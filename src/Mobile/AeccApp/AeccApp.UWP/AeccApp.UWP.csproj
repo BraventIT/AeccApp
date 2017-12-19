@@ -136,9 +136,6 @@
     <Content Include="..\AeccApp.Droid\Resources\drawable\icon.png">
       <Link>Assets\icon.png</Link>
     </Content>
-    <Content Include="..\AeccApp.Droid\Resources\drawable\ico_clean_filter.png">
-      <Link>Assets\ico_clean_filter.png</Link>
-    </Content>
     <Content Include="..\AeccApp.Droid\Resources\drawable\ico_clean_refresh.png">
       <Link>Assets\ico_clean_refresh.png</Link>
     </Content>
