@@ -279,6 +279,6 @@
         </StackLayout>
 
         <!--  INDICATOR  -->
-        <ctrl:CustomActivityIndicatorControl Grid.Row="1" />
+        <!--<ctrl:CustomActivityIndicatorControl Grid.Row="1" />-->
     </Grid>
 </v:BaseContentPage>
