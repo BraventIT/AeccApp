@@ -170,11 +170,11 @@
                                     Text="{Binding [HomeViewTalkToVolunteer]}" />
                             </StackLayout>
 
-                            <Grid IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}">
-                                <Grid
-                                    HorizontalOptions="EndAndExpand"
-                                    IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}"
-                                    VerticalOptions="Center">
+                            <Grid
+                                HorizontalOptions="EndAndExpand"
+                                IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
+                                VerticalOptions="Center">
+                                <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
                                     <Button Command="{Binding NewChatCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
 
                                     <ctrl:CustomImage
