@@ -10,6 +10,7 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
+    Title="{Binding [CommonFilters]}"
     vm:ViewModelLocator.AutoWireViewModel="True">
 
     <v:BaseContentPage.Resources>
