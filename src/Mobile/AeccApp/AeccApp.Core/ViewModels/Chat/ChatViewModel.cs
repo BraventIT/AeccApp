@@ -41,11 +41,12 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
             MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
 
-           
             ChatConnectingPopupVM.LeaseChatConversation += OnLeaseConversation;
             ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
             ChatService.MessagesReceived += OnMesagesReceived;
             ChatService.AggregationsReceived += OnAggregationsReceived;
+
+            _lastMessageTime = DateTime.MinValue;
 
             if (FirstChat)
             {

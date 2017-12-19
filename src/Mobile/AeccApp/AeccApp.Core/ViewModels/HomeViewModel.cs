@@ -58,8 +58,15 @@ namespace AeccApp.Core.ViewModels
         {
             MessagingCenter.Unsubscribe<ChatMessageReceivedMessage>(this, string.Empty);
             MessagingCenter.Unsubscribe<ChatStateMessage>(this, string.Empty);
-
-            MessagingCenter.Send(new ToolbarMessage(false), string.Empty);
+            try
+            {
+                MessagingCenter.Send(new ToolbarMessage(false), string.Empty);
+            }
+            catch (Exception)
+            {
+              //TODO: Hacer algo
+            }
+            
         }
         #endregion
 
