@@ -18,8 +18,8 @@ namespace AeccApp.Core.Models
         public bool WillBeSaved { get; set; }
         public string PlaceId { get; set; }
         public int HospitalID { get; set; }
-        private string _displayRoom;
 
+        private string _displayRoom;
         public string DisplayRoom
         {
             get

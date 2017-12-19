@@ -24,8 +24,8 @@ namespace AeccApp.Core.ViewModels
             return ExecuteOperationAsync(async () =>
             {
                 var homeAddresses = await HomeAddressesDataService.GetListAsync();
-                HomeAddressesList.SyncExact(homeAddresses);
-                HomeAddressesIsEmpty = !homeAddresses.Any();
+                HomeAddressesList.SyncExact(homeAddresses.Where(x=> !x.IsHospitalAddress).ToList());
+                HomeAddressesIsEmpty = !HomeAddressesList.Any();
             });
         }
         #endregion

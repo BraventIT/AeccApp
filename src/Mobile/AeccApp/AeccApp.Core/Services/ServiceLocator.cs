@@ -26,7 +26,6 @@ namespace AeccApp.Core.Services
 
             IocContainer.RegisterAsSingleton<IHospitalRequestDataService, HospitalRequestDataService>();
             IocContainer.RegisterAsSingleton<IHomeRequestsDataService, HomeRequestsDataService>();
-            IocContainer.RegisterAsSingleton<IAddressesDataService, AddressesDataService>();
    
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();

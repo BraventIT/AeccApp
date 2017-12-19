@@ -42,5 +42,11 @@ namespace AeccApp.iOS.Services
         {
             return Path.Combine(DocumentsPath, fileName);
         }
+
+        public Task DeleteFileAsync(string filename)
+        {
+            File.Delete(CreatePathToFile(filename));
+            return Task.CompletedTask;
+        }
     }
 }

@@ -39,7 +39,6 @@ namespace AeccApp.Core
 
         #endregion
 
-
         public static string AuthAccessToken
         {
 			get
@@ -120,6 +119,15 @@ namespace AeccApp.Core
             {
                 AppSettings.AddOrUpdateValue(LastNewsCheckedKey, value);
             }
+        }
+
+        public static void Reset()
+        {
+            AppSettings.Remove(AccessTokenKey);
+            AppSettings.Remove(TermsAndConditionsAcceptKey);
+            AppSettings.Remove(FirstChatKey);
+            AppSettings.Remove(HomeHeaderBannerAcceptClosedKey);
+            AppSettings.Remove(FirstRequestLandingPageSeenKey);
         }
     }
 }

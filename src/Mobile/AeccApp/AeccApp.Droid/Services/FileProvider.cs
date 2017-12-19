@@ -10,6 +10,12 @@ namespace AeccApp.Droid.Services
 {
     public class FileProvider : IFileProvider
     {
+        public Task DeleteFileAsync(string filename)
+        {
+            File.Delete(CreatePathToFile(filename));
+            return Task.CompletedTask;
+        }
+
         public bool FileExists(string filename)
         {
             return File.Exists(CreatePathToFile(filename));

@@ -27,5 +27,11 @@ namespace AeccApp.Core.Services
             _data[key] = value;
             Save(_data);
         }
+
+        public override Task ResetAsync()
+        {
+            _data = null;
+            return base.ResetAsync();
+        }
     }
 }

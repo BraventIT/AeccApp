@@ -11,5 +11,7 @@ namespace AeccApp.Core.Services
         Task<List<RequestModel>> GetListAsync();
 
         Task InsertOrUpdateAsync(RequestModel address);
+
+        Task ResetAsync();
     }
 }

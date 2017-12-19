@@ -12,6 +12,12 @@ namespace AeccApp.Core.ViewModels
     public class SettingsDashboardViewModel : ViewModelBase
     {
         private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
+        private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
+        private IHomeRequestsDataService HomeRequestsDataService { get; } = ServiceLocator.HomeRequestsDataService;
+        private IHospitalRequestDataService HospitalRequestDataService { get; } = ServiceLocator.HospitalRequestDataService;
+        private IMapPositionsDataService MapPositionsDataService { get; } = ServiceLocator.MapPositionsDataService;
+
+
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
 
         #region Ctor and initialize
@@ -122,7 +128,15 @@ namespace AeccApp.Core.ViewModels
         {
             await NavigationService.HidePopupAsync();
             IdentityService.LogOff();
+
+            Settings.Reset();
+            await HomeAddressesDataService.ResetAsync();
+            await HomeRequestsDataService.ResetAsync();
+            await HospitalRequestDataService.ResetAsync();
+            await MapPositionsDataService.ResetAsync();
+
             await ChatService.LogOffAsync();
+
             await NavigationService.NavigateToAsync<LoginViewModel>();
             await NavigationService.RemoveBackStackAsync();
         }

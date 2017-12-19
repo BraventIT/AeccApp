@@ -12,6 +12,12 @@ namespace AeccApp.UWP.Services
     {
         private StorageFolder RootFolder { get; } = ApplicationData.Current.LocalFolder;
 
+        public async Task DeleteFileAsync(string filename)
+        {
+            var file = await RootFolder.GetFileAsync(filename);
+            await file.DeleteAsync();
+        }
+
         public bool FileExists(string filename)
         {
             try
@@ -37,7 +43,5 @@ namespace AeccApp.UWP.Services
             StorageFile sampleFile = await RootFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(sampleFile, text);
         }
-
-       
     }
 }

@@ -12,5 +12,7 @@ namespace AeccApp.Core.Services
         Task<List<NewsModel>> GetListAsync();
 
         Task InsertOrUpdateAsync(NewsModel newData);
+
+        Task ResetAsync();
     }
 }

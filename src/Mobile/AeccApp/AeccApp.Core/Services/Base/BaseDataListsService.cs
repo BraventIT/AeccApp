@@ -70,5 +70,11 @@ namespace AeccApp.Core.Services
             if (requiredSave)
                 Save(dataList);
         }
+
+        public override Task ResetAsync()
+        {
+            _data = null;
+            return base.ResetAsync();
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace AeccApp.Core.Services
         Task SaveTextAsync(string filename, string text);
         Task<string> LoadTextAsync(string filename);
         bool FileExists(string filename);
+        Task DeleteFileAsync(string filename);
     }
 }

@@ -77,28 +77,6 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Commands
-
-        private Command logOffCommand;
-        public ICommand LogOffCommand
-        {
-            get
-            {
-                return logOffCommand ??
-                    (logOffCommand = new Command(OnLogOffAsync));
-            }
-
-        }
-        /// <summary>
-        /// Logout
-        /// </summary>
-        /// <param name="obj"></param>
-        private async void OnLogOffAsync(object obj)
-        {
-            IdentityService.LogOff();
-            await NavigationService.NavigateToAsync<LoginViewModel>();
-            await NavigationService.RemoveBackStackAsync();
-        }
-
         private Command openNotificationsCommand;
         public ICommand OpenNotificationsCommand
         {
