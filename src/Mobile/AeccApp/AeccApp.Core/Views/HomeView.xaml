@@ -34,6 +34,7 @@
             <StackLayout>
                 <!--  Info call banner  -->
                 <Grid
+                    BackgroundColor="{StaticResource LightGrey}"
                     ColumnSpacing="0"
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand"
@@ -59,7 +60,9 @@
                             Margin="0"
                             BackgroundColor="{StaticResource LightGrey}"
                             BorderRadius="0"
-                            Command="{Binding HeaderInfoBannerClose}" />
+                            Command="{Binding HeaderInfoBannerClose}"
+                            Style="{StaticResource ClosePopupButtonStyle}"
+                            VerticalOptions="FillAndExpand" />
 
                         <ctrl:CustomImage
                             Margin="0,0,10,0"
@@ -111,37 +114,65 @@
                     <!--#endregion-->
 
                     <!--#region Request state panel-->
-                    <StackLayout
-                        Margin="15,20"
-                        Padding="20"
-                        BackgroundColor="{StaticResource WhiteColor}"
-                        IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
-                        Orientation="Horizontal">
-                        <ctrl:CustomImage
-                            Margin="0,0,12,0"
-                            HeightRequest="35"
-                            SourcePlatform="request_grey_icon"
-                            WidthRequest="28" />
-                        <StackLayout Margin="0" Padding="0">
-                            <Label
-                                Margin="0"
-                                HorizontalOptions="Start"
-                                Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
-                                Text="{Binding [HomeViewRequests]}" />
-                            <Label Style="{StaticResource LightGreyLabelStyle}" Text="{Binding [HomeViewAllRequests]}">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding OpenAllRequestsCommand}" />
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </StackLayout>
-
-                        <Grid HorizontalOptions="EndAndExpand" VerticalOptions="Center">
-                            <Button Command="{Binding NewRequestCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
-
+                    <StackLayout>
+                        <Grid
+                            Margin="15,20"
+                            Padding="20"
+                            BackgroundColor="{StaticResource WhiteColor}"
+                            IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
                             <ctrl:CustomImage
-                                HeightRequest="50"
-                                InputTransparent="True"
-                                SourcePlatform="round_plus_green_background" />
+                                Grid.Column="0"
+                                Margin="0,0,12,0"
+                                HeightRequest="35"
+                                SourcePlatform="request_grey_icon"
+                                WidthRequest="28" />
+                            <StackLayout
+                                Grid.Column="1"
+                                Margin="0"
+                                Padding="0">
+                                <Label
+                                    Margin="0"
+                                    HorizontalOptions="Start"
+                                    Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                                    Text="{Binding [HomeViewRequests]}" />
+                                <Grid Margin="0" Padding="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button
+                                        Margin="0"
+                                        BackgroundColor="White"
+                                        BorderRadius="0"
+                                        Command="{Binding OpenAllRequestsCommand}" />
+                                    <Label
+                                        InputTransparent="True"
+                                        Style="{StaticResource LightGreyLabelStyle}"
+                                        Text="{Binding [HomeViewAllRequests]}"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center" />
+                                </Grid>
+
+                            </StackLayout>
+
+                            <Grid
+                                Grid.Column="2"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center">
+                                <Button Command="{Binding NewRequestCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
+
+                                <ctrl:CustomImage
+                                    HeightRequest="50"
+                                    InputTransparent="True"
+                                    SourcePlatform="round_plus_green_background" />
+                            </Grid>
                         </Grid>
                     </StackLayout>
                     <!--#endregion-->
@@ -255,15 +286,24 @@
                             HorizontalOptions="Start"
                             Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
                             Text="{Binding [HomeViewLastNews]}" />
-                        <Label
-                            HorizontalOptions="Start"
-                            Style="{StaticResource LightGreyLabelStyle}"
-                            Text="{Binding [HomeViewAllNews]}">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding OpenAllNewsCommand}" />
-                            </Label.GestureRecognizers>
-                        </Label>
-
+                        <Grid>
+                            <Grid Margin="0" Padding="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    Margin="0"
+                                    BackgroundColor="{StaticResource LightSilver}"
+                                    BorderRadius="0"
+                                    Command="{Binding OpenAllNewsCommand}" />
+                                <Label
+                                    Margin="0"
+                                    HorizontalOptions="Start"
+                                    InputTransparent="True"
+                                    Style="{StaticResource LightGreyLabelStyle}"
+                                    Text="{Binding [HomeViewAllNews]}" />
+                            </Grid>
+                        </Grid>
                         <flv:FlowListView
                             x:Name="NewsFlowListView"
                             Grid.Row="2"

@@ -23,19 +23,24 @@
                 VerticalOptions="Center">
 
                 <StackLayout>
-                    <ctrl:CustomImage
+                    <Grid
                         Grid.Column="0"
                         Margin="10"
-                        HeightRequest="30"
                         HorizontalOptions="End"
-                        SourcePlatform="x_icon"
-                        VerticalOptions="Center"
-                        WidthRequest="30">
-                        <ctrl:CustomImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
-                        </ctrl:CustomImage.GestureRecognizers>
+                        VerticalOptions="Center">
+                        <Button
+                            Margin="0"
+                            BackgroundColor="White"
+                            BorderRadius="0"
+                            Command="{Binding HeaderInfoBannerClose}"
+                            Style="{StaticResource ClosePopupButtonStyle}"
+                            VerticalOptions="FillAndExpand" />
+                        <ctrl:CustomImage
+                            HeightRequest="30"
+                            SourcePlatform="x_icon"
+                            WidthRequest="30" />
+                    </Grid>
 
-                    </ctrl:CustomImage>
 
                     <ctrl:CustomImage
                         Grid.Column="0"

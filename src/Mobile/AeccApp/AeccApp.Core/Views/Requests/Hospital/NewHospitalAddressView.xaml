@@ -222,12 +222,22 @@
                                 Margin="0"
                                 Padding="10"
                                 BackgroundColor="Transparent"
+                                HasShadow="False"
                                 HorizontalOptions="Center"
                                 IsVisible="{Binding IsSearchIconVisible}">
-                                <ctrl:CustomImage SourcePlatform="x_icon" VerticalOptions="Center" />
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding ResetAddressFinderCommand}" />
-                                </Frame.GestureRecognizers>
+                                <Grid>
+                                    <Button
+                                        Margin="0"
+                                        BackgroundColor="White"
+                                        BorderRadius="0"
+                                        Command="{Binding ResetAddressFinderCommand}"
+                                        HeightRequest="12" />
+                                    <ctrl:CustomImage
+                                        InputTransparent="True"
+                                        SourcePlatform="x_icon"
+                                        VerticalOptions="Center" />
+
+                                </Grid>
                             </Frame>
 
                         </Grid>

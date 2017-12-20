@@ -124,41 +124,47 @@
                             HorizontalTextAlignment="Center"
                             IsVisible="{Binding ProvinceHasNotRequestAvailable}"
                             Text="{Binding [HomeRequestChooseTypeNoRequestsInProvince]}" />
+
                         <Grid>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding RequestTalkToAeccCommand}" />
-                            </Grid.GestureRecognizers>
+                            <Button
+                                Margin="0"
+                                BackgroundColor="{StaticResource AlmostWhiteColor}"
+                                BorderRadius="0"
+                                Command="{Binding RequestTalkToAeccCommand}" />
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                            <Grid InputTransparent="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label
-                                Grid.Column="0"
-                                Margin="30,26,0,26"
-                                FontAttributes="Bold"
-                                FontSize="{StaticResource MediumSize}"
-                                Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
-                                TextColor="{StaticResource GreyTextDark}" />
-                            <ctrl:CustomImage
-                                Grid.Column="1"
-                                Margin="0,26,20,26"
-                                HeightRequest="17"
-                                HorizontalOptions="End"
-                                SourcePlatform="right_arrow"
-                                VerticalOptions="Center"
-                                WidthRequest="9" />
-                            <BoxView
-                                Grid.Row="1"
-                                Grid.ColumnSpan="2"
-                                HeightRequest="1"
-                                Color="LightGray" />
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    Margin="30,26,0,26"
+                                    FontAttributes="Bold"
+                                    FontSize="{StaticResource MediumSize}"
+                                    Text="{Binding [NewHomeRequestChoseTypeTalkToAnAECCProfesional]}"
+                                    TextColor="{StaticResource GreyTextDark}" />
+                                <ctrl:CustomImage
+                                    Grid.Column="1"
+                                    Margin="0,26,20,26"
+                                    HeightRequest="17"
+                                    HorizontalOptions="End"
+                                    SourcePlatform="right_arrow"
+                                    VerticalOptions="Center"
+                                    WidthRequest="9" />
+                                <BoxView
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="2"
+                                    HeightRequest="1"
+                                    Color="LightGray" />
+                            </Grid>
                         </Grid>
+
                     </StackLayout>
                 </ListView.Footer>
 

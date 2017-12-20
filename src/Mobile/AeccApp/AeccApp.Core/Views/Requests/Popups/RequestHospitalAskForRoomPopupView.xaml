@@ -13,18 +13,17 @@
     <Frame Style="{StaticResource PopupFrameStyle}">
 
         <StackLayout>
-            <ctrl:CustomImage
-                Margin="25"
-                HeightRequest="12"
-                HorizontalOptions="Start"
-                SourcePlatform="x_icon"
-                VerticalOptions="Center"
-                WidthRequest="12">
-                <ctrl:CustomImage.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
-                </ctrl:CustomImage.GestureRecognizers>
-
-            </ctrl:CustomImage>
+            <Grid>
+                <Button Command="{Binding ClosePopupCommand}" Style="{StaticResource ClosePopupButtonStyle}" />
+                <ctrl:CustomImage
+                    Margin="25"
+                    HeightRequest="12"
+                    HorizontalOptions="Start"
+                    InputTransparent="True"
+                    SourcePlatform="x_icon"
+                    VerticalOptions="Center"
+                    WidthRequest="12" />
+            </Grid>
 
             <ctrl:CustomImage
                 HeightRequest="55"

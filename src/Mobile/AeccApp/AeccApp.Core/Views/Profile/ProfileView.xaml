@@ -27,20 +27,28 @@
                 <Label
                     HorizontalOptions="Center"
                     Style="{StaticResource DarkGreyBigTitleLabelStyle}"
-                    Text="{Binding Name}" />
+                    Text="{Binding Name}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
                 <Label
                     HorizontalOptions="Center"
                     Style="{StaticResource NormalLabelStyle}"
                     Text="{Binding Description}" />
-                <Label
-                    HorizontalOptions="Center"
-                    Style="{StaticResource NormalLabelStyle}"
-                    Text="{Binding [CommonEdit]}"
-                    TextColor="LightGreen">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding EditProfileCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
+                <Grid>
+                    <Button
+                        Margin="0"
+                        BackgroundColor="{StaticResource AlmostWhiteColor}"
+                        BorderRadius="0"
+                        Command="{Binding EditProfileCommand}" />
+                    <Label
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="Center"
+                        InputTransparent="True"
+                        Style="{StaticResource NormalLabelStyle}"
+                        Text="{Binding [CommonEdit]}"
+                        TextColor="LightGreen" />
+
+                </Grid>
                 <BoxView
                     Margin="1,0,1,0"
                     HeightRequest="1"
