@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#if WEB
+using System.ComponentModel.DataAnnotations;
+#endif
 
 namespace Aecc.Models
 {
