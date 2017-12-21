@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 
 namespace AeccApi.WebAdmin.Controllers
 {
+#if !DEBUG
     [Authorize]
+#endif
     public class CoordinatorsController : Controller
     {
         private readonly AeccContext _context;

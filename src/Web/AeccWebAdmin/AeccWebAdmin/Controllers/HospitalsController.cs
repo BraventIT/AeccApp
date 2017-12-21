@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace AeccApi.WebAdmin.Controllers
 {
+#if !DEBUG
     [Authorize]
+#endif
     public class HospitalsController : Controller
     {
         private readonly AeccContext _context;
