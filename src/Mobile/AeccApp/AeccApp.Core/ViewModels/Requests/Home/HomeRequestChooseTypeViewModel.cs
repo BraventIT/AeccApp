@@ -1,10 +1,12 @@
 ﻿using Aecc.Models;
+using AeccApp.Core.Extensions;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -16,6 +18,7 @@ namespace AeccApp.Core.ViewModels
         private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
         private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
         private IHomeRequestService HomeRequestService { get; } = ServiceLocator.HomeRequestService;
+        private IHomeRequestsTypesDataService HomeRequestsTypesDataService { get; } = ServiceLocator.HomeRequestsTypesDataService;
 
         #region Properties
 
@@ -79,15 +82,27 @@ namespace AeccApp.Core.ViewModels
                     MyAddress = await GoogleMapsService.FillPlaceDetailAsync(MyAddress, cancelToken);
                 }
 
+                await ExecuteOperationAsync(FillTypesAsync);
                 ProvinceCoordinators = await HomeRequestService.GetCoordinatorsAsync(MyAddress.Province, cancelToken);
                 if (ProvinceCoordinators != null && ProvinceCoordinators.Any())
                 {
-                    RequestTypes = await HomeRequestService.GetRequestTypesAsync(cancelToken);
+                    if (!RequestTypes.Any())
+                    {
+                        RequestTypes = await HomeRequestService.GetRequestTypesAsync(cancelToken);
+                        foreach (var item in RequestTypes)
+                        {
+                            await HomeRequestsTypesDataService.InsertOrUpdateAsync(item);
+                        }
+                    }
+
+                    await ExecuteOperationQuietlyAsync(cancTok => TryToUpdateTypesAsync(cancTok));
                 }
                 else
                 {
                     ProvinceHasNotRequestAvailable = true;
                 }
+
+
                 if (MyAddress.WillBeSaved)
                 {
                     MyAddress.WillBeSaved = false;
@@ -138,5 +153,45 @@ namespace AeccApp.Core.ViewModels
         }
 
         #endregion
+
+
+        #region Methods
+        private async Task FillTypesAsync(CancellationToken cancelToken)
+        {
+            var types = (await HomeRequestsTypesDataService.GetListAsync()).ToList();
+            ObservableCollection<RequestType> typesList = new ObservableCollection<RequestType>();
+
+            if (types.Any())
+            {
+                typesList.SyncExact(types);
+                RequestTypes = typesList;
+
+            }
+        }
+
+        private async Task TryToUpdateTypesAsync(CancellationToken cancelToken)
+        {
+            // var today = DateTime.Today.ToUniversalTime();
+            // if (Settings.LastNewsChecked != today)
+            // {
+            var types = await HomeRequestsTypesDataService.GetListAsync();
+
+            foreach (var typesData in types)
+            {
+                if (!RequestTypes.Contains(typesData))
+                {
+                    await HomeRequestsTypesDataService.InsertOrUpdateAsync(typesData);
+                }
+
+            }
+            ObservableCollection<RequestType> typesList = new ObservableCollection<RequestType>();
+            typesList.SyncExact(types);
+            RequestTypes = typesList;
+            //  Settings.LastNewsChecked = today;
+            // }
+        }
+
+        #endregion
+
     }
 }

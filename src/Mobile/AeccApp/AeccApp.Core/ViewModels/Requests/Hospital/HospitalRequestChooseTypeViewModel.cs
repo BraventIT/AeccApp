@@ -1,4 +1,5 @@
 ﻿using Aecc.Models;
+using AeccApp.Core.Extensions;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -17,6 +19,8 @@ namespace AeccApp.Core.ViewModels
         private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
         private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
         private IHospitalRequestService HospitalRequestService { get; } = ServiceLocator.HospitalRequestService;
+        private IHospitalRequestsTypesDataService HospitalRequestsTypesDataService { get; } = ServiceLocator.HospitalRequestsTypesDataService;
+
 
         public HospitalRequestChooseTypeViewModel()
         {
@@ -39,12 +43,25 @@ namespace AeccApp.Core.ViewModels
 
         public override Task ActivateAsync()
         {
+
             return ExecuteOperationAsync(async cancelToken =>
             {
+                await ExecuteOperationAsync(FillTypesAsync);
+
                 ProvinceHospitals = await HospitalRequestService.GetHospitalsAsync(HospitalAddress.Province, cancelToken);
                 if (ProvinceHospitals != null && ProvinceHospitals.Any())
                 {
-                    RequestTypes = await HospitalRequestService.GetRequestTypesAsync(cancelToken);
+                    if (!RequestTypes.Any())
+                    {
+                        RequestTypes = await HospitalRequestService.GetRequestTypesAsync(cancelToken);
+                        foreach (var item in RequestTypes)
+                        {
+                            await HospitalRequestsTypesDataService.InsertOrUpdateAsync(item);
+                        }
+                    }
+                   
+                        await ExecuteOperationQuietlyAsync(cancTok => TryToUpdateTypesAsync(cancTok));
+                    
                 }
                 else
                 {
@@ -151,6 +168,41 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
 
+        #region Private Methods
+        private async Task FillTypesAsync(CancellationToken cancelToken)
+        {
+            var types = (await HospitalRequestsTypesDataService.GetListAsync()).ToList();
+            ObservableCollection<RequestType> typesList = new ObservableCollection<RequestType>();
 
+            if (types.Any())
+            {
+                typesList.SyncExact(types);
+                RequestTypes = typesList;
+
+            }
+        }
+
+        private async Task TryToUpdateTypesAsync(CancellationToken cancelToken)
+        {
+            // var today = DateTime.Today.ToUniversalTime();
+            // if (Settings.LastNewsChecked != today)
+            // {
+            var types = await HospitalRequestsTypesDataService.GetListAsync();
+
+            foreach (var typesData in types)
+            {
+                if (!RequestTypes.Contains(typesData))
+                {
+                await HospitalRequestsTypesDataService.InsertOrUpdateAsync(typesData);
+                }
+
+            }
+            ObservableCollection<RequestType> typesList = new ObservableCollection<RequestType>();
+            typesList.SyncExact(types);
+            RequestTypes = typesList;
+            //  Settings.LastNewsChecked = today;
+            // }
+        }
+        #endregion
     }
 }

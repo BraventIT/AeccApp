@@ -26,7 +26,11 @@ namespace AeccApp.Core.Services
 
             IocContainer.RegisterAsSingleton<IHospitalRequestDataService, HospitalRequestDataService>();
             IocContainer.RegisterAsSingleton<IHomeRequestsDataService, HomeRequestsDataService>();
-   
+            IocContainer.RegisterAsSingleton<IHospitalRequestsTypesDataService, HospitalRequestsTypesDataService>();
+            IocContainer.RegisterAsSingleton<IHomeRequestsTypesDataService, HomeRequestsTypesDataService>();
+            
+
+
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.RegisterAsSingleton<IGoogleMapsService, GoogleMapsService>();
             IocContainer.Register<IHttpRequestProvider, HttpRequestProvider>();
@@ -81,6 +85,15 @@ namespace AeccApp.Core.Services
         public static IMapPositionsDataService MapPositionsDataService
         {
             get { return Resolve<IMapPositionsDataService>(); }
+        }
+
+        public static IHospitalRequestsTypesDataService HospitalRequestsTypesDataService
+        {
+            get { return Resolve<IHospitalRequestsTypesDataService>(); }
+        }
+        public static IHomeRequestsTypesDataService HomeRequestsTypesDataService
+        {
+            get { return Resolve<IHomeRequestsTypesDataService>(); }
         }
 
         static IHomeRequestService _homeRequestService;

@@ -63,6 +63,7 @@ namespace AeccApp.Core.ViewModels
             var news = (await NewsDataService.GetListAsync()).ToList();
             if (news.Any())
             {
+                
                 NewsList.SyncExact(news);
             }
         }
