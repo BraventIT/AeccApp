@@ -45,7 +45,7 @@ namespace AeccApi.WebAdmin
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromHours(1);
-                options.CookieHttpOnly = true;
+                options.Cookie.HttpOnly = true;
             });
         }
 

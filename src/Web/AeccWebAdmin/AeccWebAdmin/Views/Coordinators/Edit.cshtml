@@ -34,6 +34,12 @@
                 <span asp-validation-for="Province" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="RequestSource" class="control-label"></label>
+                <select asp-for="RequestSource" asp-items="Html.GetEnumSelectList<Aecc.Models.RequestSourceEnum>()" class="form-control"></select>
+                <span asp-validation-for="RequestSource" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="HospitalAssignments" class="control-label"></label>
               
                     <table>

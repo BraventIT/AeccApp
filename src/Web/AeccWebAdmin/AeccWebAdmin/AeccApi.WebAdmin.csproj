@@ -7,13 +7,22 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0;WEB;</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WEB</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;WEB</DefineConstants>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Data\DbInitializer.cs" />
     <Compile Remove="Models\AeccContext.cs" />
     <Compile Remove="Models\Identity\AzureAdB2COptions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\Alfraso-AeccApiWebAdmin - Web Deploy.pubxml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +52,7 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>

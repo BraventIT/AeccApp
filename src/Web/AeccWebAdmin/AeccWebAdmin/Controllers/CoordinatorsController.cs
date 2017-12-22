@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 
 namespace AeccApi.WebAdmin.Controllers
 {
+#if !DEBUG
     [Authorize]
+#endif
     public class CoordinatorsController : Controller
     {
         private readonly AeccContext _context;
@@ -101,7 +103,7 @@ namespace AeccApi.WebAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Email,Telephone,Province")] Coordinator coordinator)
+        public async Task<IActionResult> Create([Bind("Name,Email,Telephone,Province,RequestSource")] Coordinator coordinator)
         {
             try
             {
