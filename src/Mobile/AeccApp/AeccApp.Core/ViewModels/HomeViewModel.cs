@@ -3,6 +3,7 @@ using AeccApp.Core.Extensions;
 using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
+using AeccApp.Core.Services.Notification;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -66,7 +67,7 @@ namespace AeccApp.Core.ViewModels
             {
                 Debug.WriteLine(ex);
             }
-            
+
         }
         #endregion
 
@@ -195,6 +196,7 @@ namespace AeccApp.Core.ViewModels
 
         void OnOpenAllRequest()
         {
+
             MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Requests), string.Empty);
         }
 
@@ -214,11 +216,11 @@ namespace AeccApp.Core.ViewModels
         {
             if (Settings.FirstRequestLandingPageSeen)
             {
-            MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Requests), string.Empty);
+                MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Requests), string.Empty);
             }
             else
             {
-            NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
+                NavigationService.NavigateToAsync<NewRequestSelectAddressViewModel>();
             }
 
 
@@ -247,13 +249,13 @@ namespace AeccApp.Core.ViewModels
                     (_newChatCommand = new Command(OnNewChat));
             }
         }
-     
+
 
         async void OnNewChat()
         {
-          
-                MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Chat), string.Empty);
-            
+
+            MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Chat), string.Empty);
+
         }
 
 
@@ -263,7 +265,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return openAllNewsCommand ??
-                    (openAllNewsCommand = new Command(o=> OnOpenAllNewsViewAsync()));
+                    (openAllNewsCommand = new Command(o => OnOpenAllNewsViewAsync()));
             }
         }
         /// <summary>
@@ -331,7 +333,7 @@ namespace AeccApp.Core.ViewModels
                 EventPopupVisible = false;
                 returnValue = true;
             }
-         
+
             return returnValue;
         }
 

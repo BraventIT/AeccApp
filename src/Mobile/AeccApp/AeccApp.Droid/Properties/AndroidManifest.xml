@@ -6,7 +6,7 @@
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<application android:label="AECC">
+	<application android:label="AECC" android:icon="@drawable/icon">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBrlsD3dhg3Bo6oaAugOCexgVoNcQDaQgQ" />
 		<activity android:name="microsoft.identity.client.BrowserTabActivity">
 			<intent-filter>

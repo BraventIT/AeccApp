@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using AeccApp.Core.Services.Notification;
 
 /// <summary>
 /// TERMINOLOGY
@@ -369,8 +370,13 @@ namespace AeccApp.Core.Services
                             _conversationMessages.Insert(0, message);
                         }
 
+                        
                         MessagesReceived?.Invoke(this, newMessages);
                         MessagesWitoutReading = MessagesReceived == null;
+                        if (MessagesWitoutReading)
+                        {
+                        DependencyService.Get<INotification>().CreateNotification("Nuevo mensaje:", newMessages[newMessages.Count-1].Activity.Text);
+                        }
                     }
                 }
                 catch (Exception ex)
