@@ -37,6 +37,7 @@ namespace AeccApp.Core.Services
             }
             Save(dataList);
         }
+
         protected async Task InsertDataAsync( T data)
         {
             List<T> dataList = await GetListAsync();

@@ -16,7 +16,7 @@ namespace AeccApp.Core.Services
             _requestProvider = requestProvider;
         }
 
-        public async Task<IEnumerable<RequestType>> GetRequestTypesAsync(CancellationToken cancelToken)
+        public async Task<IList<RequestType>> GetRequestTypesAsync(CancellationToken cancelToken)
         {
             UriBuilder uribuilder = new UriBuilder(GlobalSetting.Instance.ApiEndpoint)
             {
@@ -24,10 +24,10 @@ namespace AeccApp.Core.Services
                 Query = $"requestSource={RequestSourceEnum.Domicilio.ToString()}"
             };
             var identityToken = await IdentityService.GetTokenAsync();
-            return await _requestProvider.GetAsync<IEnumerable<RequestType>>(uribuilder.ToString(), cancelToken, identityToken);
+            return await _requestProvider.GetAsync<IList<RequestType>>(uribuilder.ToString(), cancelToken, identityToken);
         }
 
-        public async Task<IEnumerable<Coordinator>> GetCoordinatorsAsync(string province, CancellationToken cancelToken)
+        public async Task<IList<Coordinator>> GetCoordinatorsAsync(string province, CancellationToken cancelToken)
         {
             UriBuilder uribuilder = new UriBuilder(GlobalSetting.Instance.ApiEndpoint)
             {
@@ -35,7 +35,7 @@ namespace AeccApp.Core.Services
                 Query = $"requestSource={RequestSourceEnum.Hospital.ToString()}&province={province}"
             };
             var identityToken = await IdentityService.GetTokenAsync();
-            return await _requestProvider.GetAsync<IEnumerable<Coordinator>>(uribuilder.ToString(), cancelToken, identityToken);
+            return await _requestProvider.GetAsync<IList<Coordinator>>(uribuilder.ToString(), cancelToken, identityToken);
         }
     }
 }
