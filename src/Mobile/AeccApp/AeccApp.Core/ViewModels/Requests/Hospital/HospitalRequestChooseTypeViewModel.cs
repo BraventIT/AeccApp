@@ -175,7 +175,6 @@ namespace AeccApp.Core.ViewModels
             foreach (var typesData in types)
             {
                 await HospitalRequestsTypesDataService.InsertOrUpdateAsync(typesData);
-
             }
             RequestTypes.SyncExact(types);
         }

@@ -93,20 +93,19 @@ namespace AeccApp.Core.ViewModels
                 {
                     ProvinceHasNotRequestAvailable = true;
                 }
-            });
 
-            await ExecuteOperationQuietlyAsync(async cancTok =>
-            {
-                if (MyAddress.WillBeSaved)
+                await ExecuteOperationQuietlyAsync(async cancTok =>
                 {
-                    MyAddress.WillBeSaved = false;
-                    await HomeAddressesDataService.InsertOrUpdateAsync(MyAddress);
-                }
-
-                if (!ProvinceHasNotRequestAvailable)
-                {
-                    await TryToUpdateTypesAsync(cancTok);
-                }
+                    if (MyAddress.WillBeSaved)
+                    {
+                        MyAddress.WillBeSaved = false;
+                        await HomeAddressesDataService.InsertOrUpdateAsync(MyAddress);
+                    }
+                    if (!ProvinceHasNotRequestAvailable)
+                    {
+                        await TryToUpdateTypesAsync(cancTok);
+                    }
+                });
             });
         }
 
@@ -131,9 +130,6 @@ namespace AeccApp.Core.ViewModels
 
         }
 
-        
-
-
         private Command _requestTalkToAeccCommand;
         public ICommand RequestTalkToAeccCommand
         {
@@ -155,7 +151,7 @@ namespace AeccApp.Core.ViewModels
 
 
         #region Methods
-        private async Task FillTypesAsync()
+        private async Task FillTypesAsync(CancellationToken cancelToken)
         {
             var types = await HomeRequestsTypesDataService.GetListAsync();
             if (types.Any())
@@ -167,11 +163,12 @@ namespace AeccApp.Core.ViewModels
 
         private async Task TryToUpdateTypesAsync(CancellationToken cancelToken)
         {
+            
             var types = await HomeRequestService.GetRequestTypesAsync(cancelToken);
 
             foreach (var typesData in types)
             {
-                await HomeRequestsTypesDataService.InsertOrUpdateAsync(typesData);
+                    await HomeRequestsTypesDataService.InsertOrUpdateAsync(typesData);
             }
             RequestTypes.SyncExact(types);
         }
