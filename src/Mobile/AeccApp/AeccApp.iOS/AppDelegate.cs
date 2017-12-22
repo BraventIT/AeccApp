@@ -15,10 +15,45 @@ namespace AeccApp.iOS
             Xamarin.FormsGoogleMaps.Init(GoogleIOSMapKey);
             LoadApplication(new App());
 
+            if (options != null)
+            {
+                // Checks for local notifications received asleep 
+                if (options.ContainsKey(UIApplication.LaunchOptionsLocalNotificationKey))
+                {
+                    var localNotification = options[UIApplication.LaunchOptionsLocalNotificationKey] as UILocalNotification;
+                    if (localNotification != null)
+                    {
+                        UIAlertController okayAlertController = UIAlertController.Create(localNotification.AlertAction, localNotification.AlertBody, UIAlertControllerStyle.Alert);
+                        okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                        Window.RootViewController.PresentViewController(okayAlertController, true, null);
+                        UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+                    }
+                }
+            }
+
+            //Ask for permission to use notifications
+            if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+            {
+                var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
+                    UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
+                );
+
+                app.RegisterUserNotificationSettings(notificationSettings);
+            }
             return base.FinishedLaunching(app, options);
         }
+        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+        {
+            // show an alert
+            UIAlertController okayAlertController = UIAlertController.Create(notification.AlertAction, notification.AlertBody, UIAlertControllerStyle.Alert);
+            okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 
-		public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+            Window.RootViewController.PresentViewController(okayAlertController, true, null);
+
+            // reset our badge
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+        }
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
 		{
 			AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(url);
 			return true;
