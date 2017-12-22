@@ -45,11 +45,10 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _provinceCoordinators, value); }
         }
 
-        private IEnumerable<RequestType> _requestTypes = new ObservableCollection<RequestType>();
-        public IEnumerable<RequestType> RequestTypes
+        private ObservableCollection<RequestType> _requestTypes;
+        public ObservableCollection<RequestType> RequestTypes
         {
             get { return _requestTypes; }
-            set { Set(ref _requestTypes, value); }
         }
 
         private bool _provinceHasNotRequestAvailable;
@@ -63,6 +62,11 @@ namespace AeccApp.Core.ViewModels
 
         #endregion
 
+        public HomeRequestChooseTypeViewModel()
+        {
+            _requestTypes = new ObservableCollection<RequestType>();
+        }
+
         public override Task InitializeAsync(object navigationData)
         {
             MyAddress = navigationData as AddressModel;
@@ -73,40 +77,35 @@ namespace AeccApp.Core.ViewModels
             return Task.CompletedTask;
         }
 
-        public override Task ActivateAsync()
+        public override async Task ActivateAsync()
         {
-            return ExecuteOperationAsync(async cancelToken =>
+            await ExecuteOperationAsync(async cancelToken =>
             {
+                await FillTypesAsync();
+
                 if (MyAddress.Coordinates.Latitude == 0)
                 {
                     MyAddress = await GoogleMapsService.FillPlaceDetailAsync(MyAddress, cancelToken);
                 }
 
-                await ExecuteOperationAsync(FillTypesAsync);
                 ProvinceCoordinators = await HomeRequestService.GetCoordinatorsAsync(MyAddress.Province, cancelToken);
-                if (ProvinceCoordinators != null && ProvinceCoordinators.Any())
-                {
-                    if (!RequestTypes.Any())
-                    {
-                        RequestTypes = await HomeRequestService.GetRequestTypesAsync(cancelToken);
-                        foreach (var item in RequestTypes)
-                        {
-                            await HomeRequestsTypesDataService.InsertOrUpdateAsync(item);
-                        }
-                    }
-
-                    await ExecuteOperationQuietlyAsync(cancTok => TryToUpdateTypesAsync(cancTok));
-                }
-                else
+                if (ProvinceCoordinators == null || !ProvinceCoordinators.Any())
                 {
                     ProvinceHasNotRequestAvailable = true;
                 }
+            });
 
-
+            await ExecuteOperationQuietlyAsync(async cancTok =>
+            {
                 if (MyAddress.WillBeSaved)
                 {
                     MyAddress.WillBeSaved = false;
                     await HomeAddressesDataService.InsertOrUpdateAsync(MyAddress);
+                }
+
+                if (!ProvinceHasNotRequestAvailable)
+                {
+                    await TryToUpdateTypesAsync(cancTok);
                 }
             });
         }
@@ -156,39 +155,25 @@ namespace AeccApp.Core.ViewModels
 
 
         #region Methods
-        private async Task FillTypesAsync(CancellationToken cancelToken)
+        private async Task FillTypesAsync()
         {
-            var types = (await HomeRequestsTypesDataService.GetListAsync()).ToList();
-            ObservableCollection<RequestType> typesList = new ObservableCollection<RequestType>();
-
+            var types = await HomeRequestsTypesDataService.GetListAsync();
             if (types.Any())
             {
-                typesList.SyncExact(types);
-                RequestTypes = typesList;
-
+                types.Reverse();
+                RequestTypes.SyncExact(types);
             }
         }
 
         private async Task TryToUpdateTypesAsync(CancellationToken cancelToken)
         {
-            // var today = DateTime.Today.ToUniversalTime();
-            // if (Settings.LastNewsChecked != today)
-            // {
-            var types = await HomeRequestsTypesDataService.GetListAsync();
+            var types = await HomeRequestService.GetRequestTypesAsync(cancelToken);
 
             foreach (var typesData in types)
             {
-                if (!RequestTypes.Contains(typesData))
-                {
-                    await HomeRequestsTypesDataService.InsertOrUpdateAsync(typesData);
-                }
-
+                await HomeRequestsTypesDataService.InsertOrUpdateAsync(typesData);
             }
-            ObservableCollection<RequestType> typesList = new ObservableCollection<RequestType>();
-            typesList.SyncExact(types);
-            RequestTypes = typesList;
-            //  Settings.LastNewsChecked = today;
-            // }
+            RequestTypes.SyncExact(types);
         }
 
         #endregion

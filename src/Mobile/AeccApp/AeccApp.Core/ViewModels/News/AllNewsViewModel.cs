@@ -58,12 +58,11 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Private Methods
-        private async Task FillNewsAsync(CancellationToken cancelToken)
+        private async Task FillNewsAsync()
         {
-            var news = (await NewsDataService.GetListAsync()).ToList();
+            var news = await NewsDataService.GetListAsync();
             if (news.Any())
             {
-                
                 NewsList.SyncExact(news);
             }
         }

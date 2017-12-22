@@ -1,7 +1,4 @@
 ﻿using Aecc.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AeccApp.Core.Services
@@ -10,9 +7,9 @@ namespace AeccApp.Core.Services
     {
         protected override string FileName => "HomeRequestsTypes.json";
 
-        public Task InsertOrUpdateAsync(RequestType requestType)
+        public Task InsertOrUpdateAsync(RequestType newData)
         {
-            return InsertDataAsync(requestType);
+            return InsertOrUpdateDataAsync(o => o.Id == newData.Id, newData);
         }
     }
 }

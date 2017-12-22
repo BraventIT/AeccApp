@@ -34,6 +34,7 @@ namespace AeccApp.Core.Models
             }
             set { _displayComments = value; }
         }
+
         public RequestModel(RequestType RequestType,string RequestLocation, string RequestDate, string RequestTime, string RequestComments, AddressModel RequestAddress)
         {
             this.RequestType = RequestType;

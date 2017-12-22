@@ -7,8 +7,8 @@ namespace AeccApp.Core.Services
 {
     public interface IHospitalRequestService
     {
-        Task<IEnumerable<RequestType>> GetRequestTypesAsync(CancellationToken cancelToken);
-        Task<IEnumerable<Hospital>> GetHospitalsAsync(string province, CancellationToken cancelToken);
+        Task<IList<RequestType>> GetRequestTypesAsync(CancellationToken cancelToken);
+        Task<IList<Hospital>> GetHospitalsAsync(string province, CancellationToken cancelToken);
         Task<Hospital> GetHospitalDetail(int hospitalId, CancellationToken cancelToken);
     }
 }

@@ -7,7 +7,7 @@ namespace AeccApp.Core.Services
 {
     public interface IHomeRequestService
     {
-        Task<IEnumerable<RequestType>> GetRequestTypesAsync(CancellationToken cancelToken);
-        Task<IEnumerable<Coordinator>> GetCoordinatorsAsync(string province, CancellationToken cancelToken);
+        Task<IList<RequestType>> GetRequestTypesAsync(CancellationToken cancelToken);
+        Task<IList<Coordinator>> GetCoordinatorsAsync(string province, CancellationToken cancelToken);
     }
 }

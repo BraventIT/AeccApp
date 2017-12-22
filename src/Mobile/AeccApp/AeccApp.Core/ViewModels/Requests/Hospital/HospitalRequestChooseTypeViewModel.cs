@@ -17,7 +17,6 @@ namespace AeccApp.Core.ViewModels
     public class HospitalRequestChooseTypeViewModel : ViewModelBase
     {
         private IGoogleMapsService GoogleMapsService { get; } = ServiceLocator.GoogleMapsService;
-        private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
         private IHospitalRequestService HospitalRequestService { get; } = ServiceLocator.HospitalRequestService;
         private IHospitalRequestsTypesDataService HospitalRequestsTypesDataService { get; } = ServiceLocator.HospitalRequestsTypesDataService;
 
@@ -26,6 +25,7 @@ namespace AeccApp.Core.ViewModels
         {
             RequestHospitalAskForRoomPopupVM = new RequestHospitalAskForRoomPopupViewModel();
             RequestHospitalAskForRoomPopupVM.ContinueWithRequest += OnContinueWithRequest;
+            _requestTypes = new ObservableCollection<RequestType>();
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -41,31 +41,24 @@ namespace AeccApp.Core.ViewModels
             return Task.CompletedTask;
         }
 
-        public override Task ActivateAsync()
+        public override async Task ActivateAsync()
         {
-
-            return ExecuteOperationAsync(async cancelToken =>
+            await ExecuteOperationAsync(async cancelToken =>
             {
-                await ExecuteOperationAsync(FillTypesAsync);
+                await FillTypesAsync();
 
                 ProvinceHospitals = await HospitalRequestService.GetHospitalsAsync(HospitalAddress.Province, cancelToken);
-                if (ProvinceHospitals != null && ProvinceHospitals.Any())
-                {
-                    if (!RequestTypes.Any())
-                    {
-                        RequestTypes = await HospitalRequestService.GetRequestTypesAsync(cancelToken);
-                        foreach (var item in RequestTypes)
-                        {
-                            await HospitalRequestsTypesDataService.InsertOrUpdateAsync(item);
-                        }
-                    }
-                   
-                        await ExecuteOperationQuietlyAsync(cancTok => TryToUpdateTypesAsync(cancTok));
-                    
-                }
-                else
+                if (ProvinceHospitals == null || !ProvinceHospitals.Any())
                 {
                     ProvinceHasNotRequestAvailable = true;
+                }
+            });
+
+            await ExecuteOperationQuietlyAsync(async cancTok =>
+            {
+                if (!ProvinceHasNotRequestAvailable)
+                {
+                    await TryToUpdateTypesAsync(cancTok);
                 }
             });
         }
@@ -82,11 +75,10 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _provinceHospitals, value); }
         }
 
-        private IEnumerable<RequestType> _requestTypes = new ObservableCollection<RequestType>();
-        public IEnumerable<RequestType> RequestTypes
+        private ObservableCollection<RequestType> _requestTypes;
+        public ObservableCollection<RequestType> RequestTypes
         {
             get { return _requestTypes; }
-            set { Set(ref _requestTypes, value); }
         }
 
         private bool _provinceHasNotRequestAvailable;
@@ -133,20 +125,17 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _requestTypeCommand ??
-                    (_requestTypeCommand = new Command(OnRequestTypeCommand, o => !IsBusy));
+                    (_requestTypeCommand = new Command(o => OnRequestTypeCommandAsync(o), o => !IsBusy));
             }
         }
 
-        async public void OnRequestTypeCommand(object obj)
+        async Task OnRequestTypeCommandAsync(object obj)
         {
             var requestType = obj as RequestType;
             Request.RequestAddress = HospitalAddress;
             Request.RequestType = requestType;
             await NavigationService.ShowPopupAsync(RequestHospitalAskForRoomPopupVM);
-
         }
-
-
 
         private Command _requestTalkToAeccCommand;
         public ICommand RequestTalkToAeccCommand
@@ -169,39 +158,26 @@ namespace AeccApp.Core.ViewModels
 
 
         #region Private Methods
-        private async Task FillTypesAsync(CancellationToken cancelToken)
+        private async Task FillTypesAsync()
         {
-            var types = (await HospitalRequestsTypesDataService.GetListAsync()).ToList();
-            ObservableCollection<RequestType> typesList = new ObservableCollection<RequestType>();
-
+            var types = await HospitalRequestsTypesDataService.GetListAsync();
             if (types.Any())
             {
-                typesList.SyncExact(types);
-                RequestTypes = typesList;
-
+                types.Reverse();
+                RequestTypes.SyncExact(types);
             }
         }
 
         private async Task TryToUpdateTypesAsync(CancellationToken cancelToken)
         {
-            // var today = DateTime.Today.ToUniversalTime();
-            // if (Settings.LastNewsChecked != today)
-            // {
-            var types = await HospitalRequestsTypesDataService.GetListAsync();
+            var types = await HospitalRequestService.GetRequestTypesAsync(cancelToken);
 
             foreach (var typesData in types)
             {
-                if (!RequestTypes.Contains(typesData))
-                {
                 await HospitalRequestsTypesDataService.InsertOrUpdateAsync(typesData);
-                }
 
             }
-            ObservableCollection<RequestType> typesList = new ObservableCollection<RequestType>();
-            typesList.SyncExact(types);
-            RequestTypes = typesList;
-            //  Settings.LastNewsChecked = today;
-            // }
+            RequestTypes.SyncExact(types);
         }
         #endregion
     }
