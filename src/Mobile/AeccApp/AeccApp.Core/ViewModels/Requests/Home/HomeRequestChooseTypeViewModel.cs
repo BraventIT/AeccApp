@@ -151,7 +151,7 @@ namespace AeccApp.Core.ViewModels
 
 
         #region Methods
-        private async Task FillTypesAsync(CancellationToken cancelToken)
+        private async Task FillTypesAsync()
         {
             var types = await HomeRequestsTypesDataService.GetListAsync();
             if (types.Any())
