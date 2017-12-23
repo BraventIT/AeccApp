@@ -157,6 +157,10 @@ namespace AeccApp.Core.Services
         {
             get { return DependencyService.Get<ILocationProviderSettings>(); }
         }
+        public static INotificationService NotificationService
+        {
+            get { return DependencyService.Get<INotificationService>(); }
+        }
 
         private static T Resolve<T>()
         {

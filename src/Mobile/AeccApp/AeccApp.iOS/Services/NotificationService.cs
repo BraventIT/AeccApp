@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AeccApp.Core.Services.Notification;
+﻿using AeccApp.Core.Services;
+using AeccApp.iOS.Services;
 using Foundation;
 using UIKit;
 
-[assembly: Xamarin.Forms.Dependency(typeof(AeccApp.iOS.Notification))]
-namespace AeccApp.iOS
+[assembly: Xamarin.Forms.Dependency(typeof(NotificationService))]
+namespace AeccApp.iOS.Services
 {
 
-    class Notification : INotification
+    class NotificationService : INotificationService
     {
         public void CreateNotification(string title, string body)
         {

@@ -1,4 +1,5 @@
-﻿using AeccApp.Core.Services.Notification;
+﻿using AeccApp.Core.Services;
+using AeccApp.Droid.Services;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -6,14 +7,12 @@ using Android.Graphics;
 using Android.Media;
 using Android.Net;
 using Android.Support.V4.App;
-using static AeccApp.Droid.Resource;
-using static Android.Media.Audiofx.BassBoost;
 
-[assembly: Xamarin.Forms.Dependency(typeof(AeccApp.Droid.Notification))]
-namespace AeccApp.Droid
+[assembly: Xamarin.Forms.Dependency(typeof(NotificationService))]
+namespace AeccApp.Droid.Services
 {
 
-    class Notification : INotification
+    class NotificationService : INotificationService
     {
         public void CreateNotification(string title, string body)
         {
