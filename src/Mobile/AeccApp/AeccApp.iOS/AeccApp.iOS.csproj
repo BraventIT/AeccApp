@@ -140,7 +140,7 @@
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Notification.cs" />
+    <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer.cs" />
     <Compile Include="Renderers\BoxViewKeyboardHeightRenderer.cs" />
     <Compile Include="Renderers\ExpandableEditorRenderer.cs" />

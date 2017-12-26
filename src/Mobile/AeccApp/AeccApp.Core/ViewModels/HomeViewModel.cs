@@ -3,7 +3,6 @@ using AeccApp.Core.Extensions;
 using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
-using AeccApp.Core.Services.Notification;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;

@@ -11,7 +11,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using AeccApp.Core.Services.Notification;
 
 /// <summary>
 /// TERMINOLOGY
@@ -356,7 +355,7 @@ namespace AeccApp.Core.Services
                                 case ActivityTypes.Message:
                                     newMessages.Add(ProcessMessage(activity)); break;
                                 case ActivityTypes.Event:
-                                   await ProcessEventResulAsync(activity); break;
+                                    await ProcessEventResulAsync(activity); break;
                                 default:
                                     break;
                             }
@@ -370,12 +369,12 @@ namespace AeccApp.Core.Services
                             _conversationMessages.Insert(0, message);
                         }
 
-                        
+
                         MessagesReceived?.Invoke(this, newMessages);
                         MessagesWitoutReading = MessagesReceived == null;
                         if (MessagesWitoutReading)
                         {
-                        DependencyService.Get<INotification>().CreateNotification("Nuevo mensaje:", newMessages[newMessages.Count-1].Activity.Text);
+                            ServiceLocator.NotificationService.CreateNotification("Nuevo mensaje:", newMessages[newMessages.Count - 1].Activity.Text);
                         }
                     }
                 }

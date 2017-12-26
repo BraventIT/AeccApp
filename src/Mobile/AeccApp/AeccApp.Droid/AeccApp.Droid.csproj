@@ -60,7 +60,7 @@
     <Compile Include="..\AeccApp.UWP\CustomRenderer\XLabs\ImageButtonRenderer.Shared.cs">
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
-    <Compile Include="Notification.cs" />
+    <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer.cs" />
     <Compile Include="Renderers\ButtonRender.cs" />
     <Compile Include="Services\LocationProviderSettings.cs" />
