@@ -19,7 +19,10 @@
 
             <DataTemplate x:Key="TimeTemplate">
                 <ViewCell IsEnabled="False">
-                    <Frame Padding="0" Rotation="180">
+                    <Frame
+                        Padding="0"
+                        HasShadow="False"
+                        Rotation="180">
                         <Label
                             Margin="10"
                             HorizontalTextAlignment="Center"
@@ -127,18 +130,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <!--  Chat messages list  -->
+    <StackLayout>
         <ListView
             x:Name="MessageList"
             Grid.ColumnSpan="2"
@@ -147,52 +139,66 @@
             ItemTemplate="{StaticResource ChatDataTemplateSelector}"
             ItemsSource="{Binding Messages}"
             Rotation="180" />
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-        <BoxView
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            BackgroundColor="{StaticResource BlackColor}"
-            HeightRequest="2"
-            VerticalOptions="Start" />
+                <!--  Chat messages list  -->
 
-        <!--  Chat text entry  -->
-        <!--  Placeholder="{Binding [ChatViewChatEntryPlaceHolder]}"  -->
-        <ctrl:ExpandableEditor
-            x:Name="Entry"
-            Grid.Row="1"
-            Margin="10,0"
-            HorizontalOptions="FillAndExpand"
-            Keyboard="Text"
-            Text="{Binding Text, Mode=TwoWay}">
-            <ctrl:ExpandableEditor.Keyboard>
-                <Keyboard x:FactoryMethod="Create">
-                    <x:Arguments>
-                        <KeyboardFlags>Suggestions</KeyboardFlags>
-                    </x:Arguments>
-                </Keyboard>
-            </ctrl:ExpandableEditor.Keyboard>
+                <BoxView
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource BlackColor}"
+                    HeightRequest="2"
+                    VerticalOptions="Start" />
 
-            <ctrl:ExpandableEditor.Behaviors>
-                <beh:EventToCommandBehavior Command="{Binding SendMessageCommand}" EventName="Completed" />
-            </ctrl:ExpandableEditor.Behaviors>
-        </ctrl:ExpandableEditor>
+                <!--  Chat text entry  -->
+                <!--  Placeholder="{Binding [ChatViewChatEntryPlaceHolder]}"  -->
+                <ctrl:ExpandableEditor
+                    x:Name="Entry"
+                    Grid.Row="1"
+                    Margin="10,0"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Text"
+                    Text="{Binding Text, Mode=TwoWay}">
+                    <ctrl:ExpandableEditor.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>Suggestions</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </ctrl:ExpandableEditor.Keyboard>
 
-        <ctrl:CustomImage
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="0,0,10,0"
-            HeightRequest="30"
-            SourcePlatform="send_icon"
-            VerticalOptions="Center"
-            WidthRequest="30">
-            <ctrl:CustomImage.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
-            </ctrl:CustomImage.GestureRecognizers>
-        </ctrl:CustomImage>
+                    <ctrl:ExpandableEditor.Behaviors>
+                        <beh:EventToCommandBehavior Command="{Binding SendMessageCommand}" EventName="Completed" />
+                    </ctrl:ExpandableEditor.Behaviors>
+                </ctrl:ExpandableEditor>
 
-        <ctrl:BoxViewKeyboardHeight
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            IsVisible="False" />
-    </Grid>
+                <ctrl:CustomImage
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0,0,10,0"
+                    HeightRequest="30"
+                    SourcePlatform="send_icon"
+                    VerticalOptions="Center"
+                    WidthRequest="30">
+                    <ctrl:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
+                    </ctrl:CustomImage.GestureRecognizers>
+                </ctrl:CustomImage>
+
+                <ctrl:BoxViewKeyboardHeight
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    IsVisible="False" />
+            </Grid>
+        </ScrollView>
+    </StackLayout>
 </ContentView>

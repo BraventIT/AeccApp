@@ -202,13 +202,20 @@ namespace AeccApp.Core.ViewModels
             {
                 string textToSend = Text;
                 Text = string.Empty;
+                if(textToSend == string.Empty)
+                {
 
+                }
+                else
+                {
                 var newMessage = ChatService.GetMyMessage(textToSend);
 
                 TryToInsertTimeMessage(newMessage, true);
                 Messages.Insert(0, newMessage);
 
                 await ChatService.SendMessageAsync(newMessage);
+
+                }
             });
         }
 
