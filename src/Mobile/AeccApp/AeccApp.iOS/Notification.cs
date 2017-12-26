@@ -21,7 +21,7 @@ namespace AeccApp.iOS
             notification.FireDate = NSDate.FromTimeIntervalSinceNow(1);
 
             // configure the alert
-            notification.AlertTitle = title;
+            notification.AlertAction = title;
             notification.AlertBody = body;
 
             // modify the badge
