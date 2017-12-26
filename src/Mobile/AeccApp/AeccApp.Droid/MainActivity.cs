@@ -1,4 +1,5 @@
 ﻿using AeccApp.Core.Messages;
+using AeccApp.Droid.Services;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -16,6 +17,10 @@ namespace AeccApp.Droid
     [Activity(Label = "AECC", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+
+        Intent notificationService;
+
+
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -25,10 +30,10 @@ namespace AeccApp.Droid
 
             Forms.Init(this, bundle);
             FormsGoogleMaps.Init(this, bundle);
-
+            notificationService = new Intent(this, typeof(NotificationBackgroundService));
+            StartService(notificationService);
             LoadApplication(new App());
             App.UiParent = new UIParent(Forms.Context as Activity);
-
 
             // Only logo visible in dashboard page
             MessagingCenter.Subscribe<ToolbarMessage>(this, string.Empty, m =>
@@ -43,6 +48,12 @@ namespace AeccApp.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        protected override void OnDestroy()
+        {
+            StopService(notificationService);
+            base.OnDestroy();
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

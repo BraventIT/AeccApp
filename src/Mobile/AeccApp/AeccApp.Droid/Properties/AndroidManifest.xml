@@ -15,6 +15,16 @@
 				<category android:name="android.intent.category.BROWSABLE" />
 				<data android:scheme="msal24b548ab-933a-47c0-9b3c-c9b334219cc7" android:host="auth" />
 			</intent-filter>
-		</activity>
+      <service android:name="md5aa051c489bb0a1358942e00c060447c0.NotificationBackgroundService" />
+      <receiver
+           android:name="oaldnnalla88ss566711aakkd0067854322aqn3211jj41nsj1.NotificationServiceBroadcastReceiver"
+           android:enabled="true"
+           android:exported="true"
+           android:label="RestartServiceWhenStopped">
+        <intent-filter>
+          <action android:name="sp.ac.af.oak.ActivityRecognition.RestartNotificationService"/>
+        </intent-filter>
+      </receiver>
+    </activity>
 	</application>
 </manifest>
