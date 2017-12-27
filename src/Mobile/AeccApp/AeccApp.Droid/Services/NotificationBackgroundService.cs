@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AeccApp.Core.Services;
@@ -9,13 +6,10 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Xamarin.Forms;
 
 namespace AeccApp.Droid.Services
 {
-    [Service(Name = "AeccApp.Droid.Services.NotificationBackgroundService")]
+    [Service(Name = "aeccapp.droid.services.NotificationBackgroundService")]
     public class NotificationBackgroundService : Service
     {
         public override IBinder OnBind(Intent intent)
@@ -34,13 +28,12 @@ namespace AeccApp.Droid.Services
                     while (true)
                     {
 
-                        Thread.Sleep(10000);//Frequency on miliseconds to check for messages
-
-                        //Check for new chat messages here:
-                        /*
-                        ServiceLocator.NotificationService.CreateNotification("Nuevo mensaje:", "Tienes nuevos mensajes, para a la app de Aecc para comprobarlos");
+                        Thread.Sleep(30000);//Frequency on miliseconds to check for messages
+                        //Check for new chat messages here
+                       // Este ejemplo descomentado genera una notificacion generica cada 30 segundos:
+                       ServiceLocator.NotificationService.CreateNotification("Nuevo mensaje:", "Tienes nuevos mensajes, para a la app de Aecc para comprobarlos");
                         
-                        */     
+                            
                     }
                 });
 
@@ -50,6 +43,7 @@ namespace AeccApp.Droid.Services
 
             return StartCommandResult.Sticky;
         }
+      
 
         public override void OnDestroy()
         {

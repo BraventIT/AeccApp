@@ -12,7 +12,8 @@ using Android.Widget;
 
 namespace AeccApp.Droid.Services
 {
-    [BroadcastReceiver(Name = "AeccApp.Droid.Services.NotificationServiceBroadcastReceiver")]
+    [BroadcastReceiver(Name = "aeccapp.droid.services.NotificationServiceBroadcastReceiver",Enabled =true,Exported =true)]
+    [IntentFilter(new string[] { Intent.ActionBootCompleted , "RestartNotificationService" })]
     public class NotificationServiceBroadcastReceiver : BroadcastReceiver
     {
         public override void OnReceive(Context context, Intent intent)

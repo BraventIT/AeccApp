@@ -51,7 +51,7 @@ namespace AeccApp.Droid
         }
 
         protected override void OnDestroy()
-        {
+        {        
             StopService(notificationService);
             base.OnDestroy();
         }
