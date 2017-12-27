@@ -244,7 +244,7 @@
         x:TypeArguments="x:Int32"
         Android="25"
         WinPhone="25"
-        iOS="25" />
+        iOS="20" />
     I
     <Style x:Key="externalBorderStyle" TargetType="Frame">
         <Setter Property="BackgroundColor" Value="{StaticResource LightGraySubtitle}" />

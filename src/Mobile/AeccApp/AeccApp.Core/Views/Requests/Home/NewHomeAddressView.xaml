@@ -47,7 +47,7 @@
                     </Grid.ColumnDefinitions>
 
                     <ctrl:CustomImage
-                        Margin="10,0,0,0"
+                        Margin="10,10,0,10"
                         SourcePlatform="search_mini_icon"
                         WidthRequest="17" />
 
@@ -69,11 +69,13 @@
 
                     <Grid Grid.Column="2" IsVisible="{Binding IsSearchIconVisible}">
                         <Button
-                            Margin="0"
+                            Margin="0,0,2,0"
+                            VerticalOptions="Center"
                             BackgroundColor="White"
-                            BorderRadius="12"
-                            HeightRequest="24"
-                            WidthRequest="24" />
+                            BorderRadius="10"
+                            Command="{Binding ResetAddressFinderCommand}"
+                            HeightRequest="20"
+                            WidthRequest="20" />
                         <ctrl:CustomImage
                             Margin="0,0,10,0"
                             InputTransparent="True"
