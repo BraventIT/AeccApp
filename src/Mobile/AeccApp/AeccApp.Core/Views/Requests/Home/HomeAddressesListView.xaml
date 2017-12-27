@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <v:BaseContentPage
     x:Class="AeccApp.Core.Views.HomeAddressesListView"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -9,7 +9,8 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [HomeAddressesListViewTitle]}"
-    vm:ViewModelLocator.AutoWireViewModel="True">
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    NavigationPage.BackButtonTitle="">
 
     <!--  Home address list item template  -->
     <ContentView.Resources>

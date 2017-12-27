@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <v:BaseContentPage
     x:Class="AeccApp.Core.Views.NewHomeAddressView"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -19,7 +19,7 @@
                 <ViewCell>
                     <StackLayout>
                         <Label
-                            Margin="15,5,5,5"
+                            Margin="35,10,25,10"
                             Style="{StaticResource SubTitleLabelStyle}"
                             Text="{Binding DisplayAddress}" />
                         <BoxView HeightRequest="1" Color="{StaticResource LightSilver}" />
@@ -37,40 +37,26 @@
         </Grid.RowDefinitions>
 
         <!--  Address search entry  -->
-        <Frame
-            Margin="20,20,20,0"
-            Padding="1"
-            BackgroundColor="{StaticResource LightGraySubtitle}"
-            CornerRadius="25"
-            HasShadow="False">
-            <Frame
-                Margin="0"
-                Padding="0"
-                BackgroundColor="{StaticResource WhiteColor}"
-                CornerRadius="25"
-                HasShadow="False">
+        <Frame Margin="20,20,20,0" Style="{StaticResource externalBorderStyle}">
+            <Frame Style="{StaticResource internalBorderStyle}">
                 <Grid Padding="5,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
                     <ctrl:CustomImage
-                        Grid.Column="0"
                         Margin="5,10"
-                        HorizontalOptions="Center"
                         SourcePlatform="search_mini_icon"
-                        VerticalOptions="Center" />
+                        WidthRequest="25" />
 
                     <ctrl:BorderlessEntry
                         Grid.Column="1"
-                        HorizontalTextAlignment="Start"
                         IsEnabled="{Binding AddressSelected, Converter={StaticResource IsNullConverter}}"
                         Placeholder="{Binding [NewHomeAddressViewSearchAddress]}"
                         Text="{Binding AddressFinder}"
-                        VerticalOptions="Center"
-                        WidthRequest="300">
+                        VerticalOptions="Center">
                         <Entry.Behaviors>
                             <beh:EventToCommandBehavior
                                 Command="{Binding AddressChangedCommand}"
@@ -80,56 +66,44 @@
                     </ctrl:BorderlessEntry>
 
 
-                    <Frame
+
+                    <Grid
                         Grid.Column="2"
                         Margin="0"
-                        Padding="10"
-                        BackgroundColor="Transparent"
-                        HasShadow="False"
-                        HorizontalOptions="Center"
+                        Padding="0,10"
                         IsVisible="{Binding IsSearchIconVisible}">
-                        <Grid>
-                            <Button
-                                Margin="0"
-                                BackgroundColor="White"
-                                BorderRadius="0"
-                                Command="{Binding ResetAddressFinderCommand}"
-                                HeightRequest="12" />
-                            <ctrl:CustomImage
-                                InputTransparent="True"
-                                SourcePlatform="x_icon"
-                                VerticalOptions="Center" />
-                        </Grid>
-                    </Frame>
+                        <Button
+                            Margin="0"
+                            BackgroundColor="White"
+                            BorderRadius="0"
+                            Command="{Binding ResetAddressFinderCommand}"
+                            HeightRequest="12" />
+                        <ctrl:CustomImage
+                            InputTransparent="True"
+                            SourcePlatform="x_icon"
+                            VerticalOptions="Center"
+                            WidthRequest="12" />
+                    </Grid>
 
                 </Grid>
             </Frame>
         </Frame>
 
         <!--  Suggestions list  -->
-        <StackLayout Grid.Row="1" IsVisible="{Binding AddressSelected, Converter={StaticResource IsNullConverter}}">
-            <Frame
-                Margin="20,0,20,0"
-                Padding="0"
-                BackgroundColor="{StaticResource WhiteColor}"
-                CornerRadius="25"
-                HasShadow="False"
-                HorizontalOptions="Center"
-                IsVisible="{Binding IsSearchIconVisible}"
-                VerticalOptions="Start">
+        <ListView
+            Grid.Row="1"
+            IsVisible="{Binding AddressSelected, Converter={StaticResource IsNullConverter}}"
+            ItemTemplate="{StaticResource suggestedAddressesListTemplate}"
+            ItemsSource="{Binding SugestedAddressesList}">
 
-                <ListView ItemTemplate="{StaticResource suggestedAddressesListTemplate}" ItemsSource="{Binding SugestedAddressesList}">
+            <ListView.Behaviors>
+                <beh:EventToCommandBehavior
+                    Command="{Binding AddressSelectedCommand}"
+                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                    EventName="ItemTapped" />
+            </ListView.Behaviors>
 
-                    <ListView.Behaviors>
-                        <beh:EventToCommandBehavior
-                            Command="{Binding AddressSelectedCommand}"
-                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                            EventName="ItemTapped" />
-                    </ListView.Behaviors>
-
-                </ListView>
-            </Frame>
-        </StackLayout>
+        </ListView>
 
         <Label
             Grid.Row="1"
@@ -167,88 +141,60 @@
 
                 <Grid Margin="20,0" ColumnSpacing="10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="6*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <Frame
-                        Grid.Column="0"
-                        Padding="1"
-                        BackgroundColor="{StaticResource LightGraySubtitle}"
-                        CornerRadius="20"
-                        HasShadow="False"
-                        HorizontalOptions="Fill">
-                        <Frame
-                            Margin="0"
-                            Padding="5,0,5,0"
-                            BackgroundColor="{StaticResource WhiteColor}"
-                            CornerRadius="20"
-                            HasShadow="False">
-                            <ctrl:BorderlessEntry
-                                BackgroundColor="Transparent"
-                                Placeholder="{Binding [NewHomeAddressViewNumberPlaceHolder]}"
-                                Text="{Binding AddressNumber}" />
+
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <Style
+                                x:Key="externalBorderSmallStyle"
+                                BasedOn="{StaticResource externalBorderStyle}"
+                                TargetType="Frame">
+                                <Setter Property="CornerRadius" Value="20" />
+                            </Style>
+
+                            <Style
+                                x:Key="internalBorderSmallStyle"
+                                BasedOn="{StaticResource internalBorderStyle}"
+                                TargetType="Frame">
+                                <Setter Property="CornerRadius" Value="20" />
+                            </Style>
+
+                            <Style TargetType="ctrl:BorderlessEntry">
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                <Setter Property="Margin" Value="18,8" />
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+
+                    <Frame Style="{StaticResource externalBorderSmallStyle}">
+                        <Frame Style="{StaticResource internalBorderSmallStyle}">
+                            <ctrl:BorderlessEntry Placeholder="{Binding [NewHomeAddressViewNumberPlaceHolder]}" Text="{Binding AddressNumber}" />
                         </Frame>
                     </Frame>
-                    <Frame
-                        Grid.Column="1"
-                        Padding="1"
-                        BackgroundColor="{StaticResource LightGraySubtitle}"
-                        CornerRadius="20"
-                        HasShadow="False">
-                        <Frame
-                            Margin="0"
-                            Padding="5,0,5,0"
-                            BackgroundColor="{StaticResource WhiteColor}"
-                            CornerRadius="20"
-                            HasShadow="False">
-                            <ctrl:BorderlessEntry
-                                BackgroundColor="Transparent"
-                                Placeholder="{Binding [NewHomeAddressViewPortalPlaceHolder]}"
-                                Text="{Binding AddressSelected.Portal}" />
+                    <Frame Grid.Column="1" Style="{StaticResource externalBorderSmallStyle}">
+                        <Frame Style="{StaticResource internalBorderSmallStyle}">
+                            <ctrl:BorderlessEntry Placeholder="{Binding [NewHomeAddressViewPortalPlaceHolder]}" Text="{Binding AddressSelected.Portal}" />
                         </Frame>
                     </Frame>
-                    <Frame
-                        Grid.Column="2"
-                        Padding="1"
-                        BackgroundColor="{StaticResource LightGraySubtitle}"
-                        CornerRadius="20"
-                        HasShadow="False">
-                        <Frame
-                            Margin="0"
-                            Padding="5,0,5,0"
-                            BackgroundColor="{StaticResource WhiteColor}"
-                            CornerRadius="20"
-                            HasShadow="False">
-                            <ctrl:BorderlessEntry
-                                BackgroundColor="Transparent"
-                                Placeholder="{Binding [NewHomeAddressViewFloorPlaceHolder]}"
-                                Text="{Binding AddressSelected.Floor}" />
+                    <Frame Grid.Column="2" Style="{StaticResource externalBorderSmallStyle}">
+                        <Frame Style="{StaticResource internalBorderSmallStyle}">
+                            <ctrl:BorderlessEntry Placeholder="{Binding [NewHomeAddressViewFloorPlaceHolder]}" Text="{Binding AddressSelected.Floor}" />
                         </Frame>
                     </Frame>
                     <Frame
                         Grid.Row="2"
                         Grid.ColumnSpan="3"
                         Margin="0,20,0,0"
-                        Padding="1"
-                        BackgroundColor="{StaticResource LightGraySubtitle}"
-                        CornerRadius="20"
-                        HasShadow="False">
-                        <Frame
-                            Margin="0"
-                            Padding="10,0,5,0"
-                            BackgroundColor="{StaticResource WhiteColor}"
-                            CornerRadius="20"
-                            HasShadow="False">
-                            <ctrl:BorderlessEntry
-                                BackgroundColor="Transparent"
-                                Placeholder="{Binding [NewHomeAddressViewNameTheAddressPlaceHolder]}"
-                                Text="{Binding AddressName.Value}"
-                                WidthRequest="300" />
+                        Style="{StaticResource externalBorderSmallStyle}">
+                        <Frame Style="{StaticResource internalBorderSmallStyle}">
+                            <ctrl:BorderlessEntry Placeholder="{Binding [NewHomeAddressViewNameTheAddressPlaceHolder]}" Text="{Binding AddressName.Value}" />
                         </Frame>
                     </Frame>
                 </Grid>
