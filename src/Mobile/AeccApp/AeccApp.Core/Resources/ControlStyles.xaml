@@ -239,17 +239,24 @@
         <Setter Property="HasShadow" Value="False" />
     </Style>
 
+    <OnPlatform
+        x:Key="CornerRadiusSize"
+        x:TypeArguments="x:Int32"
+        Android="25"
+        WinPhone="25"
+        iOS="25" />
+    I
     <Style x:Key="externalBorderStyle" TargetType="Frame">
         <Setter Property="BackgroundColor" Value="{StaticResource LightGraySubtitle}" />
         <Setter Property="Padding" Value="1" />
-        <Setter Property="CornerRadius" Value="25" />
+        <Setter Property="CornerRadius" Value="{StaticResource CornerRadiusSize}" />
     </Style>
 
     <Style x:Key="internalBorderStyle" TargetType="Frame">
         <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />
-        <Setter Property="CornerRadius" Value="25" />
+        <Setter Property="CornerRadius" Value="{StaticResource CornerRadiusSize}" />
     </Style>
 
 </ResourceDictionary>

@@ -19,7 +19,7 @@
                 <ViewCell>
                     <StackLayout>
                         <Label
-                            Margin="35,10,25,10"
+                            Margin="30,20,25,20"
                             Style="{StaticResource SubTitleLabelStyle}"
                             Text="{Binding DisplayAddress}" />
                         <BoxView HeightRequest="1" Color="{StaticResource LightSilver}" />
@@ -47,12 +47,14 @@
                     </Grid.ColumnDefinitions>
 
                     <ctrl:CustomImage
-                        Margin="5,10"
+                        Margin="10,0,0,0"
                         SourcePlatform="search_mini_icon"
-                        WidthRequest="25" />
+                        WidthRequest="17" />
 
                     <ctrl:BorderlessEntry
                         Grid.Column="1"
+                        Margin="5,0,10,0"
+                        HorizontalOptions="Fill"
                         IsEnabled="{Binding AddressSelected, Converter={StaticResource IsNullConverter}}"
                         Placeholder="{Binding [NewHomeAddressViewSearchAddress]}"
                         Text="{Binding AddressFinder}"
@@ -65,24 +67,19 @@
                         </Entry.Behaviors>
                     </ctrl:BorderlessEntry>
 
-
-
-                    <Grid
-                        Grid.Column="2"
-                        Margin="0"
-                        Padding="0,10"
-                        IsVisible="{Binding IsSearchIconVisible}">
+                    <Grid Grid.Column="2" IsVisible="{Binding IsSearchIconVisible}">
                         <Button
                             Margin="0"
                             BackgroundColor="White"
-                            BorderRadius="0"
-                            Command="{Binding ResetAddressFinderCommand}"
-                            HeightRequest="12" />
+                            BorderRadius="12"
+                            HeightRequest="24"
+                            WidthRequest="24" />
                         <ctrl:CustomImage
+                            Margin="0,0,10,0"
                             InputTransparent="True"
                             SourcePlatform="x_icon"
                             VerticalOptions="Center"
-                            WidthRequest="12" />
+                            WidthRequest="14" />
                     </Grid>
 
                 </Grid>
@@ -92,6 +89,7 @@
         <!--  Suggestions list  -->
         <ListView
             Grid.Row="1"
+            HasUnevenRows="True"
             IsVisible="{Binding AddressSelected, Converter={StaticResource IsNullConverter}}"
             ItemTemplate="{StaticResource suggestedAddressesListTemplate}"
             ItemsSource="{Binding SugestedAddressesList}">
@@ -107,7 +105,7 @@
 
         <Label
             Grid.Row="1"
-            Margin="20,0"
+            Margin="40,0"
             HorizontalTextAlignment="Center"
             IsVisible="{Binding ShowHelpMessage}"
             Style="{StaticResource NormalLabelStyle}"
@@ -116,7 +114,7 @@
 
         <Label
             Grid.Row="1"
-            Margin="20,0"
+            Margin="40,0"
             HorizontalTextAlignment="Center"
             IsVisible="{Binding SugestedAddressesListIsEmpty}"
             Style="{StaticResource NormalLabelStyle}"
@@ -166,9 +164,14 @@
                                 <Setter Property="CornerRadius" Value="20" />
                             </Style>
 
+                            <OnPlatform x:Key="entryMargin" x:TypeArguments="Thickness">
+                                <On Platform="Android, UWP">8,0</On>
+                                <On Platform="iOS">18,8</On>
+                            </OnPlatform>
+
                             <Style TargetType="ctrl:BorderlessEntry">
                                 <Setter Property="BackgroundColor" Value="Transparent" />
-                                <Setter Property="Margin" Value="18,8" />
+                                <Setter Property="Margin" Value="{StaticResource entryMargin}" />
                             </Style>
                         </ResourceDictionary>
                     </Grid.Resources>
@@ -220,7 +223,7 @@
                 </StackLayout>
 
                 <ctrlXlabs:ImageButton
-                    Margin="0,20,0,0"
+                    Margin="0,20"
                     BackgroundColor="{StaticResource GreyText}"
                     Command="{Binding ContinueWithRequestCommand}"
                     HorizontalOptions="CenterAndExpand"
