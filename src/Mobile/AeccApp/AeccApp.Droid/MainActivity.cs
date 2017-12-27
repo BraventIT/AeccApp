@@ -30,8 +30,6 @@ namespace AeccApp.Droid
 
             Forms.Init(this, bundle);
             FormsGoogleMaps.Init(this, bundle);
-            notificationService = new Intent(this, typeof(NotificationBackgroundService));
-            StartService(notificationService);
             LoadApplication(new App());
             App.UiParent = new UIParent(Forms.Context as Activity);
 
@@ -48,13 +46,7 @@ namespace AeccApp.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-
-        protected override void OnDestroy()
-        {        
-            StopService(notificationService);
-            base.OnDestroy();
-        }
+        }     
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
