@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary
     x:Class="AeccApp.Core.Resources.ControlStyles"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -32,19 +32,16 @@
         <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
         <Setter Property="WidthRequest" Value="{StaticResource ButtonWidth}" />
         <Setter Property="HeightRequest" Value="44" />
-        <Setter Property="BorderRadius" Value="28" />
+        <Setter Property="BorderRadius" Value="22" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
     </Style>
 
-    <Style x:Key="DarkButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
-        <Setter Property="WidthRequest" Value="{StaticResource ButtonWidth}" />
-        <Setter Property="HeightRequest" Value="44" />
-        <Setter Property="BorderRadius" Value="28" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+    <Style
+        x:Key="DarkButtonStyle"
+        BasedOn="{StaticResource ButtonStyle}"
+        TargetType="{x:Type Button}">
         <Setter Property="BackgroundColor" Value="{StaticResource GreyText}" />
     </Style>
 
@@ -236,6 +233,23 @@
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="CornerRadius" Value="20" />
         <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
+    </Style>
+
+    <Style TargetType="Frame">
+        <Setter Property="HasShadow" Value="False" />
+    </Style>
+
+    <Style x:Key="externalBorderStyle" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{StaticResource LightGraySubtitle}" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="CornerRadius" Value="25" />
+    </Style>
+
+    <Style x:Key="internalBorderStyle" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="CornerRadius" Value="25" />
     </Style>
 
 </ResourceDictionary>

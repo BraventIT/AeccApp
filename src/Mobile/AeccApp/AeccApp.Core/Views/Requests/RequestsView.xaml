@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <v:BaseContentPage
     x:Class="AeccApp.Core.Views.RequestsView"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -162,7 +162,7 @@
 
                     <ListView.Footer>
                         <!--  New request button  -->
-                        <Frame Padding="0,30">
+                        <Frame Padding="0,30" HasShadow="false">
                             <Button
                                 Command="{Binding AtHomeCommand}"
                                 HorizontalOptions="Center"
@@ -186,7 +186,7 @@
 
                     <ListView.Footer>
                         <!--  New request button  -->
-                        <Frame Padding="0,30">
+                        <Frame Padding="0,30" HasShadow="false">
                             <Button
                                 Command="{Binding AtHospitalCommand}"
                                 HorizontalOptions="Center"

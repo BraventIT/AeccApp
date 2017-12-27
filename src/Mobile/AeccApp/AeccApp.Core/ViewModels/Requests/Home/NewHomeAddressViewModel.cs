@@ -188,6 +188,7 @@ namespace AeccApp.Core.ViewModels
 
             SugestedAddressesListIsEmpty = false;
             ShowHelpMessage = true;
+            SugestedAddressesList.Clear();
         }
 
 
@@ -206,16 +207,14 @@ namespace AeccApp.Core.ViewModels
             if (AddressSelected != null)
                 return;
 
-            string result = string.Empty;
-            if (obj is string)
-            {
-                result = (string)obj;
-            }
+            string result = obj as string;
 
             if (string.IsNullOrWhiteSpace(result))
             {
                 IsSearchIconVisible = false;
                 ShowHelpMessage = true;
+                SugestedAddressesList.Clear();
+                SugestedAddressesListIsEmpty = false;
             }
             else
             {
@@ -223,13 +222,15 @@ namespace AeccApp.Core.ViewModels
                 if (result.Length > 4)
                 {
                     RefreshSugestedAddressesAsync(result);
+                    ShowHelpMessage = false;
                 }
-                else if (SugestedAddressesList.Any())
+                else
                 {
+                    ShowHelpMessage = true;
                     SugestedAddressesList.Clear();
+                    SugestedAddressesListIsEmpty = false;
                 }
                 IsSearchIconVisible = true;
-                ShowHelpMessage = false;
             }
         }
 
