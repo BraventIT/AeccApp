@@ -50,7 +50,7 @@ namespace AeccApp.Core.ViewModels
                 if (!NewsList.Any())
                     await FillNewsAsync();
             });
-
+            ServiceLocator.ChatMessagesListenerService.InitChatMessageListener();
             await ExecuteOperationQuietlyAsync(cancelToken => TryToUpdateNewsAsync(cancelToken));
         }
 

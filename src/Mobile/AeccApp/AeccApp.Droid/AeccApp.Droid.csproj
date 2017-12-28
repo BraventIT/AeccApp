@@ -53,13 +53,16 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Assets\AboutAssets.txt" />
-    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AeccApp.UWP\CustomRenderer\XLabs\ImageButtonRenderer.Shared.cs">
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
+    <Compile Include="Services\ChatMessagesListenerInit.cs" />
     <Compile Include="Services\NotificationBackgroundService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer.cs" />

@@ -161,7 +161,10 @@ namespace AeccApp.Core.Services
         {
             get { return DependencyService.Get<INotificationService>(); }
         }
-
+        public static IChatMessagesListenerService ChatMessagesListenerService
+        {
+            get { return DependencyService.Get<IChatMessagesListenerService>(); }
+        }
         private static T Resolve<T>()
         {
             return IocContainer.Resolve<T>();

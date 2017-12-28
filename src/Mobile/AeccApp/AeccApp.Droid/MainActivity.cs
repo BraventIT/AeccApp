@@ -30,8 +30,6 @@ namespace AeccApp.Droid
 
             Forms.Init(this, bundle);
             FormsGoogleMaps.Init(this, bundle);
-            notificationService = new Intent(this, typeof(NotificationBackgroundService));
-            StartService(notificationService);
             LoadApplication(new App());
             App.UiParent = new UIParent(Forms.Context as Activity);
 
@@ -51,10 +49,13 @@ namespace AeccApp.Droid
         }
 
         protected override void OnDestroy()
-        {        
+        {
+            notificationService = new Intent(this, typeof(NotificationBackgroundService));
             StopService(notificationService);
             base.OnDestroy();
         }
+
+    
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
