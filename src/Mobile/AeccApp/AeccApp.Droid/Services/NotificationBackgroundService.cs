@@ -35,6 +35,11 @@ namespace AeccApp.Droid.Services
             throw new NotImplementedException();
         }
 
+        public override void OnTaskRemoved(Intent rootIntent)
+        {
+            StopSelf();
+            base.OnTaskRemoved(rootIntent);
+        }
 
         public override void OnDestroy()
         {

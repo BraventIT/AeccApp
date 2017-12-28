@@ -48,15 +48,6 @@ namespace AeccApp.Droid
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        protected override void OnDestroy()
-        {
-            notificationService = new Intent(this, typeof(NotificationBackgroundService));
-            StopService(notificationService);
-            base.OnDestroy();
-        }
-
-    
-
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
