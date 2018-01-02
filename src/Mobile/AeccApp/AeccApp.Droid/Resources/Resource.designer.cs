@@ -6044,26 +6044,26 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f02015c
-			public const int avd_hide_password_1 = 2130837852;
-			
 			// aapt resource value: 0x7f02015d
-			public const int avd_hide_password_2 = 2130837853;
+			public const int avd_hide_password_1 = 2130837853;
 			
 			// aapt resource value: 0x7f02015e
-			public const int avd_hide_password_3 = 2130837854;
+			public const int avd_hide_password_2 = 2130837854;
+			
+			// aapt resource value: 0x7f02015f
+			public const int avd_hide_password_3 = 2130837855;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f02015f
-			public const int avd_show_password_1 = 2130837855;
-			
 			// aapt resource value: 0x7f020160
-			public const int avd_show_password_2 = 2130837856;
+			public const int avd_show_password_1 = 2130837856;
 			
 			// aapt resource value: 0x7f020161
-			public const int avd_show_password_3 = 2130837857;
+			public const int avd_show_password_2 = 2130837857;
+			
+			// aapt resource value: 0x7f020162
+			public const int avd_show_password_3 = 2130837858;
 			
 			// aapt resource value: 0x7f020055
 			public const int bell = 2130837589;
@@ -6761,11 +6761,11 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f02013c
 			public const int notification_icon_background = 2130837820;
 			
-			// aapt resource value: 0x7f02015a
-			public const int notification_template_icon_bg = 2130837850;
-			
 			// aapt resource value: 0x7f02015b
-			public const int notification_template_icon_low_bg = 2130837851;
+			public const int notification_template_icon_bg = 2130837851;
+			
+			// aapt resource value: 0x7f02015c
+			public const int notification_template_icon_low_bg = 2130837852;
 			
 			// aapt resource value: 0x7f02013d
 			public const int notification_tile_bg = 2130837821;
@@ -6840,19 +6840,22 @@ namespace AeccApp.Droid
 			public const int slideout = 2130837844;
 			
 			// aapt resource value: 0x7f020155
-			public const int thumb_up = 2130837845;
+			public const int splash_screen = 2130837845;
 			
 			// aapt resource value: 0x7f020156
-			public const int tick_icon = 2130837846;
+			public const int thumb_up = 2130837846;
 			
 			// aapt resource value: 0x7f020157
-			public const int time_icon = 2130837847;
+			public const int tick_icon = 2130837847;
 			
 			// aapt resource value: 0x7f020158
-			public const int x_icon = 2130837848;
+			public const int time_icon = 2130837848;
 			
 			// aapt resource value: 0x7f020159
-			public const int x_icon_grey = 2130837849;
+			public const int x_icon = 2130837849;
+			
+			// aapt resource value: 0x7f02015a
+			public const int x_icon_grey = 2130837850;
 			
 			static Drawable()
 			{
@@ -8033,8 +8036,8 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f0c0170
 			public const int Animation_Design_BottomSheetDialog = 2131493232;
 			
-			// aapt resource value: 0x7f0c018b
-			public const int AppCompatDialogStyle = 2131493259;
+			// aapt resource value: 0x7f0c018c
+			public const int AppCompatDialogStyle = 2131493260;
 			
 			// aapt resource value: 0x7f0c00b2
 			public const int Base_AlertDialog_AppCompat = 2131493042;
@@ -8501,8 +8504,8 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f0c0172
 			public const int Base_Widget_Design_TabLayout = 2131493234;
 			
-			// aapt resource value: 0x7f0c018c
-			public const int ButtontextNoCaps = 2131493260;
+			// aapt resource value: 0x7f0c018d
+			public const int ButtontextNoCaps = 2131493261;
 			
 			// aapt resource value: 0x7f0c000b
 			public const int CardView = 2131492875;
@@ -8603,8 +8606,8 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f0c004d
 			public const int RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = 2131492941;
 			
-			// aapt resource value: 0x7f0c018d
-			public const int TabTextNoCaps = 2131493261;
+			// aapt resource value: 0x7f0c018e
+			public const int TabTextNoCaps = 2131493262;
 			
 			// aapt resource value: 0x7f0c00dd
 			public const int TextAppearance_AppCompat = 2131493085;
@@ -9211,6 +9214,9 @@ namespace AeccApp.Droid
 			
 			// aapt resource value: 0x7f0c000a
 			public const int Widget_MediaRouter_MediaRouteButton = 2131492874;
+			
+			// aapt resource value: 0x7f0c018b
+			public const int splashscreen = 2131493259;
 			
 			static Style()
 			{
