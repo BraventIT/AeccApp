@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="223">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="222">
+            <objects>
+                <viewController id="223" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="220"/>
+                        <viewControllerLayoutGuide type="bottom" id="221"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="224">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.55294117647058827" green="0.81960784313725488" blue="0.00392156862745098" alpha="1"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="227" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" image="logo_white_splash_ios.png">
+                                <rect key="frame" x="42" y="270" width="292" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="225" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-231" y="-343"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="AppIcons/Icon-App-20x20.png" width="20" height="20"/>
+        <image name="AppIcons/Icon-App-29x29.png" width="29" height="29"/>
+        <image name="AppIcons/Icon-App-40x40.png" width="40" height="40"/>
+        <image name="AppIcons/Icon-App-57x57.png" width="57" height="57"/>
+        <image name="AppIcons/Icon-App-60x60.png" width="60" height="60"/>
+        <image name="AppIcons/Icon-App-72x72.png" width="72" height="72"/>
+        <image name="AppIcons/Icon-App-76x76.png" width="76" height="76"/>
+        <image name="AppIcons/Icon-App-83.5x83.5.png" width="83.5" height="83.5"/>
+        <image name="AppIcons/Icon-Small-50x50.png" width="50" height="50"/>
+        <image name="AppIcons/ItunesArtwork.png" width="512" height="512"/>
+        <image name="bell.png" width="72" height="72"/>
+        <image name="chat.png" width="76" height="76"/>
+        <image name="chat_grey_icon.png" width="96" height="90"/>
+        <image name="chat_tab_icon.png" width="50" height="47"/>
+        <image name="CheckBoxOff.png" width="54" height="54"/>
+        <image name="CheckBoxOn.png" width="54" height="54"/>
+        <image name="date_icon.png" width="48" height="48"/>
+        <image name="exit_icon.png" width="60" height="63"/>
+        <image name="from_home.png" width="120" height="120"/>
+        <image name="from_hospital.png" width="120" height="121"/>
+        <image name="gender_female.png" width="256" height="256"/>
+        <image name="gender_male.png" width="256" height="256"/>
+        <image name="home_tab_icon.png" width="44" height="49"/>
+        <image name="ico_clean_refresh.png" width="128" height="128"/>
+        <image name="Ico_cruz.png" width="110" height="110"/>
+        <image name="ico_first_request.png" width="520" height="520"/>
+        <image name="ICO_firstCHAT.png" width="390" height="390"/>
+        <image name="ico_girl.png" width="180" height="180"/>
+        <image name="ico_hospital.png" width="75" height="66"/>
+        <image name="ico_house.png" width="75" height="72"/>
+        <image name="ico_man.png" width="180" height="180"/>
+        <image name="ico_sup_filter.png" width="256" height="256"/>
+        <image name="icon.png" width="72" height="72"/>
+        <image name="list_icon.png" width="78" height="54"/>
+        <image name="location_pin.png" width="17" height="21"/>
+        <image name="logo.png" width="1135" height="453"/>
+        <image name="logoHeader.png" width="814" height="286"/>
+        <image name="logout_icon.png" width="63" height="63"/>
+        <image name="map_icon.png" width="141" height="123"/>
+        <image name="map_location_pin_green.png" width="40" height="49"/>
+        <image name="no_profile_image_v2.png" width="180" height="222"/>
+        <image name="PopUp_Ico_chatrequest.png" width="165" height="165"/>
+        <image name="PopUp_Ico_question.png" width="110" height="110"/>
+        <image name="PopUp_Ico_thumbsdown.png" width="165" height="165"/>
+        <image name="profile.png" width="200" height="203"/>
+        <image name="profile_icon.png" width="256" height="256"/>
+        <image name="rating_star.png" width="80" height="80"/>
+        <image name="request_grey_icon.png" width="84" height="105"/>
+        <image name="requests_tab_icon.png" width="40" height="51"/>
+        <image name="right_arrow.png" width="9" height="17"/>
+        <image name="right_arrow_big.png" width="50" height="50"/>
+        <image name="round_no_profile_image_v2.png" width="244" height="260"/>
+        <image name="round_plus.png" width="128" height="128"/>
+        <image name="round_plus_green_background.png" width="174" height="174"/>
+        <image name="round_question_icon.png" width="165" height="165"/>
+        <image name="search_mini_icon.png" width="45" height="45"/>
+        <image name="send_icon.png" width="57" height="57"/>
+        <image name="settings_gear.png" width="50" height="50"/>
+        <image name="slideout.png" width="28" height="30"/>
+        <image name="thumb_up.png" width="165" height="165"/>
+        <image name="tick_icon.png" width="50" height="50"/>
+        <image name="time_icon.png" width="50" height="50"/>
+        <image name="x_icon.png" width="26" height="26"/>
+        <image name="x_icon_grey.png" width="26" height="26"/>
+        <image name="logo_white_splash_ios.png" width="704" height="296"/>
+    </resources>
+</document>
