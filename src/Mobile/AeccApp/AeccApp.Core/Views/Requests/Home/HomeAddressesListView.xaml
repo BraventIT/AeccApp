@@ -132,7 +132,7 @@
         </ListView>
 
         <Label
-            Margin="20,0"
+            Margin="40,0"
             HorizontalTextAlignment="Center"
             IsVisible="{Binding HomeAddressesIsEmpty}"
             Style="{StaticResource NormalLabelStyle}"
