@@ -7,6 +7,8 @@ namespace AeccApp.Droid.Services
 {
     class ChatMessagesListenerInit : IChatMessagesListenerService
     {
+
+        //Esta clase es llamada con DependencyService desde Core para inicializar el servicio que escucha mensajes nuevos
             Intent notificationService;
         public void InitChatMessageListener()
         {         

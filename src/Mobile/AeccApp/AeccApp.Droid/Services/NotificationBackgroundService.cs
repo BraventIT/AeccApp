@@ -43,6 +43,7 @@ namespace AeccApp.Droid.Services
 
         public override void OnDestroy()
         {
+            //Al destruirse el servicio se reinicia via Broadcast siempre y cuando el movil lo permita
             Intent broadcastIntent = new Intent(Android.App.Application.Context, typeof(NotificationServiceBroadcastReceiver));
             SendBroadcast(broadcastIntent);
             base.OnDestroy();
@@ -82,7 +83,7 @@ namespace AeccApp.Droid.Services
                     while (true)
                     {
                         //Frequency on miliseconds to check for messages
-                        Thread.Sleep(5000);
+                        Thread.Sleep(7000);
                         //Check for new chat messages here
                         ListenToBotMessages();
 
