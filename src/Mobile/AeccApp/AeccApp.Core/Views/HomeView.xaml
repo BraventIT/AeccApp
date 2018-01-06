@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <v:BaseContentPage
     x:Class="AeccApp.Core.Views.HomeView"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -32,18 +32,16 @@
     <Grid>
         <ScrollView>
             <StackLayout>
-                <!--  Info call banner  -->
-                <Grid
+
+                <!--#region  Info call banner-->
+                <StackLayout
                     BackgroundColor="{StaticResource LightGrey}"
-                    ColumnSpacing="0"
-                    HeightRequest="50"
-                    HorizontalOptions="FillAndExpand"
+                    Spacing="0"
+                    Orientation="Horizontal"
                     IsVisible="{Binding IsHeaderInfoBannerVisible}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Margin="0">
+
+                    
+                    <Grid HorizontalOptions="FillAndExpand" >
                         <Button
                             Margin="0"
                             BackgroundColor="{StaticResource LightGrey}"
@@ -55,7 +53,7 @@
                             Text="{Binding [HomeViewHeaderInfoBannerText]}"
                             VerticalOptions="Center" />
                     </Grid>
-                    <Grid Grid.Column="1" Margin="0">
+                    <Grid>
                         <Button
                             Margin="0"
                             BackgroundColor="{StaticResource LightGrey}"
@@ -74,9 +72,10 @@
                             WidthRequest="13" />
                     </Grid>
 
-                </Grid>
+                </StackLayout>
+                <!--#endregion-->
 
-                <StackLayout Padding="10,5,10,10" VerticalOptions="FillAndExpand">
+                <StackLayout Padding="10,5,10,10">
 
                     <!--#region Volunteer state panel-->
                     <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
@@ -87,8 +86,6 @@
                             IsVisible="{Binding IsVolunteer}">
 
                             <StackLayout Margin="0">
-
-
                                 <ctrl:CustomImage
                                     HeightRequest="100"
                                     HorizontalOptions="Center"
@@ -114,58 +111,34 @@
                     <!--#endregion-->
 
                     <!--#region Request state panel-->
-                    <StackLayout>
                         <Grid
                             Margin="15,20"
                             Padding="20"
+                        HeightRequest="50"
                             BackgroundColor="{StaticResource WhiteColor}"
                             IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                             <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
                             <ctrl:CustomImage
-                                Grid.Column="0"
                                 Margin="0,0,12,0"
-                                HeightRequest="35"
                                 SourcePlatform="request_grey_icon"
+                                VerticalOptions="Center"
                                 WidthRequest="28" />
-                            <StackLayout
-                                Grid.Column="1"
-                                Margin="0"
-                                Padding="0">
+
+                            <StackLayout Grid.Column="1" Margin="0,0,50,0">
                                 <Label
                                     Margin="0"
                                     HorizontalOptions="Start"
                                     Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
                                     Text="{Binding [HomeViewRequests]}" />
-                                <Grid Margin="0" Padding="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button
-                                        Margin="0"
-                                        BackgroundColor="White"
-                                        BorderRadius="0"
-                                        Command="{Binding OpenAllRequestsCommand}" />
-                                    <Label
-                                        InputTransparent="True"
-                                        Style="{StaticResource LightGreyLabelStyle}"
-                                        Text="{Binding [HomeViewAllRequests]}"
-                                        VerticalOptions="Center"
-                                        VerticalTextAlignment="Center" />
-                                </Grid>
 
+                                <Label Style="{StaticResource LightGreyLabelStyle}" Text="{Binding [HomeViewAllRequests]}" />
                             </StackLayout>
 
-                            <Grid
-                                Grid.Column="2"
-                                HorizontalOptions="End"
-                                VerticalOptions="Center">
+                            <Grid Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End">
                                 <Button Command="{Binding NewRequestCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
 
                                 <ctrl:CustomImage
@@ -174,7 +147,6 @@
                                     SourcePlatform="round_plus_green_background" />
                             </Grid>
                         </Grid>
-                    </StackLayout>
                     <!--#endregion-->
 
                     <!--#region Chat state panel-->
@@ -182,99 +154,106 @@
                         Margin="15,0,15,20"
                         Padding="20"
                         BackgroundColor="{StaticResource WhiteColor}">
-                        <StackLayout Orientation="Horizontal">
-                            <ctrl:CustomImage
-                                Margin="0,0,12,0"
-                                HeightRequest="30"
-                                SourcePlatform="chat_grey_icon"
-                                WidthRequest="32" />
-                            <StackLayout>
-                                <Label
-                                    Margin="0"
-                                    HorizontalOptions="Start"
-                                    Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
-                                    Text="{Binding [HomeViewChatsOnline]}" />
-                                <Label
-                                    Margin="0"
-                                    IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
-                                    Style="{StaticResource LightGreyLabelStyle}"
-                                    Text="{Binding [HomeViewTalkToVolunteer]}" />
-                            </StackLayout>
-
-                            <Grid
-                                HorizontalOptions="EndAndExpand"
-                                IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
-                                VerticalOptions="Center">
-                                <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
-                                    <Button Command="{Binding NewChatCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
-
-                                    <ctrl:CustomImage
-                                        HeightRequest="50"
-                                        InputTransparent="True"
-                                        SourcePlatform="round_plus_green_background" />
-                                </Grid>
-                            </Grid>
-                        </StackLayout>
-
-                        <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
-
-                            <StackLayout IsVisible="{Binding IsVolunteer}">
-                                <Label
-                                    IsVisible="{Binding VolunteerIsActive, Converter={StaticResource InverseBoolConverter}"
-                                    Style="{StaticResource NormalLabelStyle}"
-                                    Text="{Binding [ChatViewGoOnlineBeforeChat]}" />
-                                <Label
-                                    IsVisible="{Binding VolunteerIsActive}"
-                                    Style="{StaticResource NormalLabelStyle}"
-                                    Text="{Binding [ChatViewYouHaveToWaitRequest]}" />
-                            </StackLayout>
-
-                        </Grid>
-
-                        <Grid
-                            Margin="10"
-                            HorizontalOptions="Center"
-                            IsVisible="{Binding InConversation}"
-                            VerticalOptions="Center">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
+                    <Grid
+                        >
+                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                             <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+                        <ctrl:CustomImage
+                            Margin="0,0,12,0"
+                            SourcePlatform="chat_grey_icon"
+                            VerticalOptions="Center"
+                            WidthRequest="32" />
 
-                            <ctrl:CustomImage
-                                HeightRequest="55"
-                                SourcePlatform="{Binding LastMessage.Activity.From.Gender, Converter={StaticResource GenderToImageConverter}}"
-                                VerticalOptions="End"
-                                WidthRequest="55" />
+                        <StackLayout Grid.Column="1" Margin="0,0,50,0">
+                        <Label
+                            Margin="0"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                            Text="{Binding [HomeViewChatsOnline]}" />
 
-                            <StackLayout Grid.Column="1" VerticalOptions="Center">
-
-                                <Label
-                                    LineBreakMode="TailTruncation"
-                                    Style="{StaticResource MediumLabelStyle}"
-                                    Text="{Binding LastMessage.DateTime, StringFormat='{0:ddd} - {0:t}'}" />
-                                <Label
-                                    LineBreakMode="TailTruncation"
-                                    Style="{StaticResource MediumLabelStyle}"
-                                    Text="{Binding LastMessage.Activity.Text}" />
+                        <Label
+                            IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
+                            Style="{StaticResource LightGreyLabelStyle}"
+                            Text="{Binding [HomeViewTalkToVolunteer]}" />
                             </StackLayout>
+                        <Grid
+                    
+                            Grid.Column="1"
+                            HorizontalOptions="End"
+                            IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
+                            VerticalOptions="Center">
+                            <Grid HorizontalOptions="Start" IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
+                                <Button Command="{Binding NewChatCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
 
-                            <Button
-                                Grid.Row="1"
-                                Grid.ColumnSpan="2"
-                                Command="{Binding CurrentChatCommand}"
-                                HorizontalOptions="Center"
-                                Style="{StaticResource ButtonStyle}"
-                                Text="{Binding [HomeViewCurrentChat]}" />
-
+                                <ctrl:CustomImage
+                                    HeightRequest="50"
+                                    InputTransparent="True"
+                                    SourcePlatform="round_plus_green_background" />
+                            </Grid>
                         </Grid>
+                    </Grid>
 
+                    <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}" VerticalOptions="Start">
+
+                        <StackLayout IsVisible="{Binding IsVolunteer}">
+                            <Label
+                                IsVisible="{Binding VolunteerIsActive, Converter={StaticResource InverseBoolConverter}"
+                                Style="{StaticResource NormalLabelStyle}"
+                                Text="{Binding [ChatViewGoOnlineBeforeChat]}" />
+                            <Label
+                                IsVisible="{Binding VolunteerIsActive}"
+                                Style="{StaticResource NormalLabelStyle}"
+                                Text="{Binding [ChatViewYouHaveToWaitRequest]}" />
+                        </StackLayout>
+
+                    </Grid>
+
+                    <Grid
+                        Margin="10"
+                        IsVisible="{Binding InConversation}"
+                        VerticalOptions="Start">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <ctrl:CustomImage
+                            HeightRequest="55"
+                            SourcePlatform="{Binding LastMessage.Activity.From.Gender, Converter={StaticResource GenderToImageConverter}}"
+                            VerticalOptions="End"
+                            WidthRequest="55" />
+
+                        <StackLayout Grid.Column="1" VerticalOptions="Center">
+
+                            <Label
+                                LineBreakMode="TailTruncation"
+                                Style="{StaticResource MediumLabelStyle}"
+                                Text="{Binding LastMessage.DateTime, StringFormat='{0:ddd} - {0:t}'}" />
+                            <Label
+                                LineBreakMode="TailTruncation"
+                                Style="{StaticResource MediumLabelStyle}"
+                                Text="{Binding LastMessage.Activity.Text}" />
+                        </StackLayout>
+
+                        <Button
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            Command="{Binding CurrentChatCommand}"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource ButtonStyle}"
+                            Text="{Binding [HomeViewCurrentChat]}" />
+
+                    </Grid>
                     </StackLayout>
                     <!--#endregion-->
 
@@ -286,27 +265,23 @@
                             HorizontalOptions="Start"
                             Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
                             Text="{Binding [HomeViewLastNews]}" />
-                        <Grid>
-                            <Grid Margin="0" Padding="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Button
-                                    Margin="0"
-                                    BackgroundColor="{StaticResource LightSilver}"
-                                    BorderRadius="0"
-                                    Command="{Binding OpenAllNewsCommand}" />
-                                <Label
-                                    Margin="0"
-                                    HorizontalOptions="Start"
-                                    InputTransparent="True"
-                                    Style="{StaticResource LightGreyLabelStyle}"
-                                    Text="{Binding [HomeViewAllNews]}" />
-                            </Grid>
+
+                        <Grid Margin="0" Padding="0">
+                            <Button
+                                Margin="0"
+                                BackgroundColor="{StaticResource LightSilver}"
+                                BorderRadius="0"
+                                Command="{Binding OpenAllNewsCommand}" />
+                            <Label
+                                Margin="0"
+                                HorizontalOptions="Start"
+                                InputTransparent="True"
+                                Style="{StaticResource LightGreyLabelStyle}"
+                                Text="{Binding [HomeViewAllNews]}" />
                         </Grid>
+
                         <flv:FlowListView
                             x:Name="NewsFlowListView"
-                            Grid.Row="2"
                             FlowColumnCount="2"
                             FlowItemTappedCommand="{Binding ChooseNewCommand}"
                             FlowItemsSource="{Binding NewsList}"
@@ -317,7 +292,7 @@
                                     <StackLayout
                                         Margin="0,7,7,7"
                                         BackgroundColor="{StaticResource WhiteColor}"
-                                        VerticalOptions="Fill">
+                                        >
                                         <Image
                                             Margin="0"
                                             HeightRequest="107"
