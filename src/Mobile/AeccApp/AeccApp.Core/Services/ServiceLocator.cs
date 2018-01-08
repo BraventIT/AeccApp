@@ -58,7 +58,7 @@ namespace AeccApp.Core.Services
             get { return Resolve<IIdentityService>(); }
         }
 
-        public static IAddressesDataService HomeAddressesDataService
+        public static IAddressesDataService AddressesDataService
         {
             get { return Resolve<IAddressesDataService>(); }
         }

@@ -11,7 +11,7 @@ namespace AeccApp.Core.ViewModels
 {
     public class HospitalAddressesListViewModel : ViewModelBase
     {
-        private IAddressesDataService AddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
+        private IAddressesDataService AddressesDataService { get; } = ServiceLocator.AddressesDataService;
 
         #region Activate & Deactive Methods
         public HospitalAddressesListViewModel()

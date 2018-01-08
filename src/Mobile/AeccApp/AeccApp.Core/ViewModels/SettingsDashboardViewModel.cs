@@ -12,7 +12,7 @@ namespace AeccApp.Core.ViewModels
     public class SettingsDashboardViewModel : ViewModelBase
     {
         private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
-        private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
+        private IAddressesDataService AddressesDataService { get; } = ServiceLocator.AddressesDataService;
         private IHomeRequestsDataService HomeRequestsDataService { get; } = ServiceLocator.HomeRequestsDataService;
         private IHospitalRequestDataService HospitalRequestDataService { get; } = ServiceLocator.HospitalRequestDataService;
         private IMapPositionsDataService MapPositionsDataService { get; } = ServiceLocator.MapPositionsDataService;
@@ -130,7 +130,7 @@ namespace AeccApp.Core.ViewModels
             IdentityService.LogOff();
 
             Settings.Reset();
-            await HomeAddressesDataService.ResetAsync();
+            await AddressesDataService.ResetAsync();
             await HomeRequestsDataService.ResetAsync();
             await HospitalRequestDataService.ResetAsync();
             await MapPositionsDataService.ResetAsync();

@@ -70,11 +70,11 @@
                     <Grid Grid.Column="2" IsVisible="{Binding IsSearchIconVisible}">
                         <Button
                             Margin="0,0,2,0"
-                            VerticalOptions="Center"
                             BackgroundColor="White"
                             BorderRadius="10"
                             Command="{Binding ResetAddressFinderCommand}"
                             HeightRequest="20"
+                            VerticalOptions="Center"
                             WidthRequest="20" />
                         <ctrl:CustomImage
                             Margin="0,0,10,0"
@@ -180,7 +180,10 @@
 
                     <Frame Style="{StaticResource externalBorderSmallStyle}">
                         <Frame Style="{StaticResource internalBorderSmallStyle}">
-                            <ctrl:BorderlessEntry Placeholder="{Binding [NewHomeAddressViewNumberPlaceHolder]}" Text="{Binding AddressNumber}" />
+                            <ctrl:BorderlessEntry
+                                Keyboard="Numeric"
+                                Placeholder="{Binding [NewHomeAddressViewNumberPlaceHolder]}"
+                                Text="{Binding AddressNumber}" />
                         </Frame>
                     </Frame>
                     <Frame Grid.Column="1" Style="{StaticResource externalBorderSmallStyle}">

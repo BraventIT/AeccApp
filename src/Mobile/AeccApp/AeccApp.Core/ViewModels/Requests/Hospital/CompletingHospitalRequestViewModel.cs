@@ -14,7 +14,7 @@ namespace AeccApp.Core.ViewModels
 {
     public class CompletingHospitalRequestViewModel : ViewModelBase
     {
-        private IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
+        private IAddressesDataService AddressesDataService { get; } = ServiceLocator.AddressesDataService;
         private IHospitalRequestDataService HospitalRequestDataService { get; } = ServiceLocator.HospitalRequestDataService;
         private IEmailService EmailService { get; } = ServiceLocator.EmailService;
         private IHospitalRequestService HospitalRequestService { get; } = ServiceLocator.HospitalRequestService;
@@ -189,11 +189,11 @@ namespace AeccApp.Core.ViewModels
 
             CurrentRequest.RequestTimeStamp = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
 
+            CurrentRequest.RequestAddress.IsHospitalAddress = true;
+            await HospitalRequestDataService.InsertOrUpdateAsync(CurrentRequest);
             if (IsAddressGettingSaved)
             {
-                CurrentRequest.RequestAddress.IsHospitalAddress = true;
-                await HospitalRequestDataService.InsertOrUpdateAsync(CurrentRequest);
-                await HomeAddressesDataService.InsertOrUpdateAsync(CurrentRequest.RequestAddress);
+                await AddressesDataService.InsertOrUpdateAsync(CurrentRequest.RequestAddress);
             }
             await NavigationService.HidePopupAsync();
 
@@ -212,7 +212,7 @@ namespace AeccApp.Core.ViewModels
            //});
            
            //LEAVE THIS FOR EMAIL TESTING
-            string[] s = new string[] { "afraj@bravent.net", "acabrera@bravent.net"};       
+            string[] s = new string[] { "afraj@bravent.net" /*, "acabrera@bravent.net"*/};       
             await OnSendRequestAsync(s);
 
         }

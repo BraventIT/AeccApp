@@ -35,7 +35,7 @@ namespace AeccApp.Core
             // LOCAL TEST API ALFRA
             //ApiEndpoint = "http://localhost:14724";
 
-            EmailChatAddress = "afraj@bravent.net;acabrera@bravent.net";
+            EmailChatAddress = "afraj@bravent.net";  //"afraj@bravent.net;acabrera@bravent.net";
             EmailChatTemplate =
                 "El beneficiario %UserName% %UserSurname% ha reportado una conversación con " +
                 "%CounterpartName% %CounterpartSurname% cuya valoración es %ChatRating%.\n" +

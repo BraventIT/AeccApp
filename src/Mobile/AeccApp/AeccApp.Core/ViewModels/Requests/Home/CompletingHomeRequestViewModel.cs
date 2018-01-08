@@ -1,10 +1,8 @@
-﻿using Aecc.Models;
-using AeccApp.Core.Messages;
+﻿using AeccApp.Core.Messages;
 using AeccApp.Core.Models;
 using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -181,7 +179,7 @@ namespace AeccApp.Core.ViewModels
             //});
 
             //LEAVE THIS FOR EMAIL TESTING
-            string[] s = new string[] { "afraj@bravent.net", "acabrera@bravent.net" };
+            string[] s = new string[] { "afraj@bravent.net" /*, "acabrera@bravent.net" */ };
             await OnSendRequestAsync(s);
 
         }

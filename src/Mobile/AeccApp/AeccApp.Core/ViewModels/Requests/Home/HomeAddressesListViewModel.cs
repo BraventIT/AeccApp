@@ -11,7 +11,7 @@ namespace AeccApp.Core.ViewModels
 {
     public class HomeAddressesListViewModel : ViewModelBase
     {
-        public IAddressesDataService HomeAddressesDataService { get; } = ServiceLocator.HomeAddressesDataService;
+        public IAddressesDataService AddressesDataService { get; } = ServiceLocator.AddressesDataService;
 
         #region Activate & Deactive Methods
         public HomeAddressesListViewModel()
@@ -23,7 +23,7 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                var homeAddresses = await HomeAddressesDataService.GetListAsync();
+                var homeAddresses = await AddressesDataService.GetListAsync();
                 HomeAddressesList.SyncExact(homeAddresses.Where(x=> !x.IsHospitalAddress).ToList());
                 HomeAddressesIsEmpty = !HomeAddressesList.Any();
             });
