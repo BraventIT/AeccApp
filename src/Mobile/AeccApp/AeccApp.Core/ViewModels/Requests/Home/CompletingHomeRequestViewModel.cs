@@ -81,22 +81,20 @@ namespace AeccApp.Core.ViewModels
 
         private async void OnOpenRequestConfirmationPopupCommand(object obj)
         {
-            if (DateToApplyParsed==null)
+            if (DateToApplyParsed == null)
             {
                 DateToApplyParsed = DateTime.Now.ToString().Remove(10);
             }
-        
+
             if (TimeToApplyParsed == null)
             {
                 TimeToApplyParsed = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString().Remove(5);
             }
 
             RequestConfirmationPopupVM.DisplayRequestInfo = DisplayRequestInfo;
-            RequestConfirmationPopupVM.DisplayDate = DateToApplyParsed+","+TimeToApplyParsed;
+            RequestConfirmationPopupVM.DisplayDate = DateToApplyParsed + "," + TimeToApplyParsed;
 
             await NavigationService.ShowPopupAsync(RequestConfirmationPopupVM);
-
-
         }
         
 

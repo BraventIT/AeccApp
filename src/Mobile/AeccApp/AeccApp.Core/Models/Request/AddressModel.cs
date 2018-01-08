@@ -48,24 +48,13 @@ namespace AeccApp.Core.Models
             set { _coordinates = value; }
         }
 
-        public string FinderAddress
+        public string DisplayAddress
         {
             get
             {
                 return string.IsNullOrEmpty(Number) ?
                   $"{Street}, {City}" :
                   $"{Street} {Number}, {City}";
-            }
-        }
-
-        public string DisplayAddress
-        {
-            get
-            {
-                var address = FinderAddress;
-                return string.IsNullOrEmpty(Name) ?
-                      address :
-                       $"{Name} - {address}";
             }
         }
 
@@ -103,18 +92,5 @@ namespace AeccApp.Core.Models
         {
 
         }
-
-        public AddressModel(string name, string street, string province, string number, string floor, string placeId, Position Coordinates)
-        {
-            Name = name;
-            Street = street;
-            Province = province;
-            Number = number;
-            Floor = floor;
-            PlaceId = placeId;
-            this.Coordinates = Coordinates;
-        }
-
-
     }
 }

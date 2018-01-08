@@ -93,8 +93,9 @@ namespace AeccApp.Core.ViewModels
                 {
                     ProvinceHasNotRequestAvailable = true;
                 }
+            });
 
-                await ExecuteOperationQuietlyAsync(async cancTok =>
+            await ExecuteOperationQuietlyAsync(async cancelToken =>
                 {
                     if (MyAddress.WillBeSaved)
                     {
@@ -103,10 +104,9 @@ namespace AeccApp.Core.ViewModels
                     }
                     if (!ProvinceHasNotRequestAvailable)
                     {
-                        await TryToUpdateTypesAsync(cancTok);
+                        await TryToUpdateTypesAsync(cancelToken);
                     }
                 });
-            });
         }
 
         #region Commands
@@ -148,7 +148,6 @@ namespace AeccApp.Core.ViewModels
         }
 
         #endregion
-
 
         #region Methods
         private async Task FillTypesAsync()

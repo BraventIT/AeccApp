@@ -29,7 +29,7 @@ namespace AeccApp.Core.Services
         public void Initialize()
         {
             var navigationPage = new NavigationPage(CreatePage(typeof(LoginViewModel), null));
-            navigationPage.Popped += OnPagePopped;
+            //navigationPage.Popped += OnPagePopped;
             Application.Current.MainPage = navigationPage;
         }
 
@@ -40,9 +40,9 @@ namespace AeccApp.Core.Services
             var navigationPage = Application.Current.MainPage as NavigationPage;
             if (page is DashboardView || navigationPage == null)
             {
-                navigationPage.Popped -= OnPagePopped;
+                //navigationPage.Popped -= OnPagePopped;
                 navigationPage = new NavigationPage(page); ;
-                navigationPage.Popped += OnPagePopped;
+                //navigationPage.Popped += OnPagePopped;
                 Application.Current.MainPage = navigationPage;
             }
             else

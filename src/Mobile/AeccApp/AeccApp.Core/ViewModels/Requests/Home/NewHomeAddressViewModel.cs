@@ -142,7 +142,7 @@ namespace AeccApp.Core.ViewModels
             if (newAddressSelected != AddressSelected)
             {
                 AddressSelected = newAddressSelected;
-                AddressFinder = AddressSelected.FinderAddress;
+                AddressFinder = AddressSelected.DisplayAddress;
             }
         }
 
@@ -262,7 +262,7 @@ namespace AeccApp.Core.ViewModels
             {
                 if (string.IsNullOrEmpty(AddressSelected.PlaceId))
                 {
-                    IEnumerable<AddressModel> places = await GetPlacesAsync(AddressSelected.FinderAddress, cancelToken);
+                    IEnumerable<AddressModel> places = await GetPlacesAsync(AddressSelected.DisplayAddress, cancelToken);
                     if (places.Any())
                     {
                         AddressSelected = places.First();

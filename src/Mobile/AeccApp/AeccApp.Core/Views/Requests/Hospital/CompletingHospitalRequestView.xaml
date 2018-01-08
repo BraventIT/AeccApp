@@ -16,37 +16,27 @@
         <Grid>
             <StackLayout>
                 <!--  Header  -->
-                <StackLayout
-                    Margin="0"
+                <Frame
                     Padding="0"
                     BackgroundColor="{StaticResource LightSilver}"
-                    HeightRequest="100"
-                    HorizontalOptions="FillAndExpand">
+                    HeightRequest="100">
                     <Label
-                        Margin="30"
+                        Margin="30,0"
                         FontSize="{StaticResource MidLargeSize}"
-                        HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource TitleLabelStyleNormal}"
                         Text="{Binding RequestTypeHeader}"
                         VerticalOptions="Center" />
-                </StackLayout>
+                </Frame>
 
                 <!--  Map  -->
-                <Grid HorizontalOptions="FillAndExpand">
-                    <Grid.HeightRequest>
-                        <OnPlatform
-                            x:TypeArguments="x:Double"
-                            Android="130"
-                            WinPhone="130"
-                            iOS="130" />
-                    </Grid.HeightRequest>
+                <Grid HeightRequest="130">
+
                     <maps:Map
                         x:Name="map"
-                        HasZoomEnabled="False"
-                        HorizontalOptions="FillAndExpand"
-                        IsEnabled="False"
-                        VerticalOptions="FillAndExpand" />
+                        HasRotationEnabled="False"
+                        HasScrollEnabled="False"
+                        HasZoomEnabled="False" />
 
                     <BoxView Margin="0" Style="{StaticResource TransparentBoxViewStyle}">
                         <BoxView.GestureRecognizers>
