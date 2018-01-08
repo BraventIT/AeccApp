@@ -36,12 +36,11 @@
                 <!--#region  Info call banner-->
                 <StackLayout
                     BackgroundColor="{StaticResource LightGrey}"
-                    Spacing="0"
+                    IsVisible="{Binding IsHeaderInfoBannerVisible}"
                     Orientation="Horizontal"
-                    IsVisible="{Binding IsHeaderInfoBannerVisible}">
+                    Spacing="0">
 
-                    
-                    <Grid HorizontalOptions="FillAndExpand" >
+                    <Grid HorizontalOptions="FillAndExpand">
                         <Button
                             Margin="0"
                             BackgroundColor="{StaticResource LightGrey}"
@@ -111,42 +110,44 @@
                     <!--#endregion-->
 
                     <!--#region Request state panel-->
-                        <Grid
-                            Margin="15,20"
-                            Padding="20"
-                        HeightRequest="50"
-                            BackgroundColor="{StaticResource WhiteColor}"
-                            IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}">
-                            <Grid.ColumnDefinitions>
+                    <Grid
+                        Margin="15,20"
+                        Padding="20"
+                        BackgroundColor="{StaticResource WhiteColor}"
+                        IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}">
+                        <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
-                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
+                        <ctrl:CustomImage
+                            Margin="0,0,12,0"
+                            SourcePlatform="request_grey_icon"
+                            VerticalOptions="Center"
+                            WidthRequest="28" />
+
+                        <StackLayout Grid.Column="1" Margin="0,0,50,0">
+                            <Label
+                                Margin="0"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                                Text="{Binding [HomeViewRequests]}" />
+
+                            <Label Style="{StaticResource LightGreyLabelStyle}" Text="{Binding [HomeViewAllRequests]}" />
+                        </StackLayout>
+
+                        <Grid
+                            Grid.Column="1"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center">
+                            <Button Command="{Binding NewRequestCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
+
                             <ctrl:CustomImage
-                                Margin="0,0,12,0"
-                                SourcePlatform="request_grey_icon"
-                                VerticalOptions="Center"
-                                WidthRequest="28" />
-
-                            <StackLayout Grid.Column="1" Margin="0,0,50,0">
-                                <Label
-                                    Margin="0"
-                                    HorizontalOptions="Start"
-                                    Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
-                                    Text="{Binding [HomeViewRequests]}" />
-
-                                <Label Style="{StaticResource LightGreyLabelStyle}" Text="{Binding [HomeViewAllRequests]}" />
-                            </StackLayout>
-
-                            <Grid Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End">
-                                <Button Command="{Binding NewRequestCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
-
-                                <ctrl:CustomImage
-                                    HeightRequest="50"
-                                    InputTransparent="True"
-                                    SourcePlatform="round_plus_green_background" />
-                            </Grid>
+                                HeightRequest="50"
+                                InputTransparent="True"
+                                SourcePlatform="round_plus_green_background" />
                         </Grid>
+                    </Grid>
                     <!--#endregion-->
 
                     <!--#region Chat state panel-->
@@ -154,106 +155,105 @@
                         Margin="15,0,15,20"
                         Padding="20"
                         BackgroundColor="{StaticResource WhiteColor}">
-                    <Grid
-                        >
-                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                             <ColumnDefinition Width="*" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                        <ctrl:CustomImage
-                            Margin="0,0,12,0"
-                            SourcePlatform="chat_grey_icon"
-                            VerticalOptions="Center"
-                            WidthRequest="32" />
+                            <ctrl:CustomImage
+                                Margin="0,0,12,0"
+                                SourcePlatform="chat_grey_icon"
+                                VerticalOptions="Center"
+                                WidthRequest="32" />
 
-                        <StackLayout Grid.Column="1" Margin="0,0,50,0">
-                        <Label
-                            Margin="0"
-                            HorizontalOptions="Start"
-                            Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
-                            Text="{Binding [HomeViewChatsOnline]}" />
+                            <StackLayout Grid.Column="1" Margin="0,0,50,0">
+                                <Label
+                                    Margin="0"
+                                    HorizontalOptions="Start"
+                                    Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                                    Text="{Binding [HomeViewChatsOnline]}" />
 
-                        <Label
-                            IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
-                            Style="{StaticResource LightGreyLabelStyle}"
-                            Text="{Binding [HomeViewTalkToVolunteer]}" />
+                                <Label
+                                    IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
+                                    Style="{StaticResource LightGreyLabelStyle}"
+                                    Text="{Binding [HomeViewTalkToVolunteer]}" />
                             </StackLayout>
-                        <Grid
-                    
-                            Grid.Column="1"
-                            HorizontalOptions="End"
-                            IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
-                            VerticalOptions="Center">
-                            <Grid HorizontalOptions="Start" IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
-                                <Button Command="{Binding NewChatCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
 
-                                <ctrl:CustomImage
-                                    HeightRequest="50"
-                                    InputTransparent="True"
-                                    SourcePlatform="round_plus_green_background" />
+                            <Grid
+                                Grid.Column="1"
+                                HorizontalOptions="End"
+                                IsVisible="{Binding IsVolunteer, Converter={StaticResource InverseBoolConverter}}"
+                                VerticalOptions="Center">
+                                <Grid HorizontalOptions="Start" IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
+                                    <Button Command="{Binding NewChatCommand}" Style="{StaticResource GreenCircularButtonStyle}" />
+
+                                    <ctrl:CustomImage
+                                        HeightRequest="50"
+                                        InputTransparent="True"
+                                        SourcePlatform="round_plus_green_background" />
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
 
-                    <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}" VerticalOptions="Start">
+                        <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}" VerticalOptions="Start">
 
-                        <StackLayout IsVisible="{Binding IsVolunteer}">
-                            <Label
-                                IsVisible="{Binding VolunteerIsActive, Converter={StaticResource InverseBoolConverter}"
-                                Style="{StaticResource NormalLabelStyle}"
-                                Text="{Binding [ChatViewGoOnlineBeforeChat]}" />
-                            <Label
-                                IsVisible="{Binding VolunteerIsActive}"
-                                Style="{StaticResource NormalLabelStyle}"
-                                Text="{Binding [ChatViewYouHaveToWaitRequest]}" />
-                        </StackLayout>
+                            <StackLayout IsVisible="{Binding IsVolunteer}">
+                                <Label
+                                    IsVisible="{Binding VolunteerIsActive, Converter={StaticResource InverseBoolConverter}"
+                                    Style="{StaticResource NormalLabelStyle}"
+                                    Text="{Binding [ChatViewGoOnlineBeforeChat]}" />
+                                <Label
+                                    IsVisible="{Binding VolunteerIsActive}"
+                                    Style="{StaticResource NormalLabelStyle}"
+                                    Text="{Binding [ChatViewYouHaveToWaitRequest]}" />
+                            </StackLayout>
 
-                    </Grid>
+                        </Grid>
 
-                    <Grid
-                        Margin="10"
-                        IsVisible="{Binding InConversation}"
-                        VerticalOptions="Start">
+                        <Grid
+                            Margin="10"
+                            IsVisible="{Binding InConversation}"
+                            VerticalOptions="Start">
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-                        <ctrl:CustomImage
-                            HeightRequest="55"
-                            SourcePlatform="{Binding LastMessage.Activity.From.Gender, Converter={StaticResource GenderToImageConverter}}"
-                            VerticalOptions="End"
-                            WidthRequest="55" />
+                            <ctrl:CustomImage
+                                HeightRequest="55"
+                                SourcePlatform="{Binding LastMessage.Activity.From.Gender, Converter={StaticResource GenderToImageConverter}}"
+                                VerticalOptions="End"
+                                WidthRequest="55" />
 
-                        <StackLayout Grid.Column="1" VerticalOptions="Center">
+                            <StackLayout Grid.Column="1" VerticalOptions="Center">
 
-                            <Label
-                                LineBreakMode="TailTruncation"
-                                Style="{StaticResource MediumLabelStyle}"
-                                Text="{Binding LastMessage.DateTime, StringFormat='{0:ddd} - {0:t}'}" />
-                            <Label
-                                LineBreakMode="TailTruncation"
-                                Style="{StaticResource MediumLabelStyle}"
-                                Text="{Binding LastMessage.Activity.Text}" />
-                        </StackLayout>
+                                <Label
+                                    LineBreakMode="TailTruncation"
+                                    Style="{StaticResource MediumLabelStyle}"
+                                    Text="{Binding LastMessage.DateTime, StringFormat='{0:ddd} - {0:t}'}" />
+                                <Label
+                                    LineBreakMode="TailTruncation"
+                                    Style="{StaticResource MediumLabelStyle}"
+                                    Text="{Binding LastMessage.Activity.Text}" />
+                            </StackLayout>
 
-                        <Button
-                            Grid.Row="1"
-                            Grid.ColumnSpan="2"
-                            Command="{Binding CurrentChatCommand}"
-                            HorizontalOptions="Center"
-                            Style="{StaticResource ButtonStyle}"
-                            Text="{Binding [HomeViewCurrentChat]}" />
+                            <Button
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Command="{Binding CurrentChatCommand}"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource ButtonStyle}"
+                                Text="{Binding [HomeViewCurrentChat]}" />
 
-                    </Grid>
+                        </Grid>
                     </StackLayout>
                     <!--#endregion-->
 
@@ -289,10 +289,7 @@
                             HorizontalOptions="FillAndExpand">
                             <flv:FlowListView.FlowColumnTemplate>
                                 <DataTemplate>
-                                    <StackLayout
-                                        Margin="0,7,7,7"
-                                        BackgroundColor="{StaticResource WhiteColor}"
-                                        >
+                                    <StackLayout Margin="0,7,7,7" BackgroundColor="{StaticResource WhiteColor}">
                                         <Image
                                             Margin="0"
                                             HeightRequest="107"

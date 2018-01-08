@@ -96,7 +96,7 @@ namespace AeccApp.Core.Services
             return Task.CompletedTask;
         }
 
-        private void OnPagePopped(object sender, NavigationEventArgs e)
+        private async void OnPagePopped(object sender, NavigationEventArgs e)
         {
             var mainPage = Application.Current.MainPage as NavigationPage;
             if (mainPage != null)
@@ -109,7 +109,7 @@ namespace AeccApp.Core.Services
                     page = tabbedPage.CurrentPage;
                 }
 
-           //     await (page.BindingContext as INavigableViewModel).StartAsync(null);
+                await (page.BindingContext as INavigableViewModel).ActivateAsync();
             }
         }
 

@@ -39,15 +39,17 @@ namespace AeccApp.Core.ViewModels
                 HasUserFilledRoomForm = false;
             }
             RequestTypeHeader = CurrentRequest.RequestType.Name;
-            DisplayRequestInfo = "Tu petición es:\n \"" + CurrentRequest.RequestType.Name + "\"\n" + CurrentRequest.RequestAddress.DisplayAddress;
+            DisplayRequestInfo = $"Tu petición es:\n \"{CurrentRequest.RequestType.Name }\"\n{CurrentRequest.RequestAddress.DisplayAddress}";
 
             return Task.CompletedTask;
         }
+
         public override Task ActivateAsync()
         {
-            MessagingCenter.Send(new GeolocatorMessage(CurrentAddress.Coordinates), string.Empty);
             RequestDateAndTimePopupVM.ApplyDateAndTime += OnApplyDateAndTimeCommand;
             RequestConfirmationPopupVM.ConfirmRequestToSend += OnSendRequestConfirmationCommand;
+
+            MessagingCenter.Send(new GeolocatorMessage(CurrentAddress.Coordinates), string.Empty);
             return Task.CompletedTask;
         }
         public override void Deactivate()

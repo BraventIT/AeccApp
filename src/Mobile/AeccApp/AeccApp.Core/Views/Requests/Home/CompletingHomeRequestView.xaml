@@ -21,9 +21,8 @@
                 BackgroundColor="{StaticResource LightSilver}"
                 HeightRequest="100">
                 <Label
-                    Margin="30"
+                    Margin="30,0"
                     FontSize="{StaticResource MidLargeSize}"
-                    HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     Style="{StaticResource TitleLabelStyleNormal}"
                     Text="{Binding RequestTypeHeader}"
