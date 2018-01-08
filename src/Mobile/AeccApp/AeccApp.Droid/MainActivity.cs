@@ -1,5 +1,4 @@
 ﻿using AeccApp.Core.Messages;
-using AeccApp.Droid.Services;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -13,8 +12,8 @@ using Xamarin.Forms;
 
 namespace AeccApp.Droid
 {
-    
-    [Activity(Label = "AECC", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+
+    [Activity(Label = "AECC", Icon = "@drawable/icon", Theme = "@style/splashscreen", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
 
@@ -23,6 +22,9 @@ namespace AeccApp.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
+            base.Window.RequestFeature(WindowFeatures.ActionBar);
+            base.SetTheme(Resource.Style.aecc);
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -31,7 +33,7 @@ namespace AeccApp.Droid
             Forms.Init(this, bundle);
             FormsGoogleMaps.Init(this, bundle);
             LoadApplication(new App());
-            App.UiParent = new UIParent(Forms.Context as Activity);
+            App.UiParent = new UIParent(this);
 
             // Only logo visible in dashboard page
             MessagingCenter.Subscribe<ToolbarMessage>(this, string.Empty, m =>

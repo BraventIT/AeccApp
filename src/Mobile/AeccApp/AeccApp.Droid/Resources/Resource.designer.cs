@@ -8516,9 +8516,6 @@ namespace AeccApp.Droid
 			// aapt resource value: 0x7f0c000e
 			public const int CardView_Light = 2131492878;
 			
-			// aapt resource value: 0x7f0c0189
-			public const int MyTheme = 2131493257;
-			
 			// aapt resource value: 0x7f0c018a
 			public const int MyTheme_Base = 2131493258;
 			
@@ -9214,6 +9211,9 @@ namespace AeccApp.Droid
 			
 			// aapt resource value: 0x7f0c000a
 			public const int Widget_MediaRouter_MediaRouteButton = 2131492874;
+			
+			// aapt resource value: 0x7f0c0189
+			public const int aecc = 2131493257;
 			
 			// aapt resource value: 0x7f0c018b
 			public const int splashscreen = 2131493259;

@@ -10,8 +10,6 @@
     BackgroundColor="{StaticResource SeeThrough}"
     CloseWhenBackgroundIsClicked="True">
 
-    <!--#region Test-->
-
     <Frame HorizontalOptions="Fill" Style="{StaticResource PopupFrameStyle}">
         <StackLayout>
             <Grid ColumnSpacing="0" RowSpacing="0">
@@ -86,5 +84,4 @@
         </StackLayout>
     </Frame>
 
-    <!--#endregion-->
 </vPop:PopupPage>

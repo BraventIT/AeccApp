@@ -73,7 +73,6 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\LoginViewRenderer.cs" />
     <Compile Include="Services\FileProvider.cs" />
-    <Compile Include="SplashScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon.png" />
