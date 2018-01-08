@@ -251,6 +251,7 @@ namespace AeccApp.Core.ViewModels
 
         private Task OnRefreshVolunteersAsync(object obj)
         {
+            _listVolunteers = null;
             return ExecuteOperationAsync(LoadVolunteersAsync);
         }
 
@@ -334,10 +335,12 @@ namespace AeccApp.Core.ViewModels
 
             if (string.IsNullOrEmpty(PartyId))
             {
+                MessagingCenter.Send(new ToolbarMessage(this[IsVolunteer ? "WaitRequestToolbarTitle" : "VolunteersListToolbarTitle"]), string.Empty);
+
                 if (!IsVolunteer)
                 {
-                    if (Volunteers.Any())
-                        await ExecuteOperationQuietlyAsync(cancelToken => LoadVolunteersAsync());
+                    if (_listVolunteers?.Any() ?? false)
+                        await ExecuteOperationQuietlyAsync(() => LoadVolunteersAsync());
                     else
                         await ExecuteOperationAsync(() => LoadVolunteersAsync());
                 }
@@ -350,8 +353,8 @@ namespace AeccApp.Core.ViewModels
 
         private async Task LoadVolunteersAsync()
         {
-            FilterVolunteersIsEmpty = false;
-            MessagingCenter.Send(new ToolbarMessage(this["VolunteersListToolbarTitle"]), string.Empty);
+            RefreshVolunters(true);
+
             try
             {
                 _listVolunteers = await ChatService.GetListVolunteersAsync();
@@ -461,28 +464,27 @@ namespace AeccApp.Core.ViewModels
             RefreshVolunters();
         }
 
-        private void RefreshVolunters()
+        private void RefreshVolunters(bool isPreload = false)
         {
-            VolunteersIsEmpty = !_listVolunteers?.Any()?? true;
-            CanFilterVolunteers = !VolunteersIsEmpty;
+            var realVolunteersIsEmpty = !_listVolunteers?.Any() ?? true;
 
-            if (_listVolunteers == null)
-                return;
+            VolunteersIsEmpty = isPreload ? false : realVolunteersIsEmpty;
 
-            var volunteersFiltered = _listVolunteers.Where((o =>
-                (!o.Age.HasValue || (o.Age < _filters.MaximumAge && o.Age > _filters.MinimumAge)) &&
-                (o.Gender == null || o.Gender.StartsWith(_filters.Gender, StringComparison.CurrentCultureIgnoreCase)))).ToList();
+            CanFilterVolunteers = !realVolunteersIsEmpty;
 
-            Volunteers.SyncExact(volunteersFiltered);
+            if (_listVolunteers != null)
+            {
+                var volunteersFiltered = _listVolunteers.Where((o =>
+                    (!o.Age.HasValue || (o.Age < _filters.MaximumAge && o.Age > _filters.MinimumAge)) &&
+                    (o.Gender == null || o.Gender.StartsWith(_filters.Gender, StringComparison.CurrentCultureIgnoreCase)))).ToList();
 
-            FilterVolunteersIsEmpty = !VolunteersIsEmpty && !Volunteers.Any();
+                Volunteers.SyncExact(volunteersFiltered);
+            }
+            FilterVolunteersIsEmpty = !realVolunteersIsEmpty && !Volunteers.Any();
         }
 
         protected override void OnIsBusyChanged()
         {
-            if (IsBusy)
-                VolunteersIsEmpty = false;
-
             _chooseVolunteerCommand?.ChangeCanExecute();
             _refreshVolunteersCommand?.ChangeCanExecute();
             _sendMessageCommand?.ChangeCanExecute();

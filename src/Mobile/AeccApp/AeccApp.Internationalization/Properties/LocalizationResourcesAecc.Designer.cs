@@ -1547,6 +1547,15 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Esperando solicitud.
+        /// </summary>
+        public static string WaitRequestToolbarTitle {
+            get {
+                return ResourceManager.GetString("WaitRequestToolbarTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tus peticiones.
         /// </summary>
         public static string YourRequestsToolbarTitle {

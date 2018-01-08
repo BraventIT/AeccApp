@@ -612,6 +612,9 @@
   <data name="VolunteersListToolbarTitle" xml:space="preserve">
     <value>Elige voluntario</value>
   </data>
+  <data name="WaitRequestToolbarTitle" xml:space="preserve">
+    <value>Esperando solicitud</value>
+  </data>
   <data name="YourRequestsToolbarTitle" xml:space="preserve">
     <value>Tus peticiones</value>
   </data>
