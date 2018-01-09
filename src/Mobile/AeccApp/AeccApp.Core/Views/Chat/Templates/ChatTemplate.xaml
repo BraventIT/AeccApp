@@ -176,19 +176,27 @@
                     </ctrl:ExpandableEditor.Behaviors>
                 </ctrl:ExpandableEditor>
 
-                <ctrl:CustomImage
+                <Grid
                     Grid.Row="1"
                     Grid.Column="1"
-                    Margin="0,0,10,0"
-                    HeightRequest="30"
-                    SourcePlatform="send_icon"
-                    VerticalOptions="Center"
-                    WidthRequest="30">
-                    <ctrl:CustomImage.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
-                    </ctrl:CustomImage.GestureRecognizers>
-                </ctrl:CustomImage>
+                    Margin="0,0,10,0">
 
+                    <Button
+                        BackgroundColor="{StaticResource GreenText}"
+                        Command="{Binding SendMessageCommand}"
+                        HeightRequest="32"
+                        Style="{StaticResource CircularButtonStyle}"
+                        VerticalOptions="Center"
+                        WidthRequest="32" />
+
+                    <ctrl:CustomImage
+                        HeightRequest="30"
+                        HorizontalOptions="Center"
+                        InputTransparent="True"
+                        SourcePlatform="send_icon"
+                        VerticalOptions="Center" />
+
+                </Grid>
                 <ctrl:BoxViewKeyboardHeight
                     Grid.Row="1"
                     Grid.ColumnSpan="2"

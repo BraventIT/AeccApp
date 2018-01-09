@@ -29,19 +29,19 @@
   
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.6.2" />
-    <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.9" />
+    <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.10" />
     <PackageReference Include="LiveXAML" Version="2.1.16" />
     <PackageReference Include="Microsoft.Bot.Connector.DirectLine" Version="3.0.2" />
     <PackageReference Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Plugin.Permissions" Version="2.1.0" />
+    <PackageReference Include="Plugin.Permissions" Version="2.2.1" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.0.4" />
-    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.1.2" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.2.0" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.7" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.121934" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="2.2.1" />
-    <PackageReference Include="Xamarin.Forms.RangeSlider" Version="0.7.14" />
+    <PackageReference Include="Xamarin.Forms.RangeSlider" Version="0.7.17" />
   </ItemGroup>
 
   <ItemGroup>

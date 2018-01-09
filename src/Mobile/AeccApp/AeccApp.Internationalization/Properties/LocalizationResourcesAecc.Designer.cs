@@ -746,15 +746,6 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ver todas mis peticiones.
-        /// </summary>
-        public static string HomeViewAllRequests {
-            get {
-                return ResourceManager.GetString("HomeViewAllRequests", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Chats online.
         /// </summary>
         public static string HomeViewChatsOnline {
@@ -787,6 +778,15 @@ namespace AeccApp.Internationalization.Properties {
         public static string HomeViewLastNews {
             get {
                 return ResourceManager.GetString("HomeViewLastNews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Haz una nueva petición.
+        /// </summary>
+        public static string HomeViewNewRequests {
+            get {
+                return ResourceManager.GetString("HomeViewNewRequests", resourceCulture);
             }
         }
         

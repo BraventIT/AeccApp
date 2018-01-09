@@ -35,7 +35,7 @@
 
                 <!--#region  Info call banner-->
                 <StackLayout
-                    BackgroundColor="{StaticResource LightGrey}"
+                    HeightRequest="50"
                     IsVisible="{Binding IsHeaderInfoBannerVisible}"
                     Orientation="Horizontal"
                     Spacing="0">
@@ -45,10 +45,12 @@
                             Margin="0"
                             BackgroundColor="{StaticResource LightGrey}"
                             BorderRadius="0"
+                            BorderWidth="0"
                             Command="{Binding HeaderInfoBannerCall}" />
                         <Label
-                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
                             InputTransparent="True"
+                            Style="{StaticResource NormalLabelStyle}"
                             Text="{Binding [HomeViewHeaderInfoBannerText]}"
                             VerticalOptions="Center" />
                     </Grid>
@@ -57,13 +59,13 @@
                             Margin="0"
                             BackgroundColor="{StaticResource LightGrey}"
                             BorderRadius="0"
+                            BorderWidth="0"
                             Command="{Binding HeaderInfoBannerClose}"
                             Style="{StaticResource ClosePopupButtonStyle}"
                             VerticalOptions="FillAndExpand" />
 
                         <ctrl:CustomImage
-                            Margin="0,0,10,0"
-                            HeightRequest="13"
+                            Margin="20,0"
                             HorizontalOptions="End"
                             InputTransparent="True"
                             SourcePlatform="x_icon_grey"
@@ -74,7 +76,7 @@
                 </StackLayout>
                 <!--#endregion-->
 
-                <StackLayout Padding="10,5,10,10">
+                <StackLayout Margin="10,5,10,10">
 
                     <!--#region Volunteer state panel-->
                     <Grid IsVisible="{Binding InConversation, Converter={StaticResource InverseBoolConverter}}">
@@ -133,7 +135,7 @@
                                 Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
                                 Text="{Binding [HomeViewRequests]}" />
 
-                            <Label Style="{StaticResource LightGreyLabelStyle}" Text="{Binding [HomeViewAllRequests]}" />
+                            <Label Style="{StaticResource LightGreyLabelStyle}" Text="{Binding [HomeViewNewRequests]}" />
                         </StackLayout>
 
                         <Grid
@@ -258,55 +260,54 @@
                     <!--#endregion-->
 
                     <!--#region  News panel-->
-                    <StackLayout Margin="20,0,0,15">
 
+                    <Label
+                        Margin="20,0"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                        Text="{Binding [HomeViewLastNews]}" />
+
+                    <Grid Margin="20,0" HeightRequest="28">
+                        <Button
+                            Margin="0"
+                            BackgroundColor="{StaticResource LightSilver}"
+                            BorderRadius="0"
+                            Command="{Binding OpenAllNewsCommand}" />
                         <Label
                             Margin="0"
                             HorizontalOptions="Start"
-                            Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
-                            Text="{Binding [HomeViewLastNews]}" />
+                            InputTransparent="True"
+                            Style="{StaticResource LightGreyLabelStyle}"
+                            Text="{Binding [HomeViewAllNews]}" />
+                    </Grid>
 
-                        <Grid Margin="0" Padding="0">
-                            <Button
-                                Margin="0"
-                                BackgroundColor="{StaticResource LightSilver}"
-                                BorderRadius="0"
-                                Command="{Binding OpenAllNewsCommand}" />
-                            <Label
-                                Margin="0"
-                                HorizontalOptions="Start"
-                                InputTransparent="True"
-                                Style="{StaticResource LightGreyLabelStyle}"
-                                Text="{Binding [HomeViewAllNews]}" />
-                        </Grid>
+                    <flv:FlowListView
+                        x:Name="NewsFlowListView"
+                        Margin="10,0"
+                        FlowColumnCount="2"
+                        FlowItemTappedCommand="{Binding ChooseNewCommand}"
+                        FlowItemsSource="{Binding NewsList}"
+                        HasUnevenRows="true"
+                        HorizontalOptions="FillAndExpand">
+                        <flv:FlowListView.FlowColumnTemplate>
+                            <DataTemplate>
+                                <StackLayout
+                                    Margin="10"
+                                    BackgroundColor="{StaticResource WhiteColor}"
+                                    HorizontalOptions="Fill">
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="100"
+                                        Source="{Binding Imagen}" />
+                                    <Label
+                                        Margin="5"
+                                        Text="{Binding Title}"
+                                        TextColor="Black" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </flv:FlowListView.FlowColumnTemplate>
+                    </flv:FlowListView>
 
-                        <flv:FlowListView
-                            x:Name="NewsFlowListView"
-                            FlowColumnCount="2"
-                            FlowItemTappedCommand="{Binding ChooseNewCommand}"
-                            FlowItemsSource="{Binding NewsList}"
-                            HasUnevenRows="true"
-                            HorizontalOptions="FillAndExpand">
-                            <flv:FlowListView.FlowColumnTemplate>
-                                <DataTemplate>
-                                    <StackLayout Margin="0,7,7,7" BackgroundColor="{StaticResource WhiteColor}">
-                                        <Image
-                                            Margin="0"
-                                            HeightRequest="107"
-                                            HorizontalOptions="FillAndExpand"
-                                            Source="{Binding Imagen}" />
-                                        <Label
-                                            Margin="5"
-                                            FontAttributes="Bold"
-                                            Text="{Binding Title}"
-                                            TextColor="Black"
-                                            VerticalOptions="Start" />
-                                    </StackLayout>
-                                </DataTemplate>
-                            </flv:FlowListView.FlowColumnTemplate>
-                        </flv:FlowListView>
-
-                    </StackLayout>
                     <!--#endregion-->
 
                 </StackLayout>

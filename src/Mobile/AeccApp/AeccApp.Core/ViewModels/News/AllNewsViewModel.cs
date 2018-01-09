@@ -79,7 +79,8 @@ namespace AeccApp.Core.ViewModels
                 {
                     await NewsDataService.InsertOrUpdateAsync(newData);
                 }
-                NewsList.SyncExact(news);
+
+                await FillNewsAsync();
 
                 Settings.LastNewsChecked = today;
             }

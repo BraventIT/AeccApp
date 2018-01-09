@@ -19,9 +19,7 @@
         FlowColumnCount="2"
         FlowItemTappedCommand="{Binding ChooseNewCommand}"
         FlowItemsSource="{Binding NewsList}"
-        HasUnevenRows="true"
-        HorizontalOptions="FillAndExpand"
-        RowHeight="214">
+        HasUnevenRows="true">
         <flv:FlowListView.FlowColumnTemplate>
             <DataTemplate>
                 <StackLayout
@@ -29,13 +27,11 @@
                     BackgroundColor="{StaticResource WhiteColor}"
                     VerticalOptions="Fill">
                     <Image
-                        Margin="0"
-                        HeightRequest="107"
-                        HorizontalOptions="FillAndExpand"
+                        Aspect="AspectFill"
+                        HeightRequest="100"
                         Source="{Binding Imagen}" />
                     <Label
                         Margin="5"
-                        FontAttributes="Bold"
                         Text="{Binding Title}"
                         TextColor="Black"
                         VerticalOptions="Start" />

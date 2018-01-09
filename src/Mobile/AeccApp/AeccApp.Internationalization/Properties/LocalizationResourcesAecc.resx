@@ -345,8 +345,8 @@
   <data name="HomeViewAllNews" xml:space="preserve">
     <value>Ver todas las noticias</value>
   </data>
-  <data name="HomeViewAllRequests" xml:space="preserve">
-    <value>Ver todas mis peticiones</value>
+  <data name="HomeViewNewRequests" xml:space="preserve">
+    <value>Haz una nueva petición</value>
   </data>
   <data name="HomeViewChatsOnline" xml:space="preserve">
     <value>Chats online</value>

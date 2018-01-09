@@ -16,7 +16,7 @@ namespace AeccApp.Core.ViewModels
 {
     class HomeViewModel : ViewModelBase
     {
-        private const int NUM_NEWS = 3;
+        private const int NUM_NEWS = 4;
 
         private IChatService ChatService { get; } = ServiceLocator.ChatService;
         private INewsDataService NewsDataService { get; } = ServiceLocator.NewsDataService;

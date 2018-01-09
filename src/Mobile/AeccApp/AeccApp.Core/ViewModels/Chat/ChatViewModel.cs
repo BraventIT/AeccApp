@@ -200,21 +200,16 @@ namespace AeccApp.Core.ViewModels
         {
             return ExecuteOperationAsync(async () =>
             {
-                string textToSend = Text;
+                string textToSend = Text.Trim();
                 Text = string.Empty;
-                if(textToSend == string.Empty)
+                if (!string.IsNullOrEmpty(textToSend))
                 {
+                    var newMessage = ChatService.GetMyMessage(textToSend);
 
-                }
-                else
-                {
-                var newMessage = ChatService.GetMyMessage(textToSend);
+                    TryToInsertTimeMessage(newMessage, true);
+                    Messages.Insert(0, newMessage);
 
-                TryToInsertTimeMessage(newMessage, true);
-                Messages.Insert(0, newMessage);
-
-                await ChatService.SendMessageAsync(newMessage);
-
+                    await ChatService.SendMessageAsync(newMessage);
                 }
             });
         }
@@ -428,10 +423,10 @@ namespace AeccApp.Core.ViewModels
             else
             {
                 DateTime nextMessageTime = DateTime.MinValue;
-                foreach (var message in ChatService.GetConversationMessages())
+                foreach (var message in ChatService.GetConversationMessages().Reverse())
                 {
-                    Messages.Add(message);
-                    TryToInsertTimeMessage(message);
+                    TryToInsertTimeMessage(message, true);
+                    Messages.Insert(0,message);
                 }
             }
             MessagingCenter.Send(new ToolbarMessage(ConversationCounterpart.Name), string.Empty);

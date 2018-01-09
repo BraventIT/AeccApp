@@ -9,7 +9,7 @@
         <Grid Margin="0,0,20,0">
 
             <Button
-                BackgroundColor="Transparent"
+                BackgroundColor="{StaticResource PlanarLightGrey}"
                 BorderColor="Transparent"
                 Command="{Binding ResetVolunteersFilterCommand}"
                 Style="{StaticResource CircularButtonStyle}" />

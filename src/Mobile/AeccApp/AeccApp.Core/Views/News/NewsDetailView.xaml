@@ -9,19 +9,23 @@
     Title="{Binding [NewsDetailViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{StaticResource WhiteColor}">
-    <ScrollView Padding="20,0,20,0">
-        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+    <ScrollView>
+        <StackLayout>
             <Image
-                HeightRequest="250"
+                Aspect="AspectFill"
                 HorizontalOptions="FillAndExpand"
                 Source="{Binding CurrentNewImagen}"
                 VerticalOptions="FillAndExpand" />
 
             <Label
-                Margin="20"
+                Margin="20,25"
                 Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
                 Text="{Binding CurrentNewTitle}" />
-            <Label Style="{StaticResource NormalLabelStyle}" Text="{Binding CurrentNewContent}" />
+
+            <Label
+                Margin="20,0,20,40"
+                Style="{StaticResource NormalLabelStyle}"
+                Text="{Binding CurrentNewContent}" />
         </StackLayout>
     </ScrollView>
 
