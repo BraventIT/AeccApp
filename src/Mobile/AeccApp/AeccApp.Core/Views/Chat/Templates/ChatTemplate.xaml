@@ -99,20 +99,7 @@
                                 <TapGestureRecognizer Command="{Binding CounterpartClickCommand, Source={x:Reference root}}" />
                             </Image.GestureRecognizers>-->
                         </ctrl:CustomImage>
-                        <Grid
-                            Margin="80,10"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand">
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                        </Grid>
                     </Grid>
                 </ViewCell>
             </DataTemplate>
@@ -125,7 +112,19 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Chat messages list  -->
         <ListView
             x:Name="MessageList"
             Grid.ColumnSpan="2"
@@ -134,74 +133,61 @@
             ItemTemplate="{StaticResource ChatDataTemplateSelector}"
             ItemsSource="{Binding Messages}"
             Rotation="180" />
-        <ScrollView>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
 
-                <!--  Chat messages list  -->
+        <BoxView
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            BackgroundColor="{StaticResource BlackColor}"
+            HeightRequest="2"
+            VerticalOptions="Start" />
 
-                <BoxView
-                    Grid.Row="0"
-                    Grid.ColumnSpan="2"
-                    BackgroundColor="{StaticResource BlackColor}"
-                    HeightRequest="2"
-                    VerticalOptions="Start" />
+        <!--  Chat text entry  -->
+        <!--  Placeholder="{Binding [ChatViewChatEntryPlaceHolder]}"  -->
+        <ctrl:ExpandableEditor
+            x:Name="Entry"
+            Grid.Row="2"
+            Margin="10,0"
+            HorizontalOptions="FillAndExpand"
+            Keyboard="Text"
+            Text="{Binding Text, Mode=TwoWay}">
+            <ctrl:ExpandableEditor.Keyboard>
+                <Keyboard x:FactoryMethod="Create">
+                    <x:Arguments>
+                        <KeyboardFlags>Suggestions</KeyboardFlags>
+                    </x:Arguments>
+                </Keyboard>
+            </ctrl:ExpandableEditor.Keyboard>
 
-                <!--  Chat text entry  -->
-                <!--  Placeholder="{Binding [ChatViewChatEntryPlaceHolder]}"  -->
-                <ctrl:ExpandableEditor
-                    x:Name="Entry"
-                    Grid.Row="1"
-                    Margin="10,0"
-                    HorizontalOptions="FillAndExpand"
-                    Keyboard="Text"
-                    Text="{Binding Text, Mode=TwoWay}">
-                    <ctrl:ExpandableEditor.Keyboard>
-                        <Keyboard x:FactoryMethod="Create">
-                            <x:Arguments>
-                                <KeyboardFlags>Suggestions</KeyboardFlags>
-                            </x:Arguments>
-                        </Keyboard>
-                    </ctrl:ExpandableEditor.Keyboard>
+            <ctrl:ExpandableEditor.Behaviors>
+                <beh:EventToCommandBehavior Command="{Binding SendMessageCommand}" EventName="Completed" />
+            </ctrl:ExpandableEditor.Behaviors>
+        </ctrl:ExpandableEditor>
 
-                    <ctrl:ExpandableEditor.Behaviors>
-                        <beh:EventToCommandBehavior Command="{Binding SendMessageCommand}" EventName="Completed" />
-                    </ctrl:ExpandableEditor.Behaviors>
-                </ctrl:ExpandableEditor>
+        <Grid
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="0,0,10,0">
 
-                <Grid
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="0,0,10,0">
+            <Button
+                BackgroundColor="{StaticResource GreenText}"
+                Command="{Binding SendMessageCommand}"
+                HeightRequest="32"
+                Style="{StaticResource CircularButtonStyle}"
+                VerticalOptions="Center"
+                WidthRequest="32" />
 
-                    <Button
-                        BackgroundColor="{StaticResource GreenText}"
-                        Command="{Binding SendMessageCommand}"
-                        HeightRequest="32"
-                        Style="{StaticResource CircularButtonStyle}"
-                        VerticalOptions="Center"
-                        WidthRequest="32" />
+            <ctrl:CustomImage
+                HeightRequest="30"
+                HorizontalOptions="Center"
+                InputTransparent="True"
+                SourcePlatform="send_icon"
+                VerticalOptions="Center" />
 
-                    <ctrl:CustomImage
-                        HeightRequest="30"
-                        HorizontalOptions="Center"
-                        InputTransparent="True"
-                        SourcePlatform="send_icon"
-                        VerticalOptions="Center" />
+        </Grid>
 
-                </Grid>
-                <ctrl:BoxViewKeyboardHeight
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    IsVisible="False" />
-            </Grid>
-        </ScrollView>
-    </StackLayout>
+        <ctrl:BoxViewKeyboardHeight
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            IsVisible="False" />
+    </Grid>
 </ContentView>
