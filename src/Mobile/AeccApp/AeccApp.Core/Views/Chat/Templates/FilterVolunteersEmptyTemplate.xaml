@@ -12,6 +12,7 @@
                 BackgroundColor="{StaticResource PlanarLightGrey}"
                 BorderColor="Transparent"
                 Command="{Binding ResetVolunteersFilterCommand}"
+                HorizontalOptions="Center"
                 Style="{StaticResource CircularButtonStyle}" />
 
             <ctrl:CustomImage

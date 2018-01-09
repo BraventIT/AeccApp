@@ -9,13 +9,13 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [AllNewsViewTitle]}"
-    Padding="15,30,15,30"
     vm:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{StaticResource LightSilver}">
 
     <!--  NewsList list  -->
     <flv:FlowListView
         x:Name="NewsFlowListView"
+        Margin="10"
         FlowColumnCount="2"
         FlowItemTappedCommand="{Binding ChooseNewCommand}"
         FlowItemsSource="{Binding NewsList}"
@@ -23,7 +23,7 @@
         <flv:FlowListView.FlowColumnTemplate>
             <DataTemplate>
                 <StackLayout
-                    Margin="7"
+                    Margin="10"
                     BackgroundColor="{StaticResource WhiteColor}"
                     VerticalOptions="Fill">
                     <Image

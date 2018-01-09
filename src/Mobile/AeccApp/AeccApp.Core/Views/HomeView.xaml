@@ -54,6 +54,7 @@
                             Text="{Binding [HomeViewHeaderInfoBannerText]}"
                             VerticalOptions="Center" />
                     </Grid>
+
                     <Grid>
                         <Button
                             Margin="0"
@@ -61,11 +62,12 @@
                             BorderRadius="0"
                             BorderWidth="0"
                             Command="{Binding HeaderInfoBannerClose}"
+                            HorizontalOptions="Fill"
                             Style="{StaticResource ClosePopupButtonStyle}"
-                            VerticalOptions="FillAndExpand" />
+                            VerticalOptions="Fill" />
 
                         <ctrl:CustomImage
-                            Margin="20,0"
+                            Margin="10,0,20,0"
                             HorizontalOptions="End"
                             InputTransparent="True"
                             SourcePlatform="x_icon_grey"

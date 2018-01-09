@@ -25,15 +25,14 @@
             <ctrl:CustomImage Style="{StaticResource ClosePopupImageStyle}" />
 
             <Label
-                Margin="20,55,20,20"
+                Margin="20,55,20,10"
                 HorizontalTextAlignment="Center"
                 Style="{StaticResource DarkGreyTitleStyle}"
                 Text="{Binding [PopupTermsAndConditionsTitle]}" />
 
             <StackLayout Grid.Row="1">
-                <ScrollView IsClippedToBounds="True">
+                <ScrollView Padding="30,10" IsClippedToBounds="True">
                     <Label
-                        Margin="30,0,30,10"
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource DarkGreyMediumLabelStyle}"
                         Text="{Binding [PopupTermsAndConditionsContent]}" />
@@ -43,7 +42,7 @@
 
             <ctrl:CheckBoxImage
                 Grid.Row="2"
-                Margin="25,20,25,20"
+                Margin="25,10,25,20"
                 IsChecked="{Binding AcceptTerms, Mode=TwoWay}"
                 Text="{Binding [PopupTermsAndConditionsAccept]}" />
 
