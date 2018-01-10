@@ -8,7 +8,8 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [MakeRequestToolbarTitle]}"
-    vm:ViewModelLocator.AutoWireViewModel="True">
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    NavigationPage.BackButtonTitle="">
 
     <Grid>
         <temp:FirstTimeRequestViewTemplate IsVisible="{Binding FirstTimeLandingPageVisible}" />

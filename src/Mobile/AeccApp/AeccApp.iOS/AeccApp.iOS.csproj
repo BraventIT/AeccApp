@@ -149,6 +149,8 @@
       <Link>Renderers\XLabs\ImageButtonRenderer.Shared.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\DatePickerRender.cs" />
+    <Compile Include="Renderers\TimePickerRender.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer.cs" />
     <Compile Include="Renderers\BoxViewKeyboardHeightRenderer.cs" />

@@ -63,7 +63,7 @@ namespace AeccApp.Core.ViewModels
         private object _operationObj = new object();
         protected void StartOperation()
         {
-            lock (_operationObj) 
+            lock (_operationObj)
                 _busyOperations++;
 
             IsBusy = _busyOperations != 0;

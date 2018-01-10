@@ -6,6 +6,8 @@ namespace AeccApp.Core
 {
     public class GlobalSetting
     {
+        public const string TEST_EMAIL = "afraj@bravent.net";
+
         private string _baseEndpoint;
         private string _apiEndpoint;
         private static readonly GlobalSetting _instance = new GlobalSetting();
@@ -35,7 +37,7 @@ namespace AeccApp.Core
             // LOCAL TEST API ALFRA
             //ApiEndpoint = "http://localhost:14724";
 
-            EmailChatAddress = "afraj@bravent.net";  //"afraj@bravent.net;acabrera@bravent.net";
+            EmailChatAddress = TEST_EMAIL;
             EmailChatTemplate =
                 "El beneficiario %UserName% %UserSurname% ha reportado una conversación con " +
                 "%CounterpartName% %CounterpartSurname% cuya valoración es %ChatRating%.\n" +

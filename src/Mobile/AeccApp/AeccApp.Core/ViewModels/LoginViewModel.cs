@@ -100,7 +100,7 @@ namespace AeccApp.Core.ViewModels
         {
             await ChatService.InitializeAsync();
             await NavigationService.NavigateToAsync<DashboardViewModel>();
-            //await NavigationService.RemoveLastFromBackStackAsync();
+            await NavigationService.RemoveBackStackAsync();
         }
 
         protected override void OnIsBusyChanged()

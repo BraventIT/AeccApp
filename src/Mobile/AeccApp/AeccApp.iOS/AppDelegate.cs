@@ -8,7 +8,7 @@ using Xamarin.Forms.Platform.iOS;
 namespace AeccApp.iOS
 {
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public partial class AppDelegate : FormsApplicationDelegate
     {
         private const string GoogleIOSMapKey = "AIzaSyCYrC9dTd2tLpBuPEbFqmmJHyO-hJywvFk";
 

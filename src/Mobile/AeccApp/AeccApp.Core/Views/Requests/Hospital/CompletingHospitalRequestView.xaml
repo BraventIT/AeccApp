@@ -10,7 +10,8 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [CompletingRequestTitle]}"
-    vm:ViewModelLocator.AutoWireViewModel="True">
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    NavigationPage.BackButtonTitle="">
 
     <ScrollView>
         <Grid>
@@ -55,7 +56,7 @@
                             Margin="35,0,35,0"
                             Padding="1"
                             BackgroundColor="{StaticResource LightGraySubtitle}"
-                            CornerRadius="25"
+                            CornerRadius="16"
                             HasShadow="False"
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
@@ -63,7 +64,7 @@
                                 Margin="0"
                                 Padding="15,3,15,3"
                                 BackgroundColor="{StaticResource WhiteColor}"
-                                CornerRadius="25"
+                                CornerRadius="16"
                                 HasShadow="False"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center">

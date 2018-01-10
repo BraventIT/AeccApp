@@ -8,7 +8,6 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [HomeViewRequests]}"
-
     vm:ViewModelLocator.AutoWireViewModel="True"
     IconPlatform="requests_tab_icon">
 

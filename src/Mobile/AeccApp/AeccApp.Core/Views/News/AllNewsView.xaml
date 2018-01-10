@@ -10,7 +10,8 @@
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [AllNewsViewTitle]}"
     vm:ViewModelLocator.AutoWireViewModel="True"
-    BackgroundColor="{StaticResource LightSilver}">
+    BackgroundColor="{StaticResource LightSilver}"
+    NavigationPage.BackButtonTitle="">
 
     <!--  NewsList list  -->
     <flv:FlowListView

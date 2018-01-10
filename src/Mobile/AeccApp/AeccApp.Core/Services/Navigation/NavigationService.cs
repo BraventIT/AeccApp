@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AeccApp.Core.Helpers;
 using AeccApp.Core.ViewModels;
-using Xamarin.Forms;
-using System.Reflection;
-using System.Globalization;
 using AeccApp.Core.Views;
-using AeccApp.Core.Helpers;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace AeccApp.Core.Services
 {

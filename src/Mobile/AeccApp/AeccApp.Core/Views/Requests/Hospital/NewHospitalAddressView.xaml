@@ -9,7 +9,8 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [CommonChoseHospital]}"
-    vm:ViewModelLocator.AutoWireViewModel="True">
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    NavigationPage.BackButtonTitle="">
 
     <ContentView.Resources>
         <ResourceDictionary>
@@ -289,6 +290,6 @@
         </StackLayout>
 
         <!--  INDICATOR  -->
-        <!--<ctrl:CustomActivityIndicatorControl Grid.Row="1" />-->
+        <ctrl:CustomActivityIndicatorControl Grid.Row="1" />
     </Grid>
 </v:BaseContentPage>

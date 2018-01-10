@@ -27,10 +27,10 @@
                     HorizontalTextAlignment="Center"
                     Text="{Binding [CommonDate]}"
                     VerticalTextAlignment="Center" />
-                <DatePicker Margin="10,5,10,5" Date="{Binding DateSelected, Mode=TwoWay}" />
+                <DatePicker Margin="10,5" Date="{Binding DateSelected, Mode=TwoWay}" />
 
                 <Label
-                    Margin="10,5,10,5"
+                    Margin="10,5"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     Text="{Binding [CommonTime]}"

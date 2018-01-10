@@ -11,11 +11,7 @@
     BackgroundColor="{StaticResource WhiteColor}">
     <ScrollView>
         <StackLayout>
-            <Image
-                Aspect="AspectFill"
-                HorizontalOptions="FillAndExpand"
-                Source="{Binding CurrentNewImagen}"
-                VerticalOptions="FillAndExpand" />
+            <Image Aspect="AspectFill" Source="{Binding CurrentNewImagen}" />
 
             <Label
                 Margin="20,25"

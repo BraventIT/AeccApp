@@ -42,9 +42,5 @@ namespace AeccApp.Core.ViewModels.Popups
             get { return _displayTime; }
             set { Set(ref _displayTime, value); }
         }
-
-
-
-
     }
 }

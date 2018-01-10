@@ -1,14 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels.Popups
 {
-   public class RequestDateAndTimePopupViewModel : ClosablePopupViewModelBase
+    public class RequestDateAndTimePopupViewModel : ClosablePopupViewModelBase
     {
         public event EventHandler ApplyDateAndTime;
+
+        public RequestDateAndTimePopupViewModel()
+        {
+            var now = DateTime.Now.AddHours(2);
+
+            _dateSelected = now;
+            _timeSelected = new TimeSpan(now.Hour, 0, 0);
+        }
 
         private Command _applyDateAndTimeCommand;
         public ICommand ApplyDateAndTimeCommand
@@ -20,7 +26,7 @@ namespace AeccApp.Core.ViewModels.Popups
             }
         }
 
-        private DateTime _dateSelected = DateTime.Now;
+        private DateTime _dateSelected;
 
         public DateTime DateSelected
         {
@@ -28,7 +34,7 @@ namespace AeccApp.Core.ViewModels.Popups
             set { Set(ref _dateSelected, value); }
         }
 
-        private TimeSpan _timeSelected = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+        private TimeSpan _timeSelected;
 
         public TimeSpan TimeSelected
         {

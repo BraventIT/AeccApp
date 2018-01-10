@@ -7,8 +7,8 @@
     xmlns:pages="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     vm:ViewModelLocator.AutoWireViewModel="True"
-    NavigationPage.BackButtonTitle=""
-    BackgroundColor="{StaticResource WhiteColor}">
+    BackgroundColor="{StaticResource WhiteColor}"
+    NavigationPage.BackButtonTitle="">
 
     <!--  This page works as parent of every tabbed page  -->
 

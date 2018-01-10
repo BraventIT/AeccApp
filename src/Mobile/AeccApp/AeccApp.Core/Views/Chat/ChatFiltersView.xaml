@@ -11,7 +11,8 @@
     xmlns:vPop="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [CommonFilters]}"
-    vm:ViewModelLocator.AutoWireViewModel="True">
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    NavigationPage.BackButtonTitle="">
 
     <v:BaseContentPage.Resources>
         <ResourceDictionary>

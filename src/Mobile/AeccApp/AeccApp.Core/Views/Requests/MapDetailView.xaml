@@ -9,7 +9,8 @@
     xmlns:v="clr-namespace:AeccApp.Core.Views"
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="{Binding [CompletingRequestTitle]}"
-    vm:ViewModelLocator.AutoWireViewModel="True">
+    vm:ViewModelLocator.AutoWireViewModel="True"
+    NavigationPage.BackButtonTitle="">
 
     <!--  Avoid InitialCameraUpdate on map (iOS bug)  -  https://github.com/amay077/Xamarin.Forms.GoogleMaps/issues/310  -->
     <maps:Map x:Name="map" HasZoomEnabled="True" />

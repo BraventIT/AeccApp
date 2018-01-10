@@ -177,9 +177,8 @@ namespace AeccApp.Core.ViewModels
             //});
 
             //LEAVE THIS FOR EMAIL TESTING
-            string[] s = new string[] { "afraj@bravent.net" /*, "acabrera@bravent.net" */ };
-            await OnSendRequestAsync(s);
-
+            string[] emails = new string[] { GlobalSetting.TEST_EMAIL };
+            await OnSendRequestAsync(emails);
         }
 
         private Command _closeConfimationPopupCommand;

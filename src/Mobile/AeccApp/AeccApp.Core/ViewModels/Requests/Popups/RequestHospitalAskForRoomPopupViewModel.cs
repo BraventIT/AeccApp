@@ -8,7 +8,6 @@ namespace AeccApp.Core.ViewModels.Popups
     {
         public event EventHandler ContinueWithRequest;
 
-
         #region Commands
         private Command _continueWithRequestCommand;
         public ICommand ContinueWithRequestCommand
@@ -57,7 +56,6 @@ namespace AeccApp.Core.ViewModels.Popups
 
         #endregion
 
-
         #region Properties
         private bool _isRoomFormFilled;
 
@@ -93,7 +91,5 @@ namespace AeccApp.Core.ViewModels.Popups
         }
 
         #endregion
-
-
     }
 }

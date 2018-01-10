@@ -8,12 +8,13 @@ namespace AeccApp.Core.ViewModels.Popups
         {
             await NavigationService.HidePopupAsync();
             await NavigationService.NavigateToAsync<DashboardViewModel>();
+            await NavigationService.RemoveBackStackAsync();
         }
 
         public override bool OnBackButtonPressed()
         {
             OnClosePopupCommandAsync();
-            return base.OnBackButtonPressed();
+            return false;
         }
     }
 }

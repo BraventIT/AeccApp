@@ -53,13 +53,6 @@ namespace AeccApp.Core.ViewModels
                  {
                      await NavigationService.ShowPopupAsync(NoLocationProviderPopupVM);
                  }
-
-                 //await ServiceLocator.EmailService.SendAsync(new Aecc.Models.EmailMessage()
-                 //{
-                 //    To = $"{GlobalSetting.Instance.User.Email};afraj@bravent.net",
-                 //    Subject = "Prueba de envío de mensajes",
-                 //    Body = $"Esto es una prueba.\r\nSe ha enviado en nombre de: {GlobalSetting.Instance.User.Name} {GlobalSetting.Instance.User.Surname}\r\n\r\nUn saludo!! ;-)"
-                 //}, token);
              });
         }
 
