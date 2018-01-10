@@ -184,10 +184,9 @@
                 VerticalOptions="Center" />
 
         </Grid>
-
+        
         <ctrl:BoxViewKeyboardHeight
             Grid.Row="3"
-            Grid.ColumnSpan="2"
-            IsVisible="False" />
+            Grid.ColumnSpan="2" />
     </Grid>
 </ContentView>

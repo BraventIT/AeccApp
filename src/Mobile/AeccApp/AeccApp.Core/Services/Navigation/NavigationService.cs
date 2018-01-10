@@ -28,7 +28,7 @@ namespace AeccApp.Core.Services
 
         public void Initialize()
         {
-            var navigationPage = new NavigationPage(CreatePage(typeof(LoginViewModel), null));
+            var navigationPage = new NavigationPage(CreatePage(typeof(DashboardViewModel), null));
             //navigationPage.Popped += OnPagePopped;
             Application.Current.MainPage = navigationPage;
         }

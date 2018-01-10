@@ -29,26 +29,31 @@ namespace AeccApp.iOS.Renderers
             TabBar.UnselectedItemTintColor = Color.FromHex(ResourcesReference.NAV_INACTIVE_COLOR).ToUIColor();
         }
 
-        public override void ViewDidLayoutSubviews()
-        {
-            base.ViewDidLayoutSubviews();
+        //public override void ViewDidLayoutSubviews()
+        //{
+        //    base.ViewDidLayoutSubviews();
 
-            if (NavigationController != null)
-            {
+        //    if (NavigationController != null)
+        //    {
                 
-                NavigationController.NavigationBar.Frame = new CGRect(0, 0, View.Frame.Size.Width, 72.0);
-                NavigationController.NavigationBar.SetTitleVerticalPositionAdjustment(-5, UIBarMetrics.Default);
-                var navigationItem = NavigationController.TopViewController.NavigationItem;
-                var leftNativeButtons = (navigationItem.LeftBarButtonItems ?? new UIBarButtonItem[] { }).ToList();
-                var rightNativeButtons = (navigationItem.RightBarButtonItems ?? new UIBarButtonItem[] { }).ToList();
+        //        NavigationController.NavigationBar.Frame = new CGRect(0, 0, View.Frame.Size.Width, 72.0);
+        //        NavigationController.NavigationBar.SetTitleVerticalPositionAdjustment(-5, UIBarMetrics.Default);
+        //        var navigationItem = NavigationController.TopViewController.NavigationItem;
+        //        var leftNativeButtons = (navigationItem.LeftBarButtonItems ?? new UIBarButtonItem[] { }).ToList();
+        //        var rightNativeButtons = (navigationItem.RightBarButtonItems ?? new UIBarButtonItem[] { }).ToList();
 
-                leftNativeButtons.ForEach(x => x.ImageInsets = new UIEdgeInsets(-8, 0, 0, 0));
-                rightNativeButtons.ForEach(x => x.ImageInsets = new UIEdgeInsets(-8, 0, 0, 0));
+        //        leftNativeButtons.ForEach(x => x.ImageInsets = new UIEdgeInsets(-8, 0, 0, 0));
+        //        rightNativeButtons.ForEach(x => x.ImageInsets = new UIEdgeInsets(-8, 0, 0, 0));
 
-                this.NavigationController.NavigationBar.TintColor = UIColor.White;
+        //        this.NavigationController.NavigationBar.TintColor = UIColor.White;
 
 
-            }
+        //    }
+        //}
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -65,12 +70,6 @@ namespace AeccApp.iOS.Renderers
             iconView.Frame = titleView.Bounds;
 
             iconView.Image = imageIcon.ImageWithRenderingMode(UIImageRenderingMode.Automatic);
-
-            if (NavigationController != null)
-            {
-                NavigationController.NavigationBar.BarTintColor = Color.FromHex(ResourcesReference.APPBAR_ACCENT_COLOR).ToUIColor();
-                NavigationController.NavigationBar.TintColor = Color.White.ToUIColor();
-            }
 
             MessagingCenter.Subscribe<ToolbarMessage>(this, string.Empty, m =>
             {

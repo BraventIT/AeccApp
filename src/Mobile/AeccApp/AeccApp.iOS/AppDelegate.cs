@@ -1,6 +1,9 @@
-﻿using Foundation;
+﻿using AeccApp.Core.Resources;
+using Foundation;
 using Microsoft.Identity.Client;
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace AeccApp.iOS
 {
@@ -14,6 +17,10 @@ namespace AeccApp.iOS
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsGoogleMaps.Init(GoogleIOSMapKey);
             LoadApplication(new App());
+
+            UINavigationBar.Appearance.BarTintColor = Color.FromHex(ResourcesReference.APPBAR_ACCENT_COLOR).ToUIColor();
+            UINavigationBar.Appearance.TintColor = UIColor.White;     
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White });
 
             if (options != null)
             {
@@ -54,10 +61,9 @@ namespace AeccApp.iOS
             UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
         }
         public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
-		{
-			AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(url);
-			return true;
-		}
-
+        {
+            AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(url);
+            return true;
+        }
     }
 }
