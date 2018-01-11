@@ -196,22 +196,18 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private Task OnSendMessageAsync()
+        private async Task OnSendMessageAsync()
         {
-            return ExecuteOperationAsync(async () =>
+            string textToSend = Text.Trim();
+            Text = string.Empty;
+            if (!string.IsNullOrEmpty(textToSend))
             {
-                string textToSend = Text.Trim();
-                Text = string.Empty;
-                if (!string.IsNullOrEmpty(textToSend))
-                {
-                    var newMessage = ChatService.GetMyMessage(textToSend);
+                var newMessage = ChatService.GetMyMessage(textToSend);
 
-                    TryToInsertTimeMessage(newMessage, true);
-                    Messages.Insert(0, newMessage);
-
-                    await ChatService.SendMessageAsync(newMessage);
-                }
-            });
+                TryToInsertTimeMessage(newMessage, true);
+                Messages.Insert(0, newMessage);
+                await ExecuteOperationAsync(async () => await ChatService.SendMessageAsync(newMessage));
+            }
         }
 
 
@@ -364,12 +360,11 @@ namespace AeccApp.Core.ViewModels
         private async void OnLeaseConversation(object sender, EventArgs e)
         {
             var counterpart = ConversationCounterpart;
-            await ExecuteOperationAsync(async () =>
-            {
-                await NavigationService.HidePopupAsync();
-                PartyId = null;
-                await ChatService.EndChatAsync();
-            },
+
+            await NavigationService.HidePopupAsync();
+            PartyId = null;
+
+            await ExecuteOperationAsync(ChatService.EndChatAsync,
             finallyAction: async () =>
             {
                 if (!IsVolunteer && ChatService.GetConversationMessages().Any())

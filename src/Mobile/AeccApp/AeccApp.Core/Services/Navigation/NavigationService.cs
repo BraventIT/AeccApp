@@ -24,7 +24,7 @@ namespace AeccApp.Core.Services
 
         public void Initialize()
         {
-            var navigationPage = new NavigationPage(CreatePage(typeof(DashboardViewModel), null));
+            var navigationPage = new NavigationPage(CreatePage(typeof(LoginViewModel), null));
             //navigationPage.Popped += OnPagePopped;
             Application.Current.MainPage = navigationPage;
         }
@@ -92,22 +92,22 @@ namespace AeccApp.Core.Services
             return Task.CompletedTask;
         }
 
-        private async void OnPagePopped(object sender, NavigationEventArgs e)
-        {
-            var mainPage = Application.Current.MainPage as NavigationPage;
-            if (mainPage != null)
-            {
-                var page = mainPage.CurrentPage;
+        //private async void OnPagePopped(object sender, NavigationEventArgs e)
+        //{
+        //    var mainPage = Application.Current.MainPage as NavigationPage;
+        //    if (mainPage != null)
+        //    {
+        //        var page = mainPage.CurrentPage;
 
-                var tabbedPage = page as TabbedPage;
-                if (tabbedPage != null)
-                {
-                    page = tabbedPage.CurrentPage;
-                }
+        //        var tabbedPage = page as TabbedPage;
+        //        if (tabbedPage != null)
+        //        {
+        //            page = tabbedPage.CurrentPage;
+        //        }
 
-                await (page.BindingContext as INavigableViewModel).ActivateAsync();
-            }
-        }
+        //        await (page.BindingContext as INavigableViewModel).ActivateAsync();
+        //    }
+        //}
 
         private Page CreatePage(Type viewModelType, object parameter)
         {

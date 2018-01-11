@@ -1,5 +1,6 @@
 ﻿using AeccApp.Core.Models;
 using AeccApp.Core.Services;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -40,7 +41,7 @@ namespace AeccApp.Core.ViewModels.Popups
                     {
                         var emailFromChat = new EmailFromChat(
                             _counterpart,
-                            ChatService.GetConversationMessages(),
+                            ChatService.GetConversationMessages().Reverse(),
                             rating);
                         await EmailService.SendAsync(emailFromChat, cancelToken);
                     }

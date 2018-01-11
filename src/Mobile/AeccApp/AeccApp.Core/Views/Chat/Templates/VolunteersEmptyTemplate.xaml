@@ -6,12 +6,11 @@
     xmlns:ctrl="clr-namespace:AeccApp.Core.Controls">
 
     <StackLayout>
-        <Grid Margin="0,0,20,0">
+        <Grid Margin="0,0,20,0" HorizontalOptions="Center">
             <Button
                 BackgroundColor="Transparent"
                 BorderColor="Transparent"
                 Command="{Binding RefreshVolunteersCommand}"
-                HorizontalOptions="Center"
                 Style="{StaticResource CircularButtonStyle}" />
 
             <ctrl:CustomImage

@@ -164,14 +164,14 @@ namespace AeccBot.MessageRouting
         /// <param name="messageRouterResult">The result to handle.</param>
         private async Task HandleNoAgentsAvailableResultAsync(MessageRouterResult messageRouterResult)
         {
-            Party conversationOwnerParty = messageRouterResult.ConversationOwnerParty;
+            Party conversationClientParty = messageRouterResult.ConversationClientParty;
 
-            string message = AeccStrings.AddNoAgentsAvailable_Text;
-            string eventText = (conversationOwnerParty?.AllowBackchannel ?? false) ?
+            string message = AeccStrings.AddNoAgentAvailable_Text;
+            string eventText = (conversationClientParty?.AllowBackchannel ?? false) ?
                 BackChannelCommands.GetMessageRouter(MessageRouterResultType.NoAgentsAvailable)
                 : string.Empty;
 
-            await MessageRouterManager.SendMessageToPartyByBotAsync(conversationOwnerParty, message, eventText);
+            await MessageRouterManager.SendMessageToPartyByBotAsync(conversationClientParty, message, eventText);
         }
 
         /// <summary>

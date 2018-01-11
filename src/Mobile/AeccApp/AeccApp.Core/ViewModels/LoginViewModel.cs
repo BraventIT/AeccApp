@@ -35,10 +35,12 @@ namespace AeccApp.Core.ViewModels
             set { Set(ref _text, value); }
         }
 
+#if VOLUNTEERTEST
         VolunteerTestPopupViewModel _volunteerTestPopupVM;
-        #endregion
+#endif
+#endregion
 
-        #region Commands
+#region Commands
         private Command _signInCommand;
         public ICommand SignInCommand
         {
@@ -51,9 +53,9 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        #endregion
+#endregion
 
-        #region Private Methods
+#region Private Methods
         private Task TryToLoginAsync(bool silentLogin)
         {
             return ExecuteOperationAsync(async () =>
@@ -67,22 +69,22 @@ namespace AeccApp.Core.ViewModels
 
                     if (await IdentityService.TryToLoginAsync(silentLogin))
                     {
-                        #region ONLY FOR TEST
+#if VOLUNTEERTEST
                         _volunteerTestPopupVM = new VolunteerTestPopupViewModel();
                         _volunteerTestPopupVM.Continue += OnVolunteerTestPopupVMContinue;
                         await NavigationService.ShowPopupAsync(_volunteerTestPopupVM);
-                        #endregion
+#else
 
-                        //Text = this["LoginViewPostLoginText"];
-                        //await ContinueLoadingAsync();
+                        Text = this["LoginViewPostLoginText"];
+                        await ExecuteOperationAsync(ContinueLoadingAsync);
+#endif
                     }
                 }
-                catch (MsalException)
+                catch
                 {
-                    //ex.ErrorCode== "request_timeout"
-                    throw;
+                    IsLoginRequired = true;
                 }
-            }, finallyAction: () => IsLoginRequired = true);
+            });
         }
 
         #region ONLY FOR TEST
@@ -92,9 +94,9 @@ namespace AeccApp.Core.ViewModels
             _volunteerTestPopupVM.Continue -= OnVolunteerTestPopupVMContinue;
             await NavigationService.HidePopupAsync();
             Text = this["LoginViewPostLoginText"];
-            await ExecuteOperationAsync(async () => await ContinueLoadingAsync());
+            await ExecuteOperationAsync(ContinueLoadingAsync);
         }
-        #endregion
+#endregion
 
         private async Task ContinueLoadingAsync()
         {
@@ -107,6 +109,6 @@ namespace AeccApp.Core.ViewModels
         {
             _signInCommand.ChangeCanExecute();
         }
-        #endregion
+#endregion
     }
 }

@@ -14,7 +14,7 @@
         public const string CommandEndEngagement = "endEngagement";
         public const string CommandSyncEngagement = "syncEngagement";
 
-        public const string CommandEngagementCounterpart = "engagemnetCounterpart";
+        public const string CommandEngagementCounterpart = "engagementCounterpart";
 
         public const string CommandInitiateEngagement = "initiateEngagement";
         

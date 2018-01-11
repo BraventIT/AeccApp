@@ -106,7 +106,7 @@ namespace AeccApp.Core.Models
 
         public bool Equals(UserData other)
         {
-            return other.Id == Id;
+            return other.PartyId == PartyId;
         }
 
         public override bool Equals(object obj)

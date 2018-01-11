@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Net.Http;
 
 /// <summary>
 /// TERMINOLOGY
@@ -35,7 +36,7 @@ namespace AeccApp.Core.Services
 #endif
 
         private const int POOLING_MS = 750;
-        private const int AGGREGATION_POOLING_CNT = (30 * 1000) / POOLING_MS; // 30 sg
+        private const int AGGREGATION_POOLING_CNT = (20 * 1000) / POOLING_MS; // 20 sg
         private double _pooling_cnt;
 
         /// <summary>
@@ -122,25 +123,26 @@ namespace AeccApp.Core.Services
 
         public async Task InitializeAsync()
         {
-            if (_mainConversation != null)
-                return;
-
-            var user = GSetting.User;
-
-            _client = new DirectLineClient(GSetting.AeccBotSecret);
-            _mainConversation = await _client.Conversations.StartConversationAsync();
-            _account = new ChannelAccountWithUserData()
+            if (_mainConversation == null)
             {
-                Id = user.Id,
-                Name = user.Name,
-                FirstName = user.FirstName,
-                Surname = user.Surname,
-                Email = user.Email,
-                Age = user.Age,
-                Gender = user.Gender
-            };
-            ListenToBotMessages();
-            await TryToFillConversationCounterpartAsync();
+                var user = GSetting.User;
+
+                _client = new DirectLineClient(GSetting.AeccBotSecret);
+                _mainConversation = await _client.Conversations.StartConversationAsync();
+
+                _account = new ChannelAccountWithUserData()
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    FirstName = user.FirstName,
+                    Surname = user.Surname,
+                    Email = user.Email,
+                    Age = user.Age,
+                    Gender = user.Gender
+                };
+                ListenToBotMessages();
+            }
+            await TryToContinueConversationAsync();
         }
 
         #endregion
@@ -175,14 +177,12 @@ namespace AeccApp.Core.Services
         public async Task<IList<UserData>> GetListVolunteersAsync()
         {
             var ct = new CancellationTokenSource(TIMEOUT_MS);
-            await SendActivity(BackChannelCommands.CommandListAggregations, token: ct.Token);
+            await SendActivity(BackChannelCommands.CommandListAggregations, token: ct.Token, rethrowWithHttpException: false);
 
             if (!(_aggregations?.Any() ?? false))
             {
                 _listAggregationsResponseTask = new TaskCompletionSource<bool>();
-                ct.Token.Register(() => _listAggregationsResponseTask?.TrySetCanceled(), false);
-
-                await _listAggregationsResponseTask.Task;
+                var result = await WaitForActivityResponseAsync(_listAggregationsResponseTask, ct.Token, false);
                 _listAggregationsResponseTask = null;
             }
             return _aggregations;
@@ -195,10 +195,9 @@ namespace AeccApp.Core.Services
 
             _conversationMessages.Clear();
             _initiateEngagementTask = new TaskCompletionSource<bool>();
-            ct.Token.Register(() => _initiateEngagementTask?.TrySetCanceled(), false);
 
             _conversationCounterpartParty = Party.FromJsonString(partyId);
-            bool result = await _initiateEngagementTask?.Task;
+            bool result = await WaitForActivityResponseAsync(_initiateEngagementTask, ct.Token, false);
             return result;
         }
 
@@ -210,9 +209,7 @@ namespace AeccApp.Core.Services
             InConversation = false;
 
             _endEngagementTask = new TaskCompletionSource<bool>();
-            ct.Token.Register(() => _endEngagementTask?.TrySetCanceled(), false);
-
-            bool result = await _endEngagementTask.Task;
+            bool result = await WaitForActivityResponseAsync(_endEngagementTask, ct.Token);
             return result;
         }
 
@@ -232,12 +229,10 @@ namespace AeccApp.Core.Services
                 BackChannelCommands.CommandDeleteAggregation;
 
             var ct = new CancellationTokenSource(TIMEOUT_MS);
-            await SendActivity(command, token: ct.Token);
+            await SendActivity(command, token: ct.Token, rethrowWithHttpException: false);
 
             _setVolunteerStateTask = new TaskCompletionSource<bool>();
-            ct.Token.Register(() => _setVolunteerStateTask?.TrySetCanceled(), false);
-
-            bool result = await _setVolunteerStateTask?.Task;
+            bool result = await WaitForActivityResponseAsync(_setVolunteerStateTask, ct.Token, false);
 
             if (result)
             {
@@ -256,11 +251,9 @@ namespace AeccApp.Core.Services
             await SendActivity(command, data: partyId, token: ct.Token);
 
             _conversationMessages.Clear();
-            _acceptAndRejectRequestTask = new TaskCompletionSource<bool>();
-            ct.Token.Register(() => _acceptAndRejectRequestTask?.TrySetCanceled(), false);
-
             _conversationCounterpartParty = Party.FromJsonString(partyId);
-            bool result = await _acceptAndRejectRequestTask.Task;
+            _acceptAndRejectRequestTask = new TaskCompletionSource<bool>();
+            bool result = await WaitForActivityResponseAsync(_acceptAndRejectRequestTask, ct.Token, false);
             return result;
         }
         #endregion
@@ -271,31 +264,21 @@ namespace AeccApp.Core.Services
         /// <summary>
         /// Ask if I´m in conversation
         /// </summary>
-        private async Task TryToFillConversationCounterpartAsync()
+        private async Task TryToContinueConversationAsync()
         {
-            try
+            var ct = new CancellationTokenSource(TIMEOUT_MS);
+            await SendActivity(BackChannelCommands.CommandEngagementCounterpart, token: ct.Token);
+
+            _engagementCounterpartTask = new TaskCompletionSource<string>();
+            string result = await WaitForActivityResponseAsync(_engagementCounterpartTask, ct.Token);
+            if (!string.IsNullOrEmpty(result))
             {
-                var ct = new CancellationTokenSource(TIMEOUT_MS);
-                await SendActivity(BackChannelCommands.CommandEngagementCounterpart, token: ct.Token);
-
-                _engagementCounterpartTask = new TaskCompletionSource<string>();
-                ct.Token.Register(() => _engagementCounterpartTask?.TrySetCanceled(), false);
-
-                string result = await _engagementCounterpartTask?.Task;
-                if (!string.IsNullOrEmpty(result))
+                _conversationCounterpartParty = Party.FromJsonString(result);
+                if (_conversationCounterpartParty != null)
                 {
-                    _conversationCounterpartParty = Party.FromJsonString(result);
-                    if (_conversationCounterpartParty != null)
-                    {
-                        InConversation = true;
-                        await SendActivity(BackChannelCommands.CommandSyncEngagement);
-                    }
+                    InConversation = true;
+                    await SendActivity(BackChannelCommands.CommandSyncEngagement);
                 }
-            }
-            catch (Exception ex)
-            {
-                InConversation = false;
-                Debug.WriteLine(ex);
             }
         }
 
@@ -307,7 +290,7 @@ namespace AeccApp.Core.Services
         /// <param name="data">data to send in event activity</param>
         /// <param name="token">cancellation token context</param>
         /// <returns></returns>
-        private async Task SendActivity(string text, string type = ActivityTypes.Event, object data = null, CancellationToken token = default(CancellationToken))
+        private async Task SendActivity(string text, string type = ActivityTypes.Event, object data = null, CancellationToken token = default(CancellationToken), bool rethrowWithHttpException = true)
         {
             try
             {
@@ -323,9 +306,34 @@ namespace AeccApp.Core.Services
                 _sendingMessage = true;
                 await _client.Conversations.PostActivityAsync(_mainConversation.ConversationId, activity, token);
             }
+            catch (OperationCanceledException)
+            {
+                if (rethrowWithHttpException)
+                    throw new HttpRequestException();
+                else
+                    throw;
+            }
             finally
             {
                 _sendingMessage = false;
+            }
+        }
+
+        private async Task<T> WaitForActivityResponseAsync<T>(TaskCompletionSource<T> taskSource, CancellationToken token, bool rethrowWithHttpException = true)
+        {
+            try
+            {
+                token.Register(() => _setVolunteerStateTask?.TrySetCanceled(), false);
+
+                var result = await taskSource?.Task;
+                return result;
+            }
+            catch (OperationCanceledException)
+            {
+                if (rethrowWithHttpException)
+                    throw new HttpRequestException();
+                else
+                    throw;
             }
         }
 
@@ -377,6 +385,11 @@ namespace AeccApp.Core.Services
                             ServiceLocator.NotificationService.CreateNotification("Nuevo mensaje:", newMessages[newMessages.Count - 1].Activity.Text);
                         }
                     }
+
+                    if (VolunteerIsActive && _pooling_cnt % AGGREGATION_POOLING_CNT == 0)
+                    {
+                        await SendActivity(BackChannelCommands.CommandCheckAggregation);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -388,10 +401,6 @@ namespace AeccApp.Core.Services
                     {
                         await Task.Delay(POOLING_MS);
                         _pooling_cnt++;
-                        if (VolunteerIsActive && _pooling_cnt % AGGREGATION_POOLING_CNT == 0)
-                        {
-                            await SendActivity(BackChannelCommands.CommandCheckAggregation);
-                        }
                     }
                     // Wait while is sending message
                     while (_sendingMessage);
@@ -399,6 +408,7 @@ namespace AeccApp.Core.Services
             }
         }
 
+       
         #region ProcessEvent Result
         /// <summary>
         /// Process event activity response
@@ -461,7 +471,7 @@ namespace AeccApp.Core.Services
             {
                 result = activity.ChannelData.ToString();
             }
-            _engagementCounterpartTask?.SetResult(result);
+            _engagementCounterpartTask?.TrySetResult(result);
         }
 
         /// <summary>
@@ -478,13 +488,18 @@ namespace AeccApp.Core.Services
                 if (!bool.TryParse(activity.ChannelData.ToString(), out result))
                 {
                     var type = isAdded ?
-                        MessageRouterResultType.AddAggregation
-                        : MessageRouterResultType.DeleteAggregation;
+                       MessageRouterResultType.AddAggregation
+                       : MessageRouterResultType.DeleteAggregation;
+
                     // Send ChatEvent message
                     MessagingCenter.Send(new ChatEventMessage(type, activity.ChannelData.ToString()), string.Empty);
                 }
+                else if (_setVolunteerStateTask == null && result)
+                {
+                    VolunteerIsActive = isAdded;
+                }
             }
-            _setVolunteerStateTask?.SetResult(result);
+            _setVolunteerStateTask?.TrySetResult(result);
         }
 
         private void HandleCommandCheckAggregation(Activity activity)
@@ -520,7 +535,7 @@ namespace AeccApp.Core.Services
 
                 InConversation = (result) ? doAccept : false;
             }
-            _acceptAndRejectRequestTask?.SetResult(result);
+            _acceptAndRejectRequestTask?.TrySetResult(result);
         }
 
         /// <summary>
@@ -536,7 +551,7 @@ namespace AeccApp.Core.Services
 
             if (_listAggregationsResponseTask != null)
             {
-                _listAggregationsResponseTask.SetResult(true);
+                _listAggregationsResponseTask.TrySetResult(true);
             }
             else
             {
@@ -559,8 +574,8 @@ namespace AeccApp.Core.Services
                     MessagingCenter.Send(new ChatEngagementEventMessage(activity.ChannelData.ToString()), string.Empty);
                     break;
                 default:
-                    // conversation reject o removed
-                    if (type == MessageRouterResultType.ConnectionRejected || type == MessageRouterResultType.Disconnected)
+                    // conversation reject, without agent o removed
+                    if (new[] { MessageRouterResultType.ConnectionRejected, MessageRouterResultType.Disconnected, MessageRouterResultType.NoAgentsAvailable }.Contains(type))
                     {
                         InConversation = false;
                         if (GSetting.User.IsVolunteer)
@@ -589,7 +604,7 @@ namespace AeccApp.Core.Services
 
                 InConversation = result;
                 
-                _initiateEngagementTask.SetResult(result);
+                _initiateEngagementTask?.TrySetResult(result);
             }
         }
 
@@ -606,7 +621,7 @@ namespace AeccApp.Core.Services
                 {
                     result = activity.ChannelData is bool;
                 }
-                _endEngagementTask.SetResult(result);
+                _endEngagementTask?.TrySetResult(result);
             }
         }
 

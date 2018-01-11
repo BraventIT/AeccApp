@@ -170,11 +170,9 @@ namespace AeccApp.Core.ViewModels
             finally
             {
                 if (execFinally)
-                {
                     finallyAction?.Invoke();
 
-                    finishAction?.Invoke();
-                }
+                finishAction?.Invoke();
             }
         }
 

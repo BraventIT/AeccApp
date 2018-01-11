@@ -4,6 +4,7 @@ using Aecc.Models;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Net.Http;
 
 namespace AeccApp.Core.ViewModels
 {
@@ -81,6 +82,7 @@ namespace AeccApp.Core.ViewModels
                             MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Chat), string.Empty);
                         }
                     }
+                    catch(HttpRequestException) { throw; }
                     catch
                     {
                         await NavigationService.NavigateBackAsync();

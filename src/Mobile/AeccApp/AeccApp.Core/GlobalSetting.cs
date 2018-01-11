@@ -19,7 +19,7 @@ namespace AeccApp.Core
             // AZURE TEST BOT
             AeccBotSecret = "3EFssRtgdBI.cwA.IF8.a-Slt6ur7daidGUxQZZdfS-HiLsWVeNQOcWv8mdLubM";
             // LOCAL TEST BOT ALFRA
-            // AeccBotSecret = "Ch31g-A6LJo.cwA.AZo.-GJpdQLh0kGznJxIlBn926-dKWSrW3qXTC81cNRF6wc";
+            //AeccBotSecret = "Ch31g-A6LJo.cwA.AZo.-GJpdQLh0kGznJxIlBn926-dKWSrW3qXTC81cNRF6wc";
 
             AzureAdB2COptions = new AzureAdB2COptions()
             {

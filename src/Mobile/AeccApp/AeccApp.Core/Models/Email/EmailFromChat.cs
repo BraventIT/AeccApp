@@ -9,14 +9,14 @@ namespace AeccApp.Core.Models
     {
         protected GlobalSetting GSetting { get { return GlobalSetting.Instance; } }
 
-        public EmailFromChat(UserData counterpartUser, IList<Message> conversation, int rating)
+        public EmailFromChat(UserData counterpartUser, IEnumerable<Message> conversation, int rating)
         {
             To = GSetting.EmailChatAddress;
             Subject = $"Valoración de chat reportada por {GSetting.User?.FirstName} {GSetting.User?.Surname}";
             Body = GetEmailBody(counterpartUser, conversation, rating);
         }
 
-        public string GetEmailBody(UserData counterpartUser, IList<Message> conversation, int rating)
+        public string GetEmailBody(UserData counterpartUser, IEnumerable<Message> conversation, int rating)
         {
             return new StringBuilder(GSetting.EmailChatTemplate)
                 .Replace("%UserName%", GSetting.User?.FirstName)

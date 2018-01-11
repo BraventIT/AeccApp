@@ -21,6 +21,7 @@ namespace AeccBot
         // COMMAND RESPONSES
         public const string HandleCommand_NotFound = "No he entendio el comando \"{0}\".";
 
+        public const string AddNoAgentAvailable_Text = "Lo sentimos, pero ahora mismo el voluntario ya no está disponible. Prueba más adelante o elige a otro voluntario.";
         public const string AddNoAgentsAvailable_Text = "Lo sentimos, pero ahora mismo no hay ningún voluntario disponible.";
         public const string AddNoAgentsAvailable_Text2 = "Por favor, mantente a la espera hasta que te notifiquemos y luego escribe un saludo para comenzar la conversación. ¡Gracias!";
 
