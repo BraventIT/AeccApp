@@ -1520,15 +1520,6 @@ namespace AeccApp.Internationalization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opciones.
-        /// </summary>
-        public static string SettingsTitle {
-            get {
-                return ResourceManager.GetString("SettingsTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Perfil y opciones.
         /// </summary>
         public static string SettingsToolbarTitle {

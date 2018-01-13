@@ -9,55 +9,61 @@
     xmlns:vm="clr-namespace:AeccApp.Core.ViewModels"
     Title="Tu perfil"
     vm:ViewModelLocator.AutoWireViewModel="True">
-    <ScrollView>
-        <Grid HorizontalOptions="FillAndExpand">
+
+    <Grid>
+        <ScrollView>
             <StackLayout>
                 <Frame
                     Padding="0"
                     BackgroundColor="{StaticResource LightSilver}"
                     HeightRequest="206">
+
                     <ctrl:CustomImage
                         Margin="0"
-                        HeightRequest="150"
                         HorizontalOptions="Center"
                         SourcePlatform="no_profile_image_v2"
                         VerticalOptions="End"
                         WidthRequest="150" />
                 </Frame>
+
                 <Label
                     HorizontalOptions="Center"
                     Style="{StaticResource DarkGreyBigTitleLabelStyle}"
                     Text="{Binding Name}"
-                    VerticalOptions="Center"
                     VerticalTextAlignment="Center" />
                 <Label
                     HorizontalOptions="Center"
                     Style="{StaticResource NormalLabelStyle}"
                     Text="{Binding Description}" />
-                <Grid>
+
+                <Grid Margin="0,10" HeightRequest="28">
                     <Button
                         Margin="0"
                         BackgroundColor="{StaticResource AlmostWhiteColor}"
                         BorderRadius="0"
                         Command="{Binding EditProfileCommand}" />
                     <Label
-                        BackgroundColor="Transparent"
-                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
                         InputTransparent="True"
                         Style="{StaticResource NormalLabelStyle}"
                         Text="{Binding [CommonEdit]}"
-                        TextColor="LightGreen" />
+                        TextColor="LightGreen"
+                        VerticalOptions="Center" />
 
                 </Grid>
+
                 <BoxView
-                    Margin="1,0,1,0"
+                    Margin="20,0"
                     HeightRequest="1"
                     Color="LightGray" />
+
                 <Label
+                    Margin="0,24,0,0"
                     HorizontalOptions="Center"
                     Style="{StaticResource NormalLabelStyle}"
                     Text="{Binding [PopupVolunteerProfileInfo]}" />
-                <Grid Padding="5" HorizontalOptions="Center">
+
+                <Grid Margin="20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -65,51 +71,50 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="4*" />
                     </Grid.ColumnDefinitions>
                     <Label
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Margin="20,0,0,0"
+                        Margin="0"
                         HorizontalOptions="Start"
                         Style="{StaticResource SubTitleLabelStyle}"
                         Text="{Binding [CommonMailTitle]}" />
                     <Label
-                        Grid.Row="0"
                         Grid.Column="1"
-                        HorizontalOptions="Center"
+                        HorizontalOptions="Start"
                         Style="{StaticResource NormalLabelStyle}"
                         Text="{Binding Email}" />
                     <Label
                         Grid.Row="1"
-                        Grid.Column="0"
-                        Margin="20,0,0,0"
+                        Margin="0,15,0,0"
                         HorizontalOptions="Start"
                         Style="{StaticResource SubTitleLabelStyle}"
                         Text="{Binding [CommonGenderTitle]}" />
                     <Label
                         Grid.Row="1"
                         Grid.Column="1"
-                        HorizontalOptions="Center"
+                        Margin="0,15,0,0"
+                        HorizontalOptions="Start"
                         Style="{StaticResource NormalLabelStyle}"
                         Text="{Binding Gender}" />
                     <Label
                         Grid.Row="2"
-                        Grid.Column="0"
-                        Margin="20,0,0,0"
+                        Margin="0,15,0,0"
                         HorizontalOptions="Start"
                         Style="{StaticResource SubTitleLabelStyle}"
                         Text="{Binding [CommonAgeTitle]}" />
                     <Label
                         Grid.Row="2"
                         Grid.Column="1"
-                        HorizontalOptions="Center"
+                        Margin="0,15,0,0"
+                        HorizontalOptions="Start"
                         Style="{StaticResource NormalLabelStyle}"
                         Text="{Binding Age}" />
                 </Grid>
             </StackLayout>
-            <ctrl:CustomActivityIndicatorControl />
-        </Grid>
-    </ScrollView>
+        </ScrollView>
+
+        <ctrl:CustomActivityIndicatorControl />
+    </Grid>
+
 </v:BaseContentPage>

@@ -26,7 +26,8 @@ namespace AeccApp.Core.ViewModels
         {
             if (FirstTimeLandingPageVisible)
                 MessagingCenter.Send(new ToolbarMessage(this["NewRequestToolbarTitle"]), string.Empty);
-            else {
+            else
+            {
                 MessagingCenter.Send(new ToolbarMessage(this["YourRequestsToolbarTitle"]), string.Empty);
                 await RefreshRequestAsync(SwitchHomeAndHospitalList);
             }

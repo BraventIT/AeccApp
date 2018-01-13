@@ -41,8 +41,6 @@ namespace AeccApp.Core.Models
         public int? Age { get; set; }
         public string Gender { get; set; }
 
-        private string _displayGender;
-
         public string DisplayGender
         {
             get
@@ -52,21 +50,15 @@ namespace AeccApp.Core.Models
                     switch (Gender.ToLower())
                     {
                         case "m":
-                            DisplayGender = "Hombre";
-                            break;
+                            return "Mujer";
                         case "h":
-                            DisplayGender = "Mujer";
-
-                            break;
+                            return "Hombre";
                         default:
-                            DisplayGender = "No especificado";
-
-                            break;
+                            return "No especificado";
                     }
                 }
-                    return _displayGender;
+                return "No especificado";
             }
-            set { _displayGender = value; }
         }
 
 
@@ -112,6 +104,11 @@ namespace AeccApp.Core.Models
         public override bool Equals(object obj)
         {
             return Equals(obj as UserData);
+        }
+
+        public override int GetHashCode()
+        {
+            return PartyId.GetHashCode();
         }
     }
 }

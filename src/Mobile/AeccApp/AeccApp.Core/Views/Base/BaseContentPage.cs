@@ -3,6 +3,9 @@ using AeccApp.Core.ViewModels;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 using AeccApp.Core.Extensions;
+using System.Resources;
+using System.Diagnostics;
+using AeccApp.Internationalization.Properties;
 
 namespace AeccApp.Core.Views
 {
@@ -14,9 +17,9 @@ namespace AeccApp.Core.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await Task.Delay(200);
+            await Task.Delay(50);
             ViewModelBase.UpdateToken();
-            ViewModel?.ActivateAsync();
+            await ViewModel?.ActivateAsync();
         }
 
         protected override void OnDisappearing()
@@ -51,5 +54,38 @@ namespace AeccApp.Core.Views
             var control = (BaseContentPage)b;
             control.SetSourcePlatform((string)newValue);
         }
+
+
+        #region Localization Resources
+        protected virtual ResourceManager LocalizationResourceManager { get; } = LocalizationResourcesAecc.ResourceManager;
+
+        /// <summary>
+		/// Obtiene el texto desde recursos para la key pasada (index).
+		/// </summary>
+		/// <param name="index">La "KEY" del texto de recursos que queramos obtener.</param>
+		/// <returns>El texto traducido a la cultura establecida.</returns>
+		public string this[string index]
+        {
+            get
+            {
+                try
+                {
+                    return LocalizationResourceManager.GetString(index) ?? $"_{index}";
+                }
+                catch (Exception)
+                {
+                    if (Debugger.IsAttached)
+                    {
+                        Debugger.Break();
+                    }
+
+                    return $"_{index}";
+                }
+
+            }
+        }
+        #endregion
+
+
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
-using Microsoft.Identity.Client;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -38,9 +37,9 @@ namespace AeccApp.Core.ViewModels
 #if VOLUNTEERTEST
         VolunteerTestPopupViewModel _volunteerTestPopupVM;
 #endif
-#endregion
+        #endregion
 
-#region Commands
+        #region Commands
         private Command _signInCommand;
         public ICommand SignInCommand
         {
@@ -53,9 +52,9 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-#endregion
+        #endregion
 
-#region Private Methods
+        #region Private Methods
         private Task TryToLoginAsync(bool silentLogin)
         {
             return ExecuteOperationAsync(async () =>
@@ -79,10 +78,13 @@ namespace AeccApp.Core.ViewModels
                         await ExecuteOperationAsync(ContinueLoadingAsync);
 #endif
                     }
+                    else
+                        IsLoginRequired = true;
                 }
                 catch
                 {
                     IsLoginRequired = true;
+                    throw;
                 }
             });
         }
@@ -96,7 +98,7 @@ namespace AeccApp.Core.ViewModels
             Text = this["LoginViewPostLoginText"];
             await ExecuteOperationAsync(ContinueLoadingAsync);
         }
-#endregion
+        #endregion
 
         private async Task ContinueLoadingAsync()
         {
@@ -109,6 +111,6 @@ namespace AeccApp.Core.ViewModels
         {
             _signInCommand.ChangeCanExecute();
         }
-#endregion
+        #endregion
     }
 }

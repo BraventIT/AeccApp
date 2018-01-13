@@ -1,14 +1,5 @@
-﻿using AeccApp.Core.Models;
+﻿using AeccApp.Core.Messages;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,7 +11,7 @@ namespace AeccApp.Core.Views
         public HomeView()
         {
             InitializeComponent();
-          //  NewsFlowListView.HeightRequest = GetGridContainerHeight(6, 2, NewsFlowListView.RowHeight);
+           // NewsFlowListView.HeightRequest = GetGridContainerHeight(4, 2, NewsFlowListView.RowHeight);
         }
 
 
@@ -31,6 +22,22 @@ namespace AeccApp.Core.Views
             return rowCount * rowHeight;
         }
 
+        protected override void OnAppearing()
+        {
+            var toolbarMessage = (Device.RuntimePlatform != Device.UWP) ?
+               new ToolbarMessage(true) :
+               new ToolbarMessage(this["DashboardAppTitle"]);
+
+            MessagingCenter.Send(toolbarMessage, string.Empty);
+
+            base.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            MessagingCenter.Send(new ToolbarMessage(false), string.Empty);
+            base.OnDisappearing();
+        }
 
     }
 }

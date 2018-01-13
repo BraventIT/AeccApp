@@ -34,12 +34,6 @@ namespace AeccApp.Core.ViewModels
             MessagingCenter.Subscribe<ChatMessageReceivedMessage>(this, string.Empty, OnMessageReceived);
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
 
-            var toolbarMessage = (Device.RuntimePlatform != Device.UWP) ?
-                new ToolbarMessage(true) :
-                new ToolbarMessage(this["DashboardAppTitle"]);
-
-            MessagingCenter.Send(toolbarMessage, string.Empty);
-
             await ExecuteOperationAsync(async () =>
             {
                 VolunteerIsActive = ChatService.VolunteerIsActive;
@@ -58,15 +52,6 @@ namespace AeccApp.Core.ViewModels
         {
             MessagingCenter.Unsubscribe<ChatMessageReceivedMessage>(this, string.Empty);
             MessagingCenter.Unsubscribe<ChatStateMessage>(this, string.Empty);
-            try
-            {
-                MessagingCenter.Send(new ToolbarMessage(false), string.Empty);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-
         }
         #endregion
 

@@ -1,23 +1,14 @@
-﻿using System.Threading.Tasks;
-using AeccApp.Core.Services;
-using Xamarin.Forms;
+﻿using AeccApp.Core.Services;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using AeccApp.Core.ViewModels.Popups;
-using System;
-using AeccApp.Core.Messages;
+using Xamarin.Forms;
 
 namespace AeccApp.Core.ViewModels
 {
     public class ProfileViewModel : ViewModelBase
     {
         private IIdentityService IdentityService { get; } = ServiceLocator.IdentityService;
-        private IChatService ChatService { get; } = ServiceLocator.ChatService;
   
-        public override async Task ActivateAsync()
-        {
-            MessagingCenter.Send(new ToolbarMessage(false, LocalizationResourceManager.GetString("ChatViewViewVolunteerProfile")), string.Empty);
-        }
-
         #region Properties
         public string Name
         {
@@ -42,17 +33,10 @@ namespace AeccApp.Core.ViewModels
         {
             get { return GSetting.User.DisplayGender; }
         }
-
-        public LogoutPopupViewModel LogoutPopupVM { get; private set; }
-
+        
         #endregion
 
         #region Commands
-        /// <summary>
-        /// Show logout popup
-        /// </summary>
-       
-
         private Command _editProfileCommand;
         public ICommand EditProfileCommand
         {
@@ -62,6 +46,7 @@ namespace AeccApp.Core.ViewModels
                     (_editProfileCommand = new Command(o => OnEditProfileAsync()));
             }
         }
+
         /// <summary>
         /// Opens webview to edit profile
         /// </summary>
@@ -71,6 +56,8 @@ namespace AeccApp.Core.ViewModels
             await IdentityService.EditProfileAsync();
             NotifyPropertyChanged(nameof(Name));
             NotifyPropertyChanged(nameof(Email));
+            NotifyPropertyChanged(nameof(Age));
+            NotifyPropertyChanged(nameof(Gender));
         }
 
         #endregion

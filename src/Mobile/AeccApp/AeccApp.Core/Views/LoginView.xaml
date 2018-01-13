@@ -10,7 +10,6 @@
     BackgroundColor="{StaticResource WhiteColor}"
     NavigationPage.HasNavigationBar="false">
 
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

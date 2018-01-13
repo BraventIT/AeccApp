@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AeccApp.Core.Extensions
 {
@@ -19,6 +20,12 @@ namespace AeccApp.Core.Extensions
 
         public static void SyncExact<T>(this IList<T> oc, IList<T> source)
         {
+            if (!source.Any())
+            {
+                oc.Clear();
+                return;
+            }
+
             for (int i = 0; i < source.Count; i++)
             {
                 var item = source[i];

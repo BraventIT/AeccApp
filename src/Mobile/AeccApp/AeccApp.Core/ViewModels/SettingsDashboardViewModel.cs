@@ -33,8 +33,6 @@ namespace AeccApp.Core.ViewModels
         public override Task ActivateAsync()
         {
             LogoutPopupVM.Logout += OnLogoutPopupLogout;
-            MessagingCenter.Send(new ToolbarMessage(this["SettingsToolbarTitle"]), string.Empty);
-
             return Task.CompletedTask;
         }
 

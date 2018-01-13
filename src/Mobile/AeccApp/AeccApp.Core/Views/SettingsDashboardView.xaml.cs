@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AeccApp.Core.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,11 @@ namespace AeccApp.Core.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        protected override void OnAppearing()
+        {
+            MessagingCenter.Send(new ToolbarMessage(this["SettingsToolbarTitle"]), string.Empty);
+            base.OnAppearing();
+        }
+    }
 }

@@ -105,7 +105,10 @@
                                         HorizontalOptions="Center"
                                         IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
                                         IsToggled="{Binding VolunteerIsActive, Mode=TwoWay}" />
-                                    <Label Style="{StaticResource GreyLabelStyle}" Text="Activa tu disponibilidad" />
+                                    <Label
+                                        Style="{StaticResource GreyLabelStyle}"
+                                        Text="Activa tu disponibilidad"
+                                        VerticalOptions="Center" />
                                 </StackLayout>
                             </StackLayout>
 
@@ -156,7 +159,7 @@
 
                     <!--#region Chat state panel-->
                     <StackLayout
-                        Margin="15,0,15,20"
+                        Margin="15,20"
                         Padding="20"
                         BackgroundColor="{StaticResource WhiteColor}">
                         <Grid>
@@ -280,7 +283,8 @@
                             HorizontalOptions="Start"
                             InputTransparent="True"
                             Style="{StaticResource LightGreyLabelStyle}"
-                            Text="{Binding [HomeViewAllNews]}" />
+                            Text="{Binding [HomeViewAllNews]}"
+                            VerticalOptions="Center" />
                     </Grid>
 
                     <flv:FlowListView

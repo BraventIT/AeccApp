@@ -55,89 +55,76 @@
                 EventName="ItemTapped" />
         </ListView.Behaviors>
         <ListView.Header>
-            <Grid>
+            <Grid HeightRequest="150">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
                 <Button
+                    Grid.ColumnSpan="2"
                     Margin="0"
                     BackgroundColor="{StaticResource LightSilver}"
                     BorderRadius="0"
-                    Command="{Binding OpenUserProfile}" />
+                    Command="{Binding OpenUserProfile}"
+                    VerticalOptions="Fill" />
 
-                <Grid
-                    HeightRequest="150"
-                    HorizontalOptions="FillAndExpand"
+
+                <StackLayout
+                    Margin="30,48,0,10"
+                    HorizontalOptions="Start"
                     InputTransparent="True">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <StackLayout
-                        Grid.RowSpan="2"
-                        Grid.Column="0"
-                        Margin="30,48,0,10"
-                        HorizontalOptions="Start">
-                        <Label
-                            Margin="0"
-                            Style="{StaticResource DarkGreyBigTitleLabelStyle}"
-                            Text="{Binding UserName}" />
-                        <Label
-                            Margin="0"
-                            FontAttributes="None"
-                            Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
-                            Text="{Binding [SettingsSeeAndEditProfile]}" />
+                    <Label
+                        Margin="0"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DarkGreyBigTitleLabelStyle}"
+                        Text="{Binding UserName}" />
+                    <Label
+                        Margin="0"
+                        FontAttributes="None"
+                        Style="{StaticResource DarkGreyMidLargeSizeTitleLabelStyle}"
+                        Text="{Binding [SettingsSeeAndEditProfile]}" />
 
-                    </StackLayout>
-                    <Grid
-                        Grid.RowSpan="2"
-                        Grid.Column="1"
-                        Margin="0,0,40,0"
-                        HorizontalOptions="End"
-                        VerticalOptions="Center">
-                        <Button BackgroundColor="{StaticResource WhiteColor}" Style="{StaticResource BigCircularButtonStyle}" />
-                        <ctrl:CustomImage
-                            Margin="7"
-                            HeightRequest="25"
-                            SourcePlatform="round_no_profile_image_v2"
-                            WidthRequest="15" />
+                </StackLayout>
 
-                    </Grid>
+                <ctrl:CustomImage
+                    Grid.Column="1"
+                    Margin="0,0,40,0"
+                    HeightRequest="80"
+                    InputTransparent="True"
+                    SourcePlatform="round_no_profile_image_v2"
+                    VerticalOptions="Center" />
 
-                </Grid>
             </Grid>
         </ListView.Header>
         <ListView.Footer>
-            <Grid>
+            <Grid HeightRequest="70">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
                 <Button
+                    Grid.ColumnSpan="2"
                     Margin="0"
                     BackgroundColor="{StaticResource WhiteColor}"
                     BorderRadius="0"
                     Command="{Binding ShowLogoutPopupCommand}" />
-                <Grid InputTransparent="True">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <ctrl:CustomImage
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Margin="15,0,0,0"
-                        SourcePlatform="logout_icon"
-                        VerticalOptions="Center"
-                        WidthRequest="15" />
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Margin="10,25,0,25"
-                        HorizontalOptions="Start"
-                        Style="{StaticResource GreenMidLargeSizeTitleLabelStyle}"
-                        Text="{Binding [SettingsLogout]}" />
 
-                </Grid>
+                <ctrl:CustomImage
+                    Margin="20,0,10,0"
+                    InputTransparent="True"
+                    SourcePlatform="logout_icon"
+                    VerticalOptions="Center"
+                    WidthRequest="20" />
+                <Label
+                    Grid.Column="1"
+                    Margin="0"
+                    HorizontalOptions="Start"
+                    InputTransparent="True"
+                    Style="{StaticResource GreenMidLargeSizeTitleLabelStyle}"
+                    Text="{Binding [SettingsLogout]}"
+                    VerticalOptions="Center" />
             </Grid>
         </ListView.Footer>
 
