@@ -89,7 +89,7 @@ namespace AeccApp.Core.ViewModels
             });
         }
 
-        #region ONLY FOR TEST
+#if VOLUNTEERTEST
         private async void OnVolunteerTestPopupVMContinue(object sender, EventArgs e)
         {
             IsLoginRequired = false;
@@ -98,7 +98,7 @@ namespace AeccApp.Core.ViewModels
             Text = this["LoginViewPostLoginText"];
             await ExecuteOperationAsync(ContinueLoadingAsync);
         }
-        #endregion
+#endif
 
         private async Task ContinueLoadingAsync()
         {

@@ -125,7 +125,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _requestTypeCommand ??
-                    (_requestTypeCommand = new Command(o => OnRequestTypeCommandAsync(o), o => !IsBusy));
+                    (_requestTypeCommand = new Command(async o => await OnRequestTypeCommandAsync(o), o => !IsBusy));
             }
         }
 

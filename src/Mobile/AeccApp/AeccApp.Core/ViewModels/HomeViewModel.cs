@@ -235,7 +235,7 @@ namespace AeccApp.Core.ViewModels
         }
 
 
-        async void OnNewChat()
+        void OnNewChat()
         {
 
             MessagingCenter.Send(new DashboardTabMessage(TabsEnum.Chat), string.Empty);
@@ -249,7 +249,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return openAllNewsCommand ??
-                    (openAllNewsCommand = new Command(o => OnOpenAllNewsViewAsync()));
+                    (openAllNewsCommand = new Command(async o => await OnOpenAllNewsViewAsync()));
             }
         }
         /// <summary>
@@ -266,7 +266,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return chooseNewCommand ??
-                    (chooseNewCommand = new Command(o => OnChooseNewAsync(o), o => !IsBusy));
+                    (chooseNewCommand = new Command(async o => await OnChooseNewAsync(o), o => !IsBusy));
             }
         }
 

@@ -18,9 +18,10 @@ namespace AeccApp.Core.Services
             _fileProvider = ServiceLocator.FileProvider;
         }
 
-        public virtual Task ResetAsync()
+        public virtual async Task ResetAsync()
         {
-            return _fileProvider.DeleteFileAsync(FileName);
+            if (_fileProvider.FileExists(FileName))
+                await _fileProvider.DeleteFileAsync(FileName);
         }
 
         protected async Task<T> LoadAsync()

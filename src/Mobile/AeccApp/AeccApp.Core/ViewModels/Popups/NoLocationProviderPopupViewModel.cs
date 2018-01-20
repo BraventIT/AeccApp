@@ -15,7 +15,7 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _continueToSettingsCommand ??
-                    (_continueToSettingsCommand = new Command(o => OnContinueToSettingsAsync()));
+                    (_continueToSettingsCommand = new Command(async o => await OnContinueToSettingsAsync()));
             }
         }
 

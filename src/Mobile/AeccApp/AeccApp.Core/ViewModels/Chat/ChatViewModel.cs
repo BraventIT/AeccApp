@@ -35,11 +35,11 @@ namespace AeccApp.Core.ViewModels
             ChatTermsAndConditionsPopupVM = new ChatTermsAndConditionsPopupViewModel();
             ChatConnectingPopupVM = new ChatConnectingPopupViewModel();
         }
-       
+
         public override async Task ActivateAsync()
         {
             MessagingCenter.Subscribe<ChatStateMessage>(this, string.Empty, OnChatState);
-            MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
+            MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, async o => await OnChatEventAsync(o));
 
             ChatConnectingPopupVM.LeaseChatConversation += OnLeaseConversation;
             ChatLeaseConversationPopupVM.LeaseChatConversation += OnLeaseConversation;
@@ -158,7 +158,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _firstChatCommand ??
-                    (_firstChatCommand = new Command(o => OnFirstChatAsync(), o => !IsBusy));
+                    (_firstChatCommand = new Command(async o => await OnFirstChatAsync(), o => !IsBusy));
             }
         }
 
@@ -192,7 +192,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _sendMessageCommand ??
-                    (_sendMessageCommand = new Command(o => OnSendMessageAsync(), o => !IsBusy));
+                    (_sendMessageCommand = new Command(async o => await OnSendMessageAsync(), o => !IsBusy));
             }
         }
 
@@ -253,7 +253,7 @@ namespace AeccApp.Core.ViewModels
             {
                 return _chooseVolunteerCommand ??
                     (_chooseVolunteerCommand = new Command(
-                        o => OnChooseVolunteerAsync(o),
+                        async o => await OnChooseVolunteerAsync(o),
                         o => !IsBusy));
             }
         }

@@ -32,16 +32,18 @@ namespace AeccApp.Core.Views
         {
             var pinHospital = new Pin() { Label = "Tu selección", Position = message.Position };
             pinHospital.IsDraggable = false;
-            switch (Device.OS)
+            switch (Device.RuntimePlatform)
             {
-                case TargetPlatform.Android:
+                case Device.Android:
                     pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"map_location_pin_green.png");
                     break;
-                case TargetPlatform.iOS:
+                case Device.iOS:
                     pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"map_location_pin_green.png");
+                    break;
+                case Device.UWP:
+                    pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"Assets/map_location_pin_green.png");
                     break;
                 default:
-                    pinHospital.Icon = BitmapDescriptorFactory.FromBundle($"Assets/map_location_pin_green.png");
                     break;
             }
 

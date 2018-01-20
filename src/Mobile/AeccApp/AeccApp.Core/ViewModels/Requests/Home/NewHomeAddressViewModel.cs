@@ -152,7 +152,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _continueWithRequestCommand ??
-                    (_continueWithRequestCommand = new Command(o => OnContinueWithRequestAsync(), o => !IsBusy));
+                    (_continueWithRequestCommand = new Command(async o => await OnContinueWithRequestAsync(), o => !IsBusy));
             }
         }
 

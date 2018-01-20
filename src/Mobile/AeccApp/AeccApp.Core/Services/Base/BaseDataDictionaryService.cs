@@ -9,8 +9,6 @@ namespace AeccApp.Core.Services
 
         public async Task<T> GetAsync(string key)
         {
-            return default(T);
-
             if (_data == null)
                 _data = await LoadAsync() ?? new Dictionary<string, T>();
 

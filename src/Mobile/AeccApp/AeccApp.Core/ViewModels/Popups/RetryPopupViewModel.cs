@@ -22,7 +22,7 @@ namespace AeccApp.Core.ViewModels.Popups
             get
             {
                 return _retryCommand ??
-                    (_retryCommand = new Command(o => OnRetryAsync()));
+                    (_retryCommand = new Command(async o => await OnRetryAsync()));
             }
         }
 

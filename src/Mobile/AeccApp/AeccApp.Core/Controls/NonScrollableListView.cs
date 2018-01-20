@@ -17,7 +17,7 @@ namespace AeccApp.Core.Controls
         {
             ItemTapped += ListView_ItemTapped;
 
-            if (Device.OS == TargetPlatform.Windows || Device.OS == TargetPlatform.WinPhone)
+            if (Device.RuntimePlatform == Device.UWP)
                 BackgroundColor = Color.White;
             
         }

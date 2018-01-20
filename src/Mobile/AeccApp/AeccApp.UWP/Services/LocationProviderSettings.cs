@@ -11,7 +11,7 @@ namespace AeccApp.UWP.Services
     {
         public async void OpenLocationProviderSettings()
         { 
-             Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-location"));
+             await Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-location"));
         }
     }
 }

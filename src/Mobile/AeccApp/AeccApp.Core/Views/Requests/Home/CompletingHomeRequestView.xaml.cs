@@ -32,16 +32,18 @@ namespace AeccApp.Core.Views
         {
             var addressPin = new Pin() { Label = "Tu dirección", Position = message.Position };
             addressPin.IsDraggable = false;
-            switch (Device.OS)
+            switch (Device.RuntimePlatform)
             {
-                case TargetPlatform.Android:
+                case Device.Android:
                     addressPin.Icon = BitmapDescriptorFactory.FromBundle($"map_location_pin_green.png");
                     break;
-                case TargetPlatform.iOS:
+                case Device.iOS:
                     addressPin.Icon = BitmapDescriptorFactory.FromBundle($"map_location_pin_green.png");
+                    break;
+                case Device.UWP:
+                    addressPin.Icon = BitmapDescriptorFactory.FromBundle($"Assets/map_location_pin_green.png");
                     break;
                 default:
-                    addressPin.Icon = BitmapDescriptorFactory.FromBundle($"Assets/map_location_pin_green.png");
                     break;
             }
 

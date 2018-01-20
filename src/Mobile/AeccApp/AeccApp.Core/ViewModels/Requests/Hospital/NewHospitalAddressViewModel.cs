@@ -151,13 +151,14 @@ namespace AeccApp.Core.ViewModels
             IsSearchIconVisible = false;
             HospitalsListIsEmpty = false;
             Hospitals.Clear();
-            await ExecuteOperationAsync(async cancelToken =>
+            await ExecuteOperationAsync(cancelToken =>
             {
                 if (!Hospitals.Any())
                 {
                     var hospitals = GlobalSetting.Instance.Hospitals;
                     Hospitals.AddRange(hospitals);
                 }
+                return Task.CompletedTask;
             });
 
         }
@@ -169,7 +170,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _addressChangedCommand ??
-                   (_addressChangedCommand = new Command(o => OnAddressChanged(o)));
+                   (_addressChangedCommand = new Command(async o => await OnAddressChanged(o)));
             }
         }
 
@@ -190,12 +191,13 @@ namespace AeccApp.Core.ViewModels
                 {
                     IsSearchIconVisible = false;
                     Hospitals.Clear();
-                    await ExecuteOperationAsync(async cancelToken =>
+                    await ExecuteOperationAsync(() =>
                     {
                         if (!Hospitals.Any())
                         {
                             Hospitals.AddRange(hospitals);
                         }
+                        return Task.CompletedTask;
                     });
                 }
                 else
@@ -222,7 +224,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _infoWindowClickedCommand ??
-                    (_infoWindowClickedCommand = new Command(o => OnInfoWindowClickedCommand(o)));
+                    (_infoWindowClickedCommand = new Command(async o => await OnInfoWindowClickedCommand(o)));
             }
         }
 
@@ -345,16 +347,18 @@ namespace AeccApp.Core.ViewModels
         private void PinManagement(string hospitalAddress, string hospitalName,int hospitalID, double lat, double lng)
         {
             Pin pin = new Pin() {Tag=hospitalID,  Address = hospitalAddress, Label = hospitalName, Position = new Xamarin.Forms.GoogleMaps.Position(lat, lng) };
-            switch (Device.OS)
+            switch (Device.RuntimePlatform)
             {
-                case TargetPlatform.Android:                    
+                case Device.Android:
                     pin.Icon = BitmapDescriptorFactory.FromBundle($"map_location_pin_green.png");
                     break;
-                case TargetPlatform.iOS:
+                case Device.iOS:
                     pin.Icon = BitmapDescriptorFactory.FromBundle($"map_location_pin_green.png");
+                    break;
+                case Device.UWP:
+                    pin.Icon = BitmapDescriptorFactory.FromBundle($"Assets/map_location_pin_green.png");
                     break;
                 default:
-                    pin.Icon = BitmapDescriptorFactory.FromBundle($"Assets/map_location_pin_green.png");
                     break;
             }
 

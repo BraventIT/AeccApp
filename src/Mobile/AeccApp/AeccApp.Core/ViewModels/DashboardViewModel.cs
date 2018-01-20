@@ -26,7 +26,7 @@ namespace AeccApp.Core.ViewModels
             ChatEventPopupVM = new ChatEventPopupViewModel();
         }
 
-        public override async Task InitializeAsync(object navigationData)
+        public override Task InitializeAsync(object navigationData)
         {
             if (navigationData is TabParameter)
             {
@@ -34,12 +34,13 @@ namespace AeccApp.Core.ViewModels
                 var tabIndex = ((TabParameter)navigationData).TabIndex;
                 MessagingCenter.Send(new TabMessage(tabIndex), string.Empty);
             }
+            return Task.CompletedTask;
         }
 
         public override Task ActivateAsync()
         {
-            MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, o => OnChatEventAsync(o));
-            MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, o => OnChatEngagementEventAsync(o));
+            MessagingCenter.Subscribe<ChatEventMessage>(this, string.Empty, async o => await OnChatEventAsync(o));
+            MessagingCenter.Subscribe<ChatEngagementEventMessage>(this, string.Empty, async o => await OnChatEngagementEventAsync(o));
 
             return ExecuteOperationAsync(async (token) =>
              {

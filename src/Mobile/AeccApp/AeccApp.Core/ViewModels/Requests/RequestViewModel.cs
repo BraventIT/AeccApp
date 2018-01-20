@@ -36,7 +36,6 @@ namespace AeccApp.Core.ViewModels
         #endregion
 
         #region Properties
-        private bool _firstTimeLandingPageVisible;
         public bool FirstTimeLandingPageVisible
         {
             get { return Settings.FirstRequestLandingPageSeen; }
@@ -89,7 +88,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _continueWithRequest ??
-                    (_continueWithRequest = new Command(o=> OnContinueWithRequestAsync()));
+                    (_continueWithRequest = new Command(async o=> await OnContinueWithRequestAsync()));
             }
         }
 

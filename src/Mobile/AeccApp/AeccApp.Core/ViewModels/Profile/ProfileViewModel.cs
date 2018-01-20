@@ -43,7 +43,7 @@ namespace AeccApp.Core.ViewModels
             get
             {
                 return _editProfileCommand ??
-                    (_editProfileCommand = new Command(o => OnEditProfileAsync()));
+                    (_editProfileCommand = new Command(async o => await OnEditProfileAsync()));
             }
         }
 
