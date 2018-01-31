@@ -10,7 +10,7 @@ namespace AeccApp.Droid.Services
     {
         public void OpenLocationProviderSettings()
         {
-            Forms.Context.StartActivity(new Intent(Android.Provider.Settings.ActionLocationSourceSettings));
+            Android.App.Application.Context.StartActivity(new Intent(Android.Provider.Settings.ActionLocationSourceSettings));
         }
     }
 }

@@ -7,6 +7,7 @@ using AeccApp.Core.Services;
 using AeccApp.Core.ViewModels.Popups;
 using Plugin.Geolocator.Abstractions;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -106,6 +107,8 @@ namespace AeccApp.Core.ViewModels
             set { _addressSelected = value; }
         }
 
+        private IList<Hospital> _fullHospitals;
+
         private ObservableCollection<Hospital> _hospitals;
 
         public ObservableCollection<Hospital> Hospitals
@@ -144,23 +147,14 @@ namespace AeccApp.Core.ViewModels
             }
         }
 
-        private async void OnResetAddressFinder()
+        private void OnResetAddressFinder()
         {
             AddressSelected = null;
             AddressFinder = string.Empty;
             IsSearchIconVisible = false;
             HospitalsListIsEmpty = false;
             Hospitals.Clear();
-            await ExecuteOperationAsync(cancelToken =>
-            {
-                if (!Hospitals.Any())
-                {
-                    var hospitals = GlobalSetting.Instance.Hospitals;
-                    Hospitals.AddRange(hospitals);
-                }
-                return Task.CompletedTask;
-            });
-
+            Hospitals.AddRange(_fullHospitals);
         }
 
 
@@ -177,7 +171,6 @@ namespace AeccApp.Core.ViewModels
         private async Task OnAddressChanged(object obj)
         {
             HospitalsListIsEmpty = false;
-            var hospitals = GlobalSetting.Instance.Hospitals;
             string result = string.Empty;
             if (obj is string)
             {
@@ -186,19 +179,11 @@ namespace AeccApp.Core.ViewModels
 
             if (result.Length > 3)
             {
-
                 if (string.IsNullOrWhiteSpace(result))
                 {
                     IsSearchIconVisible = false;
                     Hospitals.Clear();
-                    await ExecuteOperationAsync(() =>
-                    {
-                        if (!Hospitals.Any())
-                        {
-                            Hospitals.AddRange(hospitals);
-                        }
-                        return Task.CompletedTask;
-                    });
+                    Hospitals.AddRange(_fullHospitals);
                 }
                 else
                 {
@@ -206,11 +191,11 @@ namespace AeccApp.Core.ViewModels
                     IsSearchIconVisible = true;
                 }
             }
-            if (result.Length < 1)
+            else if (result.Length < 1)
             {
                 IsSearchIconVisible = false;             
                 Hospitals.Clear();
-                Hospitals.AddRange(hospitals);
+                Hospitals.AddRange(_fullHospitals);
             }
             else
             {
@@ -272,10 +257,8 @@ namespace AeccApp.Core.ViewModels
             {
                 if (!Hospitals.Any())
                 {
-                    var hospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
-                    GlobalSetting.Instance.Hospitals = new ObservableCollection<Hospital>();
-                    GlobalSetting.Instance.Hospitals.AddRange(hospitals);
-                    Hospitals.AddRange(hospitals);
+                    _fullHospitals = await HospitalRequestService.GetHospitalsAsync(string.Empty, cancelToken);
+                    Hospitals.AddRange(_fullHospitals);
                 }
             });
         }
@@ -314,16 +297,11 @@ namespace AeccApp.Core.ViewModels
         {
             HospitalsListIsEmpty = false;
             Hospitals.Clear();
-            var hospitals = GlobalSetting.Instance.Hospitals;
-            Hospitals.AddRange(hospitals.Where(o => o.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase)));
-            if (Hospitals.Count == 0)
-            {
-                Hospitals.AddRange(hospitals.Where(o => o.Province.Contains(search, StringComparison.CurrentCultureIgnoreCase)));
-            }
-            if (Hospitals.Count == 0)
-            {
-                HospitalsListIsEmpty = true;
-            }
+            Hospitals.AddRange(_fullHospitals?.Where(o =>
+                o.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase)
+                || o.Province.Contains(search, StringComparison.CurrentCultureIgnoreCase)));
+
+            HospitalsListIsEmpty = !Hospitals.Any();
         }
 
         private async Task<Xamarin.Forms.GoogleMaps.Position> GetLocationForHospitalAsync(Hospital hospital, CancellationToken cancelToken)

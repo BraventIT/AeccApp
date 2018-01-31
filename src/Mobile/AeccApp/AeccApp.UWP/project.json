@@ -21,7 +21,7 @@
     "Xam.Plugin.Geolocator": "4.2.0",
     "Xamarin.Build.Download": "0.4.7",
     "Xamarin.Forms": "2.5.0.122203",
-    "Xamarin.Forms.GoogleMaps": "2.2.1",
+    "Xamarin.Forms.GoogleMaps": "2.3.0",
     "Xamarin.Forms.RangeSlider": "0.7.17"
   },
   "frameworks": {

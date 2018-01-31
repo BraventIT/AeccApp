@@ -194,24 +194,23 @@ namespace AeccApp.Core.ViewModels
             }
             await NavigationService.HidePopupAsync();
 
-           //TODO UNCOMMENT WHEN BACK OFFICE HAS FILLED COORDINATORS EMAILS 
-           //await ExecuteOperationAsync(async cancelToken =>
-           //{
-           //    var currentHospitalSelected = await HospitalRequestService.GetHospitalDetail(CurrentAddress.HospitalID, cancelToken);
-           //    List<HospitalAssignment> HospitalAssignments = new List<HospitalAssignment>();
-           //    HospitalAssignments.AddRange(currentHospitalSelected.HospitalAssignments); 
-           //    string[] coordinatorsEmails = new string[HospitalAssignments.Count];
-           //    for (int i = 0; i < currentHospitalSelected.HospitalAssignments.Count ; i++)
-           //    {
-           //        coordinatorsEmails[i] = HospitalAssignments[i].Coordinator.Email;
-           //    }
-           //    await OnSendRequestAsync(coordinatorsEmails);
-           //});
-           
-           //LEAVE THIS FOR EMAIL TESTING
-            string[] emails = new string[] { GlobalSetting.TEST_EMAIL };       
-            await OnSendRequestAsync(emails);
+            //TODO UNCOMMENT WHEN BACK OFFICE HAS FILLED COORDINATORS EMAILS 
+            //await ExecuteOperationAsync(async cancelToken =>
+            //{
+            //    var currentHospitalSelected = await HospitalRequestService.GetHospitalDetail(CurrentAddress.HospitalID, cancelToken);
+            //    List<HospitalAssignment> HospitalAssignments = new List<HospitalAssignment>();
+            //    HospitalAssignments.AddRange(currentHospitalSelected.HospitalAssignments); 
+            //    string[] coordinatorsEmails = new string[HospitalAssignments.Count];
+            //    for (int i = 0; i < currentHospitalSelected.HospitalAssignments.Count ; i++)
+            //    {
+            //        coordinatorsEmails[i] = HospitalAssignments[i].Coordinator.Email;
+            //    }
+            //    await OnSendRequestAsync(coordinatorsEmails);
+            //});
 
+            //LEAVE THIS FOR EMAIL TESTING
+            string[] emails = GlobalSetting.TEST_EMAIL.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            await OnSendRequestAsync(emails);
         }
 
 

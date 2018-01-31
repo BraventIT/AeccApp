@@ -31,7 +31,7 @@ namespace AeccApp.Core.ViewModels
         public override Task ActivateAsync()
         {
             RequestAskForAddressNumberPopupVM.ContinueWithoutInputANumber += OnDoesNotWantToInputNumberSuggestionPopupCommand;
-            return null;
+            return Task.CompletedTask;
         }
 
         public override void Deactivate()

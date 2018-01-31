@@ -177,7 +177,7 @@ namespace AeccApp.Core.ViewModels
             //});
 
             //LEAVE THIS FOR EMAIL TESTING
-            string[] emails = new string[] { GlobalSetting.TEST_EMAIL };
+            string[] emails =  GlobalSetting.TEST_EMAIL.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             await OnSendRequestAsync(emails);
         }
 

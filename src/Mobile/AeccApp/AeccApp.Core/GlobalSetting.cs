@@ -6,7 +6,7 @@ namespace AeccApp.Core
 {
     public class GlobalSetting
     {
-        public const string TEST_EMAIL = "afraj@bravent.net";
+        public const string TEST_EMAIL = "alberto_fraj@hotmail.com";
 
         private string _baseEndpoint;
         private string _apiEndpoint;
@@ -60,10 +60,6 @@ namespace AeccApp.Core
             get { return _apiEndpoint; }
             set { _apiEndpoint = value; }
         }
-
-        #region GlobalLists
-        public ObservableCollection<Hospital> Hospitals { get; set; }
-        #endregion
 
         #region Maps
 
